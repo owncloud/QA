@@ -37,18 +37,17 @@ TestID | Test Case | Expected Result | Result | Related Comment
 7 | Share a file with an Active Directory user| The file appears in server | :construction:  |
 8 | Share a folder with a Shibboleth user autoprovisioned| The folder appears in server | :construction:  |
 9 | Share a file with a Shibboleth SSO user| The file appears in server | :construction:  |
-10 | Try to Share a folder with a user that belongs to a oC server version below 8.2.X| The folder appears in server | :construction:  |
-11 | Share a file with one user whose name contains special characters | The file appears in server | :construction:  |
-12 | Share a folder with one users a file whose name contains special characters | The folder appears in server | :construction:  |
-13 | Share a file bigger than 1 GB with one user | The file appears in server | :construction:  |
-14 | Try to federate share a file with one user | Not possible yet | :construction:  |
+10 | Try to Share a folder with a user that belongs to a oC server version below 8.2.X| It's not possible to share with users | :construction:  |
+11 | Share a file with one user whose name contains special characters such as @ or .| The file appears in server | :construction:  |
+12 | Share a folder with one users a file whose name contains special characters such as @ or . | The folder appears in server | :construction:  |
+13 | Try to federate share a file with one user | Not possible yet | :construction:  |
 15 | Share a file from S3 with a user | The file appears in server | :construction:  |
 16 | Share a folder from SMB with a user | The folder appears in server | :construction:  |
 17 | Share a file from WND with a user | The file appears in server | :construction:  |
 18 | Share a folder from Sharepoint with a user | The folder appears in server | :construction:  |
 19 | Share a file from a Federated Sharing with a user | The file appears in server | :construction:  |
-20 | Share a folder from redirect server with a user | The folder appears in server | :construction:  |
-21 | Using a redirect server, Share a file with a user | The file appears in server | :construction:  |
+20 | Share a folder from redirected server with a user | The folder appears in server | :construction:  |
+21 | Using a redirected server, Share a file with a user | The file appears in server | :construction:  |
 22 | Share a file with user B with Can Share permissions enabled. Login as User B and reshare it | The file can be reshared in the server with other user| :construction:  |
 23 | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it  | The file can be edited in the server with other user | :construction:  |
 24 | Share a file with user B with Change permission enabled. Login as User B and change it  | The file can be changed in the server with other user | :construction:  |
@@ -85,8 +84,7 @@ TestID | Test Case | Expected Result | Result | Related Comment
 55 | Share link a file with a user and set a password. Modify Password Policies and retry | The pwd is updated | :construction:  |
 56 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy| The file is shared with pwd | :construction:  |
 57 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy| An error should be shown | :construction:  |
-58 | Share link a file with a user and set a valid Expiration date | The file is shared with an expiration date 
-| :construction:  |
+58 | Share link a file with a user and set a valid Expiration date | The file is shared with an expiration date | :construction:  |
 59 | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :construction:  |
 60 | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :construction:  |
 61 | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd | :construction:  |
