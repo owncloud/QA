@@ -1,16 +1,20 @@
-### Avoid duplications 
+### Select to move to the last subfolder, duplicate in local all the father of subfolder structure inside the subfolder 
 
-#### Pr: https://github.com/owncloud/android/pull/1168 
+#### Pr: https://github.com/owncloud/ios/pull/527
 
-Device 4: S3 Android 4.1.2  
-Device 8: Tablet nexus Android 6
+Device 8: iPhone 6 simulator iOS 9.1
+
+Previously we need a estructure like:
+a/b/c
+a/b/cc
+a/b/ccc
 
 ---
 
  
 | Test case     | Steps           | Expected behavior | Passed / failed |
 |:------------- |:---------------:| -------------:|-------------:|
-| Upload using ownCloud - move     | Select move file |   File are kept just on oc       | 
+| Move a folder     | Select move file |   File are kept just on oc       | 
 | Upload using ownCloud - copy      | Select copy file       |    File are kept on oc and on the folder        | 
 | Upload using ownCloud - multiple files    | Select move file |  File are kept on oc and on the folder     |
 | Upload using ownCloud - multiple files    | Select copy file |   Files are kept just on oc       |
