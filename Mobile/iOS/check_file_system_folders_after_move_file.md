@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/527
 
-Device 8: iPhone 6 simulator iOS 9.1
+M9: iPhone 6 simulator iOS 9.1
 
 Previously we need a estructure like:
 *   a/b/c
@@ -14,8 +14,8 @@ Previously we need a estructure like:
  
 | Test case     | Steps           | Expected behavior | Passed / failed |
 |:------------- |:---------------:| -------------:|-------------:|
-| Move a folder     | Select move file |   File are kept just on oc       | 
-| Upload using ownCloud - copy      | 1.  test1 1.  test2       |    File are kept on oc and on the folder        | 
+| Move a folder     | 1.  test1<br>2.  test2 |   File are kept just on oc       | 
+| Upload using ownCloud - copy      | 1.  test1<br>2.  test2       |    File are kept on oc and on the folder        | 
 | Upload using ownCloud - multiple files    | Select move file |  File are kept on oc and on the folder     |
 | Upload using ownCloud - multiple files    | Select copy file |   Files are kept just on oc       |
 | Uploads - Changes of orientation    | Check changes of orientation on the uplaods view |  Files are uploaded       |
