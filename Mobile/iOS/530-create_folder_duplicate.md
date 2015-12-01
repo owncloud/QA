@@ -1,4 +1,4 @@
-### Avoid create duplicate folder in local file systems
+### Create a folder also creates another folder with duplicate name 
 
 #### Pr: https://github.com/owncloud/ios/pull/530 
 
