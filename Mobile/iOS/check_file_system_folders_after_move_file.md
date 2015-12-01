@@ -4,10 +4,10 @@
 
 Device 8: iPhone 6 simulator iOS 9.1
 
-Previously we need a estructure like:
-a/b/c
-a/b/cc
-a/b/ccc
+- Previously we need a estructure like:
+*   a/b/c
+*   a/b/cc
+*   a/b/ccc
 
 ---
 
