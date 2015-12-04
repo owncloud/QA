@@ -6,6 +6,7 @@
 ---
 
  
-| Test case     | Steps           | Expected behavior | Passed / failed |
-|:------------- |:---------------:| -------------:|-------------:|
-|  feature to test   |  Prerequisites<br>-a<br>-b<br>1.step1<br>2.step2<br> |  2.Expected result after step 2<br>     | p(m9,m7) f(t9)
+|Test ID | Test case     | Steps           | Expected Result | Result | Comments
+|:-------|:------------- |:---------------|:-------------|:-------------:|:---------
+|1| Copy URL from browser|1. Open a browser and login into an oC account<br> 2. Copy the URL<br> 3. Open oC app <br> 4. Paste the URL | 4. The URL is validated after 
+
