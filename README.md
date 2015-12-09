@@ -1,7 +1,7 @@
 # QA
 Repository for public test plans for owncloud components and apps
 
-###Integration
+###Stages QA issues
 
 **1.[QA ISSUE]** QA create **new issue** for the new feature to test, with labels <em>“iOS/Android/Desktop client/Server”, “1.To develop"</em> and <em>"milestone"</em>
 
