@@ -11,6 +11,6 @@ Repository for public test plans for owncloud components and apps
 
 **4.[QA PR REVIEWED]** After reviewed QA test plan template PR, **merge** and in QA issue add label <em>"3.To review”</em> 
 
-**5.[VALIDATING US]**  Pass test plan (in a comment in the issue or another file for longer test plan). Fix bugs found, **[CODE REVIEW and QA again if needed]**
+**5.[VALIDATING]**  Pass test plan (in a comment in the issue or another file for longer test plan).
 
-**6.[VALIDATED US]** After validated new feature with the testPlan, add into QA issue label <em>“4.To release"</em>, **close QA issue**
+**6.[VALIDATED]** After validated new feature with the testPlan, add into QA issue label <em>“4.To release"</em>, **close QA issue**
