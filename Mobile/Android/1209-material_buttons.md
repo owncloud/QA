@@ -16,18 +16,18 @@ List of files|
 3| Details view | Improved margins, adaptive decimals in size  (landscape and portrait) | P m4| Decimals only with big files (enhacement)
 4| Upload view | RadioButton and checkboxes are blue | P m4
 Primary Buttons| 
-5| Passcode view: cancel | Change color of text and background and check it is correctly displayed
+5| Passcode view: cancel | Change color of text and background and check it is correctly displayed | P m4
 6| Upload file view: upload| Change color of text and background it is correctly displayed | P m4
-7| Uploader view: upload| Change color of text and background it is correctly displayed
-8| Copy view: choose| Change color of text and background it is correctly displayed
-9| Move view: choose| Change color of text and background it is correctly displayed
-10| Logs view: send history| Change color of text and background it is correctly displayed
-Secondary buttons| 
-11| Upload file view: cancel| Change color of text and background it is correctly displayed
-12| Uploader view: cancel| Change color of text and background it is correctly displayed
-13| Copy view: cancel| Change color of text and background it is correctly displayed
-14| Move view: cancel| Change color of text and background it is correctly displayed
-15| Logs view: delete history| Change color of text and background it is correctly displayed
+7| Uploader view: upload| Change color of text and background it is correctly displayed | P m4
+8| Copy view: choose| Change color of text and background it is correctly displayed| P m4
+9| Move view: choose| Change color of text and background it is correctly displayed| P m4
+10| Logs view: send history| Change color of text and background it is correctly displayed| P m4
+Secondary buttons|
+11| Upload file view: cancel| Change color of text and background it is correctly displayed| P m4
+12| Uploader view: cancel| Change color of text and background it is correctly displayed| P m4
+13| Copy view: cancel| Change color of text and background it is correctly displayed| P m4
+14| Move view: cancel| Change color of text and background it is correctly displayed| P m4
+15| Logs view: delete history| Change color of text and background it is correctly displayed| P m4
 Dialog Buttons |
-16| Dialog buttons| They do not change, for example the "remove" dialog |
+16| Dialog buttons| They do not change, for example the "remove" dialog | P m4
 
