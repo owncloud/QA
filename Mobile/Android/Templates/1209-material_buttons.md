@@ -1,4 +1,4 @@
-### Uploads view
+### Material Design
 
 #### Pr: https://github.com/owncloud/android/pull/1209
 
