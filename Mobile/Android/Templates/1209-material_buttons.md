@@ -11,8 +11,8 @@ Server version:
 Test Case ID | Test case   | Expected behavior | Result | Related Comments
 |:----:|:------------- |:-------------|-------------:|----------:
 List of files|
-1| Check list of files portrait | Includes higher items, mod date includes time, size of files is on the left separated with coma, footer is slightly shorter (in height)
-2| Check list of files landscape | Includes higher items, mod date includes time, size of files is on the left separated with coma, footer is slightly shorter (in height)
+1| Check list of files portrait | Includes higher items, size of files is on the left separated with coma, footer is slightly shorter (in height)
+2| Check list of files landscape | Includes higher items,  size of files is on the left separated with coma, footer is slightly shorter (in height)
 3| Details view | Improved margins, adaptive decimals in size  (landscape and portrait)
 4| Upload view | RadioButton and checkboxes are blue |
 Primary Buttons|
