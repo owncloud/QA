@@ -2,18 +2,18 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1209
 
-Devices:
+Devices: Phone Galaxy Nexus v4.2, Tablet Nexus v6.0
 
-Server version:
+Server version: 8.2.2
 
 <br>
 
 Test Case ID | Test case   | Expected behavior | Result | Related Comments
-|:----:|:------------- |:-------------|-------------:|----------:
+|:----:|:------------- |:-------------|:-------------:|:----------
 List of files|
-1| Check list of files portrait | Includes higher items, mod date includes time, size of files is on the left separated with coma, footer is slightly shorter (in height)
-2| Check list of files landscape | Includes higher items, mod date includes time, size of files is on the left separated with coma, footer is slightly shorter (in height)
-3| Details view | Improved margins, adaptive decimals in size  (landscape and portrait)
+1| Check list of files portrait | Includes higher items, mod date includes time, size of files is on the left separated with coma, footer is slightly shorter (in height) | F m4 t6 | Date does not include time
+2| Check list of files landscape | Includes higher items, mod date includes time, size of files is on the left separated with coma, footer is slightly shorter (in height) | F m4 t6 | Date does not include time
+3| Details view | Improved margins, adaptive decimals in size  (landscape and portrait) | P m4| Decimals only with big files (enhacement)
 4| Upload view | RadioButton and checkboxes are blue |
 Primary Buttons|
 5| Passcode view: cancel | Change color of text and background and check it is correctly displayed
