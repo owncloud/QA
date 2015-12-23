@@ -11,9 +11,9 @@ Server version: 8.2.2
 Test Case ID | Test case   | Expected behavior | Result | Related Comments
 |:----:|:------------- |:-------------|:-------------:|:----------
 List of files|
-1| Check list of files portrait | Includes higher items, size of files is on the left separated with coma, footer is slightly shorter (in height) | P m4 t6 | 
-2| Check list of files landscape | Includes higher items, size of files is on the left separated with coma, footer is slightly shorter (in height) | P m4 t6 | 
-3| Details view | Improved margins, adaptive decimals in size  (landscape and portrait) | P m4 t6| Decimals only with big files (enhacement)
+1| Check list of files portrait | Includes higher items, size of files is on the left separated with coma, footer is slightly shorter (in height) | F m4 t6 | Size without decimals
+2| Check list of files landscape | Includes higher items, size of files is on the left separated with coma, footer is slightly shorter (in height) | F m4 t6 | Size without decimals
+3| Details view | Improved margins, adaptive decimals in size  (landscape and portrait) | F m4 t6| Size without decimals
 4| Upload view | RadioButton and checkboxes are blue | P m4 t6
 Primary Buttons| 
 5| Passcode view: cancel | Change color of text and background and check it is correctly displayed | P m4 t6
