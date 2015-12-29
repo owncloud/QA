@@ -13,8 +13,8 @@ Test Case ID | Test case   | Steps| Expected behavior | Result | Related Comment
 Menu option|
 1|Menu option|1. Tap on (...) menu| An option "Switch to (grid/list) view" appears
 Orientations|
-2|Portrait| 1. In a folder, switch to grid and list in portrait |The files are displayed correctly as grid and list
-3|Landscape| 1. In a folder, switch to grid and list in landscape|The files are displayed correctly as grid and list
+2|Portrait| 1. In a folder, switch to grid/list in portrait and change the orientation several times|The files are displayed correctly as grid and list
+3|Landscape| 1. In a folder, switch to grid/list in landscape and change the orientation several times|The files are displayed correctly as grid and list
 Switching views|
 4|Switch to grid (root)| 1. In root folder, switch to grid view |The files are displayed as grid
 5|Switch to list (root)| 1. In root folder, switch to list view |The files are displayed as list
