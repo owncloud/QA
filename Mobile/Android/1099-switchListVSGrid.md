@@ -21,14 +21,14 @@ Switching views|
 6|Switch recursive| 1. Set the root folder as list<br>2. Browse to a folder<br>3. Set that folder to grid<br>4. Browse another deeper folder into the one in 2. step<br>5. Set that folder to list |2. The folder is displayed as list<br> 3. The folder is displayed as grid and the ancestor (root) as list<br>4. The folder is displayed as grid <br>5. The folder is displayed as list, the ancestor as grid, and the last ancestor (root) as list| P m5
 7|Switch recursive II| 1. Set the root folder as grid<br>2. Browse to a folder<br>3. Set that folder to list<br>4. Browse another deeper folder into the one in 2. step<br>5. Set that folder to grid |2. The folder is displayed as grid<br> 3. The folder is displayed as list and the ancestor (root) as grid<br>4. The folder is displayed as list <br>5. The folder is displayed as grid, the ancestor as list, and the last ancestor (root) as grid
 Persistance|
-8|Changing account|1. Repeat steps from 6 or 7<br>2. Change to another account<br>3. Change again to the first account<br>|The configured views of all folders persists 
-9|Kill the app|1. Repeat steps from 6 or 7<br>2. Kill or close the app<br>3. Open the app<br>|The configured views of all folders persists 
-10|Changing password|1. Repeat steps from 6 or 7<br>2. In server, change the account password<br>3. Refresh<br>4. Input new credentials<br>|The configured views of all folders persists 
+8|Changing account|1. Repeat steps from 6 or 7<br>2. Change to another account<br>3. Change again to the first account<br>|The configured views of all folders persists|P m5
+9|Kill the app|1. Repeat steps from 6 or 7<br>2. Kill or close the app<br>3. Open the app<br>|The configured views of all folders persists | P m5
+10|Changing password|1. Repeat steps from 6 or 7<br>2. In server, change the account password<br>3. Refresh<br>4. Input new credentials<br>|The configured views of all folders persists| P m5
 Badgets|
-11|Share with users|1. Share a file/folder with users<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations
-12|Share link|1. Share a file/folder by link<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations
-13|Download|1. Download a file<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations
-14|Favourite|1. Set a file as a favourite<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations
+11|Share with users|1. Share a file/folder with users<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations| P m5
+12|Share link|1. Share a file/folder by link<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations| P m5
+13|Download|1. Download a file<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations| P m5
+14|Favourite|1. Set a file as a favourite<br>2. Change view and orientations<br>|1. Badget is displayed<br>2. Badget is correctly displayed in both views and orientations| P m5
 Shibboleth|
 15|Change views|1. In a shibb account, change views and browse|Change of views is performed correctly
 16|Expired session|1. Set several folders as grid/list<br>2. When the session expires, input credentials|The configured views of all folders persists
