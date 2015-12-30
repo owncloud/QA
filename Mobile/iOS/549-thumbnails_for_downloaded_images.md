@@ -34,7 +34,7 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment
 18|Cancel Favourite|1. Create a new folder and upload a large amount of images<br>2. Swipe to set the folder as favourite<br>3. Cancel the favourite|Only the downloaded images show their thumbnail|P m9
 **Multiaccount**|
 19|Multiaccount| 1. Download some images in different accounts and change from one to another|Thumbnails are correctly shown in all accounts|P m9
-20|Multiaccount| 1. Upload and download some image files in a folder call "folder1"<br>2. Change to account2<br> 3.Upload and download some image files in a folder call "folder1"  <br>4. Change the account to the first one|1. Thumbnails of account 1 are visible correctly<br>3. Thumbnails of account 2 are visible correctly<br>4. Thumbnails of account 1 keep on being correct
+20|Multiaccount| 1. Upload and download some image files in a folder call "folder1"<br>2. Change to account2<br> 3.Upload and download some image files in a folder call "folder1"  <br>4. Change the account to the first one|1. Thumbnails of account 1 are visible correctly<br>3. Thumbnails of account 2 are visible correctly<br>4. Thumbnails of account 1 keep on being correct|P m9
 **Shibboleth**|
 21|Shibb server|1. Login in a Shibboleth server<br>2. Download some images|The thumbnails are correctly shown
 
