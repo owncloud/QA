@@ -1,4 +1,4 @@
-###  Summary 
+###  Allow copy and paste url from browser to login
 
 https://github.com/owncloud/ios/pull/528
 
