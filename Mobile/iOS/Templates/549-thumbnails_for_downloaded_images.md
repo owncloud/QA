@@ -24,17 +24,19 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment
 8|Rename file| 1. Download an image<br>2. Rename the file using special characeters|1. Thumbnail is visible<br>2. Thumbnail is visible with the new name
 9|Duplicated name| 1. Download an image<br>2. Rename another image with the same name in other folder and download it <br>|1. Thumbnail is visible<br>2. Both thumbnails are correct
 10|Overwrite file| 1. Download an image<br>2. Upload another image with the same name in the folder<br>3. Solve the conflict with "overwrite"|1. Thumbnail is visible<br>2. A conflict is detected<br>3. The thumbnail of the new image is visible
-11|Rename file (conflict)| 1. Download an image<br>2. Upload another image with the same name in the folder<br>3. Solve the conflict with "rename" and download it|1. Thumbnail is visible<br>2. A conflict is detected<br>3. Both thumbnails are visible
-12|Delete file locally| 1. Download an image<br>2. Delete the file from the device|1. Thumbnail is visible<br>2. Thumbnail is not visible
-13|Share file|1. Download an image<br>2. Share the image to another user<br>3. Login with this user and download the image|1. Thumbnail is visible<br>3. Thumbnail is visible for the sharee
-14|Favourite file|1. Set an image as favourite|Thumbnail is visible
-15|Update favourite|1. Set an image as favourite<br>2. From the web, upload another one with the same name overwriting the first one|The thumbnail in device is updated
-16|Favourite folder|1. Create a new folder and upload a large amount of images<br>2. Set the folder as favourite|All thumbnails are shown
-17|Cancel Download|1. Create a new folder and upload a large amount of images<br>2. Swipe to download the folder<br>3. Cancel the downloading|Only the downloaded images show their thumbnail
-18|Cancel Favourite|1. Create a new folder and upload a large amount of images<br>2. Swipe to set the folder as favourite<br>3. Cancel the favourite|Only the downloaded images show their thumbnail
+11|Move and overwrite file| 1. Download an image<br>2. Upload another image with the same name in another folder and download it<br>3. Move one image to the folder in which is the another one<br>4. Solve the conflict with "overwrite"|2. Both thumbnails are visible<br>3. A conflict is detected<br>4. The thumbnail of the image is visible|
+12|Overwrite from a external app| 1. Download an image<br>2. Upload another image from an external app with the same name<br>3. Solve the conflict with "overwrite"|1. Thumbnail is visible<br>2. A conflict is detected<br>3. The thumbnail of the new image is visible|
+13|Rename file (conflict)| 1. Download an image<br>2. Upload another image with the same name in the folder<br>3. Solve the conflict with "rename" and download it|1. Thumbnail is visible<br>2. A conflict is detected<br>3. Both thumbnails are visible
+14|Delete file locally| 1. Download an image<br>2. Delete the file from the device|1. Thumbnail is visible<br>2. Thumbnail is not visible
+15|Share file|1. Download an image<br>2. Share the image to another user<br>3. Login with this user and download the image|1. Thumbnail is visible<br>3. Thumbnail is visible for the sharee
+16|Favourite file|1. Set an image as favourite|Thumbnail is visible
+17|Update favourite|1. Set an image as favourite<br>2. From the web, upload another one with the same name overwriting the first one|The thumbnail in device is updated
+18|Favourite folder|1. Create a new folder and upload a large amount of images<br>2. Set the folder as favourite|All thumbnails are shown
+19|Cancel Download|1. Create a new folder and upload a large amount of images<br>2. Swipe to download the folder<br>3. Cancel the downloading|Only the downloaded images show their thumbnail
+20|Cancel Favourite|1. Create a new folder and upload a large amount of images<br>2. Swipe to set the folder as favourite<br>3. Cancel the favourite|Only the downloaded images show their thumbnail
 **Multiaccount**|
-19|Multiaccount| 1. Download some images in different accounts and change from one to another|Thumbnails are correctly shown in all accounts
-20|Multiaccount| 1. Upload and download some image files in a folder call "folder1"<br>2. Change to account2<br> 3.Upload and download some image files in a folder call "folder1"  <br>4. Change the account to the first one|1. Thumbnails of account 1 are visible correctly<br>3. Thumbnails of account 2 are visible correctly<br>4. Thumbnails of account 1 keep on being correct
+21|Multiaccount| 1. Download some images in different accounts and change from one to another|Thumbnails are correctly shown in all accounts
+22|Multiaccount| 1. Upload and download some image files in a folder call "folder1"<br>2. Change to account2<br> 3.Upload and download some image files in a folder call "folder1"  <br>4. Change the account to the first one|1. Thumbnails of account 1 are visible correctly<br>3. Thumbnails of account 2 are visible correctly<br>4. Thumbnails of account 1 keep on being correct
 **Shibboleth**|
-21|Shibb server|1. Login in a Shibboleth server<br>2. Download some images|The thumbnails are correctly shown
+23|Shibb server|1. Login in a Shibboleth server<br>2. Download some images|The thumbnails are correctly shown
 
