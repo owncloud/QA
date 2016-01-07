@@ -1,7 +1,10 @@
 ###  Bug: Tableviews behind navigation 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/552
 
+Devices
+
+Server version: 8.2.2
 
 ---
 
