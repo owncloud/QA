@@ -1,4 +1,4 @@
-# Smoke test for the mani Server Version
+# Smoke test for the maintenance Server Version
 
 ## Previous requirements
 
@@ -40,6 +40,8 @@ TestID | Test Case | Expected Result | Result | Related Comment
 7 | Unshare the folder by link | 1. Create a new folder 2. Right click in the folder 3. Click on Share with oC 4. Uncheck the option "Share link" |  |
 8 | Share the folder with users or groups| 1. Create a new folder 2. Right click in the folder 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups (The folder is Share with user/group) |  |
 9 | Unshare the folder with users or groups| 1. Create a new folder 2. Right click on the folder 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups 5. Click on Delete (The folder is not Share with user/group) |  |
+10 | share the folder with users or groups (Federated sharing)| 1. Create a new folder 2. Right click on the folder 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups (The folder is Share with user/group) |  |
+11 | Unshare the folder with users or groups (Federated sharing)| 1. Create a new folder 2. Right click on the folder 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups 5. Click on Delete (The folder is not Share with user/group) |  |
 
 ### File
 
@@ -53,4 +55,6 @@ TestID | Test Case | Expected Result | Result | Related Comment
 6 | Share the file by link | 1. Create a file 2. Right click on the file 3. Click on Share with oC 4. Check the option "Share link" 5. Check the option "Password protect" 6. Introduce a password 7. Press Enter (The file link is generated) | |
 7 | Unshare the file by link | 1. Create a file 2. Right click in the file 3. Click on Share with oC 4. Uncheck the option "Share link" |  |
 8 | Share the file with users or groups| 1. Create a file 2. Right click on the file 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups (The file is Share with user/group) |  |
-8 | Unshare the file with users or groups| 1. Create a file 2. Right click on the file 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups 5. Click on Delete (The file is not Share with user/group) |  |
+9 | Unshare the file with users or groups| 1. Create a file 2. Right click on the file 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups 5. Click on Delete (The file is not Share with user/group) |  |
+10 | Share the file with users or groups (Federated sharing)| 1. Create a new folder 2. Right click on the folder 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups (The folder is Share with user/group) |  |
+11 | Unshare the file with users or groups (Federated sharing)| 1. Create a new folder 2. Right click on the folder 3. Click on Share with oC 4. Introduce one user/group on the option Share with users or groups 5. Click on Delete (The folder is not Share with user/group) |  |
