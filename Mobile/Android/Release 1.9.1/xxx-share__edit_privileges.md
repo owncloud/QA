@@ -38,8 +38,8 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 22|Sharing API disabled|1. Long press to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4
 23|Resharing disabled|1. Long press to share a file/folder with privilege of sharing<br>2. In server, disable the resharing<br>3. Login with the sharee<br>4. Try to share the file/folder by handling privileges<br>5. Tap on "done"| An error is shown | P m4 | Enhacement: do not allow to re-share if capability is disabled
 24|Changing password|1. Long press to share a file/folder with privileges<br>2. In server, change the password of the user<br>3. Try to share the file/folder by handling privileges<br>4. Tap on "done"| Credentials are required | P m4
-25|Delete file|1. Long press to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown | P m4
-26|Delete user|1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with<br>3. Tap on "done"|An error is shown| P m4
+25|Delete file|1. Long press to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown | F m4 | No error is shown
+26|Delete user|1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with<br>3. Tap on "done"|An error is shown| F m4 | No error is shown
 **Shibboleth**|
 27|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed
 **Special servers**|
