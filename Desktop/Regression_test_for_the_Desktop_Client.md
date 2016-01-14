@@ -140,7 +140,6 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 1 | Share a Folder/File with special characters| 1. User share a folder (special characters /, <,>,:,?) with you 2. Refresh the parent folder | File/Folder is not displayed as shared| :construction: | |
 2 | Share a Folder/File with special characters| 1. User share a folder (special characters in the name $%ñ&) with you 2. Refresh the parent folder | File/Folder is not displayed as shared| :construction: | |
 3 | Unshare the Folder/File | 1. User unshare a folder/file with you 2. Refresh the folder/file | File/Folder is not shown as shared| :construction: | |
-4 | Unshare the Folder/File | 1. User unshare a folder/file with you 2. Access to the parent folder/file | File/Folder is not shown as shared| :construction: | |
 5 | Unshare the Folder with you | 1. Access to a shared file 2. User unshare a folder with you 3. Upload file from Desktop Client | Folder error| :construction: | |
 6 | Verify shared icon | 1. User share a folder | When the folder/file are shared show a special icon | :construction: |https://github.com/owncloud/client/issues/3043 |
 7 | Verify shared icon | 1. User share a folder | When the folder or file is shared by link show a special icon | :construction: |https://github.com/owncloud/client/issues/3043 |
@@ -154,6 +153,20 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 15 | Share a File with Password protect| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Ckeck Password protection 5. Introduce the password 6. Press Enter or Click on Set password option  | You can write the Password protect | :construction: | |
 16 | Share a File with Set expiration date| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date |You can configurate the expiration date | :construction: | |
 17 | Modify the Set expiration date option on the server| 1. Create a new file on the Desktop 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date 6. Go to the Server and change the date 7. Go to the Desktop 8. Wait to sync| You can see the new date on Set expiration date | :construction: | |
+18 | Share link a file and download it | The file is shared | :construction:  |
+19 | Share link a folder and download it | The folder is shared | :construction: |
+20 | Share link a file and disable it after | The link should not be enabled any longer | :construction:|
+21 | Share link a file and 'add to your owncloud' a user that belongs to the server| The file is shared | :construction: |
+22 | Share link a file and 'add to your owncloud' a user that belongs to the server and has been already shared another file| The file is shared | :construction: |
+423 | Share link a file and 'add to your owncloud' with a user that belongs to another server| The file is shared | :construction: |
+24 | Try to share link a file and 'add to your owncloud' with an LDAP user| The file is shared | :construction:  |
+25 | Try to share link a file and 'add to your owncloud' with an Active Directory user| The file is shared | :construction:  |
+26 | Try to share link a file and 'add to your owncloud' with a Shibboleth user autoprovisioned| The file is shared | :construction:  |
+27 | Try to share link a file and 'add to your owncloud' with a Shibboleth user SSO| The file is shared |:construction:  |
+28 | Share link a file and 'add to your owncloud' with a user that belongs to another oC server below 8.2.X version| The file is shared |  |
+29 | Share link a file with a user and set a password | The file is shared with a pwd | :construction: |
+30 | Share link a file with a user and set a pwd with special characters | The file is shared with a pwd | :construction: |
+31 | Share link a file with a user and set a password. Modify Password Policies and retry | The pwd is updated | :construction:  |
 
 
 #### 9.2 Share with Users and Groups
@@ -201,40 +214,23 @@ TestID | Test Case | Expected Result | Result | Related Comment
 38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction: |
 39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed | :construction:|
 40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction: |
-41 | Share link a file and download it | The file is shared | :construction:  |
-42 | Share link a folder and download it | The folder is shared | :construction: |
-43 | Share link a file and disable it after | The link should not be enabled any longer | :construction:|
-44 | Share link a file and 'add to your owncloud' a user that belongs to the server| The file is shared | :construction: |
-45 | Share link a file and 'add to your owncloud' a user that belongs to the server and has been already shared another file| The file is shared | :construction: |
-46 | Share link a file and 'add to your owncloud' with a user that belongs to another server| The file is shared | :construction: |
-47 | Try to share link a file and 'add to your owncloud' with an LDAP user| The file is shared | :construction:  |
-48 | Try to share link a file and 'add to your owncloud' with an Active Directory user| The file is shared | :construction:  |
-49 | Try to share link a file and 'add to your owncloud' with a Shibboleth user autoprovisioned| The file is shared | :construction:  |
-50 | Try to share link a file and 'add to your owncloud' with a Shibboleth user SSO| The file is shared |:construction:  |
-51 | Share link a file and 'add to your owncloud' with a user that belongs to another oC server below 8.2.X version| The file is shared |  |
-52 | Share link a file with a user and set a password | The file is shared with a pwd | :construction: |
-53 | Share link a file with a user and set a pwd with special characters | The file is shared with a pwd | :construction: |
-54 | Share link a file with setting a password and modifiying it later | The file is shared and the pwd is changed | :construction:  |
-55 | Share link a file with a user and set a password. Modify Password Policies and retry | The pwd is updated | :construction:  |
-56 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy| The file is shared with pwd |:construction:|
-57 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy| An error should be shown | :construction:| https://github.com/owncloud/client/issues/4209
-58 | Share link a file with a user and set a valid Expiration date | The file is shared with an expiration date 
- | :construction:  |
-59 | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date |:construction:  |
-60 | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :construction:  |
-61 | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd | :construction:  |
-62 | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown | :construction: |
-63 | Try to search yourself in the users searchbox | The user should not be shown | :construction:|
-64 | Search for 'pa' pattern | All users that contains this pattern should be shown |:construction:  |
-65 | Try to search a remote user in the users searchbox | The user should not be shown (not developed yet) | :construction:  |
-66 | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :construction: |
-67 | Sharing API  | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :construction:  |
-67 | Enforce password protection  | Password should be always required | :construction:   | https://github.com/owncloud/client/issues/4227
-67 | Enforce password protection enabled. Try to disable the pwd  | Password should be always required |:construction: | https://github.com/owncloud/client/issues/4227
-68 | Set default expiration date  | The expiration date should be set by default |  :construction:   |
-69 | Allow resharing disabled and Can Share enabled  | The user cannot reshare files | :construction:  |
-70 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| https://github.com/owncloud/client/issues/4226
-71 | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing | :construction: |
+41 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy| The file is shared with pwd |:construction:|
+42 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy| An error should be shown | :construction:| https://github.com/owncloud/client/issues/4209
+43 | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date |:construction:  |
+44 | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :construction:  |
+45 | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd | :construction:  |
+46 | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown | :construction: |
+47 | Try to search yourself in the users searchbox | The user should not be shown | :construction:|
+48 | Search for 'pa' pattern | All users that contains this pattern should be shown |:construction:  |
+49 | Try to search a remote user in the users searchbox | The user should not be shown (not developed yet) | :construction:  |
+50 | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :construction: |
+51 | Sharing API  | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :construction:  |
+52 | Enforce password protection  | Password should be always required | :construction:   | https://github.com/owncloud/client/issues/4227
+53 | Enforce password protection enabled. Try to disable the pwd  | Password should be always required |:construction: | https://github.com/owncloud/client/issues/4227
+54 | Set default expiration date  | The expiration date should be set by default |  :construction:   |
+55 | Allow resharing disabled and Can Share enabled  | The user cannot reshare files | :construction:  |
+56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| https://github.com/owncloud/client/issues/4226
+58 | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing | :construction: |
 
 ### 10. Selective_Sync
 
