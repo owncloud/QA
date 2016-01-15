@@ -20,9 +20,9 @@ TestID | Test Case | Expected Result | Result | Related Comment
 12 | Download a file >150MiB | No errors | :construction:  |
 13 | Download a file of 4GiB | No errors | :construction:  |
 14 | Make a public share of a file, download it anonymously | No errors | :construction:  |
-15 | Make a public share of a file allowing everything, rename it anonymously | No errors | :construction:  |
-16 | Make a public share of a file allowing everything, move it to another folder anonymously | No errors | :construction:  |
-17 | Make a public share of a file allowing everything, delete it anonymously | No errors | :construction:  |
+15 | Make a public share of a folder allowing everything, rename a file anonymously | No errors | :construction:  |
+16 | Make a public share of a folder allowing everything, move a file to another folder anonymously | No errors | :construction:  |
+17 | Make a public share of a folder allowing everything, delete a file anonymously | No errors | :construction:  |
 18 | Favorite some files | No errors | :construction:  |
 19 | Mount an external storage, move files inside it | No errors | :construction:  |
 20 | Mount an external storage, rename files inside it | No errors | :construction:  |
@@ -61,9 +61,9 @@ TestID | Test Case | Expected Result | Result | Related Comment
 12 | Download a file >150MiB | No errors | :construction:  |
 13 | Download a file of 4GiB | No errors | :construction:  |
 14 | Make a public share of a file, download it anonymously | No errors | :construction:  |
-15 | Make a public share of a file allowing everything, rename it anonymously | No errors | :construction:  |
-16 | Make a public share of a file allowing everything, move it to another folder anonymously | No errors | :construction:  |
-17 | Make a public share of a file allowing everything, delete it anonymously | No errors | :construction:  |
+15 | Make a public share of a folder allowing everything, rename a file anonymously | No errors | :construction:  |
+16 | Make a public share of a folder allowing everything, move a file to another folder anonymously | No errors | :construction:  |
+17 | Make a public share of a folder allowing everything, delete a file anonymously | No errors | :construction:  |
 18 | Favorite some files | No errors | :construction:  |
 19 | Mount an external storage, move files inside it | No errors | :construction:  |
 20 | Mount an external storage, rename files inside it | No errors | :construction:  |
@@ -100,9 +100,9 @@ TestID | Test Case | Expected Result | Result | Related Comment
 12 | Download a file >150MiB | No errors | :construction:  |
 13 | Download a file of 4GiB | No errors | :construction:  |
 14 | Make a public share of a file, download it anonymously | No errors | :construction:  |
-15 | Make a public share of a file allowing everything, rename it anonymously | No errors | :construction:  |
-16 | Make a public share of a file allowing everything, move it to another folder anonymously | No errors | :construction:  |
-17 | Make a public share of a file allowing everything, delete it anonymously | No errors | :construction:  |
+15 | Make a public share of a folder allowing everything, rename a file anonymously | No errors | :construction:  |
+16 | Make a public share of a folder allowing everything, move a file to another folder anonymously | No errors | :construction:  |
+17 | Make a public share of a folder allowing everything, delete a file anonymously | No errors | :construction:  |
 18 | Favorite some files | No errors | :construction:  |
 19 | Mount an external storage, move files inside it | No errors | :construction:  |
 20 | Mount an external storage, rename files inside it | No errors | :construction:  |
@@ -137,9 +137,9 @@ TestID | Test Case | Expected Result | Result | Related Comment
 10 | Create a folder which already exists | No errors | :construction:  |
 11 | Download a small text file | No errors | :construction:  |
 12 | Make a public share of a file, download it anonymously | No errors | :construction:  |
-13 | Make a public share of a file allowing everything, rename it anonymously | No errors | :construction:  |
-14 | Make a public share of a file allowing everything, move it to another folder anonymously | No errors | :construction:  |
-15 | Make a public share of a file allowing everything, delete it anonymously | No errors | :construction:  |
+13 | Make a public share of a folder allowing everything, rename a file anonymously | No errors | :construction:  |
+14 | Make a public share of a folder allowing everything, move a file to another folder anonymously | No errors | :construction:  |
+15 | Make a public share of a folder allowing everything, delete a file anonymously | No errors | :construction:  |
 16 | Favorite some files | No errors | :construction:  |
 17 | Mount an external storage, move files inside it | No errors | :construction:  |
 18 | Mount an external storage, rename files inside it | No errors | :construction:  |
