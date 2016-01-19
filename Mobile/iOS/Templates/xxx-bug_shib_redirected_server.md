@@ -5,7 +5,7 @@
 
 Devices: v9.2
 
-Server: 7.0.10
+Server: 7.0.10 (SAML)
 
 
 ---
