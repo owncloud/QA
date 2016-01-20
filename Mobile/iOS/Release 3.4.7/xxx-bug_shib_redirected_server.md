@@ -23,9 +23,9 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment
 | 7 | Session expires - favourite   |  1. Login in shibb server<br>2. Wait until the session expires<br> 3. Try to favourite a file or folder |  A message about the expiration of the session is shown and redirection to credentials view | P m9
 |**Non-Shibboleth Server (errors)**
 | 8 | No internet connection | 1. Switch the internet connection off<br>2. Perform any action (create folder, update file...)| The message shows a non-connection error |P t8
-| 9 | No server connection | 1. Switch the server off<br>2. Perform any action (create folder, update file...)| The message shows a non-connection error |
-| 10 | Credential error | 1. Login with a user in oC<br>2. On server, change the password of the user<br> 3. Perform any action (create folder, update file...) |  Redirection to login view |
+| 9 | No server connection | 1. Switch the server off<br>2. Perform any action (create folder, update file...)| The message shows a non-connection error | P t8
+| 10 | Credential error | 1. Login with a user in oC<br>2. On server, change the password of the user<br> 3. Perform any action (create folder, update file...) |  Redirection to login view | P t8
 | 11 | Folder error | 1. Tap in upload and select a file, selecting a location folder<br> 2. On server, delete this folder<br> 3. Tap on the file| The message shows a non-existing folder | P t8
 | 12 | File error | 1. Tap to move a file and not select it<br> 2. On server, delete the file<br> 3. Tap on the folder to move| The message shows a non-existing file | P t8
-| 13 | Delete account | 1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with (version > 8)<br>3. Tap on "done"| The message shows a non-existing user
+| 13 | Delete account | 1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with (version > 8)<br>3. Tap on "done"| The message shows a non-existing user | P t8
 | 14 | Share  |  1. Swipe to share a file with users |  A error message about the unavailability of the share must be shown (version < 8)| P m9 t8
