@@ -1,6 +1,6 @@
 ###  Bug: incorrect message when the session expires 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/559 
 
 
 Devices: iPhone v9.2 (Shibb), iPad Air v8.4 (No-Shibb)
