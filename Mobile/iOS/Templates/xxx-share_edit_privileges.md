@@ -33,24 +33,22 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 18|Privileges in app|1. Login on app<br>2. Grant a file/folder some privileges<br>3. Login on server| Check that the granted privileges on app are visible in server
 18|Several sharees|1. Share a file/folder with several users granting them different privileges<br>|Each sharee can only manage the file/folder according his privileges
 19|Several files|1. Share several files/folders with a user/group granting him different privileges<br>|The user/group can only manage the files/folders according his privileges
-**Re-sharing**|
-19|Re-share with all privileges| 1. Swipe to share a folder with user1<br>2. Grant user1 to edit (all privileges) and share <br> 3. Login with user1<br>4. Swipe to re-share the folder with some different privileges| The folder can be reshared
-20|Re-share with share and without edit| 1. Swipe to share a folder with user1<br>2. Grant user1 to share but not to edit <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting edit<br>5. Re-share the folder with user2 granting share but not edit| 4. The folder can not be reshared<br> 5. The folder can be reshared
-21|Re-share with edit and without share| 1. Swipe to share a folder with user1<br>2. Grant user1 to edit (all edit privileges) but not to share <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting share<br>5. Re-share the folder with user2 granting edit but not share| 4. The folder can not be reshared<br> 5. The folder can be reshared
-22|Re-share with edit (not all) and without share| 1. Swipe to share a folder with user1<br>2. Grant user1 to edit (some edit privileges) but not to share <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting share and/or not granted editing permissions<br>5. Re-share the folder with user2 granting edit (privileges granted) but not share| 4. The folder can not be reshared<br> 5. The folder can be reshared
-23|Re-share with minimum privileges| 1. Swipe to share a folder with user1<br>2. Grant user1 minimum privileges (only read) <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting more permissions than read<br>5. Re-share the folder with user2 granting minimim permissionse| 4. The folder can not be reshared<br> 5. The folder can be reshared
+**Re-sharing privileges**|
+20|Re-share with all privileges| 1. Swipe to share a folder with user1<br>2. Grant user1 to edit (all privileges) and share <br> 3. Login with user1<br>4. Swipe to re-share the folder with some different privileges| The folder can be reshared
+21|Re-share with share and without edit| 1. Swipe to share a folder with user1<br>2. Grant user1 to share but not to edit <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting edit<br>5. Re-share the folder with user2 granting share but not edit| 4. The folder can not be reshared<br> 5. The folder can be reshared
+22|Re-share with edit and without share| 1. Swipe to share a folder with user1<br>2. Grant user1 to edit (all edit privileges) but not to share <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting share<br>5. Re-share the folder with user2 granting edit but not share| 4. The folder can not be reshared<br> 5. The folder can be reshared
+23|Re-share with edit (not all) and without share| 1. Swipe to share a folder with user1<br>2. Grant user1 to edit (some edit privileges) but not to share <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting share and/or not granted editing permissions<br>5. Re-share the folder with user2 granting edit (privileges granted) but not share| 4. The folder can not be reshared<br> 5. The folder can be reshared
+24|Re-share with minimum privileges| 1. Swipe to share a folder with user1<br>2. Grant user1 minimum privileges (only read) <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting more permissions than read<br>5. Re-share the folder with user2 granting minimim permissionse| 4. The folder can not be reshared<br> 5. The folder can be reshared
 **Errors**|
-20|No connection|1. Swipe to share a file/folder with privileges<br>2. Switch the device connection off<br>3. Change the privileges<br>4. Tap on "done"| An error is shown
-21|Server down|1. Swipe to share a file/folder with privileges<br>2. Server down<br>3. Change the privileges<br>4. Tap on "done"| An error is shown
-22|Sharing API disabled|1. Swipe to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown
-23|Resharing disabled|1. Swipe to share a file/folder with privilege of sharing<br>2. In server, disable the resharing<br>3. Login with the sharee<br>4. Try to share the file/folder by handling privileges<br>5. Tap on "done"| An error is shown
-24|Changing password|1. Swipe to share a file/folder with privileges<br>2. In server, change the password of the user<br>3. Try to share the file/folder by handling privileges<br>4. Tap on "done"| Credentials are required
-25|Delete file|1. Swipe to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown
-26|Delete user|1. Swipe to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with<br>3. Tap on "done"|An error is shown
+25|No connection|1. Swipe to share a file/folder with privileges<br>2. Switch the device connection off<br>3. Change the privileges<br>4. Tap on "done"| An error is shown
+26|Server down|1. Swipe to share a file/folder with privileges<br>2. Server down<br>3. Change the privileges<br>4. Tap on "done"| An error is shown
+27|Sharing API disabled|1. Swipe to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown
+28|Resharing disabled|1. Swipe to share a file/folder with privilege of sharing<br>2. In server, disable the resharing<br>3. Login with the sharee<br>4. Try to share the file/folder by handling privileges<br>5. Tap on "done"| An error is shown
+29|Delete file|1. Swipe to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown
 **Shibboleth**|
-27|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed
+30|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed
 **Special servers**|
-28|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users
-29|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed
-30|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed
-31|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed
+31|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users
+32|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed
+33|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed
+34|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed
