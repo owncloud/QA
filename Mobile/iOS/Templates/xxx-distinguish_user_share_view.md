@@ -1,15 +1,12 @@
 ###  Distinguish users in share view 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/563 
 
-Devices:
+Devices: 
 
 Server version:
 
 
-Prerrequisite to perform this test plan: 
-
-**The server must contain users who have the same display name, but different user name**
 
 ---
 
