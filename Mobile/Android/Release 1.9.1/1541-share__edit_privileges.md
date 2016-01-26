@@ -1,6 +1,6 @@
 ### Sharing privileges
 
-#### Pr: https://github.com/owncloud/android/pull/xxx
+#### Pr: https://github.com/owncloud/android/pull/1451
 
 Devices: Phone Galaxy Nexus v4.2, Tablet Nexus9 v6
 
