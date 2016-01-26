@@ -18,4 +18,4 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment
 **Special servers**|
 | 5 | Redirect servers |1. Open app  <br>2. Paste URL of a redirect server with form `http://myuser:mypass@host.com` | Username and password are populated with `myuser` and `mypass`. Login button should be active. | P m8 t9
 | 6 | No self signed |1. Open app  <br>2. Paste URL of a no self signed server with form `http://myuser:mypass@host.com` | Username and password are populated with `myuser` and `mypass`. Login button should be active. | P m8 t9
-| 7 | Shibboleth servers |1. Open app | Login button should be active. |
+| 7 | Shibboleth servers |1. Open app | Login button should be active. | P(m9)
