@@ -18,7 +18,7 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 4|Landscape| From 1 or 2, set on landscape the view of sharing privileges| The view is correcly displayed | P m4 t6 |
 **Privileges**|
 5|Can share|1. Long press to share a file/folder with special characters<br>2. Select a user/group and grant it to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. File/folder is correctly shared | P m4 t6 | SOLVED: If can not edit, can not share
-6|Can not share|1. Long press to share a file/folder<br>2. Select a user/group but does not grant to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. The file/folder can not be shared | P m4 t6 | Refresh fails -> core issue
+6|Can not share|1. Long press to share a file/folder<br>2. Select a user/group but does not grant to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. The file/folder can not be shared | P m4 t6 | Refresh fails -> core issue https://github.com/owncloud/core/issues/21907
 7|Can edit file|1. Long press to share a file<br>2. Select a user/group and grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file is correctly edited | P m4 t6
 8|Can not edit file|1. Long press to share a file<br>2. Select a user/group but does not grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file can not be edited | P m4 t6
 9|Can create folder|1. Long press to share a folder<br>2. Select a user/group and grant it to create<br>3. Login with the sharee<br>4. Try to create/upload a file into the folder| 3. The sharee can see the file<br>4. The file is correctly created/uploaded | P m4 t6
@@ -41,17 +41,17 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 25|Re-share without edit + share| 1. Swipe to share a folder with user1<br>2. Grant user1 to share but not to edit <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting more permissions than read<br>5. Re-share the folder with user2 granting minimim permissions| 4. The folder can not be reshared<br> 5. The folder can be reshared | P m4 t6
 26|Re-share with edit + share| 1. Swipe to share a folder with user1<br>2. Grant user1 to share but some privileges of editing <br> 3. Login with user1<br>4. Swipe to re-share the folder with user2 granting more permissions than the granted <br>5. Re-share the folder with user2 granting the same permissions| 4. The folder can not be reshared<br> 5. The folder can be reshared | P m4 t6
 **Errors**|
-27|No connection|1. Long press to share a file/folder with privileges<br>2. Switch the device connection off<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4
-28|Server down|1. Long press to share a file/folder with privileges<br>2. Server down<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4
-29|Sharing API disabled|1. Long press to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4
-30|Resharing disabled|1. Long press to share a file/folder with privilege of sharing<br>2. In server, disable the resharing<br>3. Login with the sharee<br>4. Try to share the file/folder by handling privileges<br>5. Tap on "done"| An error is shown | P m4 | Enhacement: do not allow to re-share if capability is disabled
-31|Changing password|1. Long press to share a file/folder with privileges<br>2. In server, change the password of the user<br>3. Try to share the file/folder by handling privileges<br>4. Tap on "done"| Credentials are required | P m4
-32|Delete file|1. Long press to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown | P m4 | SOLVED (after re-design): No error is shown
-33|Delete user|1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with<br>3. Tap on "done"|An error is shown| P m4 | 
-**Shibboleth**|
-34|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed
+27|No connection|1. Long press to share a file/folder with privileges<br>2. Switch the device connection off<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4 t6 
+28|Server down|1. Long press to share a file/folder with privileges<br>2. Server down<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4 t6
+29|Sharing API disabled|1. Long press to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m4 t6
+30|Resharing disabled|1. Long press to share a file/folder with privilege of sharing<br>2. In server, disable the resharing<br>3. Login with the sharee<br>4. Try to share the file/folder by handling privileges<br>5. Tap on "done"| An error is shown | P m4 t6| 
+31|Changing password|1. Long press to share a file/folder with privileges<br>2. In server, change the password of the user<br>3. Try to share the file/folder by handling privileges<br>4. Tap on "done"| Credentials are required | P m4 t6
+32|Delete file|1. Long press to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown | P m4 t6| SOLVED (after re-design): No error is shown
+33|Delete user|1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with<br>3. Tap on "done"|An error is shown| P m4 t6| 
+**Shibboleth**| 1 device
+34|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed | F m4 | Expired session + changing privileges -> not granted access
 **Special servers**|
-35|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users | P m4
-36|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed| P m4
-38|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed | P m4
-39|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed
+35|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users | P m4 t6
+36|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed| P m4 t6
+38|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed | P m4 t6
+39|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed | P m4 t6
