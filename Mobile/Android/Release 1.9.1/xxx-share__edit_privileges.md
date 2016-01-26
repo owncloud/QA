@@ -49,7 +49,7 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 32|Delete file|1. Long press to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown | P m4 t6| SOLVED (after re-design): No error is shown
 33|Delete user|1. Long press to share a file/folder with privileges, selecting an user<br>2. In server, delete the user to share with<br>3. Tap on "done"|An error is shown| P m4 t6| 
 **Shibboleth**| 1 device
-34|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed | F m4 | Expired session + changing privileges -> not granted access
+34|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed | P m4 | SOLVED: Expired session + changing privileges -> not granted access
 **Special servers**|
 35|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users | P m4 t6
 36|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed| P m4 t6
