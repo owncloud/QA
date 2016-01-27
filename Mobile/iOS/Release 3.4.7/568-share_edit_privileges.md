@@ -2,25 +2,25 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/568
 
-Devices:
+Devices: iPhone6 v9
 
-Server version:
+Server version: 8.2.2
 
 <br>
  
 Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Comments
-|:----:|:------------- |:-------------------|:-------------|-------------:|----------:
+|:----:|:------------- |:-------------------|:-------------|:-------------:|:----------
 **Menu views**|
-1|File sharing options| 1. Swipe to share with users/groups<br>2. Tap on "add user or group" and add one of them<br>3. Tap on handle privileges|2. A badget is shown to handle privileges<br>3. Two options are displayed: "can share" and "can edit", and a "Done" button to confirm. On the top appears the name of user/group to share with
-2|Folder sharing options| 1. Swipe to share with users/groups<br>2. Tap on "add user or group" and add one of them<br>3. Tap on handle privileges<br>4. Enable "can edit" option|2. A badget is shown to handle privileges<br>3. Two options are displayed: "can share" and "can edit", and a "Done" button to confirm<br>4. Three more options are displayed: "create", "change", "delete". On the top appears the name of user/group to share with
+1|File sharing options| 1. Swipe to share with users/groups<br>2. Tap on "add user or group" and add one of them<br>3. Tap on handle privileges|2. A badget is shown to handle privileges<br>3. Two options are displayed: "can share" and "can edit", and a "Done" button to confirm. On the top appears the name of user/group to share with | P m9
+2|Folder sharing options| 1. Swipe to share with users/groups<br>2. Tap on "add user or group" and add one of them<br>3. Tap on handle privileges<br>4. Enable "can edit" option|2. A badget is shown to handle privileges<br>3. Two options are displayed: "can share" and "can edit", and a "Done" button to confirm<br>4. Three more options are displayed: "create", "change", "delete". On the top appears the name of user/group to share with | P m9 
 **Orientations**|
-3|Portrait| From 1 or 2, set on portrait the view of sharing privileges| The view is correcly displayed
-4|Landscape| From 1 or 2, set on landscape the view of sharing privileges| The view is correcly displayed
+3|Portrait| From 1 or 2, set on portrait the view of sharing privileges| The view is correcly displayed | P m9
+4|Landscape| From 1 or 2, set on landscape the view of sharing privileges| The view is correcly displayed | F m9 P t8 | The sharee`s name is not correctly disposed
 **Privileges**|
-5|Can share|1. Swipe to share a file/folder with special characters<br>2. Select a user/group and grant it to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. File/folder is correctly shared
-6|Can not share|1. Swipe to share a file/folder<br>2. Select a user/group but does not grant to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. The file/folder can not be shared
-7|Can edit file|1. Swipe to share a file<br>2. Select a user/group and grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file is correctly edited
-8|Can not edit file|1. Swipe to share a file<br>2. Select a user/group but does not grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file can not be edited
+5|Can share|1. Swipe to share a file/folder with special characters<br>2. Select a user/group and grant it to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. File/folder is correctly shared | P m9
+6|Can not share|1. Swipe to share a file/folder<br>2. Select a user/group but does not grant to share<br>3. Login with the sharee<br>4. Share the file/folder with other users| 3. The sharee can see the file<br>4. The file/folder can not be shared | P m9
+7|Can edit file|1. Swipe to share a file<br>2. Select a user/group and grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file is correctly edited | F m9 t8 | Edit button switch share button
+8|Can not edit file|1. Swipe to share a file<br>2. Select a user/group but does not grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file can not be edited| F m9 t8 | Edit button switch share button
 9|Can create folder|1. Swipe to share a folder<br>2. Select a user/group and grant it to create<br>3. Login with the sharee<br>4. Try to create/upload a file into the folder| 3. The sharee can see the file<br>4. The file is correctly created/uploaded
 10|Can not create folder|1. Swipe to share a folder<br>2. Select a user/group but does not grant it to create<br>3. Login with the sharee<br>4. Try to create a file into the folder with an external app| 3. The sharee can see the file<br>4. The file can not be created/uploaded 
 11|Can change folder|1. Swipe to share a folder<br>2. Select a user/group and grant it to change<br>3. Login with the sharee<br>4. Try to edit a file into the folder with an external app| 3. The sharee can see the folder<br>4. The file into the folder is correctly changed
