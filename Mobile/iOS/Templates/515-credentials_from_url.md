@@ -19,3 +19,4 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment
 | 5 | Redirect servers |1. Open app  <br>2. Paste URL of a redirect server with form `http://myuser:mypass@host.com` | Username and password are populated with `myuser` and `mypass`. Login button should be active.
 | 6 | No self signed |1. Open app  <br>2. Paste URL of a no self signed server with form `http://myuser:mypass@host.com` | Username and password are populated with `myuser` and `mypass`. Login button should be active.
 | 7 | Shibboleth servers |1. Open app | Login button should be active. |
+| 8 | Server with subpath  |  1. Open app <br>2. Paste URL Paste URL with form `https://host.com:port/subpath1/subpath2`<br>3. Select Username field<br> |  Username and Password fields should remain blank and login button should be active | |
