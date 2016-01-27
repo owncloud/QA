@@ -1,6 +1,6 @@
 ### Sharing privileges
 
-#### Pr: https://github.com/owncloud/ios/pull/xxx
+#### Pr: https://github.com/owncloud/ios/pull/568
 
 Devices:
 
