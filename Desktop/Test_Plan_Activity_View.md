@@ -13,7 +13,7 @@ Have a Redirected server ready to be used with owncloud
 TestID | Test Case | Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------
 1 | "Server Activity"  |  1.- Access to the activity tab   2.- Check that the Server activity view is shown in reversed chronological order| |
-2 | Server Activity | Check that actions done from any other client, such as web interface are shown: upload files / delete / share /rename |
+2 | Server Activity | Check that actions done from any other client, such as web interface are shown: upload files / delete / share  |
 3 | Server Activity - multiple accounts| Check that actions of all the registered accounts done from any other client, such as web interface are shown: upload files / delete / share  |
 4 | Server Activity - pause/no connection| 1.- Having the desktop client on going pause an account, 2.- Do any action from the server interface, 3.- Resume the sync 4.- Info is shown |
 5 | Sync Protocol  |  1.- Access to the activity tab 2.- Check that the Sync Protocol view is shown and the information is the right one, such as file names, sizes, |  |
