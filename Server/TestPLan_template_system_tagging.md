@@ -1,5 +1,41 @@
 Previous requirements: use https and enable encryption.
 
+Hints for webdav testing:
+
+Save this as propfind_tags.txt
+
+``` xml
+<?xml version="1.0"?>
+<a:propfind xmlns:a="DAV:" xmlns:oc="http://owncloud.org/ns">
+       <a:prop><oc:display-name/>
+       <oc:user-visible/>
+       <oc:user-assignable/>
+       <oc:id/></a:prop>
+</a:propfind>
+```
+
+Use curl to get answers.
+
+Create new tag:
+
+curl -D - -X POST -H "Content-Type: application/json" -d '{"name":"new tag", "userVisible": true, "userAssignable": true}' http://USER:PASSWORD@HOST/remote.php/dav/systemtags
+
+Get all tags:
+
+curl -X PROPFIND -H "Content-Type: text/xml" --data-binary "@propfind_tags.txt" http://USER:PASSWORD@HOST/remote.php/dav/systemtags | xmllint --format -
+
+Assign tag to a file:
+
+curl -X PUT  http://USER:PASSWORD@HOST/remote.php/dav/systemtags/remote.php/dav/systemtags-relations/files/$fileID/$tagID
+
+You can get the fileid in the tr field inspecting the file in the files view using chrome. Or do a PROPFIND on remote.php/webdav/path/to/file and request the property "oc:id" or "oc:fileid".
+
+Unassign tag to a file:
+
+curl -X DELETE  http://USER:PASSWORD@HOST/remote.php/dav/systemtags/remote.php/dav/systemtags-relations/files/$fileID/$tagID
+
+
+
 
 
 | Test Case                                | Expected Result                          | Result | Related Comment |
