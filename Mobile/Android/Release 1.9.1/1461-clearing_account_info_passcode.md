@@ -1,10 +1,10 @@
 ###  Bug: Clearing app data removes passcode 
 
-#### Pr: https://github.com/owncloud/android/pull/XXX 
+#### Pr: https://github.com/owncloud/android/pull/1461
 
-Devices:
+Devices: MotorolaE v4.4.4 (m4a)
 
-Server: 
+Server: 8.2.2
 
 
 ---
