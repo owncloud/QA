@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1461
 
-Devices: MotorolaE v4.4.4 (m4a), HTC one v4.3 (m4b), Tablet Nexus9 v6 (t6)
+Devices: MotorolaE v4.4.4 (m4a), HTC one v4.3 (m4b), Tablet Nexus9 v6 (t9)
 
 Server: 8.2.2
 
