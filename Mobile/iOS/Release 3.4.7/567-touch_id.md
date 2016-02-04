@@ -12,7 +12,6 @@ Server: 8.2.2
 | Test Case | Steps | Expected Result | Result | Related Comment
 :------: | :------------- | :------------- | :-------------- | :-----: | :------
 | Without Having finger touch ID enable on the device | 1.- Enable pincode within the app  | Touch ID option is not shown |
-| Having finger touch ID enable on the device | 1.- Enable pincode within the app 2.- Enable pin code 3.- Leave the app 4.- OPen again | Touch ID is requested |
 | Having finger touch ID enable on the device | 1.- Enable pincode within the app 2.- Enable pin code 3.- Leave the app 4.- Open again | Touch ID is requested |
 | Having finger touch ID enable on the device | 1.- Enable pincode within the app 2.- Enable pin code 3.- Leave the app 4.- Open again 5.- Unblock with non registered finger | Error detected and it´s possible to unlock with the pincode |
 | Having finger touch ID enable on the device | 1.- Enable pincode & touch id within the app  2.- Leave the app 3.- Select to upload an image from another app, such as gallery  | Touch ID is requested|
