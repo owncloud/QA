@@ -49,7 +49,7 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 **Shibboleth**|
 31|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed | P t8
 **Special servers**|
-32|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users
-33|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed
-34|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed
+32|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users| P m9 P t8
+33|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed | P m9 P t8
+34|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed | P m9 P t8
 35|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed
