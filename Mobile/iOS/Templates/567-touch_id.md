@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/567 
 
-Devices: iPhone6 v9.0.2, iPad Air v8.4
+Devices: iPhone6 v9.0.2, iPad Air v8.4, iPhone 5 v8.4 (only for last)
 
 Server: 8.2.2
 
@@ -22,3 +22,4 @@ Server: 8.2.2
 | Having finger touch ID enabled on the device | 1.- Enable passcode & touch id within the app <br> 2.- Open the app touch ID is asked <br> 3.- Unchecked Touch ID  <br> 4.- Close the app| Touch ID is not requested|
 | Having finger touch ID enabled on the device | 1.- Enable passcode & touch id within the app <br> 2.- Open the app touch ID is asked <br> 3.- Unchecked Passcode  <br> 4.- Enable passcode| Touch ID is not enable|
 | Having, at least, 2 finger touch ID enabled on the device | 1.- Enable passcode & touch id within the app <br> 2.- Open the app touch ID is asked| Both finger touch work|
+| Device without fingerprint sensor | 1. - Enable passcode | Option for Touch ID is not shown | 
