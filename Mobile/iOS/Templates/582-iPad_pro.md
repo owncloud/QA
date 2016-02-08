@@ -1,6 +1,6 @@
 ### Sharing privileges
 
-#### Pr: https://github.com/owncloud/ios/pull/xx
+#### Pr: https://github.com/owncloud/ios/pull/582
 
 Devices: iPad pro v9
          iPhone6 v8
@@ -24,3 +24,5 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 6|Tab bar| Check that tab bar images are shown and images are not pixeled |  |  
 **Branding**|
 7|Branding| Check a branding client |  |  
+**App Icon**|
+8|App Icon| Check the App icon |  |  
