@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/568
 
-Devices: iPhone6 v9
+Devices: iPhone6 v9, iPad Mini v8 
 
 Server version: 8.2.2
 
@@ -23,7 +23,7 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 8|Can not edit file|1. Swipe to share a file<br>2. Select a user/group but does not grant it to edit<br>3. Login with the sharee<br>4. Try to edit the file with an external app| 3. The sharee can see the file<br>4. The file can not be edited| P m9 t8 | SOLVED: Edit button switch share button.
 9|Can create folder|1. Swipe to share a folder<br>2. Select a user/group and grant it to create<br>3. Login with the sharee<br>4. Try to create/upload a file into the folder| 3. The sharee can see the file<br>4. The file is correctly created/uploaded | P m9 P t8
 10|Can not create folder|1. Swipe to share a folder<br>2. Select a user/group but does not grant it to create<br>3. Login with the sharee<br>4. Try to create a file into the folder with an external app| 3. The sharee can see the file<br>4. The file can not be created/uploaded | P m9 P t8
-11|Can change folder|1. Swipe to share a folder<br>2. Select a user/group and grant it to change<br>3. Login with the sharee<br>4. Try to edit a file into the folder with an external app| 3. The sharee can see the folder<br>4. The file into the folder is correctly changed | P m9 P t8 | File dosesn't update correctly in the app for the user who changed the file
+11|Can change folder|1. Swipe to share a folder<br>2. Select a user/group and grant it to change<br>3. Login with the sharee<br>4. Try to edit a file into the folder with an external app| 3. The sharee can see the folder<br>4. The file into the folder is correctly changed | P m9 P t8 | File doesn't update correctly in the app for the user who changed the file
 12|Can not change folder|1. Swipe to share a folder<br>2. Select a user/group but does not grant it to change<br>3. Login with the sharee<br>4. Try to edit a file into the folder file with an external app| 3. The sharee can see the file<br>4. The file into the folder can not be changed | P m9 t8 | NOT REPROD: Allow change when it is not granted
 13|Can delete folder|1. Swipe to share a folder<br>2. Select a user/group and grant it to delete<br>3. Login with the sharee<br>4. Try to delete a file into the folder| 3. The sharee can see the file<br>4. The file is correctly deleted | P m9 P t8
 14|Can not delete folder|1. Swipe to share a folder<br>2. Select a user/group but does not grant it to delete<br>3. Login with the sharee<br>4. Try to delete a file into the folder| 3. The sharee can see the file<br>4. The file can not be deleted | P m9 P t8
@@ -41,15 +41,15 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 24 |Re-share without edit + share| 1. Swipe to share a folder with user1<br>2. Grant user1 to share but not to edit <br>3. Login with user1<br>4. Swipe to re-share the folder with user2 granting share but not edit<br>5. Re-share the folder with user2 granting minimum edit permissions |4. The folder can not be edited<br> 5. The folder can be edited| P m9 P t8
 25 |Re-share with edit + share| 1. Swipe to share a folder with user1<br>2. Grant user1 to share but some privileges of editing <br>3. Login with user1<br>4. Swipe to re-share the folder with user2 granting more permissions than the granted <br>5. Re-share the folder with user2 granting the same permissions |4. The folder can not be edited<br> 5. The folder can be edited| P m9 P t8
 **Errors**|
-26|No connection|1. Swipe to share a file/folder with privileges<br>2. Switch the device connection off<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | F m9 P t9| SOLVED: All privileges are shown active if network fails before tap "Done" button 
-27|Server down|1. Swipe to share a file/folder with privileges<br>2. Server down<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | F m9 F t8 | Setting privileges view enable change them with no connection. However, an alertview is shown pointing out the server error.
-28|Sharing API disabled|1. Swipe to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m9 P t8 | User dissaperas from sharees list
+26|No connection|1. Swipe to share a file/folder with privileges<br>2. Switch the device connection off<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m9 P t8| SOLVED: All privileges are shown active if network fails before tap "Done" button 
+27|Server down|1. Swipe to share a file/folder with privileges<br>2. Server down<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m9 P t8 | SOLVED: Setting privileges view enable change them with no connection. However, an alertview is shown pointing out the server error.
+28|Sharing API disabled|1. Swipe to share a file/folder with privileges<br>2. In server, disable the sharing API<br>3. Change the privileges<br>4. Tap on "done"| An error is shown | P m9 P t8 | User dissapears from sharees list
 29|Resharing disabled|1. Swipe to share a file/folder with privilege of sharing<br>2. In server, disable the resharing<br>3. Login with the sharee<br>4. Try to share the file/folder by handling privileges<br>5. Tap on "done"| An error is shown | P m9 P t8 |
 30|Delete file|1. Swipe to share a file/folder with privileges<br>2. In server, delete the file<br>3. Tap on "done"|An error is shown | P m9 P t8
 **Shibboleth**|
-31|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed | P t8
+31|Share in shibboleth|Share a file granting/banning privileges in a shibboleth server|The privileges are correctly managed | P t8 m9
 **Special servers**|
 32|LDAP|Share a file granting/banning privileges in a server with LDAP enabled|The privileges are correctly managed with LDAP users| P m9 P t8
 33|Self signed|Share a file granting/banning privileges in a self signed server|The privileges are correctly managed | P m9 P t8
 34|No self signed|Share a file granting/banning privileges in a no self signed server|The privileges are correctly managed | P m9 P t8
-35|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed
+35|Redirect|Share a file granting/banning privileges in a redirect server|The privileges are correctly managed | P t8 P m9
