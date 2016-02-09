@@ -9,8 +9,8 @@ Server: 8.2.2
 ---
 
  
-| Test Case | Steps | Expected Result | Result | Related Comment
-:------: | :------------- | :------------- | :-------------- | :--------d-: | :------
+| Test Case | Steps | Expected Result | Result | Related Comment |
+| :-------: | :------------- | :------------- | :---------- | :---------- |
 | Without Having finger touch ID enable on the device | 1.- Enable passcode within the app  | Touch ID option is not shown | OK m9 <br> OK m8 |
 | Having finger touch ID enabled on the device | 1.- Enable passcode within the app <br> 2.- Enable Touch ID <br> 3.- Leave the app <br> 4.- Open again | Touch ID is requested | OK m9 <br> OK m8 |
 | Having finger touch ID enabled on the device | 1.- Enable passcode within the app <br> 2.- Enable Touch ID <br> 3.- Leave the app <br> 4.- Open again <br> 5.- Unblock with non registered finger | Error detected and it´s possible to unlock with the passcode, tapping on the 'Enter passcode' option | OK m9 <br> OK m8 |
