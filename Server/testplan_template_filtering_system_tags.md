@@ -7,6 +7,7 @@
 | Having many tags assigned including 'tag1' but no 'tag2'. Search files and folders which has 'tag1 and 'tag2' | No results are returned.                 |        |                 |
 | After filtering tagged files and folders. Check file actions: rename, move, delete files. | Actions happen without problems.         |        |                 |
 | After filtering tagged files and folders. Open sidebar and check that comments, activities and share info are loaded properly. | No problems when opening the sidebar.    |        |                 |
+| Having many tags assigned to files and folders, filter by a tag. See results, bookmark the page on your browser. Close the browser, open it again, go to the bookmarked page. | Same results from first filtering  appear. |        |                 |
 | Search tags using internet explorer 11.  | Files or folders tagged appear.          |        |                 |
 | Search tags using safari.                | Files or folders tagged appear.          |        |                 |
 | Search tags using firefox.               | Files or folders tagged appear.          |        |                 |
