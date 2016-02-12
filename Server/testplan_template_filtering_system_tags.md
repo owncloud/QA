@@ -3,6 +3,10 @@
 | Test Case                                | Expected Result                          | Result | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | ------ | --------------- |
 | Assign tags to files and folders, include tags with special characters. Assign tags to files inside nested directories. Go to the tags section. Search them. | Files or folders tagged appear.          |        |                 |
+| Having many tags assigned including 'tag1' and 'tag2'. Search files and folders which has 'tag1 and 'tag2' | Only files or folders with both tags appear. |        |                 |
+| Having many tags assigned including 'tag1' but no 'tag2'. Search files and folders which has 'tag1 and 'tag2' | No results are returned.                 |        |                 |
+| After filtering tagged files and folders. Check file actions: rename, move, delete files. | Actions happen without problems.         |        |                 |
+| After filtering tagged files and folders. Open sidebar and check that comments, activities and share info are loaded properly. | No problems when opening the sidebar.    |        |                 |
 | Search tags using internet explorer 11.  | Files or folders tagged appear.          |        |                 |
 | Search tags using safari.                | Files or folders tagged appear.          |        |                 |
 | Search tags using firefox.               | Files or folders tagged appear.          |        |                 |
@@ -11,8 +15,6 @@
 | Having tags on files and folders assigned, deassign some. Go to the tags section. Search them. | Files and folders with deassigned tags doesn't appear. |        |                 |
 | Assign tags to shared files and files in external storage. Filter them. | Files or folders tagged appear.          |        |                 |
 | Enabling encryption and ldap, assign tags using an ldap user luser1, share those files with another ldap user luser2 Filter tags using luser2. | Luser2 can see the tags assigned by luser1. |        |                 |
-
-
 
 **Extra** - API Test:
 
@@ -141,4 +143,3 @@ Having files and folders tagged with
    ```
    
    ​
-
