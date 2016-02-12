@@ -7,6 +7,7 @@
 2. Create 4 users.
 3. Configure a LDAP
 4. Configure an Active Directory
+5. Configure a SSL
 3. Add 2 users to each group.
 4. Upload files with all of them.
 5. Create some folders for each user.
@@ -54,3 +55,11 @@ TestID | Test Case | Expected Result | Result | Related Comment
 28 | Share a folder with an AD user. After that, write down a pattern that matches with some AD users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared  | :construction:  |
 29 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches with a AD user but not completed| The username does NOT appear in the dropdown | :construction:  |
 30 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches exactly with an AD user| The username appears in the dropdown | :construction:  |
+| **Sharee with SSL users** |  |   |
+ |  |  |   |
+31 | Sharing a file, write down a pattern that matches with an SSL user | The user that matches with this pattern is shown in the dropdown | :construction: |
+32 | Sharing a file, write down a pattern that does not match with any SSL user | A warning message about no results found is shown in the dropdown | :construction:  |
+33 | Share a file with an SSL user. After that, write down a pattern that matches with some SSL users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared  | :construction:  |
+34 | Share a folder with an SSL user. After that, write down a pattern that matches with some SSL users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared  | :construction:  |
+35 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches with a SSL user but not completed| The username does NOT appear in the dropdown | :construction:  |
+36 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches exactly with an SSL user| The username appears in the dropdown | :construction:  |
