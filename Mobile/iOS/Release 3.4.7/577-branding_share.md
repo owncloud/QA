@@ -1,6 +1,6 @@
 ### Sharing branding option
 
-#### Pr: https://github.com/owncloud/ios/pull/577
+#### Pr: https://github.com/owncloud/ios/pull/xxx
 
 Devices: iPad v9 with oc8.2.2 <br>
          iPhone6 v9 with oc9
