@@ -21,7 +21,7 @@ TestID |  Test Case | Expected Result | Result | Related Comment
 1 | share a file (userA) to (userB) |  shared file can be seen from the userB ||
 2 | share a folder (userA) to (userB) |  shared folder can be seen from the userB and access to its contents ||
 3 |  unshare a file/folder in your ownCloud (userB) |  shared file/folder no longer visible from the userB ||
-4 |share a file (userA) to (userB) |  shared file can be seen from the userB ||
+4 |share a file (userA) to (userB), delete file in userA | shared file is no longer visible from the userB ||
 5 |share a folder (userA) in (userB), delete file in userA |  file is shown in userA ||
 6 |share a file (userA) in (userB), update the file in userA |  file is updated in userB ||
 7 | share a file (userA) in (userB) using an LDAP user |  shared file can be seen from the userB ||
