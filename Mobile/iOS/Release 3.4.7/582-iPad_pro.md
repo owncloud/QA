@@ -1,4 +1,4 @@
-### Sharing privileges
+### iPad Pro support
 
 #### Pr: https://github.com/owncloud/ios/pull/582
 
