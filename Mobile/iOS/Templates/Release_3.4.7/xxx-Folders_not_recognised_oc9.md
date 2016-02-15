@@ -28,5 +28,5 @@ Server: 9 and 8.2.2
 |**Multiaccount**||||||
 | 13 | Multiaccount (oC8 & oC9) | 1. Login in oC8 and oC9 accounts|  Both lists are correctly displayed, and all files and folders are correctly recognised as usual | P m9 | |
 |**Regression**||||||
-| 14 | oC8 (regress) | 1. Login in a OC 8 account with files and folders|  The list is correctly displayed, and all files and folders are correctly recognised as usual | P m9 | |
+| 14 | oC8 (regress) | 1. Login in a OC 8 account with files and folders|  The list is correctly displayed, and all files and folders are correctly recognised as usual | | |
 
