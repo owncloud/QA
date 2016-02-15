@@ -3,8 +3,8 @@
 
 ## Testing functionality
 
-|TestID | Test Case | Expected Result | Result | Related Comment
------------- | ------------- | -------------- | ----- | ------
+Test Case | Expected Result | Result | Related Comment
+------------- | -------------- | ----- | ------
 **files_external:create** |  |   |
 |  |   |
 Create a S3 mountpoint via command line | The mountpoint is created and appears in the server webUI | :construction:  |
@@ -75,7 +75,7 @@ Verify mount configuration of a S3 mountpoint | The verify command returns statu
 Verify mount configuration of a DropBox mountpoint | The verify command returns status OK, code 0 and no message | :construction:  |
 Verify mount configuration of a GoogleDrive mountpoint| The verify command returns status OK, code 0 and no message | :construction:  |
 Verify mount configuration of a SFTP mountpoint | The verify command returns status OK, code 0 and no message| :construction:  |
-Verify a wrong mount configuration of a S3 mountpoint | he verify command returns status error, code  and error message | :construction:  |
+Verify a wrong mount configuration of a S3 mountpoint | The verify command returns status error, code  and error message | :construction:  |
 Verify a wrong mount configuration of a DropBox mountpoint | The verify command returns status error, code  and error message | :construction:  |
 Verify a wrong mount configuration of a GoogleDrive mountpoint| The verify command returns status error, code  and error message | :construction:  |
 Verify a wrong mount configuration of a SFTP mountpoint | The verify command returns status error, code  and error message | :construction:  |
