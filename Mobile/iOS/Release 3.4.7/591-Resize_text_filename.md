@@ -1,6 +1,6 @@
 ###  Resize text of filename in iPad 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/591 
 
 Devices: iPad Air 8.4, iPadPro v9.2
 

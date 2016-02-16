@@ -1,6 +1,6 @@
 ###  Folders are not recognised in oC9 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/592 
 
 Devices: iPhone9 v9.2.1
 
