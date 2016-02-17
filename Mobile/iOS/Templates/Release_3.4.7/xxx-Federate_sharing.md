@@ -1,4 +1,4 @@
-###  Federate Sharing 
+###  Federated Sharing 
 
 #### Pr: https://github.com/owncloud/ios/pull/XXX 
 
@@ -22,10 +22,10 @@ Server:
 | 6 |  Shared with groups |  1. Swipe to share a file/folder with a group<br>2. Type a groupname and then an '@' and a correct server URL<br>3. Login in web with all the group members and accept the federated share<br>4. Login in app with the sharees  | The shared appears in files view and can be browsed |||
 | 7 |  Reject federated |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct server URL<br>3. Login in web with the sharee and reject the federated share<br>4. Login in app with the sharee  | The shared file does not appear in files view. The share does not show the file as shared |||
 | 8 |  Special characters |  1. Repeat the test cases 2. or 3. with file/folder which contains special characters  | The shared file/folder appears in files view |||
-| 9 |  User with '@' |  1. Repeat the test cases 2. or 3. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federate shared |||
-| 10 |  User called '@' |  1. Repeat the test cases 2. or 3. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federate shared |||
+| 9 |  User with '@' |  1. Repeat the test cases 2. or 3. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federated shared |||
+| 10 |  User called '@' |  1. Repeat the test cases 2. or 3. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federated shared |||
 | 11 |  Multiple federated |  1. Swipe to share a folder with users<br>2. Type different federated URLs (different servers and users)<br>3. Login in web with the sharees and accept the federated share<br>4. Login in app with the sharees  | All sharees can view the file/folder |||
-| 12 |  Unsharing | 1. Federate share of a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file||
+| 12 |  Unsharing | 1. Share (federated) a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file||
 | **Errors** ||||||
 | 13 |  Inexistent User |  1. Repeat the test cases 2. or 3. using a username which does not exist in remote server  | The file can not be shared, an error appears |||
 | 14 |  Inexistent Server |  1. Repeat the test cases 2. or 3. using an inexistent remote URL | The file can not be shared, an error appears |||
@@ -36,7 +36,7 @@ Server:
 | 19 | Server under maintenance mode | 1. Repeat the test cases 2. or 3. using a server under maitenance mode | The file can not be shared, an error appears |||
 | **Server Capabilities** ||||||
 | 20 |  Federated Sharing disabled |  1. In server side, disable the capability to share with federation<br>2. In app, try to share with federation<br> | The share is not accepted and an error is raised |||
-| 21 |  Receive Federated disabled |  1. In server side, disable the capability to receive federate shares<br>2. In app, try to share form a other server's user with the current server<br> | The share is not accepted and an error is raised |||
+| 21 |  Receive Federated disabled |  1. In server side, disable the capability to receive federated shares<br>2. In app, try to share form a other server's user with the current server<br> | The share is not accepted and an error is raised |||
 | **Edit Privilege** ||||||
 | 22 | Edit granted file|  1. Swipe to share a file with users<br>2. Type a federated URL<br>3. Grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the file  | The shared file appears in files view and can be edited |||
 | 23 | Edit granted folder|  1. Swipe to share a folder with users<br>2. Type a federated URL<br>3. Grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the folder  | The shared folder appears in files view and can be edited (upload/update/delete) |||
@@ -53,4 +53,4 @@ Server:
 | 32 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 33 | Redirect sharee |  1. Swipe to share a file with an federated user in a redirect server <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 34 | No self signed |  1. Swipe to share a file with an federated user in a no self signed server <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 35 | Self signed not trusted|  1. Swipe to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be federate shared and the sharee can neither accept nor view it|||
+| 35 | Self signed not trusted|  1. Swipe to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be shared federated and the sharee can neither accept nor view it|||
