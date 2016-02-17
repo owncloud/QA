@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1473 
 
-Devices:
+Devices:  Samsung Galaxy S3 Android4, HTC Android4, Android5, Android6
 
 Server:
 
