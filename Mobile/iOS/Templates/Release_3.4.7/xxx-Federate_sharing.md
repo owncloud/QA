@@ -49,7 +49,7 @@ Server:
 | 29 | Reshare federated |  1. Swipe to share a file with an federated user<br>2. Login with the sharee<br>3. Try to reshare with another federated in a different server| The file is reshared correctly |||
 | 30 | Reshare initial user |  1. Swipe to share a file with an federated user<br>2. Login with the sharee<br>3. Try to reshare with the initial share| The file can not be reshared with the initial share |||
 | 31 | Reshare initial server |  1. Swipe to share a file with an federated user <br>2. Login with the sharee<br>3. Try to reshare with an user of the initial server| The user can see the file|||
-| **Special Servers** ||||||
+| **Special Servers** |Only one device|||||
 | 32 | Shibboleth sharee |  1. Swipe to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file|||
 | 33 | Shibboleth share |  1. In a shibboleth server, swipe to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 34 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|||
