@@ -13,7 +13,7 @@ Server:
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 | **Correct view** ||||||
-| 1 |  "Can share" not displayed | 1. Swipe to share a file or folder with users| "Can share" option is not displayed. Only "Can edit"|||
+| 1 |  "Can share" not displayed | 1. Swipe to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit"|||
 | 2 |  "remote" is shown |  1. Swipe to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote) 
 | **Federated Sharing** ||||||
 | 3 |  Shared file (http) |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |||
