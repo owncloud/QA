@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/XXX 
 
-Devices: iPhone6 v9.2 (v8.2.2)
+Devices: iPhone6 v9.2 (Server v8.2.2), iPad Air v8.4 (Server v9)
 
 Server: 8.2.2 & 9
 
