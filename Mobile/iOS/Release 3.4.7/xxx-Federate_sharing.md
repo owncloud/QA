@@ -2,9 +2,9 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/XXX 
 
-Devices:
+Devices: iPhone6 v9.2 (v8.2.2)
 
-Server:
+Server: 8.2.2 & 9
 
 
 ---
@@ -13,15 +13,15 @@ Server:
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 | **Correct view** ||||||
-| 1 |  "Can share" not displayed | 1. Swipe to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit"|||
-| 2 |  "remote" is shown |  1. Swipe to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote) 
+| 1 |  "Can share" not displayed | 1. Swipe to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit"| P m9 ||
+| 2 |  "remote" is shown |  1. Swipe to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote) | P m9||
 | **Federated Sharing** ||||||
-| 3 |  Shared file (http) |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |||
-| 4 |  Shared folder (http) |  1. Swipe to share a folder with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |||
+| 3 |  Shared file (http) |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view | P m9||
+| 4 |  Shared folder (http) |  1. Swipe to share a folder with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed | P m9 ||
 | 5 |  Shared file (https trusted) |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |||
 | 6 |  Shared folder (https trusted) |  1. Swipe to share a folder with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |||
-| 7 |  Shared with groups |  1. Swipe to share a file/folder with a group<br>2. Type a groupname and then an '@' and a correct server URL<br>3. Login in web with all the group members and accept the federated share<br>4. Login in app with the sharees  | The shared appears in files view and can be browsed |||
-| 8 |  Reject federated |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct server URL<br>3. Login in web with the sharee and reject the federated share<br>4. Login in app with the sharee  | The shared file does not appear in files view. The share does not show the file as shared |||
+| 7 |  Shared with groups |  1. Swipe to share a file/folder with a group<br>2. Type a groupname and then an '@' and a correct server URL  | Federated share with groups is not allowed | P m9 ||
+| 8 |  Reject federated |  1. Swipe to share a file with users<br>2. Type a username and then an '@' and a correct server URL<br>3. Login in web with the sharee and reject the federated share<br>4. Login in app with the sharee  | The shared file does not appear in files view. The share does not show the file as shared | P m9 ||
 | 9 |  Special characters |  1. Repeat the test cases 2. or 3. with file/folder which contains special characters  | The shared file/folder appears in files view |||
 | 10 |  User with '@' |  1. Repeat the test cases 2. or 3. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federated shared |||
 | 11 |  User called '@' |  1. Repeat the test cases 2. or 3. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federated shared |||
