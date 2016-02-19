@@ -52,7 +52,7 @@ Server: 8.2.2 & 9
 | **Special Servers** |Only one device|||||
 | 32 | Shibboleth sharee |  1. Swipe to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file|||
 | 33 | Shibboleth share |  1. In a shibboleth server, swipe to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 34 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|||
+| 34 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|P m9||
 | 35 | Redirect sharee |  1. Swipe to share a file with an federated user in a redirect server <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 36 | No self signed |  1. Swipe to share a file with an federated user in a no self signed server <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 37 | Self signed not trusted|  1. Swipe to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be shared federated and the sharee can neither accept nor view it|||
