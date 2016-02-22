@@ -34,7 +34,7 @@ Server: 8.2.2 & 9
 | 17 |  Deleted account |  1. Repeat the test cases 2. or 3.<br> 2. From admin in web, delete the account ot the sharing user | The sharee can not view the shared file or folder |F m9|https://github.com/owncloud/core/issues/22525|
 | 18 |  Without connection |  1. Switch the wifi connection off<br>2. Try to share with a federated user | An error appears |P m9||
 | 19 |  Without server connection |  1. Switch the server off<br>2. Try to share with a federated user | An error appears |P m9||
-| 20 | Server under maintenance mode | 1. Repeat the test cases 2. or 3. using a server under maitenance mode | The file can not be shared, an error appears |||
+| 20 | Server under maintenance mode | 1. Repeat the test cases 2. or 3. using a server under maitenance mode | The file can not be shared, an error appears | P m9||
 | **Server Capabilities** ||||||
 | 21 |  Federated Sharing disabled |  1. In server side, disable the capability to share with federation<br>2. In app, try to share with federation<br> | The share is not accepted and an error is raised |P m9||
 | 22 |  Receive Federated disabled |  1. In server side, disable the capability to receive federated shares<br>2. In app, try to share form a other server's user with the current server<br> | The share is not accepted and an error is raised |P m9||
