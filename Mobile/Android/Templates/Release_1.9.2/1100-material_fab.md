@@ -25,6 +25,6 @@ Server:
 | 9 | Content from other apps |  1. Tap on fab in root folder<br>2. Tap on "Content from other apps"<br>3. Select a file or files to upload from other apps | The files are upload correctly. The options collapsed  |  |  |
 | **Actions (no root)**||||||
 | 10 | Upload (copy) |  1. Tap on fab in a no root folder<br>2. Tap on "Upload"<br>3. Select a file or files to upload with option copy | The files are upload correctly. The options collapsed  |  |  |
-| 11 | Upload (move) |  1. Tap on fab in root folder<br>2. Tap on "Upload"<br>3. Select a file or files to upload with option move | The files are upload correctly, being deleted from origin. The options collapsed  |  |  |
+| 11 | Upload (move) |  1. Tap on fab in no root folder<br>2. Tap on "Upload"<br>3. Select a file or files to upload with option move | The files are upload correctly, being deleted from origin. The options collapsed  |  |  |
 | 12 | New folder |  1. Tap on fab in a no root folder<br>2. Tap on "New folder"<br>3. Input the folder's name | The folder is created correctly. The options collapsed  |  |  |
 | 13 | Content from other apps |  1. Tap on fab in a no root folder<br>2. Tap on "Content from other apps"<br>3. Select a file or files to upload from other apps | The files are upload correctly. The options collapsed  |  |  |
