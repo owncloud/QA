@@ -1,6 +1,7 @@
+
 ###  Federated Sharing 
 
-#### Pr: https://github.com/owncloud/android/pull/XXX 
+#### Pr: https://github.com/owncloud/android/pull/1492 
 
 Devices:
 
@@ -13,8 +14,8 @@ Server:
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 | **Correct view** ||||||
-| 1 |  "Can share" not displayed | 1. Long press to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit"|||
-| 2 |  "remote" is shown |  1. Long press to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote) 
+| 1 |  "Can share" not displayed | 1. Long press to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit" without suboptions|||
+| 2 |  "remote" is shown |  1. Long press to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote). 
 | **Federated Sharing** ||||||
 | 3 |  Shared file (http) |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |||
 | 4 |  Shared folder (http) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |||
@@ -36,7 +37,7 @@ Server:
 | 19 |  Without server connection |  1. Switch the server off<br>2. Try to share with a federated user | An error appears |||
 | 20 | Server under maintenance mode | 1. Repeat the test cases 2. or 3. using a server under maitenance mode | The file can not be shared, an error appears |||
 | **Server Capabilities** ||||||
-| 21 |  Federated Sharing disabled |  1. In server side, disable the capability to share with federation<br>2. In app, try to share with federation<br> | The share is not accepted and an error is raised |||
+| 21 |  Federated Sharing disabled |  1. In server side, disable the capability to share with federation<br>2. In app, try to share with federation<br> | Can not be share |||
 | 22 |  Receive Federated disabled |  1. In server side, disable the capability to receive federated shares<br>2. In app, try to share form a other server's user with the current server<br> | The share is not accepted and an error is raised |||
 | **Edit Privilege** ||||||
 | 23 | Edit granted file|  1. Long press to share a file with users<br>2. Type a federated URL<br>3. Grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the file  | The shared file appears in files view and can be edited |||
@@ -48,11 +49,16 @@ Server:
 | 28 | Share without edit |  1. Long press to share a file with an federated user without granting him to edit <br>2. Login with the sharee<br>3. Try to reshare with other users in the same server granting them to edit<br>4. Try to reshare with other users in the same server without granting them to edit| 3. The file can not be reshared because the permission exceeds<br>4. The file can be reshared and the 2nd sharee can not edit the file|||
 | 29 | Reshare federated |  1. Long press to share a file with an federated user<br>2. Login with the sharee<br>3. Try to reshare with another federated in a different server| The file is reshared correctly |||
 | 30 | Reshare initial user |  1. Long press to share a file with an federated user<br>2. Login with the sharee<br>3. Try to reshare with the initial share| The file can not be reshared with the initial share |||
-| 31 | Reshare initial server |  1. Long press to share a file with an federated user <br>2. Login with the sharee<br>3. Try to reshare with an user of the initial server| The user can see the file|||
+| 31 | Reshare initial server |  1. Long press to share a file with an federated user <br>2. Login with the sharee<br>3. Try to reshare with an user of the initial server| The user can see the file|||w
+| **Autocomplete** |Set two servers with Autocompletion|||||
+| 32 | User in other server (whith autoc.)|  1. Share a file/folder with a user of a trusted typing only his name| The autocompletion shows the complete federated URL and not the (remote)|||
+| 33 | User in other server (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name| When the @ is written is shown as 'remote'|||
+| 34 | Two users with same name  (with autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including whole URL|||
+| 35 | Two users with same name  (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including @remote|||
 | **Special Servers** |Only one device|||||
-| 32 | Shibboleth sharee |  1. Long press to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file|||
-| 33 | Shibboleth share |  1. In a shibboleth server, long press to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 34 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 35 | Redirect sharee |  1. Long press to share a file with an federated user in a redirect server <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 36 | No self signed |  1. Long press to share a file with an federated user in a no self signed server <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 37 | Self signed not trusted|  1. Long press to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be shared federated and the sharee can neither accept nor view it|||
+| 36 | Shibboleth sharee |  1. Long press to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file|||
+| 37 | Shibboleth share |  1. In a shibboleth server, long press to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|||
+| 38 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|||
+| 39 | Redirect sharee |  1. Long press to share a file with an federated user in a redirect server <br>2. Login with the sharee<br>| The sharee can view the file|||
+| 40 | No self signed |  1. Long press to share a file with an federated user in a no self signed server <br>2. Login with the sharee<br>| The sharee can view the file|||
+| 41 | Self signed not trusted|  1. Long press to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be shared federated and the sharee can neither accept nor view it|||
