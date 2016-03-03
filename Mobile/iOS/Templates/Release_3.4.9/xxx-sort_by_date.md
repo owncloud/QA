@@ -38,10 +38,14 @@ Server:
 | 21 | Update file with doc provider (A-Z)|  1. Set "sorted by A-Z"<br>2. Open a txt file with an external app using doc provider <br>3. Change the file and save it | The order does not change |  |  |
 | 22 | Update folder - by Date |  1. Set sort by Date<br>2. With an external app or the web, upload files into a folder| The uploaded folder is on the top |  |  |
 | 23 | Update folder - by A-Z |  1. Set sort by A-Z<br>2. With an external app or the web, upload files into a folder| The order does not change |  |  |
+|**External apps**||||||
+| 24 | Doc. provider |  1. In app, set  by Date<br>2. Open a document with an external app (for example, Documents) from location "ownCloud"<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted  by Date<br>3. The files are correctly sorted by A-Z|  |  |
+| 25 | Gallery |  1. In app, set  by Date<br>2. Open a pic/s with the gallery and select "ownCloud" to upload<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted by Date<br>3. The files are correctly sorted by A-Z|  |  |
+| 26 | Gallery II|  1. In app, set  by Date<br>2. Open a pic/s with the gallery and select "copy to ownCloud" to upload<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted by Date<br>3. The files are correctly sorted by A-Z|  |  |
 |**Persistance**||||||
-| 24 | Kill - A-Z |  1. Set sort by A-Z<br>2. Kill the app<br>3. Open the app| The files are correctly sorted |  |  |
-| 25 | Kill - Date|  1. Set sort by Date<br>2. Kill the app<br>3. Open the app| The files are correctly sorted |  |  |
-| 26 | Change app - A-Z|  1. Set sort by A-Z<br>2. Change to another app without killing<br>3. Return to the app| The files are correctly sorted |  |  |
-| 27 | Change app - Date|  1. Set sort by Date<br>2. Change to another app without killing<br>3. Return to the app| The files are correctly sorted |  |  |
+| 27 | Kill - A-Z |  1. Set sort by A-Z<br>2. Kill the app<br>3. Open the app| The files are correctly sorted |  |  |
+| 28 | Kill - Date|  1. Set sort by Date<br>2. Kill the app<br>3. Open the app| The files are correctly sorted |  |  |
+| 29 | Change app - A-Z|  1. Set sort by A-Z<br>2. Change to another app without killing<br>3. Return to the app| The files are correctly sorted |  |  |
+| 30 | Change app - Date|  1. Set sort by Date<br>2. Change to another app without killing<br>3. Return to the app| The files are correctly sorted |  |  |
 |**Customization**||||||
-| 28 | More than minimum to separate|  1. In branded options, set a value for minimum files to use separators<br>2. Upload more files than the minimum<br>3. Set sort by Date<br>4. Set sort by A-Z| 3. The files are correctly sorted<br>4. The files are correctly sorted<br>  |  |
+| 31 | More than minimum to separate|  1. In branded options, set a value for minimum files to use separators<br>2. Upload more files than the minimum<br>3. Set sort by Date<br>4. Set sort by A-Z| 3. The files are correctly sorted<br>4. The files are correctly sorted<br>  |  |
