@@ -1,6 +1,6 @@
 ###  Sort by date/alphabetical 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/598
 
 Devices:
 
