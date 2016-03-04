@@ -43,29 +43,29 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 |26| Upload files| 1. Login in two accouts<br> 2. Select files to upload in both accounts | The files are correctly uploaded in each account and shown in the same list of uploads view | P m5 ||
 |**Instant Uploads**||||
 |27| Upload a pic (copy)| 1. Enable "Instant picture upload" in settings menu<br> 2. Select "copy" as behaviour<br> 3. Take a pic| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Pic is correctly copied (remains in origin)| P m5 ||
-|28| Upload a pic (move)| 1. Enable "Instant picture upload" in settings menu<br> 2. Select "move" as behaviour<br> 3. Take a pic| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Pic is correctly moved (deleted in origin)
-|29| Upload a video (copy)| 1. Enable "Instant video upload" in settings menu<br> 2. Select "copy" as behaviour<br> 3. Take a video| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Video is correctly copied (remains in origin)
-|30| Upload a video (move)| 1. Enable "Instant video upload" in settings menu<br> 2. Select "move" as behaviour<br> 3. Take a video| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Video is correctly moved (deleted in origin)
-|31| Upload folder| 1. Enable "Instant pic upload" in settings menu without changing the upload folder<br> 2. Take some photos<br>| The pics are uploaded to default folder spite it was not created before.
-|32| Only WiFi| 1. Enable "Instant pic upload" and "Only WiFi" in settings menu <br> 2. Enable Airplane mode or disable wifi to change to phone bandwidth<br>3. Take some pics<br>4. Enable the WiFi connection| 3. Files appears in failed<br>4. The file appears in upload view in "Current" and when it finishes, in "Uploaded". | 
-|**Several Actions**||||
-|33| Upload + Share| 1. Tap to upload a file<br> 2. Select File1 to upload<br>3. While it is being uploaded, share a File2 with users/groups | File1 appears in "Uploaded" when the upload is finished. File2 is accesible for the sharees
-|34| Upload + Move| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, move a File2 to another location | File1 appears in "Uploaded" when the upload is finished. File2 is correctly moved to its new location (removed in origin)
-|35| Upload + Copy| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, copy a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly copied (remains in origin).
-|36| Upload + Delete| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, delete a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly removed.
-|37| Upload + Rename| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, rename a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly renamed.
-|38| Upload + Send| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, send a File2 to another app| File1 appears in "Uploaded" when the upload is finished. File2 is sent correctly.
-|39| Upload + Favourite| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, set a File2 as favourite| File1 appears in "Uploaded" when the upload is finished. File2 is now favourite.
-|40| Upload + Favourite update| 1. Set a text file as favourite<br> 2. Modify the text file by opening it with an external app<br>3. Save the changes| The file appears in "Uploaded" when the upload is finished.
-|41| Upload + Sync| 1. In server, add files to a Folder1<br>2. In device, tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, long press in Folder1 and select "Synchronize"| File1 appears in "Uploaded" when the upload is finished. Folder2 is sync with server.
-|42| Upload + Download| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, download a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly downloaded.
-|43| Several Upload + Several Download| 1. Tap to upload a file<br> 2. Select several files to upload<br>3. While it is being uploaded, download several files | Uploaded and downloaded files are correctly managed.
-|**Shibboleth**||||
+|28| Upload a pic (move)| 1. Enable "Instant picture upload" in settings menu<br> 2. Select "move" as behaviour<br> 3. Take a pic| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Pic is correctly moved (deleted in origin)| P m5 ||
+|29| Upload a video (copy)| 1. Enable "Instant video upload" in settings menu<br> 2. Select "copy" as behaviour<br> 3. Take a video| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Video is correctly copied (remains in origin)| P m5 ||
+|30| Upload a video (move)| 1. Enable "Instant video upload" in settings menu<br> 2. Select "move" as behaviour<br> 3. Take a video| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Video is correctly moved (deleted in origin)| P m5 ||
+|31| Upload folder| 1. Enable "Instant pic upload" in settings menu without changing the upload folder<br> 2. Take some photos<br>| The pics are uploaded to default folder spite it was not created before.| P m5 ||
+|32| Only WiFi| 1. Enable "Instant pic upload" and "Only WiFi" in settings menu <br> 2. Enable Airplane mode or disable wifi to change to phone bandwidth<br>3. Take some pics<br>4. Enable the WiFi connection| 3. Files appears in failed<br>4. The file appears in upload view in "Current" and when it finishes, in "Uploaded". | P m5 ||
+|**Several Actions**|1 device|||
+|33| Upload + Share| 1. Tap to upload a file<br> 2. Select File1 to upload<br>3. While it is being uploaded, share a File2 with users/groups | File1 appears in "Uploaded" when the upload is finished. File2 is accesible for the sharees| P m5 ||
+|34| Upload + Move| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, move a File2 to another location | File1 appears in "Uploaded" when the upload is finished. File2 is correctly moved to its new location (removed in origin)| P m5 ||
+|35| Upload + Copy| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, copy a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly copied (remains in origin).| P m5 ||
+|36| Upload + Delete| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, delete a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly removed.| P m5 ||
+|37| Upload + Rename| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, rename a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly renamed.| P m5 ||
+|38| Upload + Send| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, send a File2 to another app| File1 appears in "Uploaded" when the upload is finished. File2 is sent correctly.| P m5 ||
+|39| Upload + Favourite| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, set a File2 as favourite| File1 appears in "Uploaded" when the upload is finished. File2 is now favourite.| P m5 ||
+|40| Upload + Favourite update| 1. Set a text file as favourite<br> 2. Modify the text file by opening it with an external app<br>3. Save the changes| The file appears in "Uploaded" when the upload is finished.| P m5 ||
+|41| Upload + Sync| 1. In server, add files to a Folder1<br>2. In device, tap to upload a file<br> 3. Select a File1 to upload<br>4. While it is being uploaded, long press in Folder1 and select "Synchronize"| File1 appears in "Uploaded" when the upload is finished. Folder2 is sync with server.| P m5 ||
+|42| Upload + Download| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, download a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly downloaded.| P m5 ||
+|43| Several Upload + Several Download| 1. Tap to upload a file<br> 2. Select several files to upload<br>3. While it is being uploaded, download several files | Uploaded and downloaded files are correctly managed.| P m5 ||
+|**Shibboleth**|1 device|||
 |44| Upload | 1. Login in a Shibboleth server<br> 2. Upload a file (copy/move)<br> | File is correctly uploaded
 |45| Upload several| 1. Login in a Shibboleth server<br> 2. Upload several file (copy/move) with special characeters<br> | Files are correctly uploaded 
 |46| Upload + Expiration| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) in a moment close to the expiration time<br> 3. Session expires<br> 4. Retry the upload| 3. Credentials are requested<br> 4. File is uploaded
 |47| Upload + Expirated| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) once the session is expired<br> 3. Login | 2. Credentials are requested<br> 3. File is not uploaded
-|**Other Servers**||||
+|**Other Servers**|1 device|||
 |48| Redirect | 1. Login in a redirect server<br> 2. Upload a file <br> | File is correctly uploaded
-|49| Self Signed| 1. Login in a self signed server<br> 2. Upload a file <br> | File is correctly uploaded
-|50| No Self Signed| 1. Login in a no self signed server<br> 2. Upload a file <br> | File is correctly uploaded
+|49| Self Signed| 1. Login in a self signed server<br> 2. Upload a file <br> | File is correctly uploaded|P m5 |
+|50| No Self Signed| 1. Login in a no self signed server<br> 2. Upload a file <br> | File is correctly uploaded|P m5||
