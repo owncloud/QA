@@ -42,7 +42,7 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 |**Multiaccount**||||
 |26| Upload files| 1. Login in two accouts<br> 2. Select files to upload in both accounts | The files are correctly uploaded in each account and shown in the same list of uploads view | P m5 ||
 |**Instant Uploads**||||
-|27| Upload a pic (copy)| 1. Enable "Instant picture upload" in settings menu<br> 2. Select "copy" as behaviour<br> 3. Take a pic| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Pic is correctly copied (remains in origin)
+|27| Upload a pic (copy)| 1. Enable "Instant picture upload" in settings menu<br> 2. Select "copy" as behaviour<br> 3. Take a pic| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Pic is correctly copied (remains in origin)| P m5 ||
 |28| Upload a pic (move)| 1. Enable "Instant picture upload" in settings menu<br> 2. Select "move" as behaviour<br> 3. Take a pic| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Pic is correctly moved (deleted in origin)
 |29| Upload a video (copy)| 1. Enable "Instant video upload" in settings menu<br> 2. Select "copy" as behaviour<br> 3. Take a video| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Video is correctly copied (remains in origin)
 |30| Upload a video (move)| 1. Enable "Instant video upload" in settings menu<br> 2. Select "move" as behaviour<br> 3. Take a video| The file appears in upload view in "Current" and when it finishes, in "Uploaded". Video is correctly moved (deleted in origin)
