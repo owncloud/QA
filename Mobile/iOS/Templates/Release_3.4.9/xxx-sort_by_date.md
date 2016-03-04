@@ -49,3 +49,5 @@ Server:
 | 30 | Change app - Date|  1. Set sort by Date<br>2. Change to another app without killing<br>3. Return to the app| The files are correctly sorted |  |  |
 |**Customization**||||||
 | 31 | More than minimum to separate|  1. In branded options, set a value for minimum files to use separators<br>2. Upload more files than the minimum<br>3. Set sort by Date<br>4. Set sort by A-Z| 3. The files are correctly sorted<br>4. The files are correctly sorted<br>  |  |
+|**Multiaccount**||||||
+| 32 | Changing account|  1. Set different kind of sorting in different users<br>2. Move within the accounts| Each account is sorted by its type |  |
