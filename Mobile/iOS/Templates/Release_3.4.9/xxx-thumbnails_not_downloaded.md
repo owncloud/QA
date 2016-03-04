@@ -15,8 +15,8 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 |1| JPG/JPEG| 1. From web, upload a JPG file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
 |2| PNG| 1. From web, upload a PNG file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
 |3| GIF| 1. From web, upload a GIF file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
+|**Media Formats**|||||
 |4| MP3| 1. From web, upload a MP3 file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
-|**Video Formats**|||||
 |5| AVI| 1. From web, upload a AVI file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
 |6| MPG/MPEG/MP4 | 1. From web, upload a MPG/MPEG/MP4 file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
 |7| MOV | 1. From web, upload a MOV file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
