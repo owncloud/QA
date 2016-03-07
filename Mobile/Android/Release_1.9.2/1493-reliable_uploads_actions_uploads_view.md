@@ -61,10 +61,10 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 |42| Upload + Download| 1. Tap to upload a file<br> 2. Select a File1 to upload<br>3. While it is being uploaded, download a File2 | File1 appears in "Uploaded" when the upload is finished. File2 is correctly downloaded.| P m5 ||
 |43| Several Upload + Several Download| 1. Tap to upload a file<br> 2. Select several files to upload<br>3. While it is being uploaded, download several files | Uploaded and downloaded files are correctly managed.| P m5 ||
 |**Shibboleth**|1 device|||
-|44| Upload | 1. Login in a Shibboleth server<br> 2. Upload a file (copy/move)<br> | File is correctly uploaded
-|45| Upload several| 1. Login in a Shibboleth server<br> 2. Upload several file (copy/move) with special characeters<br> | Files are correctly uploaded 
-|46| Upload + Expiration| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) in a moment close to the expiration time<br> 3. Session expires<br> 4. Retry the upload| 3. Credentials are requested<br> 4. File is uploaded
-|47| Upload + Expirated| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) once the session is expired<br> 3. Login | 2. Credentials are requested<br> 3. File is not uploaded
+|44| Upload | 1. Login in a Shibboleth server<br> 2. Upload a file (copy/move)<br> | File is correctly uploaded| P t6 ||
+|45| Upload several| 1. Login in a Shibboleth server<br> 2. Upload several file (copy/move) with special characeters<br> | Files are correctly uploaded | P t6 ||
+|46| Upload + Expiration| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) in a moment close to the expiration time<br> 3. Session expires<br> 4. Retry the upload| 3. Credentials are requested<br> 4. File is uploaded| P t6 ||
+|47| Upload + Expirated| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) once the session is expired<br> 3. Login | 2. Credentials are requested<br> 3. File is not uploaded| P t6 ||
 |**Other Servers**|1 device|||
 |48| Redirect | 1. Login in a redirect server<br> 2. Upload a file <br> | File is correctly uploaded
 |49| Self Signed| 1. Login in a self signed server<br> 2. Upload a file <br> | File is correctly uploaded|P m5 |
