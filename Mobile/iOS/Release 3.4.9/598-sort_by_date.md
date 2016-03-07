@@ -2,25 +2,25 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/598
 
-Devices:
+Devices: iPhone6 v9, iPadAir v8.4
 
-Server:
+Server: v9
 
 ---
 
  
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
-| :----: | :-------- | :---- | :-------------- | :----- | :-------------- |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**View**||||||
-| 1 | Change options button |  1. Open app  |  1. In top-right appears ... instead of (+)  |  |  |
-| 2 | Sort option portrait |  1. Tap on (...) with the device in portrait<br>2.Tap on "Sort"  |  1. An option "Sort" appears<br>2. Two options are displayed: "A-Z" and "Newest - Oldest"  |  |  |
-| 3 | Sort option landscape |  1. Tap on (...) with the device in landscape<br>2.Tap on "Sort"  |  1. An option "Sort" appears<br>2. Two options are displayed: "A-Z" and "Newest - Oldest"  |  |  |
+| 1 | Change options button |  1. Open app  |  1. In top-right appears ... instead of (+)  | P m9 |  |
+| 2 | Sort option portrait |  1. Tap on (...) with the device in portrait<br>2.Tap on "Sort"  |  1. An option "Sort" appears<br>2. Two options are displayed: "A-Z" and "Newest - Oldest"  | P m9 |  |
+| 3 | Sort option landscape |  1. Tap on (...) with the device in landscape<br>2.Tap on "Sort"  |  1. An option "Sort" appears<br>2. Two options are displayed: "A-Z" and "Newest - Oldest"  | P m9 F t8 | in iPad, rotation crhases |
 |**Sort by**||||||
-| 4 | A-Z  |  1. Upload some files and folders on root, some of the with special characters<br>2. Tap on (...) and select Sort by 'A-Z'<br> 3. Browse in a folder | 2. The content appears sorted by A-Z. First folders, then files<br>3. The order is the same as previous step |  |
-| 5 | Date |  1. Upload some files and folders on root, some of the with special characters<br>2. Tap on (...) and select Sort by 'Date'<br> 3. Browse in a folder | 2. The content appears sorted by date. No matter whether is file or folder<br>3. The order is the same as previous step |  |  |
+| 4 | A-Z  |  1. Upload some files and folders on root, some of the with special characters<br>2. Tap on (...) and select Sort by 'A-Z'<br> 3. Browse in a folder | 2. The content appears sorted by A-Z. First folders, then files<br>3. The order is the same as previous step | P t8 |
+| 5 | Date |  1. Upload some files and folders on root, some of the with special characters<br>2. Tap on (...) and select Sort by 'Date'<br> 3. Browse in a folder | 2. The content appears sorted by date. No matter whether is file or folder<br>3. The order is the same as previous step | P t8 |  |
 |**Actions**||||||
-| 6 | Rename - by A-Z |  1. In a populated folder, set sort by 'A-Z'<br>2. Rename a file or folder<br> | The renamed item is set correctly with its new name |  |  |
-| 7 | Rename - by Date |  1. In a populated folder, set sort by Date<br>2. Rename a file or folder<br> | The order does not change |  |  |
+| 6 | Rename - by A-Z |  1. In a populated folder, set sort by 'A-Z'<br>2. Rename a file or folder<br> | The renamed item is set correctly with its new name | P t8 |  |
+| 7 | Rename - by Date |  1. In a populated folder, set sort by Date<br>2. Rename a file or folder<br> | The order does not change | P t8 |  |
 | 8 | Update - by A-Z |  1. In web, upload some files. A few minutes later create a txt file, and after that update more files<br>2. Set sort by A-Z<br>3. With an external app, change the  txt file | 2. The content is correctly sorted by date, first the newest.<br>3. The order does not change |  |  |
 | 9 | Update - by Date |  1. In web, upload some files. A few minutes later create a txt file, and after that update more files<br>2. Set sort by date<br>3. With an external app, change the  txt file | 2. The content is correctly sorted by date, first the newest.<br>3. The txt file is set on the top of the list |  |  |
 | 10 | Move - by A-Z |  1. In a populated folder, set sort by 'A-Z'<br>2. Move a file or folder to another location<br> | The content is correctly sorted by 'A-Z' |  |  |
