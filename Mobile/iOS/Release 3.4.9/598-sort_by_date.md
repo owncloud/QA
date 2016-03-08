@@ -41,7 +41,7 @@ Server: v9
 |**External apps**||||||
 | 24 | Doc. provider |  1. In app, set  by Date<br>2. Open a document with an external app (for example, Documents) from location "ownCloud"<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted  by Date<br>3. The files are correctly sorted by A-Z| P t8 m9|  |
 | 25 | Gallery |  1. In app, set  by Date<br>2. Open a pic/s with the gallery and select "ownCloud" to upload<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted by Date<br>3. The files are correctly sorted by A-Z| P t8 m9|  |
-| 26 | Gallery II|  1. In app, set  by Date<br>2. Open a pic/s with the gallery and select "copy to ownCloud" to upload<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted by Date<br>3. The files are correctly sorted by A-Z|  |  |
+| 26 | Gallery II|  1. In app, set  by Date<br>2. Open a pic/s with the gallery and select "copy to ownCloud" to upload<br>3. Repeat from step 1 by sorting by A-Z | 2. The files are correctly sorted by Date<br>3. The files are correctly sorted by A-Z| P m9 |  |
 |**Persistance**||||||
 | 27 | Kill - A-Z |  1. Set sort by A-Z<br>2. Kill the app<br>3. Open the app| The files are correctly sorted | P t8 m9|  |
 | 28 | Kill - Date|  1. Set sort by Date<br>2. Kill the app<br>3. Open the app| The files are correctly sorted | P t8 m9|  |
