@@ -3,9 +3,9 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1492 
 
-Devices: 
+Devices: Morotola v4.4.4
 
-Server:
+Server: 9
 
 
 ---
@@ -14,13 +14,13 @@ Server:
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 | **Correct view** ||||||
-| 1 |  "Can share" not displayed | 1. Long press to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit" without suboptions|||
-| 2 |  "remote" is shown |  1. Long press to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote). 
+| 1 |  "Can share" not displayed | 1. Long press to share a file or folder with federated users<br>2. Tap on (i) to manage privileges| "Can share" option is not displayed. Only "Can edit" without suboptions| F m4 | Suboptions displayed if can edit is switched|
+| 2 |  "remote" is shown |  1. Long press to share a file or folder with users<br>2. Type a username and then an '@'   | Within the results, there is one like 'username'@(remote). |P m4 ||
 | **Federated Sharing** ||||||
-| 3 |  Shared file (http) |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |||
-| 4 |  Shared folder (http) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |||
-| 5 |  Shared file (https trusted) |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |||
-| 6 |  Shared folder (https trusted) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |||
+| 3 |  Shared file (http) |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view |P m4||
+| 4 |  Shared folder (http) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed | P m4 ||
+| 5 |  Shared file (https trusted) |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view | P m4||
+| 6 |  Shared folder (https trusted) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |P m4||
 | 7 |  Shared with groups |  1. Long press to share a file/folder with a group<br>2. Type a groupname and then an '@' and a correct server URL | Federated share with groups is not allowed |||
 | 8 |  Reject federated |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct server URL<br>3. Login in web with the sharee and reject the federated share<br>4. Login in app with the sharee  | The shared file does not appear in files view. The share does not show the file as shared |||
 | 9 |  Special characters |  1. Repeat the test cases 2. or 3. with file/folder which contains special characters  | The shared file/folder appears in files view |||
