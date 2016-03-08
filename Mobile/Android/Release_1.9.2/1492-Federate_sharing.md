@@ -21,18 +21,18 @@ Server: 9
 | 4 |  Shared folder (http) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct http server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed | P m4 ||
 | 5 |  Shared file (https trusted) |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared file appears in files view | P m4||
 | 6 |  Shared folder (https trusted) |  1. Long press to share a folder with users<br>2. Type a username and then an '@' and a correct https server URL<br>3. Login in web with the sharee and accept the federated share<br>4. Login in app with the sharee  | The shared folder appears in files view and can be browsed |P m4||
-| 7 |  Shared with groups |  1. Long press to share a file/folder with a group<br>2. Type a groupname and then an '@' and a correct server URL | Federated share with groups is not allowed |||
-| 8 |  Reject federated |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct server URL<br>3. Login in web with the sharee and reject the federated share<br>4. Login in app with the sharee  | The shared file does not appear in files view. The share does not show the file as shared |||
-| 9 |  Special characters |  1. Repeat the test cases 2. or 3. with file/folder which contains special characters  | The shared file/folder appears in files view |||
-| 10 |  User with '@' |  1. Repeat the test cases 2. or 3. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federated shared |||
-| 11 |  User called '@' |  1. Repeat the test cases 2. or 3. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federated shared |||
+| 7 |  Shared with groups |  1. Long press to share a file/folder with a group<br>2. Type a groupname and then an '@' and a correct server URL | Federated share with groups is not allowed | P m4||
+| 8 |  Reject federated |  1. Long press to share a file with users<br>2. Type a username and then an '@' and a correct server URL<br>3. Login in web with the sharee and reject the federated share<br>4. Login in app with the sharee  | The shared file does not appear in files view. The share does not show the file as shared | P m4||
+| 9 |  Special characters |  1. Repeat the test cases 3. or 4. with file/folder which contains special characters  | The shared file/folder appears in files view |P m4||
+| 10 |  User with '@' |  1. Repeat the test cases 3. or 4. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federated shared | P m4| Review when deleting share|
+| 11 |  User called '@' |  1. Repeat the test cases 3. or 4. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federated shared | P m4||
 | 12 |  Multiple federated |  1. Long press to share a folder with users<br>2. Type different federated URLs (different servers and users)<br>3. Login in web with the sharees and accept the federated share<br>4. Login in app with the sharees  | All sharees can view the file/folder |||
 | 13 |  Unsharing | 1. Share (federated) a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file||
 | **Errors** ||||||
-| 14 |  Inexistent User |  1. Repeat the test cases 2. or 3. using a username which does not exist in remote server  | The file can not be shared, an error appears |||
-| 15 |  Inexistent Server |  1. Repeat the test cases 2. or 3. using an inexistent remote URL | The file can not be shared, an error appears |||
+| 14 |  Inexistent User |  1. Repeat the test cases 3. or 4. using a username which does not exist in remote server  | The file can not be shared, an error appears |||
+| 15 |  Inexistent Server |  1. Repeat the test cases 3. or 4. using an inexistent remote URL | The file can not be shared, an error appears |||
 | 16 |  Share twice fed |  1. Share federated twice with the same user | First time the file is shared, second time, an error is received |||
-| 17 |  Deleted account |  1. Repeat the test cases 2. or 3.<br> 2. From admin in web, delete the account ot the sharing user | The sharee can not view the shared file or folder |||
+| 17 |  Deleted account |  1. Repeat the test cases 3. or 4.<br> 2. From admin in web, delete the account ot the sharing user | The sharee can not view the shared file or folder |||
 | 18 |  Without connection |  1. Switch the wifi connection off<br>2. Try to share with a federated user | An error appears |||
 | 19 |  Without server connection |  1. Switch the server off<br>2. Try to share with a federated user | An error appears |||
 | 20 | Server under maintenance mode | 1. Repeat the test cases 2. or 3. using a server under maitenance mode | The file can not be shared, an error appears |||
