@@ -26,8 +26,8 @@ Server: 9
 | 9 |  Special characters |  1. Repeat the test cases 3. or 4. with file/folder which contains special characters  | The shared file/folder appears in files view |P m4||
 | 10 |  User with '@' |  1. Repeat the test cases 3. or 4. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federated shared | P m4| Review when deleting share|
 | 11 |  User called '@' |  1. Repeat the test cases 3. or 4. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federated shared | P m4||
-| 12 |  Multiple federated |  1. Long press to share a folder with users<br>2. Type different federated URLs (different servers and users)<br>3. Login in web with the sharees and accept the federated share<br>4. Login in app with the sharees  | All sharees can view the file/folder |||
-| 13 |  Unsharing | 1. Share (federated) a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file||
+| 12 |  Multiple federated |  1. Long press to share a folder with users<br>2. Type different federated URLs (different servers and users)<br>3. Login in web with the sharees and accept the federated share<br>4. Login in app with the sharees  | All sharees can view the file/folder | P m4||
+| 13 |  Unsharing | 1. Share (federated) a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file|P m4||
 | **Errors** ||||||
 | 14 |  Inexistent User |  1. Repeat the test cases 3. or 4. using a username which does not exist in remote server  | The file can not be shared, an error appears |||
 | 15 |  Inexistent Server |  1. Repeat the test cases 3. or 4. using an inexistent remote URL | The file can not be shared, an error appears |||
