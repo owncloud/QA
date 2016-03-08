@@ -3,7 +3,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1492 
 
-Devices:
+Devices: 
 
 Server:
 
