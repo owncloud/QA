@@ -27,22 +27,22 @@ Server: 9
 | 10 |  User with '@' |  1. Repeat the test cases 3. or 4. using a username which contains '@', for example 'M@ri@'  | The search view is correct, showing the option M@ri@@(remote). The file/folder can be federated shared | P m4| Review when deleting share|
 | 11 |  User called '@' |  1. Repeat the test cases 3. or 4. using a username '@' | The search view is correct, showing the option @@(remote). The file/folder can be federated shared | P m4||
 | 12 |  Multiple federated |  1. Long press to share a folder with users<br>2. Type different federated URLs (different servers and users)<br>3. Login in web with the sharees and accept the federated share<br>4. Login in app with the sharees  | All sharees can view the file/folder | P m4||
-| 13 |  Unsharing | 1. Share (federated) a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file|P m4||
+| 13 |  Unsharing | 1. Share (federated) a file/folder<br> 2. Accept it in the web<br>3.  In the sharing user, unshare the file | 2. The sharee can view the file<br>3. The sharee can not view the file|P m4| Pending unshare multiple -> ¿bug?|
 | **Errors** ||||||
-| 14 |  Inexistent User |  1. Repeat the test cases 3. or 4. using a username which does not exist in remote server  | The file can not be shared, an error appears |||
-| 15 |  Inexistent Server |  1. Repeat the test cases 3. or 4. using an inexistent remote URL | The file can not be shared, an error appears |||
-| 16 |  Share twice fed |  1. Share federated twice with the same user | First time the file is shared, second time, an error is received |||
-| 17 |  Deleted account |  1. Repeat the test cases 3. or 4.<br> 2. From admin in web, delete the account ot the sharing user | The sharee can not view the shared file or folder |||
-| 18 |  Without connection |  1. Switch the wifi connection off<br>2. Try to share with a federated user | An error appears |||
-| 19 |  Without server connection |  1. Switch the server off<br>2. Try to share with a federated user | An error appears |||
+| 14 |  Inexistent User |  1. Repeat the test cases 3. or 4. using a username which does not exist in remote server  | The file can not be shared, an error appears | P m4 | Improve message (server side)|
+| 15 |  Inexistent Server |  1. Repeat the test cases 3. or 4. using an inexistent remote URL | The file can not be shared, an error appears | P m4 ||
+| 16 |  Share twice fed |  1. Share federated twice with the same user | First time the file is shared, second time, an error is received | P m4 ||
+| 17 |  Deleted account |  1. Repeat the test cases 3. or 4.<br> 2. From admin in web, delete the account ot the sharing user | The sharee can not view the shared file or folder |¿?|Server does not remove the share in the sharee. Manually.|
+| 18 |  Without connection |  1. Switch the wifi connection off<br>2. Try to share with a federated user | An error appears |P m4||
+| 19 |  Without server connection |  1. Switch the server off<br>2. Try to share with a federated user | An error appears |P m4||
 | 20 | Server under maintenance mode | 1. Repeat the test cases 2. or 3. using a server under maitenance mode | The file can not be shared, an error appears |||
 | **Server Capabilities** ||||||
-| 21 |  Federated Sharing disabled |  1. In server side, disable the capability to share with federation<br>2. In app, try to share with federation<br> | Can not be share |||
-| 22 |  Receive Federated disabled |  1. In server side, disable the capability to receive federated shares<br>2. In app, try to share form a other server's user with the current server<br> | The share is not accepted and an error is raised |||
+| 21 |  Federated Sharing disabled |  1. In server side, disable the capability to share with federation<br>2. In app, try to share with federation<br> | Can not be share | P m4||
+| 22 |  Receive Federated disabled |  1. In server side, disable the capability to receive federated shares<br>2. In app, try to share form a other server's user with the current server<br> | The share is not accepted and an error is raised |P m4||
 | **Edit Privilege** ||||||
-| 23 | Edit granted file|  1. Long press to share a file with users<br>2. Type a federated URL<br>3. Grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the file  | The shared file appears in files view and can be edited |||
+| 23 | Edit granted file|  1. Long press to share a file with users<br>2. Type a federated URL<br>3. Grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the file  | The shared file appears in files view and can be edited |P m4||
 | 24 | Edit granted folder|  1. Long press to share a folder with users<br>2. Type a federated URL<br>3. Grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the folder  | The shared folder appears in files view and can be edited (upload/update/delete) |||
-| 25 | Edit not granted file |  1. Long press to share a file with users<br>2. Type a federated URL<br>3. Do not grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the file  | The shared file appears in files view and can not be edited |||
+| 25 | Edit not granted file |  1. Long press to share a file with users<br>2. Type a federated URL<br>3. Do not grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the file  | The shared file appears in files view and can not be edited |P m4||
 | 26 | Edit not granted folder |  1. Long press to share a folder with users<br>2. Type a federated URL<br>3. Do not grant the federated user to edit<br> 4. Login in web with the sharee and accept the federated share<br>5. Login in app with the sharee and try to edit the folder  | The shared file appears in files view and can not be edited (upload/update/delete)|||
 | **Reshare Privilege** ||||||
 | 27 | Share with edit |  1. Long press to share a file with an federated user granting him to edit <br>2. Login with the sharee<br>3. Try to reshare with other users in the same server granting them to edit and share<br>4. Login with the 2nd sharee| 3. The edit and share privileges are enabled and the file can be reshared<br>4. The 2nd sharee can edit and share the file|||
