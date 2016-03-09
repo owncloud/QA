@@ -51,14 +51,14 @@ Server: 9
 | 30 | Reshare initial user |  1. Long press to share a file with an federated user<br>2. Login with the sharee<br>3. Try to reshare with the initial share| The file can not be reshared with the initial share |F m4| Options in can edit should not appear|
 | 31 | Reshare initial server |  1. Long press to share a file with an federated user <br>2. Login with the sharee<br>3. Try to reshare with an user of the initial server| The user can see the file|Pending sever||
 | **Autocomplete** |Set two servers with Autocompletion|||||
-| 32 | User in other server (whith autoc.)|  1. Share a file/folder with a user of a trusted typing only his name| The autocompletion shows the complete federated URL and not the (remote)|||
-| 33 | User in other server (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name| When the @ is written is shown as 'remote'|||
-| 34 | Two users with same name  (with autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including whole URL|||
-| 35 | Two users with same name  (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including @remote|||
+| 32 | User in other server (whith autoc.)|  1. Share a file/folder with a user of a trusted typing only his name| The autocompletion shows the complete federated URL and not the (remote)| P m4 ||
+| 33 | User in other server (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name| When the @ is written is shown as 'remote'| P m4||
+| 34 | Two users with same name  (with autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including whole URL|P m4||
+| 35 | Two users with same name  (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including @remote|Server fails||
 | **Special Servers** |Only one device|||||
 | 36 | Shibboleth sharee |  1. Long press to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file||Autoprovision of users. Https not supported by the server SSO|
 | 37 | Shibboleth share |  1. In a shibboleth server, long press to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 38 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|P m4||
 | 39 | Redirect sharee |  1. Long press to share a file with an federated user in a redirect server <br>2. Login with the sharee<br>| The sharee can view the file|||
 | 40 | No self signed |  1. Long press to share a file with an federated user in a no self signed server <br>2. Login with the sharee<br>| The sharee can view the file|||
-| 41 | Self signed not trusted|  1. Long press to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be shared federated and the sharee can neither accept nor view it|||
+| 41 | Self signed not trusted|  1. Long press to share a file with an federated user in a self signed server with an untrusted certificate <br>2. Login with the sharee<br>| The file can not be shared federated and the sharee can neither accept nor view it|P m4||
