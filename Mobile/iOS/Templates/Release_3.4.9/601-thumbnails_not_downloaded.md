@@ -1,6 +1,6 @@
 ###  Thumbnails for not downloaded 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/601
 
 Devices:
 
