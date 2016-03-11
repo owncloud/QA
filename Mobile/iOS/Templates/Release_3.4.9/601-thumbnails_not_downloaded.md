@@ -17,7 +17,7 @@ TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 |3| GIF| 1. From web, upload a GIF file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
 |**Media Formats**|||||
 |4| Audio| 1. From web, upload a MP3 file<br>2. Open the app<br>3. Tap to download the file | 2. Thumbnail is shown<br>3. Thumbnail is shown|||
-|5| Video| 1. From web, upload video files from formats MP4, MOV, FLV, AVI, 3GP, WEBM, OGV, WMB<br>2. Open the app<br>3. Tap to download the files | 2. Thumbnails are shown<br>3. Thumbnails are shown|||
+|5| Video| 1. From web, upload video files from formats MP4, MOV, FLV, AVI, 3GP, WEBM, OGV, WMV<br>2. Open the app<br>3. Tap to download the files | 2. Thumbnails are shown<br>3. Thumbnails are shown|||
 |**Actions**|||||
 |6|Load files| Upload an large amount of image files in a folder|All thumbnails are correcly shown id they are visible|||
 |7|Move file| 1. Upload a image<br>2. Move the image to another folder|1. Thumbnail is shown <br>2. Thumbnail is shown in the new location|||
