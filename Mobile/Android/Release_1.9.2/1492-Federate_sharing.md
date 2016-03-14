@@ -56,8 +56,8 @@ Server: 9
 | 34 | Two users with same name  (with autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including whole URL|P m4 t6||
 | 35 | Two users with same name  (without autoc.) |  1. Share a file/folder with a user of a trusted typing only his name. Another user with the same name exists in the current server| Both users are shown correctly, the remote including @remote|P m4 t6||
 | **Special Servers** |Only one device|||||
-| 36 | Shibboleth sharee |  1. Long press to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file||Autoprovision of users. Https not supported by the server SSO|
-| 37 | Shibboleth share |  1. In a shibboleth server, long press to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|||
+| 36 | Shibboleth sharee |  1. Long press to share a file with an federated user in a shibboleth server <br>2. Login with the sharee<br>| The sharee in shibboleth server can view the file|NA|https://github.com/owncloud/documentation-enterprise/issues/221|
+| 37 | Shibboleth share |  1. In a shibboleth server, long press to share a file with an federated user <br>2. Login with the sharee<br>| The sharee can view the file|NA|https://github.com/owncloud/documentation-enterprise/issues/221|
 | 38 | LDAP |  1. Swipe to share a file with an federated user in a LDAP server <br>2. Login with the sharee<br>| The sharee can view the file|P m4||
 | 39 | Redirect sharee |  1. Long press to share a file with an federated user in a redirect server <br>2. Login with the sharee<br>| The sharee can view the file|NA| Server does not support redirect to federated servers|
 | 40 | No self signed |  1. Long press to share a file with an federated user in a no self signed server <br>2. Login with the sharee<br>| The sharee can view the file| P t6||
