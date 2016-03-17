@@ -4,7 +4,7 @@
 
 Devices: Nexus5 v6, Nexus 7 v4.3
 
-Server: v9, v8.2.2
+Server: v9, v8.2.3
 
 
 ---
@@ -20,7 +20,7 @@ Server: v9, v8.2.2
 |4|Landscape|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6, P t4.3||
 |**Actions**||||||
 |5|Allow - Upload|1. Long press to share a folder by link.<br>2. Enable "Allow Editing"<br>3. Copy the link and paste in a browser<br>4. Upload content to the folder| 2. Check also in server that is enabled<br>4. Content is upload. Check in app|P m6, P t4.3||
-|6|Allow - New folder|1. Long press to share a folder by link.<br>2. Enable "Allow Editing"<br>3. Copy the link and paste in a browser<br>4. Create a subfolder|2. Check also in server that is enabled<br>4. Subfolder is created and content can be uploaded on it. Check in app|P m6||
+|6|Allow - New folder|1. Long press to share a folder by link.<br>2. Enable "Allow Editing"<br>3. Copy the link and paste in a browser<br>4. Create a subfolder|2. Check also in server that is enabled<br>4. Subfolder is created and content can be uploaded on it. Check in app|P m6|On OC8.2.3 not appear the option to create folder|
 |7|Disabling Allow|1. From 6, disable "Allow Editing"<br>2. Copy the link and paste in a browser|1. Check also in server that is disabled<br>2. No options for editing are available|P m6, P t4.3||
 |**External actions**||||||
 |8|Allow |1. In server, share a folder by link and enable "Allow editing".| Check in app that "Allow editing" is also enabled|P m6||
