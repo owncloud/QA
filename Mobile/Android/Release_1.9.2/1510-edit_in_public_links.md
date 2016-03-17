@@ -28,8 +28,8 @@ Server: v9
 |**Capabilities**||||||
 |10|Allow public uploads|1. In server side, disable the capability "Allow public uploads"<br>2. In app, long press to share a folder by link| The switch button with the option "Allow editing" does not appear|P m6|Related to the server: https://github.com/owncloud/core/issues/23325|
 |**Offline**||||||
-|11|Offline device|1. Long press to share a folder by link.<br>2. Switch the device connection off<br>3. Enable "Allow editing"| A error message is returned. Check in app and server that "Allow editing" is disabled|||
-|12|Offline server|1. Long press to share a folder by link.<br>2. Switch the server off<br>3. Enable "Allow editing"| A error message is returned. Check that "Allow editing" is disabled|||
+|11|Offline device|1. Long press to share a folder by link.<br>2. Switch the device connection off<br>3. Enable "Allow editing"| A error message is returned. Check in app and server that "Allow editing" is disabled| P m6||
+|12|Offline server|1. Long press to share a folder by link.<br>2. Switch the server off<br>3. Enable "Allow editing"| A error message is returned. Check that "Allow editing" is disabled|P m6||
 |**Shibboleth**|One device|||||
-|13|Expiration|1. In a shibboleth server, share a folder by link<br>2. Wait until the session expires and then, switch "Allow editing" on<br>3. Enable "Allow editing"| 2. Credentials are required and "Allow editing" is not enabled<br>3. The public share allows to edit|||
+|13|Expiration|1. In a shibboleth server, share a folder by link<br>2. Wait until the session expires and then, switch "Allow editing" on<br>3. Enable "Allow editing"| 2. Credentials are required and "Allow editing" is not enabled<br>3. The public share allows to edit|P m6||
 
