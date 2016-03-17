@@ -26,7 +26,7 @@ Server: v9, v8.2.3
 |8|Allow |1. In server, share a folder by link and enable "Allow editing".| Check in app that "Allow editing" is also enabled|P m6, P t4.3||
 |9|Disable allow|1. From 8, in server side disable "Allow editing".| Check in app that "Allow editing" is also disabled|P m6, P t4.3||
 |**Capabilities**||||||
-|10|Allow public uploads|1. In server side, disable the capability "Allow public uploads"<br>2. In app, long press to share a folder by link| The switch button with the option "Allow editing" does not appear|P m6|Related to the server: https://github.com/owncloud/core/issues/23325|
+|10|Allow public uploads|1. In server side, disable the capability "Allow public uploads"<br>2. In app, long press to share a folder by link| The switch button with the option "Allow editing" does not appear|P m6, P t4.3|Related to the server: https://github.com/owncloud/core/issues/23325|
 |**Offline**||||||
 |11|Offline device|1. Long press to share a folder by link.<br>2. Switch the device connection off<br>3. Enable "Allow editing"| A error message is returned. Check in app and server that "Allow editing" is disabled| P m6||
 |12|Offline server|1. Long press to share a folder by link.<br>2. Switch the server off<br>3. Enable "Allow editing"| A error message is returned. Check that "Allow editing" is disabled|P m6||
