@@ -16,8 +16,8 @@ Server: v9
 |1|Folders|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears| P m6, P t4.3||
 |2|Files|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" does not appear|P m6, P t4.3||
 |**Orientation**||||||
-|3|Portrait|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6||
-|4|Landscape|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6||
+|3|Portrait|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6, P t4.3||
+|4|Landscape|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6, P t4.3||
 |**Actions**||||||
 |5|Allow - Upload|1. Long press to share a folder by link.<br>2. Enable "Allow Editing"<br>3. Copy the link and paste in a browser<br>4. Upload content to the folder| 2. Check also in server that is enabled<br>4. Content is upload. Check in app|P m6||
 |6|Allow - New folder|1. Long press to share a folder by link.<br>2. Enable "Allow Editing"<br>3. Copy the link and paste in a browser<br>4. Create a subfolder|2. Check also in server that is enabled<br>4. Subfolder is created and content can be uploaded on it. Check in app|P m6||
