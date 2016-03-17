@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1510
 
-Devices: Nexus5 v6
+Devices: Nexus5 v6, Nexus 7 v4.3
 
 Server: v9
 
@@ -14,7 +14,7 @@ Server: v9
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**View**||||||
 |1|Folders|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears| P m6, P t4.3||
-|2|Files|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" does not appear|P m6||
+|2|Files|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" does not appear|P m6, P t4.3||
 |**Orientation**||||||
 |3|Portrait|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6||
 |4|Landscape|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6||
