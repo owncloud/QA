@@ -13,7 +13,7 @@ Server: v9
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**View**||||||
-|1|Folders|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears| P m6||
+|1|Folders|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears| P m6, P t4.3||
 |2|Files|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" does not appear|P m6||
 |**Orientation**||||||
 |3|Portrait|1. Long press to share a folder by link<br>| A switch button with the option "Allow editing" appears correctly|P m6||
