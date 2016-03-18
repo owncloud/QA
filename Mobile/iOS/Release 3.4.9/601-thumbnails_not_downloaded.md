@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/601
 
-Devices:
+Devices: iPhone 6s iOS 9.2 — iPad air iOS 8
 
 Server:
 
@@ -37,11 +37,11 @@ Server:
 |    **Offline**    |                                 |                                          |                                          |         |                                          |
 |        21         | Offline                         | 1. In web, create an account and upload some images/videos in a folder that is not root<br>2. In app, login in the account but not browse<br>3. Switch the device network connection off<br>4. Browse into the folder<br>5. Switch the device network connection on and browse | 4. Thumbnails are not shown<br>5. Thumbnails are correctly shown | P t8 m9 | Is neccesary the connection to browse, but disabling while thumbnails are being updated and then connecting again it works fine |
 | **Multiaccount**  |                                 |                                          |                                          |         |                                          |
-|        22         | Multiaccount                    | 1. Upload some images in different accounts and change from one to another | Thumbnails are correctly shown in all accounts |   m9    |                                          |
-|        23         | Multiaccount                    | 1. Upload  some image files in a folder call "folder1"<br>2. Change to account2<br> 3.Upload some image files in a folder call "folder1"  <br>4. Change the account to the first one | 1. Thumbnails of account 1 are visible correctly<br>3. Thumbnails of account 2 are visible correctly<br>4. Thumbnails of account 1 keep on being correct |   m9    |                                          |
+|        22         | Multiaccount                    | 1. Upload some images in different accounts and change from one to another | Thumbnails are correctly shown in all accounts | P t8 m9 |                                          |
+|        23         | Multiaccount                    | 1. Upload  some image files in a folder call "folder1"<br>2. Change to account2<br> 3.Upload some image files in a folder call "folder1"  <br>4. Change the account to the first one | 1. Thumbnails of account 1 are visible correctly<br>3. Thumbnails of account 2 are visible correctly<br>4. Thumbnails of account 1 keep on being correct | P t8 m9 |                                          |
 |  **Shibboleth**   |                                 |                                          |                                          |         |                                          |
-|        24         | Shibb server                    | 1. Login in a Shibboleth server<br>2. Upload some images<br>3. Download some images | 2. Thumbnails are correctly shown<br>3. Thumbnails are correctly shown |         |                                          |
+|        24         | Shibb server                    | 1. Login in a Shibboleth server<br>2. Upload some images<br>3. Download some images | 2. Thumbnails are correctly shown<br>3. Thumbnails are correctly shown | F t8 m9 | SOLVED: If the video plugin is not installed in the server, the default video thumbnails are not shown after adding a new user. |
 |     **Cache**     |                                 |                                          |                                          |         |                                          |
-|        25         | Cache                           | 1. Upload some images to different accounts<br>2. Move some images from a location to another one<br>3. Delete some images<br>4. Delete an account | Check in all the cases that the thumbnails are correctly managed in mobile's cache |         |                                          |
+|        25         | Cache                           | 1. Upload some images to different accounts<br>2. Move some images from a location to another one<br>3. Delete some images<br>4. Delete an account | Check in all the cases that the thumbnails are correctly managed in mobile's cache | P t8 m9 |                                          |
 |    **Upgrade**    |                                 |                                          |                                          |         |                                          |
-|        26         | Upgrade                         | 1. Install in device the stable version of the app<br>2. Install the app version with thumbnails | Check that the thumbnails are correctly managed in mobile |         |                                          |
+|        26         | Upgrade                         | 1. Install in device the stable version of the app<br>2. Install the app version with thumbnails | Check that the thumbnails are correctly managed in mobile | P t8 m9 |                                          |
