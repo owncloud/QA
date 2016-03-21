@@ -1,6 +1,6 @@
 ###  Certificate changes must alert the user 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/611
 
 Device:
 
