@@ -2,10 +2,10 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1551
 
-Devices:
+Devices: Nexus 5 v5.0.1, Nexus 7 v4.0.3
 
 Server:
-
+OC 9.1
 
 ---
 
