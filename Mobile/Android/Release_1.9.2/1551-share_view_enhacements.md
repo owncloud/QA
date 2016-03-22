@@ -13,7 +13,7 @@ OC 9.1
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**View**||||||
-| 1 | Share view | Open the share view |  All components are correct: share with users/groups, share by link in both orientations |  |  |
+| 1 | Share view | Open the share view |  All components are correct: share with users/groups, share by link in both orientations | P T4, M5 |  |
 | 2 | Search view | Open the share view and share a file/folder with users and gruops|  Material design is correctly shown for both users and groups in search view  |  |  |
 | 3 | User/groups icon | Open the share view and share a file/folder with users and gruops|  Material design is correctly shown for both users and groups.  |  |  |
 | 4 | Privileges view file | Open the share view and share a file with users or groups. Tap on '>'| The options "Can edit" and "Can share" are shown correctly in both orientations  |  |  |
