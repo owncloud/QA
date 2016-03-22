@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1493
 
-Devices: Nexus5 v5.0.1
+Devices: Nexus5 v5.0.1, Nexus9 v6
 
 Server version: v9
 
@@ -11,9 +11,9 @@ Server version: v9
 Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Comments|
 |:----------:|:------------- |:--------|:------------------|:------:|:----------------|
 |**Views**|||||
-|1| New option in menu | 1. Swipe to display the main menu <br> 2. Change orientation of device | 1. An new option "Uploads" is displayed in the menu<br> 2. The view is correct in both orientations| P m5 ||
-|2| Empty upload menu |  1. Swipe to display the main menu after installing the app<br> 2. Tap on Uploads <br>| A message about "any uploads were performed yet" must be displayed. Changing orientation the message is correctly displayed.| P m5 ||
-|3| Upload menu |  1. Swipe to display the main menu after performing a upload<br> 2. Tap on Uploads <br> 3. Change orientation of device| 2. Three sections are displayed: current , failed and uploaded. Also there are two options to clear: all and failed.<br> 3. The view is correct in both orientations| F m5 | List names are not uniform|
+|1| New option in menu | 1. Swipe to display the main menu <br> 2. Change orientation of device | 1. An new option "Uploads" is displayed in the menu<br> 2. The view is correct in both orientations| P m5 t6||
+|2| Empty upload menu |  1. Swipe to display the main menu after installing the app<br> 2. Tap on Uploads <br>| A message about "any uploads were performed yet" must be displayed. Changing orientation the message is correctly displayed.| P m5 t6||
+|3| Upload menu |  1. Swipe to display the main menu after performing a upload<br> 2. Tap on Uploads <br> 3. Change orientation of device| 2. Three sections are displayed: current , failed and uploaded. Also there are two options to clear: all and failed.<br> 3. The view is correct in both orientations| P m5 t6| SOLVED: List names are not uniform|
 |**Uploads**||||
 |4| Upload a file (copy)| 1. Tap to upload a file<br> 2. Select a file to upload choosing "copy"| 2. The file appears on menu "Current" while is uploading and in "Uploaded" when the upload is finished (change orientation). File is correctly copied (remains in origin)| P m5 ||
 |5| Upload a file (move)| 1. Tap to upload a file<br> 2. Select a file to upload choosing "move" | 2. The file appears on menu "Current" while is uploading and in "Uploaded" when the upload is finished (change orientation). File is correctly moved (deleted in origin)| P m5 ||
