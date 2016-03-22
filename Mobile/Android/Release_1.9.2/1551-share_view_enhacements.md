@@ -18,7 +18,7 @@ OC 9.1
 | 3 | User/groups icon | Open the share view and share a file/folder with users and gruops|  Material design is correctly shown for both users and groups.  | P T4, M5 |  |
 | 4 | Privileges view file | Open the share view and share a file with users or groups. Tap on '>'| The options "Can edit" and "Can share" are shown correctly in both orientations  | P T4, M5 |  |
 | 5 | Privileges view folder | 1. Open the share view and share a folder with users or groups. Tap on '>'<br>2. Enable "Can Edit"| The options "Can edit" and "Can share" are shown correctly in both orientations.<br>2. The three suboptions "create", "change" and "delete" are displayed correctly in both orientations.   | P T4, M5 |  |
-| 6 | Share by link | Open the share view and share a file by link. Tap on '>'| The options "Expiration date", "Password secure" are shown correctly in both orientations, as the views for choosing the date and the password. |  |  |
+| 6 | Share by link | Open the share view and share a file by link. Tap on '>'| The options "Expiration date", "Password secure" are shown correctly in both orientations, as the views for choosing the date and the password. | P T4, M5 |  |
 |**Smoke test**||||||
 | 1 | Share users | Share a file and a folder with users | Share correct. Check that sharees can see the content |  |  |
 | 2 | Share groups | Share a file and a folder with groups | Share correct. Check that sharees can see the content |  |  |
