@@ -1,6 +1,6 @@
 ###  Share view enhacements 
 
-#### Pr: https://github.com/owncloud/android/pull/1451
+#### Pr: https://github.com/owncloud/android/pull/1551
 
 Devices:
 
