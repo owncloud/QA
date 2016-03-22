@@ -22,6 +22,6 @@ OC 9.1
 |**Smoke test**||||||
 | 1 | Share users | Share a file and a folder with users | Share correct. Check that sharees can see the content | P T4, M5 |  |
 | 2 | Share groups | Share a file and a folder with groups | Share correct. Check that sharees can see the content | P T4, M5 |  |
-| 3 | Share by link with passw | Share a file and a folder by link | Share correct. Check that the link is available |  |  |
-| 4 | Share by link with date | Share a file and a folder by link | Share correct. Check that the link is available |  |  |
-| 5 | Share with privileges | Share a file and a folder with privileges | Share correct. Check that sharees can see the content with the granted privileges. |  |  |
+| 3 | Share by link with passw | Share a file and a folder by link | Share correct. Check that the link is available | P T4, M5 |  |
+| 4 | Share by link with date | Share a file and a folder by link | Share correct. Check that the link is available | P T4, M5 |  |
+| 5 | Share with privileges | Share a file and a folder with privileges | Share correct. Check that sharees can see the content with the granted privileges. | P T4, M5 |  |
