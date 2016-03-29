@@ -66,6 +66,6 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 |46| Upload + Expiration| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) in a moment close to the expiration time<br> 3. Session expires<br> 4. Retry the upload| 3. Credentials are requested<br> 4. File is uploaded| P t6 |SOLVED: Credentials requested twice|
 |47| Upload + Expirated| 1. Login in a Shibboleth server<br> 2. Upload a large file (copy/move) once the session is expired<br> 3. Login | 2. Credentials are requested<br> 3. File is not uploaded| P t6| SOLVED: Credentials requested twice|
 |**Other Servers**|1 device|||
-|48| Redirect | 1. Login in a redirect server<br> 2. Upload a file <br> | File is correctly uploaded
+|48| Redirect | 1. Login in a redirect server<br> 2. Upload a file <br> | File is correctly uploaded | P m5 ||
 |49| Self Signed| 1. Login in a self signed server<br> 2. Upload a file <br> | File is correctly uploaded|P m5 |
 |50| No Self Signed| 1. Login in a no self signed server<br> 2. Upload a file <br> | File is correctly uploaded|P m5||
