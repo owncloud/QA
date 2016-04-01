@@ -15,4 +15,5 @@ Server: v9
 | 2 | Actions after accepting  |  1. From 1, accept the certificate and perform server actions (upload, download, move, rename, document provider, share...) | Actions are correctly managed | P m8 |  |
 | 3 | Actions after denying  |  1. From 1, deny the certificate and perform server actions (upload, download, move, rename, document provider, share...) | Actions are not managed, accepting the cert is required | P m8 | SOLVED: yellow arroy in favourites. Freezed if delete file |
 |**Regression**||||||
-| 4 | Regression | 1. Wait some minutes without performing any action<br>2. Refresh the file view or do some other action| No error from server is received |  |  |
+| 4 | Regression | 1. Wait some minutes without performing any action<br>2. Refresh the file view or do some other action| No error from server is received | P m8 |  |
+| 5 | Error handling | 1. Errors in share forms<br>|Errors are correct  | P m9 t8 |  |
