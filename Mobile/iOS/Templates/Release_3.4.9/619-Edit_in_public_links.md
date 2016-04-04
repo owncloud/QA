@@ -26,7 +26,7 @@ Server:
 |8|Allow |1. In server, share a folder by link and enable "Allow editing".| Check in app that "Allow editing" is also enabled|||
 |9|Disable allow|1. From 8, in server side disable "Allow editing".| Check in app that "Allow editing" is also disabled|||
 |**Capabilities**||||||
-|10|Allow public uploads|1. In server side, disable the capability "Allow public uploads"<br>2. In app, long press to share a folder by link| The switch button with the option "Allow editing" does not appear|||
+|10|Allow public uploads|1. In server side, disable the capability "Allow public uploads"<br>2. In app, swipe to share a folder by link| The switch button with the option "Allow editing" does not appear|||
 |**Offline**||||||
 |11|Offline device|1. Swipe to share a folder by link.<br>2. Switch the device connection off<br>3. Enable "Allow editing"| A error message is returned. Check in app and server that "Allow editing" is disabled|||
 |12|Offline server|1. Swipe to share a folder by link.<br>2. Switch the server off<br>3. Enable "Allow editing"| A error message is returned. Check that "Allow editing" is disabled|||
