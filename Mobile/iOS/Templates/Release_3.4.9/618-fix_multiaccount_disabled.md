@@ -29,7 +29,11 @@ Server:
 | 14 | Instant upload disabled - several accounts| 1. With several accounts, check that the layout is correct     | No empty lines, all the view is correct |  |
 | 15 | Instant upload enabled - several accounts| 1. With several accounts, check that the layout is correct     | No empty lines, all the view is correct |  |
 |**Other options**||||||
-| 15 | Help enabled| 1. Help branding option enabled | No empty lines, all the view is correct |  |
-| 15 | Help disabled| 1. Help branding option disabled | No empty lines, all the view is correct |  |
-| 15 | Recommend enabled| 1. Recommend branding option enabled | No empty lines, all the view is correct |  |
-| 15 | Recommend disabled| 1. Recommend branding option disabled | No empty lines, all the view is correct |  |
+| 16 | Help enabled| 1. Help branding option enabled | No empty lines, all the view is correct |  |
+| 17 | Help disabled| 1. Help branding option disabled | No empty lines, all the view is correct |  |
+| 18 | Recommend enabled| 1. Recommend branding option enabled | No empty lines, all the view is correct |  |
+| 19 | Recommend disabled| 1. Recommend branding option disabled | No empty lines, all the view is correct |  |
+| 20 | Feedback enabled| 1. Feedback branding option enabled | No empty lines, all the view is correct |  |
+| 21 | Feedback disabled| 1.Feedback branding option disabled | No empty lines, all the view is correct |  |
+| 22 | Impressum enabled| 1. Impressum branding option enabled | No empty lines, all the view is correct |  |
+| 23 | Impressum disabled| 1.Impressum branding option disabled | No empty lines, all the view is correct |  |
