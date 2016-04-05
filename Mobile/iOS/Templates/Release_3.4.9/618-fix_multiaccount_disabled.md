@@ -28,3 +28,8 @@ Server:
 | 13 | Passcode disabled - several accounts| 1. With several accounts, check that the layout is correct | No empty lines, all the view is correct |  |
 | 14 | Instant upload disabled - several accounts| 1. With several accounts, check that the layout is correct     | No empty lines, all the view is correct |  |
 | 15 | Instant upload enabled - several accounts| 1. With several accounts, check that the layout is correct     | No empty lines, all the view is correct |  |
+|**Other options**||||||
+| 15 | Help enabled| 1. Help branding option enabled | No empty lines, all the view is correct |  |
+| 15 | Help disabled| 1. Help branding option disabled | No empty lines, all the view is correct |  |
+| 15 | Recommend enabled| 1. Recommend branding option enabled | No empty lines, all the view is correct |  |
+| 15 | Recommend disabled| 1. Recommend branding option disabled | No empty lines, all the view is correct |  |
