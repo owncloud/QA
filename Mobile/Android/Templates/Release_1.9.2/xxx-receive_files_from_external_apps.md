@@ -20,3 +20,4 @@ Server:
 | 5 | FeedMe | Open the app and share a file with ownCloud|File is correctly shared and stored in ownCloud| | |
 | 6 | Google Keep | Open the app and share a file with ownCloud|File is correctly shared and stored in ownCloud| | |
 | 7 | Speed Test | Open the app and share a file with ownCloud|File is correctly shared and stored in ownCloud| | |
+| 8 | Gmail | Open the app and share an attached file with ownCloud|File is correctly shared and stored in ownCloud| | |
