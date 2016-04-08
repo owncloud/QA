@@ -1,6 +1,6 @@
 ###  BUG: Receiving files from external apps display an error
 
-#### Pr: https://github.com/owncloud/android/pull/1598
+#### Pr: https://github.com/owncloud/android/pull/xxx
 
 Devices:
 
