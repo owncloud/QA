@@ -18,7 +18,7 @@ Server: v9.0.1 RC2
 | 3 | Gmail | Open the app and share an attached file with ownCloud|File is correctly shared and stored in ownCloud| P t4 m6| |
 | 4 | Downloads | Open the app and share with ownCloud|File is correctly shared and stored in ownCloud| P t4 m6| |
 | 5 | Dropbox | Open the app and share with ownCloud|File is correctly shared and stored in ownCloud| P t4 m6| |
-|**External apps - No Content**||||||
+|**External apps - No Content (text)**||||||
 | 6 | ListMyApps | Open the app and share with ownCloud| An error is shown because no file is available to upload| P t4 m6| |
 | 7 | Gtask | Open the app and share with ownCloud|An error is shown because no file is available to upload| P t4 m6| |
 | 8 | Google Keep | Open the app and share with ownCloud|An error is shown because no file is available to upload| P t4 m6| |
