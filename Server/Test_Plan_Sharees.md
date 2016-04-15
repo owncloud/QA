@@ -20,7 +20,6 @@
 
 | Test Case                                | Expected Result                          | Result             | Related Comment                          |
 | ---------------------------------------- | ---------------------------------------- | ------------------ | ---------------------------------------- |
-|                                          |                                          |                    |                                          |
 | Sharing a file, write down a pattern that matches with a regular user | The user that matches with this pattern is shown in the dropdown | :construction:     |                                          |
 | Sharing a file, write down a pattern that does not match with any regular user | A warning message about no results found is shown in the dropdown | :construction:     |                                          |
 | Sharing a file, write down a pattern that matches with the user logged | The user logged is NOT shown in the dropdown | :construction:     |                                          |
