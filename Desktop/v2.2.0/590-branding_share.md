@@ -1,7 +1,5 @@
 ### Sharing branding option
 
-#### Pr: 
-
 Server version: 9.0.1 <br> 
 Client Version: 2.2.0
 
