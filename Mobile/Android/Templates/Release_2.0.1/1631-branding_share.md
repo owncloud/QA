@@ -2,8 +2,8 @@
 
 #### Pr: https://github.com/owncloud/android/issues/1631
 
-Devices: iPad v9 with oc8.2.2 <br>
-         iPhone6 v9 with oc9
+Devices: Tablet Android 5.x or 6.x to OC8.2.2 <br>
+         Smartphone Android 4.x to OC9
 
 
 Server version: 9 and 8.2.2
