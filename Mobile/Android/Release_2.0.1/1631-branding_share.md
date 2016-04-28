@@ -21,9 +21,6 @@ Test Case ID | Test case     | Steps   | Expected behavior | Result | Related Co
 6 |Disable share link - check portrait| 1.- "share_via_link_feature" to "false" in setup.xml <br> 2.- Select to share a file | Just internal sharing is shown | P s4.2.1 t5.0.2
 7 |Disable share link - check landscape| 1.- "share_via_link_feature" to "false" in setup.xml <br> 2.- Select to share a file | Just internal sharing is shown | P s4.2.1 t5.0.2
 8 |Disable share link - check landscape| 1.- "share_via_link_feature" to "false" in setup.xml <br> 2.- Select to share a file from the details view | Just internal sharing is shown | P s4.2.1 t5.0.2
-9 |Multiaccount - disable internal sharing| 1.- "share_via_link_feature" to "false" in setup.xml <br> 2.- Select to share a file from the details view | Just internal sharing is shown | P s4.2.1 | t5.0.2
-
-
-
+9 |Multiaccount - disable internal sharing| 1.- "share_via_link_feature" to "false" in setup.xml <br> 2.- Select to share a file from the details view | Just internal sharing is shown | P s4.2.1 t5.0.2
 
 
