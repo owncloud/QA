@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1643
 
-Devices: 
+Devices: Android 4.4, Android 4.2
 
 Server: 
 
