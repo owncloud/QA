@@ -1,6 +1,6 @@
-###  Sync: Change wording and icons
+###  Sync: Change wording and syncing icons
 
-#### Pr: https://github.com/owncloud/android/pull/xxx
+#### Pr: https://github.com/owncloud/android/pull/1685
 
 Devices: 
 
