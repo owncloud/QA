@@ -43,19 +43,27 @@
 | **Sharee with LDAP users**               |                                          |                |                 |
 |                                          |                                          |                |                 |
 | Sharing a file, write down a pattern that matches with an LDAP user | The user that matches with this pattern is shown in the dropdown | :construction: |                 |
+| Sharing a file, write down a pattern that matches with an LDAP user when LDAP is down | The user that matches with this pattern should not be shown in the dropdown | :construction: |                 |
+| Sharing a file, write down a pattern that matches with an LDAP user when LDAP is down, but there is an active Backup (replica) Host  | The user that matches with this pattern is shown in the dropdown | :construction: | 
 | Sharing a file, write down a pattern that does not match with any LDAP user | A warning message about no results found is shown in the dropdown | :construction: |                 |
 | Share a file with an LDAP user. After that, write down a pattern that matches with some LDAP users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared | :construction: |                 |
 | Share a folder with an LDAP user. After that, write down a pattern that matches with some LDAP users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared | :construction: |                 |
 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches with a LDAP user but not completed | The username does NOT appear in the dropdown | :construction: |                 |
 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches exactly with an LDAP user | The username appears in the dropdown     | :construction: |                 |
+| Share a file from an AD user to a regular user. LDAP server goes down after the sharing | Check that the share is no longer available and an error is shown if regular user was editing the file and tries to save it | :construction: | 	|
 | **Sharee with Active Directory users**   |                                          |                |                 |
 |                                          |                                          |                |                 |
 | Sharing a file, write down a pattern that matches with an AD user | The user that matches with this pattern is shown in the dropdown | :construction: |                 |
+| Sharing a file, write down a pattern that matches with an AD user when AD is down | The user that matches with this pattern should not be shown in the dropdown | :construction: |
+| Sharing a file, write down a pattern that matches with an AD user when AD is down, but there is an active Backup (replica) Host  | The user that matches with this pattern is not shown in the dropdown | :construction: |
 | Sharing a file, write down a pattern that does not match with any AD user | A warning message about no results found is shown in the dropdown | :construction: |                 |
 | Share a file with an AD user. After that, write down a pattern that matches with some AD users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared | :construction: |                 |
+| Sharing a folder, write down a pattern that matches with an AD user when AD is down | The user that matches with this pattern should not be shown in the dropdown | :construction: |
+| Sharing a folder, write down a pattern that matches with an AD user when AD is down, but there is an active Backup (replica) Host  | The user that matches with this pattern is shown in the dropdown | :construction: |
 | Share a folder with an AD user. After that, write down a pattern that matches with some AD users, included the previous one | The usernames that match with this pattern are shown in the dropdown except the one that had been already shared | :construction: |                 |
 | Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches with a AD user but not completed | The username does NOT appear in the dropdown | :construction: |                 |
-| Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches exactly with an AD user | The username appears in the dropdown     | :construction: |                 |
+| Allow username autocompletion in share dialog option disabled in oC Server; write down a pattern that matches exactly with an AD user | The username appears in the dropdown     | :construction: |
+| Share a file from an AD user to a regular user. LDAP server goes down after the sharing | Check that the share is no longer available and an error is shown if regular user was editing the file and tries to save it | :construction: |                 |
 | **Sharee with SHIB users**               |                                          |                |                 |
 |                                          |                                          |                |                 |
 | Sharing a file, write down a pattern that matches with an SHIB user | The user that matches with this pattern is shown in the dropdown | :construction: |                 |
