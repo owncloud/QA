@@ -1,6 +1,6 @@
 ###  New options in account menu
 
-#### Pr: https://github.com/owncloud/ios/pull/xxx
+#### Pr: https://github.com/owncloud/ios/pull/669
 
 Devices: 
 
