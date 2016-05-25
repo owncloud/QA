@@ -12,8 +12,8 @@ Server:
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**View**||||||
-| 1 | Portrait  |  Open Settings View  |  Next to the account info appears a (...) menu with four options: "Edit credentials", "Clear cache", "Disconnect from server" and "Delete connection" |  |  |
-| 2 | Landscape  |  Open Settings View |  Next to the account info appears a (...) menu with four options: "Edit credentials", "Clear cache", "Disconnect from server" and "Delete connection" |  |  |
+| 1 | Portrait  |  Open Settings View  |  Next to the account info appears a (...) menu with three options: "Edit credentials", "Clear cache", and "Remove account" |  |  |
+| 2 | Landscape  |  Open Settings View |  Next to the account info appears a (...) menu with three options: "Edit credentials", "Clear cache", and "Remove account" |  |  |
 |**Actions (one account)**||||||
 | 3 |Edit Credentials| 1. In settings view, tap on (...) of one account and then in "Edit Credentials"|The Login view is displayed and the password can be edited | | |
 | 4 |Remove account|1. In settings view, tap on (...) and then in "Remove account"| The account is removed from the account list|||
