@@ -1,4 +1,4 @@
-###  BUG: Uploading a photo via share dialog duplicates the photo
+###  BUG: Uploading via share dialog duplicates the photo
 
 #### Pr: https://github.com/owncloud/android/pull/1626
 
