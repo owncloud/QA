@@ -18,7 +18,7 @@ Server: v9.0.2
 | 3 |Edit Credentials| 1. In settings view, tap on (...) of one account and then in "Edit Credentials"|The Login view is displayed and the password can be edited | P m9  t8 |SOLVED: "Edit credentials" does not work in iPad|
 | 4 |Remove account|1. In settings view, tap on (...) and then in "Remove account"| The account is removed from the account list| P m9 t8||
 |**Clear cache (one account)**||||||
-| 5 |Empty account|1. In Settings view, tap on (...) of an account that is empty<br>2. Select "Clear cache"| Nothing happens| P m9 | |
+| 5 |Empty account|1. In Settings view, tap on (...) of an account that is empty<br>2. Select "Clear cache"| Nothing happens| P m9 t8| |
 | 6 |Account with downloaded files|1. In Settings view, tap on (...) of an account with downloaded<br>2. Select "Clear cache"| All downloaded files are locally removed| P m9 t8| |
 | 7 |Account without downloaded files|1. In Settings view, tap on (...) of an account that does not have downloaded files<br>2. Select "Clear cache"| Nothing happens| P m9 t8| |
 | 8 |Account with favourite files|1. In Settings view, tap on (...) of an account that has favourite files<br>2. Select "Clear cache"| All the file are removed but the favourites| P m9 t8| |
