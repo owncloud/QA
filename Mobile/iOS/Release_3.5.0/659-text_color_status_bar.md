@@ -22,7 +22,7 @@ Server: v9.0.2
 | 7 | Share view   |  Open the share view | Text color white | P m9 |  |
 | 8 | Upload view   |  Open the uploads view | Text color white | P m9 |  |
 | 9 | Uploader view   |  Open the uploader view from an external app | Text color white | F m9 | Appears in black (won't fix FTM) |
-| 10 | Uploading file   |  1. Edit a txt file from server side<br>2. In app, pull down and tap on the file to upgrade it | Text color white | P m9 F t8 | SOLVED: In iPad, upload text does not appear. The text remains if the updating takes less than 1sec|
+| 10 | Uploading file   |  1. Edit a txt file from server side<br>2. In app, pull down and tap on the file to upgrade it | Text color white | P m9 F t8 | SOLVED: In iPad, upload text does not appear.<br>SOLVED: The text remains if the updating takes less than 1sec|
 |**No Login View Colour = Black**||||||
 | 11 | Settings view   |  Open the settings view | Text color black | P m9 t8 |  |
 | 12 | Files view   |  Open the files view | Text color black | P m9 t8|  |
@@ -31,5 +31,5 @@ Server: v9.0.2
 | 15 | Share view   |  Open the share view | Text color black | P m9 |  |
 | 16 | Upload view   |  Open the upload view | Text color black | P m9 |  |
 | 17 | Uploader view   |  Open the uploader view from an external app | Text color black | P m9 |  |
-| 18 | Uploading file   |  1. Edit a txt file from server side<br>2. In app, pull down and tap on the file to upgrade it | Text color black | P m9 F t8| SOLVED: In iPad, upload text does not appear. The text remains if the updating takes less than 1sec |
+| 18 | Uploading file   |  1. Edit a txt file from server side<br>2. In app, pull down and tap on the file to upgrade it | Text color black | P m9 F t8| SOLVED: In iPad, upload text does not appear.<br>SOLVED: The text remains if the updating takes less than 1sec |
 
