@@ -2,9 +2,9 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/674
 
-Device:
+Device: iPhone6 v9
 
-Server:
+Server: v9.1beta
 
 ---
 

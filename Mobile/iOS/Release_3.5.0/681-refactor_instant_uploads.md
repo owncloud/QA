@@ -14,7 +14,7 @@ Server: 9.1beta
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**User notifications**||||||3
 | 1 | View - Enable instant uploads | 1. In settings, disable location services<br>2. In app, enable "Instant uploads"  | Any notification is shown | P m9 t8|  |
-| 2 | View - Ask enable loc. services | 1. From previous test case, enable "Background instant uploads" | Enable location services in device is requested | F m9 t8| Switch enabled although location services are disabled |
+| 2 | View - Ask enable loc. services | 1. From previous test case, enable "Background instant uploads" | Enable location services in device is requested | P m9 t8| SOLVED: Switch enabled although location services are disabled |
 |**Background disabled**||||||
 | 3 | App alive - one pic | 1. Leave the app<br>2. Take a pic before three minutes<br>3. Open the app | Pic was uploaded when it was taken| P m9 t8|  |
 | 4 | App closed/background - one pic | 1. Kill the app<br>2. Take a pic<br>3. Open the app| 2. Pic is not uploaded<br>3. Pic is uploaded | P m9 t8|  |
