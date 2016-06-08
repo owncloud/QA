@@ -12,19 +12,19 @@ Server: v9.1beta
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Login**||||||
-| 1 | http URL | Input a correct http URL | The connection is stablished |  |  |
-| 2 | https trusted URL | Input a correct https URL (server with trusted certif) | The connection is stablished |  |  |
-| 3 | https untrusted URL | Input a correct https URL (server with untrusted certif) | The connection is stablished atfer accepting the certificate|  |  |
-| 4 | Correct credentials | Input correct credentials | Access granted to the app |  |
-| 5 | Incorrect credentials | Input incorrect credentials | Access denied to the app |  |
+| 1 | http URL | Input a correct http URL | The connection is stablished | P m9 |  |
+| 2 | https trusted URL | Input a correct https URL (server with trusted certif) | The connection is stablished | P m9 |  |
+| 3 | https untrusted URL | Input a correct https URL (server with untrusted certif) | The connection is stablished atfer accepting the certificate| P m9 |  |
+| 4 | Correct credentials | Input correct credentials | Access granted to the app | P m9 |
+| 5 | Incorrect credentials | Input incorrect credentials | Access denied to the app | P m9 |
 |**File actions**||||||
-| 6 | Create folder | Tap on (...) to create a new folder with special characters | Folder is correctly created (check in server)  |  |
-| 7 | Rename file | Swipe over a file and select rename | File is renamed correctly  |  |
-| 8 | Rename folder | Swipe over a folder and select rename | Folder is renamed correctly  |  |
-| 8 | Move file | Swipe over a file (in root) and select move. Move it to a deep folder | Folder is moved correctly  |  |
-| 10 | Move folder | Swipe over a folder (not in root) and select move. Move it to root folder | Folder is moved correctly  |  |
-| 11 | Download file | Tap on a file  | File is downloaded correctly |
-| 12 | Download huge file | Tap on a huge file  | File is downloaded correctly |
+| 6 | Create folder | Tap on (...) to create a new folder with special characters | Folder is correctly created (check in server)  | P m9 | |
+| 7 | Rename file | Swipe over a file and select rename | File is renamed correctly  | P m9 ||
+| 8 | Rename folder | Swipe over a folder and select rename | Folder is renamed correctly  | P m9 | |
+| 8 | Move file | Swipe over a file (in root) and select move. Move it to a deep folder | Folder is moved correctly  | P m9 | |
+| 10 | Move folder | Swipe over a folder (not in root) and select move. Move it to root folder | Folder is moved correctly  | P m9 | |
+| 11 | Download file | Tap on a file  | File is downloaded correctly | P m9 | |
+| 12 | Download huge file | Tap on a huge file  | File is downloaded correctly | P m9 | |
 | 13 | Download folder foreground| Swipe to download folder that have several subfolders in different deep levels, containing files | Folder content is correctly downloaded |
 | 14 | Download folder background| Swipe to download a folder that have several subfolders in different deep levels, containing a huge number of files. Lock the device and wait at least 3 minutes | Folder content is correctly downloaded |
 | 15 | Favourite folder foreground| Swipe to favourite a folder that have several subfolders in different deep levels, containing files | Folder content is correctly downloaded and favourited |
