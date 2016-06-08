@@ -12,7 +12,7 @@ Server: 9.1beta
  
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
-|**User notifications**||||||
+|**User notifications**||||||3
 | 1 | View - Enable instant uploads | 1. In settings, disable location services<br>2. In app, enable "Instant uploads"  | Any notification is shown | P m9 t8|  |
 | 2 | View - Ask enable loc. services | 1. From previous test case, enable "Background instant uploads" | Enable location services in device is requested | F m9 t8| Switch enabled although location services are disabled |
 |**Background disabled**||||||
