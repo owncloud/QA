@@ -12,7 +12,7 @@ Server: v9.1beta
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Login**||||||
-| 1 | http URL | Input a correct http URL | The connection is stablished | F m9 | upgrading makes the app freeze  |
+| 1 | http URL | Input a correct http URL | The connection is stablished | F m9 | SOLVED: upgrading makes the app freeze. TouchId turns the screen black |
 | 2 | https trusted URL | Input a correct https URL (server with trusted certif) | The connection is stablished | P m9 |  |
 | 3 | https untrusted URL | Input a correct https URL (server with untrusted certif) | The connection is stablished atfer accepting the certificate| P m9 |  |
 | 4 | Correct credentials | Input correct credentials | Access granted to the app | P m9 |
@@ -67,4 +67,4 @@ Server: v9.1beta
 |**Special servers**||||||
 | 48 |Redirection| 1. Login in a redirect server<br>2. Perform some actions over files and folders | Actions are correctly performed | P m9 | |
 | 49 |Shibboleth| 1. Login in a Shibboleth server<br>2. Perform some actions over files and folders | Actions are correctly performed | P m9 | |
-| 50 |Shibboleth expiration| 1. Login in a Shibboleth server<br>2. Wait until session expires and perform any action| Login view is displayed and credentials are required | P m9 | |
+| 50 |Shibboleth expiration| 1. Login in a Shibboleth server<br>2. Wait until session expires and perform any action| Login view is displayed and credentials are required | F m9 | Uploads does not resume|
