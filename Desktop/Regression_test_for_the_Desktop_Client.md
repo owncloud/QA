@@ -4,7 +4,7 @@
 
 Have a Desktop Client vX.X.X ready to be used with owncloud.
 
-Prepare a OC server with ssl actived and trusted certificates.
+Prepare a OC server with ssl activated and trusted certificates.
 
 Have a LDAP server ready to be used with owncloud.
 
@@ -16,39 +16,39 @@ Have ready two external storage of your choice (e.g S3)
 
 ### 1. Settings windows - Login
 
-TestID | Test Case | Steps to reprouce |Expected Result |Result| Related Comment
+TestID | Test Case | Steps to reproduce |Expected Result |Result| Related Comment
 ------------ | ------------- | ------------- | ------- | ----- | ------
-1 | Update Installation | 1. You need to have installed a previous version 2. Update the new version ||:construction:| |
+1 | Update Installation | 1. You need to have installed a previous version 2. Update to the new version ||:construction:| |
 2 | Install the new version (with url: HTTPS) | 1. Delete the previous version 2. Install the new version || :construction: | |
 3 | Install the new version (with url: HTTP) | 1. Delete the previous version 2. Install the new version || :construction: | |
-4 | Verify that you can introduce the server address | 1. Lauch desktop app 2. Introduce the server address 3. Click on Next 4 If it the first time you should accept the certification- click on the checkbox and OK (The lock is shown in green -the server si validated SSL connection window is opened, if it is the first time an you have to accept the certification| | :construction: | https://github.com/owncloud/client/issues/3751 (**backlog**) |
-5 | Introduce username/password  | 1. Fill in username and password |If the credentials are not correct it is shown a message "Error: Wrong credentials" |:construction: | |
-6 | Verify that all the account is synced in the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desirable | All the account is sync in the local folder|:construction: | |
-7 | Verify that only he folder selected are sync in the local folder  | 1. Click on Choose what to sync 2. The remote folder are shown, select which you want to sync 3. Select the local folder |The remote folders selecter are sync |:construction: | |
-8 | Verify that you can skip folder configuration | 1. Click on skip folders configuration | The setting window is opened neither local and remote folders are configurate  |:construction: | https://github.com/owncloud/client/issues/3846 (**backlog**)|
-9 | Install version with SHIB  | 1. Install version 2. Introduce the user account with SHIB  |All the account is sync with the User SHIB| :construction: | |
-10 | Sesion expiration with SHIBB | 1. Login with SHIB 2. Wait for SHIB session expiration |The Desktop sync client show the login (WebKit) windows after the SHIB sessions terminates| :construction: | |
+4 | Verify that you can introduce the server address | 1. Launch desktop app 2. Introduce the server address 3. Click on Next 4. If it is the first time you should accept the certificate - click on the checkbox and OK (The lock is shown in green - the server validated SSL connection window is opened)| | :construction: | https://github.com/owncloud/client/issues/3751 (**backlog**) |
+5 | Introduce username/password  | 1. Fill in username and password |If the credentials are not correct a message is shown "Error: Wrong credentials" |:construction: | |
+6 | Verify that all the account is synced in the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desired | All the account is synced in the local folder|:construction: | |
+7 | Verify that only the folder(s) selected are synced in the local folder  | 1. Click on Choose what to sync 2. The remote folder(s) are shown, select which you want to sync 3. Select the local folder |The remote folders selected are synced |:construction: | |
+8 | Verify that you can skip folder configuration | 1. Click on skip folders configuration | The settings window is opened neither local and remote folders are configured  |:construction: | https://github.com/owncloud/client/issues/3846 (**backlog**)|
+9 | Install version with SHIB  | 1. Install version 2. Introduce the user account with SHIB  |All the account is synced with the User SHIB| :construction: | |
+10 | Session expiration with SHIBB | 1. Login with SHIB 2. Wait for SHIB session expiration |The Desktop sync client shows the login (WebKit) windows after the SHIB session terminates| :construction: | |
 11 | Install the new version with LDAP Server | 1. Install the new version with LDAP server || :construction: | |
 12 | Install the new version with Active Directory server | 1. Install the new version with Active Directory server || :construction: | |
 
 ### 2. Folders
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
+TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 | Verify that you can create one folder  | 1. Go to local sync folder 2. Create a single folder 3. Wait for it to sync to Via Web|The folder is created on Via Website| :construction: | |
-2 | Verify that you can create one folder with long name  | 1. Go to local sync folder 2. Create a single folder with a logn name (59 characters+a terminating zero bytes) 3. Wait for it to sync to Via Web |The folder is created on Via Website| :construction: | |
-3 | Verify that you can create one folder with special characters in the name | 1. Go to local sync folder 2. Create a single folder with a special characters in the name (e.g $%ñ&) 3. Wait for it to sync to Via Web | The folder is created on Via Website| :construction: | |
-4| Verify that you can sync five subfolders | 1. Go to local sync folder 2. Copy a folder with 5 subfolders 3. Wait for it to sync to Via Web |The folder are created on Via Website  |:construction: | |
+2 | Verify that you can create one folder with long name  | 1. Go to local sync folder 2. Create a single folder with a long name (59 characters+a terminating zero bytes) 3. Wait for it to sync to Via Web |The folder is created on Via Website| :construction: | |
+3 | Verify that you can create one folder with special characters in the name | 1. Go to local sync folder 2. Create a single folder with a special character(s) in the name (e.g $%ñ&) 3. Wait for it to sync to Via Web | The folder is created on Via Website| :construction: | |
+4| Verify that you can sync five subfolders | 1. Go to local sync folder 2. Copy a folder with 5 subfolders 3. Wait for it to sync to Via Web |The folders are created on Via Website  |:construction: | |
 5| Verify that you can sync five subfolders with files | 1. Go to local sync folder 2. Copy a folder with 5 subfolders + 10 files in each folder 3. Wait for it to sync to Via Web |The folder and the files are created on Via Website |:construction: | |
 6| Verify that you can create multiples folders at once | 1. Go to local sync folder 2. Create 400 folders on the root 3. Wait for it to sync to Via Web |The folders are created on Via Website| :construction: | |
 7| Verify that you can copy one folder | 1. Go to local sync folder 2. Create a single folder with some files in it 3. Copy and paste the folder 4. Wait for it to sync to Via Web |The folder is created on Via Website| :construction: | |
-8| Verify that you can create a subfolder with long name | 1. Go to local sync folder (Desktop client) 2. Create a folder called "Folder1" 3. Create a subfolder called "LUsgzq!0k02sek+szBqrzN5=R#UJpWql&rwhnYVb~Gh!l!” 4. This subfolder had a file called ilppng.PNG inside it 5. let them sync |The files are sync correctly| :construction: | |
-9| Verify pre existing folders in local (Desktop client) are copied over to Via Web on startup | 1. Turn off the Desktop client 2. Go to local sync folder 3. Create several folders inside the Desktop Client folder at several different levels 4. Turn ON the Desktop Client 5. Log into Via Web |At Via Web the folder has been sync over| :construction: | |
-10| Verify that invalid name in a file are not sync | 1. Go to local sync folder 2. Create a single folder 3. Sync 4.Move a file o folder with an invalid name in the directory (e.g a/a) | The sync status folder represent the status as failed|:construction: | |
-11| Verify one empty folder with a leght longer than the allowed limit will not be sync | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been sync| :construction: | |
-12| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many inernal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside th Destop Client folder |1. Make sure you get a popup saying that all the extracted files have sync. 2. Loos at Via Web and make sure that the folder has been sync over| :construction: | |
-13| Files that error with API should try 3 times, and then blacklist | 1. Try to sync that is has a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succedd if the name is less than 65 characters |The folder is sync| :construction: | |
-14| Invalid system names | 1. Navigate to the Via Web 2. Create a few folders with a invalid Windows sytem name: COM, AUX, COM1, LPT1, PRN, NULL |1. In Mac OS X the folders does sync 2. In Windows OS the folders does not sync| :construction: | |
+8| Verify that you can create a subfolder with long name | 1. Go to local sync folder (Desktop client) 2. Create a folder called "Folder1" 3. Create a subfolder called "LUsgzq!0k02sek+szBqrzN5=R#UJpWql&rwhnYVb~Gh!l!” 4. This subfolder had a file called ilppng.PNG inside it 5. let them sync |The files are synced correctly| :construction: | |
+9| Verify pre existing folders in local (Desktop client) are copied over to Via Web on startup | 1. Turn off the Desktop client 2. Go to local sync folder 3. Create several folders inside the Desktop Client folder at several different levels 4. Turn ON the Desktop Client 5. Log into Via Web |At Via Web the folder has been synced over| :construction: | |
+10| Verify that file(s) with invalid names are not synced | 1. Go to local sync folder 2. Create a single folder 3. Sync 4.Move a file or folder with an invalid name in the directory (e.g a/a) | The sync status folder represent the status as failed|:construction: | |
+11| Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :construction: | |
+12| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many internal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside the Destop Client folder |1. Make sure you get a popup saying that all the extracted files have synced. 2. Look at Via Web and make sure that the folder has been synced over| :construction: | |
+13| Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succeed if the name is less than 65 characters |The folder is synced| :construction: | |
+14| Invalid system names | 1. Navigate to the Via Web 2. Create a few folders with an invalid Windows sytem name: COM, AUX, COM1, LPT1, PRN, NULL |1. In Mac OS X the folders sync 2. In Windows OS the folders do not sync| :construction: | |
 15| Invalid system names | 1. Navigate to the Via Web 2. Create a few folders with a special characters "%" in the name || :construction: | |
 
 ### 3. Files
