@@ -12,7 +12,7 @@ Server: v9.1beta
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Login**||||||
-| 1 | http URL | Input a correct http URL | The connection is stablished | F m9 | SOLVED: upgrading makes the app freeze. TouchId turns the screen black |
+| 1 | http URL | Input a correct http URL | The connection is stablished | P m9 | SOLVED: upgrading makes the app freeze. TouchId turns the screen black |
 | 2 | https trusted URL | Input a correct https URL (server with trusted certif) | The connection is stablished | P m9 |  |
 | 3 | https untrusted URL | Input a correct https URL (server with untrusted certif) | The connection is stablished atfer accepting the certificate| P m9 |  |
 | 4 | Correct credentials | Input correct credentials | Access granted to the app | P m9 |
