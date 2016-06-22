@@ -1,6 +1,6 @@
 ###  Document provider 
 
-#### Pr: https://github.com/owncloud/ios/android/1368 
+#### Pr: https://github.com/owncloud/android/pull/1368
 
 
 ---
