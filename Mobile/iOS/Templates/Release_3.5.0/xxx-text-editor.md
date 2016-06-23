@@ -11,7 +11,7 @@
 |**View**||||||
 | 1 | Text preview |  1. Open a text file file (txt, rtf, css, py, xml, js)<br>2. Change orientation  | 1. On top right corner appears the option "Edit".<br> 2. Option is correctly displayed |  |  |
 | 2 | No-text preview |  Open a no-txt file (doc, xls, pdf...)  | 1. On top right corner does not appear the option "Edit". |  |  |
-| 3 | Edit view |  1. Open a txt file and tap on "Edit" <br>2. Change orientation  | 1. Buttons cancel and done are shown. The name of the file is shown on the title. Tab bar is not shown<br> 2. View is correctly displayed |  |  |
+| 3 | Edit view |  1. Open a txt file and tap on "Edit" (iPad shows a pencil) <br>2. Change orientation  | 1. Buttons cancel and done are shown. The name of the file is shown on the title. Tab bar is not shown<br> 2. View is correctly displayed |  |  |
 |**Text edition**||||||
 | 4 | Edit text |  1. Open edit view<br>2. Edit the content<br>3. Tap on "Done" | Content is uploaded (check in server) and file view is shown with new modification date |  |  |
 | 5 | Edit without changes |  1. Open edit view<br>2. Do not edit the content<br>3. Tap on "Done" | Content is not uploaded and file view is shown with old modification date |  |  |
