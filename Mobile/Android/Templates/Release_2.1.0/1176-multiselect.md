@@ -16,9 +16,9 @@
 | 3 | Portrait |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
 | 4 | Landscape |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
 |*Several selected options*||||||
-| 5 | Portrait |  Long press on more than one items  | On the top menu appears the options to sync, move, copy, delete |  |  |
-| 6 | Landscape | Long press on more than one items | On the top menu appears the options to sync, move, copy, delete |  |  |
-| 7 | Number | Long press on more than one items. Check with a huge number | On the top left menu appears the number of selected items. |  |  |
+| 5 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete |  |  |
+| 6 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete |  |  |
+| 7 | Number | Long press to select more than one items. Check with a huge number | On the top left menu appears the number of selected items. |  |  |
 |**Grid View**||||||
 |*One folder options*||||||
 | 8 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete |  |  |
@@ -27,9 +27,9 @@
 | 10 | Portrait |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
 | 11 | Landscape |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
 |*Several selected options*||||||
-| 12 | Portrait |  Long press on more than one items  | On the top menu appears the options to sync, move, copy, delete |  |  |
-| 13 | Landscape | Long press on more than one items | On the top menu appears the options to sync, move, copy, delete |  |  |
-| 14 | Number | Long press on more than one items. Check with a huge number | On the top left menu appears the number of selected items. |  |  |
+| 12 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete |  |  |
+| 13 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete |  |  |
+| 14 | Number | Long press to select more than one items. Check with a huge number | On the top left menu appears the number of selected items. |  |  |
 |**Actions**||||||
 |*Actions one file selected*||||||
 | 15 | Share |  Select only one file and the option "Share" (only if branding option is enabled) | File can be shared as usually |  |  |
