@@ -24,3 +24,5 @@
 | 12 | image file  |  Try to open a image in app with an external image reader | File is opened  |  |  |
 | 13 | video file  |  Try to open a video file in app with an external video player | File is opened  |  |  |
 | 14 | audio file  |  Try to open a audio file in app with an external media player | File is opened  |  |  |
+|**Multiaccount**||||||
+| 15 | Multiaccount  |  Try to open some files in app with an external app, havinf several accounts on app | Account and file can be chosen  |  |  |
