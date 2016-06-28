@@ -13,8 +13,8 @@
 | 1 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete |  |  |
 | 2 | Landscape |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete |  |  |
 |*One file options*||||||
-| 3 | Portrait |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
-| 4 | Landscape |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
+| 3 | Portrait |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details |  |  |
+| 4 | Landscape |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details |  |  |
 |*Several selected options*||||||
 | 5 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete |  |  |
 | 6 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete |  |  |
@@ -24,8 +24,8 @@
 | 8 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete |  |  |
 | 9 | Landscape |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete |  |  |
 |*One file options*||||||
-| 10 | Portrait |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
-| 11 | Landscape |  Long press on a file  | On the top menu appears the options to share, download, rename, move, copy, delete, send, av off, details |  |  |
+| 10 | Portrait |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details |  |  |
+| 11 | Landscape |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details |  |  |
 |*Several selected options*||||||
 | 12 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete |  |  |
 | 13 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete |  |  |
