@@ -65,8 +65,8 @@ Server: 9.1
 | 40 | Delete locally|  Long press to select a folder  | Folder is deleted locally as usually | P m5 |  |
 | 41 | Delete from server|  Long press to select a folder  | Folder is deleted from server as usually | P m5 |  |
 |*Actions several folders selected*||||||
-| 42 | Move I |  Long press to select more than one folder  | All selected folders are moved to the new location |  |  |
-| 43 | Move II |  Long press to select more than one folder. Select as target one of the selected folders  | All selected are moved but the selected one. |  |  |
+| 42 | Move I |  Long press to select more than one folder  | All selected folders are moved to the new location | F m5 | Incorrect icon |
+| 43 | Move II |  Long press to select more than one folder. Select as target one of the selected folders  | All selected are moved but the selected one. | F m5 | The target remains as selected |
 | 44 | Copy |  Long press to select more than one folder  | All selected folders are copied to the new location |  |  |
 | 45 | Sync |  Long press to select more than one folder  | All selected folders are synced to the new location |  |  |
 | 46 | Delete locally |  Long press to select more than one folder  | All selected folders are deleted locally and remain on server|  |  |
