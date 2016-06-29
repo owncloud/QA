@@ -45,7 +45,7 @@ Server: v9.1beta
 | 29 |Queue priority| 1. Tap on (...) and select several pics to download<br>2. Tap on a file that is being downloaded| Selected file is downloaded immediatly. At the end all files are downloaded| P m9 | |
 | 30 |Local updating| 1. Modify locally a file| Selected file is uploaded immediatly| | |
 | 31 |No connection| 1. Set the device connection off<br>2.  Tap on (...) and select several pics to upload<br>3. Set the device connection on| 2. File is awaiting connection in uploads view<br>3. Files are uploaded | P m9 |  |
-| 32 |Connection loss| 1. Tap on (...) and select a pic to upload<br>2. Set the device connection off<br>3. Set the device connection on| 2. File is awaiting connection in uploads view<br>3. Upload is resumed | F m9 | owncloud/ios#695 |
+| 32 |Connection loss| 1. Tap on (...) and select a pic to upload<br>2. Set the device connection off<br>3. Set the device connection on| 2. File is awaiting connection in uploads view<br>3. Upload is resumed | P m9 | SOLVED: owncloud/ios#695 |
 | 33 |Instant upload| 1. In Settings, enable instant uploads <br>2. Take a pic |  Pic is uploaded immediatly| P m9 | |
 | 34 |Instant uploads| 1. In Settings, enable instant uploads <br>2. Take several pics | Pics are uploaded immediatly | P m9 | |
 | 35 |Instant uploads without connection| 1. In Settings, enable instant uploads <br>2. Take several pics without connection<br>3. Switch the device connection on| Pics are uploaded when the connection is recovered | P m9 | |
@@ -67,4 +67,4 @@ Server: v9.1beta
 |**Special servers**||||||
 | 48 |Redirection| 1. Login in a redirect server<br>2. Perform some actions over files and folders | Actions are correctly performed | P m9 | |
 | 49 |Shibboleth| 1. Login in a Shibboleth server<br>2. Perform some actions over files and folders | Actions are correctly performed | P m9 | |
-| 50 |Shibboleth expiration| 1. Login in a Shibboleth server<br>2. Wait until session expires and perform any action| Login view is displayed and credentials are required | F m9 | Uploads does not resume|
+| 50 |Shibboleth expiration| 1. Login in a Shibboleth server<br>2. Wait until session expires and perform any action| Login view is displayed and credentials are required | P m9 | SOLVED: Uploads does not resume|
