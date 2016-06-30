@@ -26,10 +26,10 @@ Server: v9.1
 | 10 | Renamed file |  1. Open edit view<br>2. In server, rename the file<br>3. Tap on "Done" | File is uplaoded with the original name. The renamed one appears as not downloaded | P m9 t8|  |
 | 11 | Moved file |  1. Open edit view<br>2. In server, move the file<br>3. Tap on "Done" | File is uplaoded with the original name. The moved one appears as not downloaded | P m9 t8|  |
 | 12 | Conflicts |  1. Open edit view<br>2. In server, edit the file<br>3. Tap on "Done" | Conflict is detected| P m9 t8|  |
-| 13 | No connection |  1. Switch the device connection off<br>2. Open edit view<br>3. Tap on "Done"<br>4. Switch the connection on | 3. File is queued until connection is restablished<br>4. File is uploaded| P m9 |  |
-| 14 | Changed credentials |  1. Open edit view<br>2. Edit the file<br>3. In server, change the credentials<br>4. Tap on "Done"<br> | Credentials are required in uploads view| P m9 |  |
-| 15 | No permission |  1. Share a txt file without edit permissions (by link or internal)<br>2. With the sharee, edit the file<br>3. Tap on "Done" | Error in uploads view. File is not updated because a lack of permissions| P m9 |  |
+| 13 | No connection |  1. Switch the device connection off<br>2. Open edit view<br>3. Tap on "Done"<br>4. Switch the connection on | 3. File is queued until connection is restablished<br>4. File is uploaded| P m9 t8|  |
+| 14 | Changed credentials |  1. Open edit view<br>2. Edit the file<br>3. In server, change the credentials<br>4. Tap on "Done"<br> | Credentials are required in uploads view| P m9 t8|  |
+| 15 | No permission |  1. Share a txt file without edit permissions (by link or internal)<br>2. With the sharee, edit the file<br>3. Tap on "Done" | Error in uploads view. File is not updated because a lack of permissions| P m9 t8|  |
 |**Special servers**||||||
 | 16 | Shibboleth |  1. Open edit view<br>2. Edit the content<br>3. Tap on "Done" | Content is uploaded (check in server) and file view is shown with new modification date |  |  |
 | 17 | Shibboleth expiration|  1. Open edit view<br>2. Edit the content<br>3. Tap on "Done" after the session expires | Error in uploads view. Credentials are requiered and after that, content is uploaded (check in server) and file view is shown with new modification date |  |  |
-| 18 | Redirect server |  1. Open edit view<br>2. Edit the content<br>3. Tap on "Done" | Content is uploaded (check in server) and file view is shown with new modification date |  |  |
+| 18 | Redirect server |  1. Open edit view<br>2. Edit the content<br>3. Tap on "Done" | Content is uploaded (check in server) and file view is shown with new modification date | P m9 t8 |  |
