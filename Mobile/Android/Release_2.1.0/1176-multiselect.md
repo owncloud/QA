@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1176 
 
-Devices: Nexus5 v5.0.1
+Devices: Nexus5 v5.0.1, Nexus7 v4.3
 
 Server: 9.1
 
@@ -13,22 +13,22 @@ Server: 9.1
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**List View**||||||
 |*One folder options*||||||
-| 1 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 |  |
-| 2 | Landscape |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 |  |
+| 1 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 t4 |  |
+| 2 | Landscape |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 t4|  |
 |*One file options*||||||
-| 3 | Portrait |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 | "Open with" incorrect |
-| 4 | Landscape |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 | "Open with" incorrect |
+| 3 | Portrait |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 t4| "Open with" incorrect |
+| 4 | Landscape |  Long press on a file  | On the top menu appears the options to share, download(open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 t4| "Open with" incorrect |
 |*Several selected options*||||||
-| 5 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete | F m5 | "Open with" incorrect |
-| 6 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete | F m5 | "Open with" incorrect |
-| 7 | Number | Long press to select more than one items. Check with a huge number | On the top left menu appears the number of selected items. | F m5 | "Open with" incorrect |
+| 5 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete | F m5 t4| "Open with" incorrect |
+| 6 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete | F m5 t4| "Open with" incorrect |
+| 7 | Number | Long press to select more than one items. Check with a huge number | On the top left menu appears the number of selected items. | F m5 t4| "Open with" incorrect |
 |**Grid View**||||||
 |*One folder options*||||||
-| 8 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 |  |
-| 9 | Landscape |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 |  |
+| 8 | Portrait |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 t4|  |
+| 9 | Landscape |  Long press on a folder | On the top menu appears the options to share, sync, rename, move, copy, delete | P m5 t4|  |
 |*One file options*||||||
-| 10 | Portrait |  Long press on a file  | On the top menu appears the options to share, download (open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 | "Open with" incorrect |
-| 11 | Landscape |  Long press on a file  | On the top menu appears the options to share, download (open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 | "Open with" incorrect |
+| 10 | Portrait |  Long press on a file  | On the top menu appears the options to share, download (open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 t4| "Open with" incorrect |
+| 11 | Landscape |  Long press on a file  | On the top menu appears the options to share, download (open with if it is downloaded), rename, move, copy, delete, send, av off, details | F m5 t4| "Open with" incorrect |
 |*Several selected options*||||||
 | 12 | Portrait |  Long press to select more than one items  | On the top menu appears the options to sync, move, copy, delete | F m5 | "Open with" incorrect |
 | 13 | Landscape | Long press to select more than one items | On the top menu appears the options to sync, move, copy, delete | F m5 | "Open with" incorrect |
