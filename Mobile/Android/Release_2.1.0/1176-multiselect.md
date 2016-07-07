@@ -61,7 +61,7 @@ Server: 9.1
 | 37 | Mixed Av off II|  Long press to select more than one files, some are av off and some other not. Choose "Unset as av off"| All selected files are not av. off. | P t6 m5 |  |
 |*Actions one folder selected*||||||
 | 38 | Share |  Long press to select a folder (only if branding option is enabled) | Folder is shared as usually | P m5 t6|  |
-| 39 | Move |  Long press to select a folder | Folder is moved as usually | F m5 t6| SOLVED: Incorrect icon |
+| 39 | Move |  Long press to select a folder | Folder is moved as usually | P m5 t6| SOLVED: Incorrect icon |
 | 40 | Copy |  Long press to select a folder  | Folder is copied as usually | P m5 t6|  |
 | 41 | Sync |  Long press to select a folder  | Folder is synced as usually | P m5 t6|  |
 | 42 | Rename |  Long press to select a folder  | Folder is renamed as usually | P m5 t6|  |
@@ -82,12 +82,12 @@ Server: 9.1
 | 54 | Delete locally|  Long press to select more than one items (files and folders)  | All selected items are deleted locally and remain on server| P m5 t6|  |
 | 55 | Delete from server|  Long press to select more than one items (files and folders)  | All selected items are deleted from server| P m5 t6|  |
 |**External actions**||||||
-| 56 | No internet connection  | 1. Switch the device connection off<br>2. Long press to select some items and try to move/copy/sync/delete  | Actions are not performed | P m5 |  |
-| 57 | No server connection  | 1. Switch the server off.<br>2. Long press to select some items and try to move/copy/sync/delete them | Actions are not performed | P m5 |  |
-| 58 | Copy + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Copy<br>4. Select a location target  | Selected files/folders are not copied | P m5 |  |
-| 59 | Move + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Move<br>4. Select a location target  | Selected files/folders are not moved | P m5 |  |
-| 60 | Delete + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Delete<br> | Selected files/folders are not deleted | P m5 |  |
-| 61 | Sync + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Sync | Selected files/folders are not synced | F m5 | Deleted items counted |
-| 62 | Copy + Deleted target |  1. Long press to select some items.<br>2. Select copy.<br>3. Select a location target.<br>4. In server, delete the location target  | Selected files/folders are not copied | P m5 |  |
-| 63 | Move + Deleted target |  1. Long press to select some items.<br>2. Select move.<br>3. Select a location target.<br>4. In server, delete the location target  | Selected files/folders are not moved | P m5 |  |
-| 64 | Credentials changed |  1. Long press to select some items.<br>2. In server, change credentials<br>3. Select any option move/copy/sync/delete.<br> | Credentials are required | P m5  |  |
+| 56 | No internet connection  | 1. Switch the device connection off<br>2. Long press to select some items and try to move/copy/sync/delete  | Actions are not performed | P m5 t6|  |
+| 57 | No server connection  | 1. Switch the server off.<br>2. Long press to select some items and try to move/copy/sync/delete them | Actions are not performed | P m5 t6|  |
+| 58 | Copy + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Copy<br>4. Select a location target  | Selected files/folders are not copied | P m5 t6|  |
+| 59 | Move + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Move<br>4. Select a location target  | Selected files/folders are not moved | P m5 t6 |  |
+| 60 | Delete + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Delete<br> | Selected files/folders are not deleted | P m5 t6|  |
+| 61 | Sync + Delete selected |  1. Long press to select some items.<br>2. In server, delete some on them.<br>3. Select Sync | Selected files/folders are not synced | P m5 t6 | SOLVED: Deleted items counted |
+| 62 | Copy + Deleted target |  1. Long press to select some items.<br>2. Select copy.<br>3. Select a location target.<br>4. In server, delete the location target  | Selected files/folders are not copied | P m5 t6|  |
+| 63 | Move + Deleted target |  1. Long press to select some items.<br>2. Select move.<br>3. Select a location target.<br>4. In server, delete the location target  | Selected files/folders are not moved | P m5 t6|  |
+| 64 | Credentials changed |  1. Long press to select some items.<br>2. In server, change credentials<br>3. Select any option move/copy/sync/delete.<br> | Credentials are required | P m5 t6 |  |
