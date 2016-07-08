@@ -1,6 +1,6 @@
 ###  Update downloaded files 
 
-#### Pr: https://github.com/owncloud/android/pull/XXX 
+#### Pr: https://github.com/owncloud/android/pull/1736
 
 
 ---
