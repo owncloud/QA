@@ -2,6 +2,11 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1736
 
+
+Devices: Nexus5 v5.0.1, Samsung Galaxy Tab 2 v4.3
+
+Server: v9.1 RC1
+
 ---
  
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
