@@ -2,6 +2,9 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/729 
 
+Device: 
+
+Server:
 
 ---
 
