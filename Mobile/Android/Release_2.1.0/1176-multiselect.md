@@ -55,8 +55,8 @@ Server: 9.1
 | 31 | Cancel Download |  Long press to select more than one files and the option "Download". When they are being downloaded, tap on cancel | File is not downloaded  | P m5 t6|  |
 | 32 | Delete locally |  Long press to select more than one files  | All selected files are deleted from the device, not from server| P m5 t6|  |
 | 33 | Delete from server |  Long press to select more than one files  | All selected files are deleted from device and server | P m5 t6|  |
-| 34 | Av off |  Long press to select more than one files  | All selected files are av. off. | F t6 m5| Icon not appropiate |
-| 35 | Unset Av off |  Long press to select more than one files that are av off| All selected files are not av. off. |  F t6 m5| Icon not appropiate |
+| 34 | Av off |  Long press to select more than one files  | All selected files are av. off. | P t4 m5| Just in case of t and several files and one of them already downloaded "Download" and Av Off will appear  |
+| 35 | Unset Av off |  Long press to select more than one files that are av off| All selected files are not av. off. |  P t4 m5| New icon Av off strikethrough |
 | 36 | Mixed Av off I|  Long press to select more than one files, some are av off and some other not. Choose "Set as av off"| All selected files are av. off. | P t6 m5 |  |
 | 37 | Mixed Av off II|  Long press to select more than one files, some are av off and some other not. Choose "Unset as av off"| All selected files are not av. off. | P t6 m5 |  |
 |*Actions one folder selected*||||||
