@@ -3,8 +3,7 @@
 #### Pr: https://github.com/owncloud/android/pull/1736
 
 
-Devices: Nexus5 v5.0.1, Samsung Galaxy Tab 2 v4.3
-
+Devices: Nexus5 v5.0.1, Samsung Galaxy Tab 2 v4.3, Nexus 10 V5.0.2
 Server: v9.1 RC1
 
 ---
@@ -19,5 +18,6 @@ Server: v9.1 RC1
 | 6 | Conflict local - Av. offline|  1. In app, download a file and set it as av. off.<br>2. Switch the device connection off<br>3. In app, update the file<br>4. In server, update the file<br>5. Restore the connection |  The conflict is detected (solve with local) |  P m5 t4 |  |
 | 7 | Conflict server - Av. offline|  1. In app, download a file and set it as av. off.<br>2. Switch the device connection off<br>3. In app, update the file<br>4. In server, update the file<br>5. Restore the connection |  The conflict is detected (solve with server) | P m5 t4 |  |
 | 8 | Conflict both - Av. offline|  1. In app, download a file and set it as av. off.<br>2. Switch the device connection off<br>3. In app, update the file<br>4. In server, update the file<br>5. Restore the connection |  The conflict is detected (solve with both) | P m5 t4 |  |
-| 9 | Update audio |  1. In app, download a audio<br>2. In server, update the audio by overwritting it with another audio using the same name<br>3. In app, pull down and tap on the audio|  The new version is downloaded and reproduced . The modification date is updated.    | F m5 t4 |  |
-| 10 | Update video |  1. In app, download a video<br>2. In server, update the video by overwritting it with another video using the same name<br>3. In app, pull down and tap on the video|  The new version is downloaded and reproduced . The modification date is updated.    | F m5 t4 |  |
+| 9 | Update audio |  1. In app, download a audio<br>2. In server, update the audio by overwritting it with another audio using the same name<br>3. In app, pull down and tap on the audio|  The new version is downloaded and reproduced . The modification date is updated.    | F m6 t5 |  |
+| 10 | Update video |  1. In app, download a video<br>2. In server, update the video by overwritting it with another video using the same name<br>3. In app, pull down and tap on the video|  The new version is downloaded and reproduced . The modification date is updated.    | P m6 t5 |  |
+| 11 | Update file without preview |  1. In app, download non previewable file <br>2. In server, update the file by overwritting it with another file using the same name<br>3. In app, pull down and choose open with option|  The new version is open in the selected program. The modification date is updated.    | P m6 t5  |  |
