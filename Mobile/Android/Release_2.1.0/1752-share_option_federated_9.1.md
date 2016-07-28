@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/1752 
 
-Devices:
+Devices: Nexus 5 v5.0.1
 
 Server: v9.1, v9.0, v8.2
 
@@ -13,10 +13,10 @@ Server: v9.1, v9.0, v8.2
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :------ |
 |**View**||||||
-| 1 | Switch button version 9.1 | 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server<br>3. Tap on (>) | A switch button "Can share" is displayed (check in both orientations) |  |  |
-| 2 | Switch button version < 9.1 | 1. Login in server 9.0 or 8.2<br>2. Share a file and a folder with a user in another server<br>3. Tap on (>) | A switch button "Can share" is not displayed (check in both orientations) |  |  |
+| 1 | Switch button version 9.1 | 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server<br>3. Tap on (>) | A switch button "Can share" is displayed (check in both orientations) | P m5 |  |
+| 2 | Switch button version < 9.1 | 1. Login in server 9.0 or 8.2<br>2. Share a file and a folder with a user in another server<br>3. Tap on (>) | A switch button "Can share" is not displayed (check in both orientations) | P m5 |  |
 |**Share with users from 9.1**||||||
-| 3 | 9.1 --> 9.1 with share permission| 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server 9.1<br>3. Tap on (>) and enable "Can share"<br>4. In server, accept the share<br>5. In app, re-share the content with a user in the same server<br>6. In app, re-share the content with a user in another server|4. The file/folder appear in file list<br>5. Content can be shared, the sharee see the file<br>6. Content can be shared, the sharee see the file after accepting it |  |  |
+| 3 | 9.1 --> 9.1 with share permission| 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server 9.1<br>3. Tap on (>) and enable "Can share"<br>4. In server, accept the share<br>5. In app, re-share the content with a user in the same server<br>6. In app, re-share the content with a user in another server|4. The file/folder appear in file list<br>5. Content can be shared, the sharee see the file<br>6. Content can be shared, the sharee see the file after accepting it |  | Can Share disable by default for folders ¿? |
 | 4 | 9.1 --> 9.1 without share permission| 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server 9.1<br>3. Tap on (>) and disable "Can share"<br>4. In server, accept the share<br>5. In app, re-share the content with a user in the same server<br>6. In app, re-share the content with a user in another server|4. The file/folder appear in file list<br>5. Content is not shared<br>6. Content is not shared after accepting it |  |  |
 | 5 | 9.1 --> v<9.1 with share permission| 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server 9.0 or 8.2<br>3. Tap on (>) and enable "Can share"<br>4. In server, accept the share<br>5. In app, re-share the content with a user in the same server<br>6. 5. In app, re-share the content with a user in another server|4. The file/folder appear in file list<br>5. Content can be shared, the sharee see the file<br>6. Content can be shared, the sharee see the file after accepting it |  |  |
 | 6 | 9.1 --> 9.0 without share permission| 1. Login in server 9.1<br>2. Share a file and a folder with a user in another server 9.0 or 8.2<br>3. Tap on (>) and disable "Can share"<br>4. In server, accept the share<br>5. In app, re-share the content with a user in the same server<br>6. 5. In app, re-share the content with a user in another server|4. The file/folder appear in file list<br>5. Content is not shared<br>6. Content is not shared after accepting it |  |  |
