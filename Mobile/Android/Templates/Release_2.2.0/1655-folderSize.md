@@ -1,6 +1,6 @@
 ### Folder Size - Sort by Size
 
-#### Pr: https://github.com/owncloud/ios/pull/1655 
+#### Pr: https://github.com/owncloud/android/pull/1655 
 
 
 ---
