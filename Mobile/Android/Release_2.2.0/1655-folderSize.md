@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1655 
 
-Devices: Nexus7 v4.3, Nexus9 v6
+Devices: Nexus7 v4.3, Nexus9 v6, HTC One v4.3
 
 Server: 9.1
 
@@ -23,18 +23,18 @@ Server: 9.1
 | 8 | Delete all | From a non-empty folder, delete all content | Size is 0B | P t4 |  |
 | 9 | Subfolders | 1. Create a deep stucture of folders, and upload files into all of them <br>2. Try to upload/delete some content| The folder size is correct in all the folders of the structure | P t4 |  |
 |**Sort by Size**||||||
-| 10 | View | Tap on (...) menu and select "Sort" | The option "Biggest - Smallest" is shown with the other two options (check in portrait and landscape) | F t6  | Option not displayed |
-| 11 | Sort in List view | 1. With list view, select to sort a folder by size | File list is correctly sorted |  |  |
-| 12 | Sort in Grid view | 1. With grid view, select to sort a folder by size | File list is correctly sorted |  |  |
-| 13 | Upload new file | 1. Sort by size<br>2. Upload a new file into the folder | File list is correctly sorted with the new file|  |  |
-| 14 | Upload several files | 1. Sort by size<br>2. Upload a new file into the folder | File list is correctly sorted with the new file|  |  |
-| 15 | Upgrade av. offline | 1. Sort by size<br>2. Upgrade an av. offline file into the folder | File list is correctly sorted |  |  |
-| 16 | Delete file | 1. Sort by size<br>2. Delete a file into the folder | File list is correctly sorted without the deleted file|  |  |
-| 17 | Delete several files | 1. Sort by size<br>2. Delete several files into the folder | File list is correctly sorted without the deleted files|  |  |
+| 10 | View | Tap on (...) menu and select "Sort" | The option "Biggest - Smallest" is shown with the other two options (check in portrait and landscape) | P m4 F t6  | Option not displayed |
+| 11 | Sort in List view | 1. With list view, select to sort a folder by size | File list is correctly sorted | P m4 |  |
+| 12 | Sort in Grid view | 1. With grid view, select to sort a folder by size | File list is correctly sorted | P m4 |  |
+| 13 | Upload new file | 1. Sort by size<br>2. Upload a new file into the folder | File list is correctly sorted with the new file| P m4 |  |
+| 14 | Upload several files | 1. Sort by size<br>2. Upload a new file into the folder | File list is correctly sorted with the new file| P m4 |  |
+| 15 | Upgrade av. offline | 1. Sort by size<br>2. Upgrade an av. offline file into the folder | File list is correctly sorted | P m4 |  |
+| 16 | Delete file | 1. Sort by size<br>2. Delete a file into the folder | File list is correctly sorted without the deleted file| P m4 |  |
+| 17 | Delete several files | 1. Sort by size<br>2. Delete several files into the folder | File list is correctly sorted without the deleted files| P m4 |  |
 |**External Actions**||||||
-| 18 | Upload | 1. In server side, upload some content into a folder sorted by size<br>2. In app, pull down to refresh | Size is updated and folder is re-sorted correctly |  |  |
-| 19 | Delete | 1. In server side, delete some content from a folder sorted by size<br>2. In app, pull down to refresh | Size is updated and folder is re-sorted correctly|  |  |
-| 20 | Upgrade | 1. In server side, upgrade some content into a folder sorted by size<br>2. In app, pull down to refresh | Size is updated and folder is re-sorted correctly|  |  |
-| 21 | Upgrade av. offline | 1. In server side, upgrade some av. offline file into a folder sorted by size | Size is updated and folder is re-sorted correctly|  |  |
+| 18 | Upload | 1. In server side, upload some content into a folder sorted by size<br>2. In app, pull down to refresh | Size is updated and folder is re-sorted correctly | P m4 |  |
+| 19 | Delete | 1. In server side, delete some content from a folder sorted by size<br>2. In app, pull down to refresh | Size is updated and folder is re-sorted correctly| P m4 |  |
+| 20 | Upgrade | 1. In server side, upgrade some content into a folder sorted by size<br>2. In app, pull down to refresh | Size is updated and folder is re-sorted correctly| P m4 |  |
+| 21 | Upgrade av. offline | 1. In server side, upgrade some av. offline file into a folder sorted by size | Size is updated and folder is re-sorted correctly| P m4 |  |
 |**Document Provider**||||||
-| 22 | File list | 1. Set sort by size<br>2. Share a file with ownCloud using the document provider | File list shows the size of the folders sorted by size| F t6 |  Size not shown when sharing from a external |
+| 22 | File list | 1. Set sort by size<br>2. Share a file with ownCloud using the document provider | File list shows the size of the folders sorted by size| F t6 m4|  Size not shown when sharing from a external |
