@@ -31,3 +31,5 @@
 | 17 | View |  In Settings view, check the new option "Source Folder" is correctly displayed| The option is correctly displayed in portrait and landscape |  |  |
 | 18 | Set folder | 1. Set a folder to be observed<br>2. Take photos and videos<br>3. Change to another folder<br>4. Take photos and videos| 2. Photos and videos are uploaded<br>3. Folder is correctly updated<br>4. Photos and videos are not uploaded |  |  |
 | 19 | New camera app | 1. Install a new camera app that stores photos in a different folder into the device (for example, Camera MX)<br>2. Select that folder as source folder<br>3. Take some photos or videos with this new camera app<br>4. Take some photos and videos with the default camera app| 2. Source folder is correctly updated<br>3. Content is uploaded<br>4. Content is not uploaded|  |  |
+|**Upgrade**|||||||
+| 20 | Upgrade from previous version | 1. Install previous version<br>2. Enable instant uploads with several options<br>3. Upgrade the app| The set-up remains after upgrading the app |  |  |
