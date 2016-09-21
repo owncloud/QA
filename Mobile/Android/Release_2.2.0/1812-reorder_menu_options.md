@@ -12,7 +12,7 @@ Server: 9.1.1
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**One File options**||||||
-| 1 | New order portrait|  Long press on a file | New order: Share, Download/Update, Av. offline, Open with, Send, Move, Copy, Rename, Details, Remove. Icons are also in tool bar, if room | P m6 t4  t5 m7| Send/Details options while sync... in text |
+| 1 | New order portrait|  Long press on a file | New order: Share, Download/Update, Av. offline, Open with, Send, Move, Copy, Rename, Details, Remove. Icons are also in tool bar, if room | P m6 t4  t5 m7| SOLVED: Send/Details options while sync... in text |
 | 2 | New order landscape|  Long press on a file | New order: Share, Download/Update, Av. offline, Open with, Send, Move, Copy, Rename, Details, Remove. Icons are also in tool bar, if room | P m6 t4 t5 m7|  |
 |**One Folder options**||||||
 | 3 | New order portrait|  Long press on a folder | New order: Share, Download/Update, Move, Copy, Rename, Remove. Icons are also in tool bar, if room | P m6 t4 t5 m7|  |
