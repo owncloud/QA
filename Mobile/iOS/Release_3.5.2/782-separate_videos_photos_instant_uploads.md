@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/782 
 
-Device: iPhone 9.3.2, iPad Air 
+Device: iPhone 9.3.2, iPad Air v10
 
 Server: 9.1.1 
 
@@ -17,10 +17,10 @@ Server: 9.1.1
 | 2 | Instant Upload Videos | Check the option in settings view| The option is correctly displayed in both orientations  | P m9 t10|  |
 | 3 | Background mode | 1. Enable one of the instant uploads (photos or video)<br>2. Enable both options<br>3. Disable both options| 1. Background mode options is visible<br>2. Background mode options is visible<br>3. Background mode options is not visible  | P m9 t10 |  |
 |**Actions**||||||
-| 4 | Photos enabled | 1. Enable the instant uploads only for photos<br>2. Take some photos<br>3. Take some videos| 2. Photos are uploaded<br>3. Videos are not uploaded  | F m9 t10 | Files before enabling are uploaded or after reopen  |
-| 5 | Videos enabled | 1. Enable the instant uploads only for videos<br>2. Take some videos<br>3. Take some photos| 2. Videos are uploaded<br>3. Photos are not uploaded  | F m9 t10 | Files before enabling are uploaded or after reopen|
+| 4 | Photos enabled | 1. Enable the instant uploads only for photos<br>2. Take some photos<br>3. Take some videos| 2. Photos are uploaded<br>3. Videos are not uploaded  | P m9 t10 | SOLVED: Files before enabling are uploaded or after reopen  |
+| 5 | Videos enabled | 1. Enable the instant uploads only for videos<br>2. Take some videos<br>3. Take some photos| 2. Videos are uploaded<br>3. Photos are not uploaded  | P m9 t10 | SOLVED: Files before enabling are uploaded or after reopen|
 | 6 | Both enabled | 1. Enable the instant uploads for both videos and photos<br>2. Take some videos<br>3. Take some photos| 2. Videos are uploaded<br>3. Photos are uploaded  | P m9 t10 |  |
-| 7 | Both disabled | 1. Disable the instant uploads for both videos and photos<br>2. Take some videos<br>3. Take some photos| 2. Videos are not uploaded<br>3. Photos are not uploaded  | F m9 t10 | Files before enabling are uploaded or after reopen|
+| 7 | Both disabled | 1. Disable the instant uploads for both videos and photos<br>2. Take some videos<br>3. Take some photos| 2. Videos are not uploaded<br>3. Photos are not uploaded  | P m9 t10 | SOLVED: Files before enabling are uploaded or after reopen|
 |**Multiaccount**||||||
 | 8 | Options persistance | 1. Login to several accounts<br>2. Enable instant uploads with Background mode<br>3. Switch to other account| The instant uploads settings do not change | P m9 t10 | SOLVED: Disbled option is enabled switching the account |
 |**Settings options**||||||
