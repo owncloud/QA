@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/1556
 
-Devices: Galaxy Note 4 v6, Huawei 6P v7, Nexus10 v5
+Devices: Galaxy Note 4 v6, Huawei 6P v7, Nexus10 v5, Nevus9 v6
 
 Server: 9.1.1
 
@@ -28,11 +28,11 @@ Server: 9.1.1
 | 11 | Delete  account | 1. Open "Manage Accounts" section<br>2. Delete one  | Account is deleted from accounts and drawer | P m7 t5|  | 
 | 12 | Delete all accounts | 1. Open "Manage Accounts" section<br>2. Delete all accounts  | Add Account is shown and redirects to login view| P m7 t5| SOLVED: Empty account list makes crash |
 |**Avatar**||||||
-| 13 | Add avatar | 1. Login an account<br>2. In server, add a new avatar | avatar is shown in app (drawer and accounts manager) | F m7 | Avatars are inherited |
-| 14 | Change avatar | 1. Perform previous test case<br>2. In server, change the avatar | new avatar is shown in app (drawer and accounts manager) | F m7 | Avatar is not updated |
-| 15 | Remove avatar | 1. Perform previous test case<br>2. In server, delete the avatar | default avatar is shown | F m7 | Avatar is not removed |
-| 16 | Upper avatars (two accounts)  | 1. Add two accounts<br>2. Tap on avatar<br>3. Delete first account | 1. Avatar of not current is shown in the upper side of the drawer<br>2. Account is switched<br>3. No avatars are shown upper in the drawer | P m7 |  |
-| 17 | Upper avatars (more than two accounts)  | 1. From previous test case, add more accounts<br>2. Delete first account | 1. The first two accounts show the avatar<br>2. The avatars of the first two accounts (but the current one) are now shown | P m7 |  |
+| 13 | Add avatar | 1. Login an account<br>2. In server, add a new avatar | avatar is shown in app (drawer and accounts manager) | P m7 t6 | Avatars are inherited |
+| 14 | Change avatar | 1. Perform previous test case<br>2. In server, change the avatar | new avatar is shown in app (drawer and accounts manager) | P m7 t6 | Avatar is not updated |
+| 15 | Remove avatar | 1. Perform previous test case<br>2. In server, delete the avatar | default avatar is shown | P m7 t6 | Avatar is not removed |
+| 16 | Upper avatars (two accounts)  | 1. Add two accounts<br>2. Tap on avatar<br>3. Delete first account | 1. Avatar of not current is shown in the upper side of the drawer<br>2. Account is switched<br>3. No avatars are shown upper in the drawer | P m7 t6|  |
+| 17 | Upper avatars (more than two accounts)  | 1. From previous test case, add more accounts<br>2. Delete first account | 1. The first two accounts show the avatar<br>2. The avatars of the first two accounts (but the current one) are now shown | P m7 t6|  |
 |**External actions**||||||
 | 18 | Remove account | 1. Remove account in server side<br>2. Try to perform any action | Login view | P m7 t5| BACKLOG: Account removed -> blocking in login view |
 | 19 | Change display name | Change displayname in server side | In drawer and account manager is shown the display name | P m7 t5 |  |
