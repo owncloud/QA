@@ -50,18 +50,21 @@
 | 36 | Move content to av. offline | 1. Set a folder as av. offline<br>2. In server, move some content into the av. off. folder from another location | Check in app that the moved content becomes av. offline |  |  |
 | 37 | Move content from av. offline | 1. Set a folder as av. offline<br>2. In server, move some content from the folder to another location | Check in app that the content is not av. off. |  |  |
 | 38 | Modify files | 1. Set a folder as av. offline<br>2. In server, modify some files into the av. off. folder in different deep levels | Check in app that the files have changed |  |  |
-| 39 | Delete | 1. Set a folder as av. off.<br>2. Delete from server or another client | The folder is deleted |  |  |
-| 40 | Delete subfolder | 1. Set a folder as av. off.<br>2. Delete from server or another client a subfolder  | The subfolder is deleted |  |  |
-| 41 | Multiaccount | 1. In two different account, set some folder as av. off.<br>2. In app, set one of the as active.<br>3. In server side, upload some content into an av. off. folder<br>4. In app, change the account | The av. off. folder is upgraded with the uploaded content |  |  |
-| 42 | Delete account server| 1. Set a folder as av. off.<br>2. While it is downloading, in server delete the account| Downloads cancelled |  |  |
+| 39 | Conflict - local version | 1. Set a folder as av. offline<br>2. Switch wifi off<br>3. In server and app, modify a txt file<br>4. Solve the conflict with local version | 4. Conflict appears<br>5. Check in app and server the correct version |  |  |
+| 40 | Conflict - server version | 1. Set a folder as av. offline<br>2. Switch wifi off<br>3. In server and app, modify a txt file<br>4. Solve the conflict with server version | 4. Conflict appears<br>5. Check in app and server the correct version |  |  |
+| 41 | Conflict - both versions | 1. Set a folder as av. offline<br>2. Switch wifi off<br>3. In server and app, modify a txt file<br>4. Solve the conflict with both versions | 4. Conflict appears<br>5. Both versions are stored |  |  |
+| 42 | Delete | 1. Set a folder as av. off.<br>2. Delete from server or another client | The folder is deleted |  |  |
+| 43 | Delete subfolder | 1. Set a folder as av. off.<br>2. Delete from server or another client a subfolder  | The subfolder is deleted |  |  |
+| 44 | Multiaccount | 1. In two different account, set some folder as av. off.<br>2. In app, set one of the as active.<br>3. In server side, upload some content into an av. off. folder<br>4. In app, change the account | The av. off. folder is upgraded with the uploaded content |  |  |
+| 45 | Delete account server| 1. Set a folder as av. off.<br>2. While it is downloading, in server delete the account| Downloads cancelled |  |  |
 |**Errors**||||||
-| 43 | No internet connection | 1. Switch the device connection off<br>2. Set a folder as av. off<br>3. Switch the device connection on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline |  |  |
-| 44 | No server connection | 1. Switch the server off<br>2. Set a folder as av. off<br>3. Switch the server on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline |  |  |
-| 45 | Lost connection | 1. Set a folder as av. off.<br>2. Switch the connection off<br>3. Switch the connection on | The download of the content resumes |  |  |
-| 46 | Changed credentials | 1. Set a folder as av. off.<br>2. While it is downloading, in server change the credentials| The new credentials are input and the download keeps on |  |  |
-| 47 | Permissions | 1. User1 shares a folder with User2 that includes a file.txt file  without permission<br>2. User2 sets the folder as av. off.<br>3. Edit txt and modify them, using the Document Provider<br>4. Open the app<br>5. Refresh the folder where the txt is stored | A permission error is raised |  |  |
+| 46 | No internet connection | 1. Switch the device connection off<br>2. Set a folder as av. off<br>3. Switch the device connection on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline |  |  |
+| 47 | No server connection | 1. Switch the server off<br>2. Set a folder as av. off<br>3. Switch the server on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline |  |  |
+| 48 | Lost connection | 1. Set a folder as av. off.<br>2. Switch the connection off<br>3. Switch the connection on | The download of the content resumes |  |  |
+| 49 | Changed credentials | 1. Set a folder as av. off.<br>2. While it is downloading, in server change the credentials| The new credentials are input and the download keeps on |  |  |
+| 50 | Permissions | 1. User1 shares a folder with User2 that includes a file.txt file  without permission<br>2. User2 sets the folder as av. off.<br>3. Edit txt and modify them, using the Document Provider<br>4. Open the app<br>5. Refresh the folder where the txt is stored | A permission error is raised |  |  |
 |**Special Servers**||||||
-| 48 | Redirect | Login in a redirected server and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. |  |  |
-| 49 | Shibboleth autoprov. | Login in a shibboleth server with autoprov. and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. |  |  |
-| 50 | Shibboleth SSO | Login in a shibboleth server with SSO and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. |  |  |
-| 51 | Shibboleth expiration | 1. Login in a shibboleth server.<br>2. Set a folder as av. off.<br>3. Session expires<br>4. Enter credentials | Downloads keep on |  |  |
+| 51 | Redirect | Login in a redirected server and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. |  |  |
+| 52 | Shibboleth autoprov. | Login in a shibboleth server with autoprov. and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. |  |  |
+| 53 | Shibboleth SSO | Login in a shibboleth server with SSO and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. |  |  |
+| 54 | Shibboleth expiration | 1. Login in a shibboleth server.<br>2. Set a folder as av. off.<br>3. Session expires<br>4. Enter credentials | Downloads keep on |  |  |
