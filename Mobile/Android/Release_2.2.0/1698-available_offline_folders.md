@@ -65,7 +65,7 @@ Server: v9.1.2
 | 47 | No server connection | 1. Switch the server off<br>2. Set a folder as av. off<br>3. Switch the server on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline | P m6 m7|  |
 | 48 | Lost connection | 1. Set a folder as av. off.<br>2. Switch the connection off<br>3. Switch the connection on | The download of the content resumes | P m6 m7|  |
 | 49 | Changed credentials | 1. Set a folder as av. off.<br>2. While it is downloading, in server change the credentials| The new credentials are input and the download keeps on | P m6 m7|  |
-| 50 | Permissions | 1. User1 shares a folder with User2 that includes a file.txt file  without permission<br>2. User2 sets the folder as av. off.<br>3. Edit txt and modify them, using the Document Provider<br>4. Open the app<br>5. Refresh the folder where the txt is stored | A permission error is raised | F m6 | Each refresh adds a failed update in uploads view |
+| 50 | Permissions | 1. User1 shares a folder with User2 that includes a file.txt file  without permission<br>2. User2 sets the folder as av. off.<br>3. Edit txt and modify them, using the Document Provider<br>4. Open the app<br>5. Refresh the folder where the txt is stored | A permission error is raised | P m6 t5 | SOLVED: Each refresh adds a failed update in uploads view |
 |**Special Servers**||||||
 | 51 | Redirect | Login in a redirected server and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. | P m6 m7| SOLVED: Error message is shown |
 | 52 | Shibboleth autoprov. | Login in a shibboleth server with autoprov. and set a folder with several subfolders as av. offline| Folder and all content becomes av. off. | P m6 m7|  |
