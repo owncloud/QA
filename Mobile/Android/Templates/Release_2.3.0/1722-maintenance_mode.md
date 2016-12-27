@@ -14,7 +14,7 @@
 | 3 | Synchronize folder| With maintenance mode enabled, download a folder | Not possible. Message is shown |  |  |
 | 4 | Upload file| With maintenance mode enabled, upload a file | Not possible. Message is shown. File is not queued | |  |
 | 5 | Instant Upload | 1. With maintenance mode enabled, take a photo with instant uploads enabled<br> 2. Disable maintenance mode| 1. Photo is queued, but not uploaded.<br>2. Photo is uploaded | |  |
-| 6 | Open with external app | With maintenance mode enabled, open a file with an external app  | 1. Photo is queued, but not uploaded.<br>2. Photo is uploaded |  |  |
+| 6 | Open with external app | With maintenance mode enabled, open a file with an external app  | File is opened. Maintenance mode does not affect 
 | 7 | Open from external app | With maintenance mode enabled, open a file of a external app  | 1. Photo is queued, but not uploaded.<br>2. Photo is uploaded |  |  |
 | 8 | New folder | With maintenance mode enabled, create a new folders | Not possible. Message is shown | |  |
 | 9 | Rename | With maintenance mode enabled, rename a file | Not possible. Message is shown | |  |
