@@ -27,10 +27,11 @@ Server: 9.1.3
 | 13 | Refresh account | With maintenance mode enabled, refresh account | Not possible. Message is shown | - | Nothing in any case. |
 | 14 | Share with users/groups | With maintenance mode enabled, share with a user/group | Not possible. Message is shown | P m7 t6| SOLVED: Message is not shown |
 | 15 | Share by link | With maintenance mode enabled, share by link | Not possible. Message is shown | P m7 t6|  |
-| 16 | Av offline | With maintenance mode enabled, set a file as av. offline | File is set but content is not downloaded. Message is shown | P m7 t6|  |
+| 16 | Unshare | With maintenance mode enabled, unshare by link / with users | Not possible. Message is shown | F m7 t6| File is removed from file list |
+| 17 | Av offline | With maintenance mode enabled, set a file as av. offline | File is set but content is not downloaded. Message is shown | P m7 t6|  |
 |**Multiaccount**|||||||
-| 17 | Both in maintenance | Set several accounts, all of them in maintenance mode. Try several options | Message is always shown | P m7 t6|  |
-| 18 | Some in maintenance | Set several accounts, some of them in maintenance mode. Try several options in all account | Message is shown if it is in maintenance, not shown if not in maintenance | P m7 t6|  |
+| 18 | Both in maintenance | Set several accounts, all of them in maintenance mode. Try several options | Message is always shown | P m7 t6|  |
+| 19 | Some in maintenance | Set several accounts, some of them in maintenance mode. Try several options in all account | Message is shown if it is in maintenance, not shown if not in maintenance | P m7 t6|  |
 |**Special servers**|||||||
-| 19 | Redirected server | Set a redirected server in maintenance mode. Try several options | Message is always shown | P m7 t6|  |
-| 20 | Shibboleth server | Set a shibboleth server in maintenance mode. Try several options | Message is always shown | F m7 t6| Not recognized |
+| 20 | Redirected server | Set a redirected server in maintenance mode. Try several options | Message is always shown | P m7 t6|  |
+| 21 | Shibboleth server | Set a shibboleth server in maintenance mode. Try several options | Message is always shown | P m7 t6| SOLVED: Not recognized |
