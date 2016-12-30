@@ -1,6 +1,6 @@
 ###  Maintenance mode 
 
-#### Pr: https://github.com/owncloud/android/pull/1722 
+#### Pr: https://github.com/owncloud/android/pull/1864
 
 Devices: Huawei 6P v7.0, Nexus9 v6.0
 
