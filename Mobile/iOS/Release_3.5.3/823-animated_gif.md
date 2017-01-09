@@ -1,6 +1,6 @@
 ###  Animated GIF 
 
-#### Pr: https://github.com/owncloud/ios/pull/822
+#### Pr: https://github.com/owncloud/ios/pull/823
 
 Devices: iPhone 6Plus v10.1.1, iPadAir v9
 
