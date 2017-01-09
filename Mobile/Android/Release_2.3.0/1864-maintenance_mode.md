@@ -33,7 +33,7 @@ Server: 9.1.3, 9.1.2
 | 18 | Both in maintenance | Set several accounts, all of them in maintenance mode. Try several options | Message is always shown | P m7 t6|P t6|  |
 | 19 | Some in maintenance | Set several accounts, some of them in maintenance mode. Try several options in all account | Message is shown if it is in maintenance, not shown if not in maintenance | P m7 t6|P t6|  |
 |**Special servers**|||||||
-| 20 | Redirected server | Set a redirected server in maintenance mode. Try several options | Message is always shown | P m7 t6|  |
-| 21 | Shibboleth server | Set a shibboleth server in maintenance mode. Try several options | Message is always shown | P m7 t6| SOLVED: Not recognized |
-| 20 | Redirected server | Set a redirected server in maintenance mode. Try several options | Message is always shown | P m7 t6||  |
-| 21 | Shibboleth server | Set a shibboleth server in maintenance mode. Try several options | Message is always shown | P m7 t6|| SOLVED: Not recognized |
+| 20 | Redirected server | Set a redirected server in maintenance mode. Try several options | Message is always shown | P m7 t6| P m5 |
+| 21 | Shibboleth server | Set a shibboleth server in maintenance mode. Try several options | Message is always shown | P m7 t6| P m5 | SOLVED: Not recognized |
+| 20 | Redirected server | Set a redirected server in maintenance mode. Try several options | Message is always shown | P m7 t6| P m5 |  |
+| 21 | Shibboleth server | Set a shibboleth server in maintenance mode. Try several options | Message is always shown | P m7 t6| P m5 | SOLVED: Not recognized |
