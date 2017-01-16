@@ -1,5 +1,7 @@
 ###  URL server changes in clients 
 
+#### Pr: https://github.com/owncloud/ios/pull/826
+
 Devices: iPhone 6S v9.3
 
 Server: 8.1, 9.1
