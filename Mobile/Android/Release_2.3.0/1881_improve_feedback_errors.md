@@ -13,8 +13,8 @@ Server: 9.1
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :------ |
 |**Certificate error**|||||||
-| 1 | Change certificate | 1. In server, change the certificate<br>2. In device, upload some content | Specific error is shown in uploads view | P m6 t5| Error message improved |
-| 2 | Certificate expires | Upload some content in a server which certificate is expired| Specific error is shown in uploads view | P m6 t5| Error message improved |
+| 1 | Change certificate | 1. In server, change the certificate<br>2. In device, upload some content | Specific error is shown in uploads view | P m6 t5| SOLVED: Error message improved |
+| 2 | Certificate expires | Upload some content in a server which certificate is expired| Specific error is shown in uploads view | P m6 t5| SOLVED: Error message improved |
 |**Toast to Snackbar**|||||||
 | 3 | Share yourself| Try to share some content with yourself | A snackbar is shown instead a toast (check both orientations) | P m6 t5|  |
 | 4 | No connectivity |  Switch the device connection off and try some actions | A snackbar is shown instead a toast (check both orientations) | P m6 t5|  |
