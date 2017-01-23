@@ -11,13 +11,13 @@
 |**Install & Upgrade**||||||
 | 1 | Install from scratch | With the passcode enforced, install the app from scratch | Passcode is required, before the login view. Check the view in both orientations |  |
 | 2 | Upgrade without passcode | 1. Install a older version<br>2. Passcode disabled<br>3. Upgrade the app enforcing the passcode| Passcode is required |  |
-| 3 | Upgrade with passcode | 1. Install a older version<br>2. Passcode enabled<br>3. Upgrade the app enforcing the passcode| Passcode is required |  |
+| 3 | Upgrade with passcode | 1. Install a older version<br>2. Passcode enabled<br>3. Upgrade the app enforcing the passcode| Passcode is not required |  |
 | 4 | Upgrade without passcode | 1. Install enforcing the passcode<br>2. Upgrade the app without enforcing the passcode| 1. Passcode is required and set<br>2. Passcode can be disabled in settings view |  |
 | 5 | Reopen | 1. Open the app for first time after enforcing the passcode<br>2. Close the app or switch to another app<br>3. Open again the app | Passcode is required |  |
 |**View**||||||
-| 6 | Settings | Open Settings view | The passcode option is not visible or freezed |  |
+| 6 | Settings | Open Settings view | The passcode option is not visible or freezed. Can not be disabled |  |
 | 7 | Touch ID | Open Settings view | The touch id option is visible if device has it |  |
-|**Passcode**||||||
+|**Passcode enabled**||||||
 | 8 | Login view | 1. Open Login view<br>2. Minimize the app<br>3. Open the app  | Passcode is required |  |
 | 9 | Settings view | 1. Open Settings view<br>2. Minimize the app<br>3. Open the app  | Passcode is required |  |
 | 10 | Uploads view | 1. Open Uploads view<br>2. Minimize the app<br>3. Open the app  | Passcode is required |  |
