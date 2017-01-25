@@ -27,7 +27,6 @@
 | 14 | Txt file view | 1. Open Txt file view<br>2. Minimize the app<br>3. Open the app  | Passcode is required |  |
 | 15 | File preview view | 1. Open file preview view<br>2. Minimize the app<br>3. Open the app  | Passcode is required |  |
 | 16 | Share with oC view | 1. Open an external app and share a file woth oC<br>2. Minimize the app<br>3. Open the app  | Passcode is required |  |
-
-
-
+|**Multiaccount**||||||
+| 17 | Multiaccount | 1. Login in several accounts with passcode enforced<br>2. Perform steps from 6. to 16. in different accounts<br>3. Go to Settings view  | 2. Passcode is always asked.<br>3. Passcode can not be disabled. |  |  |
 
