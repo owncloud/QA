@@ -1,6 +1,6 @@
 ###  Enforce passcode 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/831 
 
 
 ---
