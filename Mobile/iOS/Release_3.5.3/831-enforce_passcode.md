@@ -14,8 +14,8 @@ Server: 10.0, 9.1.3
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Install & Upgrade**||||||
 | 1a | Install from scratch | With the passcode enforced, install the app from scratch | Passcode is required, before the login view. Can not be cancelled. Check the view in both orientations | P m10 t9 | Message notifying the  passcode enforcement |
-| 1b | Install from scratch withot wizard| With the passcode enforced, install the app from scratch without wizard | Passcode is required, before the login view. Can not be cancelled. Check the view in both orientations | P m10 |  |
-| 2 | Upgrade without previous passcode | 1. Install a older version<br>2. Passcode disabled<br>3. Upgrade the app enforcing the passcode| Passcode is required and can not be cancelled | F m10 t9 | Screen turns black |
+| 1b | Install from scratch without wizard| With the passcode enforced, install the app from scratch without wizard | Passcode is required, before the login view. Can not be cancelled. Check the view in both orientations | P m10 |  |
+| 2 | Upgrade without previous passcode | 1. Install a older version<br>2. Passcode disabled<br>3. Upgrade the app enforcing the passcode| Passcode is required and can not be cancelled | F m10 t9 | SOLVED: Screen turns black. Passcode asked once. |
 | 3 | Upgrade with previous passcode | 1. Install a older version<br>2. Passcode enabled<br>3. Upgrade the app enforcing the passcode| New passcode is not required, only typing the existing one | P m10 |
 | 4 | Upgrade without passcode | 1. Install enforcing the passcode<br>2. Upgrade the app without enforcing the passcode| 1. Passcode is required and set<br>2. Passcode can be disabled in settings view and appears as "Passcode Lock"| P m10 |
 | 5 | Reopen | 1. Open the app for first time after enforcing the passcode<br>2. Close the app or switch to another app<br>3. Open again the app | Passcode is required | P m10 |  |

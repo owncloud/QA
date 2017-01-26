@@ -10,7 +10,7 @@
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Install & Upgrade**||||||
 | 1a | Install from scratch | With the passcode enforced, install the app from scratch | Passcode is required, before the login view. Can not be cancelled. Check the view in both orientations |  |
-| 1b | Install from scratch withot wizard| With the passcode enforced, install the app from scratch without wizard | Passcode is required, before the login view. Can not be cancelled. Check the view in both orientations |  |
+| 1b | Install from scratch without wizard| With the passcode enforced, install the app from scratch without wizard | Passcode is required, before the login view. Can not be cancelled. Check the view in both orientations |  |
 | 2 | Upgrade without previous passcode | 1. Install a older version<br>2. Passcode disabled<br>3. Upgrade the app enforcing the passcode| Passcode is required and can not be cancelled |  |
 | 3 | Upgrade with previous passcode | 1. Install a older version<br>2. Passcode enabled<br>3. Upgrade the app enforcing the passcode| New passcode is not required, only typing the existing one |  |
 | 4 | Upgrade without passcode | 1. Install enforcing the passcode<br>2. Upgrade the app without enforcing the passcode| 1. Passcode is required and set<br>2. Passcode can be disabled in settings view and appears as "Passcode Lock"|  |
@@ -39,3 +39,5 @@
 | 24 | No wifi | Reopen the app without wifi connection | Passcode is required |  |
 |**Multiaccount**||||||
 | 25 | Multiaccount | 1. Login in several accounts with passcode enforced<br>2. Perform steps from 14. to 24. in different accounts<br>3. Go to Settings view  | 2. Passcode is always asked.<br>3. Passcode can not be disabled. |  |  |
+|**Shibboleth**||||||
+| 26 | Shibboleth | 1. Login in shibboleth accounts with passcode enforced<br>2. Perform some actions<br>3. When session expires, in login view minimize the app and open it again  | Passcode is asked |  |  |
