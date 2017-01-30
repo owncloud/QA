@@ -23,25 +23,25 @@ Server: 10.0, 9.1.3
 | 6 | Settings | Open Settings view | "Change Passcode Lock" button appears. Check in both orientations  | P m10 t9 m9| |
 | 7 | Touch ID | Open Settings view | The touch id option is visible if device has it. Check in both orientations | P m10 t9| SOLVED: Touch id does not work |
 |**Change passcode**||||||
-| 8 | Correct old passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type the correct old passcode<br>4. Type new passcode correctly both times it is asked<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. New passcode is set<br>5. Passcode works properly | P m10 m9|
-| 9 | Incorrect old passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type an incorrect old passcode| 1. Passcode is set<br>3. App shows a correct error message and passcode is not allowed to be changed| P m10 m9 |
-| 10 | Cancel old passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Cancel the input of the old passcode<br>4. Minimize the app and open it again| 1. Passcode is set<br>3. Go to settings<br>4. Old passcode gives access | P m10 m9|  |
-| 11 | Cancel new passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type a correct old passcode<br>4. Cancel the process<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. Return to settings view<br>5. The app is opened with the old passcode | P m10 m9|  |
-| 12 | Incorrect second passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type the correct old passcode<br>4. Type new passcode, but second time a different<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. Error displayed<br>5. Old passcode gives access | P m10 m9|
-| 13 | Cancel second passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type a correct old passcode<br>4. Cancel the process in the second input<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. Return to settings view<br>5. The app is opened with the old passcode | P m10 m9 |  |
+| 8 | Correct old passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type the correct old passcode<br>4. Type new passcode correctly both times it is asked<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. New passcode is set<br>5. Passcode works properly | P m10 m9 t10|
+| 9 | Incorrect old passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type an incorrect old passcode| 1. Passcode is set<br>3. App shows a correct error message and passcode is not allowed to be changed| P m10 m9 t10|
+| 10 | Cancel old passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Cancel the input of the old passcode<br>4. Minimize the app and open it again| 1. Passcode is set<br>3. Go to settings<br>4. Old passcode gives access | P m10 m9 t10|  |
+| 11 | Cancel new passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type a correct old passcode<br>4. Cancel the process<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. Return to settings view<br>5. The app is opened with the old passcode | P m10 m9 t10|  |
+| 12 | Incorrect second passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type the correct old passcode<br>4. Type new passcode, but second time a different<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. Error displayed<br>5. Old passcode gives access | P m10 m9 t10|
+| 13 | Cancel second passcode | 1. Install or upgrade the app with passcode enforced<br>2. In Settings, change the passcode<br>3. Type a correct old passcode<br>4. Cancel the process in the second input<br>5. Minimize the app and open it again| 1. Passcode is set<br>3. New passcode is required<br>4. Return to settings view<br>5. The app is opened with the old passcode | P m10 m9  t10|  |
 |**Passcode enabled**||||||
-| 14 | Login view | 1. Open Login view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 | 
-| 15 | Settings view | 1. Open Settings view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9|
-| 16 | Uploads view | 1. Open Uploads view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9|
-| 17 | Shared links view | 1. Open Shared links view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9|
-| 18 | Files view | 1. Open Files view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9|
-| 19 | Share view | 1. Open Share view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P t9 |
-| 20 | Txt file view | 1. Open Txt file view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P t9 |
-| 21 | File preview view | 1. Open file preview view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9 |
-| 22 | Share with oC view | Open an external app and share a file with oC| Passcode is required | P m10 |
-| 23 | Document provider | Open an external app and open a oC file| Passcode is required | P m10 |
-| 24 | No wifi | Reopen the app without wifi connection | Passcode is required | P m10 t9 |
+| 14 | Login view | 1. Open Login view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t10 t9| 
+| 15 | Settings view | 1. Open Settings view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9 t10|
+| 16 | Uploads view | 1. Open Uploads view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9 t10|
+| 17 | Shared links view | 1. Open Shared links view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9 t10 |
+| 18 | Files view | 1. Open Files view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9 t10|
+| 19 | Share view | 1. Open Share view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P t9 t10|
+| 20 | Txt file view | 1. Open Txt file view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P t9 t10|
+| 21 | File preview view | 1. Open file preview view<br>2. Minimize the app<br>3. Open the app  | Passcode is required | P m10 t9 t10|
+| 22 | Share with oC view | Open an external app and share a file with oC| Passcode is required | P m10 t10 t9|
+| 23 | Document provider | Open an external app and open a oC file| Passcode is required | P m10 t10 t9|
+| 24 | No wifi | Reopen the app without wifi connection | Passcode is required | P m10 t9 t10|
 |**Multiaccount**||||||
-| 25 | Multiaccount | 1. Login in several accounts with passcode enforced<br>2. Perform steps from 14. to 24. in different accounts<br>3. Go to Settings view  | 2. Passcode is always asked.<br>3. Passcode can not be disabled. | P m10 m9|  |
+| 25 | Multiaccount | 1. Login in several accounts with passcode enforced<br>2. Perform steps from 14. to 24. in different accounts<br>3. Go to Settings view  | 2. Passcode is always asked.<br>3. Passcode can not be disabled. | P m10 m9 t10|  |
 |**Shibboleth**||||||
-| 26 | Shibboleth | 1. Login in shibboleth accounts with passcode enforced<br>2. Perform some actions<br>3. When session expires, in login view minimize the app and open it again  | Passcode is asked | F m10 | After expiration, passcode is not asked |
+| 26 | Shibboleth | 1. Login in shibboleth accounts with passcode enforced<br>2. Perform some actions<br>3. When session expires, in login view minimize the app and open it again  | Passcode is asked | P m10 t9| After expiration, passcode is not asked -> regression |
