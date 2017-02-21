@@ -31,10 +31,11 @@
 | 19 | Downloaded file | 1. Tap on a downloaded video  | Local copy is played, no streaming |  |  |
 | 20 | Av. offline file | 1. Tap on a av. offline video  | Local copy is played, no streaming |  |  |
 |**New version**||||||
-| 21 | View | 1. Upload a new version of a downloaded video on server.<br>2. Tap on it | An alert will be diplayed with the options "preview local" or "remote streaming" and "cancel" |  |  |
-| 22 | Preview local | 1. From previous test case, select "Preview local" | Local copy will start to be played |  |  |
-| 23 | Remote streaming | 1. From previous test case, select "Remote streaming" | Local copy is removed from device and remote copy starts to be played in streaming. |  |  |
-| 24 | Cancel | 1. From previous test case, select "Cancel" | Nothing happens |  |  |
+| 21 | View | 1. Upload a new version of a downloaded video on server.<br>2. Tap on it | New version is downloaded |  |  |
+|**External actions**||||||
+| 22 | Remove | 1. Start to stream a video<br>2. In server side, remove the video| Streaming is stopped |  |  |
+| 23 | Rename | 1. Start to stream a video<br>2. In server side, rename the video| Streaming goes on |  |  |
+| 24 | Move | 1. Start to stream a video<br>2. In server side, move the video| Streaming is stopped |  |  |
 |**Error**||||||
 | 25 | Network connection | 1. Start streaming without connection| Streaming does not start |  |  |
 | 26 | Network connection II | 1. Start streaming<br>2. During the streaming, switch connection off<br>3. Switch connection on| 2. Streaming stops<br>3. Streaming goes on |  |  |
