@@ -35,7 +35,11 @@
 | 22 | Preview local | 1. From previous test case, select "Preview local" | Local copy will start to be played |  |  |
 | 23 | Remote streaming | 1. From previous test case, select "Remote streaming" | Local copy is removed from device and remote copy starts to be played in streaming. |  |  |
 | 24 | Cancel | 1. From previous test case, select "Cancel" | Nothing happens |  |  |
+|**Error**||||||
+| 25 | Network connection | 1. Start streaming without connection| Streaming does not start |  |  |
+| 26 | Network connection II | 1. Start streaming<br>2. During the streaming, switch connection off<br>3. Switch connection on| 2. Streaming stops<br>3. Streaming goes on |  |  |
+| 27 | Server connection | 1. Start streaming<br>2. During the streaming, switch server off<br>3. Switch connection on| Streaming stops<br>3. Streaming goes on |  |  |
 |**Session expiration**||||||
-| 25 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on |  |  |
+| 28 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on |  |  |
 |**Redirected server**||||||
-| 26 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works |  |  |
+| 29 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works |  |  |
