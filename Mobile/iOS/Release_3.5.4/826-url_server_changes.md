@@ -36,4 +36,4 @@ Server: 8.1, 9.1
 |**Flag disabled**||||||
 | 20 | Upgrade Basic -> Basic, Version or build changed| Upgrade app with no URL change | Upgrade correct | P m9 t10| Second upgrade does not work well: needed a restart in the app|
 | 20 | Upgrade Basic -> Basic, Version and build not changed | Upgrade app with no URL change | Upgrade correct | P m9 t10|  |
-| 21 | Upgrade SAML -> SAML | Upgrade app with no URL change | Upgrade correct | P t9 |  |
+| 21 | Upgrade SAML -> SAML | Upgrade app with no URL change | Upgrade correct | P t9 m10|  |

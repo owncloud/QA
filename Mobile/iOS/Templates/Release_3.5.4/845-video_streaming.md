@@ -27,6 +27,7 @@
 | 16 | Share users | Play a video and during the streaming, share it with users | Streaming continues and video is shared. |  |  |
 |**Download**||||||
 | 17 | Download | 1. Swipe over video file and select "Download".<br>2. Tap on the video  | Download is shown, no streaming during download. Check both orientations |  |  |
+| 17b | Download folder| 1. Swipe over folder with videos and select "Download".<br>2. Browse and tap on a video  | Download is shown, no streaming during download. Check both orientations | P m10 | SOLVED: Streaming instead of downloading |
 | 18 | Av. offline | 1. Swipe over video file and select "Available offline".<br>2. Tap on the video  | Download is shown, no streaming during download. Check both orientations |  |  |
 | 19 | Downloaded file | 1. Tap on a downloaded video  | Local copy is played, no streaming |  |  |
 | 20 | Av. offline file | 1. Tap on a av. offline video  | Local copy is played, no streaming |  |  |
