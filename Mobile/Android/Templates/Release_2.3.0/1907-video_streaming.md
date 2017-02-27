@@ -1,6 +1,6 @@
 ###  Video streaming 
 
-#### Pr: https://github.com/owncloud/android/pull/XXX 
+#### Pr: https://github.com/owncloud/android/pull/1907 
 
 Check with different video formats
 
