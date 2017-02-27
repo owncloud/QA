@@ -36,16 +36,16 @@ Server: 9.1
 | 19 | Downloaded file | 1. Tap on a downloaded video  | Local copy is played, no streaming | P m10 t10|  |
 | 20 | Av. offline file | 1. Tap on a av. offline video  | Local copy is played, no streaming | P m10 t10|  |
 |**New version**||||||
-| 21 | View | 1. Upload a new version of a downloaded video on server.<br>2. Tap on it | New version is downloaded | P m10 |  |
+| 21 | View | 1. Upload a new version of a downloaded video on server.<br>2. Tap on it | New version is downloaded | P m10 t10|  |
 |**External actions**||||||
-| 22 | Remove | 1. Start to stream a video<br>2. In server side, remove the video| Streaming is stopped | P m10  | Without file locking |
-| 23 | Rename | 1. Start to stream a video<br>2. In server side, rename the video| Streaming is stopped | P m10 |  Without file locking |
-| 24 | Move | 1. Start to stream a video<br>2. In server side, move the video| Streaming is stopped | P m10 |  Without file locking |
+| 22 | Remove | 1. Start to stream a video<br>2. In server side, remove the video| Streaming is stopped | P m10 t 10 | Without file locking |
+| 23 | Rename | 1. Start to stream a video<br>2. In server side, rename the video| Streaming is stopped | P m10 t10|  Without file locking |
+| 24 | Move | 1. Start to stream a video<br>2. In server side, move the video| Streaming is stopped | P m10 t10|  Without file locking |
 |**Error**||||||
 | 25 | Network connection | 1. Start streaming without connection| Streaming does not start | P m10 t10|  |
 | 26 | Network connection II | 1. Start streaming<br>2. During the streaming, switch connection off<br>3. Switch connection on| 2. Streaming stops<br>3. Streaming goes on | P m10 t10|  |
 | 27 | Server connection | 1. Start streaming<br>2. During the streaming, switch server off<br>3. Switch connection on| Streaming stops<br>3. Streaming goes on | P m10 t10|  |
 |**Session expiration**||||||
-| 28 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on | P m10 | Streaming is stopped |
+| 28 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on | P m10 t10| Streaming is stopped |
 |**Redirected server**||||||
-| 29 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works | P m10 |  |
+| 29 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works | P m10 t10 |  |
