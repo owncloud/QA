@@ -15,7 +15,7 @@ Check with different video formats
 |**Streaming**||||||
 | 2 | Streaming until end with http | Tap on a video and wait until it ends in a http server | Video starts to be played. At the end the video is not downloaded | P t5 m7 |  |
 | 3 | Streaming until end with https valid | Tap on a video and wait until it ends in a https valid server | Video starts to be played. At the end the video is not downloaded | P m5 t7 |  |
-| 4 | Streaming until end with https self signed or not valid | Tap on a video  | Video is downloaded and not streamed | P m5 t7 | iPad goes to root |
+| 4 | Streaming until end with https self signed or not valid | Tap on a video  | Video is downloaded and not streamed | P m5 t7 | FIXED: iPad goes to root |
 | 5 | Orientation changed | Play a video and during the streaming, change orientation several times | Streaming is not stopped | P m5 t7 | Only full screen  |
 | 6 | Full screen | Play a video and during the streaming, change to full screen | Streaming is not stopped |  P m5 t7 | Streaming starts again |
 | 7 | Streaming interrupted | 1. Tap on a video and stop it before ending.<br>2. Play again the video | 1. Video is not downloaded<br>2. Video starts again without being downloaded in file list  | P m7 t5 |  |
@@ -42,6 +42,6 @@ Check with different video formats
 | 24 | Network connection II | 1. Start streaming<br>2. During the streaming, switch connection off<br>3. Switch connection on| 2. Streaming stops<br>3. Streaming goes on | F m7 t5 | Error message is repeated |
 | 25 | Server connection | 1. Start streaming<br>2. During the streaming, switch server off<br>3. Switch connection on| Streaming stops<br>3. Streaming goes on | F m7 t5 | Error message is repeated |
 |**Session expiration**||||||
-| 26 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on | F m7 t5 | Crash when expires |
+| 26 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on | P m7 t5 | FIXED: Crash when expires |
 |**Redirected server**||||||
 | 27 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works | P t5 m7|  |
