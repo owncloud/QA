@@ -1,6 +1,6 @@
 ###  Fix: App freezes when SAML session expires and av. offline file 
 
-#### Pr: https://github.com/owncloud/ios/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/850 
 
 Devices: iPhone 6Plus v10, iPadAir v10
 
