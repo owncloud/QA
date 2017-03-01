@@ -2,10 +2,6 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/826
 
-Devices: iPhone 6S v9.3, iPhone6 v10
-
-Server: 8.1, 9.1
-
 
 ---
 
@@ -35,3 +31,8 @@ Server: 8.1, 9.1
 |**Flag disabled**||||||
 | 19 | Upgrade Basic -> Basic | Upgrade app with no URL change | Upgrade correct |  |  |
 | 20 | Upgrade SAML -> SAML | Upgrade app with no URL change | Upgrade correct |  |  |
+|**Redirected servers**||||||
+| 21 | Upgrade No redirected -> Redirected 301 (with subfolder) | 1. Upgrade app updating URL (pending uploads)<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 22 | Upgrade No redirected -> Redirected 302 | 1. Upgrade app updating URL (pending uploads)<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 23 | Upgrade Redirected -> Redirected | 1. Upgrade app updating URL (pending uploads)<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 24 | Upgrade Redirected -> No Redirected | 1. Upgrade app updating URL (pending uploads)<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
