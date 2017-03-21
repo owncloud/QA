@@ -28,11 +28,11 @@ Check with different video formats
 | 14 | Share users | Play a video and during the streaming, share it with users | Streaming continues and video is shared. | P m7 t5 m6| FIXED: Video is freezed |
 |**Download**||||||
 | 15 | Download | 1. Long press over video file and select "Download".<br>2. Tap on the video  | Download is shown, no streaming during download. Check both orientations | P m7 t5 m6| FIXED: Change orientation stream+dload |
-| 16 | Av. offline | 1. Long press over video file and select "Available offline".<br>2. Tap on the video  | Download is shown, no streaming during download. Check both orientations | F m7 t5 m6| FIXED: Option missed. FIXED: Change orientation stream+dload |
-| 17 | Downloaded file | 1. Tap on a downloaded video  | Local copy is played, no streaming | F m7 t5 m6| FIXED: Av offline streams |
+| 16 | Av. offline | 1. Long press over video file and select "Available offline".<br>2. Tap on the video  | Download is shown, no streaming during download. Check both orientations | P m7 t5 m6| FIXED: Option missed. FIXED: Change orientation stream+dload |
+| 17 | Downloaded file | 1. Tap on a downloaded video  | Local copy is played, no streaming | P m7 t5 m6| FIXED: Av offline streams |
 | 18 | Av. offline file | 1. Tap on a av. offline video  | Local copy is played, no streaming | P m7 t5 m6| FIXED: Option missed. FIXED:Change orientation stream+dload |
 |**New version**||||||
-| 19 | View | 1. Upload a new version of a downloaded video on server.<br>2. Tap on it | New version will be downloaded | F m6 t5 m7 | downloaded and streamed |
+| 19 | View | 1. Upload a new version of a downloaded video on server.<br>2. Tap on it | New version will be downloaded | P m6 t5 m7 | FIXED: downloaded and streamed |
 |**External actions**||||||
 | 20 | Remove | 1. Start to stream a video<br>2. In server side, remove the video| Streaming is stopped | P m7 t5 m6 | FIXED: Without file locking. Crash if video is removed |
 | 21 | Rename | 1. Start to stream a video<br>2. In server side, rename the video| Streaming goes on | P m7 t5 m6 | Without file locking. Crash if video is removed |
@@ -44,4 +44,4 @@ Check with different video formats
 |**Session expiration**||||||
 | 26 | Expire during streaming | 1. In a SAML server, play a video streaming<br>2. Session expires<br>3. User input credentials | Streaming keeps on | P m7 t5 m6| FIXED: Crash when expires |
 |**Redirected server**||||||
-| 27 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works | F t5 m7 m6| 301 -> works<br>302 -> if non-trusted -> bad error message|
+| 27 | Redirected server | 1. In a redirected server, play a video streaming| Streaming works | P t5 m7 m6| 301 -> works<br>FIXED: 302 -> if non-trusted -> bad error message|
