@@ -9,7 +9,7 @@
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Flag enabled One Account**||||||
-| 1 | Upgrade Basic > Basic. New URL | 1. Upgrade app updating URL<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 1 | Upgrade Basic > Basic. New URL | 1. Upgrade app updating URL (without /)<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
 | 2 | Upgrade Basic > Basic. Same URL | 1. Upgrade app version without updating URL | Version upgraded. URL is not updated |  |  |
 | 3 | Upgrade Basic > SAML. New URL | 1. Upgrade app updating URL and auth method (SAML)<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
 | 4 | Upgrade Basic > SAML. Same URL | 1. Upgrade app version without updating URL | Version upgraded. URL is not updated |  |  |
@@ -18,16 +18,16 @@
 | 7 | Upgrade SAML > SAML. New URL | 1. Upgrade app updating URL<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
 | 8 | Upgrade SAML > SAML. Same URL | 1. Upgrade app version without updating URL | Version upgraded. URL is not updated |  |  |
 |**Flag enabled Multiaccount**||||||
-| 9 | Upgrade Basic > Basic |  1. Upgrade app updating URL with several accounts<br>2. Enter in each account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
-| 10 | Upgrade Basic > SAML |  1. Upgrade app updating URL with several accounts<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
-| 11 | Upgrade SAML > Basic |  1. Upgrade app updating URL with several accounts<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
-| 12 | Upgrade SAML > SAML | 1. Upgrade app updating URL with several accounts<br>2. Enter in the account <br>3. Perform same actions (browse, create file or folder...)<br>4. Wait until expiration  | 2. Credentials required and message displayed (check both orientations)<br> 3. Actions are correctly performed<br>4. Credentials are required |  |
+| 9 | Upgrade Basic > Basic |  1. Upgrade app updating URL with several accounts<br>2. Enter in each account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 1. Check that all accounts are updated<br>2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 10 | Upgrade Basic > SAML |  1. Upgrade app updating URL with several accounts<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 1. Check that all accounts are updated<br>2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 11 | Upgrade SAML > Basic |  1. Upgrade app updating URL with several accounts<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 1. Check that all accounts are updated<br>2. Credentials required and message displayed (check both orientations)<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
+| 12 | Upgrade SAML > SAML | 1. Upgrade app updating URL with several accounts<br>2. Enter in the account <br>3. Perform same actions (browse, create file or folder...)<br>4. Wait until expiration  | 1. Check that all accounts are updated<br>2. Credentials required and message displayed (check both orientations)<br> 3. Actions are correctly performed<br>4. Credentials are required |  |
 |**Flag disabled**||||||
-| 13 | Upgrade Basic > Basic. New URL. | Upgrade app updating URL | No upgrade |  |  |
-| 14 | Upgrade Basic > SAML. New URL. | Upgrade app updating URL | No upgrade |  |  |
-| 15 | Upgrade SAML > Basic. New URL. | Upgrade app updating URL | No upgrade |  |  |
-| 16 | Upgrade SAML > SAML. New URL. | Upgrade app updating URL | No upgrade |  |  |
-| 17 | Upgrade. Same URL. | Upgrade app updating URL | No upgrade |  |  |
+| 13 | Upgrade Basic > Basic. New URL. | Upgrade app updating URL | URL not updated |  |  |
+| 14 | Upgrade Basic > SAML. New URL. | Upgrade app updating URL | URL not updated |  |  |
+| 15 | Upgrade SAML > Basic. New URL. | Upgrade app updating URL | URL not updated |  |  |
+| 16 | Upgrade SAML > SAML. New URL. | Upgrade app updating URL | URL not updated |  |  |
+| 17 | Upgrade. Same URL. | Upgrade app updating URL | URL not updated |  |  |
 |**Certificate acceptance**||||||
 | 18 | Upgrade http > https | 1. Upgrade app updating URL to an non-trusted https server<br>2. Enter in the account<br>3. Perform same actions (browse, create file or folder...)<br>4. Upload some files  | 2. Credentials and certificate required<br>3. Actions are correctly performed<br>4. Check that the uploads view is correctly updated |  |  |
 |**Redirected servers**||||||
@@ -43,4 +43,4 @@
 | 27 |  Share| 1. Share with oC from an external app<br>2. Upgrade the app with new URL. | Uploads are performed to the new account |  |  |
 |**Errors in login view**||||||
 | 28 | SAML |  Open a SAML session and wait until it expires| Login view is displayed with an appropiate message about the expiration  |  |  
-| 27 | Incorrect pasword |  Enter wrong credentials | Login view is displayed with an appropiate message about the expiration  |  |  |
+| 29 | Incorrect pasword |  Enter wrong credentials | Login view is displayed with an appropiate message about the expiration  |  |  |
