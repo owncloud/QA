@@ -15,3 +15,5 @@
 | 5 | Instant uploads | 1. Take some pics with instant uploads enabled<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads are performed  |  |  |
 | 6 | Share with oC | 1. Share content from an external app<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads are performed  |  |  |
 | 7 | Uploads&Downloads | 1. Upload and download somes files<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads and downloads are resumed (not immediatly) |  |  |
+| 8 | No connection | 1. Upload a file<br>2. Switch connection off<br>3. Remove failed in uploads view<br>4. Turn the screen off<br>5. Turn the screen off| Nothing happens |  |  |
+| 9 | Switch device off | 1. Upload a file<br>2. Switch device off<br>3. Switch the device on| Nothing happens |  |  |
