@@ -22,7 +22,7 @@ Server: v9.1, v10
 | 8 | Cancel upload | 1. Upload somes files/folders<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on and cancel some of the uploads| Uploads are not longer retried | P m7 |  |
 | 9 | Any upload | 1. Switch the screen off and set device in idle mode with no uploads<br>2. Wait a while<br>4. Switch the screen on| Nothing is resumed | P m7 |  |
 | 10 | Instant uploads | 1. Take some pics with instant uploads enabled<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads are performed  | P t5 F m7 | Not resumed |
-| 11 | Share with oC | 1. Share content from an external app<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads are performed  | P t5 |  |
-| 12 | Uploads&Downloads | 1. Upload and download somes files<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads and downloads are resumed (not immediatly) | P t5 |  |
-| 13 | No connection | 1. Upload a file<br>2. Switch connection off<br>3. Remove failed in uploads view<br>4. Turn the screen off<br>5. Turn the screen on| Nothing happens | P t5 |  |
+| 11 | Share with oC | 1. Share content from an external app<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads are performed  | P t5 m7|  |
+| 12 | Uploads&Downloads | 1. Upload and download somes files<br>2. Switch the screen off and set device in idle mode<br>3. Wait a while<br>4. Switch the screen on| Uploads and downloads are resumed (not immediatly) | P t5 F m7| Not all resumed |
+| 13 | No connection | 1. Upload a file<br>2. Switch connection off<br>3. Remove failed in uploads view<br>4. Turn the screen off<br>5. Turn the screen on| Nothing happens | P t5 m7|  |
 | 14 | Switch device off | 1. Upload/Download a file<br>2. Switch connection and device off<br>3. Switch the device on| Operations are resumed | P m7 | FIXED: Not resumed |
