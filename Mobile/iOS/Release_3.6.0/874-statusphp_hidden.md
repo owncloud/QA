@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/874 
 
-Devices: iPhone6 v10
+Devices: iPhone6 v10, iPad Air v10
 
 Server: 10.0, 9.1, 8.2, 8.1
 
@@ -13,11 +13,11 @@ Server: 10.0, 9.1, 8.2, 8.1
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :-----: | :------- | :---- | :-------------- | :----: | :-------------- |
 |**hidden status.php**||||||
-| 1 | Login | Login in the app | Login correct | P m10 |  |
-| 2 | Refresh in root | Refresh the app in root folder | Correct refresh | P m10 |  |
-| 3 | Share with users 8.1 | Share with users in version 8.1 | Not posible | P m10 |  |
-| 4 | Switch account | Switch between account | Sync finishes correctly | P m10 |  |
-| 5 | Multiaccount | Sync an account. In SAML expire session | Correct behaviour |  |  |
+| 1 | Login | Login in the app | Login correct | P m10 t10|  |
+| 2 | Refresh in root | Refresh the app in root folder | Correct refresh | P m10 t10|  |
+| 3 | Share with users 8.1 | Share with users in version 8.1 | Not posible | NA |  |
+| 4 | Switch account | Switch between account | Sync finishes correctly | NA |  |
+| 5 | Multiaccount | Sync an account. In SAML expire session | Correct behaviour | P t10 |  |
 |**visible status.php**||||||
 | 6 | Login | Login in the app | Login correct | P m10 |  |
 | 7 | Refresh in root | Refresh the app in root folder | Correct refresh | P m10 |  |
