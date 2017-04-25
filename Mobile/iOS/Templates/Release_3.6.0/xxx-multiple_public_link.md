@@ -52,4 +52,6 @@
 | 33 | Enable | Open Share view and enable public link | Public Links enabled. Check in web and in server side |  |  |
 | 34 | Edit options | Open Share view. Enable allow editing, password and expiration| Public Links enabled with the selected options. Check in web and in server side |  |  |
 | 35 | Disable | Open Share view and disable public link | Public Links disabled. Check in web and in server side |  |  |
+|**Upgrade**||||||
+| 36 | Upgrade | 1. Install older version and create some public links<br>2. Upgrade to the new  | Public Links correctly shown |  |  |
 
