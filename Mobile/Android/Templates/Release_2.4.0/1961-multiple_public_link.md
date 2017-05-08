@@ -1,6 +1,6 @@
 ###  Multiple Public Links 
 
-#### PR: https://github.com/owncloud/android/pull/XXX 
+#### PR: https://github.com/owncloud/android/pull/1961 
 
 
 ---
