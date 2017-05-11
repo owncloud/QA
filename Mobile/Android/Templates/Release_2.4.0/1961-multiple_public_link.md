@@ -53,4 +53,14 @@
 | 35 | Disable | Open Share view and disable public link | Public Links disabled. Check in web and in server side |  |  |
 |**Upgrade**||||||
 | 36 | Upgrade | 1. Install older version and create some public links<br>2. Upgrade to the new  | Public Links correctly shown |  |  |
+|**Errors**||||||
+| 37 | No internet connection | 1. Switch internet connection off. <br>2. Create a public link | Error is displayed | |  |
+| 38 | No server connection | 1. Switch server off. <br>2. Create a public link | Error is displayed | |  |
+|**Password Policy**||||||
+| 39 | Minimun characters | 1. Set minimum characters as Password Policy<br>2. Create public link with password that does not match the policy| Correct error displayed |  |  |
+| 40 | Uppercase | 1. Set Uppercase as Password Policy<br>2. Create public link with password that does not match the policy| Correct error displayed |  |  |
+| 41 | Number | 1. Set Number as Password Policy<br>2. Create public link with password that does not match the policy| Correct error displayed | |  |
+| 42 | Special characters | 1. Set Special characters as Password Policy<br>2. Create public link with password that does not match the policy| Correct error displayed |  |  |
+| 43 | Expiration with passw | 1. Set number of expiration days if password is set<br>2. Create link without expiration | Expiration date is correctly set |  |  |
+| 44 | Expiration without passw | Set number of expiration days if password is not set<br>2. Create link without expiration | Expiration date is correctly set |  |  |
 
