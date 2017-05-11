@@ -15,7 +15,7 @@ Servers: 10.0, 9.1, 8.2
 |**View**||||||
 | 1 | Portrait  | Open Share view | Public Links section is correct. "+" Button to add new public links. Icons for delete, get link and more options when public link is created. | P m7 t6 |  |
 | 2 | Landscape| Open Share view | Public Links section is correct. "+" Button to add new public links. Icons for delete, get link and more options when public link is created. | P m7 t6 | FIXED: Crashes if passcode |  |
-| 3 | Security warning | Enable security warning | Public Links section is correct showing the warning | NA | Moved forward |
+| 3 | Security warning | Enable security warning | Public Links section is correct showing the warning | P m7 t6 |  |
 |**Creation**||||||
 | 4 | Name | 1. Open Share view<br>2. Add a public link with name. Other options default  | Public link created. Check in server | P m7 t6 | FIXED: Keyboard not displayed |
 | 5 | No Name | 1. Open Share view<br>2. Add a public link with all options default and empty name | Public link created with token name. Check in server | P m7 t6 |  |  |
