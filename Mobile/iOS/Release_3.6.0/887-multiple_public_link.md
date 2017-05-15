@@ -1,6 +1,6 @@
 ###  Multiple Public Links 
 
-#### PR: https://github.com/owncloud/ios/pull/XXX 
+#### PR: https://github.com/owncloud/ios/pull/866 
 
 
 ---
@@ -9,20 +9,20 @@
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**View**||||||
-| 1 | Portrait  | Open Share view | Public Links section is correct. "+" Button to add new public links. Icons for delete, get link and more options when public link is created. |  |  |
-| 2 | Landscape| Open Share view | Public Links section is correct. "+" Button to add new public links. Icons for delete, get link and more options when public link is created. |  |  |  |
+| 1 | Portrait  | Open Share view | Public Links section is correct. "+" Button to add new public links. Icons for delete, get link and more options when public link is created. | P m10 |  |
+| 2 | Landscape| Open Share view | Public Links section is correct. "+" Button to add new public links. Icons for delete, get link and more options when public link is created. | P m10 |  |  |
 | 3 | Security warning | Enable security warning | Public Links section is correct showing the warning |  |  |  |
 |**Creation**||||||
-| 4 | Name | 1. Open Share view<br>2. Add a public link with name. Other options default  | Public link created. Check in server |  |  |  |
-| 5 | No Name | 1. Open Share view<br>2. Add a public link with all options default  | Public link created with string name. Check in server |  |  |  |
-| 6 | Allow editing | 1. Open Share view (folder)<br>2. Add a public link with allow editing enabled | Public link created with allow editing. Check in server |  |  |  |
-| 7 | Password | 1. Open Share view<br>2. Add a public link with password enabled | Public link created with password. Check in server |  |  |  |
+| 4 | Name | 1. Open Share view<br>2. Add a public link with name. Other options default  | Public link created. Check in server | P m10 |  |
+| 5 | No Name | 1. Open Share view<br>2. Add a public link with all options default  | Public link created with string name. Check in server | P m10 |  |
+| 6 | Allow editing | 1. Open Share view (folder)<br>2. Add a public link with allow editing enabled | Public link created with allow editing. Check in server | F m10 | Option unreachable |
+| 7 | Password | 1. Open Share view<br>2. Add a public link with password enabled | Public link created with password. Check in server | P m10 |  |
 | 8 | Expiration time | 1. Open Share view<br>2. Add a public link with expiration time | Public link created with expiration time. Check in server |  |  |  |
 | 9 | All options | 1. Open Share view<br>2. Add a public link with name, allow editing (folders), password, expiration time | Public link created with all options. Check in server |  |  |  |
 |**Edition (link already exists)**||||||
 | 10 | Name | 1. Open Share view<br>2. Edit name of public link | Name edited. Check in server |  |  |  |
 | 11 | No Name | 1. Open Share view<br>2. Remove name from public link  | Name removed. Check in server |  |  |  |
-| 12 | Allow editing | 1. Open Share view (folder)<br>2. Edit option "allow editing" in a public link| Option switched. Check in server |  |  |  |
+| 12 | Allow editing | 1. Open Share view (folder)<br>2. Edit option "allow editing" in a public link| Option switched. Check in server | F m10 | Error in SAML |
 | 13 | Add Password | 1. Open Share view<br>2. Add password to public link | Password added. Check in server |  |  |  |
 | 14 | Edit Password | 1. Open Share view<br>2. Edit password | Password edited. Check in server |  |  |  |
 | 15 | Remove Password | 1. Open Share view<br>2. Remove password from public link | Password removed. Check in server |  |  |  |
