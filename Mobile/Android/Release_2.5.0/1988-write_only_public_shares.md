@@ -26,7 +26,7 @@ Server: v10, v9.x, v8
 | 10 | Switch "Edit" off | 1. Test case 4.<br>2. Edit the link<br>3. Switch "Edit" off<br>4. Save and get the link  | Check in browser that link is accesible, contents are listed, and you can NOT upload more content | P t6 m7 |  |
 | 11 | Switch "Edit" off  II | 1. Test case 5.<br>2. Edit the link<br>3. Switch "Edit" off<br>4. Save and get the link  | Check in browser that link is accesible, contents are listed, and you can NOT upload more content | P t6 m7 |  |
 |**External actions**||||||
-| 12 | Create new link | In web UI, create a new public link with "Edit" and "Show" | In app, the link appears with the correct options|  |  |
+| 12 | Create new link | In web UI, create a new public link with "Edit" and "Show" | In app, the link appears with the correct options| P m7 t6 |  |
 | 13 | Switch "Edit" on | 1. In app, create a new public link with defaults<br>2. In web UI, edit it enabling "Edit" | In app, the link appears with the correct options| P t6 m7 |  |
 | 14 | Switch "Show" off | 1. In app, create a new public link with "Edit" enabled<br>2. In web UI, edit it disabling "Show" | In app, the link appears with the correct options| P t6 m7 |  |
 | 15 | Switch "Edit" off | 1. In app, create a new public link with both "Edit" and "Show" enabled<br>2. In web UI, edit it disabling "Edit" | In app, the link appears with the correct options| P t6 m7|  |
@@ -35,5 +35,5 @@ Server: v10, v9.x, v8
 | 17 | Files | In web UI admin dashboard, disable "Allow uploads" capability | In app, the options "Edit" and "Show" are hidden | P t6 m7 |  |
 |**Legacy (v<10)**||||||
 | 18 | Server 9.1 | In server 9.1, create a public link  | The option "show" does not exist | P t6 m7 |  |
-| 19 | Server 9.0 | In server 9.0, create a public link  | The option "show" does not exist |  |  |
-| 20 | Server 8.2 | In server 8.2, create a public link  | The option "show" does not exist |  |  |
+| 19 | Server 9.0 | In server 9.0, create a public link  | The option "show" does not exist | P t6 m7|  |
+| 20 | Server 8.2 | In server 8.2, create a public link  | The option "show" does not exist | P t6 m7|  |
