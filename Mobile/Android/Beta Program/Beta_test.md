@@ -17,5 +17,5 @@ Device: Huawei 6P v7
 | 6 | Instant Uploads | 1. Attach the same account in both apps<br>2. Enable instant uploads and take some pics<br>3. Disable instant uploads in release/debug version and take more pics| 2. Uploaded in both accounts<br>3. Uploaded only in beta | P m7 |  |
 | 7 | Download | 1. Attach the same account in both apps<br>2. Download a file to beta | Finished download notification only appears to the beta| P m7 |  |
 | 8 | Refresh account | 1. Attach the same account in both apps<br>2. Refresh account in beta | Only beta is refreshed. In release/debug the folders are not discovered | P m7 |  |
-| 9 | Document Provider | 1. Attach the same account in both apps<br>2. Share content from other apps in both| Content is correctly shared in both | F m7 | Crash |
-| 10 | Manage Space - Clear account | 1. Attach the same account in both apps<br>2. In device settings, clear data and manage space | Data cleared | F m7 | Crash |
+| 9 | Document Provider | 1. Attach the same account in both apps<br>2. Share content from other apps in both| Content is correctly shared in both | P m7 | FIXED: Crash |
+| 10 | Manage Space - Clear account | 1. Attach the same account in both apps<br>2. In device settings, clear data and manage space | Data cleared | P m7 | FIXED: Crash |
