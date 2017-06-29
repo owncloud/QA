@@ -1,6 +1,6 @@
 ###  Write-only public shares 
 
-#### Pr: https://github.com/owncloud/ios/pull/913 
+#### Pr: https://github.com/owncloud/ios/pull/916 
 
 
 ---
