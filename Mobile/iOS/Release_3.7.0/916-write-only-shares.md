@@ -34,10 +34,10 @@ Server: v10.0.2
 | 16 | Folders | In web UI admin dashboard, disable "Allow uploads" capability | In app, the options "Edit" and "Show" are hidden | P t10 m9 |  |
 | 17 | Files | In web UI admin dashboard, disable "Allow uploads" capability | In app, the options "Edit" and "Show" are hidden | P t10 m9 |  |
 | 18 | DB | Check capabilities in DB | Correct values | P t10 | Always true. Not other option |
-|**Legacy (v<10)**||||||
+|**Legacy (v<10)**| one device|||||
 | 19 | Server 9.1 | In server 9.1, create a public link  | The option "show" does not exist | P t10 |  |
 | 20 | Server 9.0 | In server 9.0, create a public link  | The option "show" does not exist | P m9 |  |
 | 21 | Server 8.2 | In server 8.2, create a public link  | The option "show" does not exist | P m9 |  |
 | 22 | Server 10.0 | In server 10.0, create a public link  | The option "show" does not exist | P t10 |  |
-|**Upgrade**||||||
+|**Upgrade**|one device|||||
 | 23 | From older version | 1. Install an older version<br>2. Create public links<br>3. Ugrade app  | Show file listing appears and is  | P t10 |  |
