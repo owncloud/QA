@@ -14,4 +14,7 @@
 | Using SSL, Having one trusted server, called serverB, go to the sharing dialog and type first characters of a user from serverB. | Users from serverB appear and you can share with them. |        |                 |
 | Check that the federation section in admin page can be used in chrome, firefox, safari and edge. |                                          |        |                 |
 | Check that the sharing dropdown with remote users can appear in chrome, firefox, safari and edge. |                                          |        |                 |
+| In admin page, add an owncloud server which exists. | The server is added correctly                                         |        |                 |
+| In admin page, add an owncloud server which doesn't exist. | A warning message appears                                         |        |                 |
+| In admin page, add an owncloud server older than 9.0 | A warning message appears                                         |        |                 |
 
