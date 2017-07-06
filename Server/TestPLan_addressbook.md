@@ -14,7 +14,7 @@
 | Having addressbook connected to evolution. Change regular user display name, email and avatar. | Changes appear in evolution.             |        |                 |
 | Having addressbook connected to evolution. Change LDAP user display name, email and avatar. | Changes appear in evolution.             |        |                 |
 | Having addressbook connected to evolution. Change AD user display name, email and avatar. | Changes appear in evolution.             |        |                 |
-| Having 8.2.2 server using contacts app and working, upgrade to 9.0. Run ./occ dav:sync-system-addressbook | Contacts app is disabled and contacts are still available when connecting to HOST/remote.php/dav/addressbooks/system/system/system. |        |                 |
+| Having previous major version server using contacts app and working, upgrade to latest major version. Run ./occ dav:sync-system-addressbook | Contacts app is disabled and contacts are still available when connecting to HOST/remote.php/dav/addressbooks/system/system/system. |        |                 |
 
 
 
