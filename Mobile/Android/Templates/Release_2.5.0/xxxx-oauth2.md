@@ -46,9 +46,17 @@
 |**Multiaccount**|||||||
 | 31 | Several OAuth2 same server | Attach several OAuth2 accounts of the same server on the same device. Check correct expirations. | All correct |  |  |
 | 32 | Several OAuth2 different server | Attach several OAuth2 accounts of different servers on the same device | All correct |  |  |
-| 33 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  |  |s
-| 34 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | All correct |  |  |
+| 33 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  |  | 
+| 34 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | Not posible |  |  |
 |**Regression**|||||||
 | 35 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success |  |  |
 | 36 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
 | 37 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
+| 38 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 39 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
+|**Upgrade**|||||||
+| 40 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
+| 41 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
+| 42 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
+| 43 | Migrate basic to OAuth2| 1. Login in a basic older server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK |  |  |
+| 44 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK |  |  |
