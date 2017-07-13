@@ -1,6 +1,6 @@
 ###  OAuth2 
 
-#### Pr: https://github.com/owncloud/android/pull/XXX 
+#### Pr: https://github.com/owncloud/ios/pull/919 
 
 
 ---
