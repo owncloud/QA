@@ -5,7 +5,7 @@
 
 ---
 
- 
+  
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Login View**|||||||
@@ -35,7 +35,7 @@
 | 22 | Wrong token endpoint | 1. In customization file, change token endpoint for a incorrect one<br>2. Enter OAuth2 URL and connect.<br>3. Input correct credentials<br>Check both orientations | Correct error handling  |  |  |
 |**OAuth2 internal flow**|||||||
 | 23 | Auth request | With mitmproxy, check the OAuth2 GET authorization code request | The URL contains the parameters: response_type=code, redirect_uri=\<customized\>, client_id=\<customized\> |  |  |
-| 24 | Token request | With mitmproxy, check the OAuth2 POST token request | The POST request contains in the body the parameters: grant_type=authorization_code, code=\<code from prev test\>,  redirect_uri=\<customized\>, client_id=\<customized\>.<br> Header Content Type = application/x-www-form-urlencoded.<br> Header www-authorization = Basic |  |  |
+| 24 | Token request | With mitmproxy, check the OAuth2 POST token request | The POST request contains in the body the parameters: grant_type=authorization_code, code=\<code from prev test\>,  redirect_uri=\<customized\>, client_id=\<customized\>.<br> Header Content Type = application/x-www-form-urlencoded.<br> Header www-authorization = Basic + client id + : + secretid |  |  |
 | 25 | Token refresh | With mitmproxy, check the OAuth2 POST token request | The POST request contains in the body the parameters: grant_type=authorization_code, code=\<code from prev test\>,  redirect_uri=\<customized\>, client_id=\<customized\>.<br> Header Content Type = application/x-www-form-urlencoded.<br> Header www-authorization = Basic |  |  |
 |**OAuth2 session**|||||||
 | 26 | Create folder | With OAuth session active, create folder | Success |  |  |
@@ -48,21 +48,20 @@
 | 33 | Share with users | With OAuth session active, share with users | Success |  |  |
 | 34 | Share public| With OAuth session active, share public | Success |  |  |
 |**Token refreshed**||||||
-| 35 | Expired | After token is refreshed, perform actions (download, upload, delete...) | Success |  |  |
+| 35 | Expired | After token is refreshed, perform actions (download, upload, delete...). Check that the new token is used in the requests | Success |  |  |
 |**Multiaccount**|||||||
 | 36 | Several OAuth2 same server | Attach several OAuth2 accounts of the same server on the same device. Check correct expirations. | All correct |  |  |
 | 37 | Several OAuth2 different server | Attach several OAuth2 accounts of different servers on the same device | All correct |  |  |
-| 38 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  |  | 
-| 39 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | Not posible |  |  |
+| 38 | Several OAuth2 expiration | 1. Attach several OAuth2 accounts of different servers on the same device<br>2. Wait until one session expires. | Expired session is refresed. The other sessions keep alive |  |  |
+| 39 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  |  | 
+| 40 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | Not posible |  |  |
 |**Regression**|||||||
-| 40 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 41 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 42 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
-| 43 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 44 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 41 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 42 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 43 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
+| 44 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 45 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
 |**Upgrade**|||||||
-| 45 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
-| 46 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
-| 47 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
-| 48 | Migrate basic to OAuth2| 1. Login in a basic older server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK |  |  |
-| 49 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK |  |  |
+| 46 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
+| 47 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
+| 48 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
