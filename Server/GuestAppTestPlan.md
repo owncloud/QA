@@ -1,5 +1,7 @@
 ## 'Guest App' Test Plan
 
+- Run Testplan with encryption enabled and mixing browsers Firefox, Chrome, Safari, IE11 and Edge
+
 
 ## Testing functionality
 
@@ -12,6 +14,9 @@ Disable Guest app via CLI using ```occ app:disable guests``` | The apps gets dis
 **Add Guest User in sharetabview** |  |   |
 |  |   |
 Create a guest user via email | Check that the user recieves the email and can register into oC | :construction:  |
+Create a guest user via email sharing from another guest user | Check that the user recieves the email and can register into oC | :construction:  |
+Create a guest user via email sharing from an LDAP user | Check that the user recieves the email and can register into oC | :construction:  |
+Create a guest user via email sharing from an Shibboleth user | Check that the user recieves the email and can register into oC | :construction:  |
 Try to create a guest user via email with an invalid email format | An error message should be shown | :construction:  |
 Try to create a guest user via email with an already used email | An warning about a username with that email already exists should be shown | :construction:  |
 Try to create a guest user via email already registered by email | A warning about the token is invalid should be shown | :construction:  |
