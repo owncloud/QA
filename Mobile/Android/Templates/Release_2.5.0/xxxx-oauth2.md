@@ -61,23 +61,24 @@
 | 44 | Refresh Token revoked | 1. After login, remove refresh token in DB<br> 2. Wait until session expires| Session is not refreshed. User redirected to login view |  |  |
 | 45 | Token revoked | After login, remove token | Session ends. User redirected to login view |  |  |
 | 46 | Change credentials | 1. In webUI, change password<br> 2. In app, after login, in settings view, go to edit credentials and enter new credentials | New token is received |  |  |
-| 47 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore |  |  |
-| 48 | Manage Space | In device Settings, clear cache and manage space of the app | Session does not end |  |  |
-| 49 | Remove client | In webUI, remove client | Not posible to authenticate anymore |  |  |
-| 50 | Remove OAuth2 app | In webUI, disable app | basic auth? |  |  |
+| 47 | Edit credentials with other account | 1. In app, after login, in settings view, go to edit credentials and enter other user credentials | Account updated / Error shown |  |  |
+| 48 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore |  |  |
+| 49 | Manage Space | In device Settings, clear cache and manage space of the app | Session does not end |  |  |
+| 50 | Remove client | In webUI, remove client | Not posible to authenticate anymore |  |  |
+| 51 | Remove OAuth2 app | In webUI, disable app | basic auth? |  |  |
 |**Errors**|||||||
-| 51 | No internet connection | 1. Disable internet connection in device<br>2. Try to login in OAuth2 | Correct error |  |  |
-| 52 | No server connection | 1. Switch server off in device<br>2. Try to login in OAuth2 | Correct error |  |  |
-| 53 | Maintenance mode login | 1. Enable maintenance mode<br>2. Try to login in OAuth2 | Correct error |  |  |
-| 54 | Firewall mode login | Enable a firewall rule to ban the login<br>2. Try to login in OAuth2 | Correct error |  |  |
+| 52 | No internet connection | 1. Disable internet connection in device<br>2. Try to login in OAuth2 | Correct error |  |  |
+| 53 | No server connection | 1. Switch server off in device<br>2. Try to login in OAuth2 | Correct error |  |  |
+| 54 | Maintenance mode login | 1. Enable maintenance mode<br>2. Try to login in OAuth2 | Correct error |  |  |
+| 55 | Firewall mode login | Enable a firewall rule to ban the login<br>2. Try to login in OAuth2 | Correct error |  |  |
 |**Regression**|||||||
-| 55 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 56 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 57 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
-| 58 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 59 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 60 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed |  |  |
+| 56 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 57 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 58 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
+| 59 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 60 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 61 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed |  |  |
 |**Upgrade**|||||||
-| 61 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
-| 62 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
-| 63 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
+| 62 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
+| 63 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
+| 64 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
