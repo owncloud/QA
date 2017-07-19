@@ -13,25 +13,54 @@
 
 ## Authentication
 
+Since the entrypoint is the same (wizard's URL)
+
+More protocol-agnostic test cases are inherited from generic auth. testplans
+
 ### From Scratch (Account Setup: Wizard)
 
-#### Successfull Scenarios
+#### Successful Scenarios
+
+| TestID | Test Case | Steps | Expected Result | Result | Related Comment |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
+|      1 | Login on a clean browser |||||
+|      2 | Login on an already open session in the browser |||||
 
 #### Unauthorized/Alternative Paths
 
 - Cancel: https://github.com/owncloud/oauth2/issues/46
 - Wrong Password: https://github.com/owncloud/oauth2/issues/47
-- Recoveries
-    - Closing the browser tab
+- Recovery options: https://github.com/owncloud/client/issues/5811
+    - Closing the browser
     - From a timeout
+- Wizard navigation: https://github.com/owncloud/client/issues/5813
+
+| TestID | Test Case | Steps | Expected Result | Result | Related Comment |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
+|      3 | Use the wrong password when trying to login |||||
+|      4 | Cancel in the app's auth request |||||
+|      5 | Close the browser without authorizing the app |||||
+|      6 | Wait for more than 5 minutes without authorizing the application |||||
+|      7 | Go back on wizard's page 2 ("Login in your browser") |||||
+|      8 | Close wizard in any step |||||
 
 ### Existing Accounts
 
+Cases to consider either when upgrading a working client that supports OAuth2 authentication or when the previous step was completed successfully but the AccountState is not "Connected" for some reason.
+
 #### Upgrade path 
 
-Account Migrations:
+Coming from an old version of the client (< 2.4.0) will require to re-login in the account since the client will consider the old credentials/sessions non-valid in virtue of the new auth. method.
 
-- [Account Configuration](https://doc.owncloud.org/desktop/2.3/advancedusage.html#configuration-file)
+| TestID | Test Case | Steps | Expected Result | Result | Related Comment |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
+|      9 | Logged-in http-auth account |||||
+|     10 | Logged-out http-auth account |||||
+|     11 | Any other credential type (dummy, SAML) |||||
+
+##### Account Migrations: 
+
+- [Account Configuration](https://doc.owncloud.org/desktop/2.3/advancedusage.html#configuration-file):
 - Session Cookie -> access token
 - Keychain/Credentials Store entries -> refresh token
 
@@ -39,17 +68,37 @@ Account Migrations:
 
 _When secrets' life come to an end_ the OAuth2 refresh token part of the protocol comes into focus.
 
+| TestID | Test Case | Steps | Expected Result | Result | Related Comment |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
+|     12 | Logged-out http-auth account |||||
+
 #### Logged out account
 
 Get a new authorization/refresh tokens combination.
+
+| TestID | Test Case | Steps | Expected Result | Result | Related Comment |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
+|     13 ||||||
 
 #### Revoked token on the server
 
 Even though the app does not support token revocation just yet, we can anticipate an scenario where this will be implemented (as it happens with sessions/application passwords). This result can be artificially achieved by _erasing the access token from the DB_.
 
+| TestID | Test Case | Steps | Expected Result | Result | Related Comment |
+| :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
+|     14 ||||||
+
 ### Orthogonal Scenarios 
 
 These are not radically different scenarios to the ones described already in the previous sections but variations that have to meet many of the same acceptance criteria.
+
+#### Branding
+
+Some branding options alter the normal wizard flow, skipping some pages or auto-filling some fields. These have to be considered when using OAuth as authentication method.
+
+- Authentication method: `Theme::forceConfigAuthType()` -> force http on OAuth2 server (normally is the opposite)
+- Server URL: `Theme::overrideServerUrl()` -> disable "Back" button on "Login in your browser" wizard's page.
+- User: `Theme::customUserID()` -> send the branding-defined username on the auth. requests (ref. https://github.com/owncloud/oauth2/issues/48).
 
 #### Multi-account support
 
@@ -58,19 +107,21 @@ Some considerations have to be taken into account to solve the issue of the desk
 - Specify the user name in the `authorize` call: https://github.com/owncloud/oauth2/issues/48 - This allows to request a specific user to login in the browser, if a different session is open, it offers the switch.
 - Do the logins in an ordered fashion. 
 
+Create an account on a server with a current valid session in the browser: **currently not supported**. This would require to input the username beforehand on the client's end by using it for the first `authorize` call.
+
 #### SAML accounts 
 
-**TBD** when the support for Shibboleth authentication wrapping is supported.
+**TBD** when the support for Shibboleth authentication wrapping is anounced.
 
 #### Same account on multiple, identical clients
 
-Currently not supported; reference: https://github.com/owncloud/oauth2/issues/64
+**Currently not supported**; reference: https://github.com/owncloud/oauth2/issues/64
 
 ### Preconditions Not Met
 
 It is important to also consider what does happen when one or more of the preconditions is not met. In this order:
 
-- Application "downgrade"/uninstall: reverse migration path - fallback options discussion. 
+- Application "downgrade"/uninstall: reverse migration path - fallback options discussion. -> https://github.com/owncloud/client/issues/5848
 - Desktop Client Configuration not correctly set up on the server: either wrong client_id, client_secret or both.
 - Apache headers/rewrite modules not enabled on the target server https://github.com/owncloud/oauth2/issues/49
 
