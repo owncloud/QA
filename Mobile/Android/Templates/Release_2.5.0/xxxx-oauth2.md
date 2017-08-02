@@ -79,6 +79,8 @@
 | 60 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
 | 61 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed |  |  |
 |**Upgrade**|||||||
-| 62 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
-| 63 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
-| 64 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
+| 62 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one without changes in server| Correct upgrade |  |  |
+| 63 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
+| 64 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login with basic | 1. Correct login<br>2. Correct login |  |  |
+| 65 | Migrate basic to OAuth2| 1. Login in a basic older server<br>2. Upgrade by enabling OAuth2 in server | Migration OK. Users access to the account without re-login |  |  |
+| 66 | Migrate OAuth2 to basic| 1. Login in a OAuth2 server<br>2. Upgrade by disabling OAuth2 in server | Migration OK. Users access to the account without re-login |  |  |

@@ -61,7 +61,7 @@
 | 43 | Refresh Token revoked | 1. After login, remove refresh token in DB<br> 2. Wait until session expires| Session is not refreshed. User redirected to login view |  |  |
 | 44 | Token revoked | After login, remove token | Session ends. User redirected to login view |  |  |
 | 45 | Change credentials | 1. In webUI, change password<br> 2. In app, after login, in settings view, go to edit credentials and enter new credentials | New token is received |  |  |
-| 46 | Edit credentials with other account | 1. In app, after login, in settings view, go to edit credentials and enter other user credentials | Account updated / Error shown |  |  |
+| 46 | Edit credentials with other account | In app, after login, in settings view, go to edit credentials and enter other user credentials | Account updated / Error shown |  |  |
 | 47 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore |  |  |
 | 48 | Remove client | In webUI, remove client | Not posible to authenticate anymore |  |  |
 | 49 | Remove OAuth2 app | In webUI, disable app | basic auth? |  |  |
@@ -77,10 +77,11 @@
 | 57 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
 | 58 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
 | 59 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed |  |  |
-|**Upgrade**|||||||
-| 60 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one | Correct upgrade |  |  |
-| 61 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login<br>2. Correct login |  |  |
+|**Upgrade & Migration**|||||||
+| 60 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one without changes in server| Correct upgrade |  |  |
+| 61 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login and account works<br>2. Correct login and account works |  |  |
 | 62 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
-| 63 | Migrate basic to OAuth2| 1. Login in a basic older server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK |  |  |
-| 64 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK |  |  |
-| 65 | Migrate with passcode enforced | 1. Login in a older basic server<br>2. Upgrade by migrating to a OAuth2 server and enforcing passcode in the app.<br>3. Miimize the app in the middle of the auth processOAuth2  | Migration OK and passcode asked and stored|  |  |
+| 63 | Migrate basic to OAuth2| 1. Login in a basic older server<br>2. Upgrade by enabling OAuth2 in server | Migration OK. Users access to the account without re-login |  |  |
+| 64 | Migrate OAuth2 to basic| 1. Login in a OAuth2 server<br>2. Upgrade by disabling OAuth2 in server | Migration OK. Users access to the account without re-login |  |  |
+| 65 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK. Users access to the account without re-login |  |  |
+| 66 | Migrate with passcode enforced | 1. Login in a older basic server<br>2. Upgrade by migrating to a OAuth2 server and enforcing passcode in the app.<br>3. Miimize the app in the middle of the auth process | Migration OK and passcode asked and stored|  |  |
