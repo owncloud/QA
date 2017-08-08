@@ -17,9 +17,9 @@
 | Share a file by link.                    | Link is created and can be accessed.     | :construction: |                 |
 | Share a file with another user.          | It is shared correctly.                  | :construction: |                 |
 | Share a file with a group.               | It is shared correctly.                  | :construction: |                 |
-| Share a file with another user in another server. | Federated shared happens correctly.      | :construction: |                 |
-| Share a folder with userB giving edit permissions, As userB open the recieved folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
-| Federate share a folder giving edit permissions with userB in serverB, As userB open the recieved folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
+| Share a file with another user in another server. | Federated sharing happens correctly.      | :construction: |                 |
+| Share a folder with userB giving edit permissions. As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
+| Federate share a folder giving edit permissions with userB in serverB, As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
 | **Desktop Client**                       |                                          |             |                 |
 | Set up two clients with the same user. Change files, add some, delete some, move some, create folders. | Changes sync properly in both clients without errors. | :construction: |                 |
 | Share a file using contextual menu with userB. | Option to share appears in the contextual menu and file is correctly shared. | :construction: |                 |

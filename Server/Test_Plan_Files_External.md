@@ -49,10 +49,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 17 | Rename file on oC webUI  | Verify file is renamed on S3 backend | :construction:  |
 18 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from S3 backend storage | :construction:  |
 19 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-20 | Connect S3 as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-21 | Connect S3 as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-22 | Connect S3 as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-23 | Delete S3 as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+20 | Connect S3 as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+21 | Connect S3 as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+22 | Connect S3 as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+23 | Delete S3 as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 24 | Edit some S3 config fields of external storage mount point | Check that the changes are applied | :construction:  |
 25 | Create a file on the webUI in S3 | verify there is no version  | :construction:  |
 26 | Edit file on the webUI in S3 | Verify version exists | :construction:  |
@@ -83,10 +83,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 45 | Rename file on oC webUI  | Verify file is renamed on DropBox backend | :construction:  |
 46 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from DropBox backend storage | :construction:  |
 47 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-48 | Connect DropBox as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-45 | Connect DropBox as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-46 | Connect DropBox as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-47 | Delete DropBox as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+48 | Connect DropBox as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+45 | Connect DropBox as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+46 | Connect DropBox as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+47 | Delete DropBox as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 48 | Edit some DropBox config fields of external storage mount point | Check that the changes are applied | :construction:  |
 49 | Create a file on the webUI in Dropbox | verify there is no version  | :construction:  |
 50 | Edit file on the webUI in Dropbox | Verify version exists | :construction:  |
@@ -117,10 +117,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 72 | Rename file on oC webUI  | Verify file is renamed on FTP backend | :construction:  |
 73 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from FTP backend storage | :construction:  |
 74 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-72 | Connect FTP as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-73 | Connect FTP as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-74 | Connect FTP as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-75 | Delete FTP as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+72 | Connect FTP as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+73 | Connect FTP as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+74 | Connect FTP as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+75 | Delete FTP as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 76 | Edit some FTP config fields of external storage mount point | Check that the changes are applied | :construction:  |
 77 | Create a file on the webUI in FTP | verify there is no version  | :construction:  |
 78 | Edit file on the webUI in FTP | Verify version exists | :construction:  |
@@ -151,10 +151,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 100 | Rename file on oC webUI  | Verify file is renamed on GoogleDrive backend | :construction:  |
 101 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from GoogleDrive backend storage | :construction:  |
 102 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-103 | Connect GoogleDrive as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-104 | Connect GoogleDrive as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-105 | Connect GoogleDrive as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-106 | Delete GoogleDrive as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+103 | Connect GoogleDrive as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+104 | Connect GoogleDrive as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+105 | Connect GoogleDrive as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+106 | Delete GoogleDrive as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 107 | Edit some GoogleDrive config fields of external storage mount point | Check that the changes are applied | :construction:  |
 108 | Create a file on the webUI in GoogleDrive | verify there is no version  | :construction:  |
 109 | Edit file on the webUI in GoogleDrive | Verify version exists | :construction:  |
@@ -185,10 +185,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 131 | Rename file on oC webUI  | Verify file is renamed on Local backend | :construction:  |
 132 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from Local backend storage | :construction:  |
 133 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-134 | Connect Local as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-135 | Connect Local as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-136 | Connect Local as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-137 | Delete Local as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+134 | Connect Local as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+135 | Connect Local as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+136 | Connect Local as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+137 | Delete Local as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 138 | Edit some Local config fields of external storage mount point | Check that the changes are applied | :construction:  |
 139 | Create a file on the webUI in Local | verify there is no version  | :construction:  |
 140 | Edit file on the webUI in Local | Verify version exists | :construction:  |
@@ -219,10 +219,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 162 | Rename file on oC webUI  | Verify file is renamed on OpenStack backend | :construction:  |
 163 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from OpenStack backend storage | :construction:  |
 164 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-165 | Connect OpenStack as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-166 | Connect OpenStack as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-167 | Connect OpenStack as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-168 | Delete OpenStack as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+165 | Connect OpenStack as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+166 | Connect OpenStack as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+167 | Connect OpenStack as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+168 | Delete OpenStack as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 169 | Edit some OpenStack config fields of external storage mount point | Check that the changes are applied | :construction:  |
 170 | Create a file on the webUI in OpenStack | verify there is no version  | :construction:  |
 171 | Edit file on the webUI in OpenStack | Verify version exists | :construction:  |
@@ -253,10 +253,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 193 | Rename file on oC webUI  | Verify file is renamed on ownCloud backend | :construction:  |
 194 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from ownCloud backend storage | :construction:  |
 195 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-196 | Connect ownCloud as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-197 | Connect ownCloud as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-198 | Connect ownCloud as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-199 | Delete ownCloud as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+196 | Connect ownCloud as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+197 | Connect ownCloud as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+198 | Connect ownCloud as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+199 | Delete ownCloud as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 200 | Edit some ownCloud config fields of external storage mount point | Check that the changes are applied | :construction:  |
 201 | Create a file on the webUI in ownCloud | verify there is no version  | :construction:  |
 202 | Edit file on the webUI in ownCloud | Verify version exists | :construction:  |
@@ -287,10 +287,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 224 | Rename file on oC webUI  | Verify file is renamed on SFTP backend | :construction:  |
 225 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from SFTP backend storage | :construction:  |
 226 | Restore file from the Deleted Items folder | verify it goes back to the proper location and the back end storage server | :construction:  |
-227 | Connect SFTP as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-228 | Connect SFTP as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-229 | Connect SFTP as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-230 | Delete SFTP as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+227 | Connect SFTP as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+228 | Connect SFTP as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+229 | Connect SFTP as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+230 | Delete SFTP as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 231 | Edit some SFTP config fields of external storage mount point | Check that the changes are applied | :construction:  |
 232 | Create a file on the webUI in SFTP | verify there is no version  | :construction:  |
 233 | Edit file on the webUI in SFTP | Verify version exists | :construction:  |
@@ -321,10 +321,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 254 | Rename file on oC webUI  | Verify file is renamed on SMB backend | :construction:  |
 255 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from SMB backend storage | :construction:  |
 256 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-257 | Connect SMB as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-258 | Connect SMB as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-259 | Connect SMB as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-260 | Delete SMB as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+257 | Connect SMB as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+258 | Connect SMB as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+259 | Connect SMB as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+260 | Delete SMB as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 261 | Edit some SMB config fields of external storage mount point | Check that the changes are applied | :construction:  |
 262 | Create a file on the webUI in SMB | verify there is no version  | :construction:  |
 263 | Edit file on the webUI in SMB | Verify version exists | :construction:  |
@@ -355,10 +355,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 285 | Rename file on oC webUI  | Verify file is renamed on WebDav backend | :construction:  |
 286 | Delete a file via the webUI  | verify it goes to Deleted Items folder; verify it is removed from WebDav backend storage | :construction:  |
 287 | Restore file from the Deleted Items folder  | verify it goes back to the proper location and the back end storage server | :construction:  |
-288 | Connect WebDav as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-289 | Connect WebDav as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-290 | Connect WebDav as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exits and works | :construction:  |
-291 | Delete WebDav as external storage | The mount dissapears from mount points list in admin view | :construction:  |
+288 | Connect WebDav as external storage in a oC server 8.2.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+289 | Connect WebDav as external storage in a oC server 8.1.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+290 | Connect WebDav as external storage in a oC server 8.0.X and upgrade to oC 9.X| Check that config still exists and works | :construction:  |
+291 | Delete WebDav as external storage | The mount disappears from mount points listed in admin view | :construction:  |
 292 | Edit some WebDav config fields of external storage mount point | Check that the changes are applied | :construction:  |
 293 | Create a file on the webUI in WebDav | verify there is no version  | :construction:  |
 294 | Edit file on the webUI in WebDav | Verify version exists | :construction:  |

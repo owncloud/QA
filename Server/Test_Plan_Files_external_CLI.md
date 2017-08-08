@@ -35,18 +35,18 @@ Add an applicable user to a S3 mountpoint via command line | The mountpoint is c
 Add an applicable user to a DropBox mountpoint via command line | The mountpoint is configured and visible only for the user | :construction:  |
 Add an applicable user to a GoogleDrive mountpoint via command line | The mountpoint is configured and visible only for the user | :construction:  |
 Add an applicable user to a SFTP mountpoint via command line | The mountpoint is configured and visible only for the user | :construction:  |
-Remove an applicable user to a S3 mountpoint via command line | The mountpoint is configured and applicable user condition is removed  | :construction:  |
-Remove an applicable user to a DropBox mountpoint via command line | The mountpoint is configured and applicable user condition is removed | :construction:  |
-Remove an applicable user to a GoogleDrive mountpoint via command line | The mountpoint is configured and applicable user condition is removed | :construction:  |
-Remove an applicable user to a SFTP mountpoint via command line | The mountpoint is configured and applicable user condition is removed | :construction:  |
+Remove an applicable user from a S3 mountpoint via command line | The mountpoint is configured and applicable user condition is removed  | :construction:  |
+Remove an applicable user from a DropBox mountpoint via command line | The mountpoint is configured and applicable user condition is removed | :construction:  |
+Remove an applicable user from a GoogleDrive mountpoint via command line | The mountpoint is configured and applicable user condition is removed | :construction:  |
+Remove an applicable user from a SFTP mountpoint via command line | The mountpoint is configured and applicable user condition is removed | :construction:  |
 Add an applicable group to a S3 mountpoint via command line | The mountpoint is configured and visible only for the group | :construction:  |
 Add an applicable group to a DropBox mountpoint via command line | The mountpoint is configured and visible only for the group | :construction:  |
 Add an applicable group to a GoogleDrive mountpoint via command line | The mountpoint is configured and visible only for the group | :construction:  |
 Add an applicable group to a SFTP mountpoint via command line | The mountpoint is configured and visible only for the group | :construction:  |
-Remove an applicable group to a S3 mountpoint via command line | The mountpoint is configured and applicable group condition is removed  | :construction:  |
-Remove an applicable group to a DropBox mountpoint via command line | The mountpoint is configured and applicable group condition is removed | :construction:  | | 
-Remove an applicable group to a GoogleDrive mountpoint via command line | The mountpoint is configured and applicable group condition is removed | :construction:  |
-Remove an applicable group to a SFTP mountpoint via command line | The mountpoint is configured and applicable group condition is removed | :construction:  |
+Remove an applicable group from a S3 mountpoint via command line | The mountpoint is configured and applicable group condition is removed  | :construction:  |
+Remove an applicable group from a DropBox mountpoint via command line | The mountpoint is configured and applicable group condition is removed | :construction:  | | 
+Remove an applicable group from a GoogleDrive mountpoint via command line | The mountpoint is configured and applicable group condition is removed | :construction:  |
+Remove an applicable group from a SFTP mountpoint via command line | The mountpoint is configured and applicable group condition is removed | :construction:  |
 Remove all applicable conditions of a S3 mountpoint via command line | The mountpoint is configured and applicable conditions are removed | :construction:  |
 Remove all applicable conditions of a DropBox mountpoint via command line | The mountpoint is configured and applicable conditions are removed | :construction:  |
 Remove all applicable conditions of a GoogleDrive mountpoint via command line | The mountpoint is configured and applicable conditions are removed | :construction:  |
@@ -59,13 +59,13 @@ After configuring some external storages mountpoints, run backends command via C
 Data configuration for exporting mountpoints is shown | Check that mount configurations are exported | :construction:  |
 | **files_external:import** |  |   |
 |  |   |
-Import the mountpoins from another server | Check that mount configurations are imported | :construction:  |
+Import the mountpoints from another server | Check that mount configurations are imported | :construction:  |
 **files_external:option** |  |   |
 |  |   |
-Change Mount option for a S3  mount | The option of the mountpoint is disable encryption. Check it with list command | :construction:  |
+Change Mount option for a S3 mount | The option of the mountpoint is disable encryption. Check it with list command | :construction:  |
 Change Mount option for a DropBox mount | The option of the mountpoint is disable sharing. Check it with list command | :construction:  |
-Change Mount option for a GoogleDrive  mount | The option of the mountpoint is change watcher policy. Check it with list command | :construction:  |
-Change Mount option for a SFTP  mount | The option of the mountpoint is ddisable thumbnail. Check it with list command | :construction:  |
+Change Mount option for a GoogleDrive mount | The option of the mountpoint is change watcher policy. Check it with list command | :construction:  |
+Change Mount option for a SFTP mount | The option of the mountpoint is ddisable thumbnail. Check it with list command | :construction:  |
 **files_external:list** |  |   |
 |  |   |
 Connect several external storages | Check the list of configured mounts is shown | :construction:  |

@@ -13,11 +13,11 @@
 
 | Test Case                                | Expected Result                          | Result         | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | -------------- | --------------- |
-| Update oC server via production channel | The update success and the files are available. Check the server status | :construction: |                 |
-| Update oC server via stable channel | The update success and the files are available. Check the server status | :construction: |                 |
-| Update oC server via beta channel | The update success and the files are available. Check the server status| :construction: |                 |
-| Update oC server via daily channel | The update success and the files are available. Check the server status | :construction: |                 |
-| Update oC server via production channel with encryption enabled | The update success and the files are available. Check the server status | :construction: |                 |
-| Update oC server via stable channel with encryption enabled | The update success and the files are available. Check the server status | :construction: |                 |
-| Update oC server via beta channel with encryption enabled | The update success and the files are available. Check the server status| :construction: |                 |
-| Update oC server via daily channel with encryption enabled | The update success and the files are available. Check the server status | :construction: |                 |
+| Update oC server via production channel | The update succeeds and the files are available. Check the server status | :construction: |                 |
+| Update oC server via stable channel | The update succeeds and the files are available. Check the server status | :construction: |                 |
+| Update oC server via beta channel | The update succeeds and the files are available. Check the server status| :construction: |                 |
+| Update oC server via daily channel | The update succeeds and the files are available. Check the server status | :construction: |                 |
+| Update oC server via production channel with encryption enabled | The update succeeds and the files are available. Check the server status | :construction: |                 |
+| Update oC server via stable channel with encryption enabled | The update succeeds and the files are available. Check the server status | :construction: |                 |
+| Update oC server via beta channel with encryption enabled | The update succeeds and the files are available. Check the server status| :construction: |                 |
+| Update oC server via daily channel with encryption enabled | The update succeeds and the files are available. Check the server status | :construction: |                 |
