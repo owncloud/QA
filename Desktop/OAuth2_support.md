@@ -14,18 +14,19 @@
 
 ### Test Scope Variability
 
-As pointed out in the preconditions, there has to be a browser installed in the underlying OS. As it's a critical piece for the auth. additionally to the multiplatform tests, we will consider the mainstream browsers to check all the testcases: **versions TBD**
+As pointed out in the preconditions, there has to be a browser installed in the underlying OS, as it's a critical piece for the auth. Additionally to the multiplatform tests, we will consider the mainstream browsers to check all the testcases: **versions TBD**
 
 - Mozilla Firefox
 - Google Chrome
 - Safari
 - Internet Explorer
+- Edge
 
-Each TC is considered to be independent, it's required both the session in the browser and the account created (if any) on the client to be removed prior to next test cases.
+Each TC is considered to be independent, it's required both the session in the browser and the account created (if any) on the client are to be removed prior to next test cases.
 
 ## Authentication
 
-Since the entrypoint is the same than in the rest of authentication methods (**the login form**) there's also some protocol-agnostic test-cases that are inherited from the appropriate testplan(s). e.g. account log-out, redirections, http/s alternatives... that should be checked for the full picture. In this document we're just gonna focus on **pure OAuth2 implementation-related test-cases**. For that, we have to differentiate between 2 scenarios:
+Since the entrypoint is the same as in the rest of authentication methods (**the login form**) there are also some protocol-agnostic test-cases that are inherited from the appropriate testplan(s). e.g. account log-out, redirections, http/s alternatives... that should be checked for the full picture. In this document we're just going to focus on **pure OAuth2 implementation-related test-cases**. For that, we have to differentiate between 2 scenarios:
 
 1. [Account Setup: Wizard](#account-setup)
 2. [Login into existing accounts](#existing-accounts)
@@ -41,8 +42,8 @@ Login from scratch, creating a new account.
 
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
-|      1 | Login on a clean browser | 1. Input the server URL on the account wizard, click next <br> 2. Input a valid account credentials on the login form in the browser opened <br> 3. Authorize the "Desktop client" application <br> 4. Use the default folder sync config | The account is created and syncing with the default config | :construction: ||
-|    1.1 | Authentication Request | When performing TC's s.1 | Verify: <ul> <li> The header `WWW-Authenticate: Bearer realm="ownCloud"` is included on the server's reply </li> <li> The query parameters `response_type=<code>`, `redirect_uri=`, `client_id=` are present **and** match the values described in [Preconditions](#preconditions) on the opened URL</li></ul> | :construction: ||
+|      1 | Login on a clean browser | 1. Input the server URL on the account wizard, click next <br> 2. Input valid account credentials on the login form in the browser opened <br> 3. Authorize the "Desktop client" application <br> 4. Use the default folder sync config | The account is created and syncing with the default config | :construction: ||
+|    1.1 | Authentication Request | When performing TC's s.1 | Verify: <ul> <li> The header `WWW-Authenticate: Bearer realm="ownCloud"` is included in the server's reply </li> <li> The query parameters `response_type=<code>`, `redirect_uri=`, `client_id=` are present **and** match the values described in [Preconditions](#preconditions) on the opened URL</li></ul> | :construction: ||
 |    1.2 | Access Token Request | After TC's s.3 (app authorization) | Verify the Access Token request contains the right values and is successful | :construction: | See Access Token Request below |
 |      2 | Login (authorize) on an already open session in the browser | 1. Open the server URL on the browser and login with valid credentials <br> 2. Use the same server URL on the client's new account wizard, click next <br> 3. Authorize the "Desktop client" application on the page opened | Same as **TC1** | :construction: ||
 
@@ -78,9 +79,9 @@ curl [...] \
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |      3 | Close the browser without authorizing the app | 1. Close the browser auth on TC1 s.2/3 | The wizard allows restarting the auth. process by opening a new browser | :construction: ||
-|      4 | Wait for more than 5 minutes without authorizing the application | 1. Wait for more than 5 minutes without completing TC1's s.2/3 | The wizard displays an error to state it's no longer waiting for the authorization but allows to restart the operation by launching a new browser | :construction: ||
+|      4 | Wait for more than 5 minutes without authorizing the application | 1. Wait for more than 5 minutes without completing TC1's s.2/3 | The wizard displays an error to state it's no longer waiting for the authorization but allows restarting the operation by launching a new browser | :construction: ||
 |      5 | Use the wrong password when trying to login | 1. Use the wrong username/password combination on TC1 s.2 | The client keeps waiting until a successful authorization is made / times out (TC4) and offers the option to restart the auth. process | :construction: | Being able to recover gracefully from this error depends on: https://github.com/owncloud/core/issues/28129 |
-|      6 | Go back on wizard's page 2 ("Login in your browser") | 1. Input the server URL on the account wizard, click next <br> 2. Click back | A new server URL can be used in the wizard; if used, the client will no longer listen for the redirection in the original `<random_port>` but in a different one | :construction: ||
+|      6 | Go back on wizard's page 2 ("Login in your browser") | 1. Input the server URL on the account wizard, click next <br> 2. Click back | A new server URL can be used in the wizard; if used, the client will no longer listen for the redirection on the original `<random_port>` but on a different one | :construction: ||
 |      7 | Close wizard in any step | 1. Use the window controls to close the wizard in any of the steps | No effect in the client: no account is included if any of the steps was not completed | :construction: ||
 
 <details>
@@ -136,13 +137,13 @@ _When tokens' hit their expiration date come to an end_ the OAuth2 refresh token
 
 #### Revoked token on the server / Logged out account
 
-Even though the OAuth2 app does not support token revocation just yet, we can anticipate an scenario where this will be implemented (as it happens with sessions/application passwords). This result can be artificially achieved either by _erasing the access & refresh token from the server DB or tampering with the one stored in the keychain_. This scenario only differs from the one in [Expired token](#expired-token) in terms of that the refresh token is no longer valid/non-existent as grant_type and re-authorization will be required from the webUI.
+Even though the OAuth2 app does not support token revocation just yet, we can anticipate a scenario where this will be implemented (as it happens with sessions/application passwords). This result can be artificially achieved either by _erasing the access & refresh token from the server DB or tampering with the one stored in the keychain_. This scenario only differs from the one in [Expired token](#expired-token) in that the refresh token is no longer valid/non-existent as grant_type and re-authorization will be required from the webUI.
 
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |     13 | Edit/Remove the refresh token from the server DB/client keychain | 1. Remove the refresh token from the server DB | Same as **TC8** | :construction: ||
 |     14 | Client restart w/ logged out account | 1. Log out from an OAuth account in the client <br> 2. Restart the client <br> 3. Complete the login process | Refresh token is erased from the keychain after s.1 <br> Account is logged back in after s.3 | :construction: ||
-|     15 | Any of the previous TC: 13, 14 loging in the WebUI as a different user | 1. Input a different, valid account on the login form | Verify an additional `user` query parameter with the expected user is included in the Authentication Request (see TC1.1) <br> The authorization page gets explicit about the accounts mismatch and offers the chance to log out and log back in as the expected user | :construction: | See https://github.com/owncloud/client/pull/5907. <br> Also depends on https://github.com/owncloud/core/issues/28129 |
+|     15 | Any of the previous TC: 13, 14 logging in the WebUI as a different user | 1. Input a different, valid account on the login form | Verify an additional `user` query parameter with the expected user is included in the Authentication Request (see TC1.1) <br> The authorization page gets explicit about the accounts mismatch and offers the chance to log out and log back in as the expected user | :construction: | See https://github.com/owncloud/client/pull/5907. <br> Also depends on https://github.com/owncloud/core/issues/28129 |
 
 ### Orthogonal Scenarios 
 
@@ -150,7 +151,7 @@ These are not semantically different scenarios to the ones described already in 
 
 #### Branding
 
-Some branding options alter the normal wizard flow, skipping pages or auto-filling some fields. These have to be considered when using OAuth as authentication method on account-creation time. (ref. https://github.com/owncloud/client/issues/5914)
+Some branding options alter the normal wizard flow, skipping pages or auto-filling some fields. These have to be considered when using OAuth as authentication method at account-creation time. (ref. https://github.com/owncloud/client/issues/5914)
 
 - Authentication method: `Theme::forceConfigAuthType()` -> force a different auth method (normally OAuth has priority)
     - **TBD** if additional "force X auth" branding configuration would be required. ref. https://github.com/owncloud/client/issues/5914#issuecomment-316641336 
@@ -163,11 +164,11 @@ Some branding options alter the normal wizard flow, skipping pages or auto-filli
 
 #### Multi-account support
 
-Some considerations have to be taken into account to solve the issue of the desktop client not being able to open independent and clean WebViews (as the mobile clients use) https://github.com/owncloud/client/issues/5895: this means server supporting ways to wrap nicely the workflow.
+Some considerations have to be taken into account to solve the issue of the desktop client not being able to open independent and clean WebViews (as the mobile clients use) https://github.com/owncloud/client/issues/5895: this means server supporting ways to wrap the workflow nicely.
 
-**Creating** a new account in the client in a server with a current valid and different session in the browser: **is currently not supported**. This would require to input the username beforehand on the client's end to use it for the first `authorize` call.
+**Creating** a new account in the client in a server with a current valid and different session in the browser: **is currently not supported**. This would require input of the username beforehand on the client's end to use it for the first `authorize` call.
 
-- Specify the user name in the `authorize` call: https://github.com/owncloud/oauth2/issues/48 - This allows to request a specific user to login in the browser, if a different session is open, it offers the switch.
+- Specify the user name in the `authorize` call: https://github.com/owncloud/oauth2/issues/48 - This allows requesting a specific user to login in to the browser. If a different session is open, it offers the switch.
 - :warning: Do the logins in an ordered fashion. 
 
 | TestID | Test Case | Steps | Expected Result | Result | Related Comment |
