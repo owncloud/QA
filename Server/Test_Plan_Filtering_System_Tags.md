@@ -2,18 +2,18 @@
 
 | Test Case                                | Expected Result                          | Result | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | ------ | --------------- |
-| Assign tags to files and folders, include tags with special characters. Assign tags to files inside nested directories. Go to the tags section. Search them. | Files or folders tagged appear.          |        |                 |
-| Having many tags assigned including 'tag1' and 'tag2'. Search files and folders which has 'tag1 and 'tag2' | Only files or folders with both tags appear. |        |                 |
-| Having many tags assigned including 'tag1' but no 'tag2'. Search files and folders which has 'tag1 and 'tag2' | No results are returned.                 |        |                 |
+| Assign tags to files and folders, include tags with special characters. Assign tags to files inside nested directories. Go to the tags section. Search for them. | Files or folders tagged appear.          |        |                 |
+| Having many tags assigned including 'tag1' and 'tag2'. Search for files and folders which have 'tag1 and 'tag2' | Only files or folders with both tags appear. |        |                 |
+| Having many tags assigned including 'tag1' but no 'tag2'. Search for files and folders which have 'tag1 and 'tag2' | No results are returned.                 |        |                 |
 | After filtering tagged files and folders. Check file actions: rename, move, delete files. | Actions happen without problems.         |        |                 |
 | After filtering tagged files and folders. Open sidebar and check that comments, activities and share info are loaded properly. | No problems when opening the sidebar.    |        |                 |
-| Having many tags assigned to files and folders, filter by a tag. See results, bookmark the page on your browser. Close the browser, open it again, go to the bookmarked page. | Same results from first filtering  appear. |        |                 |
-| Search tags using internet explorer 11.  | Files or folders tagged appear.          |        |                 |
-| Search tags using safari.                | Files or folders tagged appear.          |        |                 |
-| Search tags using firefox.               | Files or folders tagged appear.          |        |                 |
-| Search tags using chrome.                | Files or folders tagged appear.          |        |                 |
-| Search tags using edge.                  | Files or folders tagged appear.          |        |                 |
-| Having tags on files and folders assigned, deassign some. Go to the tags section. Search them. | Files and folders with deassigned tags doesn't appear. |        |                 |
+| Having many tags assigned to files and folders, filter by a tag. See results, bookmark the page on your browser. Close the browser, open it again, go to the bookmarked page. | Same results from first filtering appear. |        |                 |
+| Search for tags using internet explorer 11. | Files or folders tagged appear.          |        |                 |
+| Search for tags using safari.            | Files or folders tagged appear.          |        |                 |
+| Search for tags using firefox.           | Files or folders tagged appear.          |        |                 |
+| Search for tags using chrome.            | Files or folders tagged appear.          |        |                 |
+| Search for tags using edge.              | Files or folders tagged appear.          |        |                 |
+| Having tags on files and folders assigned, deassign some. Go to the tags section. Search for them. | Files and folders with deassigned tags do not appear. |        |                 |
 | Assign tags to shared files and files in external storage. Filter them. | Files or folders tagged appear.          |        |                 |
 | Enabling encryption and ldap, assign tags using an ldap user luser1, share those files with another ldap user luser2 Filter tags using luser2. | Luser2 can see the tags assigned by luser1. |        |                 |
 

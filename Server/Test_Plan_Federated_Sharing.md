@@ -28,53 +28,53 @@ Previous requirements
 | Test Case                                | Expected Result                          | Result         | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | -------------- | --------------- |
 | **Federated share**                      |                                          |                |                 |
-| share a file (server A) to (server B)    | shared file can be seen from the server B | :construction: |                 |
-| share a folder (server A) to (server B)  | shared folder can be seen from the server B and access to its contents | :construction: |                 |
-| unshare a file / folder in your owncloud (server B) | shared file is no longer visible from the server B | :construction: |                 |
-| share a file (server A) in (server B), delete file in server A | shared file is no longer visible from the server B | :construction: |                 |
-| share a file password-protected (server A) with the correct password (server B) | shared file can be seen from the server B | :construction: |                 |
+| share a file (server A) to (server B)    | shared file can be seen from server B    | :construction: |                 |
+| share a folder (server A) to (server B)  | shared folder can be seen from server B and its contents can be accessed | :construction: |                 |
+| unshare a file / folder in your owncloud (server B) | shared file is no longer visible from server B | :construction: |                 |
+| share a file (server A) in (server B), delete file in server A | shared file is no longer visible from server B | :construction: |                 |
+| share a file password-protected (server A) with the correct password (server B) | shared file can be seen from server B | :construction: |                 |
 | share a file (server A) with a wrong password (server B) | Error is notified and file isn't visible | :construction: |                 |
 | share a file password-protected (server A), with the correct password (server B), change the password (server A) | file isn't accessible anymore            | :construction: |                 |
 | share a folder (server A) allowing editing (server B), upload a file inside the folder (server B) | file is shown in server A                | :construction: |                 |
 | share a file (server A) in (server B), update the file in server A | file is updated in server B              | :construction: |                 |
-| share a file  (server A), in (server B) using an openLDAP user | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A), in (server B) using an Active Directory user | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A) in (server B) using different oC versions | shared file can be seen from the server B | :construction: |                 |
-| share a file (server A), in (server B) using different oC versions | shared file can be seen from the server B | :construction: |                 |
-| share a file (server A), in (server B) using different oC versions both servers with encryption | shared file can be seen from the server B | :construction: |                 |
-| share a file (server A) to (server B) and edit it | shared file can be seen modified from the server B | :construction: |                 |
+| share a file  (server A), in (server B) using an openLDAP user | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A), in (server B) using an Active Directory user | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A) in (server B) using different oC versions | shared file can be seen from server B | :construction: |                 |
+| share a file (server A), in (server B) using different oC versions | shared file can be seen from server B | :construction: |                 |
+| share a file (server A), in (server B) using different oC versions both servers with encryption | shared file can be seen from server B | :construction: |                 |
+| share a file (server A) to (server B) and edit it | shared file can be seen modified from server B | :construction: |                 |
 | share a file (server A) to (server B) and edit it from B. (Allowed editing marked when sharing) | shared file can be seen modified from both servers. | :construction: |                 |
-| share a folder (server A) to (server B) and edit it | shared folder can be seen modified from the server B | :construction: |                 |
-| share a file (server A) to (server B) and rename it in A | shared file in A is seen with the new name and old named in B | :construction: |                 |
-| share a file (server A) to (server B) and rename it from B | shared file can be seen renamed from the server B and old named in A | :construction: |                 |
-| share a folder (server A) to (server B) and rename it in A | shared folder can be seen renamed from the server B | :construction: |                 |
-| share a folder (server A) to (server B) and rename it in B | shared folder can be seen renamed from the server B and old named in A | :construction: |                 |
-| share a folder (server A) to (server B) and rename a file in dir | shared file can be seen renamed from the server B | :construction: |                 |
+| share a folder (server A) to (server B) and edit it | shared folder can be seen modified from server B | :construction: |                 |
+| share a file (server A) to (server B) and rename it in A | shared file in A is seen with the new name, and with the old name in B | :construction: |                 |
+| share a file (server A) to (server B) and rename it from B | shared file can be seen renamed from server B and with the old name in A | :construction: |                 |
+| share a folder (server A) to (server B) and rename it in A | shared folder can be seen renamed from server B | :construction: |                 |
+| share a folder (server A) to (server B) and rename it in B | shared folder can be seen renamed from server B and with the old name in A | :construction: |                 |
+| share a folder (server A) to (server B) and rename a file in dir | shared file can be seen renamed from server B | :construction: |                 |
 | share a folder (server A) to (server B) and rename a file in dir B | shared file can be seen renamed from both servers | :construction: |                 |
 | share a folder (server A) to (server B) and delete a file in dir B | shared file can be seen only in server A | :construction: |                 |
 | share a folder (server A) to (server B) and add files in dir in B | added files can be seen in both servers  | :construction: |                 |
 | share a file (server A) to (server B) with a group in B | shared file can be seen from the group of server B | :construction: |                 |
 | **Federated shared links**               |                                          |                |                 |
-| share a file with link (server A), add link to your owncloud (server B) | shared file can be seen from the server B | :construction: |                 |
-| share a folder with link (server A), add link to your owncloud (server B) | shared folder can be seen from the server B and access to its contents | :construction: |                 |
-| unshare a file / folder in your owncloud (server B) | shared file is no longer visible from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B), delete file in server A | shared file is no longer visible from the server B | :construction: |                 |
-| share a file with link password-protected (server A), add link to your owncloud with the correct password (server B) | shared file can be seen from the server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) | shared file can be seen from server B | :construction: |                 |
+| share a folder with link (server A), add link to your owncloud (server B) | shared folder can be seen from server B and its contents can be accessed | :construction: |                 |
+| unshare a file / folder in your owncloud (server B) | shared file is no longer visible from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B), delete file in server A | shared file is no longer visible from server B | :construction: |                 |
+| share a file with link password-protected (server A), add link to your owncloud with the correct password (server B) | shared file can be seen from server B | :construction: |                 |
 | share a file with link password-protected (server A), add link to your owncloud with a wrong password (server B) | Error is notified and file isn't visible | :construction: |                 |
 | share a file with link password-protected (server A), add link to your owncloud with the correct password (server B), change the password (server A) | file isn't accessible anymore            | :construction: |                 |
 | share a folder with link (server A) allowing editing, add link to your owncloud (server B), upload a file inside the folder (server B) | file is shown in server A                | :construction: |                 |
 | share a file with link (server A), add link to your owncloud (server B), update the file in server A | file is updated in server B              | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) using an openLDAP user | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) using an Active Directory user | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) using different O.C versions | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) using different O.C versions | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) using different O.C versions both servers with encryption | shared file can be seen from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) and modify the file from server A | shared file can be seen modified from the server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) using an openLDAP user | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) using an Active Directory user | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) using different O.C versions | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) using different O.C versions | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) using different O.C versions both servers with encryption | shared file can be seen from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) and modify the file from server A | shared file can be seen modified from server B | :construction: |                 |
 | share a file with link (server A), add link to your owncloud (server B) and modify the file from server B (allow editing marked when sharing) | shared file can be seen modified from both servers. | :construction: |                 |
-| share a folder with link (server A), add link to your owncloud (server B) and modify the folder | shared folder can be seen from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) and rename the file | shared file can be seen renamed from the server B | :construction: |                 |
-| share a file with link (server A), add link to your owncloud (server B) and rename the file | shared file can be seen renamed from the server B and old named in A | :construction: |                 |
-| share a folder with link (server A), add link to your owncloud (server B) and rename the folder | shared folder can be seen renamed from the server B | :construction: |                 |
+| share a folder with link (server A), add link to your owncloud (server B) and modify the folder | shared folder can be seen from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) and rename the file | shared file can be seen renamed from server B | :construction: |                 |
+| share a file with link (server A), add link to your owncloud (server B) and rename the file | shared file can be seen renamed from server B and with the old name in A | :construction: |                 |
+| share a folder with link (server A), add link to your owncloud (server B) and rename the folder | shared folder can be seen renamed from server B | :construction: |                 |
 | share a folder with link (server A) to (server B) and add files in dir in B | added files can be seen in both servers  | :construction: |                 |
 | share a folder with link (server A) to (server B) and delete a file in dir B | shared file can be seen only in server A | :construction: |                 |
 | share a folder with link (server A) to (server B) and rename a file in dir B | shared file can be seen renamed from both servers | :construction: |                 |
