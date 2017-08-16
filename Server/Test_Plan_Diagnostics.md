@@ -31,11 +31,11 @@ Examples of the logged elements:
 | Enable the app                           | No problems found                        | :construction: |                 |
 | Having a server with several users and groups, click on the textfield to select users. | Only users appear, not groups, and they can be selected without problems. | :construction: |                 |
 | Click on the checkbox to allow collecting all data. | The user selection dissapears.           | :construction: |                 |
-| Choose in the dropdown about "what to log" Nothing | No idea what is this for                 | :construction: |                 |
-| Clean the log file. Choose in the dropdown about "what to log" Summary | The log is correctly saved and only has summaries. | :construction: |                 |
-| Clean the log file. Choose in the dropdown about "what to log" All queries. | The log is correctly saved and only has queries. | 🚧             |                 |
-| Clean the log file. Choose in the dropdown about "what to log" All events. | The log is correctly saved and only has events. | 🚧             |                 |
-| Clean the log file. Choose in the dropdown about "what to log" Everything | The log is correctly saved and has queries, events and summaries. | 🚧             |                 |
+| With "allow collecting all data" checkbox enabled. Clean the log file. Choose in the dropdown about "what to log" Summary | The log is correctly saved and only has summaries. | :construction: |                 |
+| With "allow collecting all data" checkbox enabled. Clean the log file. Choose in the dropdown about "what to log" All queries. | The log is correctly saved and only has queries. | 🚧             |                 |
+| With "allow collecting all data" checkbox enabled. Clean the log file. Choose in the dropdown about "what to log" All events. | The log is correctly saved and only has events. | 🚧             |                 |
+| With "allow collecting all data" checkbox enabled. Clean the log file. Choose in the dropdown about "what to log" Everything | The log is correctly saved and has queries, events and summaries. | 🚧             |                 |
+| With "allow collecting all data" checkbox enabled. Having chosen in the dropdown about "what to log" Nothing | Logging stops.                           | :construction: |                 |
 | **Particular users**                     |                                          |                |                 |
 | Disable the checkbox to allow collecting all data. Choose a particular user 'user1'. Choose in the dropdown about "what to log" Summary | The log is correctly saved and only has summaries of 'user1' | 🚧             |                 |
 | Disable the checkbox to allow collecting all data. Choose a particular user 'user1'. Choose in the dropdown about "what to log" all queries. | The log is correctly saved and only has queries of 'user1' | 🚧             |                 |
