@@ -34,17 +34,29 @@
 | Having no other admin in a custom group, as group owner try to remove your own admin permissions. | A group owner cannot remove his own admin permissions if there is no other owner in the group | :gear:         |                 |
 | Check that a non-existing user cannot be added to a custom group |                                          | :gear:         |                 |
 | **Using frontend**                       |                                          |                |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
-|                                          |                                          | 🚧             |                 |
+| Create a custom group.                   | Custom group is created correctly.       | 🚧             |                 |
+| Create an already existing custom group. | The group cannot be created again. A warning appears. | 🚧             |                 |
+| Delete a custom group.                   | The group is removed correctly.          | 🚧             |                 |
+| Rename a custom group.                   | The group is renamed correctly.          | 🚧             |                 |
+| As a creator of a custom group add members. | Members are added correctly.             | 🚧             |                 |
+| As regular user member of a custom group check the users in the custom groups. | You can see the other members.           | 🚧             |                 |
+| As non-admin member of a custom group try to add members. | Non-admin member cannot add members. There is no UI element to do it. | 🚧             |                 |
+| As non-admin member of a custom group try to delete a custom group | A non-admin member of a custom group cannot delete a custom group. | 🚧             |                 |
+| As a creator of a custom group try to remove members. | Creator of a custom group can remove members. | 🚧             |                 |
+| As a non-admin member of a custom group try to remove members | Not even possible.                       | 🚧             |                 |
+| Not having more admins on a custom group, as group owner try to remove yourself from the group | Group owner cannot remove self if no other admin exists in the group. | 🚧             |                 |
+| As member of a custom group leave the custom group. | A member of a custom group can leave the custom group himself. | 🚧             |                 |
+| As a user check the groups you belong to. | A user can list his groups.              | 🚧             |                 |
+| As owner of a group, try to change the role of a member of the group. | Role is changed successfully.            | 🚧             |                 |
+| Create a custom group and let user 'member1' as admin. | 'member1' is the new admin of the group. No problems. | 🚧             |                 |
+| As member converted to group owner add members to group, remove members, change roles and list members. | A member converted to group owner can do the same as group owner | :construction: |                 |
+| Having no other admin in a custom group, as group owner try to remove your own admin permissions. | A group owner cannot remove his own admin permissions if there is no other owner in the group | :construction: |                 |
 | **Browsers**                             |                                          |                |                 |
 | Check that all the UI elements are usable when browsing with safari |                                          | :construction: |                 |
 | Check that all the UI elements are usable when browsing with chrome |                                          | :construction: |                 |
 | Check that all the UI elements are usable when browsing with firefox |                                          | :construction: |                 |
 | Check that all the UI elements are usable when browsing with edge |                                          | :construction: |                 |
 | Check that all the UI elements are usable when browsing with IE11 |                                          | :construction: |                 |
+| **Extra cases**                          |                                          |                |                 |
+| Set up an ldap server. Create a custom group and add ldap users as members. | They can use customgroups without problems. | :construction: |                 |
+| Check that ldap users appear with their display name instead of the uuid. |                                          | :construction: |                 |
