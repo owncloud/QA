@@ -5,6 +5,7 @@
 | Test Case                                | Expected Result                          | Result         | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | -------------- | --------------- |
 | Enable the app.                          | No problems found.                       | :gear:         |                 |
+| Enable the app using CLI.                | No problems found.                       | :gear:         |                 |
 | Create a custom group.                   | Custom group is created correctly.       | :gear:         |                 |
 | Create an already existing custom group. | The group cannot be created again.       | :gear:         |                 |
 | Delete a custom group.                   | The group is removed correctly.          | :gear:         |                 |
