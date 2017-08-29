@@ -59,28 +59,28 @@ Server: 10.0.3 beta (with LDAP users)
 | 38 | Several OAuth2 same server | Attach several OAuth2 accounts of the same server on the same device. Check correct expirations. | All correct | F m9 | Shown files view. Instant uploads. |
 | 39 | Several OAuth2 different server | Attach several OAuth2 accounts of different servers on the same device | All correct | F m9 | Shown files view. Instant uploads. |
 | 40 | Several OAuth2 expiration | 1. Attach several OAuth2 accounts of different servers on the same device<br>2. Wait until one session expires. | Expired session is refresed. The other sessions keep alive |  |  |
-| 41 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  |  | 
-| 42 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | Not posible |  |  |
+| 41 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  P m9|  | 
+| 42 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | Not posible | P m9 |  |
 |**External actions**|||||||
 | 43 | Refresh Token revoked | 1. After login, remove refresh token in DB<br> 2. Wait until session expires| Session is not refreshed. User redirected to login view |  |  |
-| 44 | Token revoked | After login, remove token | Session ends. User redirected to login view |  |  |
-| 45 | Change credentials | 1. In webUI, change password<br> 2. In app, after login, in settings view, go to edit credentials and enter new credentials | New token is received |  |  |
-| 46 | Edit credentials with other account | In app, after login, in settings view, go to edit credentials and enter other user credentials | Account updated / Error shown |  |  |
-| 47 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore |  |  |
-| 48 | Remove client | In webUI, remove client | Not posible to authenticate anymore |  |  |
-| 49 | Remove OAuth2 app | In webUI, disable app | basic auth? |  |  |
+| 44 | Token revoked | After login, remove token | Session ends. User redirected to login view | P m9 |  |
+| 45 | Change credentials | 1. In webUI, change password<br> 2. In app, after login, in settings view, go to edit credentials and enter new credentials | New token is received | P m9 | accumulation of sessions in server |
+| 46 | Edit credentials with other account | In app, after login, in settings view, go to edit credentials and enter other user credentials | Account updated / Error shown | P m9 |  |
+| 47 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore | P m9 |  |
+| 48 | Remove client | In webUI, remove client | Not posible to authenticate anymore | F m9 | files view opened in web view |
+| 49 | Remove OAuth2 app | In webUI, disable app | basic auth | P m9 |  |
 |**Errors**|||||||
-| 50 | No internet connection | 1. Disable internet connection in device<br>2. Try to login in OAuth2 | Correct error |  |  |
-| 51 | No server connection | 1. Switch server off in device<br>2. Try to login in OAuth2 | Correct error |  |  |
-| 52 | Maintenance mode login | 1. Enable maintenance mode<br>2. Try to login in OAuth2 | Correct error |  |  |
-| 53 | Firewall mode login | Enable a firewall rule to ban the login<br>2. Try to login in OAuth2 | Correct error |  |  |
+| 50 | No internet connection | 1. Disable internet connection in device<br>2. Try to login in OAuth2 | Correct error | F m9 | Message improvable |
+| 51 | No server connection | 1. Switch server off in device<br>2. Try to login in OAuth2 | Correct error | F m9 | Message improvable |
+| 52 | Maintenance mode login | 1. Enable maintenance mode<br>2. Try to login in OAuth2 | Correct error | F m9 | Less info than before |
+| 53 | Firewall mode login | Enable a firewall rule to ban the login<br>2. Try to login in OAuth2 | Correct error | NA | Server allows login. Not allows other operations |
 |**Regression**|||||||
-| 54 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 54 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success | P m9 |  |
 | 55 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
 | 56 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
 | 57 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 58 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 59 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed |  |  |
+| 58 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success | P m9 |  |
+| 59 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed | P m9 | check with https non secured |
 |**Upgrade & Migration**|||||||
 | 60 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one without changes in server| Correct upgrade |  |  |
 | 61 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login and account works<br>2. Correct login and account works |  |  |
