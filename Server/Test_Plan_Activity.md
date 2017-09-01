@@ -20,8 +20,8 @@ Check that all activities done with my user in this Testplan are shown in this s
 Check that all activities done dealing with my user by other users in this Testplan are shown in this section |  | :construction:  |
 An LDAP user shares a file with my user | Check that LDAP username is shown properly in this section | :construction:  |
 An LDAP user edits a file shared with my user | Check that LDAP username is shown properly in this section | :construction:  |
-A Shibboleth user shares a file with my user | Check that LDAP username is shown properly in this section | :construction:  |
-A Shibboleth user edits a file shared with my user | Check that LDAP username is shown properly in this section | :construction:  |
+A Shibboleth user shares a file with my user | Check that Shibboleth username is shown properly in this section | :construction:  |
+A Shibboleth user edits a file shared with my user | Check that Shibboleth username is shown properly in this section | :construction:  |
 **Favorites section**|  |   |
 |  |   |
 Make favorite a file | Check that the notification is shown in activity section and in the sidebar | :construction:  |
