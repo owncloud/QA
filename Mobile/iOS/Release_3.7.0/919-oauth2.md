@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/ios/pull/919 
 
-Devices: iPhone 6 v9.2
+Devices: iPhone 6 v9.2, iPhone6 Plus v10.0.1
 
 Server: 10.0.3 beta (with LDAP users)
 
@@ -76,16 +76,17 @@ Server: 10.0.3 beta (with LDAP users)
 | 53 | Firewall mode login | Enable a firewall rule to ban the login<br>2. Try to login in OAuth2 | Correct error | NA | Server allows login. Not allows other operations |
 |**Regression**|||||||
 | 54 | Basic Auth server | Open a session in a basic auth server and perform some actions (create folder, update, download, share...) | Success | P m9 |  |
-| 55 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success |  |  |
-| 56 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view |  |  |
-| 57 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success |  |  |
+| 55 | SAML server | Open a session in a SAML server and perform some actions (create folder, update, download, share...) | Success | P m10 |  |
+| 56 | SAML expiration | Open a session in a SAML server and wait until it expires | Redirected to iDP credentials view | P m10 |  |
+| 57 | Redirected | Open a session in a redirected server and perform some actions (create folder, update, download, share...) | Success | P m10 |  |
 | 58 | Redirected with subfolder| Open a session in a redirected server with subfolder and perform some actions (create folder, update, download, share...) | Success | P m9 |  |
 | 59 | VideoStreaming | Stream a video in a OAuth2 server | Video is streamed | P m9 | check with https non secured |
 |**Upgrade & Migration**|||||||
-| 60 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one without changes in server| Correct upgrade |  |  |
-| 61 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login and account works<br>2. Correct login and account works |  |  |
-| 62 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login |  |  |
-| 63 | Migrate basic to OAuth2| 1. Login in a basic older server<br>2. Upgrade by enabling OAuth2 in server | Migration OK. Users access to the account without re-login |  |  |
-| 64 | Migrate OAuth2 to basic| 1. Login in a OAuth2 server<br>2. Upgrade by disabling OAuth2 in server | Migration OK. Users access to the account without re-login |  |  |
-| 65 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK. Users access to the account without re-login |  |  |
-| 66 | Migrate with passcode enforced | 1. Login in a older basic server<br>2. Upgrade by migrating to a OAuth2 server and enforcing passcode in the app.<br>3. Miimize the app in the middle of the auth process | Migration OK and passcode asked and stored|  |  |
+| 60 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one without changes in server| Correct upgrade | P m10 |  |
+| 61 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login and account works<br>2. Correct login and account works | P m10 | Not migrated. Remains as basic. New ones are OAuth2 |
+| 62 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login | P m10 |  |
+| 63 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK. Users access to the account without re-login | F m10 | Error after migrating |
+| 63 | Migrate OAuth2 to OAuth2| 1. Login in a OAuth2 server<br>2. Upgrade by migrating to a different OAuth2 server | Migration OK. | F m10 | Credentials required twice |
+| 63 | Migrate OAuth2 to SAML| 1. Login in a OAuth2 server<br>2. Upgrade by migrating to a SAML server | Migration OK. | F m10 | Credentials required twice |
+| 63 | Migrate OAuth2 to basic| 1. Login in a OAuth2 server<br>2. Upgrade by migrating to a basic server | Migration OK. | P m10 |  |
+| 64 | Migrate with passcode enforced | 1. Login in a older basic server<br>2. Upgrade by migrating to a OAuth2 server and enforcing passcode in the app.<br>3. Miimize the app in the middle of the auth process | Migration OK and passcode asked and stored| F m10 | Credentials required twice |
