@@ -2,7 +2,7 @@
 
 ### Environment #1:
 
-**Ubuntu 14.04 without encryption. Using Chrome as main browser.**
+**Ubuntu 16.04 without encryption. Using Chrome as main browser.**
 
 TestID | Test Case | Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------
@@ -42,7 +42,7 @@ TestID | Test Case | Expected Result | Result | Related Comment
 
 ### Environment #2:
 
-**Ubuntu 14.04 enabling encryption from beginning. Use Firefox :cat: as main browser.**
+**Ubuntu 16.04 enabling encryption from beginning. Use Firefox :cat: as main browser.**
 
 
 TestID | Test Case | Expected Result | Result | Related Comment
@@ -121,7 +121,7 @@ TestID | Test Case | Expected Result | Result | Related Comment
 
 ### Environment #4:
 
-**Ubuntu 14.04 without encryption. Use an iPad with Safari :iphone: as main browser.**
+**Ubuntu 16.04 without encryption. Use an iPad with Safari :iphone: as main browser.**
 
 TestID | Test Case | Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------
