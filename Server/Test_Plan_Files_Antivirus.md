@@ -139,14 +139,14 @@ curl --user $user:$pwd http://$host/$path/remote.php/webdav/virus-chunking-1234-
 
 5. upload v2 dav path without chunking
 ```
-curl --user $user:$pwd http://$host/$path/remote.php/dav/files/admin/virus --request PUT --data-binary "@eicar.com"
+curl --user $user:$pwd http://$host/$path/remote.php/dav/files/$user/virus --request PUT --data-binary "@eicar.com"
 ```
 
 6. upload v2 dav path with chunking
 The amount of chunks might vary depending on the split size and the original file size
 ```
-curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/admin/12345 --request MKCOL
-curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/admin/12345/0 --request PUT --data-binary "@eicar.com_00"
-curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/admin/12345/1 --request PUT --data-binary "@eicar.com_01"
-curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/admin/12345/.file --request MOVE -H "Destination: http://$host/$path/remote.php/dav/files/admin/virus"
+curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345 --request MKCOL
+curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345/0 --request PUT --data-binary "@eicar.com_00"
+curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345/1 --request PUT --data-binary "@eicar.com_01"
+curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345/.file --request MOVE -H "Destination: http://$host/$path/remote.php/dav/files/$user/virus"
  ```
