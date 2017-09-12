@@ -3,20 +3,20 @@
 | Test Case                                | Expected Result                          | Result      | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | ----------- | --------------- |
 | **Web UI**                               |                                          |             |                 |
-| Login with admin user.                   | Admin logs in.                           | :construction: |                 |
-| Create a text file.                      | Text editor can open, file is saved.     | :construction: |                 |
-| Modify a text file.                      | File can be modified, no problems found. | :construction: |                 |
-| Rename a file.                           | File is renamed.                         | :construction: |                 |
+| Login with admin user.                   | Admin logs in.                           | :gear: |                 |
+| Create a text file.                      | Text editor can open, file is saved.     | :gear: |                 |
+| Modify a text file.                      | File can be modified, no problems found. | :gear: |                 |
+| Rename a file.                           | File is renamed.                         | :gear: |                 |
 | Upload a file.                           | File is uploaded, no problems found.     | :construction: |                 |
 | Overwrite a file by uploading a new version. | File is uploaded and overwritten, no problems found. | :construction: |                 |
 | Remove a file.                           | File is removed correctly, it appears in the trashbin. | :construction: |                 |
 | Move a file inside a folder.             | There are not problems on the process.   | :construction: |                 |
-| Create a folder.                         | Folder is created, no MKCOL problems appear. | :construction: |                 |
-| Delete a folder.                         | Folder is removed.                       | :construction: |                 |
+| Create a folder.                         | Folder is created, no MKCOL problems appear. | :gear: |                 |
+| Delete a folder.                         | Folder is removed.                       | :gear: |                 |
 | Move a folder inside another.            | No problems while moving the folder.     | :construction: |                 |
 | Share a file by link.                    | Link is created and can be accessed.     | :construction: |                 |
-| Share a file with another user.          | It is shared correctly.                  | :construction: |                 |
-| Share a file with a group.               | It is shared correctly.                  | :construction: |                 |
+| Share a file with another user.          | It is shared correctly.                  | :gear: |                 |
+| Share a file with a group.               | It is shared correctly.                  | :gear: |                 |
 | Share a file with another user in another server. | Federated sharing happens correctly.      | :construction: |                 |
 | Share a folder with userB giving edit permissions. As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
 | Federate share a folder giving edit permissions with userB in serverB, As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
