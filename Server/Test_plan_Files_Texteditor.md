@@ -13,8 +13,8 @@ The individual test cases here cover basic functionality, and illustrate the ran
 Manually performing all the individual test cases can be done, and will give basic confidence in the text editor behavior,
 however it is not necessary to manually perform test cases already covered automatically.
 
-| Test Case | Steps | Expected result | Result  | Related Comment
-| :---------| :---- | :-------------- | :------:|---------------
+| Test Case | Steps | Expected result | Result  | Related Comment |
+| :---------| :---- | :-------------- | :------:| --------------- |
 | UI test suite | Run the automated UI test suite | All tests pass | :construction: | |
 | Create a text file | Use "+", "Text file", enter a file name, then enter some text in the file and close the editor window. | File is listed in folder and contains the entered text | :gear: | |
 | Create a text file with the default name | Use "+", "Text file", press enter, then enter some text in the file and close the editor window. | "New text file.txt" is listed in folder and contains the entered text | :gear: | |
@@ -26,3 +26,5 @@ however it is not necessary to manually perform test cases already covered autom
 | Create a text file ".part" | Use "+", "Text file", enter a name ending in ".part". | A tooltip is shown '"filename.part" has a forbidden file type/extension' | :gear: | |
 | Edit an existing file | Choose an existing text file and open it. Edit the text. Close the editor window. | The changed text is saved in the file. | :gear: | |
 | Perform the above tests in a sub-folder | Create a folder and navigate into it. Create and edit text files in the subfolder, like in the steps above. | Same results as above. | :gear: | |
+| Cannot create a text file when app disabled | As an admin, disable the files_texteditor app. As a regular user, go to the files page and click the "+". | An entry for "Text file" does not appear. | :construction: | |
+| Cannot edit a text file when app disabled | As an admin, disable the files_texteditor app, . As a regular user, go to the files page and click on an existing text file. | No text editor window appears. You are prompted to download the file. | :construction: | |
