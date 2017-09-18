@@ -9,11 +9,11 @@
 | Rename a file.                           | File is renamed.                         | :gear: |                 |
 | Upload a file.                           | File is uploaded, no problems found.     | :construction: |                 |
 | Overwrite a file by uploading a new version. | File is uploaded and overwritten, no problems found. | :construction: |                 |
-| Remove a file.                           | File is removed correctly, it appears in the trashbin. | :construction: |                 |
-| Move a file inside a folder.             | There are not problems on the process.   | :construction: |                 |
+| Remove a file.                           | File is removed correctly, it appears in the trashbin. | :gear: |                 |
+| Move a file inside a folder.             | There are not problems on the process.   | :gear: |                 |
 | Create a folder.                         | Folder is created, no MKCOL problems appear. | :gear: |                 |
 | Delete a folder.                         | Folder is removed.                       | :gear: |                 |
-| Move a folder inside another.            | No problems while moving the folder.     | :construction: |                 |
+| Move a folder inside another.            | No problems while moving the folder.     | :gear: |                 |
 | Share a file by link.                    | Link is created and can be accessed.     | :construction: |                 |
 | Share a file with another user.          | It is shared correctly.                  | :gear: |                 |
 | Share a file with a group.               | It is shared correctly.                  | :gear: |                 |
