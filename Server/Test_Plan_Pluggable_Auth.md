@@ -11,7 +11,7 @@
 6. Add 2 users to each group.
 7. Upload files with all of them.
 8. Create some folders for each user.
-9. Linux environment: Ubuntu 14.04  mysql and apache with ssl activated
+9. Linux environment: Ubuntu 16.04  mysql and apache with ssl activated
 
 
 ## Testing functionality
