@@ -54,7 +54,7 @@ Server: 10.0.3 (with LDAP users)
 | 35 | Share with oC | With OAuth2 session active, share content from an external app | Success | P m9 t10 |  |
 |**Session ends/refresh**||||||
 | 36 | Session Expired | 1. Wait until token is refreshed<br> 2. Perform actions (download, upload, delete, move, remove) | New token is used in the requests and the action is performed | F t10 | Uploads file if triggered before expiration |
-| 37 | Session Expired - external | 1. Wait until token is refreshed out of the app<br> 2. From an external app, send content once the token is expired | New token is used in the requests and the action is performed|  |  |
+| 37 | Session Expired - external | 1. Wait until token is refreshed out of the app<br> 2. From an external app, send content once the token is expired | New token is used in the requests and the action is performed|  | Pending server issue |
 |**Multiaccount**|||||||
 | 38 | Several OAuth2 same server | Attach several OAuth2 accounts of the same server on the same device. Check correct expirations. | All correct | P m9 t10 | FIXED: Shown files view. Instant uploads. |
 | 39 | Several OAuth2 different server | Attach several OAuth2 accounts of different servers on the same device | All correct | P m9 t10 | FIXED: Shown files view. Instant uploads. |
@@ -62,13 +62,13 @@ Server: 10.0.3 (with LDAP users)
 | 41 | OAuth2 + basic | Attach an OAuth2 and a basic auth accounts to the same device | All correct |  P m9 t10 |  | 
 | 42 | OAuth2 + SAML | Attach an OAuth2 and a SAML auth accounts to the same device | Not posible | P m9 t10 |  |
 |**External actions**|||||||
-| 43 | Refresh Token revoked | 1. After login, remove refresh token in DB<br> 2. Wait until session expires| Session is not refreshed. User redirected to login view | F t10 | Not redirected to login |
-| 44 | Token revoked | After login, remove token | Session ends. User redirected to login view | P m9 F t10 | Not redirected to login  |
-| 45 | Change credentials | 1. In webUI, change password<br> 2. In app, after login, in settings view, go to edit credentials and enter new credentials | New token is received | P m9 F t10 | Crash after editing |
+| 43 | Refresh Token revoked | 1. After login, remove refresh token in DB<br> 2. Wait until session expires| Session is not refreshed. User redirected to login view | P t10 | FIXED: Not redirected to login |
+| 44 | Token revoked | After login, remove token (and refresh) | Session ends. User redirected to login view | P m9 t10 | Not redirected to login  |
+| 45 | Change credentials | 1. In webUI, change password<br> 2. In app, after login, in settings view, go to edit credentials and enter new credentials | New token is received | P m9 t10 | FIXED: Crash after editing |
 | 46 | Edit credentials with other account | In app, after login, in settings view, go to edit credentials and enter other user credentials | Account updated / Error shown | P m9 t10 |  |
-| 47 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore | P m9 F t10| Check again after fix in 43. and 44. |
+| 47 | User deleted | 1. In webUI, remove user | Session ends. User redirected to login view and can not login anymore | P m9 t10| FIXED: Check again after fix in 43. and 44. |
 | 48 | Remove client | In webUI, remove client | Not posible to authenticate anymore | P m9 | FIXED: files view opened in web view |
-| 49 | Remove OAuth2 app | In webUI, disable app | basic auth | P m9 F t10 | Crash |
+| 49 | Remove OAuth2 app | In webUI, disable app | basic auth | P m9 t10 | FIXED: Crash |
 |**Errors**|||||||
 | 50 | No internet connection | 1. Disable internet connection in device<br>2. Try to login in OAuth2 | Correct error | P m9 t10 | FIXED: Message improvable |
 | 51 | No server connection | 1. Switch server off in device<br>2. Try to login in OAuth2 | Correct error | P m9 t10 | FIXED: Message improvable |
