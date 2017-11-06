@@ -24,3 +24,5 @@
 | 11 | Server 9.1 | Copy private link in a Server 9.1 | Correct behaviour |  |  |
 | 12 | Server 9.0 | Copy private link in a Server 9.0 | Correct behaviour |  |  |
 | 13 | Server 8.2 | Copy private link in a Server 8.2 | Correct behaviour |  |  |
+|**Upgrade**|||||||
+| 14 | Upgrade from latest version | 1. Install latest version<br>2. Upgrade to that one |  |  |  |
