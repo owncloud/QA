@@ -54,7 +54,7 @@ Server: 10.0.3 (with LDAP users)
 | 35 | Share with oC | With OAuth2 session active, share content from an external app | Success | P m9 t10 |  |
 |**Session ends/refresh**||||||
 | 36 | Session Expired | 1. Wait until token is refreshed<br> 2. Perform actions (download, upload, delete, move, remove) | New token is used in the requests and the action is performed | F t10 | Uploads file if triggered before expiration |
-| 37 | Session Expired - external | 1. Wait until token is refreshed out of the app<br> 2. From an external app, send content once the token is expired | New token is used in the requests and the action is performed|  | Pending server issue |
+| 37 | Session Expired - external | 1. Wait until token is refreshed out of the app<br> 2. From an external app, send content once the token is expired | New token is used in the requests and the action is performed| delayed | Pending server issue |
 |**Multiaccount**|||||||
 | 38 | Several OAuth2 same server | Attach several OAuth2 accounts of the same server on the same device. Check correct expirations. | All correct | P m9 t10 | FIXED: Shown files view. Instant uploads. |
 | 39 | Several OAuth2 different server | Attach several OAuth2 accounts of different servers on the same device | All correct | P m9 t10 | FIXED: Shown files view. Instant uploads. |
@@ -84,7 +84,7 @@ Server: 10.0.3 (with LDAP users)
 |**Upgrade & Migration**|||||||
 | 60 | Upgrade app from older version with basic | 1. Install an older version (basic auth)<br>2. Upgrade to this one without changes in server| Correct upgrade | P m10 t10 |  |
 | 61 | Upgrade auth method server (to OAuth2)| 1. Login in a server without OAuth2<br>2. Enable OAuth2 in server<br>3. Login again with OAuth2 | 1. Correct login and account works<br>2. Correct login and account works | P m10 t10 | New ones are OAuth2. Older need a edit credentials to become OAuth2 |
-| 62 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login | P m10 F t10| Crash when OAuth2 is disabled. |
+| 62 | Upgrade auth method server (to basic)| 1. Login in a server with OAuth2<br>2. Disable OAuth2 in server<br>3. Login again with basic | 1. Correct login<br>2. Correct login | P m10 t10| FIXED: Crash when OAuth2 is disabled. |
 | 63 | Migrate SAML to OAuth2| 1. Login in a older SAML server<br>2. Upgrade by migrating to a OAuth2 server | Migration OK. Users access to the account without re-login | P m10 t10 | FIXED: Error after migrating |
 | 64 | Migrate OAuth2 to OAuth2| 1. Login in a OAuth2 server<br>2. Upgrade by migrating to a different OAuth2 server | Migration OK. | P m10 t10 | FIXED: Credentials required twice |
 | 65 | Migrate OAuth2 to SAML| 1. Login in a OAuth2 server<br>2. Upgrade by migrating to a SAML server | Migration OK. | P m10 t10 | FIXED Credentials required twice |
