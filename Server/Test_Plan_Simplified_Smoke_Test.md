@@ -14,7 +14,7 @@
 | Create a folder.                         | Folder is created, no MKCOL problems appear. | :gear: |                 |
 | Delete a folder.                         | Folder is removed.                       | :gear: |                 |
 | Move a folder inside another.            | No problems while moving the folder.     | :gear: |                 |
-| Share a file by link.                    | Link is created and can be accessed.     | :construction: |                 |
+| Share a file by link.                    | Link is created and can be accessed.     | :gear: |                 |
 | Share a file with another user.          | It is shared correctly.                  | :gear: |                 |
 | Share a file with a group.               | It is shared correctly.                  | :gear: |                 |
 | Share a file with another user in another server. | Federated sharing happens correctly.      | :construction: |                 |
