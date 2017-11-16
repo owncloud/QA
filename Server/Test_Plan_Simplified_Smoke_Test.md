@@ -7,8 +7,8 @@
 | Create a text file.                      | Text editor can open, file is saved.     | :gear: |                 |
 | Modify a text file.                      | File can be modified, no problems found. | :gear: |                 |
 | Rename a file.                           | File is renamed.                         | :gear: |                 |
-| Upload a file.                           | File is uploaded, no problems found.     | :construction: |                 |
-| Overwrite a file by uploading a new version. | File is uploaded and overwritten, no problems found. | :construction: |                 |
+| Upload a file.                           | File is uploaded, no problems found.     | :gear: |                 |
+| Overwrite a file by uploading a new version. | File is uploaded and overwritten, no problems found. | :gear: |                 |
 | Remove a file.                           | File is removed correctly, it appears in the trashbin. | :gear: |                 |
 | Move a file inside a folder.             | There are not problems on the process.   | :gear: |                 |
 | Create a folder.                         | Folder is created, no MKCOL problems appear. | :gear: |                 |
