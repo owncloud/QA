@@ -18,7 +18,7 @@
 | Share a file with another user.          | It is shared correctly.                  | :gear: |                 |
 | Share a file with a group.               | It is shared correctly.                  | :gear: |                 |
 | Share a file with another user in another server. | Federated sharing happens correctly.      | :gear: |                 |
-| Share a folder with userB giving edit permissions. As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
+| Share a folder with userB giving edit permissions. As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :gear: |                 |
 | Federate share a folder giving edit permissions with userB in serverB, As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :construction: |                 |
 | **Desktop Client**                       |                                          |             |                 |
 | Set up two clients with the same user. Change files, add some, delete some, move some, create folders. | Changes sync properly in both clients without errors. | :construction: |                 |
