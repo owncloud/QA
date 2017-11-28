@@ -28,5 +28,7 @@ This aims to be a client-agnostic testplan for the OAuth2 application, centered 
 | Successful [Authorization Request] with a valid session in the browser | The "Authorize" screen is displayed | :construction: | |
 | Successful [Authorization Request] in a browser with a different user logged in | The "Switch User" screen is displayed, allowing to modify the current session | :construction: | See use of the additional `user` parameter in: https://github.com/owncloud/oauth2/pull/67 |
 | Failed attempt in the authorization login form | The query parameters for the [Authorization Request] are preserved in next attempts | :construction: | See original issue in: https://github.com/owncloud/core/issues/28129 |
+| **Relevant Smoke Tests** | | |
+| Unauthenticated Actions: Public File Drop | Files get uploaded normally | :construction: | See https://github.com/owncloud/oauth2/pull/100 |
 
 [Authorization Request]: https://github.com/owncloud/oauth2/#protocol-flow
