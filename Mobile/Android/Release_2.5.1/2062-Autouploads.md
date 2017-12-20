@@ -45,5 +45,8 @@ Devices: Galaxy Note 4 v6, Nexus 6P v7, Nexus 5X v8
 | 24 | Switch option | 1. Enable "only wifi"<br> 2. Take pics and videos under 4G<br>3. After some time, disable "only wifi" and take pics&videos<br> |2. Pics and videos queued<br>3. Pics and videos uploaded and previous keep queued | P m7 |  |
 | 25 | Mixed | 1. Enable "only wifi" for pics and disable for videos<br> 2. Take pics and videos under 4G | Pics queued and videos uploaded| P m7 |  |
 | 26 | Mixed II | 1. Enable "only wifi" for videos and disable for pics<br> 2. Take pics and videos under 4G | Pics uploaded and videos queued| P m7 |  |
+|**Camera folder**|||||||
+| 27 | Different camera folder | Take pics with other camera app | Pics never uploaded | P m7 |  |
+| 28 | Switch camera | 1. Take pics<br> 2. Switch camera path<br>3. Take more pics within the new camera app<br> | Pics from new camera folder are uploaded | P m7 |  |
 |**Upgrade**|||||||
-| 27 | Upgrade from latest version | 1. Install latest version<br>2. Upgrade to that one | Correct config in settings view |  |  |
+| 28 | Upgrade from latest version | 1. Install latest version<br>2. Upgrade to that one | Correct config in settings view |  |  |
