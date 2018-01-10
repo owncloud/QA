@@ -2,9 +2,6 @@
 
 #### Pr: https://github.com/owncloud/android/pull/2062
 
-Server: 10.0.3, 10.0.4
-
-Devices: Galaxy Note 4 v6, Nexus 6P v7, Nexus 5X v8, Nexus 9 v7
 
 ---
 
