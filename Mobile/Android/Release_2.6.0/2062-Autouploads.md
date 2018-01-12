@@ -48,4 +48,4 @@ Devices: Galaxy Note 4 v6, Nexus 6P v7, Nexus 5X v8, Nexus 9 v7
 |**Upload folder**|||||||
 | 27 | Different upload folder | 1. Take pics and videos<br>2. Change upload folder in both pics and videos | Pics and videos uploaded to the correct folder | P t7 m8 |  |
 |**Upgrade**|||||||
-| 28 | Upgrade from latest version | 1. Install latest version<br>2. Upgrade to that one | Correct config in settings view | F t7 m8 | Reset set-up |
+| 28 | Upgrade from latest version | 1. Install latest version<br>2. Upgrade to that one | Correct config in settings view | F t7 m8 | RESETED |
