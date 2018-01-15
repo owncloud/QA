@@ -136,6 +136,24 @@ The amount of chunks might vary depending on the split size and the original fil
 curl --user $user:$pwd http://$host/$path/remote.php/webdav/virus-chunking-1234-2-0 --request PUT --data-binary "@eicar.com_00" -H "OC-Chunked:1"
 curl --user $user:$pwd http://$host/$path/remote.php/webdav/virus-chunking-1234-2-1 --request PUT --data-binary "@eicar.com_01" -H "OC-Chunked:1"
 ```
+or to do all 3 uploads in a loop:
+```
+BASEFILES="eicar.com eicar_com.zip eicarcom2.zip"
+for BASEFILE in $BASEFILES
+do
+    ID=$RANDOM
+    NUM=0
+    FILES=`ls ${BASEFILE}_*`
+    COUNT=`echo $FILES | wc -w`
+    echo uploading $FILES
+    for FILE in $FILES
+    do
+        echo chunk name: VIRUS$BASEFILE-chunking-${ID}-${COUNT}-${NUM}
+        curl --user $user:$pwd http://$host/$path/remote.php/webdav/VIRUS$BASEFILE-chunking-${ID}-${COUNT}-${NUM} --request PUT --data-binary "@$FILE" -H "OC-Chunked:1"
+        let NUM=NUM+1
+    done
+done
+```
 
 5. upload v2 dav path without chunking
 ```
@@ -150,3 +168,22 @@ curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345/0 -
 curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345/1 --request PUT --data-binary "@eicar.com_01"
 curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/12345/.file --request MOVE -H "Destination: http://$host/$path/remote.php/dav/files/$user/virus"
  ```
+or to do all 3 uploads in a loop:
+```
+BASEFILES="eicar.com eicar_com.zip eicarcom2.zip"
+for BASEFILE in $BASEFILES
+do
+    ID=$RANDOM
+    curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/$ID --request MKCOL
+    NUM=0
+    FILES=`ls ${BASEFILE}_*`
+    echo uploading $FILES
+    for FILE in $FILES
+    do
+        curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/$ID/$NUM --request PUT --data-binary "@$FILE"
+        let NUM=NUM+1
+    done
+    echo "moving $BASEFILE"
+    curl --user $user:$pwd http://$host/$path/remote.php/dav/uploads/$user/$ID/.file --request MOVE -H "Destination: http://$host/$path/remote.php/dav/files/$user/virus_$BASEFILE"
+done
+```
