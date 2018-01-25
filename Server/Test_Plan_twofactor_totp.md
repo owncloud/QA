@@ -18,5 +18,3 @@
 | Check the login process is possible using edge |                                          | 🚧             | <br />          |
 | Check the login process is possible using internet explorer 11 |                                          | 🚧             | <br />          |
 | Check the login process is possible using safari |                                          | 🚧             |                 |
-| **Special cases**                        |                                          |                |                 |
-| Having a server using shibboleth. <br /><br />Using a non admin user myself, enable totp in the personal settings.<br />Having the app freeotp (android or ios) scan the QR code provided and set it up.<br />Login using myself, get a new code in the freeotp app. Introduce it in the login view. Login. |                                          | 🚧             |                 |
