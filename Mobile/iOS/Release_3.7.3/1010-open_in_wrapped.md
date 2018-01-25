@@ -16,7 +16,7 @@ Server: 10.0.4
 | 1 | iPhone | 1. Swipe over a file and select Open with | All apps available | P m10 m11  |  |
 | 2 | iPad  | 1. Swipe over a file and select Open with | All apps available | P t10 t11 |  |
 |**wrapped**|||||||
-| 3 | iPhone without whitelist | 1. Swipe over a file and select Open with | All apps available | P m11  |  |
-| 4 | iPad  without whitelist | 1. Swipe over a file and select Open with | All apps available | P t11 |  |
-| 5 | iPhone with whitelist| 1. Swipe over a file and select Open with | Only whitelisted app can open the file | P m11  |  |
-| 6 | iPad with whitelist | 1. Swipe over a file and select Open with | Only whitelisted app can open the file | P t11 |  |
+| 3 | iPhone without whitelist | 1. Swipe over a file and select Open with | All apps available | P m11 m10 |  |
+| 4 | iPad  without whitelist | 1. Swipe over a file and select Open with | All apps available | P t11 t10 |  |
+| 5 | iPhone with whitelist| 1. Swipe over a file and select Open with | Only whitelisted app can open the file | P m11 P m10  |  |
+| 6 | iPad with whitelist | 1. Swipe over a file and select Open with | Only whitelisted app can open the file | P t11 t10 |  |
