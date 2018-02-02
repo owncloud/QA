@@ -1,7 +1,6 @@
 ###  Camera uploads
 
-#### Pr: https://github.com/owncloud/android/pull/2075
-
+#### Pr: https://github.com/owncloud/android/pull/2097
 ---
 
  
