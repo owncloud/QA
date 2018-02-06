@@ -10,15 +10,15 @@
 | :----: | :-------- | :---- | :-------------- | :----: | :-------------- |
 |**Root**|||||||
 | 1 | File in root supported downloaded | 1. Get private link of a supported format downloaded file in root<br>2. Open the link in the device | App is opened and the file is opened |  |  |
-| 2 | File in root supported not downloaded | 1. Get private link of a  supported format downloaded file in root<br>2. Open the link in the device | App is opened and the file is highlighted |  |  |
+| 2 | File in root supported not downloaded | 1. Get private link of a  supported format downloaded file in root<br>2. Open the link in the device | App is opened and the file is downloaded and opened |  |  |
 | 3 | File in root not supported downloaded | 1. Get private link of a non-supported format file in root<br>2. Open the link in the device | App is opened and the file is highlighted |  |  |
-| 4 | File in root not supported not downloaded | 1. Get private link of a non-supported format non-downloaded file in root<br>2. Open the link in the device | App is opened and the file is downloaded and opened |  |  |
+| 4 | File in root not supported not downloaded | 1. Get private link of a non-supported format non-downloaded file in root<br>2. Open the link in the device | App is opened and the file is highlighted |  |  |
 |**Non-root cached**|||||||
-| 5 | Non-Root folder | 1. Get private link of a cached folder in root<br>2. Open the link in the device | App is opened and the content of the folder is shown |  |  |
+| 5 | Non-Root folder | 1. Get private link of a cached folder in non-root<br>2. Open the link in the device | App is opened and the content of the folder is shown |  |  |
 | 6 | File in non-root supported downloaded | 1. Get private link of a supported format downloaded file in non-root folder, which is cached<br>2. Open the link in the device | App is opened and the file is opened |  |  |
-| 7 | File in non-root supported not downloaded | 1. Get private link of a  supported format downloaded file in non-root folder, which is cached<br>2. Open the link in the device | App is opened and the file is highlighted |  |  |
+| 7 | File in non-root supported not downloaded | 1. Get private link of a  supported format downloaded file in non-root folder, which is cached<br>2. Open the link in the device | App is opened and the file is opened |  |  |
 | 8 | File in non-root not supported downloaded | 1. Get private link of a non-supported format file in non-root folder, which is cached<br>2. Open the link in the device | App is opened and the file is highlighted |  |  |
-| 9 | File in non-root not supported not downloaded | 1. Get private link of a non-supported format non-downloaded file in non-root folder, which is cached<br>2. Open the link in the device | App is opened and the file is downloaded and opened |  |  |
+| 9 | File in non-root not supported not downloaded | 1. Get private link of a non-supported format non-downloaded file in non-root folder, which is cached<br>2. Open the link in the device | App is opened and the file is highlighted |  |  |
 |**Non-root non-cached**|||||||
 | 10 | Non-Root folder | 1. Get private link of a non-cached folder in root<br>2. Open the link in the device | App is opened and the content of the folder is shown |  |  |
 | 11 | File in non-root supported | 1. Get private link of a supported format downloaded file in non-root folder, which is non-cached<br>2. Open the link in the device | App is opened and the file is opened |  |  |
@@ -37,3 +37,4 @@
 | 22 | File not accesible | 1. Get private link of a non-accesible file<br>2. Open the link in a device  | File can not be shown, correct error message? |  |  |
 | 23 | Folder not accesible | 1. Get private link of a item non-accesible folder<br>2. Open the link in a device  | Folder can not be shown, correct error message? |  |  |
 | 24 | App not installed | Get private link of a non-cached file or folder | Opened in browser |  |  |
+| 25 | Public link | Get public link of a folder | Opened in browser |  |  |
