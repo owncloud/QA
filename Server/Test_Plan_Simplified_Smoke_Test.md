@@ -2,6 +2,8 @@
 
 | Test Case                                | Expected Result                          | Result      | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | ----------- | --------------- |
+| **Automated Checks**                     |                                          |             |                 |
+| Travis nightly cron job with UI tests on chrome, firefox, Edge, IE11 | All tests pass on the release branch | :construction: | Note: IE11 tests have intermittent issues with IE webdriver, it is acceptable to restart failed test suites to see that they will pass |
 | **Web UI**                               |                                          |             |                 |
 | Login with admin user.                   | Admin logs in.                           | :gear: |                 |
 | Create a text file.                      | Text editor can open, file is saved.     | :gear: |                 |
