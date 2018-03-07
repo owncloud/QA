@@ -18,4 +18,8 @@
 | 7 | Skip III | Skip welcome wizard in the 3. slide| Login view appears |  |  |
 | 8 | Skip IV | Skip welcome wizard in the 4. slide| Login view appears |  |  |
 | 9 | Skip V | Skip welcome wizard in the 5. slide| Login view appears |  |  |
+|**Upgrade**|||||
+| 10 | Release | 1. Install previous version<br>2. Install current version| Welcome wizard does not appear |  |  |
+| 11 | Beta | 1. Install previous version<br>2. Install current version| Welcome wizard does not appear |  |  |
+| 12 | New upgrade after the first | 1. Install the current version<br>2. Install other version| Welcome wizard does not appear |  |  |
 
