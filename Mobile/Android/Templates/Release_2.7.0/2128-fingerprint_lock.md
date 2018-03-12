@@ -25,6 +25,5 @@
 |**Externals**||||||
 | 13 | Share with oC | 1. Enable passcode lock + fingerprint<br>2. Share content from an external app with oC | Fingerprint is asked  |  |  |
 | 14 | Send copied text with oC | 1. Enable passcode lock + fingerprint<br>2. Send copied text from an external app with oC | Fingerprint is asked  |  |  |
-| 15 | Open with an external app | 1. Enable passcode lock + fingerprint<br>2. With an extenal app, open some oC content| Fingerprint is asked  |  |  |
-| 16 | Remove files in settings| 1. Enable passcode lock + fingerprint<br>2. Go to Android settings and remove local date and cache | Fingerprint is asked  |  |  |
+| 15 | Remove files in settings| 1. Enable passcode lock + fingerprint<br>2. Go to Android settings and remove local date and cache | Fingerprint is asked  |  |  |
 
