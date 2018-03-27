@@ -11,16 +11,16 @@ This aims to be a client-agnostic testplan for the OAuth2 application, centered 
 | --------- | --------------- | ------ | --------------- |
 | **CLI commands** | | |
 | Enable OAuth2 app via CLI using `occ app:enable oauth2` | - The apps gets enabled <br> - Replies from the WebDAV endpoint includes a new `WWW-Authenticate: Bearer...` header | :construction: | |
-| Disable OAuth2 app via CLI using `occ app:disable oauth2` | - The apps gets disabled <br> - Previously menctioned header goes away in further requests | :construction: | |
+| Disable OAuth2 app via CLI using `occ app:disable oauth2` | - The apps gets disabled <br> - Previously mentioned header goes away in further requests | :construction: | |
 | **Registered Clients** | | |
 | Default clients | The default Registered clients are included among the "Settings > Admin > User Authentication" OAuth 2.0: Registered Clients | :construction: | See https://github.com/owncloud/oauth2/pull/38 for the default values |
-| Register new Client | 64-character-lenght `client_id` and `client_secret` are generated together with a (optional) Client Name and a (required) Redirection URL | :construction: | |
+| Register new Client | 64-character-length `client_id` and `client_secret` are generated together with a (optional) Client Name and a (required) Redirection URL | :construction: | |
 | Remove a Client | - Confirmation dialog is prompted before removal <br> - All client sessions opened from those clients get removed | :construction: | |
 | **Unregistered Clients** | | |
 | Authentication flow from an unregistered client | Unsuccessful [Authorization Request] | :construction: | Browser displays the "Request not valid" screen.|
 | **Authorized Applications** | | |
 | Login with a Registered Client | The Client Name is displayed amongst the "Personal > Security" OAuth 2.0 Authorized Applications | :construction: | |
-| Session Revocation (i.e. delete Authorized Aplication) | All the sessions opened in the clients are revoked and must be re-authorized | :construction: | |
+| Session Revocation (i.e. delete Authorized Application) | All the sessions opened in the clients are revoked and must be re-authorized | :construction: | |
 | **User Account Handling** | | |
 | Password change | Open sessions are revoked and new credentials must be used in further login attempts | :construction: | |
 | **Authorization Flow** | | |
