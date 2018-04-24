@@ -5,9 +5,8 @@
 
 ---
 
- 
-| Test Case | Steps | Expected Result | Result | Related Comment
-:------: | :------------- | :------------- | :-------------- | :-----: | :------
+| Num | Test Case | Steps | Expected Result | Result | Related Comment
+| :-: | :-------: | :---- | :-------------- | :----- | :-----:
 |**Create OAuth2 session**||||||
 | 1 | Chrome | Enter en OAuth2 server URL | Chrome is shown and authentication is correct. Check that the cookies in auth process are not present in app during session|  |  |
 | 2 | Firefox | Enter en OAuth2 server URL | Firefox is shown and authentication is correct. Check that the cookies in auth process are not present in app during session|  |  |
