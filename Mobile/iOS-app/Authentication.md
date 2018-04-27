@@ -1,9 +1,9 @@
 ### Feature name 
 
-#### PR: https://github.com/owncloud/ios-app/pull/8 
+#### PR: https://github.com/owncloud/ios-app/pull/27
 
 Device/s: <br>
-Server:
+Server: 10.0.7
 
 Number of tests:  <br>
 Number of automated tests:   <br>
