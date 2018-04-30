@@ -2,7 +2,7 @@
 
 #### PR: https://github.com/owncloud/ios-app/pull/27
 
-Device/s: <br>
+Device/s: iPhoneX 11.3<br>
 Server: 10.0.7
 
 Number of tests:  <br>
@@ -16,8 +16,8 @@ Coverage: <br>
 | Test Case | Steps | Expected | Result | Related Comment / Bug link | Automated |
 | :-------- | :---- | :------- | :----- | :------------------------- | :-------: |
 |**URL**||||||
-| Empty URL | Let empty URL | Correct issue indicating error ||||
-| Incorrect URL | Set Incorrect URL | Correct issue indicating error ||||
+| Empty URL | Let empty URL | Correct issue indicating error | P m11 | Nothing happens ? ||
+| Incorrect URL | Set Incorrect URL | Correct issue indicating error | F m11 | Nothing happens ? ||
 | No prefix SSL I | Input non-secure-SSL URL with no protocol | Show certificate |  |  |  |
 | No prefix SSL II | Input secure-SSL URL with no protocol | Show certificate - passed validation| |||
 | No prefix http | Input http URL with no protocol | SSL error ||||
