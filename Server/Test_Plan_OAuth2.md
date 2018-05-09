@@ -17,17 +17,17 @@ This aims to be a client-agnostic testplan for the OAuth2 application, centered 
 | Register new Client | 64-character-length `client_id` and `client_secret` are generated together with a (optional) Client Name and a (required) Redirection URL | :construction: | |
 | Remove a Client | - Confirmation dialog is prompted before removal <br> - All client sessions opened from those clients get removed | :construction: | |
 | **Unregistered Clients** | | |
-| Authentication flow from an unregistered client | Unsuccessful [Authorization Request] | :construction: | Browser displays the "Request not valid" screen.|
+| Authentication flow from an unregistered client | Unsuccessful [Authorization Request] | :gear: | Browser displays the "Request not valid" screen.|
 | **Authorized Applications** | | |
-| Login with a Registered Client | The Client Name is displayed amongst the "Personal > Security" OAuth 2.0 Authorized Applications | :construction: | |
-| Session Revocation (i.e. delete Authorized Application) | All the sessions opened in the clients are revoked and must be re-authorized | :construction: | |
+| Login with a Registered Client | The Client Name is displayed amongst the "Personal > Security" OAuth 2.0 Authorized Applications | :gear: | |
+| Session Revocation (i.e. delete Authorized Application) | All the sessions opened in the clients are revoked and must be re-authorized | :gear: | |
 | **User Account Handling** | | |
 | Password change | Open sessions are revoked and new credentials must be used in further login attempts | :construction: | |
 | **Authorization Flow** | | |
-| Successful [Authorization Request] without any session open in the browser | Login form with an additional informative note about the application requesting access to ownCloud is displayed | :construction: | |
-| Successful [Authorization Request] with a valid session in the browser | The "Authorize" screen is displayed | :construction: | |
-| Successful [Authorization Request] in a browser with a different user logged in | The "Switch User" screen is displayed, allowing to modify the current session | :construction: | See use of the additional `user` parameter in: https://github.com/owncloud/oauth2/pull/67 |
-| Failed attempt in the authorization login form | The query parameters for the [Authorization Request] are preserved in next attempts | :construction: | See original issue in: https://github.com/owncloud/core/issues/28129 |
+| Successful [Authorization Request] without any session open in the browser | Login form with an additional informative note about the application requesting access to ownCloud is displayed | :gear: | |
+| Successful [Authorization Request] with a valid session in the browser | The "Authorize" screen is displayed | :gear: | |
+| Successful [Authorization Request] in a browser with a different user logged in | The "Switch User" screen is displayed, allowing to modify the current session | :gear: | See use of the additional `user` parameter in: https://github.com/owncloud/oauth2/pull/67 |
+| Failed attempt in the authorization login form | The query parameters for the [Authorization Request] are preserved in next attempts | :gear: | See original issue in: https://github.com/owncloud/core/issues/28129 |
 | **Relevant Smoke Tests** | | |
 | Unauthenticated Actions: Public File Drop | Files get uploaded normally | :construction: | See https://github.com/owncloud/oauth2/pull/100 |
 
