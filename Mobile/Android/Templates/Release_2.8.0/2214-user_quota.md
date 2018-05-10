@@ -12,10 +12,10 @@
 | 1 | Portrait | Open drawer and check quota | Correctly displayed |  |  |
 | 2 | Landscape | Open drawer and check quota | Correctly displayed |  |  |
 |**Default options**||||||
-| 3 | Default | Open drawer and check quota | It is displayed the quota with no limit |  |  |
+| 3 | Default | Open drawer and check quota | It is displayed the quota with default limit (check in server side) |  |  |
 | 4 | Unlimited | Open drawer and check quota | It is displayed the quota with no limit |  |  |
 | 5 | 1 GB | Open drawer and check quota | It is displayed the quota with 1GB limit |  |  |
-| 6 | 5 GB | Open drawer and check quota | It is displayed the quota with 1GB limit |  |  |
+| 6 | 5 GB | Open drawer and check quota | It is displayed the quota with 5GB limit |  |  |
 | 7 | 10 GB | Open drawer and check quota | It is displayed the quota with 10GB limit |  |  |
 |**Other options**||||||
 | 8 | 10MB | Open drawer and check quota | It is displayed the quota with 10MB limit |  |  |
