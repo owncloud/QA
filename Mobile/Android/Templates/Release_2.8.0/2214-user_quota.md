@@ -7,7 +7,7 @@
 
  
 | Test Case | Steps | Expected Result | Result | Related Comment
-|:------: | :------------- | :------------- | :-------------- | :-----: | :------
+|:---------:| :---- | :-------------- | :----- | :------------: |
 |**View**||||||
 | 1 | Portrait | Open drawer and check quota | Correctly displayed |  |  |
 | 2 | Landscape | Open drawer and check quota | Correctly displayed |  |  |
