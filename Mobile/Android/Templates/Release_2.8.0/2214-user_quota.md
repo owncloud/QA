@@ -21,9 +21,11 @@
 | 8 | 10MB | Open drawer and check quota | It is displayed the quota with 10MB limit |  |  |
 | 9 | 500MB | Open drawer and check quota | It is displayed the quota with 500MB limit |  |  |
 | 10 | 100GB | Open drawer and check quota | It is displayed the quota with 100GB limit |  |  |
+| 11 | 0 quota | Open drawer and check quota | It is displayed "No storage usabe information availble" |  |  |
+| 12 | Unknown | Open drawer and check quota after switching connection off | It is displayed the quota with no limit |  |  |
 |**Progress bar**||||||
-| 11 | Empty | Open an empty account | Progress bar 0% |  |  |
-| 12 | Full | Open a full account | Progress bar 100% |  |  |
-| 13 | 25% | Open an account with 25% out of the quota| Progress bar 25% |  |  |
-| 14 | 50% | Open an account with 50% out of the quota| Progress bar 50% |  |  |
-| 15 | 75% | Open an account with 75% out of the quota| Progress bar 75% |  |  |
+| 13 | Empty | Open an empty account | Progress bar 0% |  |  |
+| 14 | Full | Open a full account | Progress bar 100% |  |  |
+| 15 | 25% | Open an account with 25% out of the quota| Progress bar 25% |  |  |
+| 16 | 50% | Open an account with 50% out of the quota| Progress bar 50% |  |  |
+| 17 | 75% | Open an account with 75% out of the quota| Progress bar 75% |  |  |
