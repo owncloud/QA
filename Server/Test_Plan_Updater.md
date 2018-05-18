@@ -20,7 +20,9 @@ Run this on the database: `delete from oc_appconfig where configkey='lastupdated
 
 ## Configuring the update server to use
 
-URL that ownCloud should use to look for updates: `'updater.server.url' => 'https://updates.owncloud.com/server/',`
+URL that ownCloud should use to look for updates: 
+
+`'updater.server.url' => 'https://updates.owncloud.com/server/',`
 
 Edit "config.php" in ownCloud and set the value of "update.server.url" to the location of the deployed update server.
 
