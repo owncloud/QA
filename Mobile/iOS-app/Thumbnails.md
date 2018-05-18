@@ -1,12 +1,12 @@
 #### Thumbnails 
 
-#### PRs: <br>
-https://github.com/owncloud/ios-app/pull/32
+#### PRs: https://github.com/owncloud/ios-app/pull/32<br>
 
-Device/s: <br>
-Server: 
 
-Number of tests: <br>
+Device/s: iPhoneX v11 <br>
+Server: 10.0.8
+
+Number of tests: 14<br>
 Number of automated tests:   <br>
 Coverage: <br>
 
@@ -19,7 +19,7 @@ Coverage: <br>
 |**Formats**||||||
 | JPG | Check non-downloaded JPG thumbnails | Correctly displayed | P m11 |  |
 | PNG | Check non-downloaded PNG thumbnails | Correctly displayed | P m11 |  |
-| BMP | Check non-downloaded BMP thumbnails | Correctly displayed |  |  |
+| BMP | Check non-downloaded BMP thumbnails | Correctly displayed | P m11 |  |
 | GIF | Check non-downloaded GIF thumbnails | Correctly displayed | P m11 |  |
 | SVG | Check non-downloaded SVG thumbnails | Correctly displayed | NA | Not displayed |
 | TIFF | Check non-downloaded TIFF thumbnails | Correctly displayed | NA | Not displayed |
