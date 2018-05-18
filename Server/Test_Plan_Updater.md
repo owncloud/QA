@@ -7,6 +7,25 @@
 * Before the update, share files/folder between LDAP users and regular users.
 * Create a file, encrypt the server and create another file after the encryption.
 
+
+# Testing updates
+
+For testing updates you'll need to deploy a version of the update server https://github.com/owncloud/administration/tree/master/update-server and adjust its configuration to match the one from the update to test.
+
+Make sure the ownCloud directory is writable by the web server.
+
+## Forcing ownCloud to recheck the update server immediately
+
+Run this on the database: `delete from oc_appconfig where configkey='lastupdatedat';`
+
+## Configuring the update server to use
+
+URL that ownCloud should use to look for updates: 
+
+`'updater.server.url' => 'https://updates.owncloud.com/server/',`
+
+Edit "config.php" in ownCloud and set the value of "update.server.url" to the location of the deployed update server.
+
 ## Testing functionality
 
 
