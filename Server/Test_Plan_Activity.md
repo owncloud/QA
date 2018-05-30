@@ -9,7 +9,7 @@ Test Case | Expected Result | Result | Related Comment
 **CLI commands** |  |   |
 |  |   |
 Enable Activity app via CLI using ```occ app:enable activity``` | The apps gets enabled | :construction:  |
-Disable Guest app via CLI using ```occ app:disable activity``` | The apps gets disabled | :construction:  |
+Disable Activity app via CLI using ```occ app:disable activity``` | The apps gets disabled | :construction:  |
 **All activities section** |  |   |
 |  |   |
 Check that all activities done in this Testplan are shown in this section |  | :construction:  |
