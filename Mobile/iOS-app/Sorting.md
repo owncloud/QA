@@ -1,0 +1,23 @@
+###  Sorting
+
+#### Pr: https://github.com/owncloud/ios-app/pull/55
+
+Devices: <br>
+Server: 
+
+---
+
+ 
+| Test Case | Steps | Expected | Result | Related Comment / Bug link | Automated |
+| :-------- | :---- | :------- | :----- | :------------------------- | :-------: |
+|**View**||||||
+| Portrait  | Open File List | Sort menu correctly displayed |  |  |  |
+| Landscape | Open File List | Sort menu correctly displayed |  |  |  |
+|**Actions**||||||
+| Sort by A-Z | Set a file list with many items<br>Sort by A-Z the file list<br>Rename some files | List of files correctly sorted | | |
+| Sort by Z-A | Set a file list with many items<br>Sort by Z-A the file list<br>Rename some files | List of files correctly sorted | | |
+| Sort by date | Set a file list with many items<br>Sort by date the file list<br>Update some files | List of files correctly sorted | | |
+| Sort by type | Set a file list with many items<br>Sort by type the file list | List of files correctly sorted | | 
+| Sort by size | Set a file list with many items<br>Sort by size the file list<br>Upload or remove content to some folder | List of files correctly sorted | | 
+|**Empty List**||||||
+| Sort by all types | Browse through an empty folder<br>Select all kind of sorting | Nothing happens | | 
