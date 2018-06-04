@@ -20,4 +20,4 @@ Server:
 | Sort by type | Set a file list with many items<br>Sort by type the file list | List of files correctly sorted | | 
 | Sort by size | Set a file list with many items<br>Sort by size the file list<br>Upload or remove content to some folder | List of files correctly sorted | | 
 |**Empty List**||||||
-| Sort by all types | Browse through an empty folder<br>Select all kind of sorting | Nothing happens | | 
+| Sort by all types | Browse through an empty folder<br>Select all kind of sorting | Nothing happens | NA | Not posible | |  

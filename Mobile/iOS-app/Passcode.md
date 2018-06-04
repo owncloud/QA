@@ -5,7 +5,7 @@
 Device/s: iPhone6S Plus v11, iPadair2 v11 <br>
 Server: 10.0.8 (not relevant)
 
-Number of tests: 15<br>
+Number of tests: 12<br>
 Number of automated tests:   <br>
 Coverage: <br>
 
@@ -17,7 +17,7 @@ Coverage: <br>
 | :-------- | :---- | :------- | :----: | :------------------------- | :-------: |
 |**View**||||||
 | Portrait | Passcode view in portrait | Correct view | P m11 t11 | | |
-| Landscape | Passcode view in landscape | Correct view | P m11 t11 | Not view in landscape for iPhone | |
+| Landscape | Passcode view in landscape | Correct view | F m11 t11 | Bad view | |
 |**Passcode**||||||
 | Enable Passcode | 1. Enter correct passcode twice<br>2. Reopen the app | 1. Passcode stored<br>2. Passcode asked | P m11 t11 | | |
 | Cancel Enable Passcode | 1. Enable Passcode in Settings view<br>2. Cancel before enter passcode<br>3. Reopen the app | 2. Passcode disabled<br>3. Passcode not asked | P m11 t11 | | |
@@ -30,6 +30,4 @@ Coverage: <br>
 | 5 minutes | 1. Open app<br>2. After 2 minutes, reopen the app<br>3. After 6 minutes, reopen theapp | 1. Passcode asked<br>2. Passcode not asked<br>3. Passcode asked | P m11 | | |
 | 30 minutes | 1. Open app<br>2. After 20 minutes, reopen the app<br>3. After 40 minutes, reopen theapp | 1. Passcode asked<br>2. Passcode not asked<br>3. Passcode asked | P m11 | | |
 |**Brute force protection**||||||
-| After 3 attempts | Reopen the app and make three failed attemps | App locked 10 secs | P m11 | | |
-| Next time | Reopen the app and make three failed attemps | App locked 100 secs | P m11 | | | |
-| Next time | Reopen the app and make three failed attemps | App locked 1000 secs | P m11 | | | |
+| After 3 attempts | Reopen the app and make three failed attemps | App locked | P m11 | | |
