@@ -19,9 +19,9 @@ Coverage: <br>
 | Portrait | Passcode view in portrait | Correct view | P m11 t11 | | |
 | Landscape | Passcode view in landscape | Correct view | P m11 t11 | FIXED: Bad view | |
 |**Passcode**||||||
-| Enable Passcode | 1. Enter correct passcode twice<br>2. Reopen the app | 1. Passcode stored<br>2. Passcode asked | P m11 t11 | :white_check_mark: | |
+| Enable Passcode | 1. Enter correct passcode twice<br>2. Reopen the app | 1. Passcode stored<br>2. Passcode asked | P m11 t11 |  | :white_check_mark: |
 | Cancel Enable Passcode | 1. Enable Passcode in Settings view<br>2. Cancel before enter passcode<br>3. Reopen the app | 2. Passcode disabled<br>3. Passcode not asked | P m11 t11 | | |
-| Incorrect Passcode | Enter incorrect passcode when re-type. Check both orientations | Error displayed | P m11 t11 | :white_check_mark: |
+| Incorrect Passcode | Enter incorrect passcode when re-type. Check both orientations | Error displayed | P m11 t11 |  | :white_check_mark: |
 | Disable Passcode | 1. Disable Passcode in Settings view<br>2. Reopen the app | 1. Passcode is asked before being disabled<br>2. Passcode not asked | P m11 t11 | | |
 | Cancel Disable Passcode | 1. Disable Passcode in Settings view<br>2. Cancel before enter the passcode<br>3. Reopen the app | 2. Passcode enabled<br>3. Passcode asked | P m11 t11 | | |
 |**Periocity**||||||
