@@ -5,7 +5,7 @@
 Device/s: iPhone 6S Plus v11, iPhoneX v11, iPadAir2 (without biometrical support) <br>
 Server: 10.0.8
 
-Number of tests: <br>
+Number of tests: 13<br>
 Number of automated tests: <br>
 Coverage: <br>
 
@@ -25,7 +25,7 @@ Coverage: <br>
 | Incorrect finger | Reopen the app<br>Use a non-registered finger | Acces not granted | P m11 t11 |  |  |
 | Cancel biometrical | Cancel biometrical when it is asked | Passcode asked | P m11 t11 | FIXED: Redundant options in the dialog | |
 | Failed passcode | Cancel biometrical when it is asked<br>Enter incorrect passcode 3 times | Passcode asked when time expired. Biometrical not asked | P m11 t11 | | |
-| Removed fingers | With biometrical enabled, remove all registered fingers from device | Biometrical is gone from settings | F m11 t11 | `No entities are enrolled` | |
+| Removed fingers | With biometrical enabled, remove all registered fingers from device | Biometrical is gone from settings | P m11 t11 | `No entities are enrolled` showed if biometrical enabled in app and disabled from device| |
 |**Periocity**||||||
 | Always | Open the app several times | Biometrical always set | P m11 t11 | | |
 | 1 minute | 1. Open app<br>2. After 30 seconds, reopen the app<br>3. After 1:30 minutes, reopen theapp | 1. Biometrical asked<br>2. Biometrical not asked<br>3. Biometrical asked | P m11 t11 | | |
