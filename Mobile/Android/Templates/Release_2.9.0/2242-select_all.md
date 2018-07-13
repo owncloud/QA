@@ -6,8 +6,8 @@
 ---
 
  
-| Test Case | Steps | Expected Result | Result | Related Comment
-:------: | :------------- | :------------- | :-------------- | :-----: | :------
+| Test n | Test Case | Steps | Expected Result | Result | Related Comment
+| :----: | :-------- | :---- | :-------------- | :-----: | :------
 |**View**||||||
 | 1 | No multiselection mode | With no multiselection mode, tap on three-dot-button (check both orientations) | Select all appears<br>Select inverse does not appear |  |  |
 | 2 | Select items (not all) | 1. Long press on an item to enable multiselection mode<br>2. Tap on three-dot-button | Select all appears<br>Select inverse appears |  |  |
