@@ -38,7 +38,7 @@ Share a pdf file via link and open it from the link| The content is shown and pd
 **External Storage**|  |   |
 |  |   |
 Open a pdf file located in an external storage | The content is shown and pdf filesviewer buttons work (download, thumbnails, fwd page...) | :construction:  |
-**Guest Appe**|  |   |
+**Guest App**|  |   |
 |  |   |
 Open a pdf file using a guest user | The content is shown and pdf filesviewer buttons work (download, thumbnails, fwd page...) | :construction:  |
 **Impersonate App**|  |   |
