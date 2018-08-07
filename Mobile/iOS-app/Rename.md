@@ -2,10 +2,10 @@
 
 #### PRs: https://github.com/owncloud/ios-app/pull/102
 
-Device/s:
-Server: 
+Device/s: iPhone6SPlus v11.4
+Server: 10.0.8
 
-Number of tests: <br>
+Number of tests: 10<br>
 Number of automated tests: <br>
 Coverage: <br>
 
