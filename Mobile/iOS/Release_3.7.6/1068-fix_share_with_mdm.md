@@ -1,6 +1,6 @@
 #### Adapt "Share with" for MDMs
 
-#### Pr: https://github.com/owncloud/ios/pull/
+#### Pr: https://github.com/owncloud/ios/pull/1068
 
 Server: 10.0.8<br>
 Devices: iPadAir v11, iPhoneX v11

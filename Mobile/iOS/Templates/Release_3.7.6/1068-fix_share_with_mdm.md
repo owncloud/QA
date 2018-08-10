@@ -1,6 +1,6 @@
 #### Adapt "Share with" for MDMs
 
-#### Pr: https://github.com/owncloud/ios/pull/
+#### Pr: https://github.com/owncloud/ios/pull/1068
 
 
 ---
