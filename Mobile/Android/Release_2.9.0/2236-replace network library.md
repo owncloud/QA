@@ -78,58 +78,58 @@ Devices: Nexus5X v8, Sa,sung Galaxy S7 Edge v7
 | Solve conflict with remote | remote version downloaded, local deleted | | | |
 | Solve conflict with both | both synced | | | |
 |**File operations**||||||
-| Move one file | Moved to target| P m8 | | |
-| Move one folder | Moved to target| P m8 | | |
-| Move one folder to itself | Correct error | P m8 | | |
-| Move several items | Moved correctly | P m8 | | |
-| Move without connection| Correct error | P m8 | | |
-| Copy one file | Copied to target| P m8 | | |
-| Copy one folder | Copied to target| P m8 | | |
-| Copy one folder to itself | Correct error | P m8 | | |
-| Copy several items | Copied correctly | P m8 | | |
-| Copy without connection| Correct error | P m8 | | |
-| Delete one file | Deleted | P m8 | | |
-| Delete one folder | Deleted | P m8 | | |
-| Delete several items | Deleted correctly | P m8 | | |
-| Delete without connection| Correct error | P m8 | | |
-| Rename one file | Renamed | P m8 | | |
-| Rename one folder | Renamed | P m8 | | |
-| Rename without connection| Correct error | P m8 | | |
-| Create folder | Created | P m8 | | 
-| Create folder without connection| Correct error | P m8 | | |
+| Move one file | Moved to target| P m8 | | | P m7
+| Move one folder | Moved to target| P m8 | | | P m7
+| Move one folder to itself | Correct error | P m8 | | | P m7
+| Move several items | Moved correctly | P m8 | | | P m7
+| Move without connection| Correct error | P m8 | | | P m7
+| Copy one file | Copied to target| P m8 | | | P m7
+| Copy one folder | Copied to target| P m8 | | | P m7
+| Copy one folder to itself | Correct error | P m8 | | | P m7
+| Copy several items | Copied correctly | P m8 | | | P m7
+| Copy without connection| Correct error | P m8 | | | P m7
+| Delete one file | Deleted | P m8 | | | P m7
+| Delete one folder | Deleted | P m8 | | | P m7
+| Delete several items | Deleted correctly | P m8 | | | P m7
+| Delete without connection| Correct error | P m8 | | | P m7
+| Rename one file | Renamed | P m8 | | | P m7
+| Rename one folder | Renamed | P m8 | | | P m7
+| Rename without connection| Correct error | P m8 | | | P m7
+| Create folder | Created | P m8 | | | P m7
+| Create folder without connection| Correct error | P m8 | | | P m7
 |**Sharing**||||||
-| Private link | Works properly | P m8 | | 
-| Share file with user | File shared | P m8 | | 
-| Share folder with user | Folder shared | P m8 | | 
-| Share file with group | File shared | P m8 | | 
-| Share folder with group | Folder shared | P m8 | | 
-| Share folder with create permission | Folder shared with create permission (check others are not) | P m8 | | 
-| Share folder with edit permission | Folder shared with edit permission (check others are not) | P m8 | | 
-| Share folder with delete permission | Folder shared with delete permission (check others are not) | P m8 | | 
-| Share folder with reshare permission | Folder shared with reshare permission (check others are not) |  P m8| | 
-| Share folder with all permissions | Folder shared with all permission | P m8 | | 
-| Share folder with no permissions | Folder shared with no permission| P m8 | | 
-| Share file with edit permissions | File shared with edit permission| P m8 | | 
-| Share file with reshare permissions | File shared with reshare permission| P m8 | | 
-| Share file with all permissions | File shared with all permission | P m8 | | 
-| Share file with no permissions | File shared with no permission| P m8 | | 
-| Federated share | Content shared | P m8 | | 
-| Unshare | Content unshared | P m8 | | 
-| Create Private share default | Correctly created | P m8 | | 
-| Create Private share name | Correctly created | P m8 | | 
-| Create Private share expiration | Correctly created | P m8 | | 
-| Create Private share password | Correctly created | P m8 | | 
-| Create Private share expiration + password | Correctly created | P m8 | | 
-| Create Private share download/view | Correctly created | P m8 | | 
-| Create Private share download/view/upload | Correctly created | P m8 | | 
-| Create Private share upload only | Correctly created | P m8 | | 
-| Update Private share name | Correctly updated | P m8 | | 
-| Update Private share expiration | Correctly updated | P m8 | | 
-| Update Private share password | Correctly updated | P m8 | | 
-| Update Private share expiration + password | Correctly updated | P m8 | | 
-| Update Private share download/view | Correctly updated | P m8 | | 
-| Update Private share download/view/upload | Correctly updated | P m8 | | 
-| Update Private share upload only | Correctly updated | P m8 | | 
-| Remove private share| Correctly deleted | P m8 | | 
+| Private link | Works properly | P m8 | | P m7
+| Share file with user | File shared | P m8 | | | P m7  
+| Share folder with user | Folder shared | P m8 | | | P m7 
+| Share file with group | File shared | P m8 | | | P m7 
+| Share folder with group | Folder shared | P m8 | | | P m7 
+| Share folder with create permission | Folder shared with create permission (check others are not) | P m8 | | | P m7 
+| Share folder with edit permission | Folder shared with edit permission (check others are not) | P m8 | || P m7 
+| Share folder with delete permission | Folder shared with delete permission (check others are not) | P m8 | | | P m7
+| Share folder with reshare permission | Folder shared with reshare permission (check others are not) |  P m8| | | P m7
+| Share folder with all permissions | Folder shared with all permission | P m8 | | | P m7
+| Share folder with no permissions | Folder shared with no permission| P m8 | | | P m7
+| Share file with edit permissions | File shared with edit permission| P m8 | | | P m7
+| Share file with reshare permissions | File shared with reshare permission| P m8 | | | P m7
+| Share file with all permissions | File shared with all permission | P m8 | | | P m7
+| Share file with no permissions | File shared with no permission| P m8 | | | P m7
+| Federated share | Content shared | P m8 | | | P m7
+| Unshare | Content unshared | P m8 | | | P m7
+| Create Private share default | Correctly created | P m8 | | | P m7
+| Create Private share name | Correctly created | P m8 | | | P m7
+| Create Private share expiration | Correctly created | P m8 | | | P m7
+| Create Private share password | Correctly created | P m8 | | | P m7
+| Create Private share expiration + password | Correctly created | P m8 | | | P m7
+| Create Private share download/view | Correctly created | P m8 | | | P m7
+| Create Private share download/view/upload | Correctly created | P m8 | | | P m7
+| Create Private share upload only | Correctly created | P m8 | | | P m7
+| Update Private share name | Correctly updated | P m8 | | | P m7
+| Update Private share expiration | Correctly updated | P m8 | | | P m7
+| Update Private share password | Correctly updated | P m8 | | | P m7
+| Update Private share expiration + password | Correctly updated | P m8 | | | P m7
+| Update Private share download/view | Correctly updated | P m8 | | | P m7
+| Update Private share download/view/upload | Correctly updated | P m8 | | | P m7
+| Update Private share upload only | Correctly updated | P m8 | | | P m7
+| Remove private share| Correctly deleted | P m8 | | | P m7
 
 
