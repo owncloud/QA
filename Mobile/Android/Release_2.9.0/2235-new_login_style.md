@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/2235
 
-Devices: Nexus 5X v8, Samsung Tab S2 v6
+Devices: Nexus 5X v8, Samsung Tab S2 v6<br>
 Server: 10.0.9
 
 ---
@@ -13,7 +13,7 @@ Server: 10.0.9
 |**Basic**||||||
 | 1 | Portrait | Login in a basic auth server| Login view is correct| P m8 t6 |  |
 | 2 | Landscape | Login in a basic auth server| Login view is correct| P m8 t6 |  |
-| 3 | Edit | After login, go to Settings and select edit account| Edit view is correct| F m8 P t6 | Not complete |
+| 3 | Edit | After login, go to Settings and select edit account| Edit view is correct| P m8 t6 | WONT FIX: Not complete |
 |**OAuth2**||||||
 | 4 | Portrait | Login in a OAuth2 server| Login view is correct| P m8 t7 |  |
 | 5 | Landscape | Login in a OAuth2 server| Login view is correct| P m8 t7 |  |
@@ -25,4 +25,4 @@ Server: 10.0.9
 |**Upgrade**||||||
 | 10 | Upgrade | Upgrade the app grom the latest version| Login view is OK| P m8 |  |
 |**Branding**||||||
-| 11 | Use backr. image | 1. Set to true<br>2. Set to false | 1. Image displayed<br>2. Image not displayed | F m8 t7 | With false, blank |
+| 11 | Use backr. image | 1. Set to true<br>2. Set to false | 1. Image displayed<br>2. Image not displayed | P m8 t7 | FIXED: With false, blank |
