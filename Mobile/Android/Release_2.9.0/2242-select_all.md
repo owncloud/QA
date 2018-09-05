@@ -14,7 +14,7 @@ Device: Nexus 5X v8, Nexus 9 v7
 | 1 | No multiselection mode | With no multiselection mode, tap on three-dot-button (check both orientations) | Select all appears<br>Select inverse does not appear | P m8 t7 |  |
 | 2 | Select items (not all) | 1. Long press on an item to enable multiselection mode<br>2. Tap on three-dot-button | Select all appears<br>Select inverse appears | P m8 t7|  |
 | 3 | Select all items | 1. Long press on an item to enable multiselection mode<br>2. Select all items manually | Select all does not appear<br>Select inverse appears | P m8 t7 |  |
-| 4 | Empty folder | 1. Enter on a empty folder<br>2. Tap on three-dot-button| Select all does not appear<br>Select inverse does not appear | F m8 t7 | Select all appears |
+| 4 | Empty folder | 1. Enter on a empty folder<br>2. Tap on three-dot-button| Select all does not appear<br>Select inverse does not appear | P m8 t7 | FIXED: Select all appears |
 |**Action**||||||
 | 5 | Select All No multiselection | 1. Tap on three-dot-button with no multiselection<br>2. Tap on "Select all" | All items selected | P m8 t7 |  |
 | 6 | Select All multiselection | 1. Long press to enter multiselection mode<br>2. Tap on "Select all" | All items selected | P m8 t7|  |
