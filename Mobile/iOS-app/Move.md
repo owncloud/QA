@@ -23,7 +23,7 @@ Coverage: <br>
 | Move folder | 1. Swipe over a folder to move<br>2. Select a location | Folder moved | P m11 t11| |
 | Move folder to itself | 1. Swipe over a folder to move<br>2. Select as location the folder itself | Not allowed | P m11 t11 | Error not appropiate |
 | Move to same location | 1. Swipe over an item to move<br>2. Select as location the current location | Nothing happens | P m11 t11 | Name is the same, not allowed |
-| Move to inexistent location | 1. Swipe over an item to move<br>2. Select a location<br>3. Befor confirming, remove the location in web UI | Error message | F m11 t11 | Wrong error message |
+| Move to inexistent location | 1. Swipe over an item to move<br>2. Select a location<br>3. Befor confirming, remove the location in web UI | Error message | P m11 t11 | FIXED: Wrong error message |
 |**Drag & Drop**||||||
 | Move file  | 1. Drag file to move<br>2. Drop into a folder | File moved | P m11 t11 |  |
 | Move folder | 1. Drag folder to move<br>2. Drop into a folder | Folder moved | P m11 |  |
