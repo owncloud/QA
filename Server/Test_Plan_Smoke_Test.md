@@ -10,6 +10,15 @@ Have a LDAP server ready to be used with owncloud.
 
 Have ready two external storages of your choice SMB, SFTP, Dropbox, Google Drive, FTP, S3, ownCloud, local.
 
+Scenarios to consider:
+- [ ] OAuth2 and sync + mobile clients ( can be deployed remotely )
+- [ ] LDAP 
+- [ ] Shibboleth ( + LDAP )
+- [ ] Windows Network Drive (also use it as sync target ) 
+- [ ] Guests
+- [ ] Impersonate
+- [ ] Login with App Token Login
+
 ## Testing setup
 
 
