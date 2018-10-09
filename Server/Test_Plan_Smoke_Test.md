@@ -18,6 +18,7 @@ Scenarios to consider:
 - [ ] Guests
 - [ ] Impersonate
 - [ ] Login with App Token Login
+- [ ] TOTP
 
 ## Testing setup
 
