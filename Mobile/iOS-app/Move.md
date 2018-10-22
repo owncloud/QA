@@ -32,4 +32,4 @@ Coverage: <br>
 | Move to folder with no folders inside | 1. Drag content<br>2. Drop in a folder that does not contain folders| allowed to drop | P m11 t11 | FIXED: Drop not allowed |
 | Multiselection | 1. Drag several items<br>2. Drop them in other location| All items moved | P m11 t11 |  |
 | Multiselection to same folder | 1. Drag several items<br>2. Drop them in same location| Nothing happens | P m11 t11 |  |
-| Huge amount of items | 1. Drag more than 100 items<br>2. Drop them in other location| All of the moved | P m11 t11 |  |
+| Huge amount of items | 1. Drag more than 100 items<br>2. Drop them in other location| All of the moved | P m11 t11 |  | 
