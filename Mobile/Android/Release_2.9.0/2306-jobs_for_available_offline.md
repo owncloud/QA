@@ -15,9 +15,9 @@ Server: 10.0.10
 | Several av. offline files | 1. Set several files as av.offline in different accounts<br>2. Kill the app<br>3. Modify all the files | After 15 mins, files are updated in all the accounts| P m8  |  |  |
 | Several av. offline and not av. offline files | 1. Set several files as av.offline<br>2. Kill the app<br>3. Modify the files, and others that are not av. offline | After 15 mins, only the av. files are updated in the server| P m8 |  |  |
 | Rename | 1. Set a file as av.offline and minimize the app<br>2. In web UI, rename the file | After 15 mins, the file is renamed| P m8 |  |  |
-| Multiaccount | 1. Set files as av.offline in different accounts<br>2. Go out of the app<br>3. Modify files| After 15 mins, files are updated in all the accounts|  |  |  
+| Multiaccount | 1. Set files as av.offline in different accounts<br>2. Go out of the app<br>3. Modify files| After 15 mins, files are updated in all the accounts| P m8 |  |  
 | No modification | 1. Set a txt file as av.offline in root folder<br>2. Kill the app| After 15 (or more) mins nothing happens| P m8  |  |  |
-| Conflict | 1. Set a txt file as av.offline<br>2. Kill the app<br>3. Modify the file in both app and webUI| After 15 mins, conflict is detected| F m8 | Conflict with no changes in server |  |
+| Conflict | 1. Set a txt file as av.offline<br>2. Kill the app<br>3. Modify the file in both app and webUI| After 15 mins, conflict is detected| P m8 | FIXED: Conflict with no changes in server |  |
 | Job stopped | Unset all content as av. offline | Job stopped | P m8 |  |  |
 |**Background folders**||||||
 | Folder | 1. Set folder that contains many files as av.offline<br>2. Kill the app<br>3. Modify some files into the folder | After 15 mins, folder is updated in the server| P m8 |  |  |
@@ -25,10 +25,11 @@ Server: 10.0.10
 | Add files | 1. Set folder as av. offline<br>2. Kill the app<br>3. Add files into the folder | After 15 mins, folder is updated in the server | P m8 |  |  |
 | Remove files | 1. Set folder as av. offline<br>2. Kill the app<br>3. Delete some files from the folder| After 15 mins, folder is updated in the server | P m8 |  |  |
 | Rename | 1. Set a folder as av.offline and minimize the app<br>2. In web UI, rename the folder | After 15 mins, the folder is renamed| P m8 |  |  |
-| Multiaccount | 1. Set folder that contains many files as av.offline in different accounts<br>2. Kill the app<br>3. Modify some files into the folders | After 15 mins, folder is updated in  all the accounts|  |  |  |
+| Multiaccount | 1. Set folder that contains many files as av.offline in different accounts<br>2. Kill the app<br>3. Modify some files into the folders | After 15 mins, folder is updated in  all the accounts| P m8 |  |  |
 | No modification | 1. Set a folder as av.offline<br>2. Kill the app| After 15 (or more) mins nothing happens | P m8 |  |  |
-| Conflict | 1. Set a folder as av.offline<br>2. Kill the app<br>3. Modify somes files inside in both app and webUI| After 15 mins, conflict is detected| F m8 | Conflict with no changes in server  |  |
+| Conflict | 1. Set a folder as av.offline<br>2. Kill the app<br>3. Modify somes files inside in both app and webUI| After 15 mins, conflict is detected| P m8 | FIXED: Conflict with no changes in server  |  |
 | Job stopped | Unset all content as av. offline | Job stopped | P m8 |  |  |
+| Remove account | 1.Add two accounts<br>2. Set av. offline items in one of them<br>3. Remove this one| Job does not sync anything| F m8 | Account deleted and files keepn on being synced |  |
 |**Foreground (regression)**||||||
 | File | 1. Set a file as av. offline<br>2. Modify the file | File is now available offline. Changes are automatically uploaded |  |  |  |
 | Folder | 1. Set a folder as av. offline<br>2. Add content to the folder<br>3. Delete content from the folder<br>4. Modify some files in the folder | Folder and all its content is now available offline. All actions are correctly and automatically performed | | It is returning an error in the notification |  |  
