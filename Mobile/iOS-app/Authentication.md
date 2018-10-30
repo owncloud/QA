@@ -7,7 +7,7 @@ https://github.com/owncloud/ios-app/pull/38
 Device/s: iPhoneX 11.3<br>
 Server: 10.0.7 / 10.0.8
 
-Number of tests: 44 <br>
+Number of tests: 45 <br>
 Number of automated tests:   <br>
 Coverage: <br>
 
@@ -24,6 +24,7 @@ Coverage: <br>
 | No prefix SSL II | Input secure-SSL URL with no protocol | Show certificate - passed validation| P m11 |||
 | No prefix http | Input http URL with no protocol | SSL error | P m11 |||
 | Prefix http | Input http URL with protocol | Moved forward | P m11 |||
+| Prefix https | Input https URL with protocol | Moved forward | P m11 |||
 |**Review Connection**||||||
 | Open certificate | Open certificate to check details | Certificate shown | P m11 |  |  |
 | Approve certificate | Open certificate to check details and approve it | Moved forward to credentials basic/oauth | P m11 |  |  |
