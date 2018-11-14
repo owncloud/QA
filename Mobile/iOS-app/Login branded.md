@@ -18,7 +18,7 @@ Coverage: <br>
 |**URL**||||||
 | Default URL | Set a default URL in customization file | URL correct in app | P m12 |  |
 | Non-Editable URL | Set the URL as non-editable | URL can not be changed | P m12 |  |
-| Hidden URL | Set the URL as hidden | URL not visible | P m12 | It is visible in bookmark list |
+| Hidden URL | Set the URL as hidden | URL not visible | F m12 | Missing hostname |
 | Button with hidden URL | Set the URL as hidden and open the app| Button with Connect instead of Continue | NA |  |
 |**Server name**||||||
 | Default Name | Set a default Name in customization file | Name correct in app | P m12 |  |
