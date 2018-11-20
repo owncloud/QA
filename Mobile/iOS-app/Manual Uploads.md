@@ -1,4 +1,4 @@
-#### Open In 
+#### Manual uploads
 
 #### PRs: https://github.com/owncloud/ios-app/pull/146
 
