@@ -18,7 +18,7 @@ Coverage: <br>
 | Test Case | Steps | Expected | Result | Related Comment / Bug link | Automated |
 | :-------- | :---- | :------- | :----- | :------------------------- | :-------: |
 |**URL**||||||
-| Empty URL | Let empty URL | Correct issue indicating error | P m11 | ||
+| Empty URL | Let empty URL | Correct issue indicating error | P m11 | | :white_check_mark: |
 | Incorrect URL | Set Incorrect URL | Correct issue indicating error | P m11 | FIXED: Improvement in error handling ||
 | No prefix SSL I | Input non-secure-SSL URL with no protocol | Show certificate | P m11 | Tell user to check certif |  |
 | No prefix SSL II | Input secure-SSL URL with no protocol | Show certificate - passed validation| P m11 |||
@@ -30,13 +30,13 @@ Coverage: <br>
 | Approve certificate | Open certificate to check details and approve it | Moved forward to credentials basic/oauth | P m11 |  |  |
 | Cancel certificate | Open certificate to check details and cancel it | Return to Add server | P m11 | FIXED: Switching the URL shows incorrect URL |  |
 |**Basic auth**||||||
-| Empty credentials |  Try to connect with empty credentials | Error | P m11 | Error message to be improved |  |
-| Empty Username |  Try to connect with empty username | Error | P m11 | Error message to be improved |  |
-| Empty password |  Try to connect with empty password | Error | P m11 | Error message to be improved |  |
-| Special characters |  Try to connect with username that contains special characters | Works | P m11 |  |  |
+| Empty credentials |  Try to connect with empty credentials | Error | P m11 | Error message to be improved | :white_check_mark: |
+| Empty Username |  Try to connect with empty username | Error | P m11 | Error message to be improved | :white_check_mark: |
+| Empty password |  Try to connect with empty password | Error | P m11 | Error message to be improved | :white_check_mark: |
+| Special characters |  Try to connect with username that contains special characters | Works | P m11 |  | :white_check_mark: |
 | Username with blanks |  Try to connect with username that contains blanks | Works | P m11 | FIXED: File list empty |  |
 |**OAuth2**||||||
-| Correct credentials |  Set correct credentials in OAuth2 view |  Bookmark created | P m11 |  |  |
+| Correct credentials |  Set correct credentials in OAuth2 view |  Bookmark created | P m11 |  | :white_check_mark: |
 |**LDAP**||||||
 | Correct credentials |  Set correct LDAP credentials |  Bookmark created | P m11 |  |  |
 |**Name**||||||
