@@ -27,15 +27,15 @@ Coverage: <br>
 | Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder | P m12 | |
 | Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder| P m12 | |
 |**Actions files app (one file)**||||||
-| Upload non-downloaded file in root | Select "Upload file"<br>Select one file| File is uploaded in root folder| | |
+| Upload non-downloaded file in root | Select "Upload file"<br>Select one file| File is uploaded in root folder| P m12 | |
 | Upload non-downloaded file in non-root | Select "Upload file" in a non-root folder<br>Select one file| File is uploaded in non-root folder| F m12 | pages makes crashes|
-| Upload downloaded file in root | Select "Upload file"<br>Select one file| File is uploaded in root folder| | |
-| Upload downloaded file in non-root | Select "Upload file" in a non-root folder<br>Select one file| File is uploaded in non-root folder| | |
-| Upload a very big file | Select "Upload file" in a non-root folder<br>Select one very big file| File is uploaded | | |
+| Upload downloaded file in root | Select "Upload file"<br>Select one file| File is uploaded in root folder| P m12 | |
+| Upload downloaded file in non-root | Select "Upload file" in a non-root folder<br>Select one file| File is uploaded in non-root folder| P m12 | |
+| Upload a very big file | Select "Upload file" in a non-root folder<br>Select one very big file| File is uploaded | F m12 | |
 |**Actions multiselection files**||||||
-| Upload three files | Select "Upload file" in a non-root folder<br>Select three files| Files are uploaded in non-root folder| | |
+| Upload three files | Select "Upload file" in a non-root folder<br>Select three files| Files are uploaded in non-root folder| P m12 | |
 | Upload a huge amount of files | Select "Upload file"<br>Select all files | Files are uploaded in non-root folder| | |
-| CAncel upload| Select "Upload file"<br>Select several files<br>Cancel the upload |  Uploadcancelled| | |
+| Cancel upload| Select "Upload file"<br>Select several files<br>Cancel the upload |  Uploadcancelled| | |
 |**Issues**||||||
 | No connection | Remove connection from device<br>Select "Upload Photo" | Not posible, lack of connection | | |
 | Server not reached | Select "Upload Photo"<br>Switch server off before it finishes| Downloaded cancelled after timeout | | |
