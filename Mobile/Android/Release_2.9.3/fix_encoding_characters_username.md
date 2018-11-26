@@ -15,7 +15,10 @@
 | _@-. | P m7 |  |  
 | user1 | P m7 |  |  
 | user1- | P m7 |  |  
-| user1@ | P m7 |  |  
+| user1@ | P m7 |  |
+| user1@. | P m7 |  |  
+| user1@- | P m7 |  |  
+| user1@\_ | P m7 |  |    
 | user1. | P m7 |  |  
 | user1 user1 | P m7 |  | 
 | user1@mymail.com | P m7 |  |  
