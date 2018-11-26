@@ -34,10 +34,10 @@ Coverage: <br>
 | Upload a very big file | Select "Upload file" in a non-root folder<br>Select one very big file| File is uploaded | F m12 | |
 |**Actions multiselection files**||||||
 | Upload three files | Select "Upload file" in a non-root folder<br>Select three files| Files are uploaded in non-root folder| P m12 | |
-| Upload a huge amount of files | Select "Upload file"<br>Select all files | Files are uploaded in non-root folder| | |
-| Cancel upload| Select "Upload file"<br>Select several files<br>Cancel the upload |  Uploadcancelled| | |
+| Upload a huge amount of files | Select "Upload file"<br>Select all files | Files are uploaded in non-root folder| F m12 | |
+| Cancel upload| Select "Upload file"<br>Select several files<br>Cancel the upload |  Upload cancelled| P m12 | |
 |**Issues**||||||
-| No connection | Remove connection from device<br>Select "Upload Photo" | Not posible, lack of connection | | |
-| Server not reached | Select "Upload Photo"<br>Switch server off before it finishes| Downloaded cancelled after timeout | | |
-| Connection lost | Select "Upload"<br>Remove connection from device before it finishes| Upload cancelled | | |
+| No connection | Remove connection from device<br>Select "Upload Photo" | Not posible, lack of connection | NA | Handled in offline |
+| Server not reached | Select "Upload Photo"<br>Switch server off before it finishes| Downloaded cancelled after timeout | P m12 | |
+| Connection lost | Select "Upload"<br>Remove connection from device before it finishes| Upload cancelled | NA | Moved to offline|
 | Folder removed | Select "Upload" within a folder<br>Remove the folder from web UI before confirming| Can not upload the file | | |

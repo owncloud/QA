@@ -2,8 +2,8 @@
 
 #### PRs: https://github.com/owncloud/ios-app/pull/132
 
-Devices: <br>
-Server: 
+Devices: iPhoneX v12.1<br>
+Server: 10.0.10
 
 Number of tests: <br>
 Number of automated tests: <br>
@@ -16,17 +16,17 @@ Coverage: <br>
 | Test Case | Steps | Expected | Result | Related Comment / Bug link | Automated |
 | :-------- | :---- | :------- | :----: | :------------------------- | :-------: |
 |**View**||||||
-| "Open In" option portrait File List| Open In option in card | Correct view of the option in portrait | | | |
-| "Open In" option landscapeFile List | Open In option in card | Correct view of the option in landscape | | | |
-| "Open In" option portrait Preview| Open In option in card | Correct view of the option in portrait | | | |
-| "Open In" option landscape Preview | Open In option in card | Correct view of the option in landscape | | | |
-| "Open In" option folders| Tap on three dots of a folder | "Open In" does not appear | | | |
+| "Open In" option portrait File List| Open In option in card | Correct view of the option in portrait | P m12 | | |
+| "Open In" option landscape File List | Open In option in card | Correct view of the option in landscape | P m12 | | |
+| "Open In" option portrait Preview| Open In option in card | Correct view of the option in portrait | P m12 | | |
+| "Open In" option landscape Preview | Open In option in card | Correct view of the option in landscape | P m12 | | |
+| "Open In" option folders| Tap on three dots of a folder | "Open In" does not appear | P m12 | | |
 |**Actions file list**||||||
-| Not downloaded | Select "open in" of a non-downloaded file| File is downloaded and list of apps to open in. shown | | |
-| Downloaded | Select "open in" of an already downloaded file after switching connection off| List of apps to open in, shown | | |
-| Cancel | Select "open in" of a non-downloaded file<br>Cancel| Nothing happens | | |
-| Filtered | Enter a pattern in search bar that matchs any file<br>Try to "open in" the file| List of apps opened | | |
-| File open | Select "Open In" from three-dot-point menu | List of apps to open in, shown | | |
+| Not downloaded | Select "open in" of a non-downloaded file| File is downloaded and list of apps to open in. shown | P m12 | |
+| Downloaded | Select "open in" of an already downloaded file after switching connection off| List of apps to open in, shown | F m12| Downloaded twice|
+| Cancel | Select "open in" of a non-downloaded file<br>Cancel| Nothing happens | P m12 | |
+| Filtered | Enter a pattern in search bar that matchs any file<br>Try to "open in" the file| List of apps opened | P m12 | |
+| File open | Select "Open In" from three-dot-point menu | List of apps to open in, shown | P m12 | |
 |**Issues**||||||
 | No connection | Remove connection from device<br>Select "Open In" of any file | Not posible, lack of connection | | |
 | Connection lost | Select "Open In" of any non-downloaded file<br>Remove connection from device before it finishes| Downloaded cancelled after timeout | | |

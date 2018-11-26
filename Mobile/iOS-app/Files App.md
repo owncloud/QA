@@ -31,8 +31,8 @@ Coverage: <br>
 | Move a folder with subfolders| Open an ownCloud Files app location<br>Move a folder that contains subfolders to another folder with special characters | Item is moved correctly in oC app | P m12 t12 |  |
 | Copy Paste downloaded item | Open an ownCloud Files app location<br>Copy and Paste an downloaded item | Item is pasted correctly in oC app | P m12 t12 |  |
 | Copy Paste non-downloaded item | Open an ownCloud Files app location<br>Copy and Paste an non-downloaded item | Item is pasted correctly in oC app | P m12 t12 |  |
-| Duplicate item downloaded| Open an ownCloud Files app location<br>Duplicate an downloaded item | Item is duplicated correctly in oC app | F m12 t12 | Fails for folders |
-| Duplicate item non-downloaded | Open an ownCloud Files app location<br>Duplicate an non-downloaded item | Item is duplicated correctly in oC app | F m12 t12 | Failed for folders |
+| Duplicate item downloaded| Open an ownCloud Files app location<br>Duplicate an downloaded item | Item is duplicated correctly in oC app | P m12 t12 | FIXED:Fails for folders |
+| Duplicate item non-downloaded | Open an ownCloud Files app location<br>Duplicate an non-downloaded item | Item is duplicated correctly in oC app | P m12 t12 | FIXED: Failed for folders |
 | Share item downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  | P m12 t12 | |
 | Share item non-downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  | P m12 t12 | |
 | Item info | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  | P m12 t12| |
