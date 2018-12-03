@@ -23,7 +23,7 @@ Coverage: <br>
 | "Open In" option folders| Tap on three dots of a folder | "Open In" does not appear | P m12 t12 | | |
 |**Actions file list**||||||
 | Not downloaded | Select "open in" of a non-downloaded file| File is downloaded and list of apps to open in. shown | P m12 t12 | Message, Mail, ownCloud |
-| Downloaded | Select "open in" of an already downloaded file after switching connection off| List of apps to open in, shown | F m12 t12 | Downloaded twice|
+| Downloaded | Select "open in" of an already downloaded file after switching connection off| List of apps to open in, shown | P* m12 t12 | Downloaded twice -> improvement |
 | Cancel | Select "open in" of a non-downloaded file<br>Cancel| Nothing happens | P m12 t12| |
 | Filtered | Enter a pattern in search bar that matchs any file<br>Try to "open in" the file| List of apps opened | P m12 t12 | |
 | File open | Select "Open In" from three-dot-point menu | List of apps to open in, shown | P m12 t12 | |
@@ -34,7 +34,7 @@ Coverage: <br>
 | File removed | Select "Open In" of any non-downloaded file<br>Remove file from server before confirming| Can not open the file | F t12 | Becomes unestable |
 |**Regression**||||||
 | Rename File list | Select "Rename" of any item of the file list | Item renamed | P t12  |  |
-| Move File list | Select "Move" of any item of the file list | Item moved | F m12 | Lag in deletion from source|
+| Move File list | Select "Move" of any item of the file list | Item moved | P* m12 | SDK: Lag in deletion from source|
 | Delete File list | Select "Delete" of any item of the file list | Item deleted | P t12 | Deleted before cancelling |
 | Duplicate File list | Select "Duplicate" of any item of the file list | Item duplicated | P t12 | Deleted before cancelling |
 | Rename Preview | Select "Rename" from an opened item  | Item removed | P t12 | |
