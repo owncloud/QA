@@ -12,6 +12,9 @@
 | Correct URL issue warning - Approval | Credentials' fields, name and Continue displayed |
 | Correct URL issue warning - Cancel | URL displayed. Credentials and name not displayed |
 | Correct URL issue warning Certificate  | Issue type certificate is displayed |
+| Correct URL issue warning Certificate - Info | Issue type certificate is displayed and certificate info |
+| Correct URL issue warning Certificate - Appoval | Credentials' fields, name and Continue displayed |
+| Correct URL issue warning Certificate - Cancel |  URL displayed. Credentials and name not displayed |
 | Correct URL issue error - OK | Error displayed. URL displayed. Credentials and name not displayed |
 | Correct URL OAuth2 | Credentials' fields not displayed |
 |**Credentials**|
