@@ -42,8 +42,8 @@ Coverage: <br>
 | Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | F t12 m12 | File is empty. Only in root folder |
 | Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded | F m12 t12 | File is empty.  |
 | Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC | P m12 t12 |  |
-| Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | F m12 |  |
-| Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted |  |  |
+| Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P m12 t12 |  |
+| Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | P t12 |  |
 |**Remote actions**||||||
 | Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app | P t12 |  |
 | Move remote| Move a file or folder in web UI | File is automatically moved in Files app | P t12 |  |
