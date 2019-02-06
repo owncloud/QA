@@ -49,8 +49,26 @@ Coverage: <br>
 | Sort Type | Sort the file list by type  | grouped by type |  |  |
 | Sort Size | Sort the file list by size  | Biggest on the top |  |  |
 |**Upload & Download**||||||
+| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
+| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
+| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
+| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder|  | |
+| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge aount of files| All files are uplaoded|  | |
+| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
+| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears|  | |
 |**Multiaccount**||||||
+| Switch account | Create several accounts and browse through them | Correct browsing | | |
+| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | | |
 |**No connection**||||||
+| Create folder | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Move item | Move item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Copy item | Copy item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Duplicate item | Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Remove item | Remove item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Download item | Download item without connection<br> Recover connection | First, an error is received.|  |  |
+| Upload item | Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
+| Upload many items | Upload many items without connection<br> Recover connection | Action is done after recovering connection|  |  |
+| All actions | Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |  |
 |**Files App**||||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there | P t12  |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  P t12|  |
@@ -79,13 +97,13 @@ Coverage: <br>
 | Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC |  ~=|  It doesn't work for Apple's own formats like pages, you need to export it as pdf (or other formats) to be able to save it through the files app |
 | Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC |  ~=| if the item was downloaded previously it works, but if not, it doesn't work. The app rests in a stuck state. |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | P t12| |
-|**Remote actions**||||||
+|**Remote actions (Files App)**||||||
 | Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app | P t12 |  |
 | Move remote| Move a file or folder in web UI | File is automatically moved in Files app | P t12
- |  |
+ |  | |
 | Delete remote| Delete a file or folder in web UI | Delete is automatically moved in Files app | P t12 |  |
 | Upload remote| Upload new content in web UI | New content refreshed in Files app |P t12  |  |
-|**Error handling**||||||
+|**Error handling (Files App)**||||||
 | Lack of connection | Operations to perform in Files app with no connection: rename, duplicate,  move, delete, download | Correct error |  P t12| All the operation but download doesn't have error message, instead, all of them are preformed when the connection came back.|
 | Lack of server connection | Operations to perform in Files app with no server connection: rename, move, delete, download | Correct error | P t12 | All the operations are done when the connection is back (some of them take a while but at the end are done)|
 | Maintenance mode | Operations to perform in Files app with maintenance mode: rename, move, delete, download | Correct error | P t12 |  |
