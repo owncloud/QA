@@ -11,8 +11,8 @@ Server: 10.0.10
 | Num | Test Case | Steps | Expected Result | Result | Related Comment |
 :------: | :------------- | :------------- | :-------------- | :-----: | :------
 |**Camera uploads**||||||
-| 1 | Camera uploads pics | Take same camera stuff and wait till 15 minutes it is uploaded | Pics uploaded | F m9 |
-| 2 | Camera uploads videos | Take same camera stuff and wait till 15 minutes it is uploaded | Videos uploaded | F m9 |
+| 1 | Camera uploads pics | Take same camera stuff and wait till 15 minutes it is uploaded | Pics uploaded | P m9 | FIXED
+| 2 | Camera uploads videos | Take same camera stuff and wait till 15 minutes it is uploaded | Videos uploaded | P m9 | FIXED
 |**Available offline**||||||
 | 3 | Files | Select several files as av. offline<br>Modify them in the device<br>Wait till 15 mins to check the stuff| Files uploaded | P m9 |  |
 | 4 | Folders | Select several folders as av. offline<br>Modify some content inside in the device<br>Wait till 15 mins to check the stuff| Stuff uploaded | P m9 |  |
