@@ -26,9 +26,9 @@ Server: 10.0.9
 | 10 | Read only | 1. Enable capability "Enforce password for Upload Only"<br>2. Create a  Read only public link without password<br>3. Create a Read only public link with password | 2. Link created (check server)<br>3. Link created (check server)| P m7 m8|  |
 | 11 | Read & write | 1. Enable capability "Enforce password for Upload Only"<br>2. Create a  Read & write public link without password<br>3. Create a Read & write public link with password | 2. Link created (check server)<br>3. Link created (check server)| P m7 m8|  |
 | 12 | Edit upload only | 1. Enable capability "Enforce password for upload only"<br>2. Create a upload only public link in server<br>3. In app, try to remove the password from the link | Not allowed| NA | Not posible remove, only edit |
-
-
-
+|**All enabled**||||||
+| 13 | All capabilities enabled | 1. Enable all capability "Enforce password xxx"<br>2. Create a link of every type" without password<br>3. Create a link of every type" with password | 2. Not allowed<br>Allowed| P m7 m8 |  |
+| 14 | All capabilities disabled | 1. Disable all capability "Enforce password xxx"<br>2. Create a link of every type" without password<br>3. Create a link of every type" with password | 2. Allowed<br>Allowed| P m7 m8 |  |
 
 
 
