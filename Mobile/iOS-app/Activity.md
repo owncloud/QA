@@ -31,12 +31,12 @@ Coverage: <br>
 | Download + more | 1. Download a huge file<br>2. While it is being downloaded, duplicate a folder, copy a file and delete another file | All actions are enqueued and finish correctly| P t12 | |
 |**Cancel Actions**||||||
 | Upload file | Upload a file from files app and cancel it from Activity| Progress is shown in Activity View| P t12 | |
-| Download file | Download a file inside the app  and cancel it from Activity| Progress is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| F m12 | Needed two clicks to resume |
+| Download file | Download a file inside the app  and cancel it from Activity| Progress is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| P m12 | FIXED: Needed two clicks to resume |
 | Delete item | Delete an item  inside the app  and cancel it from Activity| Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| NA | |
 | Rename item | Rename an item  inside the app  and cancel it from Activity| Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed|NA | |
 | Duplicate item | Duplicate an item  inside the app  and cancel it from Activity| Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed|NA | |
-| Copy item | Copy an item inside the app  and cancel it from Activity | Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| F m12 | Action stucked|
-| Duplicate item | Duplicate an item  inside the app  and cancel it from Activity| Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| F m12| Action stucked |
+| Copy item | Copy an item inside the app  and cancel it from Activity | Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| P m12 | FIXED: Action stucked|
+| Duplicate item | Duplicate an item  inside the app  and cancel it from Activity| Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| P m12| FIXED: Action stucked |
 | Create folder | Create a new folder  and cancel it from Activity| Action is shown in Activity View and when it is cancelled, it disappears. Actions is not completed| NA | |
 |**Multiaccount**||||||
 | Two accounts - Download | Download files in two accounts at the same time | Downloads run at the time and finishes correctly| F m12 | App stucked |

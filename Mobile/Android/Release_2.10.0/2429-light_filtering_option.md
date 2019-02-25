@@ -36,7 +36,7 @@ Filter app: Twilight
 | 20 | Multiselection options | Tap anywhere in the view | tap works | P m7 m9 |
 | 21 | FAB options| Tap anywhere in the view | tap works | F m7 | Upload crashes
 | 22 | Create folder view | Tap anywhere in the view | tap works | P m7 m9 |
-| 23 | Uploads view | Tap anywhere in the view | tap works | F m7 m9 | Can not tap
+| 23 | Uploads view | Tap anywhere in the view | tap works | P m7 m9 | FIXED Can not tap
 | 24 | Feedback view | Tap anywhere in the view | tap works | P m7 m9 |
 | 25 | Upload picker | Tap anywhere in the view | tap works | P m7 m9 |
 | 26 | Upload picker options | Tap anywhere in the view | tap works | P m7 m9 |
