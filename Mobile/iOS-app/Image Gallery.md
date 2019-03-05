@@ -2,7 +2,7 @@
 
 #### PRs: https://github.com/owncloud/ios-app/pull/277
 
-Device/s: 
+Device/s: iPadAir2 v12
 Server:
 
 
@@ -12,11 +12,11 @@ Server:
 | Test Case | Steps | Expected | Result | Related Comment / Bug link | Automated |
 | :-------- | :---- | :------- | :----: | :------------------------- | :-------: |
 |**Only images**||||||
-| Non-downloaded | Open a folder that contain only images. Any of them is downloaded. Open the first one and swipe left. Check backwards and both orientations | Images are downlaoded at the time. Gallery runs correctly | | | |
-| Downloaded | Open a folder that contain only images. All of them are downloaded. Open the first one and swipe left. Check backwards | Images are not downlaoded, they are. Gallery runs correctly | | | |
+| Non-downloaded | Open a folder that contain only images. Any of them is downloaded. Open the first one and swipe left. Check backwards and both orientations | Images are downlaoded at the time. Gallery runs correctly | P t12 | Everyone is downloaded till it finishes even when it passes | |
+| Downloaded | Open a folder that contain only images. All of them are downloaded. Open the first one and swipe left. Check backwards | Images are not downlaoded, they are. Gallery runs correctly | F t12 | Huge images make it slower. Spinner? | |
 | Mix Downloaded - non-Downloaded | Open a folder that contain only images. Some of them are downloaded, other aren't. Open the first one and swipe left. Check backwards and both orientations| Images that are not downlaoded, they are. Other ones, only displayed. Gallery runs correctly | | | |
 |**No images**||||||
-| No images | Open a folder that does not contain images. Open a file and swipe left (both orientations) | No Gallery| | | |
+| No images | Open a folder that does not contain images. Open a file and swipe left (both orientations) | No Gallery| P t12 | | |
 |**Images-files**||||||
 | Non-downloaded | Open a folder that contain many kind of files. Any of them is downloaded. Open the first image one and swipe left. Check backwards and both orientations | Images are downlaoded at the time. Gallery runs correctly only over images | | | |
 | Downloaded | Open a folder that contain many kind of files. All of them are downloaded. Open the first image one and swipe left. Check backwards and both orientations | Images are downlaoded at the time. Gallery runs correctly only over images | | | |

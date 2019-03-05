@@ -1,88 +1,87 @@
 | Title | Procedure |  Expected Result | Result | Comments
 | :---: | :-------- | :--------------- | :----: | :-----
 | **Welcome Wizard**| 1 device
-| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed in both orientations |
+| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed in both orientations | P m9
 | **Detect Auth Method**  | 1 device  |  |
-| Basic Auth | Input a basic auth URL | User and password field shown |
-| OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs |
+| Basic Auth | Input a basic auth URL | User and password field shown | P m9 | Autom
+| OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs | P m9
 | **Basic Auth** |  1 device |  |
-| Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |
-| Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |
-| Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown |
-| Empty password | 1. Type a correct url<br>2. Try to log in without filling the password | error is shown |
-| Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown |
-| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |
-| Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud |
-| With blanks | Set some blanks after and before user name | Correct access |
-| LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access |
-| From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished |
-| Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view |
+| Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) | P m9 | Autom
+| Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) | P m9 | Autom
+| Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown | P m9 | Autom
+| Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown | P m9 | Autom
+| Account already exists | Log in in an already existing account | Error is shown | P m9 | Autom
+| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud | P m9 | Autom
+| Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud | P m9 | Autom
+| With blanks | Set some blanks after and before user name | Correct access | P m9 | Autom
+| LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access | NA | Lack of set up in basic/OAuth2
+| From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished | P m9
+| Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view | P m9
 | **OAuth2** | 1 device  |  |
-| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
-| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app |
-| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  |
+| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed | P m9
+| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded | P m9
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | P m9
+| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  | P m9
 | **Redirections** | 1 device  |  |
-| Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
-| Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
+| Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK | P m9
+| Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK | P m9
 | **Accounts manager** | 1 device  |  |
-| Create a new basic account from accounts manager<br>| Create a new account| Account is created and is visible in accounts manager |
-| Create a new OAuth2 account from accounts manager<br>| Create a new account<br>| Account is created and is visible in accounts manager |
-| Create a new account without connection to the internet<br>| Create a new account without connection to the internet<br>| There must be an adequate error message |
-| Create a new account without connection to the server | Create a new account without connection to the server | There must be an adequate error message |
-|Multiaccount | Having connection, login with another auth method (basic, oauth2) | Both accounts must be ready to use |
-| Create a new account, but it is an existing one. |1. There is an account whith a user in one server<br>2. Try to create the same account | A error: "An account for the same user and server already exists in the device" |
-| Edit and chnage the password | Edit the account (Change the password for an incorrect one)| It is not possible, credentials error |
-| Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account |
-| Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account |
+| Create a new basic account from accounts manager<br>| Create a new account| Account is created and is visible in accounts manager | P m9
+| Create a new OAuth2 account from accounts manager<br>| Create a new account<br>| Account is created and is visible in accounts manager | P m9
+| Create a new account without connection to the internet<br>| Create a new account without connection to the internet<br>| There must be an adequate error message | P m9
+| Create a new account without connection to the server | Create a new account without connection to the server | There must be an adequate error message | P m9
+|Multiaccount | Having connection, login with another auth method (basic, oauth2) | Both accounts must be ready to use | P m9
+| Create a new account, but it is an existing one. |1. There is an account whith a user in one server<br>2. Try to create the same account | A error: "An account for the same user and server already exists in the device" | P m9
+| Edit and chhnge the password | Edit the account (Change the password for an incorrect one)| It is not possible, credentials error | P m9
+| Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account | P m9
+| Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account | P m9
 | **User quota** | 1 device  |  |
-| Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed |
-| 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar |
-| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar |
-| 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" |
+| Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed | P m9
+| 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar | P m9
+| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar | P m9
+| 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" | P m9
 | **Security** | 1 device  |  |
-| Passcode enable | 1. Enable passcode (While doing that, change the orientation of the device)<br>2. Leave the app<br>3. Kill the app<br>4. passcode is asked (While doing that change the orientation of the device)<br>5. Fill in the correct password and select the account and folder | Passcode asked |
-| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current pincode, don't enter it, leave the app<br>3. Open the app again<br>| Passcode is asked |
-| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current passcode, enter it<br>3. Leave the app<br>4. Open the app<br> | Passcode is not asked anymore |
-| Passcode security | 1. Select to disable passcode<br>2. Without entering it, kill the app<br>3. Open the app<br>| Passcode is asked |
-| Passcode security | 1. Go to device settings and clear data<br>2. Open the app<br>| Passcode is asked |
-| Pattern lock | 1. Enable Pattern lock<br>2. Leave the app and enter again | Pattern lock is asked |
-| Disable pattern lock | 1. Select to disable pattern<br>2. When it's asked to enter the current pattern, don't enter it, leave the app<br>3. Open the app again<br>| Pattern is asked |
-| Disable pattern lock | 1. select to disable pattern<br>2. When it's asked to enter the current pattern, enter it<br>3.- Leave the app<br>4. Open the app<br>| Pattern is not asked anymore |
-| Both at the same time | Try to enable pattern and passcode lock at the same time | Not posible |
-| Fingerprint lock | Option is enabled if device has fingerprint support | Pattern is asked |
-| Fingerprint unlock | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the fingerprint | 1. Fingerprint asked<br>2. Passcode/Pattern asked |
-| Upload file from camera with security | With a sec method enabled (pattern/passcode/fingerp), upload from camera | Method not asked |
-| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked |
-| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked |
+| Passcode enable | 1. Enable passcode (While doing that, change the orientation of the device)<br>2. Leave the app<br>3. Kill the app<br>4. passcode is asked (While doing that change the orientation of the device)<br>5. Fill in the correct password and select the account and folder | Passcode asked |  P m9
+| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current pincode, don't enter it, leave the app<br>3. Open the app again<br>| Passcode is asked | P m9
+| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current passcode, enter it<br>3. Leave the app<br>4. Open the app<br> | Passcode is not asked anymore | P m9
+| Passcode security | 1. Select to disable passcode<br>2. Without entering it, kill the app<br>3. Open the app<br>| Passcode is asked | P m9
+| Passcode security | 1. Go to device settings and clear data<br>2. Open the app<br>| Passcode is asked | P m9
+| Pattern lock | 1. Enable Pattern lock<br>2. Leave the app and enter again | Pattern lock is asked | P m9
+| Disable pattern lock | 1. Select to disable pattern<br>2. When it's asked to enter the current pattern, don't enter it, leave the app<br>3. Open the app again<br>| Pattern is asked | P m9
+| Disable pattern lock | 1. select to disable pattern<br>2. When it's asked to enter the current pattern, enter it<br>3.- Leave the app<br>4. Open the app<br>| Pattern is not asked anymore | P m9
+| Both at the same time | Try to enable pattern and passcode lock at the same time | Not posible | P m9
+| Fingerprint lock | Option is enabled if device has fingerprint support | Pattern is asked | P m9
+| Fingerprint unlock | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the fingerprint | 1. Fingerprint asked<br>2. Passcode/Pattern asked | P m9
+| Upload file from camera with security | With a sec method enabled (pattern/passcode/fingerp), upload from camera | Method not asked | P m9
+| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked | P m9
 | **Actions with no connection** |  1 device |  |
-| Create a folder without connection | Create a folder without connection | An error message is shown |
-| Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|
-| Rename folder/file without connection | Rename a folder/file without connection | An error message is shown|
-| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown |
-| Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct |
-| Move a file/folder without connection | Select to move a file/folder without connection | An error is shown |
-| Share by link | Select to share by link a file | An error is shown |
-| Share with user | Select to share with a user | An error is shown |
+| Create a folder without connection | Create a folder without connection | An error message is shown |  P m9
+| Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown| P m9
+| Rename folder/file without connection | Rename a folder/file without connection | An error message is shown| P m9
+| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown | P m9
+| Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct | P m9
+| Move a file/folder without connection | Select to move a file/folder without connection | An error is shown | P m9
+| Share by link | Select to share by link a file | An error is shown | P m9
+| Share with user | Select to share with a user | An error is shown | P m9
 | **Specific error handling (server set ups)** | 1 device  |  |
-| Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message |
-| Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct |
-| Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct |
-| Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct |
+| Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message | P m9
+| Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct | P m9
+| Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct | P m9
+| Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct | P m9
 | Antivirus | 1. Enable antivirus in server<br>2. Upload EICAR file<br>| Correct error message in notification |
 | **Uploads** |  1 device |  |
-| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |
-| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view |
-| Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view |
-| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view |
-| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view |
-| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |
-| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
-| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |
-| Move or copy uploadeds | 1. Select to upload a file and select "Copy"<br>2. Select to upload a file and select "Move" | 1. The original is not removed from device<br>2. The original is removed from device |
-| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  |
-| Instant uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum |
-| Instant uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app |
+| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct | P m9
+| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view | P m9
+| Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view | P m9
+| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view | P m9
+| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | P m9
+| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list | P m9
+| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view | P m9
+| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared | P m9
+| Move or copy uploadeds | 1. Select to upload a file and select "Copy"<br>2. Select to upload a file and select "Move" | 1. The original is not removed from device<br>2. The original is removed from device | P m9
+| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  | P m8
+| Instant uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum | P m8
+| Instant uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app | P m9
 | Change instant upload Camera folder | 1. Set a source folder<br>2. Take photos and videos<br>3. Change the folder<br>4. Take photos and videos | 2. Videos and photos uploaded<br>4. Videos and photos not uploaded |
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
 | Error permissions | 1. Share a folder wiithout permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  |
@@ -94,12 +93,12 @@
 | Sort in uploads | Open upload picker and check sorting options in three-dot menu | Correct sorting |
 | Select all and inverse in uploads | Open upload picker and select all and inverse options over the items | Correct selection |
 | **Upload from external** | 1 device  |  |
-| Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated |
+| Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated | P m9
 | Send text | Copy text and share it with oC | A txt file is created with the copied text |
 | **VideoStreaming** | 1 device  |  |
-| Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly |
+| Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly | P m9
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward  and change orientation | Video is streamed correctly |
-| Stream a video with https (non trusted server) | 1. With a https server stream a video. | Video is not streamed, so that the server is not secure. |
+| Stream a video with https (non trusted server) | 1. With a https server stream a video. | Video is not streamed, so that the server is not secure. | P m9
 | **Conflict handling** |  1 device |  |
 | Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated |
 | Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected<br>6. Server version is downloaded to the device |
@@ -135,19 +134,19 @@
 | Browse and open (downloaded) | Browse through file structure and open at least 3 files of different extensions that are already downloaded in oC | Correct browsing and previewing |
 | Save | Try to save a file after modify it | Not posible, saving not supported. Correct error message |
 | **Share by link** |  1 device |  |
-| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works |
-| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work |
+| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works | P m9 | Autom
+| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work | P m9 | Autom
 | Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link |
 | Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option does not appear. |
-| Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared |
-| Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared |
-| Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server |
+| Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared | P m9 | Autom
+| Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared | P m9 | Autom
+| Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server | P m9 | Autom
 | Download / View | 1. Share link of a folder<br>2. Select "Download / View"  | Folder is shared and content is visible, but no action is allowed |
 | Download / View / Upload | 1. Share link of a folder<br>2. Select "Download / View / Upload"  | Folder is shared and content is "updatable" |
 | Upload only | 1. Share link of a folder<br>2. Select "Upload Only"  | Folder is shared and content is not visible, but it is posible to upload content |
-| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear |
+| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear |  P m9 | Autom
 | Enforced Password | Create a new public link with the password enforced in server | The link can not be saved until password is typed |
-| Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date |
+| Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date | P m9 | Autom
 | Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input |
 | **Share with users** | 1 device  |  |
 |Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon |
