@@ -14,8 +14,7 @@
 | Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud | P m9 | Autom
 | Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud | P m9 | Autom
 | With blanks | Set some blanks after and before user name | Correct access | P m9 | Autom
-| LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access | NA | Lack of set up in basic/OAuth2
-| From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished | P m9
+| LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access | P m9 m7 | | From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished | P m9
 | Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view | P m9
 | **OAuth2** | 1 device  |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed | P m9  m7
@@ -160,9 +159,9 @@
 | Unshare | 1. From the previous test case - previosly shared user, select shared with user<br>2. Unshare with 1 of the users<br>| The share with user icon is not included<br>User does not have access to the folder any more | P m9
 | Share with users + Share with link | 1. From the previous test case - previosly shared user, select shared with user<br>2. Select to share by link | Check that the link works<br>Check, at least one user have still access to the file |P m9
 | Share with privileges - edit and share | 1. Share a file with edit permission with user1<br>2. Login with user1 and try to edit the file<br>3. Grant user1 to share | 2. user1 can see and edit the file<br>3. user1 can share the file |P m9
-| Share with privileges - folders | 1. Share a folder with user1 with create and delete privileges, and without change<br>2. Login with user1 and try to upload/delete files<br>3. Change the content of any file | 2. user1 can create/delete in the folder<br>3. user1 can not change the file in the folder | F m9 | Lack oif notification
+| Share with privileges - folders | 1. Share a folder with user1 with create and delete privileges, and without change<br>2. Login with user1 and try to upload/delete files<br>3. Change the content of any file | 2. user1 can create/delete in the folder<br>3. user1 can not change the file in the folder | P m9 m7 | FIXED: Lack of notification
 | Privileges inheritance | 1. Share a folder with user1 with share and create privileges, and without change and delete<br>2. Login with user1 and try to re-share the folder with create privilege<br>3. Re-share with change and/or delete privileges (check in server side)| 2. user1 can reshare the file<br>3. user1 can not reshare the file | P m9
-| Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file | ? |
+| Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file | P m9 |
 | Federated Share disabled | 1. In server, disable the option federated share<br>2. Share a folder with user1 in other server<br>3. Login with user1<br> | The file can not be federated shared | P m9
 | **Miscellanous** |  1 device |  |
 | Remote thumbnails | 1. Access to the photos folder<br>2. Check that the thumbnails are previewed |  Check that the thumbnails are previewed  | P m9
@@ -176,6 +175,6 @@
 | Local search | Enter a pattern that matches with any item on the file list | Correct filtered |P m9
 | Light filtering | Enable a light filtering app (like Twilight) and the option in settings. Check in several views | Tapping is allowed in every view|P m9
 | **Upgrade** |
-| Upgrade from 2.9.3 basic | Install 2.9.3 with basic and upgrade to the current one| Correct upgrade |
-| Upgrade from 2.9.3 oauth2 | Install 2.9.3 with oauth2 and upgrade to the current one| Correct upgrade |
+| Upgrade from 2.9.3 basic | Install 2.9.3 with basic and upgrade to the current one| Correct upgrade | P m7 m9
+| Upgrade from 2.9.3 oauth2 | Install 2.9.3 with oauth2 and upgrade to the current one| Correct upgrade | P m7 m9
 | Upgrade from 2.9.3 saml | Install 2.9.3 with saml and upgrade to the current one| Correct upgrade |
