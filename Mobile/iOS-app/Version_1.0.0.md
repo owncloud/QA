@@ -45,7 +45,18 @@ Server:
 | Sort Z-A | Sort the file list by Z-A  | Z on the top |  |  |
 | Sort Type | Sort the file list by type  | grouped by type |  |  |
 | Sort Size | Sort the file list by size  | Biggest on the top |  |  |
-|**Upload & Download**||||||
+|**Multiselection**||||||
+| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent |  |  |
+| Open In folder | Open several folders in a 3rd party app | Not posible |  |  |
+| Copy file | Copy several files to another location | Correctly copied |  |  |
+| Copy folder| Copy several folders to another location | Correctly copied |  |  |
+| Move file | Move several files to another location | Correctly moved |  |  |
+| Move folder| Move several folders to another location | Correctly moved |  |  |
+| Duplicate file | Duplicate several files to another location | Correctly duplicated |  |  |
+| Duplicate folder| Duplicate several folders to another location | Correctly duplicated |  |  |
+| Delete file | Delete several files | Correctly deleted |  |  |
+| Delete folder| Delete several folders  | Correctly deleted |  |  |
+|**Upload & Download**| **2 auth methods**|||||
 | Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
 | Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
 | Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
@@ -58,22 +69,22 @@ Server:
 |**Multiaccount**||||||
 | Switch account | Create several accounts and browse through them | Correct browsing | | |
 | Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | | |
-|**No connection**||||||
-| Create folder | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Move item | Move item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Copy item | Copy item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Duplicate item | Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Remove item | Remove item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Download item | Download item without connection<br> Recover connection | First, an error is received.|  |  |
-| Upload item | Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| Upload many items | Upload many items without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| All actions | Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |  |
-|**Errors**||||||
+| Download in several | Download several items in different accounts at the time | All items corectly uploaded | | |
+|**Error handling**||||||
+| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  |  |
+| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  |  |
+| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
+| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection|  |  |
+| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |  |
 | Create folder | Create folder with existing name | Correct error |  |  |
 | Rename | Rename item with existing name in target | Correct error |  |  |
 | Copy | Copy item with existing name in target | Correct error |  |  |
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
-|**Files App**||||||
+|**Files App**| **2 auth methods** |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |   |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
 | Browse Basic | Open an ownCloud Files app location | Content is correctly displayed | |  |
