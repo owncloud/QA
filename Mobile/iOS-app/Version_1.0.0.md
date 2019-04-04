@@ -1,61 +1,73 @@
 #### Version 1.0.0
 
-#### PRs: https://github.com/owncloud/ios-app/pull/<br>
+#### PRs: https://github.com/owncloud/ios-app/pull/352<br>
 
 
-Device/s: <br>
-Server: 
+Device/s: iPhoneX v12, iPadAir v12 <br>
+Server: 10.1, 10.0.9
 
+How to read Results:
 
+P -> Passed<br>
+F -> Failed<br>
+m -> mobile (iPhone)<br>
+t -> tablet (iPad)<br>
+12 -> iOS version<br>
+NA -> non applicable
+
+P m12 -> Passed in an iPhone with iOS12<br>
+F t12 -> Failed in an iPad with iOS12<br>
+P m12 t12 -> Passed with an iPhone with iOS12 and an iPad with iOS12 <br>
+P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS12 <br>
 
 ---
 
  
 | Test Case | Steps | Expected Result | Result | Related Comment
-|:---------:| :---- | :-------------- | :----: | :------------: |
+|:---------:| :---- | :-------------- | :----: | :------------- |
 |**Settings**||||||
-| Certificate | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Reve the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  |  |  |
-| Logging disabled | Disable Logging| All options hidden  |  |  |
-| Logging debug | 1. Enable Logging with debug level<br>2. Perform some actions<br>3. Share file | Log is filled up |  |  |
-| Logging info | 1. Enable Logging with info level<br>2. Perform some actions<br>3. Share file | Log is filled up |  |  |
-| Logging warning | 1. Enable Logging with warning level<br>2. Perform some actions<br>3. Share file | Log is filled up |  |  |
-| Logging error | 1. Enable Logging with error level <br>2. Perform some error actions<br>3. Share file | Log is filled up |  |  |
-| Logging standard error | 1. Enable Logging with error level <br>2. Perform some error actions<br>3. Check standard error output | Standard output with errors |  |  |
-| Reset log file | After any of the actions before, reset file  | File is empty|  |  |
+| Certificate | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Reve the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | F m12 t12 | Non readable error. After other account approval, contents from cache |
+| Logging disabled | Disable Logging| All options hidden  | P t12 m12 |  |
+| Logging debug | 1. Enable Logging with debug level<br>2. Perform some actions<br>3. Share file | Log is filled up |  P m12|  |
+| Logging info | 1. Enable Logging with info level<br>2. Perform some actions<br>3. Share file | Log is filled up | P m12 |  |
+| Logging warning | 1. Enable Logging with warning level<br>2. Perform some actions<br>3. Share file | Log is filled up | P m12 |  |
+| Logging error | 1. Enable Logging with error level <br>2. Perform some error actions<br>3. Share file | Log is filled up | P m12 |  |
+| Logging standard error | 1. Enable Logging with error level <br>2. Perform some error actions<br>3. Check standard error output | Standard output with errors | P m12 |  |
+| Reset log file | After any of the actions before, reset file  | File is empty| P m12 t12 |  |
 | Mask private data | Enable the option Mask private data  | Log does not contain info about servers, users...|  |  |
-| Help | Open Help Section  | Help web is opened |  |  |
-| Send feedback | Open Send feedback section | feedback mail is opened|  |  |
-| Recommend | Open Recommend section | recommend mail is opened|  |  |
-| Privacy policy | Open Privacy policy section | privacy policy is opened|  |  |
-| Acknowledgement | Open Acknowledgement section | Acknowledgement y is opened|  |  |
+| Help | Open Help Section  | Help web is opened | P m12 t12 |  |
+| Send feedback | Open Send feedback section | feedback mail is opened| P m12 t12 |  |
+| Recommend | Open Recommend section | recommend mail is opened| P m12 t12 |  |
+| Privacy policy | Open Privacy policy section | privacy policy is opened| P m12 t12 |  |
+| Acknowledgement | Open Acknowledgement section | Acknowledgement y is opened| P m12 t12 |  |
 |**Item Actions**||||||
-| Open In | Open a file in a 3rd party app | Correctly downloaded and sent |  |  |
-| Copy file | Copy a file to another location | Correctly copied |  |  |
-| Copy folder| Copy a folder to another location | Correctly copied |  |  |
-| Move file | Move a file to another location | Correctly moved |  |  |
-| Move folder| Move a folder to another location | Correctly moved |  |  |
-| Duplicate file | Duplicate a file to another location | Correctly duplicated |  |  |
-| Duplicate folder| Duplicate a folder to another location | Correctly duplicated |  |  |
-| Rename file | Rename a file | Correctly renamed |  |  |
-| Rename folder| Rename a folder  | Correctly renamed |  |  |
-| Delete file | Delete a file | Correctly deleted |  |  |
-| Delete folder| Delete a folder  | Correctly deleted |  |  |
-| Sort Date | Sort the file list by date  | Newest on the top |  |  |
-| Sort A-Z | Sort the file list by A-Z  | A on the top |  |  |
-| Sort Z-A | Sort the file list by Z-A  | Z on the top |  |  |
-| Sort Type | Sort the file list by type  | grouped by type |  |  |
-| Sort Size | Sort the file list by size  | Biggest on the top |  |  |
+| Open In | Open a file in a 3rd party app | Correctly downloaded and sent | P m12 t12 |  |
+| Copy file | Copy a file to another location | Correctly copied | P m12 t12|  |
+| Copy folder| Copy a folder to another location | Correctly copied | P m12 t12 |  |
+| Move file | Move a file to another location | Correctly moved | P m12 t12|  |
+| Move folder| Move a folder to another location | Correctly moved | P m12 t12|  |
+| Duplicate file | Duplicate a file to another location | Correctly duplicated | P m12 t12|  |
+| Duplicate folder| Duplicate a folder to another location | Correctly duplicated | P m12 t12|  |
+| Rename file | Rename a file | Correctly renamed | P m12 t12|  |
+| Rename folder| Rename a folder  | Correctly renamed | P m12 t12|  |
+| Delete file | Delete a file | Correctly deleted | P m12 t12|  |
+| Delete folder| Delete a folder  | Correctly deleted | P m12 t12|  |
+| Sort Date | Sort the file list by date  | Newest on the top | P m12 t12 |  |
+| Sort A-Z | Sort the file list by A-Z  | A on the top | P m12 t12 |  |
+| Sort Z-A | Sort the file list by Z-A  | Z on the top | P m12 t12 |  |
+| Sort Type | Sort the file list by type  | grouped by type | P m12 t12 |  |
+| Sort Size | Sort the file list by size  | Biggest on the top | P m12 t12 |  |
 |**Multiselection**||||||
-| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent |  |  |
-| Open In folder | Open several folders in a 3rd party app | Not posible |  |  |
-| Copy file | Copy several files to another location | Correctly copied |  |  |
-| Copy folder| Copy several folders to another location | Correctly copied |  |  |
-| Move file | Move several files to another location | Correctly moved |  |  |
-| Move folder| Move several folders to another location | Correctly moved |  |  |
-| Duplicate file | Duplicate several files to another location | Correctly duplicated |  |  |
-| Duplicate folder| Duplicate several folders to another location | Correctly duplicated |  |  |
-| Delete file | Delete several files | Correctly deleted |  |  |
-| Delete folder| Delete several folders  | Correctly deleted |  |  |
+| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent | P m12 t12 |  |
+| Open In folder | Open several folders in a 3rd party app | Not posible | P m12 t12 |  |
+| Copy file | Copy several files to another location | Correctly copied | P m12 t12 |  |
+| Copy folder| Copy several folders to another location | Correctly copied | P m12 t12 |  |
+| Move file | Move several files to another location | Correctly moved | P m12 t12|  |
+| Move folder| Move several folders to another location | Correctly moved | P m12 t12|  |
+| Duplicate file | Duplicate several files to another location | Correctly duplicated | P m12 t12|  |
+| Duplicate folder| Duplicate several folders to another location | Correctly duplicated | P m12 t12|  |
+| Delete file | Delete several files | Correctly deleted | P m12 t12|  |
+| Delete folder| Delete several folders  | Correctly deleted | P m12 t12 |  |
 |**Upload & Download**| **2 auth methods**|||||
 | Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
 | Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
@@ -70,6 +82,16 @@ Server:
 | Switch account | Create several accounts and browse through them | Correct browsing | | |
 | Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | | |
 | Download in several | Download several items in different accounts at the time | All items corectly uploaded | | |
+|**Files preview**||||||
+| PDF | Download an open a PDF file | Correctly displayed | P m12 t12|  |
+| Doc | Download an open a Doc file | Correctly displayed | P m12 t12|  |
+| Excel | Download an open a excel file | Correctly displayed | P m12 t12|  |
+| Ppt | Download an open a ppt file | Correctly displayed | P m12 t12|  |
+| Txt | Download an open a txt file | Correctly displayed | P m12 t12|  |
+| Image | Download an open a png, jpg files | Correctly displayed | P m12 t12|  |
+| GIF | Download an open a GIF file | Correctly displayed | P m12 t12| https://github.com/owncloud/ios-app/issues/323 |
+| Video | Download an open a video file | Correctly displayed | P m12 |  |
+| Non openable | Download an open a non openable file | Placeholder displayed with date and size| P m12 t12|  |
 |**Error handling**||||||
 | Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
 | Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  |  |
@@ -84,6 +106,7 @@ Server:
 | Rename | Rename item with existing name in target | Correct error |  |  |
 | Copy | Copy item with existing name in target | Correct error |  |  |
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
+| Quota exceeded | Upload some content so that the user quota is exceeded | Correct error | F m12 t12 | non readable error  |
 |**Files App**| **2 auth methods** |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |   |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
@@ -122,3 +145,6 @@ Server:
 | Lack of server connection | Operations to perform in Files app with no server connection: rename, move, delete, download | Correct error |  | |
 | Maintenance mode | Operations to perform in Files app with maintenance mode: rename, move, delete, download | Correct error |  |  |
 | Target folder deleted | Operations to perform in Files app after deleting target folder: create folder, move, copy | Correct error |  | |
+|**Other**||||||
+| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | F m12 p12  | thumbnails overplace the cell|
+| Quota correct | Open the root folder | Quota is correctly displayed | P m12  | |
