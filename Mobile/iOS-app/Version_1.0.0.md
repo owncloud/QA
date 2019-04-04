@@ -33,8 +33,8 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Logging warning | 1. Enable Logging with warning level<br>2. Perform some actions<br>3. Share file | Log is filled up | P m12 |  |
 | Logging error | 1. Enable Logging with error level <br>2. Perform some error actions<br>3. Share file | Log is filled up | P m12 |  |
 | Logging standard error | 1. Enable Logging with error level <br>2. Perform some error actions<br>3. Check standard error output | Standard output with errors | P m12 |  |
-| Reset log file | After any of the actions before, reset file  | File is empty| P m12 t12 |  |
-| Mask private data | Enable the option Mask private data  | Log does not contain info about servers, users...|  |  |
+| Reset log file | After any of the actions before, reset file  | File is empty| P m12  |  |
+| Mask private data | Enable the option Mask private data  | Log does not contain info about servers, users...| P m12 | «private» added in the logs |
 | Help | Open Help Section  | Help web is opened | P m12 t12 |  |
 | Send feedback | Open Send feedback section | feedback mail is opened| P m12 t12 |  |
 | Recommend | Open Recommend section | recommend mail is opened| P m12 t12 |  |
@@ -69,15 +69,15 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Delete file | Delete several files | Correctly deleted | P m12 t12|  |
 | Delete folder| Delete several folders  | Correctly deleted | P m12 t12 |  |
 |**Upload & Download**| **2 auth methods**|||||
-| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
-| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
-| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
-| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder|  | |
-| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded|  | |
-| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
-| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears|  | |
-| Download several files | Tap on several files | all are enqueued and finally downloaded |  | |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded |  | |
+| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder | P m12 t12 |  |
+| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder| P m12 t12 |  |
+| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder | P m12 t12 | |
+| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder| P m12 t12 | |
+| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded|  | Checked with different amounts: ~50, ~100, 300 files|
+| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears| P m12 t12 | |
+| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| P m12 t12| |
+| Download several files | Tap on several files | all are enqueued and finally downloaded | P m12 t12 | |
+| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed |P m12 t12 | |
 |**Multiaccount**||||||
 | Switch account | Create several accounts and browse through them | Correct browsing | | |
 | Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | | |
@@ -147,4 +147,4 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Target folder deleted | Operations to perform in Files app after deleting target folder: create folder, move, copy | Correct error |  | |
 |**Other**||||||
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | F m12 p12  | thumbnails overplace the cell|
-| Quota correct | Open the root folder | Quota is correctly displayed | P m12  | |
+| Quota correct | Open the root folder | Quota is correctly displayed | P m12 t12 | |
