@@ -26,7 +26,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Test Case | Steps | Expected Result | Result | Related Comment
 |:---------:| :---- | :-------------- | :----: | :------------- |
 |**Settings**||||||
-| Certificate | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Reve the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | F m12 t12 | Non readable error. After other account approval, contents from cache |
+| Certificate | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Reve the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | P m12 t12 | FIXED: Non readable error. After other account approval, contents from cache |
 | Logging disabled | Disable Logging| All options hidden  | P t12 m12 |  |
 | Logging debug | 1. Enable Logging with debug level<br>2. Perform some actions<br>3. Share file | Log is filled up |  P m12|  |
 | Logging info | 1. Enable Logging with info level<br>2. Perform some actions<br>3. Share file | Log is filled up | P m12 |  |
@@ -64,8 +64,8 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Copy folder| Copy several folders to another location | Correctly copied | P m12 t12 |  |
 | Move file | Move several files to another location | Correctly moved | P m12 t12|  |
 | Move folder| Move several folders to another location | Correctly moved | P m12 t12|  |
-| Duplicate file | Duplicate several files to another location | Correctly duplicated | P m12 t12|  |
-| Duplicate folder| Duplicate several folders to another location | Correctly duplicated | P m12 t12|  |
+| Duplicate file | Duplicate several files to another location | Correctly duplicated | F m12 t12| Not all are duplicated if you have many |
+| Duplicate folder| Duplicate several folders to another location | Correctly duplicated | F m12 t12| Not all are duplicated if you have many |
 | Delete file | Delete several files | Correctly deleted | P m12 t12|  |
 | Delete folder| Delete several folders  | Correctly deleted | P m12 t12 |  |
 |**Upload & Download**| **2 auth methods**|||||
@@ -73,15 +73,15 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder| P m12 t12 |  |
 | Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder | P m12 t12 | |
 | Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder| P m12 t12 | |
-| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded|  | Checked with different amounts: ~50, ~100, 300 files|
+| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded | P t12 m12 | Checked with different amounts: ~50, ~100, 300 files|
 | Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears| P m12 t12 | |
 | Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| P m12 t12| |
 | Download several files | Tap on several files | all are enqueued and finally downloaded | P m12 t12 | |
 | Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed |P m12 t12 | |
 |**Multiaccount**||||||
-| Switch account | Create several accounts and browse through them | Correct browsing | | |
-| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | | |
-| Download in several | Download several items in different accounts at the time | All items corectly uploaded | | |
+| Switch account | Create several accounts and browse through them | Correct browsing | P m12 t12 | |
+| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | F m12 t12 | Fail when go back|
+| Download in several | Download several items in different accounts at the time | All items corectly uploaded | F m12 t12 | Fails with multiaccount |
 |**Files preview**||||||
 | PDF | Download an open a PDF file | Correctly displayed | P m12 t12|  |
 | Doc | Download an open a Doc file | Correctly displayed | P m12 t12|  |
@@ -106,7 +106,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Rename | Rename item with existing name in target | Correct error |  |  |
 | Copy | Copy item with existing name in target | Correct error |  |  |
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
-| Quota exceeded | Upload some content so that the user quota is exceeded | Correct error | F m12 t12 | non readable error  |
+| Quota exceeded | Upload some content so that the user quota is exceeded | Correct error | P m12 t12 | FIXED: non readable error  |
 |**Files App**| **2 auth methods** |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |   |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
@@ -146,5 +146,5 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Maintenance mode | Operations to perform in Files app with maintenance mode: rename, move, delete, download | Correct error |  |  |
 | Target folder deleted | Operations to perform in Files app after deleting target folder: create folder, move, copy | Correct error |  | |
 |**Other**||||||
-| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | F m12 p12  | thumbnails overplace the cell|
+| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12 t12  | FIXED: thumbnails overplace the cell|
 | Quota correct | Open the root folder | Quota is correctly displayed | P m12 t12 | |
