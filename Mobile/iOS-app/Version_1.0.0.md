@@ -42,10 +42,10 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Acknowledgement | Open Acknowledgement section | Acknowledgement y is opened| P m12 t12 |  |
 |**Item Actions**||||||
 | Open In | Open a file in a 3rd party app | Correctly downloaded and sent | P m12 t12 |  |
-| Copy file | Copy a file to another location | Correctly copied | P m12 t12|  |
-| Copy folder| Copy a folder to another location | Correctly copied | P m12 t12 |  |
-| Move file | Move a file to another location | Correctly moved | P m12 t12|  |
-| Move folder| Move a folder to another location | Correctly moved | P m12 t12|  |
+| Copy file | Copy a file to another location | Correctly copied | P m12 t12| FIXED: Browsing in picker not dismissed |
+| Copy folder| Copy a folder to another location | Correctly copied | P m12 t12 | FIXED: Options sould not be available in the picker |
+| Move file | Move a file to another location | Correctly moved | P m12 t12| FIXED: Browsing in picker not dismissed |
+| Move folder| Move a folder to another location | Correctly moved | P m12 t12| FIXED: Options sould not be available in the picker |
 | Duplicate file | Duplicate a file to another location | Correctly duplicated | P m12 t12|  |
 | Duplicate folder| Duplicate a folder to another location | Correctly duplicated | P m12 t12|  |
 | Rename file | Rename a file | Correctly renamed | P m12 t12|  |
@@ -92,19 +92,22 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | GIF | Download an open a GIF file | Correctly displayed | P m12 t12| https://github.com/owncloud/ios-app/issues/323 |
 | Video | Download an open a video file | Correctly displayed | P m12 |  |
 | Non openable | Download an open a non openable file | Placeholder displayed with date and size| P m12 t12|  |
-|**Error handling**||||||
+|**Offline**||||||
 | Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
-| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
-| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
-| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  P m12 |  |
-| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.| P m12  |  |
-| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m12  |  |
-| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m12 |  |
-| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |  |
-| Create folder | Create folder with existing name | Correct error | P m12 |  |
-| Rename | Rename item with existing name in target | Correct error | P m12 |  |
-| Copy | Copy item with existing name in target | Correct error | P m12 |  |
+| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m12 t12 | |
+| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection | P m12 t12 |  |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection | F m12 t12 | Not in status view |
+| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  P m12 t12|  |
+| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.| P m12 t12 |  |
+| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m12 t12 |  |
+| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m12 t12|  |
+| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |   |
+| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| F m12 t12| Double deletion causes error |
+|**Error handling**||||||
+| Create folder | Create folder with existing name | Correct error | P m12 t12 |  |
+| Rename | Rename item with existing name in target | Correct error | P m12 t12 |  |
+| Copy | Copy item with existing name in target | Correct error | P m12 t12 |  |
+| Move | Move item with existing name in target | Correct error | P m12 t12 |  |
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | F m12 t12 | Rename a deleted does not work |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error | P m12 t12 | FIXED: non readable error  |
 |**Files App**| **2 auth methods** |||||
@@ -129,9 +132,9 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Item info | Open an ownCloud Files app location<br>Open info option | Item info is correct  | P m12 t12 | |
 | Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app | P m12 t12 |  |
 | Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app | P m12 t12 | FIXED: Nor asked for confirmation |
-| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | P m12 |  |
-| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | P m12 |  |
-| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded | P m12 |  |
+| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | P m12 t12 |  |
+| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | P m12 t12 |  |
+| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded | P m12 t12 |  |
 | Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC | P m12 t12  |   |
 | Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P m12 t12 |  |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | NA | Apple issue |
@@ -149,4 +152,5 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Target folder deleted | Operations to perform in Files app after deleting target folder: move, copy | Correct error | P m12 t12 | |
 |**Other**||||||
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12 t12  | FIXED: thumbnails overplace the cell|
+| Searching | Input a pattern to filter in the current folder | Results correct filtered | P m12 t12  | 
 | Quota correct | Open the root folder | Quota is correctly displayed | P m12 t12 | |
