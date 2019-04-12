@@ -14,6 +14,8 @@
 | "enabled" | false | Create public shares | Public shares are not visible in the app | Pending  |
 | "multiple" | true  | Create one public share | Another one can be created | Pending |
 | "multiple" | false | Create one public share | No more links to be created | Pending |
+| "version_string" | > 10.0.0  | Create one public share | Another one can be created | Pending |
+| "version_string" | < 10.0.0 | Create one public share | No more links to be created | Pending |
 | "upload" | true  | Create one public share (folder) | Options for upload permissions are  displayed | Pending |
 | "upload" | false | Create one public share (folder) | Options for upload permissions are not  displayed | Pending |
 | "expire\_date"."enabled" | true  | Create one public share | Expiration date is enabled | Pending |
