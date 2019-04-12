@@ -9,8 +9,6 @@
  
 | Capability | Value | Steps | Expected Result | Status | Dev
 | :----: | :-------- | :---- | :-------------- | :-----: | :------
-| "api_enabled" | true | Create public share| Public share is visible in the app | Pending |
-| "api_enabled"  | false |Create public share | Public share is not visible in the app | Pending |
 |**public**|||||
 | "enabled" | true  | Create several public shares | Public shares are visible in the app |  Pending |
 | "enabled" | false | Create public shares | Public shares are not visible in the app | Pending  |
