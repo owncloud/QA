@@ -20,8 +20,8 @@ Devices: Nexus 5X v8
 | "version_string" | < 10.0.0 | Create one public share | No more links to be created | P m8 |
 | "upload" | true  | Create one public share (folder) | Options for upload permissions are  displayed | P m8 |
 | "upload" | false | Create one public share (folder) | Options for upload permissions are not  displayed | P m8 |
-| "expire\_date"."enabled" | true  | Create one public share | Expiration date is enabled | Pending |
-| "expire\_date"."enabled" | false  | Create one public share | Expiration date is disabled | Pending |
+| "expire\_date"."enabled" | true  | Create one public share | Expiration date is enabled | NA |
+| "expire\_date"."enabled" | false  | Create one public share | Expiration date is disabled | NA |
 | "expire\_date"."enforced" | true  | Create one public share | Expiration date is enabled and enforced | P m8 |
 | "expire\_date"."enforced" | false  | Create one public share | Expiration date is enabled and not enforced | P m8 |
 | "expire\_date"."days" | 2 | Create one public share | Expiration date is enabled with a value two days in the future | Pending |
