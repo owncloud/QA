@@ -41,7 +41,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Privacy policy | Open Privacy policy section | privacy policy is opened| P m12 t12 |  |
 | Acknowledgement | Open Acknowledgement section | Acknowledgement y is opened| P m12 t12 |  |
 |**Item Actions**||||||
-| Open In | Open a file in a 3rd party app | Correctly downloaded and sent | P m12 t12 |  |
+| Open In | Open a file in a 3rd party app | Correctly downloaded and sent | F m12 t12 | Go back to the file list |
 | Copy file | Copy a file to another location | Correctly copied | P m12 t12| FIXED: Browsing in picker not dismissed |
 | Copy folder| Copy a folder to another location | Correctly copied | P m12 t12 | FIXED: Options sould not be available in the picker |
 | Move file | Move a file to another location | Correctly moved | P m12 t12| FIXED: Browsing in picker not dismissed |
@@ -96,7 +96,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
 | Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m12 t12 | |
 | Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection | P m12 t12 |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection | F m12 t12 | Not in status view |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection | P m12 t12 | FIXED: Not in status view |
 | Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  P m12 t12|  |
 | Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.| P m12 t12 |  |
 | Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m12 t12 |  |
