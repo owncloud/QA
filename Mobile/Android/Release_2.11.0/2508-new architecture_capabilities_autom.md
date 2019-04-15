@@ -2,8 +2,6 @@
 
 #### Pr: https://github.com/owncloud/android/pull/2508
 
-
-Server: 10.1.1
 Devices: Nexus 5X v8
 
 ---
