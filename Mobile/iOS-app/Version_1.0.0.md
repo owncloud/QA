@@ -84,14 +84,19 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m12 t12 | FIXED: Fails with multiaccount |
 |**Files preview**||||||
 | PDF | Download an open a PDF file | Correctly displayed | P m12 t12|  |
+| PDF search | Download an open a PDF file and search by a pattern | Correct search | P m12 t12|  |
+| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | P m12 t12|  |
+| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | F p12 m12 | Margin on the top |
 | Doc | Download an open a Doc file | Correctly displayed | P m12 t12|  |
 | Excel | Download an open a excel file | Correctly displayed | P m12 t12|  |
 | Ppt | Download an open a ppt file | Correctly displayed | P m12 t12|  |
 | Txt | Download an open a txt file | Correctly displayed | P m12 t12|  |
 | Image | Download an open a png, jpg files | Correctly displayed | P m12 t12|  |
 | GIF | Download an open a GIF file | Correctly displayed | P m12 t12| https://github.com/owncloud/ios-app/issues/323 |
-| Video | Download an open a video file | Correctly displayed | P m12 |  |
+| Video | Download an open a video file. Go back and the video stops | Correctly played | P m12 t12 | FIXED: going back, it dos not stop |
+| Audio | Download an open a video file. Go back and the music stops | Correctly played | P m12 t12 | FIXED: going back, it dos not stop  |
 | Non openable | Download an open a non openable file | Placeholder displayed with date and size| P m12 t12|  |
+| Damaged | Download an open a damaged file | Placeholder displayed | P m12 t12| FIXED: crash  |
 |**Offline**||||||
 | Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
 | Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m12 t12 | |
