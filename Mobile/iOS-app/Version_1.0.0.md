@@ -3,7 +3,7 @@
 #### PRs: https://github.com/owncloud/ios-app/pull/352<br>
 
 
-Device/s: iPhoneX v12, iPadAir v12 <br>
+Device/s: iPhoneX v12 (m12), iPadAir v12, iPhone6Plus v12 (m12')  <br>
 Server: 10.1, 10.0.9
 
 How to read Results:
@@ -26,7 +26,8 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Test Case | Steps | Expected Result | Result | Related Comment
 |:---------:| :---- | :-------------- | :----: | :------------- |
 |**Settings**||||||
-| Certificate | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Reve the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | P m12 t12 | FIXED: Non readable error. After other account approval, contents from cache |
+| Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | P m12 t12 | FIXED: Non readable error. After other account approval, contents from cache |
+| Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked  | P m12 t12 m12' |  |
 | Logging disabled | Disable Logging| All options hidden  | P t12 m12 |  |
 | Logging debug | 1. Enable Logging with debug level<br>2. Perform some actions<br>3. Share file | Log is filled up |  P m12|  |
 | Logging info | 1. Enable Logging with info level<br>2. Perform some actions<br>3. Share file | Log is filled up | P m12 |  |
@@ -41,33 +42,33 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Privacy policy | Open Privacy policy section | privacy policy is opened| P m12 t12 |  |
 | Acknowledgement | Open Acknowledgement section | Acknowledgement y is opened| P m12 t12 |  |
 |**Item Actions**||||||
-| Open In | Open a file in a 3rd party app | Correctly downloaded and sent | F m12 t12 | Go back to the file list |
-| Copy file | Copy a file to another location | Correctly copied | P m12 t12| FIXED: Browsing in picker not dismissed |
-| Copy folder| Copy a folder to another location | Correctly copied | P m12 t12 | FIXED: Options sould not be available in the picker |
-| Move file | Move a file to another location | Correctly moved | P m12 t12| FIXED: Browsing in picker not dismissed |
-| Move folder| Move a folder to another location | Correctly moved | P m12 t12| FIXED: Options sould not be available in the picker |
-| Duplicate file | Duplicate a file to another location | Correctly duplicated | P m12 t12|  |
-| Duplicate folder| Duplicate a folder to another location | Correctly duplicated | P m12 t12|  |
-| Rename file | Rename a file | Correctly renamed | P m12 t12|  |
-| Rename folder| Rename a folder  | Correctly renamed | P m12 t12|  |
-| Delete file | Delete a file | Correctly deleted | P m12 t12|  |
-| Delete folder| Delete a folder  | Correctly deleted | P m12 t12|  |
-| Sort Date | Sort the file list by date  | Newest on the top | P m12 t12 |  |
-| Sort A-Z | Sort the file list by A-Z  | A on the top | P m12 t12 |  |
-| Sort Z-A | Sort the file list by Z-A  | Z on the top | P m12 t12 |  |
-| Sort Type | Sort the file list by type  | grouped by type | P m12 t12 |  |
-| Sort Size | Sort the file list by size  | Biggest on the top | P m12 t12 |  |
+| Open In | Open a file in a 3rd party app | Correctly downloaded and sent | P m12 t12 m12' | FIXED: Go back to the file list |
+| Copy file | Copy a file to another location | Correctly copied | P m12 t12 m12'| FIXED: Browsing in picker not dismissed |
+| Copy folder| Copy a folder to another location | Correctly copied | P m12 t12 m12'| FIXED: Options sould not be available in the picker |
+| Move file | Move a file to another location | Correctly moved | P m12 t12 m12'| FIXED: Browsing in picker not dismissed |
+| Move folder| Move a folder to another location | Correctly moved | P m12 t12 m12'| FIXED: Options sould not be available in the picker |
+| Duplicate file | Duplicate a file to another location | Correctly duplicated | P m12 t12 m12'|  |
+| Duplicate folder| Duplicate a folder to another location | Correctly duplicated | P m12 t12 m12'|  |
+| Rename file | Rename a file | Correctly renamed | P m12 t12 m12'|  |
+| Rename folder| Rename a folder  | Correctly renamed | P m12 t12 m12'|  |
+| Delete file | Delete a file | Correctly deleted | P m12 t12 m12'|  |
+| Delete folder| Delete a folder  | Correctly deleted | P m12 t12 m12'|  |
+| Sort Date | Sort the file list by date  | Newest on the top | P m12 t12 m12'|  |
+| Sort A-Z | Sort the file list by A-Z  | A on the top | P m12 t12 m12'|  |
+| Sort Z-A | Sort the file list by Z-A  | Z on the top | P m12 t12 m12'|  |
+| Sort Type | Sort the file list by type  | grouped by type | P m12 t12 m12'|  |
+| Sort Size | Sort the file list by size  | Biggest on the top | P m12 t12 m12'|  |
 |**Multiselection**||||||
-| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent | P m12 t12 |  |
-| Open In folder | Open several folders in a 3rd party app | Not posible | P m12 t12 |  |
-| Copy file | Copy several files to another location | Correctly copied | P m12 t12 |  |
-| Copy folder| Copy several folders to another location | Correctly copied | P m12 t12 |  |
-| Move file | Move several files to another location | Correctly moved | P m12 t12|  |
-| Move folder| Move several folders to another location | Correctly moved | P m12 t12|  |
-| Duplicate file | Duplicate several files to another location | Correctly duplicated | F m12 t12| Not all are duplicated if you have many |
-| Duplicate folder| Duplicate several folders to another location | Correctly duplicated | F m12 t12| Not all are duplicated if you have many |
-| Delete file | Delete several files | Correctly deleted | P m12 t12|  |
-| Delete folder| Delete several folders  | Correctly deleted | P m12 t12 |  |
+| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent | P m12 t12 m12' |  |
+| Open In folder | Open several folders in a 3rd party app | Not posible | P m12 t12 m12' |  |
+| Copy file | Copy several files to another location | Correctly copied | P m12 t12 m12' |  |
+| Copy folder| Copy several folders to another location | Correctly copied | P m12 t12 m12' |  |
+| Move file | Move several files to another location | Correctly moved | P m12 t12 m12' |  |
+| Move folder| Move several folders to another location | Correctly moved | P m12 t12 m12' |  |
+| Duplicate file | Duplicate several files to another location | Correctly duplicated | P m12 t12 m12' | FIXED: Not all are duplicated if you have many |
+| Duplicate folder| Duplicate several folders to another location | Correctly duplicated | P m12 t12 m12' | FIXED: Not all are duplicated if you have many |
+| Delete file | Delete several files | Correctly deleted | P m12 t12 m12' |  |
+| Delete folder| Delete several folders  | Correctly deleted | P m12 t12 m12' |  |
 |**Upload & Download**| **2 auth methods**|||||
 | Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder | P m12 t12 |  |
 | Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder| P m12 t12 |  |
@@ -83,10 +84,10 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | P m12 t12 | FIXED: Fail when go back|
 | Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m12 t12 | FIXED: Fails with multiaccount |
 |**Files preview**||||||
-| PDF | Download an open a PDF file | Correctly displayed | P m12 t12|  |
+| PDF | Download an open a PDF file | Correctly displayed | F m12 t12 m12'| Intermediate view shown |
 | PDF search | Download an open a PDF file and search by a pattern | Correct search | P m12 t12|  |
 | PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | P m12 t12|  |
-| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | F p12 m12 | Margin on the top |
+| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | P p12 m12 | FIXED: Margin on the top |
 | Doc | Download an open a Doc file | Correctly displayed | P m12 t12|  |
 | Excel | Download an open a excel file | Correctly displayed | P m12 t12|  |
 | Ppt | Download an open a ppt file | Correctly displayed | P m12 t12|  |
@@ -107,13 +108,13 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m12 t12 |  |
 | Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m12 t12|  |
 | All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |   |
-| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| F m12 t12| Double deletion causes error |
+| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| P m12 t12| FIXED: Double deletion causes error |
 |**Error handling**||||||
 | Create folder | Create folder with existing name | Correct error | P m12 t12 |  |
 | Rename | Rename item with existing name in target | Correct error | P m12 t12 |  |
 | Copy | Copy item with existing name in target | Correct error | P m12 t12 |  |
 | Move | Move item with existing name in target | Correct error | P m12 t12 |  |
-| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | F m12 t12 | Rename a deleted does not work |
+| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | P m12 t12 | FIXED: Rename a deleted does not work |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error | P m12 t12 | FIXED: non readable error  |
 |**Files App**| **2 auth methods** |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there | P m12 t12 |  |
@@ -143,8 +144,8 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC | P m12 t12  |   |
 | Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P m12 t12 |  |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | NA | Apple issue |
-| Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved | F m12 t12 | Copied, not moved |
-| Move between oC accounts non-root | Move a file from an oC account to anocther one in non-root folder | Content correctly moved | F m12 t12 | Returns an error |
+| Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved | NA | Apple issue, check future |
+| Move between oC accounts non-root | Move a file from an oC account to anocther one in non-root folder | Content correctly moved | NA | Apple unexpected behaviour. Check to improve. |
 | Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied | P m12 t12 |  |
 | Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied | P m12 t12 |  |
 |**Remote actions (Files App)**||||||
