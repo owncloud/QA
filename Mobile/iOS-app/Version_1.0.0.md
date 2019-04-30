@@ -160,3 +160,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12 t12  | FIXED: thumbnails overplace the cell|
 | Searching | Input a pattern to filter in the current folder | Results correct filtered | P m12 t12  | 
 | Quota correct | Open the root folder | Quota is correctly displayed | P m12 t12 | |
+|**HEIC to JPG**||||||
+| View | Open settings view | Option to select heic/jpg is correctly displayed | P m12 | |
+| Heic selected | Select the option heic in settings<br>Upload pics in heic | Heic format in uploaded files, check in mime header | P m12 | |
+| JPG selected | Select the option JPG in settings<br>Upload pics in heic | JPG format in uploaded files , check in mime header| P m12 | |
