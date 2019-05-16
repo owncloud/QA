@@ -30,3 +30,6 @@
 | **Deletion** | |  |
 | Delete all shares | With one share created before, delete it | No more shares, "No public links created yet"  |  |
 | Delete one share | With several shares share, delete one | Removed one is not there anymore |  |
+| **Capabilities** | |  |
+| enableMultiplePublicSharing true| Add one share before | "+" is displayed |  |
+| enableMultiplePublicSharing false | Add one share before | "+" is not displayed |  |
