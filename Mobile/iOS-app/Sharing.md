@@ -79,3 +79,21 @@ Server:
 | Default share permission | Set different options in web UI<br>Create a share in the app | Default options are the same |  |  |
 | Allow send federated = false | Try to create a federated share | Not posible |  |  |
 | Allow receive federated = false | Try to create a federated share | Not posible |  |  |
+|**Favorites**||||
+| View | Open card of any item | View is correct | | | | 
+| Set fav File | in the app, set a file as favorite | Check in web UI that the file is favorite | | | | 
+| Set fav Folder | in the app, set a folder as favorite | Check in web UI that the folder is favorite | | | | 
+| Unset fav File | in the app, unset a file as favorite | Check in web UI that the file is not favorite anymore| | | | 
+| Unset fav Folder | in the app, set a folder as favorite | Check in web UI that the folder is not favorite anymore | | | | 
+| Remote set fav | in web UI, set an item as favorite | Check in the app that the item is favorite | | | | 
+| Remote unset fav | in web UI, unset an item as favorite | Check in the app that the item is not favorite anymore | | | | 
+|**Quick access**||||
+| No Public links | Open Quick Access -> Public Links with no public links| Correct view | | | | 
+| Public links | Create some public links<br>Open Quick Access -> Public Links | All public links are there | | | | 
+| No Images | Open Quick Access -> Images, but no images in the account| Correct view | | | | 
+| Images | Upload some images<br>Open Quick Access -> Images | All images are there | | | | 
+| No PDFs | Open Quick Access -> PDFs, but no pdfs in the account| Correct view | | | | 
+| PDFs | Upload some PDFs<br>Open Quick Access -> PDFs | All PDFs are there | | | | 
+| No Favorites | Open Quick Access -> Favorites, but no favorites in the account| Correct view | | | | 
+| Favorites | Set some favorites<br>Open Quick Access -> Favorites | All Favorites are there | | | | 
+
