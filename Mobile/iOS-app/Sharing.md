@@ -96,4 +96,6 @@ Server:
 | PDFs | Upload some PDFs<br>Open Quick Access -> PDFs | All PDFs are there | | | | 
 | No Favorites | Open Quick Access -> Favorites, but no favorites in the account| Correct view | | | | 
 | Favorites | Set some favorites<br>Open Quick Access -> Favorites | All Favorites are there | | | | 
+|**Extra**||||
+| 292 | Issue 292 |  | | | | 
 
