@@ -12,7 +12,7 @@
 | **Create share** | |  |
 | Create one share default name when there's no shares yet | name: by default. permissions: by default | Public share with correct name in Share Activity | DONE |
 | Create one share default name with already existing shares | name: by default. permissions: by default | Public share with correct name in Share Activity | DONE |
-| Create several shares  | Create three shares with different names | Three shares in list |  |
+| Create several shares  | Create three shares with different names | Three shares in list | DONE |
 | **Edition Files** | |  |
 | Edit name | One share created before. Open share and edit the name | Public share with correct name in Share Activity |  |
 | Add password | One share created before with no password. Open share and add a password | Public share with password |  |
