@@ -7,7 +7,7 @@
 | Test | Test Case | Expected Result | Result | Related Comment
 | :---- | :-------- | :---- | :-------------- | :-----: | 
 | **Share File** | |  |
-| No shares | Initial view | "No public links created yet" | DONE |
+| No shares | Initial view | "No public links created yet" | DONE | Already implemented in ShareFileFragmentTest
 | Correct View | Share created | icons for send link, delete and edit are there|  |
 | **Create share** | |  |
 | Create one share default name | name: by default. permissions: by default | Public share with correct name in Share Activity |  |
