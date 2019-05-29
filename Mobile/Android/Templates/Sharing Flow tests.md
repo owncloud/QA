@@ -17,8 +17,8 @@
 | Edit name | One share created before. Open share and edit the name | Public share with correct name in Share Activity | DONE |
 | Add password | One share created before with no password. Open share and add a password | Public share with password | DONE |
 | Remove password | One share created before with password. Open share and remove the password | Public share with no password | DONE |
-| Add expiration date | One share created before with no expiration date. Open share and add an expiration date | Public share with expiration date |  |
-| Remove expiration date | One share created before with expiration date. Open share and remove the expiration date | Public share with no expiration date |  |
+| Add expiration date | One share created before with no expiration date. Open share and add an expiration date | Public share with expiration date | DONE |
+| Remove expiration date | One share created before with expiration date. Open share and remove the expiration date | Public share with no expiration date | DONE |
 | **Edition Folders** | |  |
 | Edit name | One share created before. Open share and edit the name | Public share with correct name in Share Activity |  |
 | Edit permission | One share created before with "Download/View" permission. Open share and edit the permission to "Download/View/Upload" | Public share with correct permissions |  |
