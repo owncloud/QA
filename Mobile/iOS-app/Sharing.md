@@ -43,28 +43,28 @@ Server: 10.1
 | Remove federated | Recipient remove the share | Share is not in the list of shares of the original user | P m12 |  |
 | Incorrect federated | URL is not correct | Correct error shown to the user | P m12 |  |
 |**Public Share**||||||
-| View files | Select to create a public link from a file | Correct view and premissions available |  |  | |  
-| View folders | Select to create a public link from a folder | Correct view and premissions available |  |  | |  
-| Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)|  |  | | 
-| Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)|  |  | | 
-| Create with password| Select to create a public link with password  | Correct creation with password. Paste the link in browser to be asked the password|  |  | | 
-| Create without password| Select to create a public link with no password  | Correct creation with no password. Paste the link in browser, password not asked|  |  | | 
-| Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI|  |  | | 
-| Create without expiration date| Select to create a public link with no expiration date  | Correct creation with no expiration date. Check in web UI|  |  | | 
-| Create folder Download/View | Select to create a public link of a folder with Download/View permission  | Correct creation. Check in web UI|  |  | | 
-| Create folder Download/View/Upload | Select to create a public link of a folder with Download/View/Upload permission  | Correct creation. Check in web UI|  |  | | 
-| Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI|  |  | | 
-| Edit name | On a created public link, edit the name  | Correct edition. Check in web UI|  |  | | 
-| Edit password | On a created public link, edit the password  | Correct edition. Check in web UI|  |  | | 
+| View files | Select to create a public link from a file | Correct view and premissions available | F m12  | Long links overlaps copy button | |  
+| View folders | Select to create a public link from a folder | Correct view and premissions available | P m12 | | |  
+| Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)| P m12 |  | | 
+| Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)| F m12 | Crash | | 
+| Create with password| Select to create a public link with password  | Correct creation with password. Paste the link in browser to be asked the password| P m12 |  | | 
+| Create without password| Select to create a public link with no password  | Correct creation with no password. Paste the link in browser, password not asked| P m12 |  | | 
+| Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI| F m12 | Date picker behind keyboard. Default date not saved |  | 
+| Create without expiration date| Select to create a public link with no expiration date  | Correct creation with no expiration date. Check in web UI| P m12 |  | | 
+| Create folder Download/View | Select to create a public link of a folder with Download/View permission  | Correct creation. Check in web UI| P m12 |  | | 
+| Create folder Download/View/Upload | Select to create a public link of a folder with Download/View/Upload permission  | Correct creation. Check in web UI| P m12 |  | | 
+| Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI| P m12 |  | | 
+| Edit name | On a created public link, edit the name  | Correct edition. Check in web UI| F m12 | Not posible | | 
+| Edit password | On a created public link, edit the password  | Correct edition. Check in web UI| P m12 |  | | 
 | Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI|  |  | | 
 | Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI|  |  | | 
 | Edit removing expiratin date | On a created public link, remove the expiration date  | Correct edition. Check in web UI|  |  | | 
 | Edit share permission | On a created public link, switch the share permission  | Correct edition. Check in web UI|  |  | | 
 | Edit file editing permission | On a created public link on a file, switch the edit permission  | Correct edition. Check in web UI|  |  | | 
 | Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI|  |  | | 
-| Delete one | Delete an already create public link  |  Link not available anymore, check in file list |  |  | | 
-| Delete all | Delete all public link of an item | Links not available anymore, check in file list | |  | | 
-| Send link | Create a link and use the open in option to send it | Options to send correctly displayed | | | | 
+| Delete one | Delete an already create public link  |  Link not available anymore, check in file list | P m12 |  | | 
+| Delete all | Delete all public link of an item | Links not available anymore, check in file list | P m12 |  | | 
+| Send link | Create a link and use the open in option to send it | Options to send correctly displayed | P m12 | | | 
 |**Private link**||||||
 | Get link View | Open Share view | Option correctly displayed | F m12 | | | 
 | Copy link | Get copy link and paste in the browser | File correctly linked | P m12 | | | 
