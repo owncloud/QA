@@ -56,12 +56,10 @@ Server: 10.1
 | Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI| P m12 |  | | 
 | Edit name | On a created public link, edit the name  | Correct edition. Check in web UI| F m12 | Not posible | | 
 | Edit password | On a created public link, edit the password  | Correct edition. Check in web UI| P m12 |  | | 
-| Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI|  |  | | 
-| Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI|  |  | | 
-| Edit removing expiratin date | On a created public link, remove the expiration date  | Correct edition. Check in web UI|  |  | | 
-| Edit share permission | On a created public link, switch the share permission  | Correct edition. Check in web UI|  |  | | 
-| Edit file editing permission | On a created public link on a file, switch the edit permission  | Correct edition. Check in web UI|  |  | | 
-| Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI|  |  | | 
+| Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI| P m12 |  | | 
+| Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI| F m12 | Bad UX | | 
+| Edit removing expiration date | On a created public link, remove the expiration date  | Correct edition. Check in web UI| F m12 | Expiration date not removed  | | 
+| Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI| P m12 |  | | 
 | Delete one | Delete an already create public link  |  Link not available anymore, check in file list | P m12 |  | | 
 | Delete all | Delete all public link of an item | Links not available anymore, check in file list | P m12 |  | | 
 | Send link | Create a link and use the open in option to send it | Options to send correctly displayed | P m12 | | | 
