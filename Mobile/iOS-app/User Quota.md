@@ -11,7 +11,7 @@ Server: 10.1<br>
  
  
 | Test Case | Steps | Expected | Result | Related Comment |
-| :-------- | :---- | :------- | :----: | :------------------------- | :-------: |
+| :-------- | :---- | :------- | :----: | :------------------------- |
 |**View**||||
 | Portrait | Open drawer and check quota | Correctly displayed | P m12 t12 |  |
 | Landscape | Open drawer and check quota | Correctly displayed | P m12 t12 |  |
