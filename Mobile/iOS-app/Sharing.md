@@ -86,6 +86,15 @@ Server: 10.1
 | Default share permission | Set different options in web UI<br>Create a share in the app | Default options are the same | P m12 |  |
 | Allow send federated = false | Try to create a federated share | Not posible | P m12 |  |
 | Allow receive federated = false | Try to create a federated share | Not posible | P m12 |  |
+|**Privacy Policy**||||
+| Minimum characters | Set a minumum characters to create the password<br>Type a password with less characters | Correct error | P m12 |  |
+| Lowercase | Set a minumum lowercase characters to create the password<br>Type a password with less lowercase characters | Correct error | P m12 |  |
+| Uppercase | Set a minumum uppercase characters to create the password<br>Type a password with less uppercase characters | Correct error | P m12 |  |
+| Numbers | Set a minumum numbers to create the password<br>Type a password with less special characters | Correct error | P m12 |  |
+| Special characters | Set a minumum special characters to create the password<br>Type a password with less uppercase characters | Correct error | P m12 |  |
+| Matching policy | Set all conditions<br>Type a password that matches every condition | Link created | P m12 |  |
+| Expiration with password set | Set a number of days for expiration if password is set | Link forces to include expiration date in maximum the set up| P m12 |  |
+| Expiration with password notset | Set a number of days for expiration if password is not set | Link forces to include expiration date in maximum the set up| P m12 |  |
 |**Favorites**||||
 | View | Open card of any item | View is correct | P m12 | | | 
 | Set fav File | in the app, set a file as favorite | Check in web UI that the file is favorite | P m12 | | | 
