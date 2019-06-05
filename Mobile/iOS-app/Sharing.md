@@ -13,6 +13,7 @@ Server: 10.1
 |**Files view**||||||
 | Portrait  | Open Card | Options to share correct | P m12 | FIXED: Glitches in card  |  |
 | Landscape | Open Card | Options to share correct | P m12 | FIXED: Glitches in card |  |
+| Sort by shared | Sort by shared by having some hares | Correctly sorted |  |  |  |
 |**Private Share**||||||
 | Portrait view  | Open Private Share view | View correct | P m12 |  |  |
 | Landscape | Open Private Share view| View correct | P m12 |  |  |
@@ -32,7 +33,7 @@ Server: 10.1
 | Edit permission folders create | Open Share<br>Share a folder with another user with only create  | Recipient can upload content, but change and delete | P m12 |  |
 | Edit permission folders Change | Open Share<br>Share a folder with another user with only change  | Recipient can change content, but create and delete | P m12 |  |
 | Edit permission folders Delete | Open Share<br>Share a folder with another user with only Delete  | Recipient can delete content, but create and change | P m12 |  |
-| Delete one recipient | Open Share<br>Share with several users<br>Delete one recipient | Recpient deleted, but in files view file is still marked as shared (private) | F m12 | Unshare wording  |
+| Delete one recipient | Open Share<br>Share with several users<br>Delete one recipient | Recpient deleted, but in files view file is still marked as shared (private) | P m12 | FIXED: Unshare wording  |
 | Delete all recipients | Open Share<br>Share with serveral users<br>Delete all recipients | Recipients deleted, in files view file is not marked as shared (private) | P m12 |  |
 | Recipient deletes | Share with a user<br>Recipient deletes the file in the file list | File is not shared, check in original user | NA | Server behaviour is keeping the share?
 | Remote share | In web UI create a share with different options | Correctly shown in the app | P m12 |  |
@@ -42,23 +43,28 @@ Server: 10.1
 | Share with a user which contains @ | Open Share<br>Type a correct user name which contais @ | User in the list of matches | F m12 | Identified as federated |
 | Remove federated | Recipient remove the share | Share is not in the list of shares of the original user | P m12 |  |
 | Incorrect federated | URL is not correct | Correct error shown to the user | P m12 |  |
+| Accept federated | Create a federated share<br>In Quick access, accept federated share | Share is added to the list and removed from pending. Same in WebUI | P m12 |  |
+| Decline federated | Create a federated share<br>In Quick access, decline federated share | Share is not added to the list and removed from pending. Same in WebUI | F m12 | Incorrect value in notification |
+| Accept federated remote | Create a federated share<br>In Quick access, check federated share<br>Accept in web UI | Share is added to the list and removed from pending in app. Same in WebUI | P m12 |  |
+| Decline federated remote | Create a federated share<br>In Quick access, check federated share<br>Decline in web UI | Share is not added to the list and removed from pending in app. Same in WebUI | P m12 |  |
+| Unshare | Create a federated share<br>In recipient, accept and then, unshare | Share is removed from both source and recipient | F m12 | Not working |
 |**Public Share**||||||
-| View files | Select to create a public link from a file | Correct view and premissions available | F m12  | Long links overlaps copy button | |  
+| View files | Select to create a public link from a file | Correct view and premissions available | P m12  | FIXED: Long links overlaps copy button | |  
 | View folders | Select to create a public link from a folder | Correct view and premissions available | P m12 | | |  
 | Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)| P m12 |  | | 
-| Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)| F m12 | Crash | | 
+| Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)| F m12 | FIXED: Crash. No name shown | | 
 | Create with password| Select to create a public link with password  | Correct creation with password. Paste the link in browser to be asked the password| P m12 |  | | 
 | Create without password| Select to create a public link with no password  | Correct creation with no password. Paste the link in browser, password not asked| P m12 |  | | 
-| Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI| F m12 | Date picker behind keyboard. Default date not saved |  | 
+| Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI| P m12 | FIXED: Date picker behind keyboard. Default date not saved |  | 
 | Create without expiration date| Select to create a public link with no expiration date  | Correct creation with no expiration date. Check in web UI| P m12 |  | | 
 | Create folder Download/View | Select to create a public link of a folder with Download/View permission  | Correct creation. Check in web UI| P m12 |  | | 
 | Create folder Download/View/Upload | Select to create a public link of a folder with Download/View/Upload permission  | Correct creation. Check in web UI| P m12 |  | | 
 | Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI| P m12 |  | | 
-| Edit name | On a created public link, edit the name  | Correct edition. Check in web UI| F m12 | Not posible | | 
+| Edit name | On a created public link, edit the name  | Correct edition. Check in web UI| P m12 | FIXED: Not posible | | 
 | Edit password | On a created public link, edit the password  | Correct edition. Check in web UI| P m12 |  | | 
 | Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI| P m12 |  | | 
 | Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI| F m12 | Bad UX | | 
-| Edit removing expiration date | On a created public link, remove the expiration date  | Correct edition. Check in web UI| F m12 | Expiration date not removed  | | 
+| Edit removing expiration date | On a created public link, remove the expiration date  | Correct edition. Check in web UI| P m12 | FIXED: Expiration date not removed  | | 
 | Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI| P m12 |  | | 
 | Delete one | Delete an already create public link  |  Link not available anymore, check in file list | P m12 |  | | 
 | Delete all | Delete all public link of an item | Links not available anymore, check in file list | P m12 |  | | 
@@ -68,35 +74,43 @@ Server: 10.1
 | Copy link | Get copy link and paste in the browser | File correctly linked | P m12 | | | 
 |**Capabilities**||||||
 | Share API disabled | Open file list | There is no option to share | P m12 |  |
-| Allow share via link disabled | Open file list | There is no option to share public, but tthere is for privates |  |  |
-| Enforce password protection read only enabled | Create a public share with read only permission  and without password | Not posible |  |  |
-| Enforce password protection read write enabled | Create a public share with read and write permission and without password | Not posible |  |  |
-| Enforce password protection upload only enabled | Create a public share with upload only permission and without password | Not posible |  |  |
-| Default expiration date | Create a public share and enable expiration date | Default date is there |  |  |
-| Enforced expiration date | Create a public share and enforce expiration date | Default date is there and can not be removed|  |  |
+| Allow share via link disabled | Open file list | There is no option to share public, but there is for privates | F m12 | Links enabled |
+| Enforce password protection read only enabled | Create a public share with read only permission  and without password | Not posible | P m12 |  |
+| Enforce password protection read write enabled | Create a public share with read and write permission and without password | Not posible | P m12 |  |
+| Enforce password protection upload only enabled | Create a public share with upload only permission and without password | Not posible | P m12 |  |
+| Default expiration date | Create a public share and enable expiration date | Default date is there | P m12 | FIXED: Not set |
+| Enforced expiration date | Create a public share and enforce expiration date | Default date is there and can not be removed| P m12 |  |
 | Allow resharing enabled | Share a file<br>Recipient tries to reshare  | Recipient can reshare| P m12 |  |
-| Allow resharing disabled | Share a file<br>Recipient tries to reshare  | There is no option to reshare | F m12 | Options to reshare are there |
+| Allow resharing disabled | Share a file<br>Recipient tries to reshare  | There is no option to reshare | F m12 | FIXED: Options to reshare are there. Share option not hidden. |
 | Allow sharing with groups disabled | Share a file with groups | Not posible | P m12 |  |
 | Default share permission | Set different options in web UI<br>Create a share in the app | Default options are the same | P m12 |  |
 | Allow send federated = false | Try to create a federated share | Not posible | P m12 |  |
 | Allow receive federated = false | Try to create a federated share | Not posible | P m12 |  |
 |**Favorites**||||
-| View | Open card of any item | View is correct | | | | 
-| Set fav File | in the app, set a file as favorite | Check in web UI that the file is favorite | | | | 
-| Set fav Folder | in the app, set a folder as favorite | Check in web UI that the folder is favorite | | | | 
-| Unset fav File | in the app, unset a file as favorite | Check in web UI that the file is not favorite anymore| | | | 
-| Unset fav Folder | in the app, set a folder as favorite | Check in web UI that the folder is not favorite anymore | | | | 
-| Remote set fav | in web UI, set an item as favorite | Check in the app that the item is favorite | | | | 
-| Remote unset fav | in web UI, unset an item as favorite | Check in the app that the item is not favorite anymore | | | | 
+| View | Open card of any item | View is correct | P m12 | | | 
+| Set fav File | in the app, set a file as favorite | Check in web UI that the file is favorite | P m12 | | | 
+| Set fav Folder | in the app, set a folder as favorite | Check in web UI that the folder is favorite | P m12 | | | 
+| Unset fav File | in the app, unset a file as favorite | Check in web UI that the file is not favorite anymore| P m12 | | | 
+| Unset fav Folder | in the app, set a folder as favorite | Check in web UI that the folder is not favorite anymore | P m12 | | | 
+| Remote set fav | in web UI, set an item as favorite | Check in the app that the item is favorite | P m12 | | | 
+| Remote unset fav | in web UI, unset an item as favorite | Check in the app that the item is not favorite anymore | P m12 | | | 
+| Set fav offline| in the app, with no connection set a file as favorite<br>Recover connection | Check in web UI that the file is favorite | P m12 | | | 
+| Unset fav offline | in the app with no connection, unset a file as favorite<br>Recover connection | Check in web UI that the file is not favorite anymore| P m12 | | | 
+| Set fav remote offline| in the app, remove connection<br>In web set a file as favorite<br>Recover connection | Check in the app that the file is favorite | P m12 | | | 
+| Unset fav remote offline | in the app, remove connection<br>In web UI unset a file as favorite<br>Recover connection | Check in app that the file is not favorite anymore| P m12 | | | 
 |**Quick access**||||
-| No Public links | Open Quick Access -> Public Links with no public links| Correct view | | | | 
-| Public links | Create some public links<br>Open Quick Access -> Public Links | All public links are there | | | | 
-| No Images | Open Quick Access -> Images, but no images in the account| Correct view | | | | 
-| Images | Upload some images<br>Open Quick Access -> Images | All images are there | | | | 
-| No PDFs | Open Quick Access -> PDFs, but no pdfs in the account| Correct view | | | | 
-| PDFs | Upload some PDFs<br>Open Quick Access -> PDFs | All PDFs are there | | | | 
-| No Favorites | Open Quick Access -> Favorites, but no favorites in the account| Correct view | | | | 
-| Favorites | Set some favorites<br>Open Quick Access -> Favorites | All Favorites are there | | | | 
+| No Public links | Open Quick Access -> Public Links with no public links| Correct view | P m12 | | | 
+| Public links | Create some public links<br>Open Quick Access -> Public Links | All public links are there | P m12 | | | 
+| No Shares | Open Quick Access | No Shares there | P m12 | | | 
+| Shares  | Create some Shares<br>Open Quick Access -> Shares | All Shares are there | P m12 | | | 
+| No Shared with you | Open Quick Access | No Shares with you there | P m12 | | | 
+| Shared with you | Create some Shares<br>Open Quick Access in the recipient -> Shares | All Shares are there | P m12 | | | 
+| No Images | Open Quick Access -> Images, but no images in the account| Correct view | P m12 | | | 
+| Images | Upload some images<br>Open Quick Access -> Images | All images are there | P m12 | | | 
+| No PDFs | Open Quick Access -> PDFs, but no pdfs in the account| Correct view | P m12 | | | 
+| PDFs | Upload some PDFs<br>Open Quick Access -> PDFs | All PDFs are there | P m12 | | | 
+| No Favorites | Open Quick Access -> Favorites, but no favorites in the account| Correct view | P m12| | | 
+| Favorites | Set some favorites in different folders<br>Open Quick Access -> Favorites | All Favorites are there | P m12 | | | 
 |**Extra**||||
-| 292 | Issue 292 |  | | | | 
+| 292 | Issue 292 | F m12 | https://github.com/owncloud/ios-app/pull/358#issuecomment-498705578 | | | 
 
