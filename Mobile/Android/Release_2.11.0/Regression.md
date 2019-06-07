@@ -102,7 +102,7 @@
 | Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected<br>6. Server version is downloaded to the device |
 | Update file - Conflict Device | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Device" | 5. Conflict is detected<br>6. Device version is uploaded to the server |
 | Update file - Conflict Both | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Both" | 5. Conflict is detected<br>6. Device version is uploaded to the server and server version is downloaded |
-| **Av. offline** | NA   |  |
+| **Av. offline** | NA |  |
 | Set a folder as av. offline | 1. Long press on a folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded | 
 | Set a folder with subfolders as av. offline | 1. Long press on a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder and subfolders is downloaded | 
 | Set a folder (not in root) as av. offline | 1. Long press on a folder that is not in root folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded | 
@@ -112,7 +112,13 @@
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is downloaded but not av.offine | 
 | Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. | 
 | Delete locally | Try to delete locally an av. offline folder | Action can not be performed | 
-| Av. offline background | Edit an av. offline file qith ownCloud closed and wait 15 minutes | file is updated, te app is not needed to be opened | 
+| Av. offline background | Edit an av. offline file with ownCloud closed and wait 15 minutes | file is updated, te app is not needed to be opened | 
+| **Av. offline shortcut** | 2 devices |  |
+| Add in menu | Set serveral files and folders in different levels as av. offline | They appear correctly in Av. Offline shortcut |  |  |
+| Remove in menu | Unset serveral files and folders in different levels as av. offline | They do not appear in Av. Offline shortcut anymore |  |  |
+| Details view | Open details from av. offline shortcut |Correct view |  |  |
+| Open In view | Open "Open In" from av. offline shortcut |Correct view and action |  |  |
+| Select all and inverse | In the view, try to select all and inverse of the list (no option if list is empty) | Correct  |  |  |
 | **Multiselection files** | NA   |  |
 | Sync files | 1. Select several files<br>2. Tap on sync | Files are downloaded correctly | 
 | Delete files | 1. Select several files<br>2. Tap on delete | Files are deleted correctly woth only one message|
