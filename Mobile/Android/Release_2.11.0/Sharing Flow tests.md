@@ -13,7 +13,7 @@
 | Create one share default name when there's no shares yet | name: by default. permissions: by default | Public share with correct name in Share Activity | DONE |
 | Create one share default name with already existing shares | name: by default. permissions: by default | Public share with correct name in Share Activity | DONE |
 | Create several shares  | Create three shares with different names | Three shares in list | DONE |
-| Loading while creating one share | Create one share | Loading status is displayed | |
+| Loading while creating one share | Create one share | Loading status is displayed | DONE |
 | Error while creating one share | Create one share | Error message displayed and share is not created | |
 | **Edition Files** | |  |
 | Edit name | One share created before. Open share and edit the name | Public share with correct name in Share Activity | DONE |
@@ -21,7 +21,7 @@
 | Remove password | One share created before with password. Open share and remove the password | Public share with no password | DONE |
 | Add expiration date | One share created before with no expiration date. Open share and add an expiration date | Public share with expiration date | DONE |
 | Remove expiration date | One share created before with expiration date. Open share and remove the expiration date | Public share with no expiration date | DONE |
-| Loading while editing one share | Edit one share | Loading status is displayed | |
+| Loading while editing one share | Edit one share | Loading status is displayed | DONE |
 | Error while editing one share | Edit one share | Error message displayed and share is not edited | |
 | **Edition Folders** | |  |
 | Edit name | One share created before. Open share and edit the name | Public share with correct name in Share Activity | DONE |
