@@ -1,31 +1,34 @@
 ### Regression 2.11
 
+Nexus 5X v9<br>
+Nexus 6P v7
+
 | Title | Procedure |  Expected Result | Result | Comments
 | :---: | :-------- | :--------------- | :----: | :-----
 | **Welcome Wizard**| 1 devices
-| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed in both orientations | 
+| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed in both orientations | P m9 m7
 | **Detect Auth Method**  |2  devices  |  |
-| Basic Auth | Input a basic auth URL | User and password field shown | |
-| OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs | 
+| Basic Auth | Input a basic auth URL | User and password field shown | P m9 m7| AUTO
+| OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs | P m9 m7
 | **Basic Auth** |  1 device |  |
-| Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |  | 
-| Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |  | 
-| Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown |  | 
-| Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown |  | 
-| Account already exists | Log in in an already existing account | Error is shown |  | 
-| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |  | 
-| Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud |  | 
-| With blanks | Set some blanks after and before user name | Correct access |  | 
+| Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) | P m9 m7 | AUTO
+| Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) | P m9 m7 | AUTO
+| Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown |  P m9 m7 | AUTO
+| Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown | P m9 m7 | AUTO
+| Account already exists | Log in in an already existing account | Error is shown |  P m9 | AUTO
+| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud | P m9 m7 | 
+| Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud | P m9 | AUTO  | 
+| With blanks | Set some blanks after and before user name | Correct access |  P m9 m7 | AUTO
 | LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access |   | | From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished | 
 | Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view | 
 | **OAuth2** | 1 device  |  |
-| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |   
-| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |   
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | 
-| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  |   
+| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed | P m9 m7  
+| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded | P m9 m7 
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | P m9 m7
+| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  | P m9 m7  
 | **Redirections** | 1 device  |  |
-| Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK | 
-| Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK | 
+| Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK | P m9
+| Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK | P m9
 | **Accounts manager** | NA   |  |
 | Create a new basic account from accounts manager<br>| Create a new account| Account is created and is visible in accounts manager |  
 | Create a new OAuth2 account from accounts manager<br>| Create a new account<br>| Account is created and is visible in accounts manager |  
@@ -71,15 +74,15 @@
 | Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct | 
 | Antivirus | 1. Enable antivirus in server<br>2. Upload EICAR file<br>| Correct error message in notification |
 | **Uploads** |  2 devices |  |
-| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct | 
-| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view | 
-| Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view |  
-| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view |  
-| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | 
-| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |  
-| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |  
-| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |  
-| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  | 
+| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct | P m9 m7
+| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view | P m9 m7
+| Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view | P m9 m7
+| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view | P m9 m7
+| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | P m9 m7
+| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |  P m9 m7
+| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |  P m9 m7
+| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared | P m9 m7
+| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  | P m9 m7
 | Instant uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum |  
 | Instant uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app | 
 | Change instant upload Camera folder | 1. Set a source folder<br>2. Take photos and videos<br>3. Change the folder<br>4. Take photos and videos | 2. Videos and photos uploaded<br>4. Videos and photos not uploaded | 
@@ -88,20 +91,20 @@
 | Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  | 
 | Delete account | 1. In settings view, remove one account | All uploads from the removed account are removed from uploads view | 
 | Multiaccount | 1. Add three different accounts<br>2. Upload files from all of them at the same time  | Files are correctly uploaded in each account and folder | 
-| Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder | 
+| Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder | P m9 m7
 | Upload from camera with different camera apps | 1. Select upload from camera<br>2. Select a camera app and take a pic | Pic uploaded to the correct folder |  
 | **Upload from external** | 1 device  |  |
-| Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated |  
-| Send text | Copy text and share it with oC | A txt file is created with the copied text | 
+| Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated | P m9 m7 
+| Send text | Copy text and share it with oC | A txt file is created with the copied text | P m9 m7
 | **VideoStreaming** | NA  |  |
 | Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly | 
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward  and change orientation | Video is streamed correctly | 
 | Stream a video with https (non trusted server) | 1. With a https server stream a video. | Video is not streamed, so that the server is not secure. | 
 | **Conflict handling** |  1 device |  |
-| Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated | 
-| Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected<br>6. Server version is downloaded to the device |
-| Update file - Conflict Device | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Device" | 5. Conflict is detected<br>6. Device version is uploaded to the server |
-| Update file - Conflict Both | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Both" | 5. Conflict is detected<br>6. Device version is uploaded to the server and server version is downloaded |
+| Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated | P m9
+| Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected<br>6. Server version is downloaded to the device | P m9
+| Update file - Conflict Device | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Device" | 5. Conflict is detected<br>6. Device version is uploaded to the server | P m9
+| Update file - Conflict Both | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Both" | 5. Conflict is detected<br>6. Device version is uploaded to the server and server version is downloaded | P m9
 | **Av. offline** | NA |  |
 | Set a folder as av. offline | 1. Long press on a folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded | 
 | Set a folder with subfolders as av. offline | 1. Long press on a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder and subfolders is downloaded | 
@@ -134,17 +137,16 @@
 | Move folders | 1. Select several folders<br>2. Tap on move and select a target folder | Folders are moved correctly |
 | Available offline | 1. Select several folders<br>2. Tap on available offline | Folders are downloaded correctly |
 | **Document Provider** | 2 devices  |  |
-| List of accounts | 1. Open Files/Downloads | Check that there are available the same accounts attached to the oC app | 
-| Add account | 1. Add a new account to oC | Check that the account is available in Files/Downloads |
-accounts attached to the oC app | 
-| Remove account | 1.Remove an account in oC | Check that the account is not available anymore in Files/Downloads |
-| Browse and open (not downloaded) | Browse through file structure and open at least 3 files of different extensions that are not downloaded in oC | Correct browsing and previewing |  
-| Browse and open (downloaded) | Browse through file structure and open at least 3 files of different extensions that are already downloaded in oC | Correct browsing and previewing |  
-| Create folder | Create a folder in root and another one in non-root | Correct created | 
-| Rename | Rename a file and a folder | Correct renamed |  
-| Delete | Delete a file and a folder | Correct deleted |  
-| Edit & Save | Try to save a file after modify it | Correct edited and saved |  
-| Edit & Save with conflicts | Try to save a file after modify it and in web UI | Correct conflict handling |  
+| List of accounts | 1. Open Files/Downloads | Check that there are available the same accounts attached to the oC app | P m9 m7
+| Add account | 1. Add a new account to oC | Check that the account is available in Files/Downloads | P m9 m7
+| Remove account | 1.Remove an account in oC | Check that the account is not available anymore in Files/Downloads | P m9 m7
+| Browse and open (not downloaded) | Browse through file structure and open at least 3 files of different extensions that are not downloaded in oC | Correct browsing and previewing |  P m9 m7
+| Browse and open (downloaded) | Browse through file structure and open at least 3 files of different extensions that are already downloaded in oC | Correct browsing and previewing |  P m9 m7
+| Create folder | Create a folder in root and another one in non-root | Correct created | P m9 m7
+| Rename | Rename a file and a folder | Correct renamed | P m9 m7
+| Delete | Delete a file and a folder | Correct deleted | P m9 m7
+| Edit & Save | Try to save a file after modify it | Correct edited and saved | P m9 m7
+| Edit & Save with conflicts | Try to save a file after modify it and in web UI | Correct conflict handling | P m9 m7
 | **Share by link** |  NA  |  |
 | Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works |  | 
 | Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work |  | 
@@ -186,16 +188,15 @@ accounts attached to the oC app |
 | Local search | Enter a pattern that matches with any item on the file list | Correct filtered |
 | Light filtering | Enable a light filtering app (like Twilight) and the option in settings. Check in several views | Tapping is allowed in every view|
 | **BugFixing** |  2 devices  |  |
-| 2437 | | |
-| 2439 | | |
-| 2485 | | |
-| 2478 | | |
-| 2493 | | |
-| 2481 | | |
-| 2451 | | |
-| 2471 | | |
-| 2563 | | |
-| 2536 | | |
+| 2439 | | P m9 m7 |
+| 2485 | | P m9 m7 |
+| 2478 | | P m9 m7 |
+| 2493 | | P m9 m7 |
+| 2481 | | P m9 m7 |
+| 2451 | | P m9 m7 |
+| 2471 | | P m9 m7 |
+| 2563 | | P m9 m7 |
+| 2536 | | P m9 m7 |
 | **Upgrade** |
-| Upgrade from 2.10.1 basic | Install 2.10.1 with basic and upgrade to the current one| Correct upgrade | 
-| Upgrade from 2.10.1 oauth2 | Install 2.10.1 with oauth2 and upgrade to the current one| Correct upgrade | 
+| Upgrade from 2.10.1 basic | Install 2.10.1 with basic and upgrade to the current one| Correct upgrade with upgrade wizard | P m9 m7
+| Upgrade from 2.10.1 oauth2 | Install 2.10.1 with oauth2 and upgrade to the current one| Correct upgrade with upgrade wizard| P m9 m7

@@ -3,7 +3,7 @@
 #### PRs: https://github.com/owncloud/ios-app/pull/402<br>
 
 
-Device/s: iPhone6Plus v12.2 <br>
+Device/s: iPhone6Plus v12.2, iPhoneX v12.3.1 <br>
 Server: 10.2
 
 How to read Results:
@@ -39,11 +39,10 @@ F t12 -> Failed in an iPad with iOS12<br>
 | Hide files disabled | Disable hide files option and open an account with some file that starts with . | File is not visible in the list | P m12 |  |
 | Help | Open Help Section  | Help web is opened | P m12 |  |
 | Send feedback | Open Send feedback section | feedback mail is opened| P m12 |  |
-| Recommend | Open Recommend section | recommend mail is opened|  | Correct link? |
 | Privacy policy | Open Privacy policy section | privacy policy is opened| P m12 |  |
 | Acknowledgement | Open Acknowledgement section | Acknowledgement y is opened| P m12 |  |
 |**Item Actions**||||||
-| Open In | Open a file in a 3rd party app | Correctly downloaded and sent |  F m12 | app stucked |
+| Open In | Open a file in a 3rd party app | Correctly downloaded and sent |  P m12 | FIXED: app stucked |
 | Copy file | Copy a file to another location | Correctly copied | P m12 |  |
 | Copy folder| Copy a folder to another location | Correctly copied | P m12 |  |
 | Move file | Move a file to another location | Correctly moved | P m12 |  |
@@ -80,10 +79,10 @@ F t12 -> Failed in an iPad with iOS12<br>
 | Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears| P m12 | |
 | Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| P m12 | |
 | Download several files | Tap on several files | all are enqueued and finally downloaded | P m12 | |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | | |
+| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | P m12 | |
 | Cancel download | Tap on a huge  file<br>Cancel it before it finishes | File is not downloaded | |
 | Cancel uploads | Upload a huge file<br>Cancel it before it finishes | File is not uploaded| |
-| Clear storage | Tap on a huge number of files<br>Go to bookmark and manage space to remove | Everything is cleaned up | | |
+| Clear storage | Tap on a huge number of files<br>Go to bookmark and manage space to remove | Everything is cleaned up | P m12 | |
 |**Concurrency**| **2 auth methods**|||||
 |**Transfers (6 as budget, 3 + 3)**|
 | Upload 3 | Upload 3 items to oC | Correctly uploaded, concurrently. Check in status view | P m12 |  |  |
@@ -95,79 +94,78 @@ F t12 -> Failed in an iPad with iOS12<br>
 | Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | P m12 |  |
 | Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m12 |  |
 |**Files preview**| 1 device |||||
-| PDF | Download an open a PDF file | Correctly displayed |  |  |
+| PDF | Download an open a PDF file | Correctly displayed | P m12 |  |
 | PDF search | Download an open a PDF file and search by a pattern | Correct search | P m12 |  |
-| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | F m12 | Where is it? |
+| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | P m12 | FIXED: Where is it? |
 | PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | P m12 |  |
 | Doc | Download an open a Doc file | Correctly displayed | P m12 |  |
 | Excel | Download an open a excel file | Correctly displayed | P m12 |  |
 | Ppt | Download an open a ppt file | Correctly displayed | P m12 |  |
 | Txt | Download an open a txt file | Correctly displayed | P m12 |  |
 | Image | Download an open a png, jpg files | Correctly displayed | P m12|  |
-| Image Gallery | Download an open a png, jpg files and swipe in gallery mode | Correctly displayed | F m12 | Number of downloads incorrect |
+| Image Gallery | Download an open a png, jpg files and swipe in gallery mode | Correctly displayed | P m12 | FIXED: Number of downloads incorrect |
 | GIF | Download an open a GIF file | Correctly displayed | P m12 | To improve |
 | Video | Download an open a video file. Go back and the video stops | Correctly played | P m12 | To improve |
 | Audio | Download an open a video file. Go back and the music stops | Correctly played | P m12 |   |
 | Non openable | Download an open a non openable file | Placeholder displayed with date and size| P m12 |  |
 | Damaged | Download an open a damaged file | Placeholder displayed | P m12 |  |
 |**Offline**||||||
-| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  | |
-| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  |  |
-| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| |  |
-| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |   |
-| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| |  |
+| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
+| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  P m12 | |
+| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |  P m12 |  |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  P m12 |  |
+| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  P m12 |  |
+| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  P m12 |  |
+| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m12 |  |
+| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m12 |  |
+| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK | P m12 |   |
 |**Error handling**||||||
-| Create folder | Create folder with existing name | Correct error |  |  |
-| Rename | Rename item with existing name in target | Correct error |  |  |
-| Copy | Copy item with existing name in target | Correct error |  |  |
-| Move | Move item with existing name in target | Correct error |  |  |
-| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
+| Create folder | Create folder with existing name | Correct error | P m12  |  |
+| Rename | Rename item with existing name in target | Correct error | P m12 |  |
+| Copy | Copy item with existing name in target | Correct error | P m12 |  |
+| Move | Move item with existing name in target | Correct error | P m12 |  |
+| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | P m12 |  |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |  |
 |**Files App**| **2 auth methods** |||||
-| Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |  |  |
-| Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
-| Browse Basic | Open an ownCloud Files app location | Content is correctly displayed | |  |
-| Browse OAuth2 | Open an ownCloud Files app location | Content is correctly displayed | |  |
-| Download Basic| Open an ownCloud Basic auth Files app location<br>Download a file | File is correctly displayed |  |  |
-| Download OAuth2| Open an ownCloud OAuth2Files app location<br>Download a file | File is correctly displayed |  |  |
-| Create a folder | Open an ownCloud Files app location<br>Create a new folder with special characters | Folder is created in oC app |  | |
-| Rename downloaded item (file and folder)| Open an ownCloud Files app location<br>Rename an downloaded item | Item is renamed correctly in oC app |  |  |
-| Rename non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Rename an non-downloaded item | Item is renamed correctly in oC app |  | |
-| Move downloaded item (file and folder)| Open an ownCloud Files app location<br>Move an downloaded item | Item is moved correctly in oC app |  |  |
-| Move non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Move an non-downloaded item | Item is moved correctly in oC app | |  |
-| Move a folder with subfolders| Open an ownCloud Files app location<br>Move a folder that contains subfolders to another folder with special characters | Item is moved correctly in oC app |  |  |
-| Copy Paste downloaded item | Open an ownCloud Files app location<br>Copy and Paste an downloaded item | Item is pasted correctly in oC app |  |  |
-| Copy Paste non-downloaded item | Open an ownCloud Files app location<br>Copy and Paste an non-downloaded item | Item is pasted correctly in oC app |  |  |
-| Duplicate item downloaded| Open an ownCloud Files app location<br>Duplicate an downloaded item | Item is duplicated correctly in oC app |  |  |
-| Duplicate item non-downloaded | Open an ownCloud Files app location<br>Duplicate an non-downloaded item | Item is duplicated correctly in oC app |   |  |
-| Share item downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  |  |  |
-| Share item non-downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is downloaded and  sent correctly  |   |  Only files -> OK |
-| Item info | Open an ownCloud Files app location<br>Open info option | Item info is correct  |  | |
-| Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app |  |  |
-| Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app |  | FIXED: Nor asked for confirmation |
-| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud |  |  |
-| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded |  |  |
-| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded |  |  |
-| Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC |   |   |
-| Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC |  |  |
+| Location one account| Attach one account to the app<br>Open available locations in files app | Account is there | P m12 |  |
+| Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached | P m12 |  |
+| Browse Basic | Open an ownCloud Files app location | Content is correctly displayed | P m12 |  |
+| Browse OAuth2 | Open an ownCloud Files app location | Content is correctly displayed | P m12 |  |
+| Download Basic| Open an ownCloud Basic auth Files app location<br>Download a file | File is correctly displayed | P m12 |  |
+| Download OAuth2| Open an ownCloud OAuth2Files app location<br>Download a file | File is correctly displayed | P m12 |  |
+| Create a folder | Open an ownCloud Files app location<br>Create a new folder with special characters | Folder is created in oC app | P m12 | |
+| Rename downloaded item (file and folder)| Open an ownCloud Files app location<br>Rename an downloaded item | Item is renamed correctly in oC app | P m12 |  |
+| Rename non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Rename an non-downloaded item | Item is renamed correctly in oC app | P m12 | |
+| Move downloaded item (file and folder)| Open an ownCloud Files app location<br>Move an downloaded item | Item is moved correctly in oC app | P m12 |  |
+| Move non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Move an non-downloaded item | Item is moved correctly in oC app | P m12 |  |
+| Move a folder with subfolders| Open an ownCloud Files app location<br>Move a folder that contains subfolders to another folder with special characters | Item is moved correctly in oC app | P m12 |  |
+| Copy Paste downloaded item | Open an ownCloud Files app location<br>Copy and Paste an downloaded item | Item is pasted correctly in oC app | P m12 |  |
+| Copy Paste non-downloaded item | Open an ownCloud Files app location<br>Copy and Paste an non-downloaded item | Item is pasted correctly in oC app | P m12 |  |
+| Duplicate item downloaded| Open an ownCloud Files app location<br>Duplicate an downloaded item | Item is duplicated correctly in oC app | P m12 |  |
+| Duplicate item non-downloaded | Open an ownCloud Files app location<br>Duplicate an non-downloaded item | Item is duplicated correctly in oC app | P m12  |  |
+| Share item downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  | P m12 |  |
+| Share item non-downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is downloaded and  sent correctly  |  P m12 |  Only files -> OK |
+| Item info | Open an ownCloud Files app location<br>Open info option | Item info is correct  | P m12 | |
+| Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app | P m12 |  |
+| Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app | P m12 |  |
+| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | P m12 |  |
+| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | P m12 | With MSWord |
+| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded | P m12 | With MSWord |
+| Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC | P m12   |   |
+| Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P m12 |  |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | NA | Apple issue |
 | Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved | NA | Apple issue, check future |
 | Move between oC accounts non-root | Move a file from an oC account to anocther one in non-root folder | Content correctly moved | NA | Apple unexpected behaviour. Check to improve. |
-| Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied |  |  |
-| Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied |  |  |
+| Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied | F m12  | In the same account |
+| Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied | F m12  | In the same account |
 |**Remote actions (Files App)**||||||
-| Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app |  |  |
-| Move remote| Move a file or folder in web UI | File is automatically moved in Files app | |  | |
-| Delete remote| Delete a file or folder in web UI | Delete is automatically moved in Files app |  |  |
-| Upload remote| Upload new content in web UI | New content refreshed in Files app |  |  |
+| Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app | P m12 |  |
+| Move remote| Move a file or folder in web UI | File is automatically moved in Files app | P m12 |  | |
+| Delete remote| Delete a file or folder in web UI | Delete is automatically moved in Files app | P m12 |  |
+| Upload remote| Upload new content in web UI | New content refreshed in Files app | P m12 |  |
 |**Error handling (Files App)**||||||
-| Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error |  | |
-| Target folder deleted | Operations to perform in Files app after deleting target folder: move, copy | Correct error |  | |
+| Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error | P m12 | |
+| Target folder deleted | Operations to perform in Files app after deleting target folder: move, copy | Correct error | P m12 | |
 |**Other**||||||
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12 | |
 | Searching | Input a pattern to filter in the current folder | Results correct filtered | P m12 | 
