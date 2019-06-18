@@ -4,7 +4,7 @@
 
 
 Device/s: iPhone6Plus v12.2, iPhoneX v12.3.1 <br>iPadAir v12
-Server: 10.2
+Server: 10.1
 
 How to read Results:
 
@@ -156,8 +156,8 @@ F t12 -> Failed in an iPad with iOS12<br>
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | NA | Apple issue |
 | Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved | NA | Apple issue, check future |
 | Move between oC accounts non-root | Move a file from an oC account to anocther one in non-root folder | Content correctly moved | NA | Apple unexpected behaviour. Check to improve. |
-| Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied | F m12  | In the same account |
-| Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied | F m12  | In the same account |
+| Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied | P m12 t12  | FIXED: In the same account |
+| Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied | NA  | Apple behaviour |
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | F m12 | not displayed |
 |**Remote actions (Files App)**||||||
 | Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app | P m12 |  |
