@@ -9,11 +9,11 @@
 | Test Case | Expected | Result | Related Comment / Bug link | 
 | :-------- | :------- | :----: | :------------------------- | 
 |**Show**||||||
-| Header | Correct header |  |  |  |  |
-| No shares | Correct message |  |  |  |  |
-| Some sharees(users) | Number of lines = number of sharees |  |  |  |  |
-| Some sharees(groups) | Sharee is marked as group (icon and text) |  |  |  |  |
-| Correct options | Options for deleting and editing displayed |  |  |  |  |
+| Header | Correct header | P m9 |  |  |  |
+| No shares | Correct message | P m9 |  |  |  |
+| Some sharees(users) | Number of lines = number of sharees | P m9 | Tested in main private shares list and search view |  |  |
+| Some sharees(groups) | Sharee is marked as group (icon and text) | P m9 | Tested in main private shares list and search view |  |  |
+| Correct options | Options for deleting and editing displayed | P m9 | Tested in main private shares list and search view |  |  |
 |**Search**||||||
 | Hint | Correct hint on the bar |  |  |  |  |
 | Input 2 characters | Nothing is shown |  |  |  |  |
