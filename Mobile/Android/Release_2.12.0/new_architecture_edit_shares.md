@@ -22,10 +22,10 @@
 | Show edit view for a private share with delete permissions (folder) | Click a share with delete permissions guaranteed. "Can edit", and "delete" are enabled, "Can share" is disabled | P m8 | |
 | Disable edit files | Click "can edit" disables the option. There is no suboptions. Check "Can share" does not change  | P m8 |  |  |  |
 | Disable edit folders| Click "can edit" disables the option. Suboptions are hidden. Check "Can share" does not change  | P m8 |  |  |  |
-| Loading | After editing an option, Loading dialog is shown before commiting|  |  |  |  |
-| Error | En error happens in the edition and it is correctly displayed|  |  |  |  |
+| Loading | After editing an option, Loading dialog is shown before commiting| P m8 |  |  |  |
+| Error | En error happens in the edition and it is correctly displayed| P m8 | The error will be shown in the edit permission dialog itself, before was being shown in the background activity snackbar, didn't look fine |  |  |
 |**Delete**||||||
 | Delete item | Item not in the list anymore |  |  |  |  |
-| Loading | After deleitin an item, Loading dialog is shown before commiting|  |  |  |  |
-| Error | En error happens in the deletion and it is correctly displayed|  |  |  |  |
+| Loading | After deleting an item, Loading dialog is shown before commiting|  |  |  |  |
+| Error | An error happens in the deletion and it is correctly displayed|  |  |  |  |
 
