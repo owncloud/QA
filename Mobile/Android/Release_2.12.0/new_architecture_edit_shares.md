@@ -20,8 +20,8 @@
 | Show edit view for a private share with change permissions (folder) | Click a share with change permissions guaranteed. "Can edit", and "change" are enabled, "Can share" is disabled | P m8 | |
 | Show edit view for a private share with change and delete permissions (folder) | Click a share with change and delete permissions guaranteed. "Can edit", "change" and "delete" are enabled, "Can share" is disabled | P m8 | |
 | Show edit view for a private share with delete permissions (folder) | Click a share with delete permissions guaranteed. "Can edit", and "delete" are enabled, "Can share" is disabled | P m8 | |
-| Disable edit files | Click "can edit" disables the option. There is no suboptions. Check "Can share" does not change  |  |  |  |  |
-| Disable edit folders| Click "can edit" disables the option. Suboptions are hidden. Check "Can share" does not change  |  |  |  |  |
+| Disable edit files | Click "can edit" disables the option. There is no suboptions. Check "Can share" does not change  | P m8 |  |  |  |
+| Disable edit folders| Click "can edit" disables the option. Suboptions are hidden. Check "Can share" does not change  | P m8 |  |  |  |
 | Loading | After editing an option, Loading dialog is shown before commiting|  |  |  |  |
 | Error | En error happens in the edition and it is correctly displayed|  |  |  |  |
 |**Delete**||||||
