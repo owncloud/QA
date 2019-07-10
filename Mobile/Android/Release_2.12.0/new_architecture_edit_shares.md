@@ -25,7 +25,7 @@
 | Loading | After editing an option, Loading dialog is shown before commiting| P m8 |  |  |  |
 | Error | En error happens in the edition and it is correctly displayed| P m8 | The error will be shown in the edit permission dialog itself, before was being shown in the background activity snackbar, didn't look fine |  |  |
 |**Delete**||||||
-| Delete item | Item not in the list anymore |  |  |  |  |
-| Loading | After deleting an item, Loading dialog is shown before commiting|  |  |  |  |
-| Error | An error happens in the deletion and it is correctly displayed|  |  |  |  |
+| Delete item | Item not in the list anymore | P m8 |  |  |  |
+| Loading | After deleting an item, Loading dialog is shown before commiting| P m8 |  |  |  |
+| Error | An error happens in the deletion and it is correctly displayed| P m8 |  |  |  |
 
