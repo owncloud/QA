@@ -10,12 +10,14 @@ Server: 10.2.1
  
 | Test Case | Steps | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
+|**Streaming on**|||||||
 | Stream video | Click on a non-downloaded video | Video is streamed in both orientations| P m12 t12 |  |  |
 | Stream audio | Click on a non-downloaded video | Video is streamed in both orientations | P m12 t12 |  |  |
-| Stream downloaded video | Click on a non-downloaded video | Video is streamed in both orientations| F m12 t12 | Not posible to download | P m12 t12 |
-| Stream downloaded audio | Click on a non-downloaded video | Video is streamed in both orientations | F m12 t12 | Not posible to download | P m12 t12 |
 | Artwork | Click on a audio file  | Artwork is shown during streaming | NA |  |  |
 | Media controls | Check controls over streaming on both orientations | Correct working (depending on library, just to check) | P m12 t12 |  |  |
+|**Streaming off**|||||||
+| Downloaded video | Click on a non-downloaded video | Video is downloaded and played in both orientations| P m12 t12 | 
+| Downloaded audio | Click on a non-downloaded video | Audio is downloaded and played in both orientations | P m12 t12 | 
 |**Operations**|||||||
 | Share | Share an streamed file | Video is shared and streaming goes on | P t12 m12|  |  |
 | Link | Create a link on a streamed file | Link is created and streaming goes on| P t12 m12 |  |  |
@@ -27,5 +29,5 @@ Server: 10.2.1
 | Delete | Delete an stramed file | Video is deleted and streaming stops| P t12 m12 |  |  |
 |**External**|||||||
 | Move | Move an streamed file from other client | Video is moved and streaming stops | P m12 m12 |  |  |
-| Rename | Rename an streamed file from other client | Video is renamed and streaming goes on| F m12 t12 | File is streamed twice |  |
+| Rename | Rename an streamed file from other client | Video is renamed and streaming goes on| P m12 t12 | FIXED: File is streamed twice |  |
 | Delete | Delete an stramed file from other client | Video is deleted and streaming stops| P t12 m12 |  |  |
