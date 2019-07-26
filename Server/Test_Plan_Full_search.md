@@ -59,6 +59,20 @@ Limit the users that will have access to full textsearch by setting a guest_app 
 **Only index metadata**|  |   |
 |  |   |
 If you only want to use search_elastic as a more scalable search on filenames you can disable content indexing by setting `nocontent` to `true` (default is `false`): ```config:app:set search_elastic nocontent --value true``` |  | :construction:  |
+**Operations with clients**|  |   |
+|  |   |
+File located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and change the content using a Desktop client. Then user searches for the new content| The file that contains the word is shown in the files view | :construction:  |
+File located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and change the content using a Desktop client. Then user searches for the old content| The file is not shown in the files view | :construction:  |
+File located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and change the content using a Desktop client. Then user searches for the new content| The file that contains the word is shown in the files view | :construction:  |
+File located inside a folder. A user searches for content included in the file using the searchbox. User edits the file  and change the content using a Mobile client. Then user searches for the old content| The file is not shown in the files view | :construction:  |
+**Operations with different file formats**|  |   |
+|  |   |
+Text file located inside a folder. A user searches for content included in the file using the searchbox. User edits the file using files_texteditor app and change the content. Then user searches for the new content| The file that contains the word is shown in the files view | :construction:  |
+Text file located inside a folder. A user searches for content included in the file using the searchbox. User edits the file using files_texteditor app and change the content. Then user searches for the old content| The file is not shown in the files view | :construction:  |
+Docx file located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and changes the content. Then user searches for the new content| The file that contains the word is shown in the files view | :construction:  |
+Docx file located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and changes the content. Then user searches for the old content| The file is not shown in the files view | :construction:  |
+XLS file located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and changes the content. Then user searches for the new content| The file that contains the word is shown in the files view | :construction:  |
+XLS file located inside a folder. A user searches for content included in the file using the searchbox. User edits the file and changes the content. Then user searches for the old content| The file is not shown in the files view | :construction:  |
 **WebUI and browsers**|  |   |
 |  |   |
 Check that Full Search menu in admin section works fine using FireFox as browser |  | :construction:  |
