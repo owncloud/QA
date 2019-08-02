@@ -15,11 +15,11 @@ Server: 10.2.1
 | Download png | Gallery shows the image  | P m9 |  |  |  |
 | Download gif | Gallery shows the image  | P m9 |  |  |  |
 | Download mp4 | Gallery shows the video  | P m9 |  |  |  |
-| Download mov | Gallery shows the video  | F m9 |  |  |  |
+| Download mov | Gallery shows the video  | F m9 | Non native in Android |  |  |
 | Download avi | Gallery shows the video  | P m9 |  |  |  |
 | Download flv | Gallery shows the video  | P m9 |  |  |  |
 |**Downloads regression **||||||
 | Download images | Correctly downloaded and previewed  | P m9' m8 |  |  |  |
 | Download videos | Gallery shows the video  | P m9' m8 |  |  |  |
 |**Wrap**||||||
-| Wrap the app with MI and check downloads and uploads | Correctly done  |  |  |  |  |
+| Wrap the app with MI and check downloads and uploads | Correctly done  | P m8 m9 | Fail when download images | Wrapped apps, gallery not updated |
