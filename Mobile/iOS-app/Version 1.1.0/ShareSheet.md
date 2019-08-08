@@ -12,7 +12,7 @@ Server: 10.2.1
 | :-------- | :---- | :------- | :----: | :-------------- | 
 |**Apps to share**|||||
 | Safari | Share content from Safari | ownCloud option is there | P m12 t12 |  |  |
-| Photos | Share content from Photos | ownCloud option is there | F m12 t12 | ownCloud not there  | Next iteration |
+| Photos | Share content from Photos | ownCloud option is there | F m12 t12 | ownCloud not there. Next iterations  | Next iteration |
 | Pages | Share content from Pages | ownCloud option is there | P m12 t12 |  |  |
 | Files App | Share content from Files App | ownCloud option is there | P m12 t12 |  |  |
 |**One account**|||||
@@ -33,13 +33,13 @@ Server: 10.2.1
 |**File extensions**|||||
 | pdf | Share a pdf with an oC account | Files correctly saved | P m12 |  |  |
 | txt | Share a txt with an oC account | Files correctly saved | P m12 |  |  |
-| doc | Share a doc with an oC account | Files correctly saved |  |  |  |
+| doc | Share a doc with an oC account | Files correctly saved | P m12 |  |  |
 | pages | Share a pages with an oC account. This is bundled file, important to check | Files correctly saved | P m12 |  |  |
-| xls | Share a xls with an oC account | Files correctly saved | F m12 |  |  |
-| zip | Share a zip with an oC account | Files correctly saved |  |  |  |
+| xls | Share a xls with an oC account | Files correctly saved | P m12 |  |  |
+| zip | Share a zip with an oC account | Files correctly saved | P m12 |  |  |
 | image | Share a image with an oC account | Files correctly saved | P m12 |  |  |
-| video | Share a video with an oC account | Files correctly saved | F m12 | Open the app, not the share sheet  |  |
-| non-openable | Share a file with no extension or not openable with an oC account | Files correctly saved | F m12 | xls not opened |  |
+| video | Share a video with an oC account | Files correctly saved | F m12 | FIXED: Open the app, not the share sheet  |  |
+| non-openable | Share a file with no extension or not openable with an oC account | Files correctly saved | P m12 |  |  |
 |**Error handling**|||||
 | Non existent target folder | Remove/Move the target folder before submitting | Correct error | P m12 |  |
 | Renamed target folder | Rename the target folder before submitting | Correct error | P m12 |  |  |

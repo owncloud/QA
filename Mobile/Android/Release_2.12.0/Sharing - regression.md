@@ -56,4 +56,4 @@ Server: 10.2.1
 | Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date | P m9 m8
 | Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input | P m9 m8
 | **Upgrade** |   |  |
-| 2.11.1 | Install 2.11.1 and create public and private shares<br>Upgrade to the current | All the shares are correct in the new version | P m9
+| 2.11.1 | Install 2.11.1 and create public and private shares<br>Upgrade to the current | All the shares are correct in the new version | P m9 m8

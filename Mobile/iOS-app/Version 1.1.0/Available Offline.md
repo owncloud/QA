@@ -30,19 +30,25 @@ Server: 10.2.1
 |**External Actions**||||||
 | Move content to av. offline | 1. Set a folder as av. offline<br>2. In server, move some content into the av. off. folder from another location | Check in app that the moved content becomes av. offline | P m12 |  |
 | Move content from av. offline | 1. Set a folder as av. offline<br>2. In server, move some content from the folder to another location | Check in app that the content is not av. off. | P m12  |  |
-| Modify files | 1. Set a folder as av. offline<br>2. In server, modify some files into the av. off. folder in different deep levels | Check in app that the files have changed | |  |
 | Delete | 1. Set a folder as av. off.<br>2. Delete from server or another client | The folder is deleted | P m12 |  |
-| Delete subfolder | 1. Set a folder as av. off.<br>2. Delete from server or another client a subfolder  | The subfolder is deleted | |  |
-| Multiaccount | 1. In two different account, set some folder as av. off.<br>2. In app, set one of them as active.<br>3. In server side, upload some content into an av. off. folder of the non active<br>4. In app, change the account | The av. off. folder is upgraded with the uploaded content | |  |
-| Delete account server| 1. Set a folder as av. off.<br>2. While it is downloading, in server delete the account| Downloads cancelled | |  |
+| Delete subfolder | 1. Set a folder as av. off.<br>2. Delete from server or another client a subfolder  | The subfolder is deleted | P m12 |  |
+| Multiaccount | 1. In two different account, set some folder as av. off.<br>2. In app, set one of them as active.<br>3. In server side, upload some content into an av. off. folder of the non active<br>4. In app, change the account | The av. off. folder is upgraded with the uploaded content | P m12 |  |
+| Remove space | Set some items as av. offline<br>Download some files<br>In list of servers, wipe local storage | Downloaded files are removed and marked as non-downloaded.<br>Av. offline content keeps downloaded | F m12 | FIXED: Crash from other branch. Everything deleted? |
+| Delete account server| 1. Set a folder as av. off.<br>2. While it is downloading, in server delete the account| Downloads cancelled | P m12 |  |
 | **Av. offline shortcut** |  |  |
-| Empty | Open quick access av. offline with no av. offline content | Correct placeholder |  |  |
-| Add av offline | Set several files and folders in different levels as av. offline | They appear correctly in quick access |  |  |
-| Remove av offline | Unset several files and folders in different levels as av. offline | They do not appear in quick access anymore |  |  |
-| Remove from quick access | Open quick access and remove some content av. offline | They do not appear in quick access anymore. Content is not av. offline |  |  |
-| Remove all from quick access | Open quick access and remove all v. offline content from there | They do not appear in quick access anymore (placeholder set). Content is not av. offline |  |  |
+| Empty | Open quick access av. offline with no av. offline content | Correct placeholder | P m12 |  |
+| Add av offline | Set several files and folders in different levels as av. offline | They appear correctly in quick access | P m12  |  |
+| Remove av offline | Unset several files and folders in different levels as av. offline | They do not appear in quick access anymore | P m12 |  |
+| Remove from quick access | Open quick access and remove some content av. offline | They do not appear in quick access anymore. Content is not av. offline | P m12 | To improve, wording |
+| Remove all from quick access | Open quick access and remove all v. offline content from there | They do not appear in quick access anymore (placeholder set). Content is not av. offline | P m12  | To improve, wording |
 |**Errors**||||||
-| No internet connection | 1. Switch the device connection off<br>2. Set a folder as av. off<br>3. Switch the device connection on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline |  |  |
-| No server connection | 1. Switch the server off<br>2. Set a folder as av. off<br>3. Switch the server on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline |  |  |
-| Lost connection | 1. Set a folder as av. off.<br>2. Switch the connection off<br>3. Switch the connection on | The download of the content resumes |  |  |
+| No internet connection | 1. Switch the device connection off<br>2. Set a folder as av. off<br>3. Switch the device connection on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline | P m12 |  |
+| No server connection | 1. Switch the server off<br>2. Set a folder as av. off<br>3. Switch the server on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline | P m12 |  |
+| Lost connection | 1. Set a folder as av. off.<br>2. Switch the connection off<br>3. Switch the connection on | The download of the content resumes | P m12 |  |
 |**Conflicts**||||||
+| Fil | 1. Set a folder as av. off.<br>2. Switch the connection off<br>3. Switch the connection on | The download of the content resumes | P m12 |  |
+|**Delete unused copies**||||
+| View | Open Settings, and the "Delete unused local copies" section | Correct view in both orientations | F m12 | To improve with selectors |
+| 1 minute | Download several files<br>Set 1 minute<br>Wait 1 minute or close the app | Content deleted | P m12 |  |
+| 15 minutes | Download several files<br>Set 15 minutes<br>Wait 15 minute or close the app | Content deleted |  |  |
+| Av. offline | Download several files<br>Set several files and folders as av. offline<br>Set 1 minute<br>Wait 1 minute or close the app | Download content deleted<br>Av. offline content keeps downloaded |  |  |
