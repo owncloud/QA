@@ -7,6 +7,8 @@ Server: 10.2.1
 
 ---
 
+SELECT owner_share, shared_date, is_directory, shared_with_display_name, file_source, expiration_date, share_with_additional_info, url, token, path, item_source, shate_with, share_type, user_id, permissions, id_remote_shared, name, _id  FROM ocshares 
+ 
  
 | Test Case | Steps | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
