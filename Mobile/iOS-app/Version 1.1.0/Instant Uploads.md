@@ -2,8 +2,8 @@
 
 #### Pr: https://github.com/owncloud/ios-app/pull/484
 
-Devices: <br>
-Server:
+Devices: iPhone XS v12<br>
+Server: 10.2.1
 
 ---
 
@@ -11,9 +11,9 @@ Server:
 | Test Case | Steps | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
 |**View**|||||
-| Settings | Open Settings view | Instant upload options are there and correct in both orientations |  |  |  |
-| Account | Open Settings view and account selection | List of accounts is there, only if at least one instant upload option is enabled |  |  |  |
-| Path | Open Settings view and select an account | Correct picker |  |  |  |
+| Settings | Open Settings view | Instant upload options are there and correct in both orientations | P m12 |  |  |
+| Account | Open Settings view and account selection | List of accounts is there, only if at least one instant upload option is enabled | F m12 | No way to go back |  |
+| Path | Open Settings view and select an account | Correct picker | P m12 |  |  |
 |**One account - Images**|||||
 | Root folder | Select the root folder<br>Take two pics | Both pics are uploaded to the root folder |  |  |  |
 | Non-Root folder | Select a non-root folder<br>Take two pics | Both pics are uploaded to the folder |  |  |  |
