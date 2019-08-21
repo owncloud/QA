@@ -12,20 +12,20 @@ Server: 10.2.1
 | :-------- | :---- | :------- | :----: | :-------------- | 
 |**View**|||||
 | Settings | Open Settings view | Instant upload options are there and correct in both orientations | P m12 |  |  |
-| Account | Open Settings view and account selection | List of accounts is there, only if at least one instant upload option is enabled | F m12 | No way to go back |  |
+| Account | Open Settings view and account selection | List of accounts is there, only if at least one instant upload option is enabled | P m12 | FIXED: No way to go back |  |
 | Path | Open Settings view and select an account | Correct picker | P m12 |  |  |
 |**One account - Images**|||||
-| Root folder | Select the root folder<br>Take two pics | Both pics are uploaded to the root folder |  |  |  |
-| Non-Root folder | Select a non-root folder<br>Take two pics | Both pics are uploaded to the folder |  |  |  |
-| Switch to other | Select a new folder as before<br>Take two pics | Both pics are uploaded to the new target folder |  |  |  |
-| Rename target folder | In the app, rename the target folder<br>Take two pics | Both pics are uploaded to the new named folder |  |  |  |
-| Move target folder | In the app, move the target folder<br>Take two pics | Both pics are uploaded to the moved folder |  |  |  |
-| Remove target folder | In the app, remove the target folder<br>Take two pics | Both pics are not uploaded?  |  |  |  |
-| Select no account |Install the app from scratch and enable pics instant uploads<br> Take two pics | Should not be posible? |  |  |  |
-| Select no target folder |Install the app from scratch and enable pics instant uploads, selecting an account<br> Take two pics | They are uploaded anywhere? |  |  |  |
-| Disable | After enabling and taking some pics, disable the feature<br>Take some pics<br>Enable again the feature<br>Take more pics | Only the pictures that were taken with the feature enabled were uploaded, other ones were ignored |  |  |  |
+| Root folder | Select the root folder<br>Take two pics | Both pics are uploaded to the root folder | P m12 |  |  |
+| Non-Root folder | Select a non-root folder<br>Take two pics | Both pics are uploaded to the folder | P m12 |  |  |
+| Switch to other | Select a new folder as before<br>Take two pics | Both pics are uploaded to the new target folder | P m12 |  |  |
+| Rename target folder | In the app, rename the target folder<br>Take two pics | Both pics are uploaded to the new named folder |  | Uploads stop till a new folder is set. |  |
+| Move target folder | In the app, move the target folder<br>Take two pics | Both pics are uploaded to the moved folder |  | Uploads stop till a new folder is set. |  |
+| Remove target folder | In the app, remove the target folder<br>Take two pics | Both pics are not uploaded?  |  | Nowhere |  |
+| Select no account |Install the app from scratch and enable pics instant uploads<br> Take two pics | Should not be posible? |  | Pics not uploaded  |  |
+| Select no target folder |Install the app from scratch and enable pics instant uploads, selecting an account<br> Take two pics | They are uploaded anywhere? |  |  Pics not uploaded|  |
+| Disable | After enabling and taking some pics, disable the feature<br>Take some pics<br>Enable again the feature<br>Take more pics | Only the pictures that were taken with the feature enabled were uploaded, other ones were ignored | P m12 |  |  |
 |**One account - Videos**|||||
-| Root folder | Select the root folder<br>Take two videos | Both videos are uploaded to the root folder |  |  |  |
+| Root folder | Select the root folder<br>Take two videos | Both videos are uploaded to the root folder | F m12 | Videos not uploade |  |
 | Non-Root folder | Select a non-root folder<br>Take two videos | Both videos are uploaded to the folder |  |  |  |
 | Switch to other | Select a new folder as before<br>Take two videos | Both videos are uploaded to the new target folder |  |  |  |
 | Rename target folder | In the app, rename the target folder<br>Take two videos | Both videos are uploaded to the new named folder |  |  |  |
@@ -35,7 +35,7 @@ Server: 10.2.1
 | Select no target folder |Install the app from scratch and enable videos instant uploads, selecting an account<br> Take two videos | They are uploaded anywhere? |  |  |  |
 | Disable | After enabling and taking some videos, disable the feature<br>Take some videos<br>Enable again the feature<br>Take more videos | Only the videos that were taken with the feature enabled were uploaded, other ones were ignored |  |  |  |
 |**Pics & Videos**|||||
-| Only pics | Enable instant upload for pics<br>Take some pics and videos<br>Enable the instant upload for videos | Only pics are uploaded |  |  |  |
+| Only pics | Enable instant upload for pics<br>Take some pics and videos<br>Enable the instant upload for videos | Only pics are uploaded | F m12 | Videos not uploaded |  |
 | Only videos | Enable instant upload for videos<br>Take some pics and videos<br>Enable the instant upload for pics | Only videos are uploaded |  |  |  |
 | Late enabling | Disable instant uploads for pics and videos<br>Take some pics and videos<br>Enable the instant upload for pics and videos | Nothing is uploaded |  |  |  |
 |**Several accounts**|||||
