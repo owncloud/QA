@@ -39,13 +39,13 @@ Server: 10.2.1
 | Only videos | Enable instant upload for videos<br>Take some pics and videos<br>Enable the instant upload for pics | Only videos are uploaded |  |  |  |
 | Late enabling | Disable instant uploads for pics and videos<br>Take some pics and videos<br>Enable the instant upload for pics and videos | Nothing is uploaded |  |  |  |
 |**Several accounts**|||||
-| Upload to one | Select one of several accounts and an existing folder<br>Take two pics and two videos | Both items are uploaded to the correct folder |  |  |  |
-| Upload to two | Select one of several accounts and an existing folder<br>Take two pics and two videos<br>Select a different account and take more pics | Every item is uploaded to the correct account and target folder |  |  |  |
-| Account removed | Select one of several accounts and an existing folder<br>remove the account from the device and take some pics/videos | Uploaded to somewhere? |  |  |  |
+| Upload to one | Select one of several accounts and an existing folder<br>Take two pics and two videos | Both items are uploaded to the correct folder | P m12 |  |  |
+| Upload to two | Select one of several accounts and an existing folder<br>Take two pics and two videos<br>Select a different account and take more pics | Every item is uploaded to the correct account and target folder | P m12 |  |  |
+| Account removed | Select one of several accounts and an existing folder<br>remove the account from the device and take some pics/videos | Uploaded to somewhere? | F m12 | Account locked |  |
 |**Background tasks**|||||
-| App closed | With instant uplaods enabled and app closed, take videos and pics | Detected when the app comes to foreground (check status tab) |  |  |  |
+| App closed | With instant uplaods enabled and app closed, take videos and pics | Detected when the app comes to foreground (check status tab) | P m12 | |  |
 | Large video | With instant uplaods enabled, take a long video<br>Once it is detected, minimize the app | Video is uploaded in background |  |  |  |
-| Large video and many pics | With instant uplaods enabled, take a long video and then, many pictures<br>Once it is detected, minimize the app | Everything is uploaded in background |  |  |  |
+| Large video and many pics | With instant uplaods enabled, take a long video and then, many pictures<br>Once it is detected, minimize the app | Everything is uploaded in background | F m12 | Stucked after re-opening |  |
 |**Miscellaneous**|||||
-| Convert to JPEG | Enable instant uplaods and convert to JPEG<br> take several pics | Uploaded in JPEG format |  |  |  |
+| Convert to JPEG | Enable instant uplaods and convert to JPEG<br> take several pics | Uploaded in JPEG format | P m12 |  |  |
 | Convert to MP4 | Enable instant uplaods and convert to MP4<br> take several videos | Uploaded in MP4 format |  |  |  |
