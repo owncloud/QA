@@ -15,10 +15,10 @@ t -> tablet (iPad)<br>
 12 -> iOS version<br>
 NA -> non applicable
 
- -> Passed in an iPhone with iOS12<br>
+P m12 -> Passed in an iPhone with iOS12<br>
 F t12 -> Failed in an iPad with iOS12<br>
- -> Passed with an iPhone with iOS12 and an iPad with iOS12 <br>
- F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS12 <br>
+P m12 t12 -> Passed with an iPhone with iOS12 and an iPad with iOS12 <br>
+P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS12 <br>
 
 ---
 

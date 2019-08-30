@@ -39,9 +39,9 @@ Server: 10.2.1
 | Only videos | Enable instant upload for videos<br>Take some pics and videos<br>Enable the instant upload for pics | Only videos are uploaded | P m12 t12 |  |  |
 | Late enabling | Disable instant uploads for pics and videos<br>Take some pics and videos<br>Enable the instant upload for pics and videos | Nothing is uploaded | P m12 t12  |  |  |
 |**Several accounts**|||||
-| Upload to one | Select one of several accounts and an existing folder<br>Take two pics and two videos | Both items are uploaded to the correct folder | P m12 |  |  |
-| Upload to two | Select one of several accounts and an existing folder<br>Take two pics and two videos<br>Select a different account and take more pics | Every item is uploaded to the correct account and target folder | P m12 |  |  |
-| Account removed | Select one of several accounts and an existing folder<br>remove the account from the device and take some pics/videos | Feature disabled | P m12 | FIXED: Account locked |  |
+| Upload to one | Select one of several accounts and an existing folder<br>Take two pics and two videos | Both items are uploaded to the correct folder | P m12 t12|  |  |
+| Upload to two | Select one of several accounts and an existing folder<br>Take two pics and two videos<br>Select a different account and take more pics | Every item is uploaded to the correct account and target folder | P m12 t12|  |  |
+| Account removed | Select one of several accounts and an existing folder<br>remove the account from the device and take some pics/videos | Feature disabled | P m12 t12| FIXED: Account locked |  |
 |**Background tasks**|||||
 | App closed | With instant uplaods enabled and app closed, take videos and pics | Detected when the app comes to foreground (check status tab) | P m12 | |  |
 | Large video | With instant uplaods enabled, take a long video<br>Once it is detected, minimize the app | Video is uploaded in background | F m12 | Problems handled separately |  |
