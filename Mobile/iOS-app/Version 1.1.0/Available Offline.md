@@ -25,6 +25,7 @@ Server: 10.2.1
 | Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync | P m12 t12 | FIXED: If content is downloaded, no av. offline
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine | P m12 t12
 | Rename av. offline | Rename av. offline folder | Correctly renamed. Content keeps av. offline | P m12 t12 | FIXED: Content is not av. offline
+| Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline | P m12 t12 | FIXED: Content is not marked
 | Cancel | 1. Set as av. offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. | P m12 t12 | No way to cancel, ftm will keep this behaviour  
 |**External Actions**||||||
 | Move content to av. offline | 1. Set a folder as av. offline<br>2. In server, move some content into the av. off. folder from another location | Check in app that the moved content becomes av. offline | P m12 t12 |  |
@@ -33,14 +34,15 @@ Server: 10.2.1
 | Delete subfolder | 1. Set a folder as av. off.<br>2. Delete from server or another client a subfolder  | The subfolder is deleted | P m12 t12 |  |
 | Multiaccount | 1. In two different account, set some folder as av. off.<br>2. In app, set one of them as active.<br>3. In server side, upload some content into an av. off. folder of the non active<br>4. In app, change the account | The av. off. folder is upgraded with the uploaded content | P m12 |  |
 | Remove space without Av. offline | Set some items as av. offline<br>Download some files<br>In list of servers, wipe local storage | Downloaded files are removed and marked as non-downloaded.<br>Av. offline content keeps downloaded | P m12 t12 | FIXED: Crash from other branch.  |
-| Remove space with Av. offline | Set some items as av. offline<br>Download some files<br>In list of servers, wipe local storage | Downloaded files are removed and marked as non-downloaded.<br>Av. offline content is also removed | F m12 t12| FIXED: Crash from other branch. Everything deleted? Av. offline is there |
+| Remove space with Av. offline | Set some items as av. offline<br>Download some files<br>In list of servers, wipe local storage | Downloaded files are removed and marked as non-downloaded.<br>Av. offline content is also removed | P m12 t12| FIXED: Crash from other branch. Everything deleted? Av. offline is there, fixed with new option |
+| Remove space with Av. offline - Files app | Set some items as av. offline<br>In list of servers, wipe local storage with av. offline<br>Open Files app with the account | Content is not downloaded till app is open again | P m12 t12|  |
 | Delete account server| 1. Set a folder as av. off.<br>2. While it is downloading, in server delete the account| Downloads cancelled | P m12 t12 |  |
 | **Av. offline shortcut** |  |  |
 | Empty | Open quick access av. offline with no av. offline content | Correct placeholder | P m12 t12 |  |
 | Add av offline | Set several files and folders in different levels as av. offline | They appear correctly in quick access | P m12 t12  |  |
 | Remove av offline | Unset several files and folders in different levels as av. offline | They do not appear in quick access anymore | P m12 t12 |  |
-| Remove from quick access | Open quick access and remove some content av. offline | They do not appear in quick access anymore. Content is not av. offline | P m12 t12 | To improve, wording |
-| Remove all from quick access | Open quick access and remove all v. offline content from there | They do not appear in quick access anymore (placeholder set). Content is not av. offline | P m12 t12| To improve, wording |
+| Remove from quick access | Open quick access and remove some content av. offline | They do not appear in quick access anymore. Content is not av. offline | P m12 t12 | DONE: To improve, wording |
+| Remove all from quick access | Open quick access and remove all v. offline content from there | They do not appear in quick access anymore (placeholder set). Content is not av. offline | P m12 t12| DONE: To improve, wording |
 |**Errors**||||||
 | No internet connection | 1. Switch the device connection off<br>2. Set a folder as av. off<br>3. Switch the device connection on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline | P m12 t12 |  |
 | No server connection | 1. Switch the server off<br>2. Set a folder as av. off<br>3. Switch the server on |2. The folder is marked as av. off<br>3.All the content is downloaded and set as av.offline | P m12 t12 |  |
