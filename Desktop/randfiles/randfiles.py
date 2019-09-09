@@ -1,15 +1,14 @@
 #! /usr/bin/python3
 #
-# Usage:
-# study the variables below. 
-#  * maxfiles seed and max_entries_per_dir are optional commandline parmeters. The others need to be edited in the code.
-#  * study the contents of earlier randfiles.conf
+#   Example:
+#     randfiles.py -m 100_000 randfiles_100k
+#   or study the printed usage.
 #
 # Run on a filesystem with more inodes than default:
-#  mke2fs -y -t ext4 -n /dev/sdb1
+#  mke2fs -t ext4 -n /dev/sdb1
 #   -> prints the default inode count. Run with 5 times as many.
-#  mke2fs -y -t ext4 -N 80000000 /dev/sdb1
-#  
+#  mke2fs -t ext4 -N 80000000 /dev/sdb1
+#
 # Run on a filesystem where we have large directory support. If you see
 #   [ 1738.125535] EXT4-fs warning (device sda2): ext4_dx_add_entry:2184: Directory (ino: 2) index full, reach max htree level :2
 #   [ 1738.125537] EXT4-fs warning (device sda2): ext4_dx_add_entry:2188: Large directory feature is not enabled on this filesystem
@@ -20,76 +19,113 @@
 
 # v0.1 -- 2019-09-03, jw        initial draught
 # v0.2 -- 2019-09-05, jw        adaptive min_entries_per_dir and folder_ratio for very tall trees.
+# v0.3 -- 2019-09-09, jw        target dir mandatory, option parser added.
 
 
 import random, time, string, os, sys, json
+import argparse
 
-__version__ = '0.2'
+__version__ = '0.3'
 
-maxfiles = 1_000_000
-if len(sys.argv) > 1:
-  maxfiles = int(sys.argv[1])
-
-seed = str(time.time())
-if len(sys.argv) > 2:
-  seed = sys.argv[2]
-
-random.seed(seed)
-
-folder_ratio = 0.002      # 0.02: 98% of all objects, are files; 2% are folders.
-
-max_name_len = 200
-min_name_len = 10
-
-min_body_len = 1
-max_body_len = 1_000
-
-max_entries_per_dir = 10_000
-if len(sys.argv) > 3:
-  max_entries_per_dir = int(sys.argv[3])
-
-min_entries_per_dir = 500
-if max_entries_per_dir < 5000:
-  min_entries_per_dir = int(max_entries_per_dir/10)
-if max_entries_per_dir < 500:
-  folder_ratio = 0.02
-  max_name_len = 50     # try avoid crashing against MAXPATH trivially.
-
-corpus_size = 2_000_000
 conf = {
-  'argv0': sys.argv[0],
-  '__version__': __version__,
-  'maxfiles': maxfiles,
-  'seed': seed,
-  'min_entries_per_dir': min_entries_per_dir,
-  'max_entries_per_dir': max_entries_per_dir,
-  'min_name_len': min_name_len,
-  'max_name_len': max_name_len,
-  'min_body_len': min_body_len,
-  'max_body_len': max_body_len,
-  'folder_ratio': folder_ratio,
-  'corpus_size': corpus_size,
+  'maxfiles': 1_000_000,
+  'seed': str(time.time()),
+  'min_entries_per_dir': 500,
+  'max_entries_per_dir': 10_000,
+  'min_name_len': 10,
+  'max_name_len': 200,
+  'min_body_len': 1,
+  'max_body_len': 1_000,
+  'folder_ratio': 2.0,                # 2.0/100=0.02: 98% of all objects, are files; 2% are folders.
+  'corpus_size': 2_000_000,
 }
 
-corpus = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(corpus_size))
+conf_run = {
+  'argv0': os.path.abspath(sys.argv[0]),
+  '__version__': __version__,
+  'when': time.ctime(),
+}
+
+parser = argparse.ArgumentParser(description='Create deep or shallow trees of random files.')
+parser.add_argument('dir', metavar='DIR', type=str, help='destination folder')
+parser.add_argument('-m', '--maxfiles', metavar='MAXFILES', type=int, help='Number of files to generate. Default: ' + str(conf['maxfiles']))
+parser.add_argument('-s', '--seed', metavar='SEED_STRING', type=str, help='String to seed the random generator. Call with identical seed to recreate an identical tree. Default: current timestamp in msec')
+parser.add_argument('-f', '--folder_ratio', metavar='FOLDER_PERCENTAGE', type=float, help='Probability to create a subfolder instead of a file, as percent. Default: ' + str(conf['folder_ratio']))
+parser.add_argument('-e', '--max_entries_per_dir', metavar='MAX_ENTRIES_PER_DIR', type=int, help='Maximum number files/subdirs per directory. Default: ' + str(conf['max_entries_per_dir']))
+parser.add_argument(      '--min_entries_per_dir', metavar='MIN_ENTRIES_PER_DIR', type=int, help='Minimum number files/subdirs per directory. Default: ' + str(conf['min_entries_per_dir']))
+parser.add_argument('-n', '--max_name_len', metavar='MAX_NAME_LEN', type=int, help='Maximum length of file/subdir names. Default: ' + str(conf['max_name_len']))
+parser.add_argument(      '--min_name_len', metavar='MIN_NAME_LEN', type=int, help='Minimum length of file/subdir names. Default: ' + str(conf['min_name_len']))
+parser.add_argument('-b', '--max_body_len', metavar='MAX_BODY_LEN', type=int, help='Maximum length file contents. Default: ' + str(conf['max_body_len']))
+parser.add_argument(      '--min_body_len', metavar='MIN_BODY_LEN', type=int, help='Minimum length file contents. Default: ' + str(conf['min_body_len']))
+parser.add_argument('-c', '--corpus_size', metavar='CORPUS_SIZE', type=int, help='Size of the internal random pool. (Larger is more chaotic but slower). Default: ' + str(conf['corpus_size']))
+parser.add_argument('-L', '--load_config', metavar='CONFIG_FILE', type=str, help='Load a config file from a previous run, before applying other options. Default: none.')
+args = parser.parse_args()
+
+if args.load_config:
+  conf = json.load(open(args.load_config))
+conf['run'] = conf_run
+
+if args.maxfiles            is not None: conf['maxfiles']            = args.maxfiles
+if args.seed                is not None: conf['seed']                = args.seed
+if args.folder_ratio        is not None: conf['folder_ratio']        = args.folder_ratio
+if args.max_entries_per_dir is not None: conf['max_entries_per_dir'] = args.max_entries_per_dir
+if args.min_entries_per_dir is not None: conf['min_entries_per_dir'] = args.min_entries_per_dir
+if args.max_name_len        is not None: conf['max_name_len']        = args.max_name_len
+if args.min_name_len        is not None: conf['min_name_len']        = args.min_name_len
+if args.max_body_len        is not None: conf['max_body_len']        = args.max_body_len
+if args.min_body_len        is not None: conf['min_body_len']        = args.min_body_len
+if args.corpus_size         is not None: conf['corpus_size']         = args.corpus_size
+
+if conf['max_entries_per_dir'] < 5000:
+  maxmin = int(max_entries_per_dir/10)
+  if conf['min_entries_per_dir'] > maxmin:
+    print("Reducing min_entries_per_dir from %d to %d due to low max_entries_per_dir." % (conf['min_entries_per_dir'], maxmin))
+    conf['min_entries_per_dir'] = maxmin
+
+if conf['max_entries_per_dir'] < 500:
+  if conf['folder_ratio'] > 0.02:
+    # try avoid running out of subdirs
+    print("Reducing folder_ratio from %g to %g due to low max_entries_per_dir." % (conf['folder_ratio'], 0.02))
+    conf['folder_ratio'] = 0.02
+  if conf['max_name_len'] > 50:
+    # try avoid crashing against MAXPATH trivially.
+    print("Reducing max_name_len from %d to %d due to low max_entries_per_dir." % (conf['max_name_len'], 50))
+    conf['max_name_len'] = 50
+
+if conf['corpus_size'] < conf['max_name_len']:
+  print("ERROR: corpus_size=%d must be at least max_name_len=%d." % (conf['corpus_size'], conf['max_name_len']))
+  sys.exit(1)
+
+if conf['corpus_size'] < conf['max_body_len']:
+  print("ERROR: corpus_size=%d be at least max_body_len=%d." % (conf['corpus_size'], conf['max_body_len']))
+  sys.exit(1)
+
+conffile = os.path.basename(os.path.abspath(args.dir))+'.conf'
+
+random.seed(conf['seed'])
+corpus = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(conf['corpus_size']))
+
 
 def randstr(min_len=10, max_len=200):
   len = random.randint(min_len, max_len)
-  len = min(len, corpus_size)
-  start = random.randint(0, corpus_size-len)
+  len = min(len, conf['corpus_size'])
+  start = random.randint(0, conf['corpus_size']-len)
   return corpus[start:start+len]
 
 
 def randfile():
-  name = randstr(min_name_len, max_name_len)
-  body = randstr(min_body_len, max_body_len)
+  name = randstr(conf['min_name_len'], conf['max_name_len'])
+  body = randstr(conf['min_body_len'], conf['max_body_len'])
   return (name, body)
-  
- 
+
+
 def randfolder():
-  name = randstr(min_name_len, max_name_len)
+  name = randstr(conf['min_name_len'], conf['max_name_len'])
   return name
 
+
+os.makedirs(args.dir, exist_ok=True)
+os.chdir(args.dir)      # or explode.
 
 dirs = [['.']]
 
@@ -98,29 +134,32 @@ total_dirs = 0
 emerg_dirs = 0
 mkdir_err = 0
 open_err = 0
+max_depth = 0
 
 done = 0
 while not done:
   dirv = dirs.pop(0)
   dir = '/'.join(dirv)
+  if len(dirv) > max_depth:
+    max_depth = len(dirv)
 
-  for i in range(random.randint(min_entries_per_dir, max_entries_per_dir)):
-    if total_files >= maxfiles:
+  for i in range(random.randint(conf['min_entries_per_dir'], conf['max_entries_per_dir'])):
+    if total_files >= conf['maxfiles']:
       done = 1
       break
-    if random.random() > folder_ratio:
+    if random.random() > conf['folder_ratio'] * 0.01:   # percent
       f = randfile()
       try:
         fd = open(dir + '/' + f[0], 'w')
         fd.write(f[1])
         fd.close()
-        total_files += 1 
+        total_files += 1
       except:
         pass
     else:
       f = randfolder()
       try:
-        os.mkdir(dir + '/' + f) 
+        os.mkdir(dir + '/' + f)
         dirs.append(dirv+[f])
         total_dirs += 1
       except:
@@ -130,7 +169,7 @@ while not done:
     # let us have one emergency folder.
     f = randfolder()
     try:
-      os.mkdir(dir + '/' + f) 
+      os.mkdir(dir + '/' + f)
       dirs.append(dirv+[f])
       total_dirs += 1
       emerg_dirs += 1
@@ -138,17 +177,28 @@ while not done:
     except:
       pass
 
-  print("%d files done. depth: %d" % (total_files, len(dirv)))
+  print("%d files done. depth: %d" % (total_files, max_depth))
 
 
 print("total_files: ", total_files)
 print("total_dirs:  ", total_dirs)
+print("max_depth:   ", max_depth)
 print("emerg_dirs:  ", emerg_dirs)
 print("mkdir_err:   ", mkdir_err)
 print("open_err:    ", open_err)
-print("seed:        ", seed)
+print("seed:        ", conf['seed'])
 
-o = open("randfiles.conf", "w")
+conf['run']['result'] = {
+  'total_files': total_files,
+  'total_dirs': total_dirs,
+  'max_depth': max_depth,
+  'emerg_dirs': emerg_dirs,
+  'mkdir_err': mkdir_err,
+  'open_err': open_err,
+}
+
+o = open(conffile, "w")
 print(json.dumps(conf, sort_keys=True, indent=4), file=o)
 o.close()
-print("... randfiles.conf written.")
+print("... %s written." % (args.dir + '/' + conffile))
+
