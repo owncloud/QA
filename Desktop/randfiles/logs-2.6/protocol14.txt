@@ -1,0 +1,22 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+
+mount syncfolder as T:\syncfolder int a win10vm
+run testpilotcloud 260rc1 msi.
+
+mv randfile_500k_1k syncfolder/
+# start client using this syncfolder, connect to server
+# client needs stop and restart, it won't recognize any changes in a mounted folder by itself.
+# enable logging, the folder is fixed in C:\IEUser\AppData\Local\Temp\testpilotcloud-logdir
+
+client grows to 305 MB during discovery
+ - the first 260 MB are reached fast, then it takes several minutes to reach 300 MB. 
+ - A constant disk IO of 4..5 MB/s is seen in taskmanager.
+ - 'Aborted' is printed in red, the size falls back to 26 MB, then the process repeats.
+
+Nothing is ever upladed to the server.
+
+TODO: Retry with local copy inside the VM (not mounted...)
+

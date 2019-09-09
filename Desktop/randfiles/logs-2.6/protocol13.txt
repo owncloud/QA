@@ -1,0 +1,49 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+
+mount syncfolder as T:\syncfolder int a win10vm
+run testpilotcloud 260rc1 msi.
+
+mv randfile_100k syncfolder/
+# start client using this syncfolder, connect to server
+# client needs stop and restart, it won't recognize any changes in a mounted folder by itself.
+# enable logging, the folder is fixed in C:\IEUser\AppData\Local\Temp\testpilotcloud-logdir
+
+client grows to 115 MB during discovery
+connection Timeout is shown in red on the gui
+-> then the client falls back to 28MB size and starts again.
+
+------------------- client log excerpt start ---------------------------------------
+09-05 14:19:44:883 [ info sync.discovery ]:     Not a move, no item in db with inode 185880921004112
+09-05 14:19:44:883 [ info sync.discovery ]:     Discovered "randfiles_100k/CxKOjtHn9XGE1pjLvgLqCFBe1eVhLYXljE0afNCw9UorL5gbVykeCe0PdCsOKjvvjAwaTbOXTV12Vw8RFkeFq0mh6jfZHL3nilJ3WZqzyxQrEXhpOI4BCFGaq0atSyTS2oAUDxMnAXp/nxnqvZfLT22HwxFaHn9E0PSB7VDqEARRph26Dug8OclOTKoNeJCpFvjnejYb0BYDEBDY2mMQOyo0eDdxp4V5kqeVBRdfPgfKZ0q0t9UoRk0J8y6bZJMzYzWfEGmGRDy14x9s49U4H1WUpoyKPWj2LMze5p8g1FchKxgSYNzl/zzaQ9Mpw5K50y4rIAaCTc8OMe8vFyZSQY1xI5VSRw" INSTRUCTION_NEW OCC::SyncFileItem::Up 0
+09-05 14:19:44:883 [ debug sync.database.sql ]  [ OCC::SqlQuery::bindValue ]:   SQL bind 1 QVariant(QString, "randfiles_100k/CxKOjtHn9XGE1pjLvgLqCFBe1eVhLYXljE0afNCw9UorL5gbVykeCe0PdCsOKjvvjAwaTbOXTV12Vw8RFkeFq0mh6jfZHL3nilJ3WZqzyxQrEXhpOI4BCFGaq0atSyTS2oAUDxMnAXp/nxnqvZfLT22HwxFaHn9E0PSB7VDqEARRph26Dug8OclOTKoNeJCpFvjnejYb0BYDEBDY2mMQOyo0eDdxp4V5kqeVBRdfPgfKZ0q0t9UoRk0J8y6bZJMzYzWfEGmGRDy14x9s49U4H1WUpoyKPWj2LMze5p8g1FchKxgSYNzl/zzaQ9Mpw5K50y4rIAaCTc8OMe8vFyZSQY1xI5VSRw")
+09-05 14:19:44:883 [ debug sync.database.sql ]  [ OCC::SqlQuery::exec ]:        SQL exec "SELECT lastTryEtag, lastTryModtime, retrycount, errorstring, lastTryTime, ignoreDuration, renameTarget, errorCategory, requestId FROM blacklist WHERE path=?1 COLLATE NOCASE"
+09-05 14:19:44:883 [ info sync.discovery ]:     Processing "randfiles_100k/CxKOjtHn9XGE1pjLvgLqCFBe1eVhLYXljE0afNCw9UorL5gbVykeCe0PdCsOKjvvjAwaTbOXTV12Vw8RFkeFq0mh6jfZHL3nilJ3WZqzyxQrEXhpOI4BCFGaq0atSyTS2oAUDxMnAXp/nxnqvZfLT22HwxFaHn9E0PSB7VDqEARRph26Dug8OclOTKoNeJCpFvjnejYb0BYDEBDY2mMQOyo0eDdxp4V5kqeVBRdfPgfKZ0q0t9UoRk0J8y6bZJMzYzWfEGmGRDy14x9s49U4H1WUpoyKPWj2LMze5p8g1FchKxgSYNzl/zzzd5AP3hITta4NQF3MXmiytCA2kJzYcdWuYBFk327lZK5gE7CTpq887WoprjhIGdZdU40EeEj7eAdUj8YVS3BFA6XK99xKQ1cTvKMPBkZ2WRkQV0EoN5KOfR8YbuazUstbxCPlll1dixIo4Xf18EMEJrh39pdJrpPtIhnd17Iiole5L0k7dfr4wMxEtl" | valid: false/true/false | mtime: 0/1567613724/0 | size: 0/9/0 | etag: ""//"" | checksum: ""//"" | perm: // | fileid: ""//"" | inode: 0/185880983332656/ | type: 3/0/0
+09-05 14:19:44:884 [ debug sync.database.sql ]  [ OCC::SqlQuery::bindValue ]:   SQL bind 1 QVariant(qulonglong, 185880983332656)
+09-05 14:19:44:884 [ debug sync.database.sql ]  [ OCC::SqlQuery::exec ]:        SQL exec "SELECT path, inode, modtime, type, md5, fileid, remotePerm, filesize,  ignoredChildrenRemote, contentchecksumtype.name || ':' || contentChecksum FROM metadata  LEFT JOIN checksumtype as contentchecksumtype ON metadata.contentChecksumTypeId == contentchecksumtype.id WHERE inode=?1"
+09-05 14:19:44:884 [ info sync.discovery ]:     Not a move, no item in db with inode 185880983332656
+09-05 14:19:44:884 [ info sync.discovery ]:     Discovered "randfiles_100k/CxKOjtHn9XGE1pjLvgLqCFBe1eVhLYXljE0afNCw9UorL5gbVykeCe0PdCsOKjvvjAwaTbOXTV12Vw8RFkeFq0mh6jfZHL3nilJ3WZqzyxQrEXhpOI4BCFGaq0atSyTS2oAUDxMnAXp/nxnqvZfLT22HwxFaHn9E0PSB7VDqEARRph26Dug8OclOTKoNeJCpFvjnejYb0BYDEBDY2mMQOyo0eDdxp4V5kqeVBRdfPgfKZ0q0t9UoRk0J8y6bZJMzYzWfEGmGRDy14x9s49U4H1WUpoyKPWj2LMze5p8g1FchKxgSYNzl/zzzd5AP3hITta4NQF3MXmiytCA2kJzYcdWuYBFk327lZK5gE7CTpq887WoprjhIGdZdU40EeEj7eAdUj8YVS3BFA6XK99xKQ1cTvKMPBkZ2WRkQV0EoN5KOfR8YbuazUstbxCPlll1dixIo4Xf18EMEJrh39pdJrpPtIhnd17Iiole5L0k7dfr4wMxEtl" INSTRUCTION_NEW OCC::SyncFileItem::Up 0
+09-05 14:19:44:884 [ debug sync.database.sql ]  [ OCC::SqlQuery::bindValue ]:   SQL bind 1 QVariant(QString, "randfiles_100k/CxKOjtHn9XGE1pjLvgLqCFBe1eVhLYXljE0afNCw9UorL5gbVykeCe0PdCsOKjvvjAwaTbOXTV12Vw8RFkeFq0mh6jfZHL3nilJ3WZqzyxQrEXhpOI4BCFGaq0atSyTS2oAUDxMnAXp/nxnqvZfLT22HwxFaHn9E0PSB7VDqEARRph26Dug8OclOTKoNeJCpFvjnejYb0BYDEBDY2mMQOyo0eDdxp4V5kqeVBRdfPgfKZ0q0t9UoRk0J8y6bZJMzYzWfEGmGRDy14x9s49U4H1WUpoyKPWj2LMze5p8g1FchKxgSYNzl/zzzd5AP3hITta4NQF3MXmiytCA2kJzYcdWuYBFk327lZK5gE7CTpq887WoprjhIGdZdU40EeEj7eAdUj8YVS3BFA6XK99xKQ1cTvKMPBkZ2WRkQV0EoN5KOfR8YbuazUstbxCPlll1dixIo4Xf18EMEJrh39pdJrpPtIhnd17Iiole5L0k7dfr4wMxEtl")
+09-05 14:19:44:884 [ debug sync.database.sql ]  [ OCC::SqlQuery::exec ]:        SQL exec "SELECT lastTryEtag, lastTryModtime, retrycount, errorstring, lastTryTime, ignoreDuration, renameTarget, errorCategory, requestId FROM blacklist WHERE path=?1 COLLATE NOCASE"
+09-05 14:19:44:898 [ info sync.accessmanager ]: 2 "" "http://172.16.12.66/owncloud/ocs/v2.php/apps/notifications/api/v1/notifications?format=json" has X-Request-ID "375e6169-4a99-4142-b02b-329c4540c470"
+09-05 14:19:44:898 [ debug sync.cookiejar ]     [ OCC::CookieJar::cookiesForUrl ]:      QUrl("http://172.16.12.66/owncloud/ocs/v2.php/apps/notifications/api/v1/notifications?format=json") requests: (QNetworkCookie("oc_sessionPassphrase=XF24BiTqzHi5y96v0V5Gq2r9T2uw5J41PO1m%2BIYfV36Sbo%2BYsayfc9CwtkYo4q%2FTy%2BHGL1VX7U8AwKsEMTELXwvpy9%2FwhSA7do5JJxjea84TO3iuj6a29Zpj6dpzFUnp; HttpOnly; domain=172.16.12.66; path=/owncloud"), QNetworkCookie("ocgo04zby86m=0m8qv1vrs0rlfur6qfd3vjfq54; HttpOnly; domain=172.16.12.66; path=/owncloud"))
+09-05 14:19:44:900 [ info sync.networkjob ]:    OCC::JsonApiJob created for "http://172.16.12.66/owncloud" + "ocs/v2.php/apps/notifications/api/v1/notifications" "OCC::ServerNotificationHandler"
+09-05 14:19:44:900 [ warning sync.networkjob ]: Network job timeout QUrl("http://172.16.12.66/owncloud/remote.php/dav/files/admin/")
+09-05 14:19:44:900 [ warning sync.networkjob ]: QNetworkReply::OperationCanceledError "Connection timed out" QVariant(Invalid)
+09-05 14:19:44:900 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://172.16.12.66/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Connection timed out"
+09-05 14:19:44:900 [ warning sync.networkjob.propfind ]:        *not* successful, http result code is 0 ""
+09-05 14:19:44:900 [ warning default ]: QIODevice::read (QNetworkReplyHttpImpl): device not open
+09-05 14:19:44:900 [ info gui.account.state ]:  AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-05 14:19:44:900 [ info gui.account.state ]:  AccountState state change:  "Connected" -> "Network error"
+09-05 14:19:44:900 [ debug gui.activity ]       [ OCC::ActivitySettings::slotRefresh ]: Do not check as last check is only secs ago:  0
+09-05 14:19:44:900 [ info gui.socketapi ]:      Sending SocketAPI message --> "UNREGISTER_PATH:T:\\syncfolder" to QLocalSocket(0x70a3b70)
+09-05 14:19:44:902 [ info gui.socketapi ]:      Sending SocketAPI message --> "UNREGISTER_PATH:T:\\syncfolder" to QLocalSocket(0x70a3c70)
+09-05 14:19:44:927 [ debug gui.account.settings ]       [ OCC::AccountSettings::showConnectionLabel ]:  "No connection to ownCloud Testpilot Edition at <a href=\"http://172.16.12.66/owncloud\">http://172.16.12.66/owncloud</a>.\nConnection timed out"
+09-05 14:19:44:928 [ debug sync.database.sql ]  [ OCC::SqlQuery::bindValue ]:   SQL bind 1 QVariant(int, 3)
+09-05 14:19:44:928 [ debug sync.database.sql ]  [ OCC::SqlQuery::exec ]:        SQL exec "SELECT path FROM selectivesync WHERE type=?1"
+09-05 14:19:44:935 [ info gui.folder.manager ]: Account "admin@172.16.12.66" disconnected or paused, terminating or descheduling sync folders
+09-05 14:19:44:935 [ info gui.folder ]: folder  "1"  Terminating!
+09-05 14:19:44:940 [ info sync.engine ]:        Sync run took  74442 ms
+------------------- client log excerpt end ---------------------------------------

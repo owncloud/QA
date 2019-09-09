@@ -1,0 +1,30 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+cd C:\Users\IEUser\randfiles
+mkdir testpilotcloud
+mkdir randfiles_500k
+cd randfiles_500k
+python ..\randfiles.py 500_000
+cd ..
+
+run testpilotcloud 260rc1 msi on syncfolder C:\Uses\IEUser\randfiles\testpilotcloud
+# enable logging, the folder is fixed in C:\IEUser\AppData\Local\Temp\testpilotcloud-logdir
+
+mv randfile_500k testpilotcloud/
+
+client grows to 358 MB during discovery
+ - A constant disk IO of 4..5 MB/s is seen in taskmanager.
+ - Error 'Connection timed out' is printed in red
+ - the size falls back to 26 MB, then the process repeats.
+
+Nothing is ever upladed to the server.
+
+stop client, remove sqlite.
+
+mkdir randfile_2m
+cd randfile_2m
+python ..\..\randfiles.py 2_000_000	# with max_name_len=50
+cd ..
+
+start client.
+

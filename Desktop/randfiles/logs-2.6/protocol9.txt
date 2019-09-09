@@ -1,0 +1,10 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+mv randfile_500k syncfolder/
+# start client using this syncfolder, connect to server.
+
+same result as if we sync first, then add the big folder.
+
+

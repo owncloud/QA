@@ -1,0 +1,17 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+# start client using this syncfolder, connect to server, sync done.
+
+mv randfile_500k syncfolder/
+
+-> local file discovery
+  Checking for changes in local 'randfiles_...'
+  #### Discovery end #### 105963 ms
+
+ upload starts...
+ 7 hour(s) left.
+
+ the estimate is realistic and constant. OK
+

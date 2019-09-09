@@ -1,0 +1,150 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+
+# this is a very deep structure, ca 100 subdirectory levels:
+mv randfile_500k_105 syncfolder/
+# start client using this syncfolder, connect to server
+
+client grows to 3.158 GB rss during discovery
+  #### Discovery end #### 211855 ms
+  Connection timed out
+
+apache restarted with: max_input_time = 600
+
+2nd discovery
+  #### Discovery end #### 214666 ms
+  Connection timed out
+
+3nd discovery
+  #### Discovery end #### 199432 ms
+ 
+4th discovery
+  #### Discovery end #### 215893 ms
+  Connection timed out Connection timed out
+...
+ 
+restart apache with 
+	max_execution_time = 300
+	max_input_time = 600
+	default_socket_timeout = 600
+
+gna, no more '#### Discovery end ### ' log lines!
+     The client flashes a brief 'Aborted' in red, then restarts the Discovery.
+
+-------------------- log excerpt start -----------------------------
+9-05 18:59:28:795 [ info sync.discovery ]:     Not a move, no item in db with inode 5816145
+09-05 18:59:28:795 [ info sync.discovery ]:     Discovered "randfiles_500k_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" INSTRUCTION_NEW OCC::SyncFileItem::Up 0
+09-05 18:59:30:037 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Connection timed out"
+09-05 18:59:30:042 [ info gui.account.state ]:  AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-05 18:59:30:042 [ info gui.account.state ]:  AccountState state change:  "Connected" -> "Network error"
+09-05 18:59:30:043 [ info gui.folder.manager ]: Account "admin@localhost" disconnected or paused, terminating or descheduling sync folders
+09-05 18:59:30:043 [ info gui.folder ]: folder  "1"  Terminating!
+09-05 18:59:30:043 [ info sync.engine ]:        Sync run took  237230 ms
+09-05 18:59:32:515 [ info sync.networkjob.lscol ]:      LSCOL of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/Documents") FINISHED WITH STATUS "OK"
+09-05 18:59:32:542 [ info sync.discovery ]:     Processing "Documents/Example.odt" | valid: false/false/true | mtime: 0/0/1567597035 | size: 0/0/36227 | etag: ""//"f767f499a3d2847d9285f84842a1bbcc" | checksum: ""//"" | perm: // | fileid: ""//"" | inode: 0/0/ | type: 3/3/0
+09-05 18:59:32:602 [ info gui.folder ]: Client version 2.6.0rc1 (build 1439)  Qt 5.12.4  SSL  OpenSSL 1.1.1  11 Sep 2018
+09-05 18:59:32:607 [ info gui.folder ]: Folder sync result:  4
+09-05 18:59:32:607 [ info gui.folder ]: the last 3 syncs failed
+09-05 18:59:32:607 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Error"
+09-05 18:59:32:931 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-05 18:59:32:946 [ info sync.connectionvalidator ]:   No system proxy set by OS
+09-05 18:59:32:946 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/status.php" has X-Request-ID "3b2d9d7a-e4da-4af9-80a9-bfe1d93d479c"
+09-05 18:59:32:946 [ info sync.networkjob ]:    OCC::CheckServerJob created for "http://localhost/owncloud" + "status.php" "OCC::ConnectionValidator"
+09-05 18:59:32:946 [ info gui.folder.manager ]: <========== Sync finished for folder [/home/win/syncfolder] of account [admin@localhost] with remote [http://localhost/owncloud/remote.php/dav/files/admin/]
+09-05 18:59:32:991 [ info sync.networkjob.checkserver ]:        status.php returns:  QJsonDocument({"edition":"Enterprise","installed":true,"maintenance":false,"needsDbUpgrade":false,"productname":"ownCloud","version":"10.3.0.1","versionstring":"10.3.0 alpha"})   QNetworkReply::NoError  Reply:  QNetworkReplyHttpImpl(0x564f773e7000)
+09-05 18:59:32:991 [ info sync.connectionvalidator ]:   ** Application: ownCloud found:  QUrl("http://localhost/owncloud")  with version  "10.3.0 alpha" ( "10.3.0.1-ownCloud" )
+09-05 18:59:32:991 [ info sync.connectionvalidator ]:   QUrl("http://localhost/owncloud") has server version "10.3.0.1-ownCloud"
+09-05 18:59:32:991 [ info sync.accessmanager ]: 6 "PROPFIND" "http://localhost/owncloud/remote.php/dav/files/admin/" has X-Request-ID "9468dedb-2937-4af7-a26f-5299d5a6ff40"
+09-05 18:59:32:991 [ info sync.networkjob ]:    OCC::PropfindJob created for "http://localhost/owncloud" + "/" "OCC::ConnectionValidator"
+09-05 18:59:33:089 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-05 18:59:33:089 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/ocs/v1.php/cloud/capabilities?format=json" has X-Request-ID "a57c6cb3-c6a9-40ec-bb38-632b79b9a699"
+09-05 18:59:33:089 [ info sync.networkjob ]:    OCC::JsonApiJob created for "http://localhost/owncloud" + "ocs/v1.php/cloud/capabilities" "OCC::ConnectionValidator"
+09-05 18:59:33:089 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/ocs/v1.php/config?format=json" has X-Request-ID "15762ffc-29e4-4d1d-9bd4-36001c1f210a"
+09-05 18:59:33:089 [ info sync.networkjob ]:    OCC::JsonApiJob created for "http://localhost/owncloud" + "ocs/v1.php/config" ""
+09-05 18:59:33:148 [ info sync.networkjob.jsonapi ]:    JsonApiJob of QUrl("http://localhost/owncloud/ocs/v1.php/cloud/capabilities?format=json") FINISHED WITH STATUS "OK"
+09-05 18:59:33:148 [ info sync.connectionvalidator ]:   Server capabilities QJsonObject({"checksums":{"preferredUploadType":"SHA1","supportedTypes":["SHA1"]},"core":{"pollinterval":60,"status":{"edition":"Enterprise","hostname":"testy-Thinkpad-T440s","installed":true,"maintenance":false,"needsDbUpgrade":false,"productname":"ownCloud","version":"10.3.0.1","versionstring":"10.3.0 alpha"},"webdav-root":"remote.php/webdav"},"dav":{"chunking":"1.0","reports":["search-files"],"trashbin":"1.0"},"files":{"bigfilechunking":true,"blacklisted_files":[".htaccess"],"privateLinks":true,"privateLinksDetailsParam":true,"undelete":true,"versioning":true},"files_sharing":{"api_enabled":true,"auto_accept_share":true,"can_share":true,"default_permissions":31,"federation":{"incoming":true,"outgoing":true},"group_sharing":true,"public":{"defaultPublicLinkShareName":"Public link","enabled":true,"expire_date":{"enabled":false},"multiple":true,"password":{"enforced":false,"enforced_for":{"read_only":false,"read_write":false,"upload_only":false}},"send_mail":false,"social_share":true,"supports_upload_only":true,"upload":true},"resharing":true,"search_min_length":2,"share_with_group_members_only":true,"share_with_membership_groups_only":true,"user":{"send_mail":false},"user_enumeration":{"enabled":true,"group_members_only":false}},"notifications":{"ocs-endpoints":["list","get","delete"]}})
+09-05 18:59:33:149 [ info sync.connectionvalidator ]:   QUrl("http://localhost/owncloud") has server version "10.3.0.1"
+09-05 18:59:33:149 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/ocs/v1.php/cloud/user?format=json" has X-Request-ID "1283a586-02ce-4bfd-80a5-946bbe0fff9d"
+09-05 18:59:33:149 [ info sync.networkjob ]:    OCC::JsonApiJob created for "http://localhost/owncloud" + "ocs/v1.php/cloud/user" "OCC::ConnectionValidator"
+09-05 18:59:33:210 [ info sync.networkjob.jsonapi ]:    JsonApiJob of QUrl("http://localhost/owncloud/ocs/v1.php/config?format=json") FINISHED WITH STATUS "OK"
+09-05 18:59:33:211 [ info sync.connectionvalidator ]:   Determined user-visible host to be "localhost"
+09-05 18:59:33:276 [ info sync.networkjob.jsonapi ]:    JsonApiJob of QUrl("http://localhost/owncloud/ocs/v1.php/cloud/user?format=json") FINISHED WITH STATUS "OK"
+09-05 18:59:33:276 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/remote.php/dav/avatars/admin/128.png" has X-Request-ID "774fd416-3f1f-4861-b7d2-6d5ecee85414"
+09-05 18:59:33:277 [ info sync.networkjob ]:    OCC::AvatarJob created for "http://localhost/owncloud" + "" "OCC::ConnectionValidator"
+09-05 18:59:33:356 [ info gui.account.state ]:  AccountState connection status change:  OCC::ConnectionValidator::Timeout -> OCC::ConnectionValidator::Connected
+09-05 18:59:33:357 [ info gui.account.state ]:  AccountState state change:  "Network error" -> "Connected"
+09-05 18:59:33:357 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/ocs/v2.php/apps/notifications/api/v1/notifications?format=json" has X-Request-ID "1724f0d0-ee98-474e-8037-23fc7dc76532"
+09-05 18:59:33:357 [ info sync.networkjob ]:    OCC::JsonApiJob created for "http://localhost/owncloud" + "ocs/v2.php/apps/notifications/api/v1/notifications" "OCC::ServerNotificationHandler"
+09-05 18:59:33:387 [ info gui.folder.manager ]: Account "admin@localhost" connected, scheduling its folders
+09-05 18:59:33:387 [ info gui.folder.manager ]: Schedule folder  "1"  to sync!
+09-05 18:59:33:387 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Not yet Started"
+09-05 18:59:33:387 [ info gui.folder.manager ]: Starting the next scheduled sync in 23 seconds
+09-05 18:59:33:402 [ info sync.networkjob.jsonapi ]:    JsonApiJob of QUrl("http://localhost/owncloud/ocs/v2.php/apps/notifications/api/v1/notifications?format=json") FINISHED WITH STATUS "OK"
+09-05 18:59:36:602 [ info sync.accessmanager ]: 6 "PROPFIND" "http://localhost/owncloud/remote.php/dav/files/admin/" has X-Request-ID "c9482ddb-78d7-4444-8e96-72931c43e4cf"
+09-05 18:59:36:602 [ info sync.networkjob ]:    OCC::PropfindJob created for "http://localhost/owncloud" + "/" "OCC::ConnectionValidator"
+09-05 18:59:36:647 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-05 18:59:57:605 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "SyncPrepare"
+09-05 18:59:57:605 [ info gui.folder ]: *** Start syncing  "http://localhost/owncloud/remote.php/dav/files/admin/"  - ownCloud Testpilot Edition client version 2.6.0rc1 (build 1439)
+09-05 18:59:57:617 [ info gui.folder ]: Forbidding local discovery to read from the database
+-------------------- log excerpt end -----------------------------
+
+cat /proc/sys/net/ipv4/tcp_keepalive_time 
+ 7200
+cat /proc/sys/net/ipv4/tcp_retries1 
+ 3
+cat /proc/sys/net/ipv4/tcp_retries2 
+ 15
+cat /proc/sys/net/ipv4/tcp_syn_retries 
+ 6
+cat /proc/sys/net/ipv4/tcp_synack_retries 
+ 5
+
+echo 6 > /proc/sys/net/ipv4/tcp_retries1
+echo 30 > /proc/sys/net/ipv4/tcp_retries2
+echo 12 > /proc/sys/net/ipv4/tcp_syn_retries
+echo 10 > /proc/sys/net/ipv4/tcp_synack_retries
+
+service apache2 stop; service apache2 start
+# restart client.
+
+-> no change...
+
+ ./network/socket/qlocalsocket_unix.cpp:	#define QT_CONNECT_TIMEOUT 30000
+ ./network/bearer/qnetworkconfiguration_p.h:    static Q_CONSTEXPR int DefaultTimeout = 30000;
+ ./network/socket/qabstractsocket.cpp:		#define QT_TRANSFER_TIMEOUT 120000
+            if (networkSession) {
+                QNetworkConfiguration networkConfiguration = networkSession->configuration();
+                connectTimeout = networkConfiguration.connectTimeout();
+            }
+ QNetworkConfiguration::setConnectTimeout(int timeout) 
+  Note: timeout is in millisecond.
+  Warning: This will have no effect if the bearer plugin doesn't have the CanStartAndStopInterfaces capability.
+
+./libsync/abstractnetworkjob.cpp:int AbstractNetworkJob::httpTimeout = qEnvironmentVariableIntValue("OWNCLOUD_TIMEOUT");
+./libsync/abstractnetworkjob.cpp:    _timer.setInterval((httpTimeout ? httpTimeout : 300) * 1000); // default to 5 minutes.
+./csync/csync.h:  CSYNC_STATUS_TIMEOUT,            /* UNUSED */
+./libsync/propagateupload.cpp:    setTimeout(120 * 1000);
+./libsync/propagateupload.cpp:    job->setTimeout(qBound(
+./libsync/propagateupload.cpp:        // the hard abort timeout signal comes as runningCount will never go to
+./libsync/owncloudpropagator.h:            QTimer::singleShot(5000, this, SLOT(abortTimeout()));
+./libsync/owncloudpropagator.h:    void abortTimeout()
+./libsync/syncengine.cpp:    connect(&_clearTouchedFilesTimer, &QTimer::timeout, this, &SyncEngine::slotClearTouchedFiles);
+./libsync/discovery.cpp:                QTimer::singleShot(0, _discoveryData, &DiscoveryPhase::scheduleMoreJobs);
+./libsync/configfile.cpp:static const char timeoutC[] = "timeout";
+./libsync/configfile.cpp:    return settings.value(QLatin1String(timeoutC), 300).toInt(); // default to 5 min
+./libsync/networkjobs.cpp:    propfind->setTimeout(30 * 1000);
+./libsync/networkjobs.cpp:    job->setTimeout(10 * 1000);
+
+recompiled testpilotcloud-client with extended_timeout.patch 
+restart:
+
+client grows to 3.158 GB rss during discovery
+  #### Discovery end ####################################################  217325 ms
+  upload starts immediately. No timeouts.
+  Photos/Paris.jpg: server reported no permissons, file id
+  Photos/San Francisco.jpg: server reported no permissons, file id
+  Photos/Squirrel.jpg: server reported no permissons, file id
+  11 hour(s) left, 5.2 MB of 243 MB, file 1743 of 510248
+

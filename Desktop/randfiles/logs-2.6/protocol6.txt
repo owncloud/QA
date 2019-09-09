@@ -1,0 +1,60 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+# start client using this syncfolder, connect to server, sync done.
+
+mv randfile_750k syncfolder/
+
+-> local file discovery
+  Checking for changes in local 'randfiles_...'
+ -> client process grows to 800 MB rss
+  #### Discovery end #### 89997 ms
+
+09-04 18:46:15:273 [ info sync.engine ]:        #### Post-Reconcile end ####################################################  101188 ms
+09-04 18:46:15:278 [ info gui.folder ]: #### Propagation start ####################################################
+09-04 18:46:15:278 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Sync Running"
+09-04 18:46:15:341 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Connection timed out"
+09-04 18:46:15:342 [ info gui.account.state ]:  AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-04 18:46:15:342 [ info gui.account.state ]:  AccountState state change:  "Connected" -> "Network error"
+09-04 18:46:15:344 [ info gui.folder.manager ]: Account "admin@localhost" disconnected or paused, terminating or descheduling sync folders
+09-04 18:46:15:344 [ info gui.folder ]: folder  "1"  Terminating!
+09-04 18:46:15:344 [ info sync.engine ]:        Aborting sync
+09-04 18:46:15:348 [ info sync.propagator ]:    Starting INSTRUCTION_NEW propagation of "randfiles_750k" by OCC::PropagateRemoteMkdir(0x55778b5c0a80)
+09-04 18:46:15:348 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-04 18:46:15:970 [ info sync.engine ]:        Sync run took  101885 ms
+09-04 18:46:37:200 [ info gui.folder ]: Client version 2.6.0daily20190903 (build 1424)  Qt 5.12.4  SSL  OpenSSL 1.1.1  11 Sep 2018
+
+2nd discovery 
+
+09-04 18:48:56:066 [ info sync.discovery ]:     Processing "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEn
+PagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/zztz3YtoRn3YUrCEQXRL9L7Z9hjsDzHkMbgHkw1njb6RsOAWdDLKk6kz9U101
+eDX4qXV1TpWULuUUyuNpfaA4hZHL6QxhK6oR25lWToKx281oGmnU9esrupZ1Mt" | valid: false/true/false | mtime: 0/1567615267/0 | size: 0/902/0 | etag: ""//"" | checksum: ""//"" | 
+perm: // | fileid: ""//"" | inode: 0/2974013/ | type: 3/0/0
+09-04 18:48:56:066 [ info sync.discovery ]:     Not a move, no item in db with inode 2974013
+09-04 18:48:56:066 [ info sync.discovery ]:     Discovered "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEn
+PagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/zztz3YtoRn3YUrCEQXRL9L7Z9hjsDzHkMbgHkw1njb6RsOAWdDLKk6kz9U101
+eDX4qXV1TpWULuUUyuNpfaA4hZHL6QxhK6oR25lWToKx281oGmnU9esrupZ1Mt" INSTRUCTION_NEW OCC::SyncFileItem::Up 0
+09-04 18:48:56:070 [ info sync.discovery ]:     STARTING "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPa
+gbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/18qpRU23ATXe6rIx2FvAuILVpCGqkjkwuMRMJYgDa7QzTJOB3ydIptun5sAr0kQ
+ngG2Q9uYTwv243m0I0euqUHciHJyMk3ve5eVgFGYzBv1xl9LutO78yduGjQw8Hnp9BHhCY4Zd0lRogCgMS8K0GGnJ1oCW10ei0SavzHXVipZq6HulzI3DmfJq" OCC::ProcessDirectoryJob::ParentDontExist "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/18qpRU23ATXe6rIx2FvAuILVpCGqkjkwuMRMJYgDa7QzTJOB3ydIptun5sAr0kQngG2Q9uYTwv243m0I0euqUHciHJyMk3ve5eVgFGYzBv1xl9LutO78yduGjQw8Hnp9BHhCY4Zd0lRogCgMS8K0GGnJ1oCW10ei0SavzHXVipZq6HulzI3DmfJq" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:48:56:070 [ info sync.discovery ]:     STARTING "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/2dZQKLSmuB84x7cuf3GfHPLky8xQuAnsnl97kPuFbWgXpSZOhG4cnB6lIPHdWyrMxjXHuM5LkMMWdZq7YAGaUQiagMWxWIH8ZtS9Rjfag" OCC::ProcessDirectoryJob::ParentDontExist "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/2dZQKLSmuB84x7cuf3GfHPLky8xQuAnsnl97kPuFbWgXpSZOhG4cnB6lIPHdWyrMxjXHuM5LkMMWdZq7YAGaUQiagMWxWIH8ZtS9Rjfag" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:48:56:070 [ info sync.discovery ]:     STARTING "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/6jAayPMIaoCMZX74xxWDyF54pPXeEEVKN6354MAg5zIUDIBHAL0m4CpRbQgF2JEbLkoUuVNeGtuEnhwFNvIMKzWaXc63eml3BzSJvSAYwRK7kdPi8yOyZfJ6wHO75aCpFLbIemTzopUtuAb8nImJzHOmBBeDnHvxxbeWI" OCC::ProcessDirectoryJob::ParentDontExist "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/6jAayPMIaoCMZX74xxWDyF54pPXeEEVKN6354MAg5zIUDIBHAL0m4CpRbQgF2JEbLkoUuVNeGtuEnhwFNvIMKzWaXc63eml3BzSJvSAYwRK7kdPi8yOyZfJ6wHO75aCpFLbIemTzopUtuAb8nImJzHOmBBeDnHvxxbeWI" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:48:56:070 [ info sync.discovery ]:     STARTING "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/E97HEry8WS2t7nDJRB697jNxNEgV66P9J5osaepzNfqj4dAB7GQJ3vdVypgQamoOtghpUhVQCSznhcukHInIzBtIIC3Tzavhczj2kWBKfpjOqy2ggiP8gWSZfFbTn73gSVDoESVl3wDF4JJXHV3MDCclYuNi" OCC::ProcessDirectoryJob::ParentDontExist "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/E97HEry8WS2t7nDJRB697jNxNEgV66P9J5osaepzNfqj4dAB7GQJ3vdVypgQamoOtghpUhVQCSznhcukHInIzBtIIC3Tzavhczj2kWBKfpjOqy2ggiP8gWSZfFbTn73gSVDoESVl3wDF4JJXHV3MDCclYuNi" OCC::ProcessDirectoryJob::NormalQuery
+....
+09-04 18:48:56:071 [ info sync.discovery ]:     STARTING "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/s4lvKXA7CQdJmrPzFHCrS" OCC::ProcessDirectoryJob::ParentDontExist "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/s4lvKXA7CQdJmrPzFHCrS" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:48:56:071 [ info sync.discovery ]:     STARTING "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/uQIHNUhYMik14mCdoQD8P" OCC::ProcessDirectoryJob::ParentDontExist "randfiles_750k/xmDtUPArQ6rztS7WGqYAyAOcfcNftB8MJ9kJjeJtziUbMAoyu1a5jmzMAaoyZmnQTvKhhiUJoWmJYBT5Spw5pYEdFEnPagbFysWyx37ZYonm3b0qhxj1ZUMXORSxrFAKczLGaCZVoOaYTZxavKILrEW4S1NFRPHUq3lz3lvfGjrXkymUHeQPzAmIPXlRGX2LgBt/uQIHNUhYMik14mCdoQD8P" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:48:56:071 [ info sync.engine ]:        #### Discovery end ####################################################  121108 ms
+09-04 18:49:07:328 [ info sync.engine ]:        #### Post-Reconcile end ####################################################  132365 ms
+09-04 18:49:07:333 [ info gui.folder ]: #### Propagation start ####################################################
+09-04 18:49:07:333 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Sync Running"
+09-04 18:49:07:340 [ info sync.accessmanager ]: 6 "PROPFIND" "http://localhost/owncloud/remote.php/dav/files/admin/" has X-Request-ID "fcf099b2-c7d1-4033-8840-c948a1f45474"
+
+
+ upload starts...
+ 10 hour(s) left.
+
+ the estimate is realistic and constant. OK
+
+
+repeated test: download starts again after one timeout error.

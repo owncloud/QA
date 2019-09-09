@@ -1,0 +1,14 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+# start client using this syncfolder, connect to server, sync done.
+
+mv randfiles_250k syncfolder/
+
+-> discovery starts
+   gui is unresponsive for ca 51 sec,
+-> upload starts
+
+
+

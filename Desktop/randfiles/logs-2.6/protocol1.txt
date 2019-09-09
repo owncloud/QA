@@ -1,0 +1,67 @@
+1st local discovery, 7min -> rss grows to 2.0 GB.
+brief pause
+2nd local discovery 8min -> rss remains at 2.0 GB.
+cpu 100% 4min, -> rss jumps to 2.5 GB.
+
+17:28h 3rd local discovery; 8 minutes.
+
+The local .sync_d9ea4daa3751.db file remains at 4096 bytes.
+(.sync_d9ea4daa3751.db-wal 432632 bytes).
+
+Error: timeout
+
+17:38h 4th local discovery;
+
+Log file excerpt during discovery:
+  9-04 17:40:15:443 [ info sync.discovery ]:	Not a move, no item in db with inode 3765313
+  09-04 17:40:15:443 [ info sync.discovery ]:	Discovered "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/IFs4XKbCHyOpNx5r9cGkMZVdqlny9V1ljelF2C4QhPEzApyMRqojaAlhTPAGZFAtUfDpq3NhUWHzUvURhdfk2NN/HTSKmgzOqcu83oUKRfUYXdTzc30xY1AhyvJ9eofzXOAEBeGI7xqLZ5V4DfT2QWGb9soYZT1DhRgYcWXBqhsqmlDou8uZEUkanjUV/Zd84iSowaXk7oVXTseW59uEoqgPfIBA9lhHxJOiB7aAJZkfKEucuZuWtm" INSTRUCTION_NEW OCC::SyncFileItem::Up 0
+  09-04 17:40:15:443 [ info sync.discovery ]:	Processing "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/IFs4XKbCHyOpNx5r9cGkMZVdqlny9V1ljelF2C4QhPEzApyMRqojaAlhTPAGZFAtUfDpq3NhUWHzUvURhdfk2NN/HTSKmgzOqcu83oUKRfUYXdTzc30xY1AhyvJ9eofzXOAEBeGI7xqLZ5V4DfT2QWGb9soYZT1DhRgYcWXBqhsqmlDou8uZEUkanjUV/ZdhqhSyfQd8ZE5dJwijWu5O9muvgZvFYnJNS6iSvwaPIvZ0WO2oclnTHo3AaNo8taNfAGFxS3WCCSpQZfXtnDwPEIcYLa3vnjXKJS2qin5hNQNDwTqxlIcgOy2EOYeLSaQxGE7KSSAaTnSOsS0Pl" | valid: false/true/false | mtime: 0/1567608661/0 | size: 0/745/0 | etag: ""//"" | checksum: ""//"" | perm: // | fileid: ""//"" | inode: 0/3761036/ | type: 3/0/0
+  09-04 17:40:15:443 [ info sync.discovery ]:	Not a move, no item in db with inode 3761036
+  09-04 17:40:15:443 [ info sync.discovery ]:	Discovered "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/IFs4XKbCHyOpNx5r9cGkMZVdqlny9V1ljelF2C4QhPEzApyMRqojaAlhTPAGZFAtUfDpq3NhUWHzUvURhdfk2NN/HTSKmgzOqcu83oUKRfUYXdTzc30xY1AhyvJ9eofzXOAEBeGI7xqLZ5V4DfT2QWGb9soYZT1DhRgYcWXBqhsqmlDou8uZEUkanjUV/ZdhqhSyfQd8ZE5dJwijWu5O9muvgZvFYnJNS6iSvwaPIvZ0WO2oclnTHo3AaNo8taNfAGFxS3WCCSpQZfXtnDwPEIcYLa3vnjXKJS2qin5hNQNDwTqxlIcgOy2EOYeLSaQxGE7KSSAaTnSOsS0Pl" INSTRUCTION_NEW OCC::SyncFileItem::Up 0
+  09-04 17:40:15:443 [ info sync.discovery ]:	Processing "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/IFs4XKbCHyOpNx5r9cGkMZVdqlny9V1ljelF2C4QhPEzApyMRqojaAlhTPAGZFAtUfDpq3NhUWHzUvURhdfk2NN/HTSKmgzOqcu83oUKRfUYXdTzc30xY1AhyvJ9eofzXOAEBeGI7xqLZ5V4DfT2QWGb9soYZT1DhRgYcWXBqhsqmlDou8uZEUkanjUV/Zds5p8gc3eO8ygmcZecPaDn4XTrQzFT4" | valid: false/true/false | mtime: 0/1567608662/0 | size: 0/263/0 | etag: ""//"" | checksum: ""//"" | perm: // | fileid: ""//"" | inode: 0/3764974/ | type: 3/0/0
+  09-04 17:40:15:443 [ info sync.discovery ]:	Not a move, no item in db with inode 3764974
+  
+
+No server activity. The webgui reports no folders. apache idle. mysqld idle.
+
+The sync is again aborted.
+09-04 17:46:45:943 [ info sync.discovery ]:	STARTING "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/q8Knwvs2ywZoQYqJIWEArakfpJS8UWyz71QEHdSbaOiC2qjaLnPvNXBgFz2FB3yqX47Sr2KJD3tTRCC5l0G4CJoxUF8qzDP5mE1ef6lL1600PWF7" OCC::ProcessDirectoryJob::ParentDontExist "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/q8Knwvs2ywZoQYqJIWEArakfpJS8UWyz71QEHdSbaOiC2qjaLnPvNXBgFz2FB3yqX47Sr2KJD3tTRCC5l0G4CJoxUF8qzDP5mE1ef6lL1600PWF7" OCC::ProcessDirectoryJob::NormalQuery
+09-04 17:46:45:944 [ info sync.discovery ]:	STARTING "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/qh6x5uwiZfEKQyDEfnjhKtY94dEw67RH6UilNqofE3tHFjsE8ZMRQRe9CtF8CSXkSbEys5VsI6AvEDFVjCRE4PzYmRT0RfYBBfRGuCMWRrCCfldHpZiFToOhh1ji3GSf3iQnZqn2qIQeRjsQi83CGjg2jch3eC" OCC::ProcessDirectoryJob::ParentDontExist "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/qh6x5uwiZfEKQyDEfnjhKtY94dEw67RH6UilNqofE3tHFjsE8ZMRQRe9CtF8CSXkSbEys5VsI6AvEDFVjCRE4PzYmRT0RfYBBfRGuCMWRrCCfldHpZiFToOhh1ji3GSf3iQnZqn2qIQeRjsQi83CGjg2jch3eC" OCC::ProcessDirectoryJob::NormalQuery
+09-04 17:46:45:944 [ info sync.discovery ]:	STARTING "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/y1qDTslCfA3HJ" OCC::ProcessDirectoryJob::ParentDontExist "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/y1qDTslCfA3HJ" OCC::ProcessDirectoryJob::NormalQuery
+09-04 17:46:45:945 [ info sync.discovery ]:	STARTING "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/yG5QCvd8wwgxxD8P5Bq5HTRgWIAoHUPSUQoWAZ0T0WOneVW6LKkEEHJUIlx9v5m7mlYZJhmeAhf4xaI0OQq15mXP8ilVGpbLTZTtdpkRMBzoQZpzqGrqXbWH00Z5wl3wj" OCC::ProcessDirectoryJob::ParentDontExist "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/yG5QCvd8wwgxxD8P5Bq5HTRgWIAoHUPSUQoWAZ0T0WOneVW6LKkEEHJUIlx9v5m7mlYZJhmeAhf4xaI0OQq15mXP8ilVGpbLTZTtdpkRMBzoQZpzqGrqXbWH00Z5wl3wj" OCC::ProcessDirectoryJob::NormalQuery
+09-04 17:46:45:948 [ info sync.engine ]:	#### Discovery end ####################################################  480987 ms
+09-04 17:47:16:021 [ info sync.engine ]:	#### Post-Reconcile end ####################################################  511060 ms
+09-04 17:47:16:270 [ info sync.networkjob.propfind ]:	PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Zeitüberschreitung bei der Verbindung"
+09-04 17:47:16:276 [ info gui.account.state ]:	AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-04 17:47:16:277 [ info gui.account.state ]:	AccountState state change:  "Verbunden" -> "Netzwerkfehler"
+09-04 17:47:16:290 [ info gui.folder.manager ]:	Account "admin@localhost" disconnected or paused, terminating or descheduling sync folders
+09-04 17:47:16:290 [ info gui.folder ]:	folder  "1"  Terminating!
+09-04 17:47:16:290 [ info sync.engine ]:	Aborting sync
+09-04 17:47:16:538 [ info sync.networkjob.propfind ]:	PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-04 17:47:16:547 [ info gui.folder ]:	#### Propagation start ####################################################
+09-04 17:47:16:547 [ info gui.application ]:	Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Sync Running"
+09-04 17:47:16:791 [ info sync.propagator ]:	Starting INSTRUCTION_NEW propagation of "1million_1" by OCC::PropagateRemoteMkdir(0x556fa0911030)
+09-04 17:47:18:565 [ info sync.engine ]:	Sync run took  513604 ms
+
+
+5th discovery
+
+09-04 17:56:48:159 [ info sync.discovery ]:	STARTING "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/yG5QCvd8wwgxxD8P5Bq5HTRgWIAoHUPSUQoWAZ0T0WOneVW6LKkEEHJUIlx9v5m7mlYZJhmeAhf4xaI0OQq15mXP8ilVGpbLTZTtdpkRMBzoQZpzqGrqXbWH00Z5wl3wj" OCC::ProcessDirectoryJob::ParentDontExist "1million_2/zoHFOGsS6m43XM5oseFmsYOjk7tPIkhpsv5D1nBOioFouhMz27KtaIBWqK2CaFbQuWcuiES3NvumkrfzCnD5pm8fW2K9QXlq1v/yxG39DWQmKSIFQuIInXaIXxWaGGb4jSLyCkDUEgztJHwUwgjeYElqGKdkVALhdrAAEHMt5gRUW3jBa5W3PxjFdQxoCtorGpkewE9DY4yMNuuyImLaNggHmQxs9pa1rnYQv9eWePI8Vbf9kbhGinqtOIGlvZ/yG5QCvd8wwgxxD8P5Bq5HTRgWIAoHUPSUQoWAZ0T0WOneVW6LKkEEHJUIlx9v5m7mlYZJhmeAhf4xaI0OQq15mXP8ilVGpbLTZTtdpkRMBzoQZpzqGrqXbWH00Z5wl3wj" OCC::ProcessDirectoryJob::NormalQuery
+09-04 17:56:48:161 [ info sync.engine ]:	#### Discovery end ####################################################  434205 ms
+
+
+09-04 17:57:18:799 [ info sync.engine ]:	#### Post-Reconcile end ####################################################  464843 ms
+09-04 17:57:19:080 [ info sync.networkjob.propfind ]:	PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Zeitüberschreitung bei der Verbindung"
+09-04 17:57:19:083 [ info gui.account.state ]:	AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-04 17:57:19:083 [ info gui.account.state ]:	AccountState state change:  "Verbunden" -> "Netzwerkfehler"
+09-04 17:57:19:096 [ info gui.folder.manager ]:	Account "admin@localhost" disconnected or paused, terminating or descheduling sync folders
+09-04 17:57:19:096 [ info gui.folder ]:	folder  "1"  Terminating!
+09-04 17:57:19:096 [ info sync.engine ]:	Aborting sync
+09-04 17:57:19:390 [ info gui.folder ]:	#### Propagation start ####################################################
+09-04 17:57:19:391 [ info gui.application ]:	Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Sync Running"
+09-04 17:57:19:614 [ info sync.networkjob.propfind ]:	PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Zeitüberschreitung bei der Verbindung"
+09-04 17:57:19:615 [ info sync.propagator ]:	Starting INSTRUCTION_NEW propagation of "1million_1" by OCC::PropagateRemoteMkdir(0x556faa57b3a0)
+09-04 17:57:21:336 [ info sync.engine ]:	Sync run took  467380 ms
+
+
+-> no progress. Stopping here.

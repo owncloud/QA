@@ -1,0 +1,56 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+# start client using this syncfolder, connect to server, sync done.
+echo huhu > syncfolder/huhu.txt
+# file appers on server.
+
+mv 1million_1 syncfolder/
+
+local discovery:
+ -> Checking for changes in local '1million_1/....'
+ -> client rss grows to 1.3 GB 
+
+09-04 18:10:43:571 [ info sync.discovery ]:     STARTING "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/qr1vWbNI4Qq5SUrapUMJ5VfIAfoIUZ" OCC::ProcessDirectoryJob::ParentDontExist "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/qr1vWbNI4Qq5SUrapUMJ5VfIAfoIUZ" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:10:43:571 [ info sync.discovery ]:     STARTING "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/t0H0wbdBYDBD9ROuIColcspF1ttTbpZyhNkTFComcWNojZZbRDEw5Yf8xnFpz81ttrgy1JAryaH9CYPFKWIHLfdFOOoVfWLIMtX" OCC::ProcessDirectoryJob::ParentDontExist "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/t0H0wbdBYDBD9ROuIColcspF1ttTbpZyhNkTFComcWNojZZbRDEw5Yf8xnFpz81ttrgy1JAryaH9CYPFKWIHLfdFOOoVfWLIMtX" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:10:43:572 [ info sync.engine ]:        #### Discovery end ####################################################  134185 ms
+09-04 18:11:03:895 [ info sync.engine ]:        #### Post-Reconcile end ####################################################  154508 ms
+09-04 18:11:04:031 [ info gui.folder ]: #### Propagation start ####################################################
+09-04 18:11:04:031 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Sync Running"
+09-04 18:11:04:056 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Connection timed out"
+09-04 18:11:04:065 [ info gui.account.state ]:  AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-04 18:11:04:066 [ info gui.account.state ]:  AccountState state change:  "Connected" -> "Network error"
+09-04 18:11:04:066 [ info gui.folder.manager ]: Account "admin@localhost" disconnected or paused, terminating or descheduling sync folders
+09-04 18:11:04:066 [ info gui.folder ]: folder  "1"  Terminating!
+09-04 18:11:04:066 [ info sync.engine ]:        Aborting sync
+09-04 18:11:04:066 [ info sync.propagator ]:    Starting INSTRUCTION_NEW propagation of "1million_1" by OCC::PropagateRemoteMkdir(0x5643899690f0)
+09-04 18:11:04:066 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-04 18:11:04:913 [ info sync.engine ]:        Sync run took  155526 ms
+
+
+Nothing arrives on the server. 
+
+next sync run, same result:
+
+09-04 18:17:34:010 [ info sync.discovery ]:     STARTING "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/bDFzubT3pKpbjyrfKUi9MZyChoQE5VSK6F9EwvIl1V1ChoVxhWlTfO0rglY2RqVTV5YEWi1Op8GluK8hr0xyyEcKruRDt5iHWHtwLbCw" OCC::ProcessDirectoryJob::ParentDontExist "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/bDFzubT3pKpbjyrfKUi9MZyChoQE5VSK6F9EwvIl1V1ChoVxhWlTfO0rglY2RqVTV5YEWi1Op8GluK8hr0xyyEcKruRDt5iHWHtwLbCw" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:17:34:010 [ info sync.discovery ]:     STARTING "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/nyS76rieOB2C" OCC::ProcessDirectoryJob::ParentDontExist "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/nyS76rieOB2C" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:17:34:011 [ info sync.discovery ]:     STARTING "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/qr1vWbNI4Qq5SUrapUMJ5VfIAfoIUZ" OCC::ProcessDirectoryJob::ParentDontExist "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/qr1vWbNI4Qq5SUrapUMJ5VfIAfoIUZ" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:17:34:011 [ info sync.discovery ]:     STARTING "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/t0H0wbdBYDBD9ROuIColcspF1ttTbpZyhNkTFComcWNojZZbRDEw5Yf8xnFpz81ttrgy1JAryaH9CYPFKWIHLfdFOOoVfWLIMtX" OCC::ProcessDirectoryJob::ParentDontExist "1million_1/Ou7fR8LKqdEoV7naAM5eGyM78gi1bkagWSzosIqx8glJgMwKu7hPtNm8haEJMDOBr9AXdDSB6BNGI4xdBrv1QXqICZPveM6r0dEgqqz9ELbmgCbv0BXGZVm79ndMFpYokptDvy9LqGuETAnj7TnZonMSwRIMAeAw/uPLbuNJ8luvFVzChz0bycYI8dM7YSynK4a3q2fzYAJVX2ajjuDssuk65SQ9cBwKqgh6aNge892F2eFSQ5KQ8igpoik9y2mX4Qoti4t6jSUjApejd5lLXAGh2m6tlI9JGM/wR3SF5dTwWHh4aUNyE8qlRRvIFqxNyslltjVmdJxAEqkMdtP6XRQeXICXCrlk0cH/t0H0wbdBYDBD9ROuIColcspF1ttTbpZyhNkTFComcWNojZZbRDEw5Yf8xnFpz81ttrgy1JAryaH9CYPFKWIHLfdFOOoVfWLIMtX" OCC::ProcessDirectoryJob::NormalQuery
+09-04 18:17:34:012 [ info sync.engine ]:        #### Discovery end ####################################################  326051 ms
+09-04 18:17:53:313 [ info sync.engine ]:        #### Post-Reconcile end ####################################################  345352 ms
+09-04 18:17:53:414 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OK"
+09-04 18:17:53:419 [ info gui.folder ]: #### Propagation start ####################################################
+09-04 18:17:53:419 [ info gui.application ]:    Sync state changed for folder  "http://localhost/owncloud/remote.php/dav/files/admin/" :  "Sync Running"
+09-04 18:17:53:442 [ info sync.accessmanager ]: 2 "" "http://localhost/owncloud/ocs/v2.php/apps/notifications/api/v1/notifications?format=json" has X-Request-ID "c95f967a-0c05-4e48-83cb-4e40acacbbd1"
+09-04 18:17:53:443 [ info sync.networkjob ]:    OCC::JsonApiJob created for "http://localhost/owncloud" + "ocs/v2.php/apps/notifications/api/v1/notifications" "OCC::ServerNotificationHandler"
+09-04 18:17:53:445 [ info sync.networkjob.propfind ]:   PROPFIND of QUrl("http://localhost/owncloud/remote.php/dav/files/admin/") FINISHED WITH STATUS "OperationCanceledError Connection timed out"
+09-04 18:17:53:448 [ info gui.account.state ]:  AccountState connection status change:  OCC::ConnectionValidator::Connected -> OCC::ConnectionValidator::Timeout
+09-04 18:17:53:448 [ info gui.account.state ]:  AccountState state change:  "Connected" -> "Network error"
+09-04 18:17:53:449 [ info gui.folder.manager ]: Account "admin@localhost" disconnected or paused, terminating or descheduling sync folders
+09-04 18:17:53:449 [ info gui.folder ]: folder  "1"  Terminating!
+09-04 18:17:53:449 [ info sync.engine ]:        Aborting sync
+09-04 18:17:53:449 [ info sync.propagator ]:    Starting INSTRUCTION_NEW propagation of "1million_1" by OCC::PropagateRemoteMkdir(0x56436a5b1d00)
+09-04 18:17:54:285 [ info sync.engine ]:        Sync run took  346323 ms
+
+nothing on the server.

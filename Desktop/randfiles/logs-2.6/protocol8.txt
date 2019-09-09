@@ -1,0 +1,16 @@
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+# start client using this syncfolder, connect to server, sync done.
+
+mv randfile_900k syncfolder/
+
+1st local discovery
+  Checking for changes in local 'randfiles_...'
+ -> client process grows to 980 MB rss
+  #### Discovery end #### 105595 ms
+
+ -> download starts.
+
+Repeated test: Again no errors. Download starts

@@ -1,0 +1,16 @@
+grep max_input_time /etc/php/7.2/apache2/php.ini
+ max_input_time = 60
+
+firefox http://localhost/owncloud
+# empty server, client exited.
+rm -rf syncfolder; mkdir syncfolder
+rm -rf ~/.config/ownCloud\ Testpilot\ Edition
+# start client using this syncfolder, connect to server, wait for initial sync
+
+# this is a very deep structure, ca 50 subdirectory levels:
+mv randfile_100k_100 syncfolder/
+
+client grows to 380 MB rss during discovery
+  #### Discovery end ####  39910 ms
+  upload starts  -> Estimated: 3 hour(s) left.
+
