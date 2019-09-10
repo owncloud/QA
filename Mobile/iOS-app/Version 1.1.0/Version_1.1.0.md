@@ -74,9 +74,10 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder | P m12 | |
 | Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder| P m12 | |
 | Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded | P m12 | |
-| Upload a bunch of files back | Select "Upload from  Files in a non-root folder and leave the device<br>After some minuts, reopen the app| All files are uplaoded | P m12 | |
+| Upload a bunch of files backgr | Select to upload some large files in a non-root folder and leave the device<br>After some minutes, reopen the app| All files are uploaded | P m12 | |
 | Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears| P m12 | |
 | Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| F m12 | Broken |
+| Download big file in backgr | Tap on a single large file and leave the device | File is downloaded in root folder.| F m12 | Broken |
 | Download several files | Tap on several files | all are enqueued and finally downloaded | F m12 | broken |
 | Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | F m12 | Broken |
 | Cancel download | Tap on a huge  file<br>Cancel it before it finishes | File is not downloaded | P m12 | 
@@ -90,11 +91,11 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Download 7 | Download 7 items from oC | Only 3 are concurrent. At the end, action ends correctly. Check in status view | P m12 |  |  |
 |**Av. offline**| **2 auth methods**|||||
 |**File**|||||
-| Set | Set a file as av. offline | File is downloaded (check in Manage options). Icon is correctly set (check in both orientations) |  |  |  |
-| Unset | 1. Unset a file as av. offline<br>2. Wipe all the files in Manage options | File is not downloaded. Icon is removed (check in both orientations) |  |  |  |
+| Set | Set a file as av. offline | File is downloaded (check in Manage options). Icon is correctly set (check in both orientations) | P m12 |  |  |
+| Unset | 1. Unset a file as av. offline<br>2. Wipe all the files in Manage options | File is not downloaded. Icon is removed (check in both orientations) |  P m12|  |  |
 |**Folder** |  |  |
-| Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  
-| Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything |   |  
+| Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  F m12 | Some errors while downloading
+| Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything | F m12  |  
 | Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|   |  
 | Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | 
 | Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline |   |  
@@ -102,9 +103,9 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine |  
 | Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline |   | 
 |**Multiaccount**||||||
-| Switch account | Create several accounts and browse through them | Correct browsing |  | |
-| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded |  |  |
-| Download in several | Download several items in different accounts at the time | All items corectly uploaded |  |  |
+| Switch account | Create several accounts and browse through them | Correct browsing | P m12 | |
+| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | P m12  |  |
+| Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m12 |  |
 |**Files preview**| 1 device |||||
 | PDF | Download an open a PDF file | Correctly displayed | P m12 |  |
 | PDF search | Download an open a PDF file and search by a pattern | Correct search | F m12 |  |
@@ -274,10 +275,9 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Several files | Save several external files in oC | Files correctly saved |  |  |  |
 | Several accounts | Add several accounts<br>Save several external files in oC | Files correctly 
 |**Delete unused copies**||||
-| View | Open Settings, and the "Delete unused local copies" section | Correct view in both orientations |  |  |
-| 1 minute | Download several files<br>Set 1 minute<br>Wait 1 minute or close the app | Content deleted |   |  |
-| Av. offline | Download several files<br>Set several files and folders as av. offline<br>Set 1 minute<br>Wait 1 minute or close the app | Download content deleted<br>Av. offline content keeps downloaded |   |  |
+| 1 minute | Download several files<br>Set 1 minute<br>Wait 1 minute or close the app | Content deleted |  P m12 |  |
+| Av. offline | Download several files<br>Set several files and folders as av. offline<br>Set 1 minute<br>Wait 1 minute or close the app | Download content deleted<br>Av. offline content keeps downloaded | P m12  |  |
 |**Other**||||||
-| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape |  | |
-| Searching | Input a pattern to filter in the current folder | Results correct filtered | | 
+| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12 | |
+| Searching | Input a pattern to filter in the current folder | Results correct filtered | P m12 | 
 | Quota correct | Open the root folder | Quota is correctly displayed | | |
