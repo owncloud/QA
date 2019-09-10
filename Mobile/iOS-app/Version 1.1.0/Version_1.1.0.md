@@ -25,6 +25,11 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
  
 | Test Case | Steps | Expected Result | Result | Related Comment
 |:---------:| :---- | :-------------- | :----: | :------------- |
+|**Auth**|  |||||
+| Login basic | Basic credentials | Correct access | P m12
+| Login basic wrong credentials | Basic credentiasl | Correct error  | P m12 |
+| Login OAuth2  | Login with OAuth2 | Correct access  | P m12 |
+| OAuth2 revoked token| Revoke the OAuth2 session from OAuth2 server dashboard | User must start a new session | P m12 |
 |**Settings**| 2 device |||||
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | P m12 |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked  | P m12 |  |
@@ -76,10 +81,10 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded | P m12 | |
 | Upload a bunch of files backgr | Select to upload some large files in a non-root folder and leave the device<br>After some minutes, reopen the app| All files are uploaded | P m12 | |
 | Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears| P m12 | |
-| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| F m12 | Broken |
-| Download big file in backgr | Tap on a single large file and leave the device | File is downloaded in root folder.| F m12 | Broken |
-| Download several files | Tap on several files | all are enqueued and finally downloaded | F m12 | broken |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | F m12 | Broken |
+| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| P m12 | FIXED: download broken |
+| Download big file in backgr | Tap on a single large file and leave the device | File is downloaded in root folder.| P m12 | FIXED: download broken |
+| Download several files | Tap on several files | all are enqueued and finally downloaded | P m12 | FIXED: download broken |
+| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | P m12 | FIXED: download broken |
 | Cancel download | Tap on a huge  file<br>Cancel it before it finishes | File is not downloaded | P m12 | 
 | Cancel uploads | Upload a huge file<br>Cancel it before it finishes | File is not uploaded| P m12 |
 | Clear storage | Tap on a huge number of files<br>Go to bookmark and manage space to remove |Everything is cleaned up |  P m12 | | |
@@ -96,7 +101,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 |**Folder** |  |  |
 | Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  F m12 | Some errors while downloading
 | Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything | F m12  |  
-| Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|   |  
+| Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|  F m12 |  
 | Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | 
 | Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline |   |  
 | Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync |   |  
@@ -108,9 +113,9 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m12 |  |
 |**Files preview**| 1 device |||||
 | PDF | Download an open a PDF file | Correctly displayed | P m12 |  |
-| PDF search | Download an open a PDF file and search by a pattern | Correct search | F m12 |  |
-| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | F m12 | |
-| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | F m12 |  |
+| PDF search | Download an open a PDF file and search by a pattern | Correct search | P m12 | FIXED: option no displayed when reopening |
+| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | P m12 | FIXED: option no displayed when reopening |
+| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | P m12 | FIXED: option no displayed when reopening |
 | Doc | Download an open a Doc file | Correctly displayed | P m12 |  |
 | Excel | Download an open a excel file | Correctly displayed | P m12 |  |
 | Ppt | Download an open a ppt file | Correctly displayed | P m12 |  |
@@ -130,21 +135,21 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Downloaded video | Click on a non-downloaded video | Video is downloaded and played in both orientations| P m12  | 
 | Downloaded audio | Click on a non-downloaded video | Audio is downloaded and played in both orientations | P m12  | 
 |**Offline**| 2 devices |||||
-| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |   | |
-| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |   |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |   |  |
-| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |   |  |
-| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|   |  |
-| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK |  |   |
+| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection | P m12 |  |
+| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m12  | |
+| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |  P m12 |  |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection | P m12  |  |
+| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  P m12 |  |
+| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  P m12 |  |
+| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m12 |  |
+| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m12 |  |
+| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK | P m12 |   |
 |**Error handling**||||||
-| Create folder | Create folder with existing name | Correct error |   |  |
-| Rename | Rename item with existing name in target | Correct error |  |  |
-| Copy | Copy item with existing name in target | Correct error |  |  |
-| Move | Move item with existing name in target | Correct error |  |  |
-| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
+| Create folder | Create folder with existing name | Correct error | P m12  |  |
+| Rename | Rename item with existing name in target | Correct error | P m12 |  |
+| Copy | Copy item with existing name in target | Correct error | P m12 |  |
+| Move | Move item with existing name in target | Correct error | P m12 |  |
+| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | P m12 |  |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |  |
 |**Files App**| **2 auth methods** |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |  |  |
@@ -264,16 +269,15 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Allow send federated = false | Try to create a federated share | Not posible |   |  |
 | Allow receive federated = false | Try to create a federated share | Not posible |  |  |
 |**HEIC/HEIV to other formats**||||||
-| View | Open settings view | Option to select heic/jpg is correctly displayed |  | |
-| Heic selected | Select the option heic in settings<br>Upload pics in heic | Heic format in uploaded files, check in mime header | | |
-| JPG selected | Select the option JPG in settings<br>Upload pics in heic | JPG format in uploaded files , check in mime header|  | |
-| Heiv selected | Select the option heiv in settings<br>Upload videos in heiv | Heiv format in uploaded videos, check in mime header |  | |
-| MP4 selected | Select the option MP4 in settings<br>Upload videos in heic | MP4 format in uploaded videos , check in mime header| | |
+| Heic selected | Select the option heic in settings<br>Upload pics in heic | Heic format in uploaded files, check in mime header | P m12 | |
+| JPG selected | Select the option JPG in settings<br>Upload pics in heic | JPG format in uploaded files , check in mime header| P m12 | |
+| Heiv selected | Select the option heiv in settings<br>Upload videos in heiv | Heiv format in uploaded videos, check in mime header | P m12 | |
+| MP4 selected | Select the option MP4 in settings<br>Upload videos in heic | MP4 format in uploaded videos , check in mime header|P m12 | |
 |**Share sheet**|||||
-| Root | Save an external file in the root | File correctly saved |  |  |  |
-| Non root | Save an external file in non-root folder | File correctly saved | |  |  |
-| Several files | Save several external files in oC | Files correctly saved |  |  |  |
-| Several accounts | Add several accounts<br>Save several external files in oC | Files correctly 
+| Root | Save an external file in the root | File correctly saved | P m12 |  |  |
+| Non root | Save an external file in non-root folder | File correctly saved | P m12 |  |  |
+| Several files | Save several external files in oC | Only one is saved | P m12 |  |  |
+| Several accounts | Add several accounts<br>Save several external files selecting an oC account | File correctly saved in the correct account | P m12 
 |**Delete unused copies**||||
 | 1 minute | Download several files<br>Set 1 minute<br>Wait 1 minute or close the app | Content deleted |  P m12 |  |
 | Av. offline | Download several files<br>Set several files and folders as av. offline<br>Set 1 minute<br>Wait 1 minute or close the app | Download content deleted<br>Av. offline content keeps downloaded | P m12  |  |
