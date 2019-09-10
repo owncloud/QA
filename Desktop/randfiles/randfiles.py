@@ -77,7 +77,7 @@ if args.min_body_len        is not None: conf['min_body_len']        = args.min_
 if args.corpus_size         is not None: conf['corpus_size']         = args.corpus_size
 
 if conf['max_entries_per_dir'] < 5000:
-  maxmin = int(max_entries_per_dir/10)
+  maxmin = int(conf['max_entries_per_dir']/10)
   if conf['min_entries_per_dir'] > maxmin:
     print("Reducing min_entries_per_dir from %d to %d due to low max_entries_per_dir." % (conf['min_entries_per_dir'], maxmin))
     conf['min_entries_per_dir'] = maxmin
