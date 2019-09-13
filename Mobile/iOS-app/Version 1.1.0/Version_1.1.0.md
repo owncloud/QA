@@ -1,6 +1,6 @@
 #### Version 1.1.0
 
-#### PRs: https://github.com/owncloud/ios-app/pull/<br>
+#### PRs: https://github.com/owncloud/ios-app/pull/499<br>
 
 
 Device/s: iPhoneXR v12<br>
@@ -94,19 +94,30 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Download 3 | Download 3 items from oC | Correctly downloadded, concurrently. Check in status view | P m12 |  |  |
 | Upload 7 | Upload 7 items to oC | Only 3 are concurrent. At the end, action ends correctly. Check in status view | P m12 |  |  |
 | Download 7 | Download 7 items from oC | Only 3 are concurrent. At the end, action ends correctly. Check in status view | P m12 |  |  |
+|**Instant Uploads**||||||
+| Root folder | Select the root folder<br>Take two pics | Both pics are uploaded to the root folder | P m12|  |  |
+| Non-Root folder | Select a non-root folder<br>Take two pics | Both pics are uploaded to the folder | P m12  |  |  |
+| Switch to other | Select a new folder as before<br>Take two pics | Both pics are uploaded to the new target folder | P m12 |  |  |
+| Rename target folder | In the app, rename the target folder<br>Take two pics | Both pics are uploaded to the new named folder | P m12 |  |  |
+| Move target folder | In the app, move the target folder<br>Take two pics | Both pics are uploaded to the moved folder | P m12 |  |  |
+| Remove target folder | In the app, remove the target folder<br>Take two pics | Both pics are not uploaded?  | P m12 |  |  |
+| Disable | After enabling and taking some pics, disable the feature<br>Take some pics<br>Enable again the feature<br>Take more pics | Only the pictures that were taken with the feature enabled were uploaded, other ones were ignored | P m12 |  |  |
+| App closed | With instant uplaods enabled and app closed, take videos and pics | Detected when the app comes to foreground (check status tab) | P m12 | |  |
+| Large video | With instant uplaods enabled, take a long video<br>Once it is detected, minimize the app | Video is uploaded in background | P m12 |  |  |
+| Large video and many pics | With instant uplaods enabled, take a long video and then, many pictures<br>Once it is detected, minimize the app | Everything is uploaded in background | P m12 | |  |
 |**Av. offline**| **2 auth methods**|||||
 |**File**|||||
 | Set | Set a file as av. offline | File is downloaded (check in Manage options). Icon is correctly set (check in both orientations) | P m12 |  |  |
 | Unset | 1. Unset a file as av. offline<br>2. Wipe all the files in Manage options | File is not downloaded. Icon is removed (check in both orientations) |  P m12|  |  |
 |**Folder** |  |  |
-| Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  F m12 | Some errors while downloading
-| Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything | F m12  |  
-| Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|  F m12 |  
-| Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | 
-| Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline |   |  
-| Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync |   |  
-| Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine |  
-| Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline |   | 
+| Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  P m12 | FIXED: Some errors while downloading
+| Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything |  P m12  |  
+| Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|  P m12 |  
+| Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | P m12
+| Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline | P m12  |  
+| Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync | P m12  |  
+| Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine |  P m12
+| Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline |  P m12 | 
 |**Multiaccount**||||||
 | Switch account | Create several accounts and browse through them | Correct browsing | P m12 | |
 | Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | P m12  |  |
@@ -150,48 +161,48 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Copy | Copy item with existing name in target | Correct error | P m12 |  |
 | Move | Move item with existing name in target | Correct error | P m12 |  |
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | P m12 |  |
-| Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |  |
 |**Files App**| **2 auth methods** |||||
-| Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |  |  |
-| Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
-| Browse Basic | Open an ownCloud Files app location | Content is correctly displayed |  |  |
-| Browse OAuth2 | Open an ownCloud Files app location | Content is correctly displayed |  |  |
-| Download Basic| Open an ownCloud Basic auth Files app location<br>Download a file | File is correctly displayed | |  |
-| Download OAuth2| Open an ownCloud OAuth2Files app location<br>Download a file | File is correctly displayed |  |  |
-| Create a folder | Open an ownCloud Files app location<br>Create a new folder with special characters | Folder is created in oC app |  | |
-| Rename downloaded item (file and folder)| Open an ownCloud Files app location<br>Rename an downloaded item | Item is renamed correctly in oC app | |  |
-| Rename non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Rename an non-downloaded item | Item is renamed correctly in oC app | | |
-| Move downloaded item (file and folder)| Open an ownCloud Files app location<br>Move an downloaded item | Item is moved correctly in oC app | |  |
-| Move non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Move an non-downloaded item | Item is moved correctly in oC app |  |  |
-| Move a folder with subfolders| Open an ownCloud Files app location<br>Move a folder that contains subfolders to another folder with special characters | Item is moved correctly in oC app |  |  |
-| Copy Paste downloaded item | Open an ownCloud Files app location<br>Copy and Paste an downloaded item | Item is pasted correctly in oC app |  |  |
-| Copy Paste non-downloaded item | Open an ownCloud Files app location<br>Copy and Paste an non-downloaded item | Item is pasted correctly in oC app |  |  |
-| Duplicate item downloaded| Open an ownCloud Files app location<br>Duplicate an downloaded item | Item is duplicated correctly in oC app |  |  |
-| Duplicate item non-downloaded | Open an ownCloud Files app location<br>Duplicate an non-downloaded item | Item is duplicated correctly in oC app |  |  |
-| Share item downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  |  |  |
-| Share item non-downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is downloaded and  sent correctly  |   |  Only files -> OK |
-| Item info | Open an ownCloud Files app location<br>Open info option | Item info is correct  |  | |
-| Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app |  |  |
-| Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app |  |  |
-| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud |  |  |
-| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded |  | With MSWord |
-| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded |  | With MSWord |
-| Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC |   |   |
-| Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC |  |  |
+| Location one account| Attach one account to the app<br>Open available locations in files app | Account is there | P m12 |  |
+| Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached | P m12 |  |
+| Browse Basic | Open an ownCloud Files app location | Content is correctly displayed | P m12 |  |
+| Browse OAuth2 | Open an ownCloud Files app location | Content is correctly displayed | P m12 | Not regression: token renewal  |
+| Download Basic| Open an ownCloud Basic auth Files app location<br>Download a file | File is correctly displayed | P m12 |  |
+| Download OAuth2| Open an ownCloud OAuth2Files app location<br>Download a file | File is correctly displayed | P m12 |  |
+| Create a folder | Open an ownCloud Files app location<br>Create a new folder with special characters | Folder is created in oC app | P m12 | |
+| Rename downloaded item (file and folder)| Open an ownCloud Files app location<br>Rename an downloaded item | Item is renamed correctly in oC app | P m12|  |
+| Rename non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Rename an non-downloaded item | Item is renamed correctly in oC app | P m12| |
+| Move downloaded item (file and folder)| Open an ownCloud Files app location<br>Move an downloaded item | Item is moved correctly in oC app | P m12|  |
+| Move non-downloaded item (file and folder) | Open an ownCloud Files app location<br>Move an non-downloaded item | Item is moved correctly in oC app |  P m12|  |
+| Move a folder with subfolders| Open an ownCloud Files app location<br>Move a folder that contains subfolders to another folder with special characters | Item is moved correctly in oC app | P m12 |  |
+| Copy Paste downloaded item | Open an ownCloud Files app location<br>Copy and Paste an downloaded item | Item is pasted correctly in oC app | P m12 |  |
+| Copy Paste non-downloaded item | Open an ownCloud Files app location<br>Copy and Paste an non-downloaded item | Item is pasted correctly in oC app | P m12 |  |
+| Copy Paste inside a shared folder with no edit permissions | Open an ownCloud Files app location<br>Copy and Paste an non-downloaded item inside a shred folder with no edit permission | No posible | P m12 |  |
+| Duplicate item downloaded| Open an ownCloud Files app location<br>Duplicate an downloaded item | Item is duplicated correctly in oC app | P m12 |  |
+| Duplicate item non-downloaded | Open an ownCloud Files app location<br>Duplicate an non-downloaded item | Item is duplicated correctly in oC app |P m12  |  |
+| Share item downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is sent correctly  | P m12 |  |
+| Share item non-downloaded | Open an ownCloud Files app location<br>Share an item by email | Item is downloaded and  sent correctly  |  P m12 |  Only files -> OK |
+| Item info | Open an ownCloud Files app location<br>Open info option | Item info is correct  | P m12 | |
+| Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app | P m12 |  |
+| Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app | P m12 |  |
+| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | P m12 |  |
+| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | P m12 | With MSWord |
+| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded |  P m12| With MSWord |
+| Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC | P m12  |   |
+| Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P m12 |  |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | NA | Apple issue |
 | Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved | NA | Apple issue, check future |
 | Move between oC accounts non-root | Move a file from an oC account to anocther one in non-root folder | Content correctly moved | NA | Apple unexpected behaviour. Check to improve. |
 | Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied |   | FIXED: In the same account |
 | Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied | NA  | Apple behaviour |
-| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape |  | not displayed |
+| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12  | |
 |**Remote actions (Files App)**||||||
-| Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app |  |  |
-| Move remote| Move a file or folder in web UI | File is automatically moved in Files app | |  | |
-| Delete remote| Delete a file or folder in web UI | Delete is automatically moved in Files app | |  |
-| Upload remote| Upload new content in web UI | New content refreshed in Files app | |  |
+| Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app | P m12 |  |
+| Move remote| Move a file or folder in web UI | File is automatically moved in Files app | P m12 |  | |
+| Delete remote| Delete a file or folder in web UI | Delete is automatically moved in Files app |  P m12|  |
+| Upload remote| Upload new content in web UI | New content refreshed in Files app |  P m12 |  |
 |**Error handling (Files App)**||||||
-| Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error | | |
-| Target folder deleted | Operations to perform in Files app after deleting target folder: move, copy | Correct error |  | |
+| Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error | P m12 | |
+| Target folder deleted | Operations to perform in Files app after deleting target folder: move, copy | Correct error | P m12 | |
 |**Favorites**||||
 | View | Open card of any item | View is correct | P m12 | | | 
 | Set fav File | in the app, set a file as favorite | Check in web UI that the file is favorite | P m12 | | | 
@@ -205,69 +216,69 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Set fav remote offline| in the app, remove connection<br>In web set a file as favorite<br>Recover connection | Check in the app that the file is favorite |  P m12 | | | 
 | Unset fav remote offline | in the app, remove connection<br>In web UI unset a file as favorite<br>Recover connection | Check in app that the file is not favorite anymore| F m12  | https://github.com/owncloud/ios-app/issues/497 (no regression)| | 
 |**Private Share**||||||
-| Share with a user | Open Share<br>Type a correct user name<br>Select user | Sharees list updated with the user |  |  |
-| Share with a group | Open Share<br>Type a correct group name<br>Select group | Group list updated with the user. Check that every user in the group can access the file |   |  |
-| Share with a non existing user | Open Share<br>Type a user name that does not exist | No matches|  |  |
-| Share with an already shared | Open Share<br>Type a user name which already has the file | Correct error|  |   |
-| Share permission OK | Open Share<br>Share with another user with share permission<br>Try to reshare | Recipient can reshare |  |    |
-| Share permission denied | Open Share<br>Share with another user with no share permission<br>Try to reshare |  Not posible |   |  |
-| Permission inheritance | Open Share<br>Share with another user with no edit permission<br>Recipient tries to reshare with edit permission |  Not posible |  |   |
-| Reshare reflected | Open Share<br>Share with another user<br>Recipient reshares |  First user sees both shares |  |  |
-| Edit permission OK | Open Share<br>Share with another user with edit permission<br>Recipient tries to edit<br>Try the same with Files App | Recipient can edit |   |  |
-| Edit permission denied | Open Share<br>Share with another user with no edit permission<br>Recipient tries to edit<br>Try the same with Files App |  It is posible |   |  |
-| Edit permission folders view | Open Share<br>Share a folder with another user  |  Create, change, delete options are there. Information icon shows additional info |   |  |
-| Edit permission folders vanished | Open Share<br>Share a folder with another user without change, create and delete | options vanished |  |   |
-| Edit permission folders | Open Share<br>Share a folder with another user with all permissions<br>Remove two permissions (change and delete)  | Correctly updated in UI |  |   |
-| Edit permission folders create | Open Share<br>Share a folder with another user with only create  | Recipient can upload content, but change and delete |  |  |
-| Edit permission folders Change | Open Share<br>Share a folder with another user with only change  | Recipient can change content, but create and delete |  |  |
-| Edit permission folders Delete | Open Share<br>Share a folder with another user with only Delete  | Recipient can delete content, but create and change |  |  |
-| Delete one recipient | Open Share<br>Share with several users<br>Delete one recipient | Recpient deleted, but in files view file is still marked as shared (private) |   |    |
-| Delete all recipients | Open Share<br>Share with serveral users<br>Delete all recipients | Recipients deleted, in files view file is not marked as shared (private) |   |  |
-| Recipient deletes | Share with a user<br>Recipient deletes the file in the file list | File is not shared, check in original user |   |  
-| Remote share | In web UI create a share with different options | Correctly shown in the app |   |  |
-| No edit granted | Share a file with a user, revoking editing and granting sharing | Recipient does not see edit option when resharing |  |   |  |
-| Edit granted| Share a file with a user, granting editing and sharing | Recipient sees edit option when resharing |   |  |  |
-| Folder no edit | Share a folder with a user, revoking whole edit permission and granting sharing | Recipient does not see edit option when resharing |  |  |  |
-| Folder edit | Share a folder with a user, granting editing and sharing | Recipient sees edit option when resharing |   |  |  |
-| Folder create | Share a folder with a user, granting create and sharing | Recipient sees only create option, but change and delete |  |  |  |
+| Share with a user | Open Share<br>Type a correct user name<br>Select user | Sharees list updated with the user | P m12 |  |
+| Share with a group | Open Share<br>Type a correct group name<br>Select group | Group list updated with the user. Check that every user in the group can access the file |  P m12 |  |
+| Share with a non existing user | Open Share<br>Type a user name that does not exist | No matches| P m12 |  |
+| Share with an already shared | Open Share<br>Type a user name which already has the file | Correct error| P m12 |   |
+| Share permission OK | Open Share<br>Share with another user with share permission<br>Try to reshare | Recipient can reshare | P m12 |    |
+| Share permission denied | Open Share<br>Share with another user with no share permission<br>Try to reshare |  Not posible |  P m12 |  |
+| Permission inheritance | Open Share<br>Share with another user with no edit permission<br>Recipient tries to reshare with edit permission |  Not posible | P m12 |   |
+| Reshare reflected | Open Share<br>Share with another user<br>Recipient reshares |  First user sees both shares | P m12 |  |
+| Edit permission OK | Open Share<br>Share with another user with edit permission<br>Recipient tries to edit<br>Try the same with Files App | Recipient can edit | P m12  |  |
+| Edit permission denied | Open Share<br>Share with another user with no edit permission<br>Recipient tries to edit<br>Try the same with Files App |  It is posible | P m12  |  |
+| Edit permission folders view | Open Share<br>Share a folder with another user  |  Create, change, delete options are there. Information icon shows additional info |  P m12 |  |
+| Edit permission folders vanished | Open Share<br>Share a folder with another user without change, create and delete | options vanished | P m12 |   |
+| Edit permission folders | Open Share<br>Share a folder with another user with all permissions<br>Remove two permissions (change and delete)  | Correctly updated in UI | P m12 |   |
+| Edit permission folders create | Open Share<br>Share a folder with another user with only create  | Recipient can upload content, but change and delete | P m12 |  |
+| Edit permission folders Change | Open Share<br>Share a folder with another user with only change  | Recipient can change content, but create and delete | P m12 |  |
+| Edit permission folders Delete | Open Share<br>Share a folder with another user with only Delete  | Recipient can delete content, but create and change | P m12 |  |
+| Delete one recipient | Open Share<br>Share with several users<br>Delete one recipient | Recpient deleted, but in files view file is still marked as shared (private) | P m12  |    |
+| Delete all recipients | Open Share<br>Share with serveral users<br>Delete all recipients | Recipients deleted, in files view file is not marked as shared (private) |  P m12 |  |
+| Recipient deletes | Share with a user<br>Recipient deletes the file in the file list | File is not shared, check in original user |  P m12 |  
+| Remote share | In web UI create a share with different options | Correctly shown in the app | P m12  |  |
+| No edit granted | Share a file with a user, revoking editing and granting sharing | Recipient does not see edit option when resharing | P m12 |   |  |
+| Edit granted| Share a file with a user, granting editing and sharing | Recipient sees edit option when resharing |  P m12 |  |  |
+| Folder no edit | Share a folder with a user, revoking whole edit permission and granting sharing | Recipient does not see edit option when resharing | P m12 |  |  |
+| Folder edit | Share a folder with a user, granting editing and sharing | Recipient sees edit option when resharing |  P m12 |  |  |
+| Folder create | Share a folder with a user, granting create and sharing | Recipient sees only create option, but change and delete | P m12 |  |  |
 |**Federated Share**||||||
-| Share with a user in other server | Open Share<br>Type a correct user name with remote URL<br>Recipient accepts | Sharees list updated with the user after accepting in web 
+| Share with a user in other server | Open Share<br>Type a correct user name with remote URL<br>Recipient accepts | Sharees list updated with the user after accepting in web | P m12
 |**Public Share**||||||
-| Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)|  |  | | 
-| Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)|   |   | | 
-| Create with password| Select to create a public link with password  | Correct creation with password. Paste the link in browser to be asked the password|   |  | | 
-| Create without password| Select to create a public link with no password  | Correct creation with no password. Paste the link in browser, password not asked|  |  | | 
-| Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI|   |   |  | 
-| Create without expiration date| Select to create a public link with no expiration date  | Correct creation with no expiration date. Check in web UI|  |  | | 
-| Create folder Download/View | Select to create a public link of a folder with Download/View permission  | Correct creation. Check in web UI|   |  | | 
-| Create folder Download/View/Upload | Select to create a public link of a folder with Download/View/Upload permission  | Correct creation. Check in web UI|   |  | | 
-| Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI|  |  | | 
-| Edit name | On a created public link, edit the name  | Correct edition. Check in web UI|  |   | | 
-| Edit password | On a created public link, edit the password  | Correct edition. Check in web UI|   |  | | 
-| Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI|  |  | | 
-| Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI|   |  | | 
-| Edit removing expiration date | On a created public link, remove the expiration date  | Correct edition. Check in web UI|   |    | | 
-| Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI|  |  | | 
-| Delete one | Delete an already create public link  |  Link not available anymore, check in file list |  |  | | 
-| Delete all | Delete all public link of an item | Links not available anymore, check in file list |   |  | | 
-| Send link | Create a link and use the open in option to send it | Options to send correctly displayed |   | | | 
+| Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)| P m12 |  | | 
+| Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)| P m12  |   | | 
+| Create with password| Select to create a public link with password  | Correct creation with password. Paste the link in browser to be asked the password|  P m12 |  | | 
+| Create without password| Select to create a public link with no password  | Correct creation with no password. Paste the link in browser, password not asked| P m12 |  | | 
+| Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI| P m12  |   |  | 
+| Create without expiration date| Select to create a public link with no expiration date  | Correct creation with no expiration date. Check in web UI| P m12 |  | | 
+| Create folder Download/View | Select to create a public link of a folder with Download/View permission  | Correct creation. Check in web UI|  P m12 |  | | 
+| Create folder Download/View/Upload | Select to create a public link of a folder with Download/View/Upload permission  | Correct creation. Check in web UI| P m12  |  | | 
+| Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI|P m12  |  | | 
+| Edit name | On a created public link, edit the name  | Correct edition. Check in web UI| P m12 |   | | 
+| Edit password | On a created public link, edit the password  | Correct edition. Check in web UI| P m12  |  | | 
+| Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI| P m12 |  | | 
+| Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI|  P m12 |  | | 
+| Edit removing expiration date | On a created public link, remove the expiration date  | Correct edition. Check in web UI| P m12  |    | | 
+| Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI|P m12  |  | | 
+| Delete one | Delete an already create public link  |  Link not available anymore, check in file list | P m12 |  | | 
+| Delete all | Delete all public link of an item | Links not available anymore, check in file list | P m12 |  | | 
+| Send link | Create a link and use the open in option to send it | Options to send correctly displayed | P m12  | | | 
 |**Private link**||||||
-| Get link View | Open Share view | Option correctly displayed |  |   | | 
-| Copy link | Get copy link and paste in the browser | File correctly linked |   | | | 
+| Get link View | Open Share view | Option correctly displayed | P m12 |   | | 
+| Copy link | Get copy link and paste in the browser | File correctly linked | P m12  | | | 
 |**Capabilities**||||||
-| Share API disabled | Open file list | There is no option to share |  |  |
-| Allow share via link disabled | Open file list | There is no option to share public, but there is for privates |   |  |
-| Enforce password protection read only enabled | Create a public share with read only permission  and without password | Not posible |   |  |
-| Enforce password protection read write enabled | Create a public share with read and write permission and without password | Not posible |   |  |
-| Enforce password protection upload only enabled | Create a public share with upload only permission and without password | Not posible |   |  |
-| Default expiration date | Create a public share and enable expiration date | Default date is there |   |  |
-| Enforced expiration date | Create a public share and enforce expiration date | Default date is there and can not be removed|  |  |
-| Allow resharing enabled | Share a file<br>Recipient tries to reshare  | Recipient can reshare|  |  |
-| Allow resharing disabled | Share a file<br>Recipient tries to reshare  | There is no option to reshare |  |  |
-| Allow sharing with groups disabled | Share a file with groups | Not posible |   |  |
-| Default share permission | Set different options in web UI<br>Create a share in the app | Default options are the same |   |  |
-| Allow send federated = false | Try to create a federated share | Not posible |   |  |
-| Allow receive federated = false | Try to create a federated share | Not posible |  |  |
+| Share API disabled | Open file list | There is no option to share | P m12 |  |
+| Allow share via link disabled | Open file list | There is no option to share public, but there is for privates |  P m12 |  |
+| Enforce password protection read only enabled | Create a public share with read only permission  and without password | Not posible |  P m12 |  |
+| Enforce password protection read write enabled | Create a public share with read and write permission and without password | Not posible | P m12  |  |
+| Enforce password protection upload only enabled | Create a public share with upload only permission and without password | Not posible |  P m12 |  |
+| Default expiration date | Create a public share and enable expiration date | Default date is there | P m12   |  |
+| Enforced expiration date | Create a public share and enforce expiration date | Default date is there and can not be removed| P m12 |  |
+| Allow resharing enabled | Share a file<br>Recipient tries to reshare  | Recipient can reshare| P m12 |  |
+| Allow resharing disabled | Share a file<br>Recipient tries to reshare  | There is no option to reshare | P m12 |  |
+| Allow sharing with groups disabled | Share a file with groups | Not posible |  P m12 |  |
+| Default share permission | Set different options in web UI<br>Create a share in the app | Default options are the same |  P m12 |  |
+| Allow send federated = false | Try to create a federated share | Not posible | P m12  |  |
+| Allow receive federated = false | Try to create a federated share | Not posible | P m12 |  |
 |**HEIC/HEIV to other formats**||||||
 | Heic selected | Select the option heic in settings<br>Upload pics in heic | Heic format in uploaded files, check in mime header | P m12 | |
 | JPG selected | Select the option JPG in settings<br>Upload pics in heic | JPG format in uploaded files , check in mime header| P m12 | |
@@ -284,4 +295,3 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 |**Other**||||||
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m12 | |
 | Searching | Input a pattern to filter in the current folder | Results correct filtered | P m12 | 
-| Quota correct | Open the root folder | Quota is correctly displayed | | |

@@ -25,8 +25,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Test Case | Steps | Expected Result | Result | Related Comment
 |:---------:| :---- | :-------------- | :----: | :------------- |
 |**Settings**| 2 device |||||
-| Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | |  |
-| Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked  |  |  |
+| Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | P m13 |  |
 |**Item Actions**||||||
 | Open In | Open a file in a 3rd party app | Correctly downloaded and sent |  |  |
 | Copy file | Copy a file to another location | Correctly copied |  |  |
@@ -166,16 +165,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Share with an already shared | Open Share<br>Type a user name which already has the file | Correct error|  |   |
 | Share permission OK | Open Share<br>Share with another user with share permission<br>Try to reshare | Recipient can reshare |  |    |
 | Share permission denied | Open Share<br>Share with another user with no share permission<br>Try to reshare |  Not posible |   |  |
-| Permission inheritance | Open Share<br>Share with another user with no edit permission<br>Recipient tries to reshare with edit permission |  Not posible |  |   |
-| Reshare reflected | Open Share<br>Share with another user<br>Recipient reshares |  First user sees both shares |  |  |
 | Edit permission OK | Open Share<br>Share with another user with edit permission<br>Recipient tries to edit<br>Try the same with Files App | Recipient can edit |   |  |
-| Edit permission denied | Open Share<br>Share with another user with no edit permission<br>Recipient tries to edit<br>Try the same with Files App |  It is posible |   |  |
-| Edit permission folders view | Open Share<br>Share a folder with another user  |  Create, change, delete options are there. Information icon shows additional info |   |  |
-| Edit permission folders vanished | Open Share<br>Share a folder with another user without change, create and delete | options vanished |  |   |
-| Edit permission folders | Open Share<br>Share a folder with another user with all permissions<br>Remove two permissions (change and delete)  | Correctly updated in UI |  |   |
-| Edit permission folders create | Open Share<br>Share a folder with another user with only create  | Recipient can upload content, but change and delete |  |  |
-| Edit permission folders Change | Open Share<br>Share a folder with another user with only change  | Recipient can change content, but create and delete |  |  |
-| Edit permission folders Delete | Open Share<br>Share a folder with another user with only Delete  | Recipient can delete content, but create and change |  |  |
 | Delete one recipient | Open Share<br>Share with several users<br>Delete one recipient | Recpient deleted, but in files view file is still marked as shared (private) |   |    |
 | Delete all recipients | Open Share<br>Share with serveral users<br>Delete all recipients | Recipients deleted, in files view file is not marked as shared (private) |   |  |
 | Recipient deletes | Share with a user<br>Recipient deletes the file in the file list | File is not shared, check in original user |   |  
@@ -183,29 +173,22 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | No edit granted | Share a file with a user, revoking editing and granting sharing | Recipient does not see edit option when resharing |  |   |  |
 | Edit granted| Share a file with a user, granting editing and sharing | Recipient sees edit option when resharing |   |  |  |
 | Folder no edit | Share a folder with a user, revoking whole edit permission and granting sharing | Recipient does not see edit option when resharing |  |  |  |
-| Folder edit | Share a folder with a user, granting editing and sharing | Recipient sees edit option when resharing |   |  |  |
-| Folder create | Share a folder with a user, granting create and sharing | Recipient sees only create option, but change and delete |  |  |  |
 |**Federated Share**||||||
 | Share with a user in other server | Open Share<br>Type a correct user name with remote URL<br>Recipient accepts | Sharees list updated with the user after accepting in web 
 |**Public Share**||||||
 | Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)|  |  | | 
 | Create without name | Select to create a public link with no name  | Correct creation with  default name (check in web UI)|   |   | | 
 | Create with password| Select to create a public link with password  | Correct creation with password. Paste the link in browser to be asked the password|   |  | | 
-| Create without password| Select to create a public link with no password  | Correct creation with no password. Paste the link in browser, password not asked|  |  | | 
 | Create with expiration date| Select to create a public link with expiration date  | Correct creation with expiration date. Check in web UI|   |   |  | 
-| Create without expiration date| Select to create a public link with no expiration date  | Correct creation with no expiration date. Check in web UI|  |  | | 
 | Create folder Download/View | Select to create a public link of a folder with Download/View permission  | Correct creation. Check in web UI|   |  | | 
 | Create folder Download/View/Upload | Select to create a public link of a folder with Download/View/Upload permission  | Correct creation. Check in web UI|   |  | | 
 | Create folder Upload Only (File Drop) | Select to create a public link of a folder with Upload only permission  | Correct creation. Check in web UI|  |  | | 
 | Edit name | On a created public link, edit the name  | Correct edition. Check in web UI|  |   | | 
 | Edit password | On a created public link, edit the password  | Correct edition. Check in web UI|   |  | | 
-| Edit removing password | On a created public link, remove the password  | Correct edition. Check in web UI|  |  | | 
 | Edit expiration date | On a created public link, edit the expiration date  | Correct edition. Check in web UI|   |  | | 
-| Edit removing expiration date | On a created public link, remove the expiration date  | Correct edition. Check in web UI|   |    | | 
 | Edit folder permission | On a created public link on a folder, switch the permissions through every option | Correct edition. Check in web UI|  |  | | 
 | Delete one | Delete an already create public link  |  Link not available anymore, check in file list |  |  | | 
-| Delete all | Delete all public link of an item | Links not available anymore, check in file list |   |  | | 
-| Send link | Create a link and use the open in option to send it | Options to send correctly displayed |   | | | 
+| Delete all | Delete all public link of an item | Links not available anymore, check in file list |   |  | |  
 |**Private link**||||||
 | Get link View | Open Share view | Option correctly displayed |  |   | | 
 | Copy link | Get copy link and paste in the browser | File correctly linked |   | | | 
