@@ -27,94 +27,86 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 |**Settings**| 2 device |||||
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  | P m13 |  |
 |**Item Actions**||||||
-| Open In | Open a file in a 3rd party app | Correctly downloaded and sent |  |  |
-| Copy file | Copy a file to another location | Correctly copied |  |  |
-| Copy folder| Copy a folder to another location | Correctly copied |  |  |
-| Move file | Move a file to another location | Correctly moved |  |  |
-| Move folder| Move a folder to another location | Correctly moved |  |  |
-| Duplicate file | Duplicate a file to another location | Correctly duplicated |  |  |
-| Duplicate folder| Duplicate a folder to another location | Correctly duplicated |  |  |
-| Rename file | Rename a file | Correctly renamed |  |  |
-| Rename folder| Rename a folder  | Correctly renamed |  |  |
-| Delete file | Delete a file | Correctly deleted |  |  |
-| Delete folder| Delete a folder  | Correctly deleted |  |  |
-| Sort Date | Sort the file list by date  | Newest on the top |  |  |
-| Sort A-Z | Sort the file list by A-Z  | A on the top |  |  |
-| Sort Z-A | Sort the file list by Z-A  | Z on the top |  |  |
-| Sort Type | Sort the file list by type  | grouped by type |  |  |
-| Sort Size | Sort the file list by size  | Biggest on the top |  |  |
-| Sort Shared | Sort the file list by sharing  | Shared on the top |  |  |
+| Open In | Open a file in a 3rd party app | Correctly downloaded and sent | P m13 |  |
+| Copy file | Copy a file to another location | Correctly copied | P m13 |  |
+| Copy folder| Copy a folder to another location | Correctly copied | P m13 |  |
+| Move file | Move a file to another location | Correctly moved | P m13 |  |
+| Move folder| Move a folder to another location | Correctly moved | P m13 |  |
+| Duplicate file | Duplicate a file to another location | Correctly duplicated | P m13 |  |
+| Duplicate folder| Duplicate a folder to another location | Correctly duplicated |  P m13|  |
+| Rename file | Rename a file | Correctly renamed | P m13 |  |
+| Rename folder| Rename a folder  | Correctly renamed |  P m13|  |
+| Delete file | Delete a file | Correctly deleted | P m13 |  |
+| Delete folder| Delete a folder  | Correctly deleted |  P m13|  |
+| Sort Date | Sort the file list by date  | Newest on the top | P m13 |  |
+| Sort A-Z | Sort the file list by A-Z  | A on the top | P m13 |  |
+| Sort Z-A | Sort the file list by Z-A  | Z on the top | P m13 |  |
+| Sort Type | Sort the file list by type  | grouped by type |  P m13|  |
+| Sort Size | Sort the file list by size  | Biggest on the top | P m13 |  |
+| Sort Shared | Sort the file list by sharing  | Shared on the top | P m13 |  |
 |**Upload & Download**||||||
-| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
-| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder | |  |
-| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
-| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder| | |
-| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded |  | |
-| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
-| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears|  | |
-| Download several files | Tap on several files | all are enqueued and finally downloaded | | |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | | |
-| Cancel download | Tap on a huge  file<br>Cancel it before it finishes | File is not downloaded | | 
-| Cancel uploads | Upload a huge file<br>Cancel it before it finishes | File is not uploaded|  |
-| Clear storage | Tap on a huge number of files<br>Go to bookmark and manage space to remove | Everything is cleaned up | | |
-|**Concurrency**| **2 auth methods**|||||
-|**Transfers (6 as budget, 3 + 3)**|
-| Upload 3 | Upload 3 items to oC | Correctly uploaded, concurrently. Check in status view |  |  |  |
-| Download 3 | Download 3 items from oC | Correctly downloadded, concurrently. Check in status view | |  |  |
-| Upload 7 | Upload 7 items to oC | Only 3 are concurrent. At the end, action ends correctly. Check in status view | |  |  |
-| Download 7 | Download 7 items from oC | Only 3 are concurrent. At the end, action ends correctly. Check in status view |  |  |  |
+| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder | P m13 |  |
+| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder | P m13|  |
+| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder | P m13 | |
+| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder|P m13 | |
+| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge a,ount of files| All files are uplaoded | P m13 | |
+| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  P m13| |
+| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears|  P m13| |
+| Download several files | Tap on several files | all are enqueued and finally downloaded |P m13 | |
+| Download a bunch of files | Tap on a huge number of files| all are enqueued and finally downloaded. Last one is displayed | P m13| |
+| Cancel download | Tap on a huge  file<br>Cancel it before it finishes | File is not downloaded | P m13 | 
+| Cancel uploads | Upload a huge file<br>Cancel it before it finishes | File is not uploaded| P m13 |
+| Clear storage | Tap on a huge number of files<br>Go to bookmark and manage space to remove | Everything is cleaned up | P m13| |
 |**Av. offline**| **2 auth methods**|||||
 |**File**|||||
-| Set | Set a file as av. offline | File is downloaded (check in Manage options). Icon is correctly set (check in both orientations) |  |  |  |
-| Unset | 1. Unset a file as av. offline<br>2. Wipe all the files in Manage options | File is not downloaded. Icon is removed (check in both orientations) |  |  |  |
+| Set | Set a file as av. offline | File is downloaded (check in Manage options). Icon is correctly set (check in both orientations) | P m13 |  |  |
+| Unset | 1. Unset a file as av. offline<br>2. Wipe all the files in Manage options | File is not downloaded. Icon is removed (check in both orientations) | P m13 |  |  |
 |**Folder** |  |  |
-| Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  
-| Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything |   |  
-| Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|   |  
-| Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | 
-| Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline |   |  
-| Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync |   |  
-| Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine |  
-| Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline |   | 
+| Set a folder as av. offline in card | 1. Swipe over a folder<br>2. Set as av. offline | All the content of the folder is downloaded. Correct icon on everything |  P m13
+| Set the content of a folder as av. offline | 1. Browse a folder<br>2. Set as av. offline using the three dt button| All the content of the folder is downloaded. Correct icon on everything |  P m13 |  
+| Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked| P m13  |  
+| Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | P m13
+| Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline |  P m13 |  
+| Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync |  P m13 |  
+| Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine |  P m13
+| Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline | P m13  | 
 |**Multiaccount**||||||
-| Switch account | Create several accounts and browse through them | Correct browsing |  | |
-| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded |  |  |
-| Download in several | Download several items in different accounts at the time | All items corectly uploaded |  |  |
+| Switch account | Create several accounts and browse through them | Correct browsing | P m13 | |
+| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | P m13 |  |
+| Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m13 |  |
 |**Files preview**| 1 device |||||
-| PDF | Download an open a PDF file | Correctly displayed |  |  |
-| PDF search | Download an open a PDF file and search by a pattern | Correct search |  |  |
-| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump |  | |
-| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  |  |
-| Doc | Download an open a Doc file | Correctly displayed |  |  |
-| Excel | Download an open a excel file | Correctly displayed |  |  |
-| Ppt | Download an open a ppt file | Correctly displayed |  |  |
-| Txt | Download an open a txt file | Correctly displayed |  |  |
-| Image | Download an open a png, jpg files | Correctly displayed | |  |
-| Image Gallery | Download an open a png, jpg files and swipe in gallery mode | Correctly displayed |  |  |
-| Image Gallery actions | Download an open a png, jpg files and swipe in gallery mode <br> Perform a rename, delete, move, copy and duplicate while gallery is running| Gallery is not dismissed |  |  |
-| GIF | Download an open a GIF file | Correctly displayed |  | To improve |
-| Video | Download an open a video file. Go back and the video stops | Correctly played |  | To improve |
-| Audio | Download an open a video file. Go back and the music stops | Correctly played |  |   |
-| Non openable | Download an open a non openable file | Placeholder displayed with date and size| |  |
-| Damaged | Download an open a damaged file | Placeholder displayed | |  |
+| PDF | Download an open a PDF file | Correctly displayed | P m13 |  |
+| PDF search | Download an open a PDF file and search by a pattern | Correct search |  P m13|  |
+| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | P m13 | |
+| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | P m13 |  |
+| Doc | Download an open a Doc file | Correctly displayed | P m13 |  |
+| Excel | Download an open a excel file | Correctly displayed | P m13 |  |
+| Ppt | Download an open a ppt file | Correctly displayed | P m13 |  |
+| Txt | Download an open a txt file | Correctly displayed | P m13 |  |
+| Image | Download an open a png, jpg files | Correctly displayed | P m13|  |
+| Image Gallery | Download an open a png, jpg files and swipe in gallery mode | Correctly displayed | P m13 |  |
+| Image Gallery actions | Download an open a png, jpg files and swipe in gallery mode <br> Perform a rename, delete, move, copy and duplicate while gallery is running| Gallery is not dismissed | P m13 |  |
+| GIF | Download an open a GIF file | Correctly displayed | P m13 | To improve |
+| Video | Download an open a video file. Go back and the video stops | Correctly played | P m13 | To improve |
+| Audio | Download an open a video file. Go back and the music stops | Correctly played | P m13 |   |
+| Non openable | Download an open a non openable file | Placeholder displayed with date and size| P m13 |  |
+| Damaged | Download an open a damaged file | Placeholder displayed |P m13|  |
 |**Streaming on**|||||||
-| Stream video | Click on a non-downloaded video |  |   |  |  |
-| Stream audio | Click on a non-downloaded video |   |   |  |  |
-| Artwork | Click on a audio file  | Artwork is shown during streaming |   |  |  |
-| Media controls | Check controls over streaming on both orientations | Correct working (depending on library, just to check) |   |  |  |
+| Stream video | Click on a non-downloaded video | Video streamed| P m13 |   |  |  |
+| Stream audio | Click on a non-downloaded video | Audio streamed| P m13  |   |  |  |
 |**Streaming off**|||||||
-| Downloaded video | Click on a non-downloaded video | Video is downloaded and played in both orientations|   | 
-| Downloaded audio | Click on a non-downloaded video | Audio is downloaded and played in both orientations |   | 
+| Downloaded video | Click on a non-downloaded video | Video is downloaded and played in both orientations| P m13  | 
+| Downloaded audio | Click on a non-downloaded video | Audio is downloaded and played in both orientations | P m13  | 
 |**Offline**| 2 devices |||||
-| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |   | |
-| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |   |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |   |  |
-| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |   |  |
-| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|   |  |
-| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK |  |   |
+| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  P m13|  |
+| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m13  | |
+| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection | P m13  |  |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  P m13 |  |
+| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  P m13 |  |
+| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  P m13 |  |
+| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m13 |  |
+| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m13 |  |
+| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK | P m13 |   |
 |**Error handling**||||||
 | Create folder | Create folder with existing name | Correct error |   |  |
 | Rename | Rename item with existing name in target | Correct error |  |  |

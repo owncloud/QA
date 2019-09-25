@@ -115,7 +115,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Set a folder with subfolders as av. offline | 1. Swipe over a folder which contains a deep structure of subfolders with special characters<br>2. Set as av. offline | All the content of the folder and subfolders is downloaded  and marked|  P m12 |  
 | Unset as av. offline a folder into an av. offline folder | 1. Swipe over a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed | P m12
 | Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline | P m12  |  
-| Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync | P m12  |  
+| Add into av. offline | Add some content into an av. offline folder | Content is downloaded and sync | P m12  | FIXED: If downloaded is not marked as av. offline 
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is not av.offine |  P m12
 | Av. offline inside av. offline | Create a folder inside an av. offline folder<br>Upload content inside the folder | Folder and its content are av. offline |  P m12 | 
 |**Multiaccount**||||||
