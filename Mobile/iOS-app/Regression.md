@@ -96,6 +96,7 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | GIF | Download an open a GIF file | Correctly displayed | |  |
 | Video | Download an open a video file. Go back and the video stops | Correctly played |  |  |
 | Audio | Download an open a video file. Go back and the music stops | Correctly played |  |  |
+| Media backgorund | Download an open a video file. Switch the screen off | Video plays in background |  |  |
 | Non opeble | Download an open a non opeble file | Placeholder displayed with date and size| |  |
 | Damaged | Download an open a damaged file | Placeholder displayed | |  |
 |**Offline**||||||
