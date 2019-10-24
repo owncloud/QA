@@ -2,6 +2,17 @@
 
 - Run Testplan with all checked notifications in Activity settings menu and a mail set in our oC server.
 
+
+To trigger email sending for testing:
+
+    SQL: update oc_activity_mq set amq_timestamp=0,amq_latest_send=0;
+    SQL: update oc_jobs set last_run=0,last_checked=0,reserved_at=0;
+    CLI: php cron.php
+
+This will send out the activity email currently in the queue.
+
+    
+
 ## Testing functionality
 
 Test Case | Expected Result | Result | Related Comment
@@ -51,7 +62,7 @@ Uncheck a public shared file or folder was downloaded stream  notification and d
 Try to uncheck comments for files (always listed in stream) stream  notification and make a comment | It should not be possible | :construction:  |
 Uncheck System tags for a file have been modified stream  notification and tag a file|  Notification is not shown| :construction:  |
 Uncheck list your own file actions in the stream | Notifications are not shown| :construction:  |
-**Settings section mail**|  |   |
+**Settings section mail**| https://github.com/owncloud/activity/wiki/Manual-testing  |   |
 Uncheck a new file or folder has been created mail notification and create a file|  | :construction:  |
 Uncheck a file or folder has been changed mail notification and change a folder|  | :construction:  |
 Check limit notifications about creation and changes to your favorite files mail notification and change favorite file and a regular file| Only notifications about favorite files are sent | :construction:  |
