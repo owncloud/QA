@@ -11,13 +11,13 @@ Server: 10.2.1
 | Test Case | Steps | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
 |**Account management**|
-| Add account | Execute the Add account with the keyboard: cmd + "+"| Correctly executed  |  |  |  |
-| Edit account | Execute the Edit account with the keyboard: capitals + cmd + ","| Correctly opened  |  |  |  |
-| Manage account | Execute the Manage account with the keyboard: capitals + cmd + "M"| Correctly opened  |  |  |  |
-| Delete account | Execute the Manage account with the keyboard: capitals + cmd + "back"| Correctly deleted  |  |  |  |
+| Add account | Execute the Add account with the keyboard: cmd + "+"| Correctly executed  | F t13 | Not posible to approve. OAuth2... |  |
+| Edit account | Execute the Edit account with the keyboard: capitals + cmd + ","| Correctly opened  | F t13 | OAuth2 |  |
+| Manage account | Execute the Manage account with the keyboard: capitals + cmd + "M"| Correctly opened  | F t13 | Cannot cancel |  |
+| Delete account | Execute the Manage account with the keyboard: capitals + cmd + "back"| Correctly deleted  | P t13 |  |  |
 |**Settings**|
-| Open View | Execute the Open Settings with the keyboard: cmd + "," from the list of accounts| Correctly displayed  |  |  |  |
-| Browse | Browse through the setting and change them | Switches are switched with the right arrow<br>Submenus are browsed with the right arrow<br>Multiple selection are selected/upselected with the right arrow<br>Browse back with cmd + up arrow |  |  |  |
+| Open View | Execute the Open Settings with the keyboard: cmd + "," from the list of accounts| Correctly displayed  | P t13 |  |  |
+| Browse | Browse through the setting and change them | Switches are switched with the right arrow<br>Submenus are browsed with the right arrow<br>Multiple selection are selected/upselected with the right arrow<br>Browse back with cmd + up arrow | F t13 | Delete unused copies. Instant uploads folder |  |
 |**File operations**|
 | Open In | Execute the Open In with the keyboard over a file: cmd + O | Correctly executed  | P t13 |  |  |
 | Move | Move an item with the keyboard: cmd + V<br>Browse to select a correct target folder | Correctly executed  | F t13  | How to select move? |  |
