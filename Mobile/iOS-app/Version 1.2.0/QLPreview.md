@@ -34,3 +34,6 @@ Server: 10.2.1
 | avi | Preview a avi document | Correct preview | P m13 |  |
 | gif | Preview a gif document | Correct preview | F m13 |  Not animated |
 | mp3 | Preview a mp3 document | Correct preview | P m13 |  |
+|**Previews thumbnails**|||||||
+| jpg | List a folder with jpg file | Correct preview of the thumbnail | P m13 |  |
+| png | List a folder with jpg file | Correct preview of the thumbnail | P m13 |  |

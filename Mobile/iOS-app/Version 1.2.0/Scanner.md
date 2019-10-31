@@ -24,4 +24,4 @@ Server: 10.3
 | Default name | Open "+" and select scan document<br>Scan a document<br>Let the default name | File saved with such name | P m13 t13 |  |  |
 | New name | Open "+" and select scan document<br>Scan a document<br>Set another name | File saved with such name | P m13 t13 |  |  |
 | Existing name | Open "+" and select scan document<br>Scan a document<br>Set another existing name in the current folder | File saved with such name adding a sequential number | P m13 t13 |  |  |
-| Empty name | Open "+" and select scan document<br>Scan a document<br>Set an empty name | Not posible | F m13 t13 | Saved as (1) |  |
+| Empty name | Open "+" and select scan document<br>Scan a document<br>Set an empty name | Not posible | P m13 t13 | FIXED: Saved as (1) |  |

@@ -26,10 +26,12 @@ Server: 10.2.1
 | Long press | Long press on a file and select "Open in a new window" | File detail is displayed in a separate window | P t13| |  |
 |**Move**|||||
 | File | With multiple window, drag & drop a file to the other window | file is moved | P t13| |  |
-| Folder | With multiple window, drag & drop a folder to the other window | folder is moved | P t13| |  |
+| Folder | With multiple window, drag & drop a folder to the other window | Not allowed | P t13 | FIXED: Not copied. Error |  |
 | Multiple | With multiple window, drag & drop several items | items are moved | P t13| |  |
-| Different account | With multiple window, drag & drop several items between different accounts | items are moved | F t13| not moved |  |
+| Different account  | With multiple window, drag & drop several items between different accounts | items are copied | P t13 | FIXED: not copied |  |
 |**UI restoration**|||||
-| Restore with multiple | Open multiple window and go to backgr<br>Reopen | Windows are displayed as before killing | | |  |
+| Restore with multiple | Open multiple window and go to backgr<br>Reopen | Windows are displayed as before killing | P t13 | | Not easy to reproduce |
+|**iPhone**|||||
+| iPhone iOS13 | Long press over an account of the list | Option to open in new window is not there | P m12 | |  |
 |**Regression**|||||
 | iOS12| Check in a iOS12 device, the option is not there |  | P t12 | |  |
