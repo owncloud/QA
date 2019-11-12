@@ -32,3 +32,5 @@ Server:
 | Resharing | Create a share<br>Sharee creates a link, without submitting. <br>Disable "Allow resharing" in Admin dashboard<br>Submit the selection | Correct error |  |  |  |
 | No connection | Remove connection from device<br>Create a link| Correct error |  |  |  |
 | Server not reachable | Disconnect the server from the device network without losing connection<br>Create a link | Correct error |  |  |  |
+| External deletion | Open an existing link<br>In the web, delete the link<br>In the app edit the link (name, permissions...) | Correct error (was deleted before) |  |  |  |
+| External deletion II | Create a link<br>In the web, delete the link<br>In the app delete the link| Correct error (was deleted before) |  |  |  |
