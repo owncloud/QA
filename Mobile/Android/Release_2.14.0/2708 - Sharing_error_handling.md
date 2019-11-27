@@ -2,8 +2,8 @@
 
 #### Pr: https://github.com/owncloud/android/pull/2708
 
-Devices: <br>
-Server: 
+Devices: Pixel 2 v10<br>
+Server: 10.3
 
 ---
 
@@ -21,7 +21,7 @@ Server:
 | Exclude groups | Search for a group to share, without submitting<br>Enable "Exclude groups", and add the searched group<br>Submit the selection| Correct error | P m10 |  |  |
 | External creation | Search for a user to share, without submitting<br>Create the same share in oher client<br>Submit the selection| Correct error | P m10 |  |  |
 | External deletion | Create a share<br>In the web, delete the share<br>In the app delete the share| Correct error (was deleted before) | P m10 | Server isntance not found |  |
-| Federation | Type a federated share, without submitting<br>Disable "allow user to create federated shares"<br>Submit the selection| Correct error | F m10 | Not able to share with federation |  |
+| Federation | Type a federated share, without submitting<br>Disable "allow user to create federated shares"<br>Submit the selection| Correct error | P m10 | FIXED: Not able to share with federation |  |
 | No connection | Remove connection from device<br>Perform a share | Correct error | P m10 |  |  |
 | Server not reachable | Disconnect the server from the device network without losing connection<br>Perform a share | Correct error | P m10  |  |  |
 |**Public share errors**||||||
@@ -33,4 +33,4 @@ Server:
 | No connection | Remove connection from device<br>Create a link| Correct error | P m10 |  |  |
 | Server not reachable | Disconnect the server from the device network without losing connection<br>Create a link | Correct error | P m10 |  |  |
 | External deletion | Open an existing link<br>In the web, delete the link<br>In the app edit the link (name, permissions...) | Correct error (was deleted before) | P m10 | Share ID does not exist |  |
-| External deletion II | Create a link<br>In the web, delete the link<br>In the app delete the link| Correct error (was deleted before) | F m10 | Server instance not found |  |
+| External deletion II | Create a link<br>In the web, delete the link<br>In the app delete the link| Correct error (was deleted before) | P m10 | FIXED: Server instance not found |  |

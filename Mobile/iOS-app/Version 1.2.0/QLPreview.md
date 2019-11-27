@@ -17,9 +17,9 @@ Server: 10.2.1
 | docx | Preview a docx document | Correct preview | P m13 |  |
 | xls | Preview a xls document | Correct preview | P m13 |  |
 | xlsx | Preview a xlsx document | Correct preview | P m13 |  |
-| xsl | Preview a xsl document | Correct preview | F m13 | Blank |
-| tex | Preview a tex document | Correct preview | F m13 | Blank |
-| css | Preview a css document | Correct preview | F m13 | Blank |
+| xsl | Preview a xsl document | Correct preview | P m13 | FIXED: Blank |
+| tex | Preview a tex document | Correct preview | NA | |
+| css | Preview a css document | Correct preview | P m13 | FIXED: Blank |
 | ppt | Preview a ppt document | Correct preview | P m13 |  |
 | pptx | Preview a pptx document | Correct preview | P m13 |  |
 | html | Preview a html document | Correct preview | P m13 |  |
@@ -34,7 +34,7 @@ Server: 10.2.1
 | heiv | Preview a heiv document | Correct preview | P m13 |  |
 | mp4 | Preview a mp4 document | Correct preview | P m13  |  |
 | avi | Preview a avi document | Correct preview | P m13 |  |
-| gif | Preview a gif document | Correct preview | F m13 | Not previewed |
+| gif | Preview a gif document | Correct preview | P m13 | FIXED: Not previewed |
 | mp3 | Preview a mp3 document | Correct preview | P m13 |  |
 |**Previews thumbnails**|||||||
 | jpg | List a folder with jpg file | Correct preview of the thumbnail | P m13 |  |
