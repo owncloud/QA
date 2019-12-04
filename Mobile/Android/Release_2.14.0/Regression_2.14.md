@@ -1,7 +1,24 @@
+For the current version, the following sections has been removed, since there is not affections in terms of regressions:
+
+- Multiselection
+- Av. offline
+- Thumbnails
+- Local Search
+- Grid/List
+- Previews
+- Accounts manager
+- User quota
+- Videostreaming
+- Conflict handling
+
+Section Security is delegated to automatic tests
+
+
 | Title | Procedure |  Expected Result |
 | :---: | :-------- | :--------------- |
-| **Welcome Wizard**|
-| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed |
+| **Wizard**|
+| Welcome wizard | Install the app from scratch | Welcome wizard shown and correctly displayed |
+| Upgrade wizard | Upgrade from latest version | Upgrade wizard shown and correctly displayed |
 | **Detect Auth Method**  |   |  |
 | Basic Auth | Input a basic auth URL | User and password field shown |
 | OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs |
@@ -14,7 +31,6 @@
 | Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |
 | Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud |
 | With blanks | Set some blanks after and before user name | Correct access |
-| LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access |
 | From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished |
 | Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view |
 | **OAuth2** |   |  |
@@ -25,36 +41,6 @@
 | **Redirections** |   |  |
 | Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
 | Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
-| **Accounts manager** |   |  |
-| Create a new basic account from accounts manager<br>| Create a new account| Account is created and is visible in accounts manager |
-| Create a new OAuth2 account from accounts manager<br>| Create a new account<br>| Account is created and is visible in accounts manager |
-| Create a new account without connection to the internet<br>| Create a new account without connection to the internet<br>| There must be an adequate error message |
-| Create a new account without connection to the server | Create a new account without connection to the server | There must be an adequate error message |
-|Multiaccount | Having connection, login with another auth method (basic, oauth2) | Both accounts must be ready to use |
-| Create a new account, but it is an existing one. |1. There is an account whith a user in one server<br>2. Try to create the same account | A error: "An account for the same user and server already exists in the device" |
-| Edit and chnage the password | Edit the account (Change the password for an incorrect one)| It is not possible, credentials error |
-| Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account |
-| Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account |
-| **User quota** |   |  |
-| Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed |
-| 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar |
-| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar |
-| 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" |
-| **Security** |   |  |
-| Passcode enable | 1. Enable passcode (While doing that, change the orientation of the device)<br>2. Leave the app<br>3. Kill the app<br>4. passcode is asked (While doing that change the orientation of the device)<br>5. Fill in the correct password and select the account and folder | Passcode asked |
-| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current pincode, don't enter it, leave the app<br>3. Open the app again<br>| Passcode is asked |
-| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current passcode, enter it<br>3. Leave the app<br>4. Open the app<br> | Passcode is not asked anymore |
-| Passcode security | 1. Select to disable passcode<br>2. Without entering it, kill the app<br>3. Open the app<br>| Passcode is asked |
-| Passcode security | 1. Go to device settings and clear data<br>2. Open the app<br>| Passcode is asked |
-| Pattern lock | 1. Enable Pattern lock<br>2. Leave the app and enter again | Pattern lock is asked |
-| Disable pattern lock | 1. Select to disable pattern<br>2. When it's asked to enter the current pattern, don't enter it, leave the app<br>3. Open the app again<br>| Pattern is asked |
-| Disable pattern lock | 1. select to disable pattern<br>2. When it's asked to enter the current pattern, enter it<br>3.- Leave the app<br>4. Open the app<br>| Pattern is not asked anymore |
-| Both at the same time | Try to enable pattern and passcode lock at the same time | Not posible |
-| Fingerprint lock | Option is enabled if device has fingerprint support | Pattern is asked |
-| Fingerprint unlock | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the fingerprint | 1. Fingerprint asked<br>2. Passcode/Pattern asked |
-| Upload file from camera with security | With a sec method enabled (pattern/passcode/fingerp), upload from camera | Method not asked |
-| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked |
-| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked |
 | **Actions with no connection** |   |  |
 | Create a folder without connection | Create a folder without connection | An error message is shown |
 | Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|
@@ -69,7 +55,6 @@
 | Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct |
 | Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct |
 | Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct |
-| Antivirus | 1. Enable antivirus in server<br>2. Upload EICAR file<br>| Correct error message in notification |
 | **Uploads** |   |  |
 | Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |
 | Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view |
@@ -80,10 +65,10 @@
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
 | Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |
 | Move or copy uploadeds | 1. Select to upload a file and select "Copy"<br>2. Select to upload a file and select "Move" | 1. The original is not removed from device<br>2. The original is removed from device |
-| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  |
-| Instant uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum |
-| Instant uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app |
-| Change instant upload Camera folder | 1. Set a source folder<br>2. Take photos and videos<br>3. Change the folder<br>4. Take photos and videos | 2. Videos and photos uploaded<br>4. Videos and photos not uploaded |
+| Camera uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  |
+| Camera uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum AUTOMATICALLY |
+| Camera uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app |
+| Change Camera upload Camera folder | 1. Set a source folder<br>2. Take photos and videos<br>3. Change the folder<br>4. Take photos and videos | 2. Videos and photos uploaded<br>4. Videos and photos not uploaded |
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
 | Error permissions | 1. Share a folder wiithout permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  |
 | Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  |
@@ -94,39 +79,6 @@
 | **Upload from external** |   |  |
 | Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated |
 | Send text | Copy text and share it with oC | A txt file is created with the copied text |
-| **VideoStreaming** |   |  |
-| Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly |
-| Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward  and change orientation | Video is streamed correctly |
-| Stream a video with https (non trusted server) | 1. With a https server stream a video. | Video is not streamed, so that the server is not secure. |
-| **Conflict handling** |   |  |
-| Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated |
-| Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected<br>6. Server version is downloaded to the device |
-| Update file - Conflict Device | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Device" | 5. Conflict is detected<br>6. Device version is uploaded to the server |
-| Update file - Conflict Both | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Both" | 5. Conflict is detected<br>6. Device version is uploaded to the server and server version is downloaded |
-| **Av. offline** |   |  |
-| Set a folder as av. offline | 1. Long press on a folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded |
-| Set a folder with subfolders as av. offline | 1. Long press on a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder and subfolders is downloaded |
-| Set a folder (not in root) as av. offline | 1. Long press on a folder that is not in root folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded |
-| Unset as av. offline a folder into an av. offline folder | 1. Long press on a folder which contains a deep structure of subfolders with content and special characters<br>2. Set as av. offline (down arrow with a line underneath)<br>3. Try to unset as av offline some of the content into the av. offline folder | Action can not be performed |
-| Move av. offline | Move an av. offline folder to another location | Folder keeps on being av. offline |
-| Move/Copy into av. offline | Move some content into an av. offline folder | Content is downloaded and sync |
-| Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is downloaded but not av.offine |
-| Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. |
-| Delete locally | Try to delete locally an av. offline folder | Action can not be performed |
-| **Multiselection files** |   |  |
-| Sync files | 1. Select several files<br>2. Tap on sync | Files are downloaded correctly |
-| Delete files | 1. Select several files<br>2. Tap on delete | Files are deleted correctly |
-| Copy files | 1. Select several files<br>2. Tap on copy and select a target folder | Files are copied correctly |
-| Move files | 1. Select several files<br>2. Tap on move and select a target folder | Files are moved correctly |
-| Available offline | 1. Select several files<br>2. Tap on available offline | Files are set as available offline |
-| Sellect all | 1. Select "Select all"<br>2. Make any action | All files in the list with the action |
-| Sellect inverse | 1. Select some items<br>2. Select "inverse"<br>3. Make any action | Inverse selection of fils with the action |
-| **Multiselection folders** |   |  |
-| Sync folders | 1. Select several folders (with subfolders) and not in root<br>2. Tap on sync | Folders are downloaded correctly |
-| Delete folders | 1. Select several folders<br>2. Tap on delete | Folders are deleted correctly |
-| Copy folders | 1. Select several folders<br>2. Tap on copy and select a target folder | Folders are copied correctly |
-| Move folders | 1. Select several folders<br>2. Tap on move and select a target folder | Folders are moved correctly |
-| Available offline | 1. Select several folders<br>2. Tap on available offline | Folders are downloaded correctly |
 | **Document Provider** |   |  |
 |**File**||||||
 | Copy file to oC | From doc prov, copy a file to the same account, different location| Correct copied |  |  |
@@ -185,13 +137,10 @@
 | Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file |
 | Federated Share disabled | 1. In server, disable the option federated share<br>2. Share a folder with user1 in other server<br>3. Login with user1<br> | The file can not be federated shared |
 | **Miscellanous** |   |  |
-| Remote thumbnails | 1. Access to the photos folder<br>2. Check that the thumbnails are previewed |  Check that the thumbnails are previewed  |
-| Local thumbnails | 1. Access to the photos folder<br>2. Download an image<br>3. Turn down the connection|  Check that the thumbnails are previewed for the already downloaded image |
-| Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
+| Splash screen | 1. Kill the app<br>2. Open again | Splash screen is there |
+| Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders |
 | Sort by size | 1. Change the list order from date to size<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
 | Sort file picker | 1. Select to upload a file<br>2. Check options to sot the list with descending | Data is listed by date ascending and descending |
-| Grid and List view | 1. Change from list to grid view several times<br>2. Browse into a folder and change to list/grid | 1. Changes are performed correctly<br>2. Changes are inherited when a option is not select |
-| GIF support | Open a GIF file | GIF correctly reproduced in both orientations |
-| Animations in power save | Enable power save mode. | Animations in app disabled (while browsing) |
-| Local search | Enter a pattern that matches with any item on the file list | Correct filtered |
 | Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Logcat and Logfiles are generated. Filters work properly. Content can be cleared (even files) and shared |
+| Copy overlapped | 1. Copy the same file to a target folder twice | File is twice in the folder |
+|pull/2679#issuecomment-550198312||||
