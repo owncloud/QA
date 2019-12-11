@@ -1,3 +1,24 @@
+#### Version 2.14
+
+#### PRs: https://github.com/owncloud/android/issues/2727<br>
+
+
+Device/s: XiaomiMiA2 v9 <br>
+Server: 10.3.1 
+
+How to read Results:
+
+P -> Passed<br>
+F -> Failed<br>
+m -> mobile (iPhone)<br>
+t -> tablet (iPad)<br>
+12 -> iOS version<br>
+ -> non applicable
+
+P m8 -> Passed in an phone with Android 8<br>
+F t8 -> Failed in an tabled with Android 8<br>
+P m8 t8 -> Passed with a phone with Android 8 and an tabled with Android 8 <br>
+P m12 F t12 -> Passed with a phone with Android 8 and failed with tablet with Android 8  <br>
 For the current version, the following sections has been removed, since there is not affections in terms of regressions:
 
 - Multiselection
@@ -14,24 +35,23 @@ For the current version, the following sections has been removed, since there is
 Section Security is delegated to automatic tests
 
 
-| Title | Procedure |  Expected Result |
-| :---: | :-------- | :--------------- |
+| Title | Steps |  Expected Result | Result | Comments
+| :---- | :---- | :--------------- | :----- | :--------
 | **Wizard**|
-| Welcome wizard | Install the app from scratch | Welcome wizard shown and correctly displayed |
+| Welcome wizard | Install the app from scratch | Welcome wizard shown and correctly displayed | P m9
 | Upgrade wizard | Upgrade from latest version | Upgrade wizard shown and correctly displayed |
 | **Detect Auth Method**  |   |  |
-| Basic Auth | Input a basic auth URL | User and password field shown |
-| OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs |
+| Basic Auth | Input a basic auth URL | User and password field shown | P m9
+| OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs | P m9
 | **Basic Auth** |   |  |
-| Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |
-| Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |
-| Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown |
-| Empty password | 1. Type a correct url<br>2. Try to log in without filling the password | error is shown |
-| Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown |
-| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |
-| Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud |
-| With blanks | Set some blanks after and before user name | Correct access |
-| From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished |
+| Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) | P m9 |
+| Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) | P m9 |
+| Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown | P m9 |
+| Empty password | 1. Type a correct url<br>2. Try to log in without filling the password | login button not shown | P m9 |
+| Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown | P m9 |
+| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud | P m9 |
+| Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud | P m9 |
+| With blanks | Set some blanks after and before user name | Correct access | P m9 |
 | Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view |
 | **OAuth2** |   |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
@@ -42,19 +62,19 @@ Section Security is delegated to automatic tests
 | Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
 | Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
 | **Actions with no connection** |   |  |
-| Create a folder without connection | Create a folder without connection | An error message is shown |
-| Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|
-| Rename folder/file without connection | Rename a folder/file without connection | An error message is shown|
-| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown |
-| Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct |
-| Move a file/folder without connection | Select to move a file/folder without connection | An error is shown |
-| Share by link | Select to share by link a file | An error is shown |
-| Share with user | Select to share with a user | An error is shown |
+| Create a folder without connection | Create a folder without connection | An error message is shown | P m9 |
+| Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown| P m9 |
+| Rename folder/file without connection | Rename a folder/file without connection | An error message is shown| P m9 |
+| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown | P m9 |
+| Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct | P m9 |
+| Move a file/folder without connection | Select to move a file/folder without connection | An error is shown | P m9 | 
+| Share by link | Select to share by link a file | An error is shown | P m9 |
+| Share with user | Select to share with a user | An error is shown | P m9 |
 | **Specific error handling (server set ups)** |   |  |
-| Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message |
-| Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct |
-| Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct |
-| Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct |
+| Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message | P m9 |
+| Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct | P m9 |
+| Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct | P m9 |
+| Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct | F m9 | Crash
 | **Uploads** |   |  |
 | Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |
 | Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view |
@@ -85,7 +105,7 @@ Section Security is delegated to automatic tests
 | Copy several file to oC | From doc prov, copy several files to the same account, different location| Correct copied | |  |
 | Copy file to oC other account | From doc prov, copy a file to other account| Correct copied |  NA |
 | Copy several file to other location | From doc prov, copy several files to other location| Correct copied |  |  |
-| Copy a file to other location  in the same oC account| From doc prov, copy a files to other location in the same account | Correct copied | P m9 m7 |  |
+| Copy a file to other location  in the same oC account| From doc prov, copy a files to other location in the same account | Correct copied |  |  |
 | Copy a file from other location | From doc prov, copy files from other location to oC| Correctly copied |  |  |
 |**Folder**||||||
 | Folder with subfolders oC | From doc prov, copy a folder with subfolders to the same account, different location| Correct copied | |  |
@@ -106,21 +126,21 @@ Section Security is delegated to automatic tests
 | Rename folder | Rename a folder in root folder and non-root folder | Folders renamed correctly |  |  |  |
 | Edit file | Open a file stored in oC<br>Modify the file | File is saved in oC with the update | |   |  |
 | **Share by link** |   |  |
-| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works |
-| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work |
-| Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link |
-| Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option does not appear. |
-| Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared |
-| Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared |
-| Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server |
-| Download / View | 1. Share link of a folder<br>2. Select "Download / View"  | Folder is shared and content is visible, but no action is allowed |
-| Download / View / Upload | 1. Share link of a folder<br>2. Select "Download / View / Upload"  | Folder is shared and content is "updatable" |
-| Upload only | 1. Share link of a folder<br>2. Select "Upload Only"  | Folder is shared and content is not visible, but it is posible to upload content |
-| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear |
-| Enforced Password | Create a new public link with the password enforced in server | The link can not be saved until password is typed |
-| Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date |
-| Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input |
-| Shortcut | Create several new public links in different levels<br>Open drawer and select the option "Shared by link"| List is correct. All shared links are there. |
+| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works | P m9 |
+| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work | P m9 |
+| Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link |P m9 |
+| Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option does not appear. | P m9 |
+| Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared | P m9
+| Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared |P m9
+| Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server |P m9
+| Download / View | 1. Share link of a folder<br>2. Select "Download / View"  | Folder is shared and content is visible, but no action is allowed |P m9
+| Download / View / Upload | 1. Share link of a folder<br>2. Select "Download / View / Upload"  | Folder is shared and content is "updatable" |P m9
+| Upload only | 1. Share link of a folder<br>2. Select "Upload Only"  | Folder is shared and content is not visible, but it is posible to upload content |P m9
+| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear | P m9
+| Enforced Password | Create a new public link with the password enforced in server | The link can not be saved until password is typed |P m9
+| Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date | P m9
+| Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input | P m9
+| Shortcut | Create several new public links in different levels<br>Open drawer and select the option "Shared by link"| List is correct. All shared links are there. | F m9 | Error removing links of items in non-root
 | **Share with users** |   |  |
 |Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon |
 | Shared with one user ldap | Select to share a file whose name contains special characters  | Check that user2 has access to the file<br>Check that the file includes the share icon |
@@ -137,10 +157,9 @@ Section Security is delegated to automatic tests
 | Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file |
 | Federated Share disabled | 1. In server, disable the option federated share<br>2. Share a folder with user1 in other server<br>3. Login with user1<br> | The file can not be federated shared |
 | **Miscellanous** |   |  |
-| Splash screen | 1. Kill the app<br>2. Open again | Splash screen is there |
-| Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders |
-| Sort by size | 1. Change the list order from date to size<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
-| Sort file picker | 1. Select to upload a file<br>2. Check options to sot the list with descending | Data is listed by date ascending and descending |
+| Splash screen | 1. Kill the app<br>2. Open again | Splash screen is there | P m9 |
+| Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders |P m9 |
+| Sort by size | 1. Change the list order from date to size<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders| P m9 |
 | Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Logcat and Logfiles are generated. Filters work properly. Content can be cleared (even files) and shared |
-| Copy overlapped | 1. Copy the same file to a target folder twice | File is twice in the folder |
+| Copy overlapped | 1. Copy the same file to a target folder twice | File is twice in the folder | P m9 |
 |pull/2679#issuecomment-550198312||||
