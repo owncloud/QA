@@ -40,7 +40,7 @@ Section Security is delegated to automatic tests
 | :---- | :---- | :--------------- | :----: | :--------
 | **Wizard**|
 | Welcome wizard | Install the app from scratch | Welcome wizard shown and correctly displayed | P m9
-| Upgrade wizard | Upgrade from latest version | Upgrade wizard shown and correctly displayed |
+| Upgrade wizard | Upgrade from latest version | Upgrade wizard shown and correctly displayed | P m9 m7
 | **Detect Auth Method**  |   |  |
 | Basic Auth | Input a basic auth URL | User and password field shown | P m9
 | OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs | P m9
@@ -123,7 +123,7 @@ Section Security is delegated to automatic tests
 | Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works | P m9 m7|
 | Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work | P m9 m7|
 | Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link |P m9 m7 |
-| Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option does not appear. | P m9 |
+| Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option does not appear. | P m9 m7|
 | Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared | P m9 m7
 | Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared |P m9 m7
 | Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server |P m9 m7
