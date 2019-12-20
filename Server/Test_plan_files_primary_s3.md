@@ -1,15 +1,15 @@
 | Test Case                                | Expected Result                          | Result         | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | -------------- | --------------- |
-| *Previous requirements: Have a primary storage configured for every file in the system (Scality or Ceph preferred, Minio is not officially supported)* |                                          |                |                 |
-| Create 3 users, upload several files with user1, share some with user2, using user2 share some with user3. Using user3 download one of the files. | No problems. User3 can download the file. | :construction: |                 |
+| *Prerequirements: Have a primary storage configured for all files in the system (Scality or Ceph preferred, Minio is not officially supported), see https://buildmedia.readthedocs.org/media/pdf/s3-server/doc-adddoc/s3-server.pdf p.12* |                                          |                |                 |
+| Create 3 users, upload several files with user1 (some in a subfolder), share some with user2, using user2 share some with user3. Using user3 download one of the files. | No problems. User3 can download the file. | :construction: |                 |
 | Rename a file, in root and in a subsubfolder. | Files are renamed without problems.      | :construction: |                 |
 | Using cadaver, copy a file from root to a subsubfolder. | Files are copied without problems.       | :construction: |                 |
-| Connect desktop client. Sync a small file of about 1MiB. | File is uploaded and downloaded correctly. | :construction: |                 |
-| Connect desktop client. Sync a file up to 256MiB, download it. | File is uploaded and downloaded correctly. | :construction: |                 |
+| Connect desktop client. Sync a small file to the server of about 1MiB. Download it with web interface. | File is uploaded and downloaded correctly. | :construction: |                 |
+| Connect desktop client. Sync a file of ca 256MiB to the server, download it with web interface. | File is uploaded and downloaded correctly. | :construction: |                 |
 | Federate share a folder and a file with another server which doesn't use objectstore. | Receiver can interact with the folder and file shared. | 🚧             |                 |
 | Federate share a folder and a file from another server which doesn't use objectstore with the server using objectstore. | User in objectstore server can interact with the folder shared. | 🚧             |                 |
 | Favorite several files and folders. Unfavorite them. Refresh page. | Files are favorited and unfavorited without problems. Check that state remains after refreshing. | :construction: |                 |
-| Public share a folder and a file.        | Folder and file can be used normally by anonymous users. | :construction: |                 |
+| As user1: Public share a folder and a file.        | Folder and file can be used normally by anonymous users. | :construction: |                 |
 | Add comments to a shared file with several users. | No errors found.                         | :construction: |                 |
 | Add comments to a shared folder with several users. | No errors found.                         | :construction: |                 |
 | Add tags to a shared folder with several users. | No errors found.                         | :construction: |                 |
