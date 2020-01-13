@@ -210,7 +210,7 @@ def generate_shares():
             print("Generating share entry from \"%s\": " % user_from, share_entry)
             shares[user_from].append(share_entry)
 
-            if has_link:
+            if has_link and user_from == 'bob':
                 link_share_entry = {
                     'path': path,
                     'type': 'link',
@@ -253,7 +253,7 @@ def generate_shares():
 
     shares['bob'].append({
         'base_path': 'bob2charlie+link',
-        'path': 'bob2charlie+link (OUP,OLP)',
+        'path': 'bob2charlie+link (OUP, OLP)',
         'type': 'link',
         'kinds': ('OUP', 'OLP')
     })
