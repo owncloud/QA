@@ -33,7 +33,7 @@ Preconditions: Needed mail not associated to any Apple ID to use as Sandbox User
 | No more renewals | Wait 5 renewals (maximum for sandbox users) | Features are locked (check also in Settings > Pro Features) | P m13 t13 | 
 | Manage Suscriptions | 1. Purchase the pro subscription<br>2. Settigs > Purchases > Manage Suscription |  | NA | Blank page. Not posible to test with sandbox users
 | Multiaccount | 1. Attach two accounts to app<br>2. Subscribe the pro features<br>3. Add another account | Features available in all accounts | P m13 t13 |
-| Periodical Shortcuts | 1. Subscribe the pro features for 2 months<br>2. Create a shortcut executed every hour<br>3. Wait till subscription expires | After expired suscription, shortcut is not executed anymore | P m13 | Notification raises, correct |
+| Periodical Shortcuts | 1. Subscribe the pro features for 2 months<br>2. Create a shortcut executed every hour<br>3. Wait till subscription expires | After expired suscription, shortcut is not executed anymore | P m13 t13 | Notification raises, correct |
 | Multiple operations | 1. Purchase a feature (scanner f .ex)<br>2. Subscribe the pro features<br>3. Wait till the subscription expires | Scanner available, the other pro features don't | P m13 t13 |
 |**Restore purchases**|||||
 | No Purchases | 1. Install the app<br>2. Settings > Purchases > Restore purchases | No purchases in the list | P m13 t13 |
