@@ -44,3 +44,6 @@ Check that guests menu in sharing section works fine using Chrome as browser |  
 Check that guests menu in sharing section works fine using IE11 as browser |  | :construction:  |
 Check that guests menu in sharing section works fine using Edge as browser |  | :construction:  |
 Check that guests menu in sharing section works fine using Safari as browser |  | :construction:  |
+**Translations**|  |   |
+|  |   |
+Check that translations to German and Arabic happens |  | :construction:  |
