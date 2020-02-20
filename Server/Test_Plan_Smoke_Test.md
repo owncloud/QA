@@ -19,6 +19,9 @@ Scenarios to consider:
 - [ ] Impersonate
 - [ ] Login with App Token Login
 - [ ] TOTP
+- [ ] German translations
+- [ ] Arabic translations
+- [ ] Update from previous version
 
 ## Testing setup
 
