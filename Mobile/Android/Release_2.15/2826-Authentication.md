@@ -69,5 +69,9 @@ Server: 10.4.0
 | Hide URL | Set show\_server\_url\_input to false in setup.xml | URL hidden | P m10 |  |  |
 | Show welcome link | Set show\_welcome\_link to false in setup.xml | Welcome link hidden | P m10 |  |  |
 | Welcome link | Set a URL in welcome\_link\_url field in setup.xml | Correct link | P m10 |  |  |
+| Check arrow color| Set a color in login\_text\_color field in setup.xml | Correct color of the arrow, the same as the login text | F m10 | Different color |  |
+| Eye color | Set a color in login\_text\_color field in setup.xml | Password eye of the same color of credentials | P m10 |  |  |
+| Server status icon | Set a color in login\_connection\_text\_color field in setup.xml | Correct color | F m10 | Different color |  |
+| Auth status icon | Set a color in login\_credentials\_text\_color field in setup.xml | Correct color | F m10 | Different color |  |
 |**Extra**||||||
 | 2655 | Check issue [2655](https://github.com/owncloud/android/issues/2655) | Problem fixed | P m10 |  |  |
