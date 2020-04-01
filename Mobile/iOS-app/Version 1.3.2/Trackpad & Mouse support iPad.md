@@ -18,7 +18,7 @@ Server: 10.4.0
 | Passcode Lock | Click in: Switch, number buttons, cancel | Correctly executed  | P t13 | | |
 | Lock aplication | Click in: different options | Correctly executed  | P t13 | | |
 | Touch ID | Click in: switch | Correctly executed | P t13 | | |
-| Certificates | Click in: certificates | Correctly executed | F t13 | Not posible to scroll down. Not posible to swipe left in certificate  | | |
+| Certificates | Click in: certificates | Correctly executed | F t13 | Not posible to scroll down. Not posible to swipe left in certificate  | Scroll only available with mouse, not trackpad | |
 | User interface | Click in: themes, logging switches, logging options, open in loggingfile | Correctly executed | P t13 | | |
 | Storage | Click in: themes, logging switches, logging options, open in logging file | Correctly executed | P t13 | | |
 | Display Settings | Click in: Switch | Correctly executed  | P t13 | | |
