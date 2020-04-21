@@ -14,7 +14,7 @@ This aims to be a client-agnostic testplan for the OAuth2 application, centered 
 | Disable OAuth2 app via CLI using `occ app:disable oauth2` | - The apps gets disabled <br> - Previously mentioned header goes away in further requests | :construction: | |
 | **Registered Clients** | | |
 | Default clients | The default Registered clients are included among the "Settings > Admin > User Authentication" OAuth 2.0: Registered Clients | :construction: | See https://github.com/owncloud/oauth2/pull/38 for the default values |
-| Register new Client | 64-character-length `client_id` and `client_secret` are generated together with a (optional) Client Name and a (required) Redirection URL | :construction: | |
+| Register new Client | 64-character-length `client_id` and `client_secret` are generated together with a (required) Client Name and a (required) Redirection URL | :construction: | |
 | Remove a Client | - Confirmation dialog is prompted before removal <br> - All client sessions opened from those clients get removed | :construction: | |
 | **Unregistered Clients** | | |
 | Authentication flow from an unregistered client | Unsuccessful [Authorization Request] | :gear: | Browser displays the "Request not valid" screen.|
