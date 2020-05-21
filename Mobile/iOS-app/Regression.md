@@ -165,3 +165,5 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | View | Open settings view | Option to select heic/jpg is correctly displayed |  | |
 | Heic selected | Select the option heic in settings<br>Upload pics in heic | Heic format in uploaded files, check in mime header |  | |
 | JPG selected | Select the option JPG in settings<br>Upload pics in heic | JPG format in uploaded files , check in mime header|  | |
+|**Accesibility**||||||
+| https://github.com/owncloud/ios-app/issues/264 |  |  |  | |

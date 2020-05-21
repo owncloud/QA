@@ -17,6 +17,7 @@
 | LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access |
 | From Browser | 1. Login in a web browser<br>2. Copy the URL and paste it in server field | The URL is cleaned and connection is stablished |
 | Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view |
+| URL with trailing slash | 1. Add a trailing slash to an correct URL | URL is correctly accepted |
 | **OAuth2** |   |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
 | Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
@@ -91,6 +92,8 @@
 | Multiaccount | 1. Add three different accounts<br>2. Upload files from all of them at the same time  | Files are correctly uploaded in each account and folder |
 | Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder |
 | Upload from camera with different camera apps | 1. Select upload from camera<br>2. Select a camera app and take a pic | Pic uploaded to the correct folder |
+| bigfilechunking true | 1. Select upload a file to a server with the capability `bigfilechunking true`  and `chunking>=1.0` (oC10) | Pic uploaded with chunking NG (MKCOL, PUT, PUT, PUT, MOVE)|
+| bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT |
 | **Upload from external** |   |  |
 | Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated |
 | Send text | Copy text and share it with oC | A txt file is created with the copied text |
