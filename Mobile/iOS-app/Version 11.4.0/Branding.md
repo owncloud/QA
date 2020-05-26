@@ -60,31 +60,125 @@ In the comments, the number of report added in the PR
 
 | Property  | Value | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
-| Corporate - Color | Color of top and bottom bar | Color correct | Passed | |
-| Action - Primary | ? | Color correct | | |
-| Action - Inverse | ? | Color correct | | |
-| Action - Secondary | ? | Color correct | | |
-| Text - Primary | Main color for the text in the app. It is set in:<br>Welcome message<br>Credentials prompt<br>Credentials typed<br>Accounts title<br>Accounts list<br>Items in file list<br>Name of the file in the card<br>Actions label in the card<br>Quick access<br>Sharees<br>List of permissions<br>Public links | Color correct | Passed | |
-| Text - Inverse | This color should be inverse of corporate color.<br> It is used in the text printed in the up and bottom bars | Color correct | Passed | Icons in bottom bar (browse, quick and status) are not tinted in this color |
-| Text - Secondary | In hints and submenus:<br>Hints in credentials<br>Size, date in list and card<br>Three dot button in card  | Color correct | Passed | |
-| Text - InverseLight | Options in top bar:<br>Back<br>`+` button<br>three dot button<br>Multiselection<br>Sorting menu | Color correct | Passed | |
-| Text - Disabled | ? | Color correct | | |
-| Background - Standard | Background color:<br>Credentials fields<br>List of files<br>Card | Color correct | Passed | Public and private link background do not get this color |
-| Background - Light | ? |Color correct |  |
-| Background - InputForm | Used only in the background of search bar | Color correct | Passed |
-| Background - Selected | ? | Color correct|  |
-| Background - Tooltip | ? | Color correct|  |
-| System - Success | ? | Color correct|  |
-| System - Success background | ? | Color correct|  |
-| System - Warning | ? | Color correct|  |
-| System - Warning background | ? | Color correct|  |
-| System - Danger | ? | Color correct|  |
-| System - Danger background | ? | Color correct|  |
-| Status - Indicator | ? | Color correct| Uploads? |
-| Status - Background | ? | Color correct| Uploads? |
-| Icon - System | ? | Color correct| |
-| Icon - SystemLight | ? | Color correct|  |
-| Icon - FileType normal | Color for folders and many file types thumbnails. In File List and also in quick access | Color correct|  |
-| Icon - Disabled | ? | Color correct| |
-| Tab - Active | Bottom bar options. Color of the selected | Color correct| Passed |
-| Tab - Inactive | Bottom bar options. Color of the non selected | Color correct| Passed |
+| Corporate -> Color | Color of top and bottom bar | Color correct | Passed | |
+| Action -> Primary | ? | Color correct | | |
+| Action -> Inverse | ? | Color correct | | |
+| Action -> Secondary | ? | Color correct | | |
+| Text -> Primary | Main color for the text in the app. It is set in:<br>Welcome message<br>Credentials prompt<br>Credentials typed<br>Accounts title<br>Accounts list<br>Items in file list<br>Name of the file in the card<br>Actions label in the card<br>Quick access<br>Sharees<br>List of permissions<br>Public links | Color correct | Passed | |
+| Text -> Inverse | This color should be inverse of corporate color.<br> It is used in the text printed in the up and bottom bars | Color correct | Passed | Icons in bottom bar (browse, quick and status) are not tinted in this color |
+| Text -> Secondary | In hints and submenus:<br>Hints in credentials<br>Size, date in list and card<br>Three dot button in card  | Color correct | Passed | |
+| Text -> InverseLight | Options in top bar:<br>Back<br>`+` button<br>three dot button<br>Multiselection<br>Sorting menu | Color correct | Passed | |
+| Text -> Disabled | ? | Color correct | | |
+| Background -> Standard | Background color:<br>Credentials fields<br>List of files<br>Card | Color correct | Passed | Public and private link background do not get this color |
+| Background -> Light | ? |Color correct |  |
+| Background -> InputForm | Used only in the background of search bar | Color correct | Passed |
+| Background -> Selected | Color | ? |  |
+| Background -> Tooltip | Color | ?|  |
+| System -> Success | Color | ?|  |
+| System -> Success background | Color | ? |  |
+| System -> Warning | Color | ?|  |
+| System -> Warning background | Color | ?|  |
+| System -> Danger | Color | ?|  |
+| System -> Danger background | Color | ?|  | 
+| Status -> Progress Indicator | To use in the progress transfers | Passed |  |
+| Status -> Progress Background | To use in the progress transfers | Passed |  |
+| Icon -> System | Color | ?| |
+| Icon -> SystemLight | Color | ?|  |
+| Icon -> FileType normal | Color for folders and many file types thumbnails. In File List and also in quick access | ?|  |
+| Icon -> Disabled | Color | ?| |
+| Tab -> Active | Bottom bar options. Color of the selected | Color correct| Passed |
+| Tab -> Inactive | Bottom bar options. Color of the non selected | Color correct| Passed |
+
+**Theme**
+
+| Property  | Value | Expected | Result | Related Comment | 
+| :-------- | :---- | :------- | :----: | :-------------- | 
+| Name | Name of the theme | If profiles are available, it is not visible.<br>If no profiles are available, in the `Themes` Section of `Settings` | Passed | |
+| Identifer | Identifier of the theme | Not present in the app, only to indentify | NA |  |
+| ThemeStyle | Dark | Headers in `Settings`<br>Divider lines in file list | Passed | | 
+| ThemeStyle | Light |  |  | Difference with contrast? | 
+| ThemeStyle | Contrast | By default. |  | | 
+| DarkBrandColor | Color | ? |  | | 
+| LightBrandColor | Color | `Cancel` buttons in login flow |  |  | 
+| tintColor | Color | ? |  |  | 
+| Label -> InformativeColor | Color | ? |  | It is empty by default | 
+| Label -> SuccessColor | Color | ? |  |  | 
+| Label -> WarningColor | Color | ? |  |  | 
+| Label -> ErrorColor | Color | ? |  |  | 
+| Fill -> Approval colors -> normal | Colors in background and foreground | Login button | Passed |  | 
+| Fill -> Approval colors -> highlighted | Colors in background and foreground | ? |  |  | 
+| Fill -> Approval colors -> disabled | Colors in background and foreground | ? |  |  | 
+| Fill -> Neutral colors -> normal | Colors in background and foreground | ? |  |  | 
+| Fill -> Neutral colors -> highlighted | Colors in background and foreground | ? |  |  | 
+| Fill -> Neutral colors -> disabled | Colors in background and foreground | ? |  |  | 
+| Fill -> Destructive colors -> normal | Colors in background and foreground | ? |  |  | 
+| Fill -> Destructive colors -> highlighted | Colors in background and foreground | ? |  |  | 
+| Fill -> Destructive colors -> disabled | Colors in background and foreground | ? |  |  | 
+| Favorite -> enabled | Color  | Favorite star enabled? | Failed |  | 
+| Favorite -> disabled | Color  | Favorite star disabled? | Failed |  |
+| Table -> tableBackgroundColor | Color | Color of the table behind the list of files and in the top of the card, and the sharing cards. Also, in the rename, create folders edit text background | Passed |  |
+| Table -> tableGroupBackgroundColor | Color | Color of the table behind the sharing cards, and in Actions label in file card | Passed |  |
+| Table -> tableSeparatorColor | Color | Color of the item separator in lists | Passed |  |
+| Table -> tableRowBorderColor | Color | ? |  |  |
+| Table -> tableRowColors -> backgroundColor | Color | ? |  |  |
+| Table -> tableRowColors -> labelColor | Color | ? |  |  |
+| Table -> tableRowColors -> secondaryLabelColor | Color | ? |  |  |
+| Table -> tableRowColors -> symbolColor | Color | ? |  |  |
+| Table -> tableRowColors -> tintColor | Color | ? |  |  |
+| Table -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: | ? |  |   |  
+| Table -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
+| Table -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
+| Icon -> folderFillColor | Color  | Color of the folder icon in login view | Passed |  | 
+| Icon -> fileFillColor | Color  | Color of some file icons: text, images, videos, audio. Check in `Quick Access` | Passed |  |  
+| Icon -> logoFillColor | Color  | ? | |  |    
+| Icon -> iconFillColor | Color  | ? | |  |    
+| Icon -> symbolFillColor | Color  | ? |  |  |  
+| Progress -> foreground | Color  | Color of the progress circle in transfers | Failed | Bad default value: it is Status.Progress-Indicator |  
+| Progress -> background | Color  | Color of the progress background in transfers | Failed | Bad default value: it is Status.Progress-Indicator |  
+| Toolbar -> backgroundColor | Color  | Color of the bottom bar | ? |  |  
+| Toolbar -> labelColor | Color  | Color of the status message in bottom bar | Passed |  | 
+| Toolbar -> tintColor | Color  | Color of the top edge of status message | ? |  |   
+| Toolbar -> secondaryLabelColor | Color  | ? |  |  |  
+| Toolbar -> symbolColor | Color  | ? |  |  |  
+| Toolbar -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | Incomplete |  |  
+| Toolbar -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? |  |  
+| Toolbar -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: Color of the unselected tabs in bottom bar<br>Foreground:  | Incomplete |  |  
+| Searchbar -> backgroundColor | Color | Background color of the SearchBar | Passed |
+| Searchbar -> labelColor | Color | Color of the hint in SearchBar | Passed |
+| Searchbar -> secondaryLabelColor | Color | ? |  |
+| Searchbar -> symbolColor | Color | ? |  |
+| Searchbar -> tintColor | Color | Cursor in search bar. Cancel button | ? |
+| Searchbar -> filledColorPairC -> normal | Colors in back and foreground  | Background: <br>Foreground:   | Failed | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |  
+| Searchbar -> filledColorPairC -> highlighted |Colors in back and foreground  | Background: <br>Foreground:  |  |  |  
+| Searchbar -> filledColorPairC -> disabled |Colors in back and foregorund  |  Background: <br>Foreground:   | Failed | Foreground in color of unselected tab of bottom bar | 
+| NavigationBar -> backgroundColor | Color | Background color of the Toolbar | Passed |
+| NavigationBar -> labelColor | Color | Color of the organization name on the top | Passed |
+| NavigationBar -> secondaryLabelColor | Color | ? | |
+| NavigationBar -> symbolColor | Color | ? | |
+| NavigationBar -> tintColor | Color | Back Navigation<br>`+`  button<br>Three-dot-button<br>Sorting<br>Multiselection| Passed |
+| NavigationBar -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |   |  
+| NavigationBar -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? |  |  
+| NavigationBar -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: Color of the unselected tabs in bottom bar<br>Foreground:  | ? |  |  
+| darkBrandColors -> backgroundColor | Color | ? |  |
+| darkBrandColors -> labelColor | Color | ? |  |
+| darkBrandColors -> secondaryLabelColor | Color | ? | |
+| darkBrandColors -> symbolColor | Color | ? | |
+| darkBrandColors -> tintColor | Color | ? | |
+| darkBrandColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |   |  
+| darkBrandColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? |  |  
+| darkBrandColors -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: Color of the unselected tabs in bottom bar<br>Foreground:  | ? |  |  
+| lightBrandColors -> backgroundColor | Color | ? |  |
+| lightBrandColors -> labelColor | Color | ? |  |
+| lightBrandColors -> secondaryLabelColor | Color | ? | |
+| lightBrandColors -> symbolColor | Color | ? | |
+| lightBrandColors -> tintColor | Color | ? | |
+| lightBrandColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |   |  
+| lightBrandColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? |  |  
+| lightBrandColors -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: Color of the unselected tabs in bottom bar<br>Foreground:  | ? |  |  
+| Styles -> statusBarStyle | | | |
+| Styles -> barStyle | | | |
+| Styles -> activityIndicatorViewStyle | | | |
+| Styles -> searchBarActivityIndicatorViewStyle | | | |
+| Styles -> InterfaceStyle | | | |
+| Styles -> keyboardAppearance | | | |
+
