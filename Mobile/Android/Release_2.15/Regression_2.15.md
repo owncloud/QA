@@ -54,6 +54,7 @@ For the current version, the following sections has been removed, since there is
 | Change certificate | 1. Login in https server with a non-accepted cert<br>2. Try to upload content before accepting the certificate | 1. A pop up is raised to warn the user of the cert and asking him to accept<br>2. Error shown in uploads view |
 | URL with trailing slash | 1. Add a trailing slash to an correct URL | URL is correctly accepted |
 | URL of server older than 10 | Add correct URL of a 9.x server | Server can not be connected |
+| App Password | Share a folder with an email<br>Login using the email | Correctly connected |
 | **OAuth2** |   |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
 | Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
