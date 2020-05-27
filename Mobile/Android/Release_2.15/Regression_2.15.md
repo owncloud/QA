@@ -1,3 +1,37 @@
+#### Version 2.15
+
+#### PR: [https://github.com/owncloud/android/issues/2876]([https://github.com/owncloud/android/issues/2876])<br>
+
+
+Device/s: <br>
+Server: 10.4.1 
+
+How to read Results:
+
+P -> Passed<br>
+F -> Failed<br>
+m -> mobile (iPhone)<br>
+t -> tablet (iPad)<br>
+12 -> iOS version<br>
+NA -> non applicable
+
+P m8 -> Passed in an phone with Android 8<br>
+F t8 -> Failed in an tabled with Android 8<br>
+P m8 t8 -> Passed with a phone with Android 8 and an tabled with Android 8 <br>
+P m12 F t12 -> Passed with a phone with Android 8 and failed with tablet with Android 8  <br>
+For the current version, the following sections has been removed, since there is not affections in terms of regressions:
+
+- Multiselection
+- Thumbnails
+- Local Search
+- Grid/List
+- Accounts manager
+- User quota
+- Videostreaming
+- Conflict handling
+- Sharing
+
+
 | Title | Procedure |  Expected Result |
 | :---: | :-------- | :--------------- |
 | **Welcome Wizard**|

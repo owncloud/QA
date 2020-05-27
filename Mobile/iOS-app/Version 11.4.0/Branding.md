@@ -120,22 +120,30 @@ In the comments, the number of report added in the PR
 | Table -> tableGroupBackgroundColor | Color | Color of the table behind the sharing cards, and in Actions label in file card | Passed |  |
 | Table -> tableSeparatorColor | Color | Color of the item separator in lists | Passed |  |
 | Table -> tableRowBorderColor | Color | ? |  |  |
-| Table -> tableRowColors -> backgroundColor | Color | ? |  |  |
-| Table -> tableRowColors -> labelColor | Color | ? |  |  |
-| Table -> tableRowColors -> secondaryLabelColor | Color | ? |  |  |
+| Table -> tableRowColors -> backgroundColor | Color | Background color of the cells in a list | Passed |  |
+| Table -> tableRowColors -> labelColor | Color | Color of the main text in a cell (file name, account name, share..) | Passed |  |
+| Table -> tableRowColors -> secondaryLabelColor | Color | Color of hints and submenus:<br>Hints in credentials<br>Size, date in list and card<br>Three dot button in card<br>Badges (av. offline, share...) | Passed |  |
 | Table -> tableRowColors -> symbolColor | Color | ? |  |  |
 | Table -> tableRowColors -> tintColor | Color | ? |  |  |
-| Table -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: | ? |  |   |  
-| Table -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
-| Table -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
-| Icon -> folderFillColor | Color  | Color of the folder icon in login view | Passed |  | 
+| Table -> tableRowColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: | ? |  |   |  
+| Table -> tableRowColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
+| Table -> tableRowColors -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
+| Table -> tableRowHighlightColors -> backgroundColor | Color | Color of the cell when it is clicked | Passed |  |
+| Table -> tableRowHighlightColors -> labelColor | Color | ? |  |  |
+| Table -> tableRowHighlightColors -> secondaryLabelColor | Color | ? |  |  |
+| Table -> tableRowHighlightColors -> symbolColor | Color | ? |  |  |
+| Table -> tableRowHighlightColors -> tintColor | Color | ? |  |  |
+| Table -> tableRowHighlightColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: | ? |  |   |  
+| Table -> tableRowHighlightColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
+| Table -> tableRowHighlightColors -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
+| Icon -> folderFillColor | Color  | Color of the folder icon in files view | Passed |  | 
 | Icon -> fileFillColor | Color  | Color of some file icons: text, images, videos, audio. Check in `Quick Access` | Passed |  |  
 | Icon -> logoFillColor | Color  | ? | |  |    
 | Icon -> iconFillColor | Color  | ? | |  |    
 | Icon -> symbolFillColor | Color  | ? |  |  |  
 | Progress -> foreground | Color  | Color of the progress circle in transfers | Failed | Bad default value: it is Status.Progress-Indicator |  
 | Progress -> background | Color  | Color of the progress background in transfers | Failed | Bad default value: it is Status.Progress-Indicator |  
-| Toolbar -> backgroundColor | Color  | Color of the bottom bar | ? |  |  
+| Toolbar -> backgroundColor | Color  | Color of the bottom bar | ? | Different color of top bar |  
 | Toolbar -> labelColor | Color  | Color of the status message in bottom bar | Passed |  | 
 | Toolbar -> tintColor | Color  | Color of the top edge of status message | ? |  |   
 | Toolbar -> secondaryLabelColor | Color  | ? |  |  |  
