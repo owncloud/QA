@@ -45,6 +45,7 @@ In the comments, the number of report added in the PR
 | allowedAuthenticationMethods | com.owncloud.basicauth - com.owncloud.oauth2 | Credentials are asked in the app | Failed | Prompted to oauth2 |
 | allowedAuthenticationMethods | com.owncloud.oauth2 - com.owncloud.basicauth| Redirected to OAuth2 | Passed |  |
 | allowedAuthenticationMethods | empty | Gets Oauth2 if available. Otherwise, basic auth. | Passed | |
+| allowedAuthenticationMethods | not recognised | Alert error | Passed | |
 
 
 **URLs**
@@ -61,12 +62,12 @@ In the comments, the number of report added in the PR
 | Property  | Value | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
 | Corporate -> Color | Color of top and bottom bar | Color correct | Passed | |
-| Action -> Primary | ? | Color correct | | |
-| Action -> Inverse | ? | Color correct | | |
-| Action -> Secondary | ? | Color correct | | |
-| Text -> Primary | Main color for the text in the app. It is set in:<br>Welcome message<br>Credentials prompt<br>Credentials typed<br>Accounts title<br>Accounts list<br>Items in file list<br>Name of the file in the card<br>Actions label in the card<br>Quick access<br>Sharees<br>List of permissions<br>Public links | Color correct | Passed | |
+| Action -> Primary | ? | Color correct | | Used by tableRowColors |
+| Action -> Inverse | ? | Color correct | | Not used |
+| Action -> Secondary | ? | Color correct | | Not used |
+| Text -> Primary | Main color for the text in the app. It is set in:<br>Welcome message<br>Credentials prompt<br>Credentials typed<br>Accounts title<br>Accounts list<br>Items in file list<br>Name of the file in the card<br>Actions label in the card<br>Quick access<br>Sharees<br>List of permissions<br>Public links | Color correct | Passed | Used in `tableRowColors.labelColor`|
 | Text -> Inverse | This color should be inverse of corporate color.<br> It is used in the text printed in the up and bottom bars | Color correct | Passed | Icons in bottom bar (browse, quick and status) are not tinted in this color |
-| Text -> Secondary | In hints and submenus:<br>Hints in credentials<br>Size, date in list and card<br>Three dot button in card  | Color correct | Passed | |
+| Text -> Secondary | In hints and submenus:<br>Hints in credentials<br>Size, date in list and card<br>Three dot button in card  | Color correct | Passed |Used in `tableRowColors.labelColor` |
 | Text -> InverseLight | Options in top bar:<br>Back<br>`+` button<br>three dot button<br>Multiselection<br>Sorting menu | Color correct | Passed | |
 | Text -> Disabled | ? | Color correct | | |
 | Background -> Standard | Background color:<br>Credentials fields<br>List of files<br>Card | Color correct | Passed | Public and private link background do not get this color |
@@ -74,17 +75,18 @@ In the comments, the number of report added in the PR
 | Background -> InputForm | Used only in the background of search bar | Color correct | Passed |
 | Background -> Selected | Color | ? |  |
 | Background -> Tooltip | Color | ?|  |
-| System -> Success | Color | ?|  |
+| Background -> Standard | Color | ?|  | Used by colors -> table  |
+| System -> Success | Color | ?|  | Used by colors -> label
 | System -> Success background | Color | ? |  |
-| System -> Warning | Color | ?|  |
+| System -> Warning | Color | ?|  | Used by colors -> label
 | System -> Warning background | Color | ?|  |
-| System -> Danger | Color | ?|  |
+| System -> Danger | Color | ?|  | Used by colors -> label
 | System -> Danger background | Color | ?|  | 
 | Status -> Progress Indicator | To use in the progress transfers | Passed |  |
 | Status -> Progress Background | To use in the progress transfers | Passed |  |
 | Icon -> System | Color | ?| |
 | Icon -> SystemLight | Color | ?|  |
-| Icon -> FileType normal | Color for folders and many file types thumbnails. In File List and also in quick access | ?|  |
+| Icon -> FileType normal | Color for folders and many file types thumbnails. In File List and also in quick access | ? | | Used by colors -> icon |
 | Icon -> Disabled | Color | ?| |
 | Tab -> Active | Bottom bar options. Color of the selected | Color correct| Passed |
 | Tab -> Inactive | Bottom bar options. Color of the non selected | Color correct| Passed |
@@ -98,9 +100,9 @@ In the comments, the number of report added in the PR
 | ThemeStyle | Dark | Headers in `Settings`<br>Divider lines in file list | Passed | | 
 | ThemeStyle | Light |  |  | Difference with contrast? | 
 | ThemeStyle | Contrast | By default. |  | | 
-| DarkBrandColor | Color | ? |  | | 
+| DarkBrandColor | Color | ? |  | It is `Corporate.Color` by default. Where is it?
 | LightBrandColor | Color | `Cancel` buttons in login flow |  |  | 
-| tintColor | Color | ? |  |  | 
+| tintColor | Color |  Items in the file card<br>Color of the cloud icon in list of accounts | Passed | 
 | Label -> InformativeColor | Color | ? |  | It is empty by default | 
 | Label -> SuccessColor | Color | ? |  |  | 
 | Label -> WarningColor | Color | ? |  |  | 
@@ -123,7 +125,7 @@ In the comments, the number of report added in the PR
 | Table -> tableRowColors -> backgroundColor | Color | Background color of the cells in a list | Passed |  |
 | Table -> tableRowColors -> labelColor | Color | Color of the main text in a cell (file name, account name, share..) | Passed |  |
 | Table -> tableRowColors -> secondaryLabelColor | Color | Color of hints and submenus:<br>Hints in credentials<br>Size, date in list and card<br>Three dot button in card<br>Badges (av. offline, share...) | Passed |  |
-| Table -> tableRowColors -> symbolColor | Color | ? |  |  |
+| Table -> tableRowColors -> symbolColor | Color | ? |  | Action.Primary. Where is it? |
 | Table -> tableRowColors -> tintColor | Color | ? |  |  |
 | Table -> tableRowColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: | ? |  |   |  
 | Table -> tableRowColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground:  | ? |  |  
@@ -183,10 +185,18 @@ In the comments, the number of report added in the PR
 | lightBrandColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |   |  
 | lightBrandColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? |  |  
 | lightBrandColors -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: Color of the unselected tabs in bottom bar<br>Foreground:  | ? |  |  
-| Styles -> statusBarStyle | | | |
-| Styles -> barStyle | | | |
-| Styles -> activityIndicatorViewStyle | | | |
+| Styles -> statusBarStyle | lightContent | | |
+| Styles -> statusBarStyle | darkContent | | |
+| Styles -> statusBarStyle | default | | |
+| Styles -> barStyle | default | | |
+| Styles -> barStyle | black | | |
+| Styles -> activityIndicatorViewStyle | large | | |
+| Styles -> activityIndicatorViewStyle | medium | | |
 | Styles -> searchBarActivityIndicatorViewStyle | | | |
-| Styles -> InterfaceStyle | | | |
-| Styles -> keyboardAppearance | | | |
+| Styles -> InterfaceStyle | unspecified | | |
+| Styles -> InterfaceStyle | light | | |
+| Styles -> InterfaceStyle | dark | | |
+| Styles -> keyboardAppearance | default | | |
+| Styles -> keyboardAppearance | light | | |
+| Styles -> keyboardAppearance | dark | | |
 
