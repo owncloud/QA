@@ -10,7 +10,7 @@
 | Log in Portrait | 1. Create a user<br>2. Log in owncloud enter a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |
 | Log in Landscape | 1. Create a user<br>2. Log in owncloud by typing a correct url<br>3. Type username + password  | Access to the app. Displayname (not the username) |
 | Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown |
-| Empty password | 1. Type a correct url<br>2. Try to log in without filling the password | error is shown |
+| Empty credentials | 1. Type a correct url and let credentials empty | Log in button is hidden |
 | Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown |
 | Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |
 | Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud |
@@ -59,11 +59,11 @@
 | Disable pattern lock | 1. Select to disable pattern<br>2. When it's asked to enter the current pattern, don't enter it, leave the app<br>3. Open the app again<br>| Pattern is asked |
 | Disable pattern lock | 1. select to disable pattern<br>2. When it's asked to enter the current pattern, enter it<br>3.- Leave the app<br>4. Open the app<br>| Pattern is not asked anymore |
 | Both at the same time | Try to enable pattern and passcode lock at the same time | Not posible |
-| Fingerprint lock | Option is enabled if device has fingerprint support | Pattern is asked |
-| Fingerprint unlock | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the fingerprint | 1. Fingerprint asked<br>2. Passcode/Pattern asked |
-| Upload file from camera with security | With a sec method enabled (pattern/passcode/fingerp), upload from camera | Method not asked |
-| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked |
-| Upload file from external app with security | With a sec method enabled (pattern/passcode/fingerp), upload from external app | Method not asked |
+| Biometrical lock | Device supports biometrical | Option is enabled in `Settings`  |
+| Biometrical unlock | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the biometrical | 1. Biometrical asked<br>2. Passcode/Pattern asked |
+| Upload file from camera with security | With a sec method enabled (pattern/passcode/biometrical), upload from camera | Security not asked |
+| Upload file from external app with security | With a securoty method enabled (pattern/passcode/biometrical), upload from external app | Security not asked |
+| Upload file from external app with security | With a security method enabled (pattern/passcode/biometrical), upload from external app | Security not asked |
 | **Actions with no connection** |   |  |
 | Create a folder without connection | Create a folder without connection | An error message is shown |
 | Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|
@@ -88,7 +88,6 @@
 | Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
 | Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |
-| Move or copy uploadeds | 1. Select to upload a file and select "Copy"<br>2. Select to upload a file and select "Move" | 1. The original is not removed from device<br>2. The original is removed from device |
 | Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  |
 | Instant uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum |
 | Instant uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app |
@@ -134,6 +133,16 @@
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is downloaded but not av.offine |
 | Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. |
 | Delete locally | Try to delete locally an av. offline folder | Action can not be performed |
+|**Basic Operations**||||||
+| Create folder | Create a new folder  | Folder is created inside the oC account |  |  |  |
+| Delete file | Delete a file in root folder and non-root folder | Files deleted correctly | |  |  |
+| Delete folder | Delete a folder in root folder and non-root folder | Folders deleted correctly |  |  |  |
+| Rename file | Rename a file in root folder and non-root folder | Files renamed correctly | |  |  |
+| Rename folder | Rename a folder in root folder and non-root folder | Folders renamed correctly |  |  |  |
+| Copy file | Copy a file in root folder and non-root folder | Files copied correctly | |  |  |
+| Copy folder | Copy a folder in root folder and non-root folder | Folders copied correctly |  |  |  |
+| Move file | Move a file in root folder and non-root folder | Files moved correctly | |  |  |
+| Move folder | Move a folder in root folder and non-root folder | Folders moved correctly |  |  |  |
 | **Multiselection files** |   |  |
 | Sync files | 1. Select several files<br>2. Tap on sync | Files are downloaded correctly |
 | Delete files | 1. Select several files<br>2. Tap on delete | Files are deleted correctly |
@@ -185,11 +194,11 @@
 | Download / View | 1. Share link of a folder<br>2. Select "Download / View"  | Folder is shared and content is visible, but no action is allowed |
 | Download / View / Upload | 1. Share link of a folder<br>2. Select "Download / View / Upload"  | Folder is shared and content is "updatable" |
 | Upload only | 1. Share link of a folder<br>2. Select "Upload Only"  | Folder is shared and content is not visible, but it is posible to upload content |
+| Edit links | After creating a link on the same file, edit the information: permissions, password, expiration date | Check in server the new fields |
 | Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear |
 | Enforced Password | Create a new public link with the password enforced in server | The link can not be saved until password is typed |
 | Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date |
 | Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input |
-| Shortcut | Create several new public links in different levels<br>Open drawer and select the option "Shared by link"| List is correct. All shared links are there. |
 | **Share with users** |   |  |
 |Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon |
 | Shared with a group | Prerrequisites: create a group whose name includes special characters<br>1. From the mobile app select to share a folder<br>2. Search the group and select it | Check that any user from the group has access to the folder<br>Check that the file includes the share icon |
@@ -209,7 +218,6 @@
 | Local thumbnails | 1. Access to the photos folder<br>2. Download an image<br>3. Turn down the connection|  Check that the thumbnails are previewed for the already downloaded image |
 | Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
 | Sort by size | 1. Change the list order from date to size<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
-| Sort file picker | 1. Select to upload a file<br>2. Check options to sot the list with descending | Data is listed by date ascending and descending |
 | Grid and List view | 1. Change from list to grid view several times<br>2. Browse into a folder and change to list/grid | 1. Changes are performed correctly<br>2. Changes are inherited when a option is not select |
 | Animations in power save | Enable power save mode. | Animations in app disabled (while browsing) |
 | Local search | Enter a pattern that matches with any item on the file list | Correct filtered |
