@@ -35,8 +35,8 @@ Server: 10.4.1
 |**Switching `Allow cellular access`**|
 | WiFi on I | 1. Switch `Allow cellular access` off<br>2. Under WiFi, upload/download some files<br>3. Switch `Allow cellular access` on | Everything finishes | P m13 | Several files, one is missed? |
 | WiFi on II | 1. Switch `Allow cellular access` on<br>2. Under WiFi, upload/download some files<br>3. Switch `Allow cellular access` off | Everything finishes | P m13 |  |
-| WiFi off I | 1. Switch `Allow cellular access` off<br>2. Upload some files<br>3. Switch `Allow cellular access` on | 2. Content queued<br>3. Content starts to upload | F m13 | Takes time to  restart. Sometimes, one file is missing to upload |
-| WiFi off II | 1. Switch `Allow cellular access` on<br>2. Upload/Download some files<br>3. Switch `Allow cellular access` off | 2. Content uploading/downloading<br>3. Content stops to upload/download | F m13 | they do not stop  |
+| WiFi off I | 1. Switch `Allow cellular access` off<br>2. Upload some files<br>3. Switch `Allow cellular access` on | 2. Content queued<br>3. Content starts to upload | NA | Not implemented yet |
+| WiFi off II | 1. Switch `Allow cellular access` on<br>2. Upload/Download some files<br>3. Switch `Allow cellular access` off | 2. Content uploading/downloading<br>3. Content stops to upload/download | NA | Not implemented yet |
 |**`Available offline` enabled**|
 | Wifi  | Set a folder with many files as av. offline | Content downloaded and set as av. offline | P m13 |  |
 | Cellular | Set a folder with many files as av. offline | Content downloaded and set as av. offline | P m13 |  |
