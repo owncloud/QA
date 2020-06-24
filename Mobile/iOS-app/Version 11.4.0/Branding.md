@@ -187,15 +187,20 @@ For the `Generic` and `Themes` section, please check better [this link](https://
 | Styles -> statusBarStyle | lightContent | | |
 | Styles -> statusBarStyle | darkContent | | |
 | Styles -> statusBarStyle | default | | |
-| Styles -> barStyle | default | | |
-| Styles -> barStyle | black | | |
+| Styles -> barStyle | default |  |  NA| Not used, for the moment
 | Styles -> activityIndicatorViewStyle | large | | |
 | Styles -> activityIndicatorViewStyle | medium | | |
-| Styles -> searchBarActivityIndicatorViewStyle | | | |
-| Styles -> InterfaceStyle | unspecified | | |
-| Styles -> InterfaceStyle | light | | |
-| Styles -> InterfaceStyle | dark | | |
-| Styles -> keyboardAppearance | default | | |
-| Styles -> keyboardAppearance | light | | |
-| Styles -> keyboardAppearance | dark | | |
+| Styles -> activityIndicatorViewStyle | whiteLarge | | |
+| Styles -> activityIndicatorViewStyle | white | | |
+| Styles -> activityIndicatorViewStyle | gray | | |
+| Styles -> searchBarActivityIndicatorViewStyle | ||  NA| Not used, for the moment
+| Styles -> InterfaceStyle | unspecified | Style of the menu when clicking on '+'. Light  | Passed |
+| Styles -> InterfaceStyle | light | Style of the menu when clicking on '+'. Light | Passed|
+| Styles -> InterfaceStyle | dark | Style of the menu when clicking on '+'. Dark | Passed |
+| Styles -> keyboardAppearance | light | Style of keyboard (rename, create folder, create new account). Light | Passed |
+| Styles -> keyboardAppearance | dark | Style of keyboard (rename, create folder, create new account). Dark | Passed |
+| Styles -> keyboardAppearance | default | Same as light | Passed|
+| Styles -> backgroundBlurEffectStyle | light | Light backgorund effect in create folder and rename  | Passed |
+| Styles -> backgroundBlurEffectStyle | dark | Dark backgorund effect in create folder and rename  | Passed |
+| Styles -> backgroundBlurEffectStyle | regular | Same as light | Passed  |
 
