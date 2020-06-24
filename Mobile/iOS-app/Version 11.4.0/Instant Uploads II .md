@@ -23,7 +23,7 @@ These cases to be executed with `Cellular transfers` enabled:
 | Remove target folder | In the app, remove the target folder<br>Take two pics | Both pics are not uploaded?  |  F m13 | Infinite loop of notification about non existing target. Cancel one by one.  |  |
 | Select no account |Install the app from scratch and enable pics instant uploads<br> Take two pics | Should not be posible | P m13 |  |  |
 | Select no target folder |Install the app from scratch and enable pics instant uploads, selecting an account<br> Take two pics | Not posible, forced to set a path| P m13 |  |  |
-| Disable | After enabling and taking some pics, disable the feature<br>Take some pics<br>Enable again the feature<br>Take more pics | Only the pictures that were taken with the feature enabled were uploaded, other ones were ignored |  |  |  |
+| Disable | After enabling and taking some pics, disable the feature<br>Take some pics<br>Enable again the feature<br>Take more pics | Only the pictures that were taken with the feature enabled were uploaded, other ones were ignored | P m13 |  |  |
 |**One account - Videos**|||||
 | Root folder | Select the root folder<br>Take two videos | Both videos are uploaded to the root folder | P m13 |   |  |
 | Non-Root folder | Select a non-root folder<br>Take two videos | Both videos are uploaded to the folder | P m13 |  |  |
@@ -33,7 +33,7 @@ These cases to be executed with `Cellular transfers` enabled:
 | Remove target folder | In the app, remove the target folder<br>Take two videos | Both videos are not uploaded?  | F m13  | Infinite loop of notification about non existing target. Cancel one by one. |  |
 | Select no account |Install the app from scratch and enable videos instant uploads<br> Take two videos | Not posible | P m13  |  |  |
 | Select no target folder |Install the app from scratch and enable videos instant uploads, selecting an account<br> Take two videos | Not posible, forced to set a path| P m13  |  |  |
-| Disable | After enabling and taking some videos, disable the feature<br>Take some videos<br>Enable again the feature<br>Take more videos | Only the videos that were taken with the feature enabled were uploaded, other ones were ignored |   |  |  |
+| Disable | After enabling and taking some videos, disable the feature<br>Take some videos<br>Enable again the feature<br>Take more videos | Only the videos that were taken with the feature enabled were uploaded, other ones were ignored | P m13  |  |  |
 |**Pics & Videos**|||||
 | Only pics | Enable instant upload for pics<br>Take some pics and videos<br>Enable the instant upload for videos | Only pics are uploaded |  |  |  |
 | Only videos | Enable instant upload for videos<br>Take some pics and videos<br>Enable the instant upload for pics | Only videos are uploaded |  |  |  |

@@ -29,7 +29,7 @@ For the `Generic` and `Themes` section, please check better [this link](https://
 | Property  | Value | Expected | Result | Related Comment | 
 | :-------- | :---- | :------- | :----: | :-------------- | 
 | identifier | Internal name |  | | Should be prevented to have profiles with same id |
-| name | whatever the name | Displayed to create a new account. Only when one profile exists in `Branding.plist` | Passed | Improvement: Skip to add a second account<br>Should be prevented to have profiles with same id |
+| name | whatever the name | Displayed to create a new account. Only when one profile exists in `Branding.plist` | Passed |  |
 | welcome | Any message string | Message is set in the login view as welcome | Passed |   |
 | welcome | empty | No welcome message | Passed | |
 | promptForPasswordAuth | Any message. Works together with `allowedAuthenticationMethods`. Such field must have `com.owncloud.basicauth` as preferred | Set as tip to enter credentials, above credentials fields | Passed |  |
@@ -38,7 +38,7 @@ For the `Generic` and `Themes` section, please check better [this link](https://
 | promptForTokenAuth | Empty. Works together with `allowedAuthenticationMethods`. Such field must have `com.owncloud.oauth2` as preferred | Empty message above `Continue` button to start the OAuth2 authentication flow | Passed | It should be prevented in oB |
 | bookmarkName | any name | Set as account name after login | Passed | To improve: Always the same for same account |
 | bookmarkName | empty | Empty account name after login | Passed | Should be prevented in oB |
-| url | correct url | Connection stablixhed with the URL, showing issues if they happen | Passed | |
+| url | correct url | Connection stablished with the URL, showing issues if they happen | Passed | |
 | url | empty | Error message | Passed |   |
 | allowedAuthenticationMethods | com.owncloud.basicauth | Credentials are asked in the app | Passed |  |
 | allowedAuthenticationMethods | com.owncloud.oauth2 | Redirected to OAuth2 | Passed |  |
@@ -157,9 +157,9 @@ For the `Generic` and `Themes` section, please check better [this link](https://
 | Searchbar -> secondaryLabelColor | Color | ? |  |
 | Searchbar -> symbolColor | Color | ? |  |
 | Searchbar -> tintColor | Color | Cursor in search bar. Cancel button | ? |
-| Searchbar -> filledColorPairC -> normal | Colors in back and foreground  | Background: <br>Foreground:   | Failed | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |  
+| Searchbar -> filledColorPairC -> normal | Colors in back and foreground  | Background: <br>Foreground:   | ? |  |  
 | Searchbar -> filledColorPairC -> highlighted |Colors in back and foreground  | Background: <br>Foreground:  | ? |  |  
-| Searchbar -> filledColorPairC -> disabled |Colors in back and foregorund  |  Background: <br>Foreground:   | Failed | Foreground in color of unselected tab of bottom bar | 
+| Searchbar -> filledColorPairC -> disabled |Colors in back and foregorund  |  Background: <br>Foreground:   | ? |  | 
 | NavigationBar -> backgroundColor | Color | Background color of the Toolbar | Passed |
 | NavigationBar -> labelColor | Color | Color of the organization name on the top | Passed |
 | NavigationBar -> secondaryLabelColor | Color | ? | |
@@ -184,15 +184,20 @@ For the `Generic` and `Themes` section, please check better [this link](https://
 | lightBrandColors -> filledColorPairC -> normal |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? | Foreground in color of selected tab of bottom bar. PROBABLY THIS SECTIONS MAKES NO SENSE |   |  
 | lightBrandColors -> filledColorPairC -> highlighted |Colors in back and foregorund  | Background: <br>Foreground: Color of the selected tab in bottom bar | ? |  |  
 | lightBrandColors -> filledColorPairC -> disabled |Colors in back and foregorund  | Background: Color of the unselected tabs in bottom bar<br>Foreground:  | ? |  |  
-| Styles -> statusBarStyle | lightContent | | |
-| Styles -> statusBarStyle | darkContent | | |
-| Styles -> statusBarStyle | default | | |
+
+**Styles**
+
+| Property  | Value | Expected | Result | Related Comment | 
+| :-------- | :---- | :------- | :----: | :-------------- | 
+| Styles -> statusBarStyle | lightContent | Battery, hour indicator, on the top. Light.| Passed |
+| Styles -> statusBarStyle | darkContent | Battery, hour indicator, on the top. Dark.| Passed |
+| Styles -> statusBarStyle | default | Same as Dark | Passed |
 | Styles -> barStyle | default |  |  NA| Not used, for the moment
-| Styles -> activityIndicatorViewStyle | large | | |
-| Styles -> activityIndicatorViewStyle | medium | | |
-| Styles -> activityIndicatorViewStyle | whiteLarge | | |
-| Styles -> activityIndicatorViewStyle | white | | |
-| Styles -> activityIndicatorViewStyle | gray | | |
+| Styles -> activityIndicatorViewStyle | large | Progress indicator wihen tapping on a server in the list, or searching for a sharee| Passed |
+| Styles -> activityIndicatorViewStyle | medium |Progress indicator wihen tapping on a server in the list, or searching for a sharee | Passed |
+| Styles -> activityIndicatorViewStyle | whiteLarge |Progress indicator wihen tapping on a server in the list, or searching for a sharee | Passed|
+| Styles -> activityIndicatorViewStyle | white | Progress indicator wihen tapping on a server in the list, or searching for a sharee| Passed |
+| Styles -> activityIndicatorViewStyle | gray | Progress indicator wihen tapping on a server in the list, or searching for a sharee | Passed |
 | Styles -> searchBarActivityIndicatorViewStyle | ||  NA| Not used, for the moment
 | Styles -> InterfaceStyle | unspecified | Style of the menu when clicking on '+'. Light  | Passed |
 | Styles -> InterfaceStyle | light | Style of the menu when clicking on '+'. Light | Passed|
