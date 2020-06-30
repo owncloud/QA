@@ -43,3 +43,9 @@ Server: 10.4.1
 |**`Available offline` disabled**|
 | Wifi | Set a folder as av. offline | Content downloaded and set as av. offline | P m13 |  |
 | Cellular | Set a folder as av. offline | Content set as av. offline but downloaded | P m13 |  |
+|**Auto uploads**|||||
+| Photo Upload global setting | 1. In Settings -> Cellular, disable cellular access<br>2. Take photos under cellular connection | Content not uploaded |  |  |
+| Photo Upload setting | 1. In Settings -> Cellular, enable cellular access and disable Photo Uploads<br>2. Take photos and videos under cellular connection | Photos not uploaded<br>Videos uploaded |  |  |
+| Video Upload global setting | 1. In Settings -> Cellular, disable cellular access<br>2. Take videos under cellular connection | Content not uploaded |  |  |
+| Video Upload setting | 1. In Settings -> Cellular, enable cellular access and disable Video Uploads<br>2. Take photos and videos under cellular connection | Videos not uploaded<br>Photos uploaded |  |  |
+| Disable all | 1. In Settings -> Cellular, disable global setting<br>2. Take photos and videos under cellular connection  | Videos not uploaded<br>Photos not uploaded |  |  |
