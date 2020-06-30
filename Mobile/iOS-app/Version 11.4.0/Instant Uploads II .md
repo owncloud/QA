@@ -42,3 +42,5 @@ Server: 10.4.1
 | Account removed | 1. Select one of several accounts and an existing folder<br>2. Remove the account from the device and take some pics/videos | Feature disabled | P m13  t13|   |  |
 |**iCloud album**|||||
 | Shared album | 1. Add a Shared Album to Photos app, and share with a different user<br>2. That user in the app, selects "Upload from photo library"<br>3. Select photos from shared album | Photos uploaded| P m13 |   |  |
+|**Upgrade**|||||
+|  Upgrade | 1.Install previous version<br>2. enable instant uploads with path<br>3. Upgrade to current one | Paths correct. Same path for video and photo by default | P m13 |   |  |
