@@ -2,7 +2,7 @@
 
 #### PR: [https://github.com/owncloud/ios-app/pull/707](https://github.com/owncloud/ios-app/pull/709)
 
-Devices: iPhone XR v13.4, iPadAir v13.4<br>
+Devices: iPhone XR v13.4<br>
 Server: 10.4.1
 
 ---
@@ -16,24 +16,20 @@ Server: 10.4.1
 |**`Allow cellular access` enabled**|
 | Uploads under WiFi | 1. Under WiFi, upload some content from Albums | Content uploaded | P m13 |  |
 | Uploads under Cellular data | 1. Switch WiFi off<br>2. Upload some content from Albums | Content uploaded | P m13 |  |
-| Auto Uploads under WiFi | 1. Enable AutoUploads in Settings<br>2. under WiFi, take some content from the camera | Content uploaded | P m13 |  |
-| Uploads under Cellular data | 1. Switch WiFi off<br>2. Enable AutoUploads in Settings<br>3. Take some content from the camera | Content uploaded | P m13 |  |
 | Downloads under WiFi | 1. Under WiFi, download a file | Content downloaded | P m13 |  |
 | Downloads under Cellular data | 1. Switch WiFi off<br>2. Download a file | Content downloaded | P m13 |  |
 | Switch WiFi on | 1. Switch WiFi off<br>2. Under cellular connection, upload some files<br>3. Switch Wifi On | Content uploaded| P m13 |  |
 | Switch WiFi off | 1. Switch WiFi on<br>2. Upload a big file<br>3. While the upload is being done,  switch Wifi Off | File uploaded| P m13 |  |
 |**`Allow cellular access` disabled**|
 | Uploads under WiFi | 1. Under WiFi, upload some content from Albums | Content uploaded | P m13 |  |
-| Uploads under Cellular data | 1. Switch WiFi off<br>2. Upload some content from Albums | Content NOT uploaded, waiting for WiFi | F m13 | Content queued, but with mintenance mode message |
-| Auto Uploads under WiFi | 1. Enable AutoUploads in Settings<br>2. under WiFi, take some content from the camera | Content uploaded | P m13 |  |
-| Auto Uploads under Cellular data | 1. Switch WiFi off<br>2. Enable AutoUploads in Settings<br>3. Take some content from the camera | Content NOT uploaded, waiting for WiFi | F m13 | Content queued, but with mintenance mode message |
+| Uploads under Cellular data | 1. Switch WiFi off<br>2. Upload some content from Albums | Content NOT uploaded, waiting for WiFi | P m13 | FIXED: Content queued, but with mintenance mode message |
 | Downloads under WiFi | 1. Under WiFi, download some files | Content downloaded | P m13 |  |
-| Downloads under Cellular data | 1. Switch WiFi off<br>2.Download some files | Content NOT downloaded, waiting for WiFi | F m13 | Maintenance mode |
+| Downloads under Cellular data | 1. Switch WiFi off<br>2.Download some files | Content NOT downloaded, waiting for WiFi | P m13 | FIXED: Maintenance mode |
 | Switch WiFi on | 1. Switch WiFi off<br>2. Under cellular connection, upload some files<br>3. Switch Wifi On | Content uploaded| P m13 |  |
-| Switch WiFi off | 1. Switch WiFi on<br>2. Upload a big file<br>3. While the upload is being done,  switch Wifi Off |2. File starts to upload<br>3. Upload stopped | P m13 |  |
-| Basic operations | 1. Switch WiFi off (use cellular data)<br>2. Perform basic operations: create folder, copy, move, delete, rename, duplicate | Operations correct, because they are not transfers and can be done even with `Allow Cellular access` disabled | P m13 |  |
+| Switch WiFi off | 1. Switch WiFi on<br>2. Upload a big file<br>3. While the upload is progressing,  switch Wifi Off |2. File starts to upload<br>3. Upload stopped | P m13 |  |
+| Basic operations | 1. Switch WiFi off (use cellular data)<br>2. Perform basic operations: create folder, copy, move, delete, rename, duplicate | Operations correct, because they are not transfers and can be done even with `Allow Cellular access` disabled | F m13 | Error message of no connection, incorrect. 4G available |
 |**Switching `Allow cellular access`**|
-| WiFi on I | 1. Switch `Allow cellular access` off<br>2. Under WiFi, upload/download some files<br>3. Switch `Allow cellular access` on | Everything finishes | P m13 | Several files, one is missed? |
+| WiFi on I | 1. Switch `Allow cellular access` off<br>2. Under WiFi, upload/download some files<br>3. Switch `Allow cellular access` on | Everything finishes | P m13 |  |
 | WiFi on II | 1. Switch `Allow cellular access` on<br>2. Under WiFi, upload/download some files<br>3. Switch `Allow cellular access` off | Everything finishes | P m13 |  |
 | WiFi off I | 1. Switch `Allow cellular access` off<br>2. Upload some files<br>3. Switch `Allow cellular access` on | 2. Content queued<br>3. Content starts to upload | NA | Not implemented yet |
 | WiFi off II | 1. Switch `Allow cellular access` on<br>2. Upload/Download some files<br>3. Switch `Allow cellular access` off | 2. Content uploading/downloading<br>3. Content stops to upload/download | NA | Not implemented yet |
@@ -42,10 +38,16 @@ Server: 10.4.1
 | Cellular | Set a folder with many files as av. offline | Content downloaded and set as av. offline | P m13 |  |
 |**`Available offline` disabled**|
 | Wifi | Set a folder as av. offline | Content downloaded and set as av. offline | P m13 |  |
-| Cellular | Set a folder as av. offline | Content set as av. offline but downloaded | P m13 |  |
-|**Auto uploads**|||||
-| Photo Upload global setting | 1. In Settings -> Cellular, disable cellular access<br>2. Take photos under cellular connection | Content not uploaded |  |  |
-| Photo Upload setting | 1. In Settings -> Cellular, enable cellular access and disable Photo Uploads<br>2. Take photos and videos under cellular connection | Photos not uploaded<br>Videos uploaded |  |  |
-| Video Upload global setting | 1. In Settings -> Cellular, disable cellular access<br>2. Take videos under cellular connection | Content not uploaded |  |  |
-| Video Upload setting | 1. In Settings -> Cellular, enable cellular access and disable Video Uploads<br>2. Take photos and videos under cellular connection | Videos not uploaded<br>Photos uploaded |  |  |
-| Disable all | 1. In Settings -> Cellular, disable global setting<br>2. Take photos and videos under cellular connection  | Videos not uploaded<br>Photos not uploaded |  |  |
+| Cellular | Set a folder as av. offline | Content neither av. offline nor downloaded | P m13 |  |
+|**`Photo uploads` enabled**|
+| Wifi  | Enable `Auto Uploads Photos` and upload some photos | Photos uploaded | P m13 |  |
+| Cellular | Enable `Auto Uploads Photos` and upload some photos | Photos uploaded | P m13 |  |
+|**`Photo uploads` disabled**|
+| Wifi  | Disable `Auto Uploads Photos` and upload some photos | Photos uploaded | P m13 |  |
+| Cellular | Disable `Auto Uploads Photos` and upload some photos | Photos queued and not uploaded | P m13 |  |
+|**`Video uploads` enabled**|
+| Wifi  | Enable `Auto Uploads Videos` and upload some videos | Videos uploaded | P m13 |  |
+| Cellular | Enable `Auto Uploads Videos`  and upload some videos | Videos uploaded | P m13 |  |
+|**`Video uploads` disabled**|
+| Wifi  | Disable `Auto Uploads Videos`  and upload some videos | Videos uploaded | P m13 |  |
+| Cellular | Disable `Auto Uploads Videos`  and upload some videos | Videos queued and not uploaded | P m13 |  |

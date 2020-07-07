@@ -112,9 +112,9 @@ P m12 F t12 -> Passed with an iPhone with iOS12 and failed with an iPad with iOS
 | Maintence mode | Actions under maintence mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| |  |
 |**Error handling**||||||
 | Create folder | Create folder with existing me | Correct error |  |  |
-| Reme | Reme item with existing me in target | Correct error |  |  |
-| Copy | Copy item with existing me in target | Correct error |  |  |
-| Move | Move item with existing me in target | Correct error |  |  |
+| Rename | Rename item with existing me in target | Correct error |  |  |
+| Copy | Copy item with existing name in target | Correct error |  |  |
+| Move | Move item with existing name in target | Correct error |  |  |
 | Non existing | Delete/Reme/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |   |
 |**Files App**| **2 auth methods** |||||
