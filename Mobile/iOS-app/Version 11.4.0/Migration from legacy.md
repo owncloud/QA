@@ -32,6 +32,10 @@ Server: 10.4.1
 | Settings - instant uploads videos on | Install old app and autenthicate with basic auth<br>Install new app | instant uploads videos correctly migrated | F m13 |  Stucked| |
 | Settings - instant uploads photos off | Install old app and autenthicate with basic auth<br>Install new app | instant uploads videos disabled | P m13 |   | |
 | To basic | Install old app and autenthicate with OAuth2<br>Disable OAuth2 in server<br>Install new app | URL correctly migrated to basic | | | |
+|**Basic + Oauth2**|||||
+| URL | Install old app and autenthicate with OAuth2 and basic (tow accounts)<br>Install new app | URLs correctly migrated | P m13 |   | |
+| Account (credentials) | Install old app and autenthicate with OAuth2 and basic (two accounts)<br>Install new app | Accounts correctly migrated | P m13 |   | |
+
 |**SAML Server**|||||
 | URL | Install old app and autenthicate with SAML auth<br>Install new app | URL correctly migrated | P m13 | FIXED: Need to kill | |
 | Account (credentials) | Install old app and autenthicate with SAML auth<br>Install new app | Account correctly migrated | P m13 | FIXED: Need to kill | |
