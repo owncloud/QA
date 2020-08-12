@@ -3,7 +3,7 @@
 #### PR: [https://github.com/owncloud/android/issues/2876]([https://github.com/owncloud/android/issues/2876])<br>
 
 
-Device/s: Pixel 2 v10, Huawei P20Lite v9<br>
+Device/s: Pixel 2 v10, Huawei P20Lite v9, Huawei 6P v7<br>
 Server: 10.4.1 
 
 How to read Results:
@@ -36,8 +36,8 @@ Network library operations:
 | https trusted url | Correct behaviour | P m10 | | 
 | https non-trusted url | Show certificate to be approved | P m10 |   | 
 | https url with http prefix | Correct error | P m10 |   |
-| 301 Redirection | Correct behaviour | F m10 | unknown error |
-| 302 Redirection | Correct behaviour | F m10 | unknown error  |
+| 301 Redirection | Correct behaviour | P m10 | FIXED: unknown error |
+| 302 Redirection | Correct behaviour | P m10 | FIXED: unknown error  |
 | No internet connection | Correct error | P m10 |  |  | 
 | No server connection | Correct error | P m10 |  |  | 
 | Maintenance mode | Correct error | P m10 |   |
@@ -93,16 +93,16 @@ Network library operations:
 | Solve conflict with remote | remote version downloaded, local deleted | P m10 | | |
 | Solve conflict with both | both synced | P m10 | | |
 |**File operations**||||||
-| Move one file | Moved to target| F m10 | Fails with redirections| | 
-| Move one folder | Moved to target| F m10 | Fails with redirections| | 
-| Move one folder to itself | Correct error | F m10 | | | 
-| Move several items | Moved correctly | F m10 | Fails with redirections| | 
-| Move without connection| Correct error |  F m10| | | 
-| Copy one file | Copied to target| F m10 | Fails with redirections| | 
-| Copy one folder | Copied to target|  F m10| Fails with redirections | | 
-| Copy one folder to itself | Correct error | F m10 | | | 
-| Copy several items | Copied correctly | F m10 | Fails with redirections| | 
-| Copy without connection| Correct error | F m10 | | | 
+| Move one file | Moved to target| P m10 | FIXED 301: Fails with redirections| | 
+| Move one folder | Moved to target| P m10 | FIXED 301: Fails with redirections| | 
+| Move one folder to itself | Correct error | P m10 | | | 
+| Move several items | Moved correctly | P m10 | FIXED 301: Fails with redirections| | 
+| Move without connection| Correct error | P m10| | | 
+| Copy one file | Copied to target| P m10 | FIXED 301: Fails with redirections| | 
+| Copy one folder | Copied to target| P m10| FIXED 301: Fails with redirections | | 
+| Copy one folder to itself | Correct error | P m10 | | | 
+| Copy several items | Copied correctly | P m10 | FIXED 301: Fails with redirections| | 
+| Copy without connection| Correct error | P m10 | | | 
 | Delete one file | Deleted | P m10 | | | 
 | Delete one folder | Deleted | P m10 | | | 
 | Delete several items | Deleted correctly | P m10 | | | 
@@ -200,18 +200,18 @@ Network library operations:
 | Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar | P m10 m9
 | 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" | P m10 m9
 | **Uploads** | One device  |  |
-| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct | P m10
-| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view | P m10
-| Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view | P m10
-| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view | P m10
-| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view |P m10
-| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |P m10
-| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |P m10
-| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |P m10
-| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  | P m10
-| Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder | P m10
-| bigfilechunking true | 1. Select upload a file to a server with the capability `bigfilechunking true`  and `chunking>=1.0` (oC10) | Pic uploaded with chunking NG (MKCOL, PUT, PUT, PUT, MOVE)| P m10
-| bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT | P m10
+| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct | P m10 m7
+| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view | P m10 m7
+| Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view | P m10 m7
+| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view | P m10 m7
+| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view |P m10 m7
+| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |P m10 m7
+| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |P m10 m7
+| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |P m10 m7
+| Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  | P m10 m7
+| Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder | P m10 m7
+| bigfilechunking true | 1. Select upload a file to a server with the capability `bigfilechunking true`  and `chunking>=1.0` (oC10) | Pic uploaded with chunking NG (MKCOL, PUT, PUT, PUT, MOVE)| P m10 m7
+| bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT | P m10 m7
 | **Upload from external** |   |  |
 | Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated | P m10
 | Send text | Copy text and share it with oC | A txt file is created with the copied text | P m10
@@ -232,7 +232,6 @@ Network library operations:
 | **Miscellanous** |   |  |
 | Avatar | 1. In web, set an avatar to the user|  Check in app that the avatar is correctly displayed in drawer and account manager | P m10 m9
 | **Upgrade** |   |  |
-| Upgrade from 2.15 | Install 2.15 version and then, upgrade to the current one | App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
+| Upgrade from 2.15 | Install 2.15 version and then, upgrade to the current one | App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed| P m9 m7
 | Upgrade from 2.14.2 | Install 2.14.2 version and then, upgrade to the current one | App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
-| Upgrade from 9.x | Install a 9.x version and then, upgrade to the current one | Account is not supported anymore |
 

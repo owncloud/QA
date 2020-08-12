@@ -25,7 +25,7 @@ Server: 10.4.1
 | Share link | In Safari, open a web page and select a link<br>Share it with oC | Link saved correctly| P m13 t13  | |  |
 | Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC | Image saved correctly| P m13 t13  | |  |
 | Share with passcode/Face id | Save an external file in a folder created on non-root folder, with security enabled in the app | First, passcode/face id is asked, then share sheet appears. File correctly saved | P m13 t13 |  |  |
-| Several files | Save 100 external files in oC | Files correctly saved | F m13 t13  | Content lost |  |
+| Several files | Save 100 external files in oC | Files correctly saved | P m13 t13  | FIXED: Content lost |  |
 |**Several accounts**|||||
 | View | Open the share sheet from an external app | Correct view in both orientations (all accounts are there)  | P m13 t13 |  |  |
 | Root | Save an external file in the root folder | File correctly saved | P m13 t13 |  |  |
@@ -36,7 +36,7 @@ Server: 10.4.1
 | Share link | In Safari, open a web page and select a link<br>Share it with oC after selecting an account| Link saved correctly| P m13 t13  | |  |
 | Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC after selecting an account | Image saved correctly| P m13 t13  | |  |
 | Share with passcode/Face id | Save an external file in a folder created on non-root folder, with security enabled in the app | First, passcode/face id is asked, then share sheet appears. File correctly saved | P m13 t13 |  |  |
-| Several files | Save 100 external files in oC selecting one account<br>Save same 100 files in a different account | Files correctly saved in both accounts | F m13 | Content lost |  |
+| Several files | Save 100 external files in oC selecting one account<br>Save same 100 files in a different account | Files correctly saved in both accounts | P m13 t13 | FIXED: Content lost |  |
 |**File extensions**|||||
 | pdf | Share a pdf with an oC account | Files correctly saved | P m13 t13|  |  |
 | txt | Share a txt with an oC account | Files correctly saved | P m13 t13 |  |  |
