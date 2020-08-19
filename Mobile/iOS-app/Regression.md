@@ -39,7 +39,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked |  |  |
 | Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked |  |  |
 | Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked |  |  |
-| Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Close the app and reopen before 1 minute<br>4. Close again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
+| Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  |  |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked  |   |  |
 | Theme | 1. Select Dark<br>2. Select Classic<br>3. Select Light<br>4. Select System | All themes are correcly saved and displayed in file list |  |  |
@@ -68,8 +68,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Move folder| Move a folder to another location | Correctly moved |  |  |
 | Duplicate file | Duplicate a file to another location | Correctly duplicated |  |  |
 | Duplicate folder| Duplicate a folder to another location | Correctly duplicated |  |  |
-| Rename file | Rename a file | Correctly remed |  |  |
-| Rename folder| Rename a folder  | Correctly remed |  |  |
+| Rename file | Rename a file | Correctly renamed |  |  |
+| Rename folder| Rename a folder  | Correctly renamed |  |  |
 | Delete file | Delete a file | Correctly deleted |  |  |
 | Delete folder| Delete a folder  | Correctly deleted |  |  |
 | Favorite file | Open the card of a file and click the favorite star | File is favorited (check in server) |  |  |
@@ -210,11 +210,18 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 |**Private link**||||||
 | Get link View | Open Share view | Option correctly displayed |   |    | | 
 | Copy link | Get copy link and paste in the browser | File correctly linked |    | | | 
-|**Universal link**||||||
+|**Universal link**|https://well-known.shniq.cloud/|||||
 | File in root supported not downloaded | 1. Get private link of a supported format downloaded file in root<br>2. Open the link in the device (use suffix owncloud://)| App is opened and the file is downloaded and opened |  |  |
 | Folder in root  | 1. Get private link of a folder in root<br>2. Open the link in the device (use suffix owncloud://) | App is opened and folder content displayed | |  |
 | Different accounts | 1. Get private link of three items in three different accounts<br>2. Open the links in the device when the open account is a different one | App is opened and the items are correctly shown inside their accounts |  |  |
 | Non existing item | 1. Get private link of a file or folder<br>2. Delete or move the item from its original location<br>3. Open the link in a device | File or folder does not exist, correct error message  about unknown link| |  |
+|**Share Sheet**||||||
+| Root | Save an external file in the root | File correctly saved |   |  |  |
+| Non root | Save an external file in non-root folder | File correctly saved |   |  |  |
+| Share text | In Safari, open a web page and select text<br>Share it with oC | Text saved in a text file |   |   |  |
+| Share link | In Safari, open a web page and select a link<br>Share it with oC | Link saved correctly|   | |  |
+| Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC | Image saved correctly|  | |  |
+| Several accounts | Add several accounts<br>Save an external file in the root folder of one of them, that is not the current one | File correctly saved in the selected account |  |  |  |
 |**IAP features**| Use an enterprise server |||||
 | Document Scanner PDF | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select PDF as format | PDF file correctly uploaded |  | |
 | Document Scanner JPG | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select JPG as format | JPG file correctly uploaded |  | |
