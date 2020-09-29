@@ -53,6 +53,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Media upload MP4 | 1. Enable setting "Convert videos to MP4"<br>2. Upload video file in MOV format| Video is saved as MP4 |  |  |
 | Media upload Preserve original name enabled | 1. Enable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format IMG_xxxx |  |  |
 | Media upload Preserve original name disabled | 1. Disable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format Photo-timestamp_xxxx|  |  |
+| Media upload Prefer unedited (IAP) | 1. Enable setting "Prefer unedited"<br>2. With photos app, edit a picure with some filters...<br>3. Upload a picture| Picture is saved with out changes, in original version|  |  |
+| Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG|  |  |
 | Help | Open Help Section  | Help web is opened |  |  |
 | Send feedback | Open Send feedback section | feedback mail is opened|  |  |
 | Recommend | Open Recommend section | recommend mail is opened|  |  |
@@ -236,4 +238,4 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder|  | |
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
 |**Accesibility**||||||
-| https://github.com/owncloud/ios-app/issues/264 |  |  |  | |
+| Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
