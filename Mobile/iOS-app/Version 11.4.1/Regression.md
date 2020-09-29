@@ -107,7 +107,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app | P m13 |  |
 | Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app | P m13 |  |
 | Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | P m13 |  |
-| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | F m13 | Check with dakmen |
+| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | P m13 |  |
 | Upload non-root| Open an exterl app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded | P m13 |  |
 | Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC | P m13  |   |
 | Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P m13 |  |
@@ -160,10 +160,10 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m13  | |
 | Searching | Input a pattern to filter in the current folder | Results correct filtered | P m13  | 
 | Quota correct | Open the root folder | Quota is correctly displayed | P m13 | |
-| Contextual menu | Long press over an item of the list | Contextual menu displayed| F m13 | Bottom bar with icones|
+| Contextual menu | Long press over an item of the list | Contextual menu displayed| P m13 | FIXED: Bottom bar with icons|
 | Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder| P m13 | |
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account| P m13 | |
 |**Upgrade**||||||
-| 11.4 | Install 11.4<br>Attach an OAuth2 and a basic auth accounts<br>Download some content and enable all settings as posible<br>Upgrade to current| Everything correct |  | |
-| IAP | Install 11.4<br>Attach a non-enterprise account<br>Purchase all Pro Features<br>Upgrade to current| Pro Photo Upload feature is purchased and available |  | |
+| 11.4 | Install 11.4<br>Attach an OAuth2 and a basic auth accounts<br>Download some content and enable all settings as posible<br>Upgrade to current| Everything correct | P m13 t13 | |
+| IAP | Install 11.4<br>Attach a non-enterprise account<br>Purchase all Pro Features<br>Upgrade to current| Pro Photo Upload feature is purchased and available | P m13 t13| |
 
