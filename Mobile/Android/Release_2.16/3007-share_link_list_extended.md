@@ -24,4 +24,4 @@ Server: 10.5
 |**Actions**|||||
 | Create new link | Create public link on any item<br>Open links shortcut<br>Select the item and create a new link| Item is in the list, and contains the new link | P m11 |  |  |
 | Delete link root| Create public link on any item in root<br>Open links shortcut<br>Select the item and delete the link| Item is not in the list anymore | P m11 |  |  |
-| Delete link non-root| Create public link on any item in non-root<br>Open links shortcut<br>Select the item and delete the link| Item is not in the list anymore | F m11 | Item in the list till containing folder is browsed |  |
+| Delete link non-root| Create public link on any item in non-root<br>Open links shortcut<br>Select the item and delete the link| Item is not in the list anymore | NA | TO DO: Item in the list till containing folder is browsed |  |
