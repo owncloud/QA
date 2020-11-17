@@ -59,7 +59,7 @@ Note that the *.conf files in the tree can be used with the -L option to create 
 
 
 ### Usage
-
+```
 Usage: randfiles.py [-h] [-m MAXFILES] [-s SEED_STRING] [-f FOLDER_PERCENTAGE]
                     [-e MAX_ENTRIES_PER_DIR]
                     [--min_entries_per_dir MIN_ENTRIES_PER_DIR]
