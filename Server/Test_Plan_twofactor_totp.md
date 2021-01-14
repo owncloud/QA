@@ -7,6 +7,8 @@ cd /tmp/oc/apps
 wget https://github.com/owncloud/twofactor_totp/releases/download/v$v/twofactor_totp-$v.tar.gz
 tar xvf *.gz; rm *.gz
 chown -R www-data two*
+
+# as ldap_user use alliah_abernathy in compose-playground/examples/hetzner-deploy/make_openidconnect_test.sh
 ```
 
 ## Twofactor TOTP Test Plan
