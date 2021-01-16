@@ -13,7 +13,7 @@ chown -R www-data two*
 
 ## Twofactor TOTP Test Plan
 
-* References: (Template)[https://github.com/owncloud/QA/edit/master/Server/Test_Plan_twofactor_totp.md]
+* References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_twofactor_totp.md)
 
 
 
