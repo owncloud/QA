@@ -9,6 +9,13 @@ docker exec -ti $(docker ps -q | head -1) occ app:disable gallery
 ## 'Files Mediaviewer' Test Plan
 
 - Run Testplan with all supported browsers: Internet Explorer 11, MS EDGE, Mozilla Firefox, Chrome and Safari.
+- References:
+  - https://doc.owncloud.com/server/user_manual/files/media_viewer_app.html
+  - https://doc.owncloud.com/server/admin_manual/installation/apps/mediaviewer/
+  - https://filesamples.com/samples/video/mov/sample_960x540.mov
+  - https://filesamples.com/samples/video/ogv/sample_1280x720.ogv
+  - https://filesamples.com/samples/video/mp4/sample_1280x720.mp4
+  
 
 ## Testing functionality
 
