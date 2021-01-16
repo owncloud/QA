@@ -9,7 +9,7 @@ docker exec -ti $(docker ps -q | head -1) occ app:disable gallery
 ## 'Files Mediaviewer' Test Plan
 
 - Run Testplan with all supported browsers: Internet Explorer 11, MS EDGE, Mozilla Firefox, Chrome and Safari.
-- References:
+- References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_Files_Mediaviewer.md)
   - Manuals: [User](https://doc.owncloud.com/server/user_manual/files/media_viewer_app.html) [Admin](https://doc.owncloud.com/server/admin_manual/installation/apps/mediaviewer/)
   - Example files: [sample_960x540.mov](https://filesamples.com/samples/video/mov/sample_960x540.mov) [sample_1280x720.ogv](https://filesamples.com/samples/video/ogv/sample_1280x720.ogv) [sample_1280x720.mp4](https://filesamples.com/samples/video/mp4/sample_1280x720.mp4)
 
@@ -84,3 +84,10 @@ Share files by public link and open `Share by link` page, and repeat above tests
 |  |   |
 Share a video via files_drop | Check that video plays correctly and buttons work |:construction: | |
 Share a folder via files_drop | Check that the viewer shows all files inside folders and buttons work correctly | :construction: | |
+|  |   |
+**Browser compatibilitiy** |  |   
+| Mozilla Firefox | | :construction: |
+| Google Chrome | | :construction: |
+| Safari | | :construction: |
+| MS IE11 | | :construction: |
+| MS Edge | | :construction: | 
