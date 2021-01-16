@@ -1,3 +1,11 @@
+## Setup
+```
+hetzner_deploy/oc_app.sh files_mediaviewer
+hetzner_deploy/oc_app.sh files_gallery
+docker run --rm -ti -v /home/testy/mnt_oc:/mnt/data -p 883:8080 owncloud/server:latest
+docker exec -ti $(docker ps -q | head -1) occ app:disable gallery
+```
+
 ## 'Files Mediaviewer' Test Plan
 
 - Run Testplan with all supported browsers: Internet Explorer 11, MS EDGE, Mozilla Firefox, Chrome and Safari.
