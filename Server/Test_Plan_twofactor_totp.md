@@ -13,6 +13,10 @@ chown -R www-data two*
 
 ## Twofactor TOTP Test Plan
 
+* References: (Template)[https://github.com/owncloud/QA/edit/master/Server/Test_Plan_twofactor_totp.md]
+
+
+
 | Test Case                                | Expected Result                          | Result         | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | -------------- | --------------- |
 | Enable the app.                          | No problems found.                       | 🚧  |                 |
