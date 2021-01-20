@@ -60,7 +60,9 @@ docker exec -ti $(docker ps -q | head -1) occ app:enable web
 Test Case | Expected Result | Result | Related Comment
 ------------- | -------------- | ----- | ------
 **CLI commands** |  |   |
-|  |   |
 Enable web app via CLI using ```occ app:enable web``` | The apps gets enabled | :construction:  |
+|  |   |
+ **Web GUI** |  |   |
+ Switch to 'Settings' -> 'New Design' | The 'new' web app appears | :construction:  |
 
 ...
