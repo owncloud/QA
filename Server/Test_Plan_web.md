@@ -1,4 +1,8 @@
 ## Setup
+
+<details>
+<summary>With 10.6.0 docker - http-only</summary>
+
 ```
 oc_release.sh app:get oauth2
 oc_release.sh app:get web
@@ -49,6 +53,7 @@ EOF
 docker exec -ti $(docker ps -q | head -1) occ app:enable oauth2
 docker exec -ti $(docker ps -q | head -1) occ app:enable web
 ```
+</details>
 
 ## 'Web' App Test Plan
 
