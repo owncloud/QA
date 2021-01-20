@@ -31,7 +31,7 @@ cat <<EOF > config/config.json
   "apps" : [ "files" ],
   "applications" : [
     {
-      "title": { "en": "Classic Design", "de": "Dateien", },
+      "title": { "en": "Classic Design", "de": "Dateien" },
       "icon": "switch_ui",
       "url": "$HTTP_SERVER/index.php/apps/files"
     },
