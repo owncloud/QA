@@ -21,7 +21,7 @@ CLIENT_ID_FROM_OAUTH2=nGqQBjSGwZ33lCgGWXUxOJLKG6SU5AnMGOHJo3w5f39U8KMrg7BMN7vJCv
 
 cat <<EOF > config/config.json
 {
-  "server" : "$HTTP_SERVER",
+  "server" : "$HTTPS_SERVER",
   "theme": "owncloud",
   "auth": {
     "clientId": "$CLIENT_ID_FROM_OAUTH2",
