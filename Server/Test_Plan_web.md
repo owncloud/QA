@@ -13,7 +13,10 @@ cd mnt_oc
 mkdir -p config/
 echo -e > config/web.config.php "<?php\n\$CONFIG = array ( 'web.baseUrl' => '$HTTPS_SERVER/index.php/apps/web' );"
 
+# temporarily start server for adding the oauth token via web ui:
+docker run -ti --rm -v $HOME/mnt_oc:/mnt/data -p $HTTP_PORT:8080 owncloud/server:10.6.0 & 
 echo "Add to Admin -> 'User Authentication': ownCloud-Web $HTTPS_SERVER/index.php/apps/web/oidc-callback.html"
+kill %1 # stop server again.
 
 CLIENT_ID_FROM_OAUTH2=nGqQBjSGwZ33lCgGWXUxOJLKG6SU5AnMGOHJo3w5f39U8KMrg7BMN7vJCvcKDF56
 
