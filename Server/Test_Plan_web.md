@@ -1,7 +1,7 @@
 ## Setup
 
 <details>
-<summary>With 10.6.0 docker - http-only</summary>
+<summary>With 10.6.0 docker - http-only (click to view details)</summary>
 
 ```
 oc_release.sh app:get oauth2
