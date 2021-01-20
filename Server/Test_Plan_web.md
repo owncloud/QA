@@ -13,10 +13,8 @@ cd mnt_oc
 mkdir -p config/
 echo -e > config/web.config.php "<?php\n\$CONFIG = array ( 'web.baseUrl' => '$HTTPS_SERVER/index.php/apps/web' );"
 
-# normal user
-# docker run --rm -ti -v $HOME/mnt_oc:/mnt/data -p 883:8080 owncloud/server:latest
-
 echo "Add to Admin -> 'User Authentication': ownCloud-Web $HTTPS_SERVER/index.php/apps/web/oidc-callback.html"
+
 CLIENT_ID_FROM_OAUTH2=nGqQBjSGwZ33lCgGWXUxOJLKG6SU5AnMGOHJo3w5f39U8KMrg7BMN7vJCvcKDF56
 
 cat <<EOF > config/config.json
