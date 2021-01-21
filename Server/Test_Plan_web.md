@@ -32,7 +32,7 @@ cat <<EOF > config/config.json
     "url": "$HTTPS_SERVER/index.php/apps/oauth2/api/v1/token",
     "authUrl": "$HTTPS_SERVER/index.php/apps/oauth2/authorize"
   },
-  "apps" : [ "files" ],
+  "apps" : [ "files", "draw-io",  "markdown-editor",  "media-viewer" ],
   "applications" : [
     {
       "title": { "en": "Classic Design", "de": "Dateien" },
