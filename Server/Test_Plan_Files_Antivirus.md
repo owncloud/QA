@@ -1,3 +1,9 @@
+## Setup
+
+References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_Files_Antivirus.md)
+  - Download: https://www.eicar.org/?page_id=3950
+
+
 ## File antivirus Test Plan
 
 ### Installing the app
@@ -29,7 +35,7 @@
 ### clamAV executable mode upload
 
 1. setup the file antivirus app to use clamAV in "Executable" mode
-2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from http://www.eicar.org/85-0-Download.html via all available endpoints. (See "Tips how to test different endpoints with curl")
+2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from https://www.eicar.org/?page_id=3950 via all available endpoints. (See "Tips how to test different endpoints with curl")
 
 None of these uploads should be possible.
 
@@ -45,7 +51,7 @@ None of these uploads should be possible.
 ### clamAV daemon mode upload
 
 1. setup the file antivirus app to use clamAV in "Daemon" mode
-2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from http://www.eicar.org/85-0-Download.html via all available endpoints. (See "Tips how to test different endpoints with curl")
+2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from https://www.eicar.org/?page_id=3950 via all available endpoints. (See "Tips how to test different endpoints with curl")
 
 None of these uploads should be possible.
 
@@ -61,7 +67,7 @@ None of these uploads should be possible.
 ### clamAV daemon (socket) mode upload
 
 1. setup the file antivirus app to use clamAV in "Daemon (Socket)" mode
-2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from http://www.eicar.org/85-0-Download.html via all available endpoints. (See "Tips how to test different endpoints with curl")
+2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from https://www.eicar.org/?page_id=3950 via all available endpoints. (See "Tips how to test different endpoints with curl")
 
 None of these uploads should be possible.
 
@@ -92,7 +98,7 @@ uploads of `eicar_com.zip` (184byte) should pass
 
 run these steps between every test case in this chapter:
 1. disable antivirus app
-2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from http://www.eicar.org/85-0-Download.html to the owncloud system under test
+2. upload `eicar.com`, `eicar_com.zip` and `eicarcom2.zip` from https://www.eicar.org/?page_id=3950 to the owncloud system under test
 3. enable antivirus app
 4. set "When infected files were found during a background scan" to "logSetting"
 5. set "File size limit" to "fileSizeLimit"
