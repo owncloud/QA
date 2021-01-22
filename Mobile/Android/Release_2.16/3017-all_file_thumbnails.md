@@ -17,9 +17,10 @@ Server: 10.5
 | Images | Open a folder which contains images in png, jpg, gif format | Thumbnails are displayed without actions | P m11 |  |
 | Txt | Open a folder which contains txt files | Thumbnails are displayed without actions | P m11 |  |
 | Change image | Open a folder which contains images<br>In Server or other client, modify the image<br>Sync the folder without clicking the image | Thumbnails are displayed with the change |  P m11|  |
-| Change txt | Open a folder which contains a txt file<br>In Server or other client, modify the file<br>Sync the folder without clicking the file| Thumbnail is displayed with the change | F m11 | Thumbnail does not change |
+| Change txt | Open a folder which contains a txt file<br>In Server or other client, modify the file<br>Sync the folder without clicking the file| Thumbnail is displayed with the change | F m11 | Thumbnail does not change. Will fix in next iteration
 |**Downloaded**||||||
 | Images | Open a folder which contains images in png, jpg, gif format and download them by clicking| Thumbnails are displayed | P m11 |  |
 | Txt | Open a folder which contains txt files and download them by clicking | Thumbnails are displayed  | P m11 |  |
 | Change image | Open a folder which contains images<br>Download one image<br>In Server or other client, modify the image<br>Sync the folder | Thumbnail is displayed with the change |   P m11 | |
-| Change txt | Open a folder which contains a txt file<br>Download the txt file<br>In Server or other client, modify the file<br>Sync the folder | Thumbnail is displayed with the change | F m11 | Thumbnail does not change  |  |
+| Change txt | Open a folder which contains a txt file<br>Download the txt file<br>In Server or other client, modify the file<br>Sync the folder | Thumbnail is displayed with the change | F m11 | Thumbnail does not change. Will fix in next iteration
+ |

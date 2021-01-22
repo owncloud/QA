@@ -1,5 +1,28 @@
-| Title | Procedure |  Expected Result |
-| :---: | :-------- | :--------------- |
+#### Version 
+
+#### PR: [https://github.com/owncloud/android/issues/]([https://github.com/owncloud/android/issues/])<br>
+
+
+Device/s: <br>
+Server: 
+
+How to read Results:
+
+P -> Passed<br>
+F -> Failed<br>
+m -> mobile <br>
+t -> tablet <br>
+10 -> Android version<br>
+NA -> non applicable
+
+P m8 -> Passed in an phone with Android 8<br>
+F t8 -> Failed in an tabled with Android 8<br>
+P m8 t8 -> Passed with a phone with Android 8 and an tabled with Android 8 <br>
+P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Android 8  <br>
+
+
+| Title | Steps     | Expected Result | Result | Comments |
+| :---- | :-------- | :-------------- | :----: | :------- |
 | **Welcome Wizard**|
 | Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed |
 | **Detect Auth Method**  |   |  |
@@ -83,8 +106,6 @@
 | Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |
 | Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view |
 | Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view |
-| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view |
-| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view |
 | Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
 | Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |
@@ -102,7 +123,8 @@
 | bigfilechunking true | 1. Select upload a file to a server with the capability `bigfilechunking true`  and `chunking>=1.0` (oC10) | Pic uploaded with chunking NG (MKCOL, PUT, PUT, PUT, MOVE)|
 | bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT |
 | **Upload from external** |   |  |
-| Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated |
+| Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view |  | Test also with Android 6
+| Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | | Test also with Android 6
 | Send text | Copy text and share it with oC | A txt file is created with the copied text |
 | **VideoStreaming** |   |  |
 | Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly |
@@ -147,6 +169,7 @@
 | Copy folder | Copy a folder in root folder and non-root folder | Folders copied correctly |  |  |  |
 | Move file | Move a file in root folder and non-root folder | Files moved correctly | |  |  |
 | Move folder | Move a folder in root folder and non-root folder | Folders moved correctly |  |  |  |
+| Open files with external apps | Open different kind of files in oC (txt, pdf, doc, xls...) with an external app, for example excel or word | Files are downloaded (if not) and correctly opened. They can not be updated |
 | **Multiselection files** |   |  |
 | Sync files | 1. Select several files<br>2. Tap on sync | Files are downloaded correctly |
 | Delete files | 1. Select several files<br>2. Tap on delete | Files are deleted correctly |
@@ -203,11 +226,11 @@
 | Enforced Password | Create a new public link with the password enforced in server | The link can not be saved until password is typed |
 | Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date |
 | Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input |
+| Share created link | Create a new public link<br>Share it with another app by using the Share Sheet  | Correctly shared |
 | **Share with users** |   |  |
-|Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon |
+|Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon | 
 | Shared with a group | Prerrequisites: create a group whose name includes special characters<br>1. From the mobile app select to share a folder<br>2. Search the group and select it | Check that any user from the group has access to the folder<br>Check that the file includes the share icon |
-| Previously shared users | Prerrequisite<br>- From the web shared a folder (fodler1) with at least 8 users / groups<br>1. Select to share the folder1 | It's shown the info about what users have been previously shared with  |
-| Shared with an already shared user | 1. From the previous test case - previously shared users - select to share the folder1<br>2. Select as user to share 1 that it's already shared with | An error is shown |
+| Shared with an already shared user | Share an item with an user who has already the item shared with | An error is shown | 
 | Forbidden reshare | 1. In server disable the capability "allow resharing"<br>2. Try to reshare a shared file or folder | Option not displayed |
 | Reshare reflected | 1. Share content with user1<br>2. User1 shares with user2 | source user sees user1 and user2 as sharees |
 | Unshare | 1. From the previous test case - previosly shared user, select shared with user<br>2. Unshare with 1 of the users<br>| The share with user icon is not included<br>User does not have access to the folder any more |
@@ -217,10 +240,11 @@
 | Privileges inheritance | 1. Share a folder with user1 with share and create privileges, and without change and delete<br>2. Login with user1 and try to re-share the folder with create privilege<br>3. Re-share with change and/or delete privileges (check in server side)| 2. user1 can reshare the file<br>3. user1 can not reshare the file |
 | Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file |
 | Federated Share disabled | 1. In server, disable the option federated share<br>2. Share a folder with user1 in other server<br>3. Login with user1<br> | The file can not be federated shared |
+| **Private link** |   |  |
+| Private link shared | Open shares view<br>Click on the private link and share it with another app  | Correctly shared  | | Test the Sheet with Android 6 (old behaviour)
 | **Miscellanous** |   |  |
-| Remote thumbnails | 1. Access to the photos folder<br>2. Check that the thumbnails are previewed |  Check that the thumbnails are previewed  |
+| Thumbnails | 1. Open a folder with pics and txt files |  Check that the thumbnails (pics and txt files) are previewed  |
 | Avatar | 1. In web, set an avatar to the user|  Check in app that the avatar is correctly displayed in drawer and account manager |
-| Local thumbnails | 1. Access to the photos folder<br>2. Download an image<br>3. Turn down the connection|  Check that the thumbnails are previewed for the already downloaded image |
 | Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
 | Sort by size | 1. Change the list order from date to size<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
 | Grid and List view | 1. Change from list to grid view several times<br>2. Browse into a folder and change to list/grid | 1. Changes are performed correctly<br>2. Changes are inherited when a option is not select |
@@ -228,6 +252,8 @@
 | Notification music player |  Upload a music file and play it | Notification with the progress of the file is shown  |
 | Local search | Enter a pattern that matches with any item on the file list | Correct filtered |
 | Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Logcat and Logfiles are generated. Filters work properly. Content can be cleared (even files) and shared |
+| Logging HTTP on | 1. In Settings, enable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are logged including headers and body|
+| Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one | App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
