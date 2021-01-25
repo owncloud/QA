@@ -6,7 +6,7 @@
  
 | Test Case | Steps | Expected | Result | Related Comment  | 
 | :-------- | :---- | :------- | :----- | :--------------- | 
-|**View**||||||
+|**Login view**||||||
 | Portrait | Open login view in portrait orientation | Everything correct placed<br>Check the disclosure button and the password eye are visibles |  |  |
 | Landscape | Open login view in landscape orientation | Everything correct placed<br>Check the disclosure button and the password eye are visibles |  |  |
 | New to ownCloud | Tap on the link "New to ownCloud" | Link works|  |  |
@@ -34,18 +34,21 @@
 | Empty credentials | Connect with empty credentials | Wrong credentials error |  |  | 
 | Empty username | Connect with empty username | Connect button not displayed |  |  |
 | Empty password | Connect with empty password | Connect button not displayed |  |  |
+| Correct credentials | Connect with correct username and passowrd | Correct connected |  |  | 
 | Special characters | Connect with username that contains special characters | Correct connected |  |  | 
 | Username with blanks | Connect with username that contains blanks | Correctly connected  |  |  |
 | Password eye | 1. Input a password<br>2. Click on eye button | Password is correctly displayed/hidden |  |  |
-| No internet connection | 1. Disable internet connection in device after entering the URL<br>2. Input credentials | Correct error |  |  |
-| No server connection | 1. Switch server off in device after entering the URL<br>2. Input credentials | Correct error |  |  |
-| Existing account | 1. Conect with credentials of an already attached user | Correct error |  |  |
-| Maintenance mode | 1. Enable maintenance mode after entering the URL<br>2. Input credentials | Correct error |  |  |
 |**OAuth2**||||||
 | Correct credentials | Set correct credentials in OAuth2 view | Correctly connected |  |  | 
 | Cancel OAuth2 Login | 1. Open OAuth2<br>2. Cancel it in credentials view | Moved to Login view |  |  |
 | Cancel OAuth2 Authorizaton | 1. Open OAuth2<br>2. Cancel it in authorization view | Moved to Login view |  |  |
+| Renewal OAuth2 token | 1. Open OAuth2 account<br>2. Wait till token expiration time passes | Token is renewed (check with mitmproxy) and it is transparent to user |  |  |
 | Revoke OAuth2 token | 1. Open OAuth2 account<br>2. In web UI, revoke token | Moved to Login view |  |  |
+|**OIDC**||||||
+| Correct credentials | 1. Set a correct OIDC URL<br>2. Enter correct credentials | Correctly validated |  |  |  |
+| Authorization | 1. After entering correct credentials, authorize to connect | Correctly connected |  |  |  |
+| Cancel login process | 1. Set a correct OIDC URL<br>2. In iDP, cancel login process<br> | Back to client |  |  |  |
+| Logout  | 1. Complete login process in a OIDC server<br>2. Logout in the idP | Session logged out. Needed credentials again to enter the account |  |  |
 |**LDAP**||||||
 | Correct credentials | Set correct LDAP credentials | Correctly connected |  |  |  |
 |**Redirections**||||||
@@ -63,6 +66,11 @@
 | Two accounts basic | 1. Add two accounts with basic auth<br>2. Switch between the accounts | Correct file lists |   |   | 
 | Two accounts OAuth2 same server | 1. Add two accounts OAuth2 from saver server<br>2. Switch between the accounts | Correct file lists |   |   | 
 | Six accounts both auth methods | 1. Add six accounts (thre OAuth2, three basic, from different severs as posible)<br>2. Switch between accounts | Correct file lists |  |  
+|**General errors**||||||
+| No internet connection | 1. Disable internet connection in device after entering the URL<br>2. Input credentials | Correct error |  |  |
+| No server connection | 1. Switch server off in device after entering the URL<br>2. Input credentials | Correct error |  |  |
+| Existing account | 1. Conect with credentials of an already attached user | Correct error |  |  |
+| Maintenance mode | 1. Enable maintenance mode after entering the URL<br>2. Input credentials | Correct error |  |  |
 |**Brandable options**||||||
 | Default URL | Set a default URL in server\_url field of setup.xml | URL set in correct field |  |  |  |
 | Hide URL | Set show\_server\_url\_input to false in setup.xml | URL hidden |  |  |  |
