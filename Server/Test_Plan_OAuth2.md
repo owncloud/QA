@@ -1,3 +1,12 @@
+## Setup
+
+<details>
+  <summary>Setup details (click to expand)</summary>
+    References:
+      * https://github.com/owncloud/oauth2/wiki/OAuth-code-Flow-Sequence-Diagram
+    
+</details>
+
 ## OAuth2 app Test Plan
 
 This aims to be a client-agnostic testplan for the OAuth2 application, centered in the actions available in the webUI and/or `occ` commands and their impact on ownCloud's core behavior. To test the application from a client standpoint see:  
