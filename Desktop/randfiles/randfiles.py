@@ -32,12 +32,13 @@
 # v0.3 -- 2019-09-09, jw        target dir mandatory, option parser added.
 # v0.4 -- 2019-09-11, jw        lower default folder ratio from 2.0% to 0.5%, fixed the logic for low -e values.
 # v0.5 -- 2019-09-12, jw        new -t option to test max tree dimensions.
+# v0.6 -- 2019-11-20, jw        count folders against -m too, so that we can properly build structures with mostly folders.
 
 
 import random, time, string, os, sys, json
 import argparse, shutil
 
-__version__ = '0.5'
+__version__ = '0.6'
 
 conf = {
   'maxfiles': 1_000_000,
@@ -60,7 +61,7 @@ conf_run = {
 
 parser = argparse.ArgumentParser(description='Create deep or shallow trees of random files.')
 parser.add_argument('dir', metavar='DIR', type=str, help='destination folder')
-parser.add_argument('-m', '--maxfiles', metavar='MAXFILES', type=int, help='Number of files to generate. Default: ' + str(conf['maxfiles']))
+parser.add_argument('-m', '--maxfiles', metavar='MAXFILES', type=int, help='Number of files and folders to generate. Default: ' + str(conf['maxfiles']))
 parser.add_argument('-s', '--seed', metavar='SEED_STRING', type=str, help='String to seed the random generator. Call with identical seed to recreate an identical tree. Default: current timestamp in msec')
 parser.add_argument('-f', '--folder_ratio', metavar='FOLDER_PERCENTAGE', type=float, help='Probability to create a subfolder instead of a file, as percent. Default: ' + str(conf['folder_ratio']))
 parser.add_argument('-e', '--max_entries_per_dir', metavar='MAX_ENTRIES_PER_DIR', type=int, help='Maximum number files/subdirs per directory. Default: ' + str(conf['max_entries_per_dir']))
@@ -256,7 +257,7 @@ while not done:
     max_depth = len(dirv)
 
   for i in range(random.randint(conf['min_entries_per_dir'], conf['max_entries_per_dir'])):
-    if total_files >= conf['maxfiles']:
+    if total_files + total_dirs >= conf['maxfiles']:
       done = 1
       break
     if random.random() > conf['folder_ratio'] * 0.01:   # percent
