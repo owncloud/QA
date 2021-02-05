@@ -77,4 +77,4 @@
 | Existing account | 1. Conect with credentials of an already attached user | Correct error | P m11  m7|  |
 | Maintenance mode | 1. Enable maintenance mode after entering the URL<br>2. Input credentials | Correct error | P m11  m7|  |
 |**Upgrade**||||||
-| Upgrade from latest| 1. Install latest version<br>2. Add an basic, an OAuth2, and an OIDC account<br>3. Upgrade to current version | Correct upgrade. Sessions are not lost. Check exploratorily the app  |  |  
+| Upgrade from latest| 1. Install latest version<br>2. Add an basic, an OAuth2, and an OIDC account<br>3. Upgrade to current version | Correct upgrade. Sessions are not lost. Check exploratorily the app  | P m11 m7 |  

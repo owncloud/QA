@@ -25,23 +25,33 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
  
 | Test Case | Steps | Expected Result | Result | Related Comment
 | :-------- | :---- | :-------------- | :----: | :------------- |
-|**Auth**||||||
+|**Basic Auth**||||||
 | Basic auth http | 1. Type an correct URL to the app with http and basic auth | 2. Host certificate is there. Credentials are asked  |   |  |
 | Basic auth https | 1. Type an correct URL to the app with https and basic auth | 2. Host certificate is there, asked from approval. Credentials are asked  |   |  |
-| OAuth2 http | 1. Type an correct URL to the app with OAuth2 and http | 2. Host certificate is there. Switch to web View  |   |  |
-| OAuth2 https | 1. Type an correct URL to the app with OAuth2 and https | 2. Host certificate is there, asked from approval. Switch to web View  |   |  |
 | Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>Type correct credentials | File list accesible |   |  |
 | OAuth2 right credentials | 1. Type an correct URL to the app with O2uth3<br>Type correct credentials in web view and authorize | File list accesible |  |  |
 | Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>Type wrong credentials | Error |   |  |
-| OIDC | 1. Type an correct URL to the app with OIDC auth<br>Type correct credentials | File list accesible |   |  |
+| Redirection 301 | 1. Type an correct URL to a sever with 301 redirection<br>Type correct credentials | File list accesible |   |  |
+| Redirection 302 | 1. Type an correct URL to a sever with 302 redirection<br>Type correct credentials | File list accesible |   |  |
+| LDAP | 1. Type an correct URL to the app agains LDAP server<br>Type correct credentials | File list accesible |   |  |
+| **OAuth2** |   |  |
+| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
+| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app |
+| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  |
+| **OIDC** |   |  |
+| Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed |
+| Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded |
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app |
+| Logout | Logout in a open and active OIDC session | Moved to login view| | |
 |**Settings**||||||
 | Passcode | 1. Enable passcode and set a code<br>2. Close app and open again| Passcode asked |  |  |
 | Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked |  |  |
 | Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked |  |  |
 | Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked |  |  |
 | Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
-| Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked  |  |  |
-| Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked  |   |  |
+| Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked and differences are displayed (they can be hidden)  |  |  |
+| Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked. In Settings > Certificate, it appears as auto approved  |   |  |
 | Theme | 1. Select Dark<br>2. Select Classic<br>3. Select Light<br>4. Select System | All themes are correcly saved and displayed in file list |  |  |
 | Show hidden | 1. Enable setting "show hidden files"<br>2. In web, create a file of folder that stars with .<br>3. Disable the setting| 2. Item displayed in app<br>3. Item not displayed|  |  |
 | Show folders at the top | 1. Enable setting "show folders at the top"<br>2. Disable setting "show folders at the top"| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files|  |  |
@@ -100,6 +110,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
 | Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder|  | |
 | Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge amount of files| All files are uplaoded |  | |
+| Restrict uploads to None |In Device Settings > ownCloud > Photos, Select "None"<br>Try to upload a picture from albums| Not allowed, error displayed | | |
+| Restrict upload to Selected I |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were not selected in previous step| Not allowed, error displayed | | |
+| Restrict upload to Selected II |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were selected in previous step| Pics uplaoded | | |
 | Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
 | Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| | |
 | Download several files | Tap on several files | all are enqueued and filly downloaded |  | |
@@ -118,7 +131,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | PDF | Download an open a PDF file | Correctly displayed |  |  |
 | PDF search | Download an open a PDF file and search by a pattern | Correct search | |  |
 | PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | |  |
-| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbils/list| Correct displayed |  |  |
+| PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  |  |
+| PDF Full screen | Download an open a PDF file and tap on the screen| Correct displayed in full screen |  |  |
+| PDF Navigate | Download an open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct |  |  |
 | Doc | Download an open a Doc file | Correctly displayed | |  |
 | Excel | Download an open a excel file | Correctly displayed | |  |
 | Ppt | Download an open a ppt file | Correctly displayed | |  |
@@ -220,6 +235,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 |**Share Sheet**||||||
 | Root | Save an external file in the root | File correctly saved |   |  |  |
 | Non root | Save an external file in non-root folder | File correctly saved |   |  |  |
+| Share many | Save many external files in the root | Files correctly saved |   |  |  |
 | Share text | In Safari, open a web page and select text<br>Share it with oC | Text saved in a text file |   |   |  |
 | Share link | In Safari, open a web page and select a link<br>Share it with oC | Link saved correctly|   | |  |
 | Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC | Image saved correctly|  | |  |
@@ -229,6 +245,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Document Scanner JPG | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select JPG as format | JPG file correctly uploaded |  | |
 | Markup PDF Overwrite | Open card of PDF file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Overwrite the file with new changes | File correctly saved with new changes |  | |
 | Markup JPG New file | Open card of image file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Save in a new file | New file correctly saved with new changes | | |
+| Metadata | Open card of image file<br>Select Metadata | Check that information there is correctly displayed| P m14| |
 | Shortcuts | Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc account<br>Execute the shortcut | Folder is created | | |
 |**Miscellaneous**||||||
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape |   | |
