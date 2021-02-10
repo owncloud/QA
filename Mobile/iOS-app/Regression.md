@@ -257,3 +257,5 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
 |**Accesibility**||||||
 | Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
+|**Upgrade**||||||
+| From previous| 1. Install previous version with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist|  | |

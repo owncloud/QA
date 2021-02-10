@@ -31,18 +31,18 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Basic auth https | 1. Type an correct URL to the app with https and basic auth | 2. Host certificate is there, asked from approval. Credentials are asked  | P m14 t13  |  |
 | Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>Type correct credentials | File list accesible | P m14 t13  |  |
 | Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>Type wrong credentials | Error | P m14 t13  |  |
-| Redirection 301 | 1. Type an correct URL to a sever with 301 redirection<br>Type correct credentials | File list accesible | F m14 t13 | Not working |
-| Redirection 302 | 1. Type an correct URL to a sever with 302 redirection<br>Type correct credentials | File list accesible | F m14 t13 | Infinite loop |
+| Redirection 301 | 1. Type an correct URL to a sever with 301 redirection<br>Type correct credentials | File list accesible | P m14 t13 | FIXED: Not working |
+| Redirection 302 | 1. Type an correct URL to a sever with 302 redirection<br>Type correct credentials | File list accesible |  NA | Only with redirection to subfolder |
 | LDAP | 1. Type an correct URL to the app agains LDAP server<br>Type correct credentials | File list accesible |  P m14 t13 |  |
 | **OAuth2** |   |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed | P m14 t13
 | Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded | P m14 t13
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | F m14 t13 | Returns an error after requesting twice
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | P m14 t13 | FIXED: Returns an error after requesting twice
 | Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  | P m14 t13
 | **OIDC** |   |  |
 | Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed | P m14 t13| 
 Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded | P m14 t13
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app | F m14 t13 | Returns an error after requesting twice
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app | P m14 t13 | FIXED: Returns an error after requesting twice
 | Logout | Logout in a open and active OIDC session | Moved to login view| NA | |
 |**Settings**||||||
 | Passcode | 1. Enable passcode and set a code<br>2. Close app and open again| Passcode asked | P m14 |  |
@@ -259,4 +259,4 @@ Log in incorrect | Log in OIDC server with incorrect credentials | Correct error
 | [#852](https://github.com/owncloud/ios-app/pull/852) | |  | P m14 | |
 | [#813](https://github.com/owncloud/ios-app/pull/813) | |  | P m14|  |
 |**Upgrade**||||||
-| 11.4.5 | Install previous 11.4.5<br>Perform some actions<br>Install current version| Correct Upgrade<br>Correct Release Notes|  | |
+| 11.4.5 | 1. Install previous 11.4.5 with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist| P m14 t13  | FIXED: Authentication lost<br>FIXED: Logging is disabled |
