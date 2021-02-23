@@ -12,7 +12,7 @@
 | Test Case | Steps | Expected | Result | Related Comment  | 
 | :-------- | :---- | :------- | :----: | :--------------- | 
 |**OIDC-oC10 with register**||||||
-| Register endpoint | Input OIDC server URL | Check that register endpoint is checked after well-known | P m11 m7 | P[roblem if idP under https non-secure ](https://github.com/owncloud/android/issues/3109)|
+| Register endpoint | Input OIDC server URL | Check that register endpoint is checked after well-known | P m11 m7 | [Problem if idP under https non-secure ](https://github.com/owncloud/android/issues/3109)|
 | Token endpoint | Entering credentials in custom tabs | New token is requested with client id and secret id granted in register endpoint | P m11 m7 |  |
 | Token renewal | Wait till token expires | New token is granted using the correct client\_id and secret\_id | P m11 m7 | [check](https://github.com/owncloud/android/issues/3107) |
 | Client/secret renewal | Wait till client_id expires | New client_id is granted. Following token renewal will use new client\_id/secret\_id | NA | Not available |
