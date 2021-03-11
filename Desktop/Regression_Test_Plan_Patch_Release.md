@@ -116,12 +116,9 @@ FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=test
      * [ ] explorer status column changes, when "free up local space" is clicked.
  * [ ] Testpilot client doesn't show ownCloud name or logo
      * [ ] Not mentioned in
-         * Installer,
-         * Connection Wizard,
-         * Settings page,
-         * About dialog.
+         * Installer, Connection Wizard, Settings page, About dialog.
  * [ ] Download signatures and keys are valid. Verify if the automated key-checker at
-        * [ ] https://jenkins.int.owncloud.com/view/monitor/job/monitor-certs/lastCompletedBuild/console
+     * [ ] https://jenkins.int.owncloud.com/view/monitor/job/monitor-certs/lastCompletedBuild/console
             * was run today/yesterday
             * has latest platform versions of each family.
             * has stable, daily & testing
