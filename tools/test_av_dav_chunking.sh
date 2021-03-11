@@ -64,6 +64,7 @@ echo -e "\nPress Enter to upload v2 dav path with chunking"; read a
 for BASEFILE in $BASEFILES
 do
     ID=$RANDOM
+    echo -n "MKCOL: "
     curls remote.php/dav/uploads/$user/$ID --request MKCOL
     NUM=0
     FILES=$(ls ${BASEFILE}_*)
@@ -77,6 +78,8 @@ do
     curls remote.php/dav/uploads/$user/$ID/.file --request MOVE -H "Destination: http://$host/$path/remote.php/dav/files/$user/virus_$BASEFILE"
     sleep 3
 done
+
+echo "Log in as $user at http://$host/$path and confirm that no file called 'virus' was uploaded."
 
 rm -rf /tmp/eicar-files
 
