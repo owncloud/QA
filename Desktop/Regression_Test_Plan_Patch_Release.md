@@ -54,6 +54,7 @@ FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=test
      * [ ] Public link has been created and can be opened in a browser
  * [ ] Enable VFS
      * [ ] VFS has been enabled
+     * [ ] Overlay icons have changed (after 'Free up space')
  ----
  * [ ] Install ownCloud client on **Ubuntu**, Mint or Debian with GNOME desktop
  ```sudo apt install owncloud-client-nautilus```
@@ -92,7 +93,6 @@ FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=test
      * [ ] Public link has been created and can be opened in a browser
  * [ ] Enable VFS
      * [ ] VFS has been enabled
-     * [ ] Overlay icons have changed
  ----
  * [ ] For Beta or RC: Install **Testpilot client on Windows 10**
      * [ ] disable VFS in connction wizard
