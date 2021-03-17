@@ -64,9 +64,10 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Create a new account without connection to the server | Create a new account without connection to the server | There must be an adequate error message |
 |Multiaccount | Having connection, login with another auth method (basic, oauth2) | Both accounts must be ready to use |
 | Create a new account, but it is an existing one. |1. There is an account whith a user in one server<br>2. Try to create the same account | A error: "An account for the same user and server already exists in the device" |
-| Edit and chnage the password | Edit the account (Change the password for an incorrect one)| It is not possible, credentials error |
+| Edit and change the password | Edit the account (Change the password for an incorrect one)| It is not possible, credentials error |
 | Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account |
 | Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account |
+| Sync Account | 1. Add an account without browsing into in<br>2. Sync the app with the sync icon<br>3. Remove connection from device<br>4. Browse through the account| Everything is discovered |
 | **User quota** |   |  |
 | Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed |
 | 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar |
@@ -108,13 +109,16 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view |
 | Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
-| Clear lists | 1. Upload a huge amount of files<br>2. When some of them are uploaded, switch the device connection off<br>3. Open the menu and tap on "clear succesfull"<br>4. Switch the device connection on and on menu, tap on "retry failed"<br>5. Switch again the device connection off<br>6. Open the menu and tap on "clear failed"<br>7. Switch the device connection on and select new files to upload. Wait until they are finished<br>8. Tap on menu and "Clear all finished" | 2. Current uploads are moved to failed (check error message is correct)<br>3. Uploaded section is cleared<br>4. Failed are moved to current<br>5. Current are move to failed  (check error message is correct)<br>6. Failed section is cleared<br>8. View is cleared |
+| Clear Uploaded | 1. Upload some files<br>2. Clear the Uplaoded list when the files have been uploaded | Uploaded list cleared | 
+| Clear Current | 1. Upload a bunch of files<br>2. Clear the Uplaoded list while the files are being uploaded | Current list cleared | 
+| Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | 
+| Retry Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Retry list | 2. Files are moved to Failed<br>3. Files are retried and moved to Current | 
 | Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  |
 | Instant uploads, only wifi| 1. Enable instant uploads of picture or video and only with wifi<br>2. Using 3G/4G, take a picture or video<br>3. Then wifi is back, take another picture or video| 2. The pic or video is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum |
 | Instant uploads, select move or copy| 1. enable instant uploads of picture or video<br>2. In "Original file will be", select move<br>3. take a picture or video<br>4. In "Original file will be", select copy<br>5. take a picture or video| 3. The original is not stored in device<br>5. The original is stored in device and in app |
 | Change instant upload Camera folder | 1. Set a source folder<br>2. Take photos and videos<br>3. Change the folder<br>4. Take photos and videos | 2. Videos and photos uploaded<br>4. Videos and photos not uploaded |
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
-| Error permissions | 1. Share a folder wiithout permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  |
+| Error permissions | 1. Share a folder without permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  | [issue](https://github.com/owncloud/android/issues/2653)
 | Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  |
 | Delete account | 1. In settings view, remove one account | All uploads from the removed account are removed from uploads view |
 | Multiaccount | 1. Add three different accounts<br>2. Upload files from all of them at the same time  | Files are correctly uploaded in each account and folder |
@@ -214,7 +218,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works |
 | Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work |
 | Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link |
-| Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option does not appear. |
+| Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option is visible but only with the link. |
 | Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared |
 | Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared |
 | Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server |
@@ -244,7 +248,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Private link shared | Open shares view<br>Click on the private link and share it with another app  | Correctly shared  | | Test the Sheet with Android 6 (old behaviour)
 | **Miscellanous** |   |  |
 | Thumbnails | 1. Open a folder with pics and txt files |  Check that the thumbnails (pics and txt files) are previewed  |
-| Avatar | 1. In web, set an avatar to the user|  Check in app that the avatar is correctly displayed in drawer and account manager |
+| Avatar | 1. In web, set an avatar to the user<br>2. Change the avatar in web<br>3. In app, click on the avatar|  1. Check in app that the avatar is correctly displayed in the top right corner<br>2. Check the avatar changes also in app<br>3. Moved to account manager  |
 | Sort by date | 1. Change the list order from name to date<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
 | Sort by size | 1. Change the list order from date to size<br>2. Check descending option | Data is listed by date ascending and descending without obeying files and folders|
 | Grid and List view | 1. Change from list to grid view several times<br>2. Browse into a folder and change to list/grid | 1. Changes are performed correctly<br>2. Changes are inherited when a option is not select |
@@ -256,5 +260,4 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
 | **Upgrade** |   |  |
-| Upgrade from latest version | Install the previous version and then, upgrade to the current one | App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
-| Upgrade from 9.x | Install a 9.x version and then, upgrade to the current one | Account is not supported anymore |
+| Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
