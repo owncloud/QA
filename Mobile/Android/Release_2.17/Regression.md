@@ -27,7 +27,7 @@ Not tested: Security, Sharing, Document Provider, Instant uploads, Multiselectio
 | Title | Steps     | Expected Result | Result | Comments |
 | :---- | :-------- | :-------------- | :----: | :------- |
 | **Welcome Wizard**|
-| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed |P m11
+| Welcome  wizard  | Install the app from scratch  | Welcome wizard shown and correctly displayed |P m11 m7
 | **Detect Auth Method**  |   |  |
 | Basic Auth | Input a basic auth URL | User and password field shown | P m11 m7
 | OAuth2 | Input an OAuth2 URL | User and password field not shown. Connected to Browser using chrome custom tabs | P m11 m7 | AUTO
@@ -91,10 +91,10 @@ Not tested: Security, Sharing, Document Provider, Instant uploads, Multiselectio
 | Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view | P m11
 | Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list | P m11
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view | P m11
-| Clear Uploaded | 1. Upload some files | No Clear button on this list | F m11 | Clear button is there
-| Clear Current | 1. Upload a bunch of files<br>2. Clear the Uplaoded list while the files are being uploaded | Current list cleared | P m11
-| Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | P m11
-| Retry Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Retry list | 2. Files are moved to Failed<br>3. Files are retried and moved to Current | P m11
+| Clear Uploaded | 1. Upload some files | No Clear button on this list | P m11 m7 | FIXED: Clear button is there
+| Clear Current | 1. Upload a bunch of files<br>2. Clear the Uplaoded list while the files are being uploaded | Current list cleared | P m11 m7
+| Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | P m11 m7
+| Retry Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Retry list | 2. Files are moved to Failed<br>3. Files are retried and moved to Current | P m11 m7
 | Instant uploads | 1. Enable instant uploads (of video and image) and close the app<br>2. Take a video and image<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, images and videos are uploaded maximum after 15 minutes  | P m11
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore | P m11
 | Error permissions | 1. Share a folder without permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  | P m11 | [issue](https://github.com/owncloud/android/issues/2653)
@@ -107,7 +107,7 @@ Not tested: Security, Sharing, Document Provider, Instant uploads, Multiselectio
 | **Upload from external** |   |  |
 | Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view | P m11 | 
 | Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | P m11 | 
-| Send text | Copy text and share it with oC | A txt file is created with the copied text | F m11 m7 | Dialog not dismissed
+| Send text | Copy text and share it with oC | A txt file is created with the copied text | P m11 m7 | FIXED: Dialog not dismissed
 | **VideoStreaming** |   |  |
 | Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly | P m11 m7
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward and change orientation | Video is streamed correctly | P m11 m7
@@ -192,7 +192,7 @@ Not tested: Security, Sharing, Document Provider, Instant uploads, Multiselectio
 | Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |P m11 m7
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |P m11 m7
 | **Upgrade** |   |  |
-| Upgrade from latest version | Install the previous version and then, upgrade to the current one | Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed| F m7 m11 | Wizard is lost
+| Upgrade from latest version | Install the previous version and then, upgrade to the current one | Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed| P m7 m11 | FIXED: Wizard is lost
 | **Changelog** |   |  |
 | [3041](https://github.com/owncloud/android/issues/3041) | |  | P m11 m7
 | [3113](https://github.com/owncloud/android/issues/3113) | |  | P m11 m7
