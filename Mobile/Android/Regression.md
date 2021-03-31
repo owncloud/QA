@@ -257,7 +257,8 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Local search | Enter a pattern that matches with any item on the file list | Correct filtered |
 | Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Logcat and Logfiles are generated. Filters work properly. Content can be cleared (even files) and shared |
 | Logging HTTP on | 1. In Settings, enable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are logged including headers and body|
-| Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |
+| Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several acti| Pictures Portrait | Enter in the Auto upload pictures section | Different sections available: Picture uploads, Picture upload path, Only wifi, Camera folder, Original file will be |  | 
+| Pictures Landscape | Enter in the Auto upload pictures section | Different sections available: Picture uploads, Picture upload path, Only wifi, Camera folder, Original file will be |  | ons in the account with network requests | Requests are not logged |
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
