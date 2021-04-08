@@ -1,6 +1,14 @@
 ## 'PDF Viewer' Test Plan
 
-- Run Testplan with all supported browsers: Internet Explorer 11, MS EDGE, Mozilla Firefox, Chrome and Safari.
+- Run Testplan with all supported browsers: 
+* [ ] Internet Explorer 11 
+* [ ] MS EDGE 
+* [ ] Mozilla Firefox 
+* [ ] Chrome 
+* [ ] Safari
+* [ ] iOS Safari Mobile
+* [ ] Android Firefox
+* [ ] Android Chrome
 
 
 ## Testing functionality
