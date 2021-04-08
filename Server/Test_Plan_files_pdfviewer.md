@@ -1,5 +1,18 @@
 ## 'PDF Viewer' Test Plan
 
+## Setup
+
+<details><summary>Click to view setup details</summary>
+
+* [ ] `bash ./make_oc10_apps.sh guests windows_network_drive impersonate ~/Download/apps/files_pdfviewer-0.12.0-RC4.tar.gz`
+      https://...
+
+</details>
+
+## Testing functionality
+
+Run Testplan with all supported browsers
+
 - Run Testplan with all supported browsers: 
 * [ ] Internet Explorer 11 
 * [ ] MS EDGE 
@@ -10,8 +23,6 @@
 * [ ] Android Firefox
 * [ ] Android Chrome
 
-
-## Testing functionality
 
 Test Case | Expected Result | Result | Related Comment
 ------------- | -------------- | ----- | ------
