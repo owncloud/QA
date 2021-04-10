@@ -56,7 +56,6 @@ Tag a pdf file and search for tag and open it from tag section| The content is s
 **Public link**|  |   |
 |  |   |
 Share a pdf file via link and open it from the link| The content is shown and pdf filesviewer buttons work (download, thumbnails, fwd page...) | :construction:  |
-|  |   |
 Put a pdf file in a folder and share the folder via link and open it from the link| The content is shown and pdf filesviewer buttons work (download, thumbnails, fwd page...) | :construction:  |
 **External Storage**|  |   |
 |  |   |
