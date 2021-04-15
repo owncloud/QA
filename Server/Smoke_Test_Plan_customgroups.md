@@ -3,6 +3,7 @@
 The toplevel checkmark indictes the test was performed.
 The indented checkmarks indicate the results were as expected.
 
+This is a quick smoke test only. For the full testplan refer to Test_Plan_Customgroups.md
 
 * [ ] Enable the app
    * [ ] No problems found
