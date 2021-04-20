@@ -19,6 +19,7 @@ References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Pl
 | ---------------------------------------- | ---------------------------------------- | ------ | --------------- |
 | Enter an invalid hostname e.g. 'localhost%&$#+~' and save the antivirus settings | saving is rejected |    🚧     |                 |
 | Enter a negative number as "Port" and save the antivirus settings | saving is rejected |    🚧     |                 |
+| Enter a number larger than 65535 as "Port" and save | saving is rejected |    🚧     |                 |
 | Enter a floating point number as "Port" and save the antivirus settings | saving is rejected |    🚧     |                 |
 | Enter "0" as "Port" and save the antivirus settings | saving is rejected |    🚧     |  
 | Enter a non numerical string as "Port" and save the antivirus settings | saving is rejected |    🚧     |              |
