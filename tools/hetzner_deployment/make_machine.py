@@ -14,7 +14,7 @@ class makeMachine:
     def __init__(self, configFile = None):
         random.seed(int(str(time.time()).split('.')[0]))
         if configFile:
-            self.load_config(configFile, mode='normal')
+            self.load_config(configFile)
         else:
             print('No config File set')
             sys.exit(1)
@@ -23,7 +23,6 @@ class makeMachine:
             while True:
                 if len(self.current_working_threads) < self.max_threads:
                     threading.Thread(target=self.worker, args=(self.config['api-key'], self.config['owner-tag'], server, self.create_thread_id())).start()
-                    #self.worker(self.config['api-key'], self.config['owner-tag'], server)
                     break
                 else:
                     time.sleep(1)
@@ -34,24 +33,11 @@ class makeMachine:
                 break
         print('finished')
 
-    def load_config(self, configFile, mode):
-        if mode == 'normal':
-            with open(configFile, 'rb') as reader:
-                config = json.loads(reader.read().decode('utf_8'))
-            print(config)
-            self.check_config(config)
-            self.config = config
-        if mode == 'experimental':
-            with open(configFile, 'rb') as reader:
-                read = ''
-                for line in reader.readlines():
-                    line = line.replace(b'\n', b'').replace(b'\t', b'').decode('utf-8')
-                    if not line.startswith('#'):
-                        read = read + line
-                    else:
-                        print('found line')
-            config = json.loads(read)
-            sys.exit()
+    def load_config(self, configFile):
+        with open(configFile, 'rb') as reader:
+            config = json.loads(reader.read().decode('utf_8'))
+        self.check_config(config)
+        self.config = config
 
     def create_thread_id(self):
         while True:
@@ -200,5 +186,4 @@ class makeMachine:
         else:
             return None
 
-
-makeMachine('./dummy.cfg')
+makeMachine()
