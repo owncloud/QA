@@ -33,12 +33,13 @@
 # v0.4 -- 2019-09-11, jw        lower default folder ratio from 2.0% to 0.5%, fixed the logic for low -e values.
 # v0.5 -- 2019-09-12, jw        new -t option to test max tree dimensions.
 # v0.6 -- 2019-11-20, jw        count folders against -m too, so that we can properly build structures with mostly folders.
+# v0.7 -- 2021-04-21, jw        added -s suffix option.
 
 
 import random, time, string, os, sys, json
 import argparse, shutil
 
-__version__ = '0.6'
+__version__ = '0.7'
 
 conf = {
   'maxfiles': 1_000_000,
@@ -62,7 +63,7 @@ conf_run = {
 parser = argparse.ArgumentParser(description='Create deep or shallow trees of random files.')
 parser.add_argument('dir', metavar='DIR', type=str, help='destination folder')
 parser.add_argument('-m', '--maxfiles', metavar='MAXFILES', type=int, help='Number of files and folders to generate. Default: ' + str(conf['maxfiles']))
-parser.add_argument('-s', '--seed', metavar='SEED_STRING', type=str, help='String to seed the random generator. Call with identical seed to recreate an identical tree. Default: current timestamp in msec')
+parser.add_argument('-S', '--seed', metavar='SEED_STRING', type=str, help='String to seed the random generator. Call with identical seed to recreate an identical tree. Default: current timestamp in msec')
 parser.add_argument('-f', '--folder_ratio', metavar='FOLDER_PERCENTAGE', type=float, help='Probability to create a subfolder instead of a file, as percent. Default: ' + str(conf['folder_ratio']))
 parser.add_argument('-e', '--max_entries_per_dir', metavar='MAX_ENTRIES_PER_DIR', type=int, help='Maximum number files/subdirs per directory. Default: ' + str(conf['max_entries_per_dir']))
 parser.add_argument(      '--min_entries_per_dir', metavar='MIN_ENTRIES_PER_DIR', type=int, help='Minimum number files/subdirs per directory. Default: ' + str(conf['min_entries_per_dir']))
@@ -73,6 +74,7 @@ parser.add_argument(      '--min_body_len', metavar='MIN_BODY_LEN', type=int, he
 parser.add_argument('-c', '--corpus_size', metavar='CORPUS_SIZE', type=int, help='Size of the internal random pool. (Larger is more chaotic but slower). Default: ' + str(conf['corpus_size']))
 parser.add_argument('-L', '--load_config', metavar='CONFIG_FILE', type=str, help='Load a config file from a previous run, before applying other options. Default: none.')
 parser.add_argument('-t', '--testonly', action='store_true', help='Only test how deep or wide a tree could be. Default: create a tree.')
+parser.add_argument('-s', '--suffix', metavar='SUFFIX', type=str, help='Common suffix for all file names generated. Default: none')
 args = parser.parse_args()
 
 if args.load_config:
@@ -89,6 +91,7 @@ if args.min_name_len        is not None: conf['min_name_len']        = args.min_
 if args.max_body_len        is not None: conf['max_body_len']        = args.max_body_len
 if args.min_body_len        is not None: conf['min_body_len']        = args.min_body_len
 if args.corpus_size         is not None: conf['corpus_size']         = args.corpus_size
+if args.suffix              is not None: conf['suffix']              = args.suffix
 
 if conf['max_entries_per_dir'] < 5000:
   maxmin = int(conf['max_entries_per_dir']/10)
@@ -232,6 +235,7 @@ def randstr(min_len=10, max_len=200):
 def randfile():
   name = randstr(conf['min_name_len'], conf['max_name_len'])
   body = randstr(conf['min_body_len'], conf['max_body_len'])
+  if 'suffix' in conf: name = name + conf['suffix']
   return (name, body)
 
 
