@@ -211,7 +211,7 @@ class makeMachine:
                 sftp = ssh_client.open_sftp()
                 sftp.put(script_local, f'/root/{str(script_local).split("/")[len(str(script_local).split("/")) - 1]}')
                 sftp.close()
-                stdin, stdout, stderr = ssh_client.exec_command('python3 /root/test_script.py')
+                stdin, stdout, stderr = ssh_client.exec_command(f'python3 /root/{str(script_local).split("/")[len(str(script_local).split("/")) - 1]}')
                 for line in stdout.readlines():
                     print(line.strip('\n'))
         else:
