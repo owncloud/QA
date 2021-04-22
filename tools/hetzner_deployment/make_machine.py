@@ -136,6 +136,7 @@ class makeMachine:
             image=self.get_image(hetnerClient=client, name=server_dict['image']),
             ssh_keys=self.get_ssh_keys(hetznerClient=client, names=server_dict['ssh-keys']),
             volumes=None,
+            firewalls=None,
             networks=None,
             user_data=None,
             labels=self.make_labels(ownerTag=owner_tag, labels=server_dict['labels']),
