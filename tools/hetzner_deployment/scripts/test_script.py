@@ -26,6 +26,8 @@ os.environ['DEBIAN_FRONTEND'] = "noninteractive"
 os.environ['DEBIAN_PRIORITY'] = "critical"
 run_command('apt -qy update')
 run_command('apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade')
+run_command('apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" install apt-show-versions')
+
 packages = run_command('apt list --installed').split('\n')
 for package in packages:
     run_command(f'apt-show-versions {package.split("/")[0]}')

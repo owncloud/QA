@@ -136,7 +136,6 @@ class makeMachine:
             image=self.get_image(hetnerClient=client, name=server_dict['image']),
             ssh_keys=self.get_ssh_keys(hetznerClient=client, names=server_dict['ssh-keys']),
             volumes=None,
-            firewalls=None,
             networks=None,
             user_data=None,
             labels=self.make_labels(ownerTag=owner_tag, labels=server_dict['labels']),
@@ -169,17 +168,17 @@ class makeMachine:
         print('server deleted')
 
     def script_loader(self, script_url):
-        if script_url.startswith('.') or script_url.startswith('/'):
-            return script_url
-        if 'https://github.com/' in script_url:
-            script_url.replace('https://github.com', 'https://raw.githubusercontent.com')
-        print(script_url)
-        filename = str(script_url).split("/")[len(str(script_url).split("/")) - 1]
-        print(filename)
-        result = requests.get(script_url, allow_redirects=True)
-        with open(f'../../../../scripts/{filename}', 'wb') as writer:
-            writer.write(result.content)
-            return f'./scripts/{filename}'
+        if str(script_url).split('/')[len(str(script_url).split('/')) - 1][-3:] == '.py' or str(script_url).split('/')[len(str(script_url).split('/')) - 1][-3:] == '.sh':
+            if script_url.startswith('.') or script_url.startswith('/'):
+                return script_url
+            if 'https://github.com/' in script_url:
+                script_url.replace('/blob/', '/raw/', 1)
+            print(script_url)
+            with open(f'./scripts/{str(script_url).split("/")[len(str(script_url).split("/")) - 1]}', 'wb') as writer:
+                writer.write(requests.get(script_url, allow_redirects=True).content)
+                return f'./scripts/{str(script_url).split("/")[len(str(script_url).split("/")) - 1]}'
+        else:
+            print('Script Type not allowed. Only .py or .sh skipping ...')
 
     def run_script_on_machine(self, machine, ssh_key, scripts):
         ssh_client = paramiko.SSHClient()
@@ -262,7 +261,9 @@ class makeMachine:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', default=None, action='store', help='Set the config file for running')
-    parser.add_argument('-k', default=None, action='store', help='Set the ssh-key file')
+    #parser.add_argument('-c', default=None, action='store', help='Set the config file for running')
+    #parser.add_argument('-k', default=None, action='store', help='Set the ssh-key file')
+    parser.add_argument('-c', default='/home/gerald/Arbeit/hetzner_stuff/dummy-orig.cfg', action='store', help='Set the config file for running')
+    parser.add_argument('-k', default='/home/gerald/Arbeit/hetzner_stuff/guard_key', action='store', help='Set the ssh-key file')
     args = parser.parse_args()
     makeMachine(args.c, args.k)
