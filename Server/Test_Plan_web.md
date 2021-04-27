@@ -66,12 +66,36 @@ docker exec -ti $(docker ps -q | head -1) occ app:enable web
 Test Case | Expected Result | Result | Related Comment
 ------------- | -------------- | ----- | ------
 **CLI commands** |  |   |
-Enable web app via CLI using ```occ app:enable web``` | The apps gets enabled | :construction:  |
+Enable web app via CLI using ```occ app:enable web``` | The apps gets enabled | 🚧  |
 |  |   |
  **Web GUI** |  |   |
- Switch to 'Settings' -> 'New Design' | The 'new' web app appears | :construction:  |
+ Switch to 'Settings' -> 'New Design' | The 'new' web app appears | 🚧:   | 
 
 ...
-* [ ] Private Links
-    * [ ] Holger found something in 2.1.0
-    * [ ] 
+
+Material collected from https://github.com/owncloud/enterprise/issues/4301
+
+Within the app I clicked around a lot and saw no issues. In particular:
+
+* [ ]    create folders
+* [ ]    upload some files and download them again
+* [ ]    open images in mediaviewer
+* [ ]    share folders with some demo users
+* [ ]    access content via public link
+* [ ]    delete files and folders, restore files and folders, and empty trash
+* [ ]    mark files as favorite, check that they are in the favorites list, remove again from favorites
+* [ ]    share with users and as public link from within the shared with others view
+* [ ]    login as different user, accept and decline shares, download files from within the shares
+* [ ]    create a draw.io file, save and exit. Reopening works correct and shows content
+
+Re-evaluate
+
+* [ ]    owncloud/web#4531 [QA] oc10 public link fails - **reproduced unchanged.**
+* [ ]    owncloud/ocis#1075 [QA] (Thumbnails and) mediaviewer fails in public links **partially fixed**
+
+The following menu items fall back into classic design
+
+* [ ]    admin -> Settings
+* [ ]    admin -> Profile -> Edit
+
+
