@@ -117,6 +117,9 @@ FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=test
  * [ ] Testpilot client doesn't show ownCloud name or logo
      * [ ] Not mentioned in
          * Installer, Connection Wizard, Settings page, About dialog.
+
+----
+
  * [ ] Download signatures and keys are valid. Verify if the automated key-checker at
      * [ ] https://jenkins.int.owncloud.com/view/monitor/job/monitor-certs/lastCompletedBuild/console
             * was run today/yesterday
