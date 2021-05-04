@@ -46,6 +46,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Logout | Logout in a open and active OIDC session | Moved to login view| | |
 |**Settings**||||||
 | Passcode | 1. Enable passcode and set a code<br>2. Close app and open again| Passcode asked |  |  |
+| Passcode Files App| 1. Enable passcode and set a code<br>2. Close app and open Files App| Passcode asked |  |  |
 | Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked |  |  |
 | Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked |  |  |
 | Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked |  |  |
@@ -130,7 +131,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 |**Files preview**||||||
 | PDF | Download an open a PDF file | Correctly displayed |  |  |
 | PDF search | Download an open a PDF file and search by a pattern | Correct search | |  |
-| PDF Go To Page | Download an open a PDF file and go to a page | Correct jump | |  |
+| PDF Go To Page | Download an open a PDF file and go to a page (in the page counter) | Correct jump | |  |
 | PDF List of Contents | Download an open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  |  |
 | PDF Full screen | Download an open a PDF file and tap on the screen| Correct displayed in full screen |  |  |
 | PDF Navigate | Download an open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct |  |  |
@@ -145,6 +146,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Media backgorund | Download an open a video file. Switch the screen off | Video plays in background |  |  |
 | Non openable | Download an open a non openable file | Placeholder displayed with date and size| |  |
 | Damaged | Download an open a damaged file | Placeholder displayed | |  |
+| Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | |  |
+| Presentation mode cancel | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"<br>4. Cancel it in the dialog| After 30 seconds, screen locks | |  |
 |**Offline**||||||
 | Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
 | Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  | |
@@ -164,6 +167,11 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |   |
 | Several| Cause together some of the errors above| Messages are grouped by kind, and can be fixed individually or grouped  |  |   |
+|**Conflict handling**||||||
+| Conflict detected | 1. Edit a file with device 1<br>2. Edit the same file with device 2<br>3. Submit changes with device 1<br>4. Submit changes with device 2 just a couple of seconds later | Device 1 uploads its new version correctly<br>Device 2 shows the conflict with three options: Cancel, Replace, Keep Both |  |
+| Cancel | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Cancel` |  Device 1 uploads its new version correctly<br> Local copy in Device 2 is deleted |  |
+| Replace | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Replace` |  Device 1 uploads its new version correctly<br> Device 2 replaces its version with the server version uploaded by Device 1<br>Device 1 updates its version to the Device 2 one |  |  |
+| Keep Both | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Keep Both` |  Device 1 uploads its new version correctly<br> Device 2 keeps its version locally and creates a new file with the version uploaded by Device 1 |  |
 |**Available Offline**||||||
 | File | 1. Set a file as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the file | File is accessible | | |
 | Folder | 1. Set a folder with subfolders as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the folder | All the content in the folders and subfolders is accesible and openable | | |
@@ -202,6 +210,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Move between oC accounts non-root | Move a file from an oC account to anocther one in non-root folder | Content correctly moved |  |  |
 | Copy between oC accounts root | Copy a file from an oC account to anocther one in root folder | Content correctly copied |  |  |
 | Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied |  |  |
+| Share a file with user | 1.Select a file or folder<br>2. In contextual menu, select Share<br>3. Select sharee | Content correctly shared |  |  |
+| Share a file by link | 1.Select a file or folder<br>2. In contextual menu, select Links<br>3. Create a new link (with defaults) | Link correctly created |  |  |
 |**Remote actions (Files App)**||||||
 | Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app |  |  |
 | Move remote| Move a file or folder in web UI | File is automatically moved in Files app | |  | |
@@ -240,6 +250,15 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Share link | In Safari, open a web page and select a link<br>Share it with oC | Link saved correctly|   | |  |
 | Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC | Image saved correctly|  | |  |
 | Several accounts | Add several accounts<br>Save an external file in the root folder of one of them, that is not the current one | File correctly saved in the selected account |  |  |  |
+|**Drag & Drop**||||||
+| Safari txt| Drag and drop text from Safari into the oC app| Text saved in a new file|  | |  |
+| Safari picture | Drag and drop image from Safari into the oC app| Picture saved in a new file|  | |  |
+| Notes txt | Drag and drop text from Notes app into the oC app| Text saved in a new file|  | |  |
+| Mail | Drag and drop text from Mail app into the oC app| Text saved in a new file|  | |  |
+| Mail file | Drag and drop attached file from Mail app into the oC app| File saved in the app|  | |  |
+| Photos picture | Drag and drop image from Photos into the oC app| Picture saved in a new file|  | |  |
+| Photos video | Drag and drop video from Photos into the oC app| Video saved in a new file|  | |  |
+| Pages file | Drag and drop file from Pages into the oC app| File saved in a new file|  | |  |
 |**IAP features**| Use an enterprise server |||||
 | Document Scanner PDF | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select PDF as format | PDF file correctly uploaded |  | |
 | Document Scanner JPG | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select JPG as format | JPG file correctly uploaded |  | |
@@ -247,14 +266,26 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Markup JPG New file | Open card of image file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Save in a new file | New file correctly saved with new changes | | |
 | Metadata | Open card of image file<br>Select Metadata | Check that information there is correctly displayed| P m14| |
 | Shortcuts | Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc account<br>Execute the shortcut | Folder is created | | |
+| Shortcuts error | 1. Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc OAuth2 account<br>2. Remove token from  adming dashboard<br>3. Execute the shortcut | Correct error displayed | | |
+|**Local Search**||||||
+| One match name| Enter a pattern that match only one file| One file in the results | |  |
+| One match name negative | Enter a pattern that matches only one file, with "-" prefix | All files displayed bit the matching one  |  |  |
+| PDF | Enter `type:pdf` in a folder with many kind of files | Only pdfs in the results | |
+| PDF negative | Enter `-type:pdf` in a folder with many kind of files | Everything but pdfs in the results |  |
+| After year | Enter `after:2020` in a folder with many files with different modification dates | Only files modified after 2020 are displayed | |  |
+| Before month negative | Enter `-before:2020-06` in a folder with many files with different modification dates | Only files modified after June 2020 are displayed |  |  |
+| Current week | Enter `:week` in a folder with many files with different modification dates from different weeks | Files modified the current week are displayed  |  |  |
+| On several days| Enter `on:2020-06-15,2020-06-19` (or any other date) in a folder with many files with different modification dates | Only files modified on 15 June 2020 or 19 June 2020 are displayed  |   |  |
+| Last 2 days | Enter `:2d` in a folder with many files with different modification dates  | Files modified last 2 days displayed  |  |  |
+| Name + Date + Type | Enter `al after:2020 type:pdf` in a folder that contains several pdf files and other multiple files of other type. One pdf filename contains the substring `al` and was created or modified after 2020  | Only one pdf displayed as result: the one created after 2020 |  |  |
 |**Miscellaneous**||||||
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape |   | |
-| Searching | Input a pattern to filter in the current folder | Results correct filtered |   | 
 | Quota correct | Open the root folder | Quota is correctly displayed |  | |
 | Contextual menu | Long press over an item of the list | Contextual menu displayed|  | |
 | Save from mail | Open mail and save an attachment in ownCloud account | Correctly saved |  | |
 | Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder|  | |
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
+| Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Ppen app  | Displayed the file opened in 1.  |  | |
 |**Accesibility**||||||
 | Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
 |**Upgrade**||||||
