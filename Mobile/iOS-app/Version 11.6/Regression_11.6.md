@@ -1,10 +1,11 @@
-#### Regression 
+#### Regression v11.6
 
-#### PR: <br>
+#### PR: https://github.com/owncloud/ios-app/pull/915<br>
 
 
-Device/s: <br>
-Server: 
+Device/s: iPhoneXR v14.4 <br>
+Server: 10.7
+XCode version: 12.5
 
 How to read Results:
 
@@ -26,128 +27,128 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Test Case | Steps | Expected Result | Result | Related Comment
 | :-------- | :---- | :-------------- | :----: | :------------- |
 |**Basic Auth**||||||
-| Basic auth http | 1. Type an correct URL to the app with http and basic auth | 2. Host certificate is there. Credentials are asked  |   |  |
+| Basic auth http | 1. Type an correct URL to the app with http and basic auth | 2. Host certificate is there. Credentials are asked  | P m14  |  |
 | Basic auth https | 1. Type an correct URL to the app with https and basic auth | 2. Host certificate is there, asked from approval. Credentials are asked  |   |  |
-| Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>Type correct credentials | File list accesible |   |  |
-| Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>Type wrong credentials | Error |   |  |
-| Redirection 301 | 1. Type an correct URL to a sever with 301 redirection<br>Type correct credentials | File list accesible |   |  |
+| Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>Type correct credentials | File list accesible |  P m14 |  |
+| Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>Type wrong credentials | Error | P m14  |  |
+| Redirection 301 | 1. Type an correct URL to a sever with 301 redirection<br>Type correct credentials | File list accesible | P m14  |  |
 | Redirection 302 | 1. Type an correct URL to a sever with 302 redirection<br>Type correct credentials | File list accesible |   |  |
-| LDAP | 1. Type an correct URL to the app agains LDAP server<br>Type correct credentials | File list accesible |   |  |
+| LDAP | 1. Type an correct URL to the app agains LDAP server<br>Type correct credentials | File list accesible | P m14  |  |
 | **OAuth2** |   |  |
-| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
-| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
+| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed | P m14
+| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded | P m14
 | Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app |
-| Remove token | 1. After being logged, remove token in server side | App detects inline the lack of authenthication and prompts the user to continue online or sign in again  |
+| Remove token | 1. After being logged, remove token in server side | App detects inline the lack of authenthication and prompts the user to continue online or sign in again  | P m14
 | **OIDC** |   |  |
-| Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed |
-| Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded |
+| Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed | P m14
+| Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded | P m14
 | Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app |
-| Logout | Logout in a open and active OIDC session | Moved to login view| | |
+| Logout | Logout in a open and active OIDC session | Moved to login view| NA |  Not available yet|
 |**Settings**||||||
-| Passcode | 1. Enable passcode and set a code<br>2. Close app and open again| Passcode asked |  |  |
-| Passcode Files App| 1. Enable passcode and set a code<br>2. Close app and open Files App| Passcode asked |  |  |
-| Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked |  |  |
-| Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked |  |  |
-| Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked |  |  |
-| Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
+| Passcode | 1. Enable passcode and set a code<br>2. Close app and open again| Passcode asked | P m14 |  |
+| Passcode Files App| 1. Enable passcode and set a code<br>2. Close app and open Files App| Passcode asked | P m14 |  |
+| Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked | P m14 |  |
+| Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked | P m14 |  |
+| Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked | P m14 |  |
+| Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked | P m14 |  |
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked and differences are displayed (they can be hidden)  |  |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked. In Settings > Certificate, it appears as auto approved  |   |  |
-| Theme | 1. Select Dark<br>2. Select Classic<br>3. Select Light<br>4. Select System | All themes are correcly saved and displayed in file list |  |  |
-| Delete unused | 1. Set Delete unused copies to 1 minute<br>2. Download two files | After 1 minute, local copies are removed (download icon appears again the row on the file list) | |  |
-| Show hidden | 1. Enable setting "show hidden files"<br>2. In web, create a file of folder that stars with .<br>3. Disable the setting| 2. Item displayed in app<br>3. Item not displayed|  |  |
-| Show folders at the top | 1. Enable setting "show folders at the top"<br>2. Disable setting "show folders at the top"| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files|  |  |
-| Prevent gestures enabled | 1. Enable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions work |  |  |
-| Prevent gestures disabled | 1. Disable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions are not posible |  |  |
-| Streaming enabled | 1. Enable setting "Streaming"<br>2. Open a video file| Video is played and not downloaded. Cloud icon remains in the item in list of files |  |  |
-| Streaming disabled | 1. Disable setting "Streaming"<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files |  |  |
-| Media upload HEIC > JPG | 1. Enable setting "Convert HEIC to JPG"<br>2. Upload an HEIC file| File is saved as JPG |  |  |
-| Media upload MP4 | 1. Enable setting "Convert videos to MP4"<br>2. Upload video file in MOV format| Video is saved as MP4 |  |  |
-| Media upload Preserve original name enabled | 1. Enable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format IMG_xxxx |  |  |
-| Media upload Preserve original name disabled | 1. Disable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format Photo-timestamp_xxxx|  |  |
-| Media upload Prefer unedited (IAP) | 1. Enable setting "Prefer unedited"<br>2. With photos app, edit a picure with some filters...<br>3. Upload a picture| Picture is saved with out changes, in original version|  |  |
-| Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG|  |  |
-| Media upload original videos | 1. Enable setting "Prefer original videos"<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable "Prefer original video" and repeat| 3. Uploaded original video<br>4. Uploaded edited video|  |  |
+| Theme | 1. Select Dark<br>2. Select Classic<br>3. Select Light<br>4. Select System | All themes are correcly saved and displayed in file list | P m14 |  |
+| Delete unused | 1. Set Delete unused copies to 1 minute<br>2. Download two files | After 1 minute, local copies are removed (download icon appears again the row on the file list) | P m14 |  |
+| Show hidden | 1. Enable setting "show hidden files"<br>2. In web, create a file of folder that stars with .<br>3. Disable the setting| 2. Item displayed in app<br>3. Item not displayed| P m14 |  |
+| Show folders at the top | 1. Enable setting "show folders at the top"<br>2. Disable setting "show folders at the top"| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files| P m14 |  |
+| Prevent gestures enabled | 1. Enable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions work | P m14 |  |
+| Prevent gestures disabled | 1. Disable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions are not posible | P m14 |  |
+| Streaming enabled | 1. Enable setting "Streaming"<br>2. Open a video file| Video is played and not downloaded. Cloud icon remains in the item in list of files | P m14 |  |
+| Streaming disabled | 1. Disable setting "Streaming"<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files | P m14 |  |
+| Media upload HEIC > JPG | 1. Enable setting "Convert HEIC to JPG"<br>2. Upload an HEIC file| File is saved as JPG | P m14 |  |
+| Media upload MP4 | 1. Enable setting "Convert videos to MP4"<br>2. Upload video file in MOV format| Video is saved as MP4 | P m14 |  |
+| Media upload Preserve original name enabled | 1. Enable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format IMG_xxxx | P m14 |  |
+| Media upload Preserve original name disabled | 1. Disable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format Photo-timestamp_xxxx| P m14 |  |
+| Media upload Prefer unedited (IAP) | 1. Enable setting "Prefer unedited"<br>2. With photos app, edit a picure with some filters...<br>3. Upload a picture| Picture is saved with out changes, in original version| P m14 |  |
+| Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG| P m14 |  |
+| Media upload original videos | 1. Enable setting "Prefer original videos"<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable "Prefer original video" and repeat| 3. Uploaded original video<br>4. Uploaded edited video| P m14 |  |
 | Documentation | Open Documentation Section  | Documentation web is opened | P m14 |   |
-| Help | Open Help Section  | Help web is opened |  |  |
-| Send feedback | Open Send feedback section | feedback mail is opened|  |  |
-| Recommend | Open Recommend section | recommend mail is opened|  |  |
-| Privacy policy | Open Privacy policy section | privacy policy is opened|  |  |
-| Acknowledgement | Open Acknowledgement section | Acknowledgement is opened|  |  |
-| App version | 1. Click on the App version cell<br>2. Paste in a text editor  | 1. Copied to clipboard<br>2. Information correctly pasted |  |  |
+| Help | Open Help Section  | Help web is opened | F m14 | web missing  |
+| Send feedback | Open Send feedback section | feedback mail is opened| P m14 |  |
+| Recommend | Open Recommend section | recommend mail is opened|P m14  |  |
+| Privacy policy | Open Privacy policy section | privacy policy is opened| P m14 |  |
+| Acknowledgement | Open Acknowledgement section | Acknowledgement is opened|P m14  |  |
+| App version | 1. Click on the App version cell<br>2. Paste in a text editor  | 1. Copied to clipboard<br>2. Information correctly pasted | P m14 |  |
 |**Item Actions**||||||
-| Create folder | In (+) menu of the list of files, select create folder | Correctly created |   |  |
+| Create folder | In (+) menu of the list of files, select create folder | Correctly created | P m14  |  |
 | Open In | Open a file in a 3rd party app | Correctly downloaded and sent |   |  |
-| Copy file | Copy a file to another location | Correctly copied |  | |
-| Copy folder| Copy a folder to another location | Correctly copied |  |  |
-| Move file | Move a file to another location | Correctly moved |  |  |
-| Move folder| Move a folder to another location | Correctly moved |  |  |
-| Duplicate file | Duplicate a file to another location | Correctly duplicated |  |  |
-| Duplicate folder| Duplicate a folder to another location | Correctly duplicated |  |  |
-| Rename file | Rename a file | Correctly renamed |  |  |
-| Rename folder| Rename a folder  | Correctly renamed |  |  |
-| Delete file | Delete a file | Correctly deleted |  |  |
-| Delete folder| Delete a folder  | Correctly deleted |  |  |
-| Favorite file | Open the card of a file and click the favorite star | File is favorited (check in server) |  |  |
-| Unfavorite file | Open the card of a favorited file and click the favorite star | File is unfavorited (check in server) |  |  |
-| Sort Date | Sort the file list by date  | Newest on the top |  |  |
-| Sort A-Z | Sort the file list by A-Z  | A on the top |  |  |
-| Sort Z-A | Sort the file list by Z-A  | Z on the top |  |  |
-| Sort Type | Sort the file list by type  | Grouped by type |  |  |
-| Sort Size | Sort the file list by size  | Biggest on the top |  |  |
-| Sort Date | Sort the file list by date  | Newest on the top |  |  |
-| Sort Shared | Sort the file list by shared  | Shared on the top |  |  |
+| Copy file | Copy a file to another location | Correctly copied | P m14 | |
+| Copy folder| Copy a folder to another location | Correctly copied | P m14 |  |
+| Move file | Move a file to another location | Correctly moved | P m14 |  |
+| Move folder| Move a folder to another location | Correctly moved | P m14 |  |
+| Duplicate file | Duplicate a file to another location | Correctly duplicated |  P m14|  |
+| Duplicate folder| Duplicate a folder to another location | Correctly duplicated | P m14 |  |
+| Rename file | Rename a file | Correctly renamed | P m14 |  |
+| Rename folder| Rename a folder  | Correctly renamed | P m14 |  |
+| Delete file | Delete a file | Correctly deleted | P m14 |  |
+| Delete folder| Delete a folder  | Correctly deleted | P m14 |  |
+| Favorite file | Open the card of a file and click the favorite star | File is favorited (check in server) | P m14 |  |
+| Unfavorite file | Open the card of a favorited file and click the favorite star | File is unfavorited (check in server) | P m14 |  |
+| Sort Date | Sort the file list by date  | Newest on the top | P m14 |  |
+| Sort A-Z | Sort the file list by A-Z  | A on the top | P m14 |  |
+| Sort Z-A | Sort the file list by Z-A  | Z on the top | P m14 |  |
+| Sort Type | Sort the file list by type  | Grouped by type | P m14 |  |
+| Sort Size | Sort the file list by size  | Biggest on the top | P m14 |  |
+| Sort Date | Sort the file list by date  | Newest on the top |  P m14|  |
+| Sort Shared | Sort the file list by shared  | Shared on the top | P m14 |  |
 |**Multiselection**||||||
-| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent |  |  |
-| Open In folder | Open several folders in a 3rd party app | Not posible |   |  |
-| Copy file | Copy several files to another location | Correctly copied |   |  |
-| Copy folder| Copy several folders to another location | Correctly copied |   |  |
-| Move file | Move several files to another location | Correctly moved |   |  |
-| Move folder| Move several folders to another location | Correctly moved |   |  |
-| Duplicate file | Duplicate several files to another location | Correctly duplicated |   |  |
-| Duplicate folder| Duplicate several folders to another location | Correctly duplicated |   |  |
-| Delete file | Delete several files | Correctly deleted |   |  |
-| Delete folder| Delete several folders  | Correctly deleted |   |  |
+| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent |  P m14|  |
+| Open In folder | Open several folders in a 3rd party app | Not posible |  P m14 |  |
+| Copy file | Copy several files to another location | Correctly copied | P m14  |  |
+| Copy folder| Copy several folders to another location | Correctly copied |  P m14 |  |
+| Move file | Move several files to another location | Correctly moved |  P m14 |  |
+| Move folder| Move several folders to another location | Correctly moved |  P m14 |  |
+| Duplicate file | Duplicate several files to another location | Correctly duplicated | P m14  |  |
+| Duplicate folder| Duplicate several folders to another location | Correctly duplicated |  P m14 |  |
+| Delete file | Delete several files | Correctly deleted |  P m14 |  |
+| Delete folder| Delete several folders  | Correctly deleted |  P m14 |  |
 |**Upload & Download**||||||
-| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
-| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
-| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
-| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder|  | |
-| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge amount of files (~300)| All files are uplaoded |  | |
-| Restrict uploads to None |In Device Settings > ownCloud > Photos, Select "None"<br>Try to upload a picture from albums| Not allowed, error displayed | | |
-| Restrict upload to Selected I |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were not selected in previous step| Not allowed, error displayed | | |
-| Restrict upload to Selected II |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were selected in previous step| Pics uplaoded | | |
-| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
-| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| | |
-| Download several files | Tap on several files | all are enqueued and filly downloaded |  | |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and filly downloaded. Last one is displayed | | |
+| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder | P m14 |  |
+| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder| P m14 |  |
+| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  P m14| |
+| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder| P m14 | |
+| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge amount of files (~300)| All files are uplaoded | P m14 | |
+| Restrict uploads to None |In Device Settings > ownCloud > Photos, Select "None"<br>Try to upload a picture from albums| Not allowed, error displayed |P m14 | |
+| Restrict upload to Selected I |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were not selected in previous step| Not allowed, error displayed | P m14| |
+| Restrict upload to Selected II |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were selected in previous step| Pics uplaoded |P m14 | |
+| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|P m14  | |
+| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| P m14| |
+| Download several files | Tap on several files | all are enqueued and filly downloaded | P m14 | |
+| Download a bunch of files | Tap on a huge number of files| all are enqueued and filly downloaded. Last one is displayed |P m14 | |
 |**Auto uploads**||||||
-| Auto uploads Photos | In Settings, Media Upload, enable Auto uploads for photos with a correct target folder<br>Take some photos and videos| Pics are uploaded after opening the app. Videos are not uploaded |  |   |
-| Auto uploads videos | In Settings, Media Upload, enable Auto uploads for videos with a correct target folder<br>Take some photos and videos| Videos are uploaded after opening the app. Photos are not uploaded |  |   |
+| Auto uploads Photos | In Settings, Media Upload, enable Auto uploads for photos with a correct target folder<br>Take some photos and videos| Pics are uploaded after opening the app. Videos are not uploaded | P m14  |   |
+| Auto uploads videos | In Settings, Media Upload, enable Auto uploads for videos with a correct target folder<br>Take some photos and videos| Videos are uploaded after opening the app. Photos are not uploaded | P m14 |   |
 |**Cellular transfers**||||||
 | Allow cellular enabled | 1. Upload a file under wifi<br>2. Upload a file under cellular| Both uploaded|  | |
 | Allow cellular disabled | 1. Upload a file under wifi<br>2. Upload a file under cellular| Under wifi, file is uploaded. Under cellular data file is not uploaded|  | |
 |**Multiaccount**||||||
-| Switch account | Create several accounts and browse through them | Correct browsing |  | |
-| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded |  | |
-| Download in several | Download several items in different accounts at the time | All items corectly uploaded |  |  |
+| Switch account | Create several accounts and browse through them | Correct browsing | P m14  | |
+| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded | P m14  | |
+| Download in several | Download several items in different accounts at the time | All items corectly uploaded | P m14  |  |
 |**Files preview**||||||
-| PDF | Download and open a PDF file | Correctly displayed |  |  |
-| PDF search | Download and open a PDF file and search by a pattern | Correct search | |  |
-| PDF Go To Page | Download and open a PDF file and go to a page (in the page counter) | Correct jump | |  |
-| PDF List of Contents | Download and open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  |  |
-| PDF Full screen | Download and open a PDF file and tap on the screen| Correct displayed in full screen |  |  |
-| PDF Navigate | Download and open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct |  |  |
-| Doc | Download and open a Doc file | Correctly displayed | |  |
-| Excel | Download and open a excel file | Correctly displayed | |  |
-| Ppt | Download and open a ppt file | Correctly displayed | |  |
-| Txt | Download and open a txt file | Correctly displayed | |  |
-| Image | Download and open a png, jpg files | Correctly displayed | |  |
-| GIF | Download and open a GIF file | Correctly displayed | |  |
-| Video | Download and open a video file. Go back and the video stops | Correctly played |  |  |
-| Audio | Download and open a video file. Go back and the music stops | Correctly played |  |  |
+| PDF | Download and open a PDF file | Correctly displayed | P m14  |  |
+| PDF search | Download and open a PDF file and search by a pattern | Correct search | P m14 |  |
+| PDF Go To Page | Download and open a PDF file and go to a page (both in the page counter and in the card actions) | Correct jump | P m14 |  |
+| PDF List of Contents | Download and open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  P m14 |  |
+| PDF Full screen | Download and open a PDF file and tap on the screen| Correct displayed in full screen |  P m14 |  |
+| PDF Navigate | Download and open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct | P m14  |  |
+| Doc | Download and open a Doc file | Correctly displayed | P m14 |  |
+| Excel | Download and open a excel file | Correctly displayed | P m14 |  |
+| Ppt | Download and open a ppt file | Correctly displayed |P m14  |  |
+| Txt | Download and open a txt file | Correctly displayed | P m14 |  |
+| Image | Download and open a png, jpg files | Correctly displayed |P m14  |  |
+| GIF | Download and open a GIF file | Correctly displayed | P m14 |  |
+| Video | Download and open a video file. Go back and the video stops | Correctly played | P m14  |  |
+| Audio | Download and open a video file. Go back and the music stops | Correctly played |  P m14 |  |
 | Media backgorund | Download an open a video file. Switch the screen off | Video plays in background |  |  |
-| Non openable | Download and open a non openable file | Placeholder displayed with date and size| |  |
-| Damaged | Download and open a damaged file | Placeholder displayed | |  |
+| Non openable | Download and open a non openable file | Placeholder displayed with date and size| P m14 |  |
+| Damaged | Download and open a damaged file | Placeholder displayed |P m14  |  |
 | Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | |  |
 | Presentation mode cancel | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"<br>4. Cancel it in the dialog| After 30 seconds, screen locks | |  |
 |**Offline**||||||
@@ -292,3 +293,12 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
 |**Upgrade**||||||
 | From previous| 1. Install previous version with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist|  | |
+|**Issues to check**||||||
+| [#956](https://github.com/owncloud/ios-app/pull/956)|  | | P m14
+| [#954](https://github.com/owncloud/ios-app/pull/954)|  | | P m14
+| [#934](https://github.com/owncloud/ios-app/pull/934)|  | | P m14
+| [#919](https://github.com/owncloud/ios-app/issues/919)|  | | P m14
+| [#910](https://github.com/owncloud/ios-app/pull/910)|  | | P m14
+| [#926](https://github.com/owncloud/ios-app/pull/926)|  | | P m14
+| [#920](https://github.com/owncloud/ios-app/pull/920)|  | | P m14
+| [#918](https://github.com/owncloud/ios-app/issues/918)|  | | P m14
