@@ -69,7 +69,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG| P m14 |  |
 | Media upload original videos | 1. Enable setting "Prefer original videos"<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable "Prefer original video" and repeat| 3. Uploaded original video<br>4. Uploaded edited video| P m14 |  |
 | Documentation | Open Documentation Section  | Documentation web is opened | P m14 |   |
-| Help | Open Help Section  | Help web is opened | F m14 | web missing  |
+| Help | Open Help Section  | Help web is opened | P m14 | FIXED: web missing  |
 | Send feedback | Open Send feedback section | feedback mail is opened| P m14 |  |
 | Recommend | Open Recommend section | recommend mail is opened|P m14  |  |
 | Privacy policy | Open Privacy policy section | privacy policy is opened| P m14 |  |
@@ -138,49 +138,50 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | PDF List of Contents | Download and open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  P m14 |  |
 | PDF Full screen | Download and open a PDF file and tap on the screen| Correct displayed in full screen |  P m14 |  |
 | PDF Navigate | Download and open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct | P m14  |  |
-| Doc | Download and open a Doc file | Correctly displayed | P m14 |  |
+| Doc | Download and open a Doc file | Correctly displayed | F m14 | Dark background? |
 | Excel | Download and open a excel file | Correctly displayed | P m14 |  |
 | Ppt | Download and open a ppt file | Correctly displayed |P m14  |  |
 | Txt | Download and open a txt file | Correctly displayed | P m14 |  |
 | Image | Download and open a png, jpg files | Correctly displayed |P m14  |  |
 | GIF | Download and open a GIF file | Correctly displayed | P m14 |  |
 | Video | Download and open a video file. Go back and the video stops | Correctly played | P m14  |  |
+| Slow-mo Video | Download and open a slow-mo video file. taken with the camera| Correctly played in slow mo | P m14  |  |
 | Audio | Download and open a video file. Go back and the music stops | Correctly played |  P m14 |  |
-| Media backgorund | Download an open a video file. Switch the screen off | Video plays in background |  |  |
+| Media background | Download an open a video file. Switch the screen off | Video plays in background | P m14  |  |
 | Non openable | Download and open a non openable file | Placeholder displayed with date and size| P m14 |  |
 | Damaged | Download and open a damaged file | Placeholder displayed |P m14  |  |
-| Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | |  |
-| Presentation mode cancel | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"<br>4. Cancel it in the dialog| After 30 seconds, screen locks | |  |
+| Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | P m14 |  |
+| Presentation mode cancel | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"<br>4. Cancel it in the dialog| After 30 seconds, screen locks | P m14 |  |
 |**Offline**||||||
-| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  | |
-| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  |  |
-| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| |  |
-| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |   |
-| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| |  |
+| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection | P m14  |  |
+| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection | P m14  | |
+| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |P m14   |  |
+| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection | P m14  |  |
+| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection | P m14  |  |
+| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.| P m14  |  |
+| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection| P m14  |  |
+| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| P m14 |  |
+| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK| P m14  |   |
+| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| P m14 |  |
 |**Error handling**||||||
-| Create folder | Create folder with existing name | Correct error |  |  |
-| Rename | Rename item with existing name in target | Correct error |  |  |
-| Copy | Copy item with existing name in target | Correct error |  |  |
-| Move | Move item with existing name in target | Correct error |  |  |
-| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
-| Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |   |
-| Several| Cause together some of the errors above| Messages are grouped by kind, and can be fixed individually or grouped  |  |   |
+| Create folder | Create folder with existing name | Correct error | P m14 |  |
+| Rename | Rename item with existing name in target | Correct error | P m14 |  |
+| Copy | Copy item with existing name in target | Correct error | P m14 |  |
+| Move | Move item with existing name in target | Correct error | P m14 |  |
+| Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error | P m14 |  |
+| Quota exceeded | Upload some content so that the user quota is exceeded | Correct error | P m14 |   |
+| Several| Cause together some of the errors above| Messages are grouped by kind, and can be fixed individually or grouped  | P m14 |   |
 |**Conflict handling**||||||
-| Conflict detected | 1. Edit a file with device 1<br>2. Edit the same file with device 2<br>3. Submit changes with device 1<br>4. Submit changes with device 2 just a couple of seconds later | Device 1 uploads its new version correctly<br>Device 2 shows the conflict with three options: Cancel, Replace, Keep Both |  |
-| Cancel | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Cancel` |  Device 1 uploads its new version correctly<br> Local copy in Device 2 is deleted |  |
-| Replace | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Replace` |  Device 1 uploads its new version correctly<br> Device 2 replaces its version with the server version uploaded by Device 1<br>Device 1 updates its version to the Device 2 one |  |  |
-| Keep Both | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Keep Both` |  Device 1 uploads its new version correctly<br> Device 2 keeps its version locally and creates a new file with the version uploaded by Device 1 |  |
+| Conflict detected | 1. Edit a file with device 1<br>2. Edit the same file with device 2<br>3. Submit changes with device 1<br>4. Submit changes with device 2 just a couple of seconds later | Device 1 uploads its new version correctly<br>Device 2 shows the conflict with three options: Cancel, Replace, Keep Both | P m14 |
+| Cancel | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Cancel` |  Device 1 uploads its new version correctly<br> Local copy in Device 2 is deleted | P m14 |
+| Replace | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Replace` |  Device 1 uploads its new version correctly<br> Device 2 replaces its version with the server version uploaded by Device 1<br>Device 1 updates its version to the Device 2 one | P m14 |  |
+| Keep Both | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Keep Both` |  Device 1 uploads its new version correctly<br> Device 2 keeps its version locally and creates a new file with the version uploaded by Device 1 | P m14 |
 |**Available Offline**||||||
-| File | 1. Set a file as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the file | File is accessible | | |
-| Folder | 1. Set a folder with subfolders as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the folder | All the content in the folders and subfolders is accesible and openable | | |
-| Add to av. offline | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder inside the av. offline folder | Content copied/moved is now av. offline | | |
-| Displace av. offline file | 1. Set a file as av. offline<br>2. Move the file to another location that is not av. offline| File is av. offline in the new location | | |
-| Displace from av. offline folder | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder from the av. offline folder to another location that is not av. offline| Content copied/moved is not av. offline anymore | | |
+| File | 1. Set a file as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the file | File is accessible | P m14 | |
+| Folder | 1. Set a folder with subfolders as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the folder | All the content in the folders and subfolders is accesible and openable | P m14 | |
+| Add to av. offline | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder inside the av. offline folder | Content copied/moved is now av. offline |P m14 | |
+| Displace av. offline file | 1. Set a file as av. offline<br>2. Move the file to another location that is not av. offline| File is av. offline in the new location | P m14| |
+| Displace from av. offline folder | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder from the av. offline folder to another location that is not av. offline| Content copied/moved is not av. offline anymore |P m14 | |
 |**Files App**| **2 auth methods** |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |  |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
@@ -246,14 +247,13 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Different accounts | 1. Get private link of three items in three different accounts<br>2. Open the links in the device when the open account is a different one | App is opened and the items are correctly shown inside their accounts |  |  |
 | Non existing item | 1. Get private link of a file or folder<br>2. Delete or move the item from its original location<br>3. Open the link in a device | File or folder does not exist, correct error message  about unknown link| |  |
 |**Share Sheet**||||||
-| Root | Save an external file in the root | File correctly saved |   |  |  |
-| Non root | Save an external file in non-root folder | File correctly saved |   |  |  |
-| Share many | Save many external files in the root | Files correctly saved |   |  |  |
-| Share text | In Safari, open a web page and select text<br>Share it with oC | Text saved in a text file |   |   |  |
-| Share link | In Safari, open a web page and select a link<br>Share it with oC | Link saved correctly|   | |  |
-| Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC | Image saved correctly|  | |  |
-| Several accounts | Add several accounts<br>Save an external file in the root folder of one of them, that is not the current one | File correctly saved in the selected account |  |  |  |
-|**Drag & Drop**||||||
+| Root | Save an external file in the root | File correctly saved |  P m14 |  |  |
+| Non root | Save an external file in non-root folder | File correctly saved | P m14  |  |  |
+| Share many | Save many external files in the root | Files correctly saved |  P m14 |  |  |
+| Share text | In Safari, open a web page and select text<br>Share it with oC | Text saved in a text file | P m14  |   |  |
+| Share image | In Safari, open a web page and select an image onto a web<br>Share it with oC | Image saved correctly| P m14 | |  |
+| Several accounts | Add several accounts<br>Save an external file in the root folder of one of them, that is not the current one | File correctly saved in the selected account | P m14 |  |  |
+|**Drag & Drop**| iPad |||||
 | Safari txt| Drag and drop text from Safari into the oC app| Text saved in a new file|  | |  |
 | Safari picture | Drag and drop image from Safari into the oC app| Picture saved in a new file|  | |  |
 | Notes txt | Drag and drop text from Notes app into the oC app| Text saved in a new file|  | |  |
@@ -263,18 +263,19 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Photos video | Drag and drop video from Photos into the oC app| Video saved in a new file|  | |  |
 | Pages file | Drag and drop file from Pages into the oC app| File saved in a new file|  | |  |
 |**IAP features**| Use an enterprise server |||||
-| Document Scanner PDF | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select PDF as format | PDF file correctly uploaded |  | |
-| Document Scanner JPG | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select JPG as format | JPG file correctly uploaded |  | |
-| Markup PDF Overwrite | Open card of PDF file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Overwrite the file with new changes | File correctly saved with new changes |  | |
-| Markup JPG New file | Open card of image file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Save in a new file | New file correctly saved with new changes | | |
+| Document Scanner PDF | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select PDF as format | PDF file correctly uploaded | P m14 | |
+| Document Scanner JPG | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select JPG as format | JPG file correctly uploaded | P m14 | |
+| Markup PDF Overwrite | Open card of PDF file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Overwrite the file with new changes | File correctly saved with new changes | P m14 | |
+| Markup JPG New file | Open card of image file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Save in a new file | New file correctly saved with new changes | P m14 | |
 | Metadata | Open card of image file<br>Select Metadata | Check that information there is correctly displayed| P m14| |
-| Shortcuts | Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc account<br>Execute the shortcut | Folder is created | | |
-| Shortcuts error | 1. Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc OAuth2 account<br>2. Remove token from  adming dashboard<br>3. Execute the shortcut | Correct error displayed | | |
+| Shortcuts | Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc account<br>Execute the shortcut | Folder is created | P m14 | |
+| Shortcuts error | 1. Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc OAuth2 account<br>2. Remove token from  admin dashboard<br>3. Execute the shortcut | Correct error displayed | P m14 | |
+| Account with IAP locked | Create a new account in a server with no IAP features available | Shortcuts can not be executed<br>Scan Documents is locked<br>Markup for PDF and JPG is locked<br>Image metadata for images is locked | P m14 | |
 |**Local Search**||||||
-| One match name| Enter a pattern that match only one file| One file in the results | |  |
-| One match name negative | Enter a pattern that matches only one file, with "-" prefix | All files displayed bit the matching one  |  |  |
-| PDF | Enter `type:pdf` in a folder with many kind of files | Only pdfs in the results | |
-| PDF negative | Enter `-type:pdf` in a folder with many kind of files | Everything but pdfs in the results |  |
+| One match name| Enter a pattern that match only one file| One file in the results | P m14 |  |
+| One match name negative | Enter a pattern that matches only one file, with "-" prefix | All files displayed bit the matching one  | P m14 |  |
+| PDF | Enter `type:pdf` in a folder with many kind of files | Only pdfs in the results |  P m14|
+| PDF negative | Enter `-type:pdf` in a folder with many kind of files | Everything but pdfs in the results | P m14 |
 | After year | Enter `after:2020` in a folder with many files with different modification dates | Only files modified after 2020 are displayed | |  |
 | Before month negative | Enter `-before:2020-06` in a folder with many files with different modification dates | Only files modified after June 2020 are displayed |  |  |
 | Current week | Enter `:week` in a folder with many files with different modification dates from different weeks | Files modified the current week are displayed  |  |  |
@@ -282,13 +283,13 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Last 2 days | Enter `:2d` in a folder with many files with different modification dates  | Files modified last 2 days displayed  |  |  |
 | Name + Date + Type | Enter `al after:2020 type:pdf` in a folder that contains several pdf files and other multiple files of other type. One pdf filename contains the substring `al` and was created or modified after 2020  | Only one pdf displayed as result: the one created after 2020 |  |  |
 |**Miscellaneous**||||||
-| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape |   | |
-| Quota correct | Open the root folder | Quota is correctly displayed |  | |
-| Contextual menu | Long press over an item of the list | Contextual menu displayed|  | |
-| Save from mail | Open mail and save an attachment in ownCloud account | Correctly saved |  | |
-| Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder|  | |
-| Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
-| Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Ppen app  | Displayed the file opened in 1.  |  | |
+| Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape | P m14  | |
+| Quota correct | Open the root folder | Quota is correctly displayed | P m14 | |
+| Contextual menu | Long press over an item of the list | Contextual menu displayed| P m14 | |
+| Save from mail | Open mail and save an attachment in ownCloud account | Correctly saved | P m14 | |
+| Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder| P m14 | |
+| Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account| P m14 | |
+| Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Open app  | Displayed the file opened in 1.  | P m14 | |
 |**Accesibility**||||||
 | Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
 |**Upgrade**||||||

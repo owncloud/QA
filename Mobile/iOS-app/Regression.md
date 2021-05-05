@@ -144,8 +144,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Image | Download and open a png, jpg files | Correctly displayed | |  |
 | GIF | Download and open a GIF file | Correctly displayed | |  |
 | Video | Download and open a video file. Go back and the video stops | Correctly played |  |  |
+| Slow-mo Video | Download and open a slow-mo video file. taken with the camera| Correctly played in slow mo | P m14  |  |
 | Audio | Download and open a video file. Go back and the music stops | Correctly played |  |  |
-| Media backgorund | Download an open a video file. Switch the screen off | Video plays in background |  |  |
+| Media background | Download an open a video file. Switch the screen off | Video plays in background |  |  |
 | Non openable | Download and open a non openable file | Placeholder displayed with date and size| |  |
 | Damaged | Download and open a damaged file | Placeholder displayed | |  |
 | Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | |  |
@@ -266,9 +267,10 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Document Scanner JPG | Open (+) menu in root folder<br>Select Scan Document<br>Scan a document<br>Set a file name and a correct location<br>Select JPG as format | JPG file correctly uploaded |  | |
 | Markup PDF Overwrite | Open card of PDF file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Overwrite the file with new changes | File correctly saved with new changes |  | |
 | Markup JPG New file | Open card of image file<br>Select Markup<br>Add some strokes, sign and some shapes<br>Save in a new file | New file correctly saved with new changes | | |
-| Metadata | Open card of image file<br>Select Metadata | Check that information there is correctly displayed| P m14| |
+| Metadata | Open card of image file<br>Select Metadata | Check that information there is correctly displayed| | |
 | Shortcuts | Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc account<br>Execute the shortcut | Folder is created | | |
-| Shortcuts error | 1. Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc OAuth2 account<br>2. Remove token from  adming dashboard<br>3. Execute the shortcut | Correct error displayed | | |
+| Shortcuts error | 1. Open Shortcuts app (iOS>13) and create a shortcut to create new folder in an existing oc OAuth2 account<br>2. Remove token from  admin dashboard<br>3. Execute the shortcut | Correct error displayed | | |
+| Account with IAP locked | Create a new account in a server with no IAP features available | Shortcuts can not be executed<br>Scan Documents is locked<br>Markup for PDF and JPG is locked<br>Image metadata for images is locked | | |
 |**Local Search**||||||
 | One match name| Enter a pattern that match only one file| One file in the results | |  |
 | One match name negative | Enter a pattern that matches only one file, with "-" prefix | All files displayed bit the matching one  |  |  |
@@ -287,7 +289,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Save from mail | Open mail and save an attachment in ownCloud account | Correctly saved |  | |
 | Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder|  | |
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
-| Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Ppen app  | Displayed the file opened in 1.  |  | |
+| Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Open app  | Displayed the file opened in 1.  |  | |
 |**Accesibility**||||||
 | Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
 |**Upgrade**||||||
