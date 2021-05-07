@@ -205,8 +205,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app |  |  |
 | Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud |  |  |
 | Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded |  |  |
-| Upload non-root| Open an exterl app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded |  |  |
-| Modify file| Open an ownCloud Files app location<br>Modify it | File is correctly uploaded to oC |   |   |
+| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded |  |  |
 | Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC |  |  |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted |  |  |
 | Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved |  |  |
@@ -215,6 +214,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied |  |  |
 | Share a file with user | 1.Select a file or folder<br>2. In contextual menu, select Share<br>3. Select sharee | Content correctly shared |  |  |
 | Share a file by link | 1.Select a file or folder<br>2. In contextual menu, select Links<br>3. Create a new link (with defaults) | Link correctly created |  |  |
+| Kind of files not greyed out | Upload to one acocunt the following kind of files: .itmz (install iThoughts2go app) ,mindnode (install Mindnode app) | Files are not greyed out in Files App | | |
 |**Remote actions (Files App)**||||||
 | Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app |  |  |
 | Move remote| Move a file or folder in web UI | File is automatically moved in Files app | |  | |
@@ -222,7 +222,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Upload remote| Upload new content in web UI | New content refreshed in Files app |  |  |
 |**Error handling (Files App)**||||||
 | Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error |  | |
-| Target folder deleted | Operations to perform in Files app after deleting target folder: move, copy | Correct error |  | |
+| Target folder deleted | Select Move/Copy of an item in Files app<br>Before submitting the operation, remove the target folder using another client or device  | Correct error |  | |
 |**Private Share**||||||
 | Share with a user | Open Share<br>Type a correct user name<br>Select user | Sharees list updated with the user |   |  |
 | Share with a group | Open Share<br>Type a correct group name<br>Select group | Group list updated with the user. Check that every user in the group can access the file |  |  |
@@ -240,7 +240,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 |**Private link**||||||
 | Get link View | Open Share view | Option correctly displayed |   |    | | 
 | Copy link | Get copy link and paste in the browser | File correctly linked |    | | | 
-|**Universal link**|https://well-known.shniq.cloud/|||||
+|**Universal link**||||||
 | File in root supported not downloaded | 1. Get private link of a supported format downloaded file in root<br>2. Open the link in the device (use suffix owncloud://)| App is opened and the file is downloaded and opened |  |  |
 | Folder in root  | 1. Get private link of a folder in root<br>2. Open the link in the device (use suffix owncloud://) | App is opened and folder content displayed | |  |
 | Different accounts | 1. Get private link of three items in three different accounts<br>2. Open the links in the device when the open account is a different one | App is opened and the items are correctly shown inside their accounts |  |  |
