@@ -1,6 +1,6 @@
 #### Download 
 
-#### PR: [https://github.com/owncloud/android/issues/3169]([https://github.com/owncloud/android/issues/3169])<br>
+#### PR: <br>
 
 
 Device/s: <br>
