@@ -4,8 +4,8 @@
 
 
 Device/s: iPhoneXR v14.4, iPadAir v13.4 <br>
-Server: 10.7
-XCode version: 12.5
+Server: 10.7<br>
+Xcode version: 12.5
 
 How to read Results:
 
@@ -237,6 +237,11 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 |**Private link**||||||
 | Get link View | Open Share view | Option correctly displayed | P m14  t13 |    | | 
 | Copy link | Get copy link and paste in the browser | File correctly linked |  P m14  t13 | | | 
+|**Universal link**||||||
+| File in root supported not downloaded | 1. Get private link of a supported format downloaded file in root<br>2. Open the link in the device (use suffix owncloud://)| App is opened and the file is downloaded and opened | P m14 |  |
+| Folder in root  | 1. Get private link of a folder in root<br>2. Open the link in the device (use suffix owncloud://) | App is opened and folder content displayed | P m14|  |
+| Different accounts | 1. Get private link of three items in three different accounts<br>2. Open the links in the device when the open account is a different one | App is opened and the items are correctly shown inside their accounts | P m14 |  |
+| Non existing item | 1. Get private link of a file or folder<br>2. Delete or move the item from its original location<br>3. Open the link in a device | File or folder does not exist, correct error message  about unknown link| P m14|  |
 |**Share Sheet**||||||
 | Root | Save an external file in the root | File correctly saved |  P m14 t13  |  |  |
 | Non root | Save an external file in non-root folder | File correctly saved | P m14 t13   |  |  |
@@ -282,9 +287,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account| P m14 t13 | |
 | Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Open app  | Displayed the file opened in 1.  | P m14 t13 | |
 |**Accesibility**||||||
-| Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
+| Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt | P m14 t13 | FIXED: Search Account/Folder selector|
 |**Upgrade**||||||
-| From previous| 1. Install previous version with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist|  | |
+| From previous| 1. Install previous version with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist| P m14 t13 | |
 |**Issues to check**||||||
 | [#956](https://github.com/owncloud/ios-app/pull/956)|  | | P m14 t13
 | [#954](https://github.com/owncloud/ios-app/pull/954)|  | | P m14 t13

@@ -4,7 +4,8 @@
 
 
 Device/s: <br>
-Server: 
+Server:  <br>
+Xcode version: <br>
 
 How to read Results:
 
