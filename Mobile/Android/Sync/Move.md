@@ -2,7 +2,7 @@
 
 #### PRs: 
 
-Devices:  <br>
+Devices: <br>
 Server: 
 
 
