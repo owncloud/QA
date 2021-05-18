@@ -1,10 +1,10 @@
-#### Version 
+#### Version 2.18
 
 #### PR: [https://github.com/owncloud/android/issues/]([https://github.com/owncloud/android/issues/])<br>
 
 
 Device/s: <br>
-Server: 
+Server: 10.7
 
 How to read Results:
 
@@ -270,5 +270,12 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Logging HTTP on | 1. In Settings, enable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are logged including headers and body|
 | Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
+| **Changelog** |   |  |
+|[#3155](https://github.com/owncloud/android/issues/3155) | |  |
+|[#3139](https://github.com/owncloud/android/issues/3139) | |  |
+|[#3121](https://github.com/owncloud/android/issues/3121) | |  |
+|[#3202](https://github.com/owncloud/android/pull/3202) | |  |
+|[#3204](https://github.com/owncloud/android/issues/3204) | |  |
+|[#3240](https://github.com/owncloud/android/pull/3240) | |  |
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
