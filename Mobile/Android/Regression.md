@@ -65,8 +65,9 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Create a new account without connection to the server | Create a new account without connection to the server | There must be an adequate error message |
 |Multiaccount | Having connection, login with another auth method (basic, oauth2) | Both accounts must be ready to use |
 | Create a new account, but it is an existing one. |1. There is an account whith a user in one server<br>2. Try to create the same account | A error: "An account for the same user and server already exists in the device" |
-| Edit and change the password | Edit the account (Change the password for an incorrect one)| It is not possible, credentials error |
+| Edit and change the password | 1. Edit one account with the key icon<br>2. Enter incorrect password| Credentials error | 
 | Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account |
+| Remove auto upload account | 1. Remove an account from Accounts manager, that is the account selected for auto uploads| Warning is shown, user has to accept the deletion |
 | Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account |
 | Sync Account | 1. Add an account without browsing into in<br>2. Sync the app with the sync icon<br>3. Remove connection from device<br>4. Browse through the account| Everything is discovered |
 | **User quota** |   |  |
@@ -75,7 +76,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar |
 | 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" |
 | **Security** |   |  |
-| Passcode enable | 1. Enable passcode (While doing that, change the orientation of the device)<br>2. Leave the app<br>3. Kill the app<br>4. passcode is asked (While doing that change the orientation of the device)<br>5. Fill in the correct password and select the account and folder | Passcode asked |
+| Passcode enable | 1. Enable passcode<br>2. Leave the app before entering<br>3. Open app<br>4. Enter a correct passcode twice<br>5. Leave the app and open it again| 3. Passcode not asked<br>5. Passcode asked |
 | Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current pincode, don't enter it, leave the app<br>3. Open the app again<br>| Passcode is asked |
 | Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current passcode, enter it<br>3. Leave the app<br>4. Open the app<br> | Passcode is not asked anymore |
 | Passcode security | 1. Select to disable passcode<br>2. Without entering it, kill the app<br>3. Open the app<br>| Passcode is asked |
@@ -86,10 +87,10 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Both at the same time | Try to enable pattern and passcode lock at the same time | Not posible |
 | Biometrical lock | Device supports biometrical | Option is displayed in `Settings`  |
 | Biometrical lock unsupported | Device does not support biometrical | Option is hidden in `Settings`  |
-| Biometrical unlock | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the biometrical | 1. Biometrical asked<br>2. Passcode/Pattern asked |
-| Upload file from camera with security | With a sec method enabled (pattern/passcode/biometrical), upload from camera | Security not asked |
-| Upload file from external app with security | With a securoty method enabled (pattern/passcode/biometrical), upload from external app | Security not asked |
-| Upload file from external app with security | With a security method enabled (pattern/passcode/biometrical), upload from external app | Security not asked |
+| Biometrical lock | 1. After registering a finger, leave the app and enter again<br>2. Enter an incorrect finger<br>3. Enter a correct finger| 1. Biometrical asked<br>2. Error<br>3. App unlocked |
+| Biometrical cancel | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the biometrical | 1. Biometrical asked<br>2. Passcode/Pattern asked |
+| Upload file from camera with security | With a security method enabled (pattern/passcode/biometrical), upload from camera | Security not asked |
+| Upload file from external app with security | With a security method enabled (pattern/passcode/biometrical), upload from external app | Security asked |
 | **Actions with no connection** |   |  |
 | Create a folder without connection | Create a folder without connection | An error message is shown |
 | Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|
@@ -103,7 +104,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message |
 | Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct |
 | Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct |
-| Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct |
+| Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct | | https://github.com/owncloud/android/issues/2653
 | Antivirus | 1. Enable antivirus in server<br>2. Upload EICAR file<br>| Correct error message in notification |
 | **Uploads** |   |  |
 | Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |
@@ -112,7 +113,6 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
 | Clear Uploaded | 1. Upload some files<br>2. Clear the Uplaoded list when the files have been uploaded | Uploaded list cleared | 
-| Clear Current | 1. Upload a bunch of files<br>2. Clear the Uplaoded list while the files are being uploaded | Current list cleared | 
 | Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | 
 | Retry Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Retry list | 2. Files are moved to Failed<br>3. Files are retried and moved to Current | 
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
@@ -205,7 +205,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Copy several file to oC | From doc prov, copy several files to the same account, different location| Correct copied | |  |
 | Copy file to oC other account | From doc prov, copy a file to other account| Correct copied |  NA |
 | Copy several file to other location | From doc prov, copy several files to other location| Correct copied |  |  |
-| Copy a file to other location  in the same oC account| From doc prov, copy a files to other location in the same account | Correct copied | P m9 m7 |  |
+| Copy a file to other location  in the same oC account| From doc prov, copy a files to other location in the same account | Correct copied |  |  |
 | Copy a file from other location | From doc prov, copy files from other location to oC| Correctly copied |  |  |
 |**Folder**||||||
 | Folder with subfolders oC | From doc prov, copy a folder with subfolders to the same account, different location| Correct copied | |  |
@@ -269,6 +269,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Logcat and Logfiles are generated. Filters work properly. Content can be cleared (even files) and shared |
 | Logging HTTP on | 1. In Settings, enable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are logged including headers and body|
 | Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |
+| Allow Touches | 1. In Settings > Security, enable `Touches with other visible windows`<br>2. Switch some light modulation app like Twilight on  | It is posible to touch in the app | 
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
