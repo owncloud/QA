@@ -49,8 +49,8 @@ Features not tested (not affected for the news in the release): multiselection, 
 | **OAuth2** |   |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed | P m11 m7
 | Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded | P m11 m7
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | P m11
-| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  | P m11
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app | P m11 m7
+| Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  | P m11 m7
 | **OIDC** |   |  |
 | Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed | P m11 m7
 | Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded | P m11 m7
@@ -94,18 +94,18 @@ Features not tested (not affected for the news in the release): multiselection, 
 | Upload file from camera with security | With a security method enabled (pattern/passcode/biometrical), upload from camera | Security not asked | P m11 m7
 | Upload file from external app with security | With a security method enabled (pattern/passcode/biometrical), upload from external app | Security asked | P m11 m7
 | **Actions with no connection** |   |  |
-| Create a folder without connection | Create a folder without connection | An error message is shown |P m11
-| Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|P m11
-| Rename folder/file without connection | Rename a folder/file without connection | An error message is shown|P m11
-| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown |P m11
-| Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct |P m11
-| Move a file/folder without connection | Select to move a file/folder without connection | An error is shown |P m11
-| Share by link | Select to share by link a file | An error is shown |P m11
-| Share with user | Select to share with a user | An error is shown |P m11
+| Create a folder without connection | Create a folder without connection | An error message is shown |P m11 m7
+| Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|P m11 m7
+| Rename folder/file without connection | Rename a folder/file without connection | An error message is shown|P m11 m7
+| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown |P m11 m7
+| Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct |P m11 m7
+| Move a file/folder without connection | Select to move a file/folder without connection | An error is shown |P m11 m7
+| Share by link | Select to share by link a file | An error is shown |P m11 m7
+| Share with user | Select to share with a user | An error is shown |P m11 m7
 | **Specific error handling (server set ups)** |   |  |
-| Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message |P m11
-| Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct |P m11
-| Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct |P m11
+| Maintenance mode login | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to login | Correct error message |P m11 m7
+| Maintenance mode uploads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to upload content | In uploads view, the error is correct |P m11 m7
+| Maintenance mode downloads | 1. Set a server en maintenance mode: sudo -u www-data ./occ maintenance:mode - -on<br>2. Try to download content | In uploads view, the error is correct |P m11 m7
 | Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct | | https://github.com/owncloud/android/issues/2653
 | **Uploads** |   |  |
 | Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |P m11 m7
@@ -125,17 +125,17 @@ Features not tested (not affected for the news in the release): multiselection, 
 | bigfilechunking true | 1. Select upload a file to a server with the capability `bigfilechunking true`  and `chunking>=1.0` (oC10) | Pic uploaded with chunking NG (MKCOL, PUT, PUT, PUT, MOVE)| P m11 m7
 | bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT | P m11 m7
 | **Auto Uploads** |   |  |
-| Auto uploads pictures| 1. Enable auto uploads pictures selecting an account and folder<br>2. Close the app<br>3. Take two picture<br>4. Switch off the device<br>5. Open the device after 5 minutes | Both pictures are uploaded after maximum 15 minutes  | P m11
-| Auto uploads pictures account & folder| 1. Enable auto uploads pictures<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures<br>4. Select another account and its root folder as target<br>5. Take more pictures<br>| 3. Pictures uploaded to this location after 15 min max<br>5. Pictures uploaded to this location after 15 min max  | P m11
-| Auto uploads pictures, only wifi| 1. Enable auto uploads pictures and only with wifi<br>2. Using 3G/4G, take a picture<br>3. When wifi is back, take another picture | 2. The picture is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum | P m11
-| Auto uploads pictures, select move or copy| 1. Enable auto uploads of pictures<br>2. In "Original file will be", select move<br>3. Take a picture<br>4. In "Original file will be", select copy<br>5. Take a picture| 3. The original is not stored in device<br>5. The original is stored in device and in app | P m11
-| Auto Upload pictures, change Camera folder | 1. Set a source folder<br>2. Take pictures with the camera<br>3. Change the folder<br>4. Take pictures | 2. Pictures uploaded<br>4. Pictures not uploaded | P m11
-| Auto uploads videos| 1. Enable auto uploads videos and close the app<br>2. Take a video<br>3. Take another video<br>4. Switch off the device<br>| Open the device after 5 minutes, videos are uploaded after maximum 15 minutes  | P m11
-| Auto uploads videos account & folder| 1. Enable auto uploads videos<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures<br>4. Select another account and its root folder as target<br>5. Take more videos<br>| 3. Videos uploaded to this location after 15 min max<br>5. Videos uploaded to this location after 15 min max  | P m11
-| Auto uploads videos, only wifi| 1. Enable auto uploads videos and only with wifi<br>2. Using 3G/4G, take a video <br>3. When wifi is back, take another video | 2. The video is not uploaded and no error is notified<br>3. The video is upload after 15 mins maximum | P m11
-| Auto uploads videos, select move or copy| 1. Enable auto uploads of videos <br>2. In "Original file will be", select move<br>3. Take a picture<br>4. In "Original file will be", select copy<br>5. Take a video| 3. The original is not stored in device<br>5. The original is stored in device and in app | P m11
-| Auto Upload videos, change Camera folder | 1. Set a source folder<br>2. Take videos with the camera<br>3. Change the folder<br>4. Take videos | 2. Videos uploaded<br>4. Videos not uploaded | P m11
-| Auto uploads both| 1. Enable auto uploads pictures and videos selecting a different account and folder for every of them<br>2. Close the app<br>3. Take two pictures and two videos | Both pictures and videos are uploaded after maximum 15 minutes  | P m11
+| Auto uploads pictures| 1. Enable auto uploads pictures selecting an account and folder<br>2. Close the app<br>3. Take two picture<br>4. Switch off the device<br>5. Open the device after 5 minutes | Both pictures are uploaded after maximum 15 minutes  | P m11 m7
+| Auto uploads pictures account & folder| 1. Enable auto uploads pictures<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures<br>4. Select another account and its root folder as target<br>5. Take more pictures<br>| 3. Pictures uploaded to this location after 15 min max<br>5. Pictures uploaded to this location after 15 min max  | P m11 m7
+| Auto uploads pictures, only wifi| 1. Enable auto uploads pictures and only with wifi<br>2. Using 3G/4G, take a picture<br>3. When wifi is back, take another picture | 2. The picture is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum | P m11 m7
+| Auto uploads pictures, select move or copy| 1. Enable auto uploads of pictures<br>2. In "Original file will be", select move<br>3. Take a picture<br>4. In "Original file will be", select copy<br>5. Take a picture| 3. The original is not stored in device<br>5. The original is stored in device and in app | P m11 m7
+| Auto Upload pictures, change Camera folder | 1. Set a source folder<br>2. Take pictures with the camera<br>3. Change the folder<br>4. Take pictures | 2. Pictures uploaded<br>4. Pictures not uploaded | P m11 m7
+| Auto uploads videos| 1. Enable auto uploads videos and close the app<br>2. Take a video<br>3. Take another video<br>4. Switch off the device<br>| Open the device after 5 minutes, videos are uploaded after maximum 15 minutes  | P m11 m7
+| Auto uploads videos account & folder| 1. Enable auto uploads videos<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures<br>4. Select another account and its root folder as target<br>5. Take more videos<br>| 3. Videos uploaded to this location after 15 min max<br>5. Videos uploaded to this location after 15 min max  | P m11 m7
+| Auto uploads videos, only wifi| 1. Enable auto uploads videos and only with wifi<br>2. Using 3G/4G, take a video <br>3. When wifi is back, take another video | 2. The video is not uploaded and no error is notified<br>3. The video is upload after 15 mins maximum | P m11 m7
+| Auto uploads videos, select move or copy| 1. Enable auto uploads of videos <br>2. In "Original file will be", select move<br>3. Take a picture<br>4. In "Original file will be", select copy<br>5. Take a video| 3. The original is not stored in device<br>5. The original is stored in device and in app | P m11 m7
+| Auto Upload videos, change Camera folder | 1. Set a source folder<br>2. Take videos with the camera<br>3. Change the folder<br>4. Take videos | 2. Videos uploaded<br>4. Videos not uploaded | P m11 m7
+| Auto uploads both| 1. Enable auto uploads pictures and videos selecting a different account and folder for every of them<br>2. Close the app<br>3. Take two pictures and two videos | Both pictures and videos are uploaded after maximum 15 minutes  | P m11 m7
 | **Upload from external** |   |  |
 | Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view | P m11 m6 m7| Test also with Android 6
 | Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | P m11 m6 m7 | Test also with Android 6
@@ -260,4 +260,4 @@ Features not tested (not affected for the news in the release): multiselection, 
 |[#3204](https://github.com/owncloud/android/issues/3204) | |  | P m11 m7
 |[#3240](https://github.com/owncloud/android/pull/3240) | |  | P m11 m7
 | **Upgrade** |   |  |
-| Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
+| Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed| P m11 m7
