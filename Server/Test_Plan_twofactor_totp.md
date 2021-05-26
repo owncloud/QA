@@ -1,12 +1,6 @@
 ## Setup
 ```
-ssh root@$hetzner_cloud_machine
-v=0.7.1RC1
-docker run --rm -ti -p 88:8080 -v /tmp/oc:/mnt/data owncloud/server:10.6.0 &
-cd /tmp/oc/apps
-wget https://github.com/owncloud/twofactor_totp/releases/download/v$v/twofactor_totp-$v.tar.gz
-tar xvf *.gz; rm *.gz
-chown -R www-data two*
+./make_oc10_apps.sh twofactor_totp
 
 # as ldap_user use alliah_abernathy in compose-playground/examples/hetzner-deploy/make_openidconnect_test.sh
 ```
