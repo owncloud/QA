@@ -1,0 +1,8 @@
+---
+- hosts: "{{ target }}"
+- remote_user: root
+  tasks:
+    - name: Connection test
+        local_action: shell ssh root@{{ target }} "echo success"
+        register: root_enabled
+    - debug: msg="{{root_enabled.stdout}}"

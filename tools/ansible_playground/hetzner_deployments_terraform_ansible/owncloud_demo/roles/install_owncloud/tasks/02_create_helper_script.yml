@@ -1,0 +1,8 @@
+---
+- name: Install occ helper Script
+  copy:
+    src: occ
+    dest: /usr/local/bin/occ
+    owner: root
+    group: root
+    mode: "u=rwx,g=rx,o=rx"

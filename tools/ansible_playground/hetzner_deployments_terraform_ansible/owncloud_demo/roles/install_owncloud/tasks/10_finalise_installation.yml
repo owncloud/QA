@@ -1,0 +1,3 @@
+---
+- name: Change Ownership of owncloud folder
+  raw: chown -R www-data. /var/www/owncloud

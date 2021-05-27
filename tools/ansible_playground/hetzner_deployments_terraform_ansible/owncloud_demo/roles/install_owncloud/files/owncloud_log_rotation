@@ -1,0 +1,8 @@
+/var/www/owncloud/data/owncloud.log {
+  size 10M
+  rotate 12
+  copytruncate
+  missingok
+  compress
+  compresscmd /bin/gzip
+}

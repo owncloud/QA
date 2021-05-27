@@ -1,0 +1,6 @@
+---
+- name: create Database
+  raw: mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud";
+
+- name: create database user and grant access to database
+  raw: mysql -u root -e "GRANT ALL PRIVILEGES ON owncloud.* TO owncloud@localhost IDENTIFIED BY 'password'";

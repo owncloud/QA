@@ -1,0 +1,12 @@
+---
+- name: Set occ background to cron
+  raw: occ background:cron
+
+- name: setup cron job
+  raw: echo "*/15  *  *  *  * /var/www/owncloud/occ system:cron" > /var/spool/cron/crontabs/www-data
+
+- name: change ownership of cron job
+  raw: chown www-data.crontab /var/spool/cron/crontabs/www-data
+
+- name: change mod of cron job
+  raw: chmod 0600 /var/spool/cron/crontabs/www-data

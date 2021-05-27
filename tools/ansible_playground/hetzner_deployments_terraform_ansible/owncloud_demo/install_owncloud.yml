@@ -1,0 +1,5 @@
+---
+- hosts: "{{ target }}"
+  remote_user: root
+  roles:
+    - install_owncloud

@@ -1,0 +1,8 @@
+---
+- name: Configure Log Rotation
+  copy:
+    src: owncloud_log_rotation
+    dest: /etc/logrotate.d/owncloud
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"

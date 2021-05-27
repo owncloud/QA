@@ -1,0 +1,32 @@
+---
+- name: Change Document Root
+  raw: sed -i "s#html#owncloud#" /etc/apache2/sites-available/000-default.conf
+
+- name: restart apache
+  service:
+    name: apache2
+    state: restarted
+
+- name: create virtual Host Configuration for ownCloud Server
+  copy:
+    src: owncloud.conf
+    dest: /etc/apache2/sites-available/owncloud.conf
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+
+- name: Enable virtual Host Configuration
+  raw: a2ensite owncloud.conf
+
+- name: reload apache
+  service:
+    name: apache2
+    state: reloaded
+
+- name: Enable recommended Apache Modules
+  raw: a2enmod dir env headers mime rewrite setenvif
+
+- name: reload apache
+  service:
+    name: apache2
+    state: reloaded

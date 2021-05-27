@@ -1,0 +1,11 @@
+---
+- import_tasks: 01_preperation.yml
+- import_tasks: 02_create_helper_script.yml
+- import_tasks: 03_install_requiered_packages.yml
+- import_tasks: 04_configure_apache.yml
+- import_tasks: 05_configure_database.yml
+- import_tasks: 06_install_owncloud.yml
+- import_tasks: 07_setup_cron_jobs.yml
+- import_tasks: 08_configure_file_caching_and_file_locking.yml
+- import_tasks: 09_configure_log_rotation.yml
+- import_tasks: 10_finalise_installation.yml

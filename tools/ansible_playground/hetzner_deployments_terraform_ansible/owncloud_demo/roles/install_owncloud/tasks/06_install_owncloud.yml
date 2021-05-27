@@ -1,0 +1,15 @@
+---
+- name: Download owncloud
+  raw: wget -O /var/www/owncloud-10.7.0.tar.bz2 https://download.owncloud.org/community/owncloud-10.7.0.tar.bz2
+
+- name: extract tarball
+  raw: tar -xvf /var/www/owncloud-10.7.0.tar.bz2 -C /var/www
+
+- name: chown owncloud folder to user www-data
+  raw: chown -R www-data. /var/www/owncloud
+
+- name: install owncloud
+  raw: occ maintenance:install --database "mysql" --database-name "owncloud" --database-user "owncloud" --database-pass "password" --admin-user "admin" --admin-pass "admin"
+
+- name: configure Trusted Domain
+  raw: occ config:system:set trusted_domains 1 --value="$(hostname -I|cut -f1 -d ' ')"
