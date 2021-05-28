@@ -7,13 +7,20 @@ terraform {
   }
 }
 
-variable "hcloud_token" {}
-variable "owner_tag" {}
-variable "labels" {}
-variable "key_names" {}
-variable "machine_name" {}
-variable "image" {}
-variable "server_type" {}
+variable "hcloud_token" {
+  type = string
+  description = "Your personal Hetzner Cloud token (64 hex characters)"
+  validation {
+    condition = length(var.hcloud_token) > 60
+    error_message = "No Hetzner Cloud Token found. Try 'terraform apply -var=hcloud_token=...' or set the TF_VAR_hcloud_token environment variable."
+  }
+} 
+variable "owner_tag"    { default="jw" }
+variable "machine_name" { default="terraform-owncloud-test-server" }
+variable "image"        { default="ubuntu-20.04" }
+variable "server_type"  { default="cx11" }
+variable "labels"       {}
+variable "key_names"    {}
 
 provider "hcloud" {
   token = var.hcloud_token
