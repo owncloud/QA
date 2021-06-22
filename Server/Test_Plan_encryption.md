@@ -8,8 +8,6 @@
 * `env OC10_DNSNAME=oc1070-enc-hsm-DATE ./make_oc10_apps.sh encryption hsmdaemon-0.0.8.zip`
 * `env OC10_DNSNAME=oc1070-enc150-hsm-DATE ./make_oc10_apps.sh encryption=1.5.0 hsmdaemon-0.0.8.zip`
 
-```
-
 </details>
   
 ## Testing functionality
