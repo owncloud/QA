@@ -8,7 +8,7 @@ Optional variables
 
     export TF_LOG=trace
     export TF_VAR_owner_tag=jw
-    export TF_VAR_machine_name=tf-oc1070-test-$(date +%Y%m%d)
+    export TF_VAR_machine_name=oc1070-test-$(date +%Y%m%d)
 
 Deploy, use and shutdown
 
