@@ -10,6 +10,8 @@
 
 ```
 
+</details>
+  
 ## Testing functionality
 
 The toplevel checkmark indictes the test was performed.
