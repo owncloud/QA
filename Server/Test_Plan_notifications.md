@@ -5,7 +5,7 @@
 * User -> Personal Settings -> General: Activity checkboxes: enables all sharing related checkboxes.
 * Connect desktop client.
 * Regularly run `occ system:cron -p`
-* Assign two different DNS-names to the server. and register them in "trusted_domains"
+* Make it a multi-homed machine: Assign two different DNS-names to the server and register them in "trusted_domains"
 
 
 ## Test items
