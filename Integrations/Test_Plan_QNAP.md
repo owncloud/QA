@@ -50,8 +50,8 @@ Three possiblities:
         - [ ] the deactivated user can not log in (error message says `user deactivated`)
     - [ ] EE apps installed to a CE https://jira.owncloud.com/browse/QNAPN-75
       - [ ] admins will see NO grace period message after activating first EE app (trial period was triggered internally, but message is disabled for QNAP)
-      - [ ] manually shorten trial period by setting it shortly before expiry `occ config:app:set core grace_period --value=<unix(now() - 24h + x seconds)>`
-      - [ ] when trial period expired after x seconds
+      - [ ] manually shorten trial period by setting it shortly before expiry `occ config:app:set core grace_period --value=$(date +%s -d "-24 hours + 120 seconds")`
+      - [ ] when trial period expired after 120 seconds
         - [ ] all EE apps are disabled
         - [ ] all EE apps are disabled shortly after activation (try to activate EE apps)
     - [ ] unlimited guest users https://github.com/owncloud/qnap/issues/17
