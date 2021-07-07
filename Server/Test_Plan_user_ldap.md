@@ -1,6 +1,10 @@
 ## User_Ldap Test Plan
 
 Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_user_ldap.md
+FIXME: 
+* Weed out CI items,
+* clarify instructions  https://github.com/owncloud/user_ldap/issues/638#issuecomment-875106439
+* integrate hetzner_deploy/task/openldap_config.txt into task/user_ldap.sh
 
 ### Setup
 
