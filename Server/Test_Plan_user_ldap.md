@@ -203,6 +203,8 @@ Prepare two LDAP backends for testing:
    - [ ]  only some users can login (based on the filter)
 - [ ] login filter: checked with LDAP username (uid) and with LDAP email
    - [ ]  users can login with both uid and email fields
+- [ ] More apps in the User authentication Panel
+   - [ ] `occ app:enable oauth2` -> The tabs do not overlap with user_ldap
 
 ### Wizard Configuration Server
 - [ ] 1. Have the host and port configured correctly <br> 2. Click “Detect Base DN”
@@ -215,8 +217,7 @@ Prepare two LDAP backends for testing:
    - [ ]  1. Detection for Obect Classes and Groups is running <br> 2. If the server does not support memberof, the group field is disabled and a message appears. <br> If it does and with more than 40 groups available, a different group selection tool is presented <br> 3. A filter is created and shown next to “LDAP Filter:” (read only)
 - [ ] 1. Have Basic tab completed correctly <br> 2. “Manually enter LDAP filters” is enabled <br> 3. Move to Users tab
    - [ ]  1. A raw input field for the LDAP filter is presented. <br> 2. The multi select box elements are disabled <br> 3. i.e. Neither object classes nor groups are being detected
-- [ ]  Oauth2 interaction. Enable oauth2
-    - [ ] the server config page looks clean (compare https://github.com/owncloud/user_ldap/issues/659)
+
 
 
 ### Wizard Configuration Users
