@@ -75,6 +75,11 @@ FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=test
  * [ ] Enable VFS
      * [ ] VFS has been enabled
  ----
+ * [ ] All platform install and gpg test ssh://git@gitea.owncloud.services:2222/client/linux-docker-install.git
+    * [ ] manually deploy a linux download repo, or use a download repo from https://download.owncloud.com/desktop/ownCloud/testing/
+    * [ ] in defs.sh edit `repo=` and update `platform_docker_images=`
+    * [ ] RUN.sh -> paste the log/test_YYYYMMDD_hhmm.log file into the client release ticket.
+ ----
  * [ ] Install ownCloud client on **Fedora** or CentOS with GNOME and Nautilus file manager (or openSUSE with KDE and dolphin)
  ```sudo yum install owncloud-client-nautilus```
      * [ ] Settings tab, About has correct versions:
