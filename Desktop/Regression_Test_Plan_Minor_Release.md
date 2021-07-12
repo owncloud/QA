@@ -12,7 +12,16 @@ Have an Active Directory server ready to be used with owncloud.
 
 Have ready two external storage of your choice (e.g S3)
 
+
 ## Testing
+
+TODO: add test items from Regression_Test_Plan_patch here as relevant.
+ ----
+ * [ ] All Linux platform install and gpg test ssh://git@gitea.owncloud.services:2222/client/linux-docker-install.git
+    * [ ] manually deploy a linux download repo, or use a download repo from https://download.owncloud.com/desktop/ownCloud/testing/
+    * [ ] in defs.sh edit `repo=` and update `platform_docker_images=`
+    * [ ] RUN.sh -> paste the log/test_YYYYMMDD_hhmm.log file into the client release ticket.
+ ----
 
 ### 1. Settings windows - Login
 
