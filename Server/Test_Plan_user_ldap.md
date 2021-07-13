@@ -11,7 +11,8 @@ FIXME:
 <details><summary>Setup details (click to view)</summary>
 
 * vi tasks/user_ldap.sh -> ldap_server=95.217.210.161 (small server from below)
-* `bash ./make_oc10_apps.sh user_ldap=0.15.3-rc4 windows_network_drive`oauth2
+* `bash ./make_oc10_apps.sh user_ldap=0.15.3-rc4 windows_network_drive oauth2`
+* `bash ./make_oc10_apps.sh user_ldap=0.15.2 windows_network_drive oauth2` (for upgrade testing!)
 
 
 #### external storages:
@@ -35,6 +36,16 @@ Prepare two LDAP backends for testing:
 </details>
 
 ## Testing functionality
+
+### Upgrade
+
+- [ ] connect owncloud to ldap via previous release of user_ldap, 
+   - [ ] ldap users can log in
+   - [ ] upgrade user_ldap to current release candidate
+   - [ ] recurring ldap users can still log in.
+   - [ ] new first time ldap users can log in
+- [ ] connect owncloud to ldap via current release candidate
+   - [ ] ldap users can log in
 
 ### ldap:test-config
 
