@@ -33,10 +33,6 @@ An LDAP user shares a file with my user | Check that LDAP username is shown prop
 An LDAP user edits a file shared with my user | Check that LDAP username is shown properly in this section | :construction:  |
 A Shibboleth user shares a file with my user | Check that Shibboleth username is shown properly in this section | :construction:  |
 A Shibboleth user edits a file shared with my user | Check that Shibboleth username is shown properly in this section | :construction:  |
-**Favorites section**|  |   |
-|  |   |
-Make favorite a file | Check that the notification is shown in activity section and in the sidebar | :construction:  |
-Make favorite a folder | Check that the notification is shown in activity section and in the sidebar | :construction:  |
 **Comments**|  |   |
 |  |   |
 Make a comment in a file | Check that the notification is shown in activity section and in the sidebar | :construction:  |
