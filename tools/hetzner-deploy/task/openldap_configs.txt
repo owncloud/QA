@@ -1,0 +1,114 @@
++-------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| Configuration                 | s01                                                                                                             |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| hasMemberOfFilterSupport      |                                                                                                                 |
+| hasPagedResultSupport         |                                                                                                                 |
+| homeFolderNamingRule          |                                                                                                                 |
+| lastJpegPhotoLookup           | 0                                                                                                               |
+| ldapAgentName                 | cn=admin,dc=example,dc=com                                                                                      |
+| ldapAgentPassword             | ***                                                                                                             |
+| ldapAttributesForGroupSearch  |                                                                                                                 |
+| ldapAttributesForUserSearch   |                                                                                                                 |
+| ldapBackupHost                |                                                                                                                 |
+| ldapBackupPort                |                                                                                                                 |
+| ldapBase                      | dc=example,dc=com                                                                                               |
+| ldapBaseGroups                | dc=example,dc=com                                                                                               |
+| ldapBaseUsers                 | dc=example,dc=com                                                                                               |
+| ldapCacheTTL                  | 600                                                                                                             |
+| ldapConfigurationActive       | 1                                                                                                               |
+| ldapDynamicGroupMemberURL     |                                                                                                                 |
+| ldapEmailAttribute            | mail                                                                                                            |
+| ldapExperiencedAdmin          | 0                                                                                                               |
+| ldapExpertUUIDGroupAttr       |                                                                                                                 |
+| ldapExpertUUIDUserAttr        | entryuuid                                                                                                       |
+| ldapExpertUsernameAttr        |                                                                                                                 |
+| ldapGroupDisplayName          | cn                                                                                                              |
+| ldapGroupFilter               | (&(|(objectclass=posixGroup)))                                                                                  |
+| ldapGroupFilterGroups         |                                                                                                                 |
+| ldapGroupFilterMode           | 0                                                                                                               |
+| ldapGroupFilterObjectclass    | posixGroup                                                                                                      |
+| ldapGroupMemberAssocAttr      | memberUid                                                                                                       |
+| ldapHost                      | 95.217.210.161                                                                                                  |
+| ldapIgnoreNamingRules         |                                                                                                                 |
+| ldapLoginFilter               | (&(|(objectclass=inetOrgPerson)(objectclass=posixAccount))(|(uid=%uid)(|(mailPrimaryAddress=%uid)(mail=%uid)))) |
+| ldapLoginFilterAttributes     |                                                                                                                 |
+| ldapLoginFilterEmail          | 1                                                                                                               |
+| ldapLoginFilterMode           | 0                                                                                                               |
+| ldapLoginFilterUsername       | 1                                                                                                               |
+| ldapNestedGroups              | 0                                                                                                               |
+| ldapNetworkTimeout            | 20                                                                                                              |
+| ldapOverrideMainServer        |                                                                                                                 |
+| ldapPagingSize                | 500                                                                                                             |
+| ldapPort                      | 389                                                                                                             |
+| ldapQuotaAttribute            | roomNumber                                                                                                      |
+| ldapQuotaDefault              | 100 MB                                                                                                          |
+| ldapTLS                       | 0                                                                                                               |
+| ldapUserDisplayName           | cn                                                                                                              |
+| ldapUserDisplayName2          | displayuser                                                                                                     |
+| ldapUserFilter                | (|(objectclass=inetOrgPerson))                                                                                  |
+| ldapUserFilterGroups          |                                                                                                                 |
+| ldapUserFilterMode            | 0                                                                                                               |
+| ldapUserFilterObjectclass     | inetOrgPerson                                                                                                   |
+| ldapUserName                  | samaccountname                                                                                                  |
+| ldapUuidGroupAttribute        | auto                                                                                                            |
+| ldapUuidUserAttribute         | auto                                                                                                            |
+| turnOffCertCheck              | 0                                                                                                               |
+| useMemberOfToDetectMembership | 1                                                                                                               |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------+
++-------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| Configuration                 | s02                                                                                                             |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| hasMemberOfFilterSupport      |                                                                                                                 |
+| hasPagedResultSupport         |                                                                                                                 |
+| homeFolderNamingRule          |                                                                                                                 |
+| lastJpegPhotoLookup           | 0                                                                                                               |
+| ldapAgentName                 | cn=admin,dc=example,dc=org                                                                                      |
+| ldapAgentPassword             | ***                                                                                                             |
+| ldapAttributesForGroupSearch  |                                                                                                                 |
+| ldapAttributesForUserSearch   |                                                                                                                 |
+| ldapBackupHost                |                                                                                                                 |
+| ldapBackupPort                |                                                                                                                 |
+| ldapBase                      | dc=example,dc=org                                                                                               |
+| ldapBaseGroups                | dc=example,dc=org                                                                                               |
+| ldapBaseUsers                 | dc=example,dc=org                                                                                               |
+| ldapCacheTTL                  | 600                                                                                                             |
+| ldapConfigurationActive       | 1                                                                                                               |
+| ldapDynamicGroupMemberURL     |                                                                                                                 |
+| ldapEmailAttribute            | mail                                                                                                            |
+| ldapExperiencedAdmin          | 0                                                                                                               |
+| ldapExpertUUIDGroupAttr       |                                                                                                                 |
+| ldapExpertUUIDUserAttr        | entryuuid                                                                                                       |
+| ldapExpertUsernameAttr        |                                                                                                                 |
+| ldapGroupDisplayName          | cn                                                                                                              |
+| ldapGroupFilter               | (&(|(objectclass=posixGroup)))                                                                                  |
+| ldapGroupFilterGroups         |                                                                                                                 |
+| ldapGroupFilterMode           | 0                                                                                                               |
+| ldapGroupFilterObjectclass    | posixGroup                                                                                                      |
+| ldapGroupMemberAssocAttr      | memberUid                                                                                                       |
+| ldapHost                      | jw-open-ldap-20200630.owncloud.works                                                                            |
+| ldapIgnoreNamingRules         |                                                                                                                 |
+| ldapLoginFilter               | (&(|(objectclass=inetOrgPerson)(objectclass=posixAccount))(|(uid=%uid)(|(mailPrimaryAddress=%uid)(mail=%uid)))) |
+| ldapLoginFilterAttributes     | cn                                                                                                              |
+| ldapLoginFilterEmail          | 1                                                                                                               |
+| ldapLoginFilterMode           | 0                                                                                                               |
+| ldapLoginFilterUsername       | 1                                                                                                               |
+| ldapNestedGroups              | 0                                                                                                               |
+| ldapNetworkTimeout            | 20                                                                                                              |
+| ldapOverrideMainServer        |                                                                                                                 |
+| ldapPagingSize                | 500                                                                                                             |
+| ldapPort                      | 389                                                                                                             |
+| ldapQuotaAttribute            | roomNumber                                                                                                      |
+| ldapQuotaDefault              | 100 MB                                                                                                          |
+| ldapTLS                       | 0                                                                                                               |
+| ldapUserDisplayName           | cn                                                                                                              |
+| ldapUserDisplayName2          |                                                                                                                 |
+| ldapUserFilter                | (|(objectclass=inetOrgPerson))                                                                                  |
+| ldapUserFilterGroups          |                                                                                                                 |
+| ldapUserFilterMode            | 0                                                                                                               |
+| ldapUserFilterObjectclass     | inetOrgPerson                                                                                                   |
+| ldapUserName                  | samaccountname                                                                                                  |
+| ldapUuidGroupAttribute        | auto                                                                                                            |
+| ldapUuidUserAttribute         | auto                                                                                                            |
+| turnOffCertCheck              | 0                                                                                                               |
+| useMemberOfToDetectMembership | 1                                                                                                               |
++-------------------------------+-----------------------------------------------------------------------------------------------------------------+
