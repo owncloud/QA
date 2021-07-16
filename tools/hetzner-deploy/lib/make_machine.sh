@@ -2,14 +2,14 @@
 # Factory switcher to choose between hcloud_tf, hcloud_py, and simple.
 #
 # 2021-03-01 jw, 	support for POSTINIT_MSG, POSTINIT_BASHRC added.
-#
+# 2021-07-16 jw, 	print better instructions also when running standalone
 
 if [ -z "$BASH_SOURCE" ]; then
   libdir=$(dirname $0)/lib	# a source command does not update $0, we have to add the lib ourselves. grrr.
 else
   libdir=$(dirname "$BASH_SOURCE")
 fi
-echo libdir=$libdir
+# echo libdir=$libdir
 
 test -z "$HCLOUD_TOKEN" && export HCLOUD_TOKEN=$TF_VAR_hcloud_token
 test -z "$OC_DEPLOY" -a -n "$OC_DEPLOY_ADDR" && OC_DEPLOY=simple
@@ -42,6 +42,7 @@ EOF
   exit 1;
 fi
 
+echo NAME=$NAME
 echo "$PARAM"
 
 scp -q -r $libdir/../task root@$IPADDR:
@@ -139,5 +140,18 @@ function INIT_SCRIPT {
 }
 
 
+if [ "$OC_DEPLOY" != 'simple' ]; then
+    cat <<EOF
+---------------------------------------------
+# Log into the machine with
+
+	ssh root@$IPADDR
+
+# When you no longer need the machine, destroy it with e.g.
+        $libdir/../destroy_machine.sh $NAME
+
+---------------------------------------------
+EOF
+fi
 # not used normally, but fulfill what the usage says:
 echo export IPADDR=$IPADDR NAME=$NAME

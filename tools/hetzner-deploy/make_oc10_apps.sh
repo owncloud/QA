@@ -15,12 +15,12 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.8.0beta2
+vers=10.8.0rc1
 tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.8.0-rc1"   -o "$vers" = "10.8.0rc1"   && tar=https://download.owncloud.org/community/testing/owncloud-complete-20210715.tar.bz2
 test "$vers" = "10.8.0-beta2" -o "$vers" = "10.8.0beta2" && tar=https://download.owncloud.org/community/testing/owncloud-complete-20210705.tar.bz2
-test "$vers" = "10.8.0-beta1" -o "$vers" = "10.8.0beta1" && tar=https://download.owncloud.org/community/testing/owncloud-complete-20210621.tar.bz2
 test "$vers" = "10.7.0"       -o "$vers" = "10.7"        && tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
 test "$vers" = "10.6.0"       -o "$vers" = "10.6"        && tar=https://download.owncloud.org/community/owncloud-complete-20201216.tar.bz2
 test "$vers" = "10.5.0"       -o "$vers" = "10.5"        && tar=https://download.owncloud.org/community/owncloud-complete-20200731.tar.bz2
@@ -40,11 +40,11 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "  should be names of github/owncloud projects."
   echo "  The latest release tar.gz is downloaded or a release asset matching a tag specified after '='."
   echo ""
-  echo "To start without extra apps or extra files, use: $0 --"
+  echo "To start with no extra apps and no extra files, use: $0 --"
   echo ""
   echo "Environment:"
-  echo "   OC10_DNSNAME=oc1070rc1-DATE	set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
-  echo "   OC10_VERSION=10.7.0-rc1	set the version label. Should match the download url. Default: $vers"
+  echo "   OC10_DNSNAME=oc1080rc1-DATE	set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
+  echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
   exit 1
 fi
@@ -93,6 +93,7 @@ done
 
 ## Default to always have a DNS name. Uncomment the next line, to skip preparations for DNS.
 firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
+test "$firstarg" = "-" && firstarg=
 test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr '[A-Z]' '[a-z]' | tr -d .=)-DATE"
 h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
@@ -110,13 +111,16 @@ INIT_SCRIPT << EOF
 TASKd=\$HOME/task
 ls -la \$TASKd
 
+# pipe apt output into here, to do what apt -q should have done, but does not do.
+noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected)"; }
+
 export LC_ALL=C LANGUAGE=C
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
-apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl
-apt install -y php-json php-mbstring php-mysql php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget
-apt install -y ssh bzip2 rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils
+apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
+apt install -y php-json php-mbstring php-mysql php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
+apt install -y ssh bzip2 rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
 # We almost always assign a DNS name.
-apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
+apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
 
 cd /var/www
 if [ -f owncloud/config/config.php ]; then
@@ -226,7 +230,7 @@ occ config:system:set mail_smtphost     --value \$hog_ip
 occ config:system:set mail_smtpport     --value 1025
 
 ## external SFTP storage
-apt install -y pure-ftpd
+apt install -y pure-ftpd | noclutter
 ftppass=ftp${RANDOM}data
 deluser ftpdata 2>/dev/null && true
 echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""

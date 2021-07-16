@@ -188,7 +188,7 @@ done
 if [ -n "$extra_pkg" ]; then
   case "$server_image" in
     ubuntu*|debian*)
-      ssh root@$IPADDR sh -x -s <<END
+      ssh root@$IPADDR sh -x -s <<END | grep -E -v "^(Preparing to|Get:|Selecting previously unselected)"
 	export LC_ALL=C
         apt-get update
         apt-get upgrade -y
