@@ -333,3 +333,12 @@ Prepare two LDAP backends for testing:
    - [ ]  1. A confirmation dialog appears <br> 2a) Click on No: deletion was cancelled <br> 2b) Click on Yes: configuration was deleted and switched to first configuration
 - [ ] 1. Select a different configuration from the drop down
    - [ ]  1. The selected configuration is loaded <br> 2. The status is updated accordingly
+
+
+### Maintenance Commands
+- [ ] `occ ldap:invalidate-cache <user name>`
+- [ ] `occ group:list-members <group name>`
+- [ ] `occ group:list-groups <user id>`
+- [ ] `occ file:scan --group <group>`
+- [ ] `occ backround:queue:ex ...` TODO: find expected behacviour
+- [ ] `occ ldap:search --group`
