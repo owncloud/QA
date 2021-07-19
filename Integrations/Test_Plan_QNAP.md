@@ -4,26 +4,22 @@
 
 Two QNAP NAS are in the office reachable via VPN -> see [Confluence](https://confluence.owncloud.com/display/QNAP/Credentials+for+Access+to+DEV+machines+and+License+Manager)
 
-Three possiblities:
+- Test on a known state device
+  - no ownCloud app installed (installation from scratch)
+  - previous ownCloud app version installed (upgrade case)
 
-- Test on a unknown state device ( device used by developers)
-- Test on a factory state device
-- Test on a known state device (eg. previous version installed)
+- [ ] when using Licenses from "Stage Store" / "Alpha License"
+  - [ ] install QDevelop App first from [Confluence](https://confluence.owncloud.com/display/QNAP/Credentials+for+Access+to+DEV+machines+and+License+Manager) and set the environment to "Alpha"
+  - [ ] start VPN, start Socks Proxy (ssh command), configure browser to use socks proxy -> you can now visit https://stage-software.qnap.com and https://alpha-license.qnap.com, exact instructions see [Confluence](https://confluence.owncloud.com/display/QNAP/Credentials+for+Access+to+DEV+machines+and+License+Manager)
 
 ### Test items
 
 - [ ] Installation
   - [ ] by uploading QPKG for x86 (while not released)
   - [ ] by uploading QPKG for ARM (while not released)
-        ~~\* [ ] from QNAP Appstore for x86 (when available in Appstore)~~
-        ~~\* [ ] from QNAP Appstore for ARM (when available in Appstore)~~
-  ***
-- [ ] when using Licenses from "Stage Store" / "Alpha License"
-  - [ ] install QDevelop App first from [Confluence](https://confluence.owncloud.com/display/QNAP/Credentials+for+Access+to+DEV+machines+and+License+Manager) and set the environment to "Alpha"
-  - [ ] start VPN, start Socks Proxy (ssh command), configure browser to use socks proxy -> you can now visit https://stage-software.qnap.com and https://alpha-license.qnap.com, exact instructions see [Confluence](https://confluence.owncloud.com/display/QNAP/Credentials+for+Access+to+DEV+machines+and+License+Manager)
-
+     ~~\* [ ] from QNAP Appstore for x86 (when available in Appstore)~~
+     ~~\* [ ] from QNAP Appstore for ARM (when available in Appstore)~~
 ---
-
 - [ ] ownCloud App icon is on the homescreen
   - [ ] clicking the ownCloud App icon opens the ownCloud web interface
 - [ ] QR codes on login page
