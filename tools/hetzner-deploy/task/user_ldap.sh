@@ -47,14 +47,14 @@ occ config:app:set user_ldap reuse_accounts --value=yes
 
 # https://doc.owncloud.com/server/admin_manual/configuration/user/user_auth_ldap.html#ldaps-configuration
 confID=s01
-occ ldap:create-empty-config $confID
-occ ldap:set-config $confID ldapHost $proto://$ldap_server
+occ ldap:create-empty-config "$confID"
+occ ldap:set-config "$confID" ldapHost $proto://$ldap_server
 if [ $proto = ldaps ]; then
-  occ ldap:set-config $confID ldapPort 636
-  occ ldap:set-config $confID ldapTLS 0
+  occ ldap:set-config "$confID" ldapPort 636
+  occ ldap:set-config "$confID" ldapTLS 0
 else
-  occ ldap:set-config $confID ldapPort 389
-  occ ldap:set-config $confID ldapTLS 0	# 1: LDAP over TLS. this is different than LDAPS
+  occ ldap:set-config "$confID" ldapPort 389
+  occ ldap:set-config "$confID" ldapTLS 0	# 1: LDAP over TLS. this is different than LDAPS
 fi
 
 ##
@@ -62,24 +62,24 @@ fi
 # "message":"Configuration Error (prefix s01): No LDAP Login Filter given!
 # "message":"Configuration Error (prefix s01): login filter does not contain %uid place holder."}
 
-occ ldap:set-config $confID ldapAgentName $ldap_login		# User DN
-occ ldap:set-config $confID ldapAgentPassword $ldap_pass
-occ ldap:set-config $confID ldapBase $base
-occ ldap:set-config $confID ldapEmailAttribute mail
-occ ldap:set-config $confID ldapExpertUUIDUserAttr entryuuid
-occ ldap:set-config $confID ldapGroupFilter '(&(|(objectclass=posixGroup)))'
-occ ldap:set-config $confID ldapGroupFilterMode 1
-occ ldap:set-config $confID ldapGroupFilterObjectclass posixGroup
-occ ldap:set-config $confID ldapLoginFilter '(&(|(objectclass=inetOrgPerson))(|(uid=%uid)(|(mailPrimaryAddress=%uid)(mail=%uid))))'
-occ ldap:set-config $confID ldapLoginFilterEmail 1
-occ ldap:set-config $confID ldapNetworkTimeout 20
-occ ldap:set-config $confID ldapQuotaAttribute roomNumber
-occ ldap:set-config $confID ldapQuotaDefault '66 MB'
-occ ldap:set-config $confID ldapUserDisplayName cn
-occ ldap:set-config $confID ldapUserDisplayName2 displayuser
-occ ldap:set-config $confID ldapUserFilter '(|(objectclass=inetOrgPerson))'
+occ ldap:set-config "$confID" ldapAgentName $ldap_login		# User DN
+occ ldap:set-config "$confID" ldapAgentPassword $ldap_pass
+occ ldap:set-config "$confID" ldapBase $base
+occ ldap:set-config "$confID" ldapEmailAttribute mail
+occ ldap:set-config "$confID" ldapExpertUUIDUserAttr entryuuid
+occ ldap:set-config "$confID" ldapGroupFilter '(&(|(objectclass=posixGroup)))'
+occ ldap:set-config "$confID" ldapGroupFilterMode 1
+occ ldap:set-config "$confID" ldapGroupFilterObjectclass posixGroup
+occ ldap:set-config "$confID" ldapLoginFilter '(&(|(objectclass=inetOrgPerson))(|(uid=%uid)(|(mailPrimaryAddress=%uid)(mail=%uid))))'
+occ ldap:set-config "$confID" ldapLoginFilterEmail 1
+occ ldap:set-config "$confID" ldapNetworkTimeout 20
+occ ldap:set-config "$confID" ldapQuotaAttribute roomNumber
+occ ldap:set-config "$confID" ldapQuotaDefault '66 MB'
+occ ldap:set-config "$confID" ldapUserDisplayName cn
+occ ldap:set-config "$confID" ldapUserDisplayName2 displayuser
+occ ldap:set-config "$confID" ldapUserFilter '(|(objectclass=inetOrgPerson))'
 
-conftest=$(occ ldap:test-config $confID | tee -a /dev/stderr)
+conftest=$(occ ldap:test-config "$confID" | tee -a /dev/stderr)
 if echo "$conftest" | grep -q -i invalid; then
   grep '"app":"user_ldap"' /var/www/owncloud/data/owncloud.log  | jq .message
   echo >> ~/POSTINIT.msg
