@@ -63,7 +63,7 @@ fi
 # "message":"Configuration Error (prefix s01): login filter does not contain %uid place holder."}
 
 ## for openLDAP:  objectclass=posixGroup objectclass=inetOrgPerson
-## for AD(fsweb): objectclass=group	 objectclass=organizationalPerson
+## for AD(fsweb): objectclass=group      objectclass=organizationalPerson
 
 occ ldap:set-config "$confID" ldapAgentName $ldap_login		# User DN
 occ ldap:set-config "$confID" ldapAgentPassword $ldap_pass
