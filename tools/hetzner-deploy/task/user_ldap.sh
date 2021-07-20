@@ -62,12 +62,15 @@ fi
 # "message":"Configuration Error (prefix s01): No LDAP Login Filter given!
 # "message":"Configuration Error (prefix s01): login filter does not contain %uid place holder."}
 
+## for openLDAP: objectclass=posixGroup objectclass=inetOrgPerson
+## for AD:	 objectclass=group	objectclass=organizationalPerson
+
 occ ldap:set-config "$confID" ldapAgentName $ldap_login		# User DN
 occ ldap:set-config "$confID" ldapAgentPassword $ldap_pass
 occ ldap:set-config "$confID" ldapBase $base
 occ ldap:set-config "$confID" ldapEmailAttribute mail
 occ ldap:set-config "$confID" ldapExpertUUIDUserAttr entryuuid
-occ ldap:set-config "$confID" ldapGroupFilter '(&(|(objectclass=posixGroup)))'
+occ ldap:set-config "$confID" ldapGroupFilter '(|(objectclass=posixGroup)(objectclass=group))'
 occ ldap:set-config "$confID" ldapGroupFilterMode 1
 occ ldap:set-config "$confID" ldapGroupFilterObjectclass posixGroup
 occ ldap:set-config "$confID" ldapLoginFilter '(&(|(objectclass=inetOrgPerson)(objectClass=organizationalPerson))(|(uid=%uid)(name=%uid)(sAMAccountName=%uid)(mailPrimaryAddress=%uid)(mail=%uid)))
