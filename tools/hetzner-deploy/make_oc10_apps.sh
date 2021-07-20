@@ -12,6 +12,8 @@
 # - the download is resolved locally
 # - using your GITHUB_USER and GITHUB_TOKEN (if needed)
 # - and sent to the target system via scp.
+#
+# Support for installing ca-certs added, suffix *.crt
 
 echo "Estimated setup time: 5 minutes ..."
 
@@ -61,8 +63,9 @@ for arg in "$@"; do
       ;;
     *)
       if [ -e $arg ]; then
-	echo "Using local file $arg ..."
+        echo "Using local file $arg ..."
       else
+	# Everything that is not a local file, and not a URL should be an app.
 	echo "$arg" | grep -q / || arg="owncloud/$arg"
 	oc_app="$(echo "$arg" | sed -e 's/[:=].*$//')"
 	tagname="v$(echo "$arg" | sed -e 's/.*[:=]//' -e 's/^v//')"	# should work with or without leading v.
@@ -249,9 +252,10 @@ install_app() { ( test -f "\$1" && cat "\$1" || curl -L -s "\$1" ) | su www-data
 
 apps_installed=
 for param in \$PARAM; do
-  # find app tar.gz files by looking for an appinfo/info.xml in them.
   param="\$(basename \$param)"
+  # Find if it is an app tar.gz file by looking for an appinfo/info.xml
   if echo "\$param" | grep -q ".tar.gz" && tar tf "\$param" 2>/dev/null | grep -q appinfo/info.xml; then
+    # This param is an app
     app="\$(basename "\$param")"
     app_name=\$(echo "\$app" | sed -e 's/[-\\.].*//')
     install_app "\$app"
@@ -278,8 +282,19 @@ for param in \$PARAM; do
     occ app:list \$app_name
 
   else
+    # This param is not an app.
     if [ -e "/root/\$param" ]; then
       echo "File added: /root/\$param"
+      case "\$param" in
+	*.crt)
+          # https://doc.owncloud.com/server/10.8/admin_manual/configuration/user/user_auth_ldap.html#ldaps-configuration
+          cp /root/\$param /usr/local/share/ca-certificates/
+          update-ca-certificates
+          ls -l /etc/ssl/certs/* | grep "\$param" || echo "ERROR: cert was not added into /etc/ssl/certs??"
+          openssl x509 -in /root/\$param -noout -issuer -subject -dates -alias # -pubkey
+          # TODO do we need to restart apache now?
+        ;;
+      esac
     else
       echo "env var PARAM contains basename '\$param', but no such file added."
     fi

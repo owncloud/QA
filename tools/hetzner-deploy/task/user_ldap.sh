@@ -70,14 +70,14 @@ occ ldap:set-config "$confID" ldapExpertUUIDUserAttr entryuuid
 occ ldap:set-config "$confID" ldapGroupFilter '(&(|(objectclass=posixGroup)))'
 occ ldap:set-config "$confID" ldapGroupFilterMode 1
 occ ldap:set-config "$confID" ldapGroupFilterObjectclass posixGroup
-occ ldap:set-config "$confID" ldapLoginFilter '(&(|(objectclass=inetOrgPerson))(|(uid=%uid)(|(mailPrimaryAddress=%uid)(mail=%uid))))'
+occ ldap:set-config "$confID" ldapLoginFilter '(&(|(objectclass=inetOrgPerson)(objectClass=organizationalPerson))(|(uid=%uid)(name=%uid)(sAMAccountName=%uid)(mailPrimaryAddress=%uid)(mail=%uid)))
 occ ldap:set-config "$confID" ldapLoginFilterEmail 1
 occ ldap:set-config "$confID" ldapNetworkTimeout 20
 occ ldap:set-config "$confID" ldapQuotaAttribute roomNumber
 occ ldap:set-config "$confID" ldapQuotaDefault '66 MB'
 occ ldap:set-config "$confID" ldapUserDisplayName cn
 occ ldap:set-config "$confID" ldapUserDisplayName2 displayuser
-occ ldap:set-config "$confID" ldapUserFilter '(|(objectclass=inetOrgPerson))'
+occ ldap:set-config "$confID" ldapUserFilter '(|(objectclass=inetOrgPerson)(objectclass=organizationalPerson))'
 
 conftest=$(occ ldap:test-config "$confID" | tee -a /dev/stderr)
 if echo "$conftest" | grep -q -i invalid; then
