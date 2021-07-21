@@ -45,7 +45,7 @@ fi
 echo NAME=$NAME
 echo "$PARAM"
 
-scp -q -r $libdir/../task root@$IPADDR:
+scp -q -r $libdir/../tasks root@$IPADDR:
 PARAM_BASENAME=
 for param in $PARAM; do
   if [ -e "$param" ]; then

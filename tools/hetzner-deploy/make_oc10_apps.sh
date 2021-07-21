@@ -109,7 +109,7 @@ rm -rf $tmpdir
 dbpass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
 
 INIT_SCRIPT << EOF
-TASKd=\$HOME/task
+TASKd=\$HOME/tasks
 ls -la \$TASKd
 
 # pipe apt output into here, to do what apt -q should have done, but does not do.

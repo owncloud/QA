@@ -73,7 +73,7 @@ occ ldap:set-config "$confID" ldapExpertUUIDUserAttr entryuuid
 occ ldap:set-config "$confID" ldapGroupFilter '(|(objectclass=posixGroup)(objectclass=group))'
 occ ldap:set-config "$confID" ldapGroupFilterMode 1
 occ ldap:set-config "$confID" ldapGroupFilterObjectclass posixGroup
-occ ldap:set-config "$confID" ldapLoginFilter '(&(|(objectclass=inetOrgPerson)(objectClass=organizationalPerson))(|(uid=%uid)(name=%uid)(sAMAccountName=%uid)(mailPrimaryAddress=%uid)(mail=%uid)))
+occ ldap:set-config "$confID" ldapLoginFilter '(&(|(objectclass=inetOrgPerson)(objectClass=organizationalPerson))(|(uid=%uid)(name=%uid)(sAMAccountName=%uid)(mailPrimaryAddress=%uid)(mail=%uid)))'
 occ ldap:set-config "$confID" ldapLoginFilterEmail 1
 occ ldap:set-config "$confID" ldapNetworkTimeout 20
 occ ldap:set-config "$confID" ldapQuotaAttribute roomNumber
@@ -92,6 +92,8 @@ fi
 
 ## prepare user sync every 5 min. sync users
 
+## FIXME: user:sync backend "OCA\User_LDAP\User_Proxy" becomes only available, when the wizard UI is used. Not when the config is scripted like above.
+## FIXME: find what is missing...
 crontab=/var/spool/cron/crontabs/www-data
 if occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable; then
   echo "ldap user:sync tested successfully, adding to crontab"
