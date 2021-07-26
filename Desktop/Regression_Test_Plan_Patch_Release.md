@@ -1,6 +1,9 @@
 ## Regression Testplan
 
-FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=testcase&id=desktop-158
+### Template: 
+[Regression_Test_Plan_Patch_Release.md](https://github.com/owncloud/QA/blob/master/Desktop/Regression_Test_Plan_Patch_Release.md)
+
+(from: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=testcase&id=desktop-158)
 
 <!-- Updates:
  * General tab -> Settings tab, About, Versions
@@ -127,10 +130,12 @@ FROM: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=test
 
  * [ ] Download signatures and keys are valid. Verify if the automated key-checker at
      * [ ] https://jenkins.int.owncloud.com/view/monitor/job/monitor-certs/lastCompletedBuild/console
-            * was run today/yesterday
-            * has latest platform versions of each family.
-            * has stable, daily & testing
-            * has all Release.key, repomd.xml.key expiries > 1y
+         * was run today/yesterday
+         * has latest platform versions of each family.
+         * has stable, daily & testing
+         * has all Release.key, repomd.xml.key expiries > 1y
 
 
-
+ * [ ] use Hannah's python script to trigger backup
+     * [ ] client responds at socket api (and log) with V2/BACKUP_FILES_FROM_RESULT
+     * [ ] test with > 100 files, response lists them all.
