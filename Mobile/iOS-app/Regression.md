@@ -45,8 +45,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app |
 | Logout | Logout in a open and active OIDC session | Moved to login view| | |
 |**Settings**||||||
-| Passcode | 1. Enable passcode and set a code<br>2. Close app and open again| Passcode asked |  |  |
-| Passcode Files App| 1. Enable passcode and set a code<br>2. Close app and open Files App| Passcode asked |  |  |
+| Passcode 4 digit | 1. Enable passcode<br>2. Select 4 digit<br>3. Set a code<br>2. Close app and open again| 4-digit passcode asked |  |  |
+| Passcode 6 digit | 1. Enable passcode<br>2. Select 6 digit<br>3. Set a code<br>2. Close app and open again| 6-digit passcode asked |  |  |
+| Passcode Files App| 1. Enable passcode and set a code<br>2. Close app and open Files App| Passcode asked (check with 4 and 6 digits) |  |  |
 | Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked |  |  |
 | Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked |  |  |
 | Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked |  |  |
@@ -68,7 +69,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Media upload Prefer unedited (IAP) | 1. Enable setting "Prefer unedited"<br>2. With photos app, edit a picure with some filters...<br>3. Upload a picture| Picture is saved with out changes, in original version|  |  |
 | Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG|  |  |
 | Media upload original videos | 1. Enable setting "Prefer original videos"<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable "Prefer original video" and repeat| 3. Uploaded original video<br>4. Uploaded edited video|  |  |
-| Documentation | Open Documentation Section  | Documentation web is opened | P m14 |   |
+| Documentation | Open Documentation Section  | Documentation web is opened |  |   |
 | Help | Open Help Section  | Help web is opened |  |  |
 | Send feedback | Open Send feedback section | feedback mail is opened|  |  |
 | Recommend | Open Recommend section | recommend mail is opened|  |  |
@@ -97,6 +98,15 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Sort Size | Sort the file list by size  | Biggest on the top |  |  |
 | Sort Date | Sort the file list by date  | Newest on the top |  |  |
 | Sort Shared | Sort the file list by shared  | Shared on the top |  |  |
+|**Clipboard**||||||
+| Copy file same account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in the same account | Correctly copied. Notification indicating the number of copied items |   |
+| Copy file another account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in other oC account | Correctly copied. Notification indicating the number of copied items |   |
+| Copy file another location | 1. Select to copy a folder<br>2. Copy to Clipboard<br>3. Paste in another location (not oC) | Correctly copied. Notification indicating the number of copied items |   |
+| Copy folder same account | 1. Select to copy a folder<br>2. Copy to Clipboard<br>3. Paste in another location in the same account | Correctly copied. Notification indicating the number of copied items |   |
+| Copy folder two accounts | 1. Add two accounts<br>2. Select to copy a folder (no matter which account)<br>3. Copy to Clipboard | Note inside the notification about "folders only copied in the same account" |   |
+| Copy folder another account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in other oC account | Correctly copied. Notification indicating the number of copied items | NA  | Not supported yet
+| Cut item same account | 1. Cut any item<br>2. Paste to another location in the same account | Correctly pasted. Notification indicating the number of cut items |   |
+| Cut item another account/location| 1. Cut any item<br>2. Paste to another location  | Correctly pasted. Notification indicating the number of cut items | NA  | Not supported yet
 |**Multiselection**||||||
 | Open In files | Open several files in a 3rd party app | Correctly downloaded and sent |  |  |
 | Open In folder | Open several folders in a 3rd party app | Not posible |   |  |
@@ -119,8 +129,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Restrict upload to Selected II |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were selected in previous step| Pics uplaoded | | |
 | Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
 | Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| | |
-| Download several files | Tap on several files | all are enqueued and filly downloaded |  | |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and filly downloaded. Last one is displayed | | |
+| Download several files | Tap on several files | all are enqueued and fully downloaded |  | |
+| Download a bunch of files | Tap on a huge number of files| all are enqueued and fully downloaded. Last one is displayed | | |
 |**Auto uploads**||||||
 | Auto uploads Photos | In Settings, Media Upload, enable Auto uploads for photos with a correct target folder<br>Take some photos and videos| Pics are uploaded after opening the app. Videos are not uploaded |  |   |
 | Auto uploads videos | In Settings, Media Upload, enable Auto uploads for videos with a correct target folder<br>Take some photos and videos| Videos are uploaded after opening the app. Photos are not uploaded |  |   |
@@ -145,9 +155,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Image | Download and open a png, jpg files | Correctly displayed | |  |
 | GIF | Download and open a GIF file | Correctly displayed | |  |
 | Video | Download and open a video file. Go back and the video stops | Correctly played |  |  |
-| Slow-mo Video | Download and open a slow-mo video file. taken with the camera| Correctly played in slow mo | P m14  |  |
-| Audio | Download and open a video file. Go back and the music stops | Correctly played |  |  |
-| Media background | Download an open a video file. Switch the screen off | Video plays in background |  |  |
+| Slow-mo Video | Download and open a slow-mo video file. taken with the camera| Correctly played in slow mo |   |  |
+| Audio | Download and open a audio file. Go back and the music stops | Correctly played |  |  |
+| Media background | Download an open a audio file. Switch the screen off | Audio plays in background |  |  |
 | Non openable | Download and open a non openable file | Placeholder displayed with date and size| |  |
 | Damaged | Download and open a damaged file | Placeholder displayed | |  |
 | Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | |  |
@@ -287,11 +297,11 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Thumbnails | Open a folder which contains images | thumbnails are correctly displayed for downloaded and non downloaded images, in portrait and landscape |   | |
 | Quota correct | Open the root folder | Quota is correctly displayed |  | |
 | Contextual menu | Long press over an item of the list | Contextual menu displayed|  | |
-| Save from mail | Open mail and save an attachment in ownCloud account | Correctly saved |  | |
+| Save from mail | Open mail and save an attachment in ownCloud account  with the option "Sharing"| Correctly saved |  | |
 | Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder|  | |
 | Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
 | Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Open app  | Displayed the file opened in 1.  |  | |
 |**Accesibility**||||||
-| Voice Over | Enable Voice Over and perform some basic exploratory tests| Commands and names are correctly spelt |  | |
+| Voice Over | Enable Voice Over and perform some basic exploratory tests, putting more effort in the newest features| Commands and names are correctly spelt |  | |
 |**Upgrade**||||||
 | From previous| 1. Install previous version with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist|  | |
