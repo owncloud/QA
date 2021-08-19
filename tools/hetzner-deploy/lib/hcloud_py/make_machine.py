@@ -185,7 +185,7 @@ if [ -n "$extra_pkg" ]; then
         export LC_ALL=C
         export DEBIAN_FRONTEND=noninteractive
         apt-get update
-        apt-get upgrade -y
+        # apt-get upgrade -y
         apt-get install -y $extra_pkg
 END
         ;;

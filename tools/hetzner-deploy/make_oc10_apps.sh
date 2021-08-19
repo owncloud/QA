@@ -95,6 +95,8 @@ done
 ## Default to always have a DNS name. Uncomment the next line, to skip preparations for DNS.
 firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
 test "$firstarg" = "-" && firstarg=
+# try to keep the name short. certbot explodes on long names
+firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')
 test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr '[A-Z]_' '[a-z]-' | tr -d .=)-DATE"
 h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
@@ -132,8 +134,10 @@ echo "... installing $tar"
 curl $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
 
+webroute=/owncloud	# what we document
+webroute=/		# what users expect
 cat <<EOCONF > /etc/apache2/sites-available/owncloud.conf
-Alias /owncloud "/var/www/owncloud/"
+Alias \$webroute "/var/www/owncloud/"
 
 <Directory /var/www/owncloud/>
   Options +FollowSymlinks
@@ -240,7 +244,7 @@ occ config:app:set core enable_external_storage --value yes
 
 test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/").jw-qa.owncloud.works"
 
-curl -k https://$IPADDR/owncloud/status.php
+curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5
 cd
 
@@ -301,11 +305,11 @@ done
 
 if [ -n "\$oc10_fqdn" ]; then
   occ config:system:set trusted_domains 2 --value="\$oc10_fqdn"
-  occ config:system:set overwrite.cli.url --value="https://\$oc10_fqdn/owncloud"	# Avoid http://localhost in notifcations emails.
+  occ config:system:set overwrite.cli.url --value="https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
   echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
   echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare     cf_dns $IPADDR \$oc10_fqdn"
   echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
-  echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn/owncloud"
+  echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
 fi
 
 for app in \$apps_installed; do
@@ -329,6 +333,6 @@ cat << EOM
 Server $vers is ready.
 
 From remote
-	firefox https://$IPADDR/owncloud
+	firefox https://$IPADDR$webroute
 EOM
 EOF

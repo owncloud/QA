@@ -95,6 +95,7 @@ fi
 ## FIXME: user:sync backend "OCA\User_LDAP\User_Proxy" becomes only available, when the wizard UI is used. Not when the config is scripted like above.
 ## FIXME: find what is missing...
 crontab=/var/spool/cron/crontabs/www-data
+occ user:sync -l | grep -q User_LDAP || echo "FIXME: admin must visit User Authentication page to initialize class OCA\User_LDAP\User_Proxy" >> ~/POSTINIT.msg
 if occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable; then
   echo "ldap user:sync tested successfully, adding to crontab"
   if ! grep -q user:sync $crontab; then

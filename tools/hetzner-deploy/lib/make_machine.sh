@@ -23,6 +23,7 @@ echo 1>&2 "Using OC_DEPLOY=$OC_DEPLOY ..."
 NAME=
 IPADDR=
 eval $($libdir/$OC_DEPLOY/make_machine.$suf "$@")
+reset
 
 if [ -z "$IPADDR" ]; then
   if [ "$NAME" = '-h' ]; then		# usage was printed.
