@@ -190,6 +190,7 @@ if [ -n "$extra_pkg" ]; then
     ubuntu*|debian*)
       ssh root@$IPADDR sh -x -s <<END | grep -E -v "^(Preparing to|Get:|Selecting previously unselected)"
 	export LC_ALL=C
+	export DEBIAN_FRONTEND=noninteractive
         apt-get update
         apt-get upgrade -y
         apt-get install -y $extra_pkg
