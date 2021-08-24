@@ -24,7 +24,32 @@ test -n "$OC10_VERSION" && vers="$OC10_VERSION"
 test "$vers" = "10.8.0"       -o "$vers" = "10.8"        && tar=https://download.owncloud.org/community/owncloud-complete-20210721.tar.bz2
 test "$vers" = "10.7.0"       -o "$vers" = "10.7"        && tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
 test "$vers" = "10.6.0"       -o "$vers" = "10.6"        && tar=https://download.owncloud.org/community/owncloud-complete-20201216.tar.bz2
+test "$vers" = "10.5.0"       -o "$vers" = "10.5"        && tar=https://download.owncloud.org/community/owncloud-complete-20200731.tar.bz2
+test "$vers" = "10.4.1"       -o "$vers" = "10.4"        && tar=https://download.owncloud.org/community/owncloud-10.4.1.tar.bz2
+test "$vers" = "10.3.2"       -o "$vers" = "10.3"        && tar=https://download.owncloud.org/community/owncloud-10.3.2.tar.bz2
+test "$vers" = "10.2.1"       -o "$vers" = "10.2"        && tar=https://download.owncloud.org/community/owncloud-10.2.1.tar.bz2
+test "$vers" = "10.1.0"       -o "$vers" = "10.1"        && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
+test "$vers" = "10.0.0"       -o "$vers" = "10.0"        && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
+test "$vers" = "9.1.8"        -o "$vers" = "9.1"         && tar=https://attic.owncloud.org/community/owncloud-9.1.8.tar.bz2
+test "$vers" = "9.0.9"        -o "$vers" = "9.0"         && tar=https://attic.owncloud.org/community/owncloud-9.0.9.tar.bz2
+test "$vers" = "8.2.11"       -o "$vers" = "8.2"         && tar=https://attic.owncloud.org/community/owncloud-8.2.11.tar.bz2
+test "$vers" = "8.1.12"       -o "$vers" = "8.1"         && tar=https://attic.owncloud.org/community/owncloud-8.1.12.tar.bz2
+test "$vers" = "8.0.16"       -o "$vers" = "8.0"         && tar=https://attic.owncloud.org/community/owncloud-8.0.16.tar.bz2
+test "$vers" = "7.0.15"       -o "$vers" = "7.0"         && tar=https://attic.owncloud.org/community/owncloud-7.0.15.tar.bz2
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
+
+case $vers in
+  10.3* | 10.2* | 10.1*)
+    export HCLOUD_SERVER_IMAGE=ubuntu-18.04
+    ;;
+  9* | 8*)
+    # Server 8.1 is incompatible with PHP 7.1, debian-9 has PHP-7.0
+    export HCLOUD_SERVER_IMAGE=debian-9
+    echo "CAUTION: vers=$vers using $tar"
+    echo "CAUTION: Trying this on Debian-9, untested..."
+    sleep 5
+    ;;
+esac
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "Usage examples:"
@@ -120,7 +145,7 @@ noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected)";
 export LC_ALL=C LANGUAGE=C
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
 apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
-apt install -y php-json php-mbstring php-mysql php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
+apt install -y php-json php-mbstring php-mysql php-sqlite3 php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
 apt install -y ssh bzip2 rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
 # We almost always assign a DNS name.
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
@@ -208,7 +233,8 @@ chmod a+x /usr/bin/oc_app_install
 
 mysql -u root -e "DROP DATABASE owncloud;" 2>/dev/null || true
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES ON owncloud.* TO owncloud@localhost IDENTIFIED BY '$dbpass'"
-occ maintenance:install --database "mysql" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || exit 1
+occ maintenance:install --database "mysql"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" ||   echo "occ maintenance:install with mysql failed"
+occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || { echo "occ maintenance:install with sqlite also failed"; exit 1; }
 
 occ config:system:set trusted_domains 1 --value="$IPADDR"
 occ log:owncloud --enable -vvv
