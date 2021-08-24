@@ -114,7 +114,8 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
 | Clear Uploaded | 1. Upload some files<br>2. Clear the Uplaoded list when the files have been uploaded | Uploaded list cleared | 
 | Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | 
-| Retry Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Retry list | 2. Files are moved to Failed<br>3. Files are retried and moved to Current | 
+| Retry Failed I | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Recover wifi connection | 2. Files are moved to Failed<br>3. Files are automatically retried and moved to Current | 
+| Retry Failed II | 1. Upload a bunch of files<br>2. Set the server in maintenance mode while the files are being uploaded<br>3. Recover wifi connection<br>4. Retry manually  | 2. Files are moved to Failed<br>3. Files are not retried<br>4. Files are automatically retried and moved to Current | 
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
 | Error permissions | 1. Share a folder without permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  | [issue](https://github.com/owncloud/android/issues/2653)
 | Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  |
@@ -160,6 +161,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | audio without coverart | Open a MP3 file that does not include cover| Music played and placeholder note displayed |
 | audio with coverart | Open a MP3 file that includes cover| Music played and cover displayed |
 | unsupported | Download a unsupported file (pdf, office...) | Menu to open in a different app is raised up| | |
+| Open with | 1. Download a file<br>2. Select the option `Open with`<br>3. Select an app from the list<br>4. Edit the file | 3. Correctly opened<br>4. Correctly edited| | |
 | **Av. offline** |   |  |
 | Set a file as av. offline | 1. Long press on a file<br>2. Set as av. offline (down arrow with a line underneath) | File is downloaded |
 | Set a folder as av. offline | 1. Long press on a folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded |
