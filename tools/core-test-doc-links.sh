@@ -16,14 +16,16 @@ echo $links
 err=
 
 for link in $links; do
-  url="https://doc.owncloud.com/server/$doc_branch/go.php?to=$link"
-  http_code=$(curl -s -L -I $url -w '%{http_code}\n' -o /dev/null)
-  echo "checking $url -> $http_code"
-  if [ "$http_code" != 200 ]; then
-    echo "	ERROR: return code should be 200"
-    echo "	ERROR: Please compare lib/public/Constants.php and web server config"
-    err="$err $http_code"
-  fi
+  for tld in com org; do
+    url="https://doc.owncloud.$tld/server/$doc_branch/go.php?to=$link"
+    http_code=$(curl -s -L -I $url -w '%{http_code}\n' -o /dev/null)
+    echo "checking $url -> $http_code"
+    if [ "$http_code" != 200 ]; then
+      echo "	ERROR: return code should be 200"
+      echo "	ERROR: Please compare lib/public/Constants.php and web server config"
+      err="$err $http_code"
+    fi
+  done
 done
 
 if [ "$err" = "" ]; then
