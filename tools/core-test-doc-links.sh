@@ -5,10 +5,11 @@
 # 
 # Same as `make test-doc-links`, but does not need a server to be installed from source -- which we don't do during release QA.
 
+test -z "$SERVER_DOC_BRANCH" && SERVER_DOC_BRANCH=latest
 git_branch=$SERVER_DOC_BRANCH
 doc_branch=$SERVER_DOC_BRANCH
-test -z "$git_branch" && git_branch=master
-test -z "$doc_branch" && doc_branch=10.8		# FIXME: both should be the same???
+test "$git_branch" = "latest" && git_branch=master
+test "$doc_branch" = "master" && doc_branch=latest
 
 links=$(curl -s -L https://github.com/owncloud/core/raw/$git_branch/lib/public/Constants.php | sed -e "s@';@@" | sed -n -e "s@.*\\sDOCS_.*\\s'@@p")
 
