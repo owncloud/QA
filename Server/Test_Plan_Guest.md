@@ -10,6 +10,10 @@ Test Case | Expected Result | Result | Related Comment
 |  |   |
 Enable Guest app via CLI using ```occ app:enable guests``` | The apps is enabled | :construction:  |
 Disable Guest app via CLI using ```occ app:disable guests``` | The apps is disabled | :construction:  |
+**Web Frontend (Classic Design)** |  |   |
+|  |   |
+Enable Guest app via Web Frontend (Classic Design) using App Section in Settings Page | The apps is enabled | :construction:  
+Disable Guest app via Web Frontend (Classic Design) using App Section in Settings Page | The apps is disabled | :construction:  |
 **Add Guest User in sharetabview** |  |   |
 |  |   |
 Create a guest user via email |  | :construction:  |
