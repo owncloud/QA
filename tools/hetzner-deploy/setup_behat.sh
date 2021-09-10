@@ -24,17 +24,18 @@ EOCC
   chmod a+x /usr/local/bin/occ
 
   cd /var/www
-  git clone -b v$vers https://github.com/owncloud/core.git owncloud
+  git clone -b v$vers https://github.com/owncloud/core.git --depth=1 owncloud
   chown -R www-data:www-data owncloud
   cd owncloud
-  git clone https://github.com/owncloud/testing apps/testing
+  git clone https://github.com/owncloud/testing --depth=1 apps/testing
+  (cd apps/testing; make)
 
   npm install -g yarn
   make clean
   make install-composer-deps
   make update-composer
   make install-nodejs-deps
-  $example_make_cmd
+  # $example_make_cmd
 
   cat <<EOM
 ---------------------------------------------
