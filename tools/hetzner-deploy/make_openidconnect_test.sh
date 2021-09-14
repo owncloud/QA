@@ -16,8 +16,8 @@
 
 echo "Estimated setup time: 8 minutes ..."
 
-vers=2.0.0
-oauth2_vers=0.5.0-rc1
+vers=2.1.0-rc1
+oauth2_vers=0.5.0
 
 test -z "$HOSTNAME_SUFFIX" && HOSTNAME_SUFFIX=test
 
