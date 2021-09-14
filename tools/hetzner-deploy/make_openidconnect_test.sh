@@ -17,7 +17,19 @@
 echo "Estimated setup time: 8 minutes ..."
 
 vers=2.1.0-rc1
-oauth2_vers=0.5.0
+oauth2_vers=0.5.0-rc1
+
+openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
+oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
+
+for url in $oauth2_url $openidconnect_url; do
+  code=$(curl -s -I -L -w "%{http_code}\n" $url -o /dev/null)
+  if [ "$code" != 200 ]; then
+    echo "ERROR: Download URL $url"
+    echo "       HTTP_CODE=$code	-- please check that URL"
+    exit 0
+  fi
+done
 
 test -z "$HOSTNAME_SUFFIX" && HOSTNAME_SUFFIX=test
 
@@ -26,8 +38,6 @@ source lib/make_machine.sh -u oidc-$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker
 
 comp_yml=kopano/konnect/docker-compose.yml
 reg_yml=kopano/konnect/konnectd-identifier-registration.yaml
-openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
-oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
 
 test -z "$OWNCLOUD_RELEASE_DOCKER_TAG" && OWNCLOUD_RELEASE_DOCKER_TAG=10.8.0	# found on https://hub.docker.com/r/owncloud/server/tags/
 d_tag=$(echo $OWNCLOUD_RELEASE_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr . -)
@@ -92,10 +102,14 @@ INIT_SCRIPT << EOF
   docker-compose -f merged.yml exec owncloud occ app:enable openidconnect
   docker-compose -f merged.yml exec owncloud occ app:list 'openidconnect|oauth2' && echo OWNCLOUD IS READY
  
-  while ! docker exec compose_owncloud_1 occ user:sync -l 2>/dev/null | grep 'User_LDAP'; do
-    echo "Waiting for user_ldap to be come ready ..."
-    sleep 5;
-  done
+  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
+  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
+  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
+  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
+  # while ! docker exec compose_owncloud_1 occ user:sync -l 2>/dev/null | grep 'User_LDAP'; do
+  #   echo "Waiting for user_ldap to become ready ..."
+  #   sleep 5;
+  # done
   docker exec compose_owncloud_1 occ user:sync --missing-account-action=disable 'OCA\User_LDAP\User_Proxy' || echo "user:sync failed"
 
   cat <<EOM
