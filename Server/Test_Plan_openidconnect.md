@@ -57,7 +57,7 @@ After releasing 2.16, authentication library will be replaced for a [custom impl
 
 Actually, Android does not support Dynamic Client Registration yet.
 
-Openidconnect: 2.0.0RC1
+Openidconnect: 2.x.x
 Device: Google Pixel 2
 Android version: 11
 
@@ -89,7 +89,7 @@ Smoke test:  2.16 :construction:   New :construction:
 
 ###  iOS
 
-Openidconnect: 2.0.0RC1
+Openidconnect: 2.x.x
 Device: iPhoneXR
 iOS version: 14.2
 
