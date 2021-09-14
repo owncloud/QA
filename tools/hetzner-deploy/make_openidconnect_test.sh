@@ -102,14 +102,10 @@ INIT_SCRIPT << EOF
   docker-compose -f merged.yml exec owncloud occ app:enable openidconnect
   docker-compose -f merged.yml exec owncloud occ app:list 'openidconnect|oauth2' && echo OWNCLOUD IS READY
  
-  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
-  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
-  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
-  docker exec compose_owncloud_1 occ user:sync -l ; sleep 5
-  # while ! docker exec compose_owncloud_1 occ user:sync -l 2>/dev/null | grep 'User_LDAP'; do
-  #   echo "Waiting for user_ldap to become ready ..."
-  #   sleep 5;
-  # done
+  while ! docker exec compose_owncloud_1 occ user:sync -l 2>/dev/null | grep 'User_LDAP'; do
+    echo "Waiting for user_ldap to become ready ..."
+    sleep 5;
+  done
   docker exec compose_owncloud_1 occ user:sync --missing-account-action=disable 'OCA\User_LDAP\User_Proxy' || echo "user:sync failed"
 
   cat <<EOM
