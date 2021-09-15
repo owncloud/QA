@@ -3,8 +3,11 @@
 <details>
 <summary>Setup details (click to view)</summary>
 
-Automated setup script: https://github.com/owncloud-docker/compose-playground/blob/master/examples/hetzner-deploy/make_openidconnect_test.sh
+Automated setup script: https://github.com/owncloud/QA/tools/hetzner-deploy/make_openidconnect_test.sh
 
+Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_openidconnect.md
+
+ 
 References:
 * https://github.com/owncloud/docs/issues/2855#issuecomment-719944884
 * https://doc.owncloud.com/server/admin_manual/configuration/user/oidc/
@@ -44,8 +47,7 @@ References:
 | Token Renewal | Wait till session time is exceed | `token` endoint is requested with refresh token to get a new token. This must be transparent for the client | :construction:   |  01-22 09:10:46:385 [ info sync.httplogger ]:  ...  \"expires_in\": 600\n}\n]"<br>01-22 09:21:03:624 [ info sync.credentials.http ]:      Refreshing token<br>01-22 09:21:03:759 [ info sync.httplogger ]:    ... Request: POST ... /konnect/v1/token 
 | ClientId/SecretiD renewal | Wait till clientId/SecretId granted by register endpoint, expire | New ClientId/SecretId must be granted to request new tokens | :construction:   | renewal seen after 10 minutes. See log example below https://github.com/owncloud/openidconnect/issues/132#issuecomment-768982643
 |**Migration**| 
-| Basic -> OIDC | 1. Login in basic auth server<br>2. Enable maintenance mode and upgrade to OIDC<br>3. Disable maintenance mode | Session expires and user must re-authenticate against new OIDC  | :x: | no session timeout #136 
-| Basic -> OIDC | 1. Login in basic auth server<br>2. Enable maintenance mode and upgrade to OIDC<br>3. add `'token_auth_enforced' => true` to config.php<br>4. Disable maintenance mode | Client shows and error and user must re-authenticate against new OIDC  | :construction:  | `Server replied "599"` after 30 sec.
+| Basic -> OIDC | 1. Login in basic auth server<br>2. Enable maintenance mode and upgrade to OIDC<br>3. add `'token_auth_enforced' => true` to config.php<br>4. Disable maintenance mode | Client shows and error and user must re-authenticate against new OIDC  | :construction:  | `Server replied "599"` after 30 sec.; see also #136
 | OAuth2 -> OIDC | 1. Login in OAuth2 server<br>2. Enable maintenance mode and upgrade to OIDC<br>3. Disable maintenance mode | Token not valid anymore, and user must re-authenticate against new OIDC  | :construction:  | Unclear expectations: https://github.com/owncloud/openidconnect/issues/66#issuecomment-718560009
 | OAuth2 -> OIDC + OAuth2 | 1. Login in OAuth2 server<br>2. Enable maintenance mode and upgrade to OIDC, keeping Oauth2 enabled<br>3. Disable maintenance mode | Token is valid anymore. Must re-authenticate to start using OIDC  | :construction:   |
 
