@@ -1,4 +1,4 @@
-## Regression Testplan
+## Regression Testplan Patch Release
 
 ### Template: 
 [Regression_Test_Plan_Patch_Release.md](https://github.com/owncloud/QA/blob/master/Desktop/Regression_Test_Plan_Patch_Release.md)
