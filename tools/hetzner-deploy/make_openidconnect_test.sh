@@ -2,9 +2,9 @@
 #
 # see also:
 #  https://github.com/owncloud-docker/compose-playground/issues/6
-#  https://github.com/owncloud-docker/compose-playground/pull/51 	pmaier-fixes
+make_openidconnect_test.sh#  https://github.com/owncloud-docker/compose-playground/pull/51 	pmaier-fixes
 #  https://github.com/owncloud-docker/compose-playground/blob/master/compose/kopano/konnect/README.md
-#  https://doc.owncloud.com/server/10.5/admin_manual/configuration/user/oidc/
+#  https://doc.owncloud.com/server/10.8/admin_manual/configuration/user/oidc/
 #
 # CAUTION: https://github.com/owncloud/openidconnect/ has a README.md
 #		- some concepts there are correct, e.g. index.php/apps/openidconnect/config rewrite
