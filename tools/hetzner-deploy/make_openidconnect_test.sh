@@ -2,7 +2,7 @@
 #
 # see also:
 #  https://github.com/owncloud-docker/compose-playground/issues/6
-make_openidconnect_test.sh#  https://github.com/owncloud-docker/compose-playground/pull/51 	pmaier-fixes
+#  https://github.com/owncloud-docker/compose-playground/pull/51 	pmaier-fixes
 #  https://github.com/owncloud-docker/compose-playground/blob/master/compose/kopano/konnect/README.md
 #  https://doc.owncloud.com/server/10.8/admin_manual/configuration/user/oidc/
 #
@@ -16,9 +16,9 @@ make_openidconnect_test.sh#  https://github.com/owncloud-docker/compose-playgrou
 
 echo "Estimated setup time: 8 minutes ..."
 
-# vers=2.0.0
-vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
-oauth2_vers=0.5.0-rc1
+vers=2.0.0
+# vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
+oauth2_vers=0.5.0
 
 openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
 oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
