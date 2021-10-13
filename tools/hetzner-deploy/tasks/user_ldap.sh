@@ -94,6 +94,12 @@ fi
 
 ## FIXME: user:sync backend "OCA\User_LDAP\User_Proxy" becomes only available, when the wizard UI is used. Not when the config is scripted like above.
 ## FIXME: find what is missing...
+# 
+# requesttoken=$(curl -s -L -c cookie.jar 'http://localhost' | sed -n -e 's@">$@@' -e 's@.*name="requesttoken" value="@@p')
+# curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/login' --data-raw "user=admin&password=admin&timezone-offset=2&timezone=Europe%2FBerlin&requesttoken=$requesttoken" | grep admin
+# curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/apps/user_ldap/ajax/getConfiguration.php' --data-raw "ldap_serverconfig_chooser=s01" | jq
+## TODO: check if the above helps to initialize the user:sync setup.
+
 crontab=/var/spool/cron/crontabs/www-data
 occ user:sync -l | grep -q User_LDAP || echo "FIXME: admin must visit User Authentication page to initialize class OCA\User_LDAP\User_Proxy" >> ~/POSTINIT.msg
 if occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable; then
@@ -107,4 +113,6 @@ else
   sleep 5
 fi
 
+echo "database table oc_accounts has:"
+echo 'select user_id,display_name,email from oc_accounts;' | mysql owncloud
 
