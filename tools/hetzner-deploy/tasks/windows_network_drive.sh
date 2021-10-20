@@ -36,3 +36,8 @@ occ files_external:create /WND windows_network_drive password::password -c host=
 sleep 2
 screen -d -m -S wnd_listen -Logfile screenlog-wnd_listen -L occ wnd:listen -vvv $smb_ip shared testy testy 	# from https://github.com/owncloud/windows_network_drive/pull/148/files
 
+# apt install cifs-utils
+# mkdir /mnt/wnd
+# mount -t cifs //$smb_ip/shared /mnt/wnd -o 'rw,username=testy,password=testy'
+# ls -la /mnt/wnd
+
