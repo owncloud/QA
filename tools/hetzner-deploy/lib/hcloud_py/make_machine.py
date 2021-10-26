@@ -38,7 +38,7 @@ server_image = os.environ.get('HCLOUD_SERVER_IMAGE')
 if server_image == None:
   server_image = "ubuntu-20.04"
 
-datacenter = "fsn1-dc14"
+loc = "nbg1"    # "fsn1", "hel1", "nbg1"
 server_type = "cx11"
 used_for = "server_testing"
 debug = False
@@ -46,7 +46,7 @@ debug = False
 parser = argparse.ArgumentParser(description=sys.argv[0]+" V0.2")
 parser.add_argument('-i', '--image',          type=str, default=server_image, help="server image. Default: "+server_image)
 parser.add_argument('-t', '--type',           type=str, default=server_type, help="server type. Default: "+server_type)
-parser.add_argument('-d', '--datacenter',     type=str, default=datacenter, help="server datacenter. Default: "+datacenter)
+parser.add_argument('-L', '--location',       type=str, default=loc, help="Datacenter location. (E.g. nbg1, fsn1, hel1) Default: "+loc)
 parser.add_argument('-s', '--ssh-key-names',  type=str, help="comma-separated names of uploaded public keys. Default: env HCLOUD_SSHKEY_NAMES", default=ssh_key_names)
 parser.add_argument('-p', '--packages',       type=str, help="comma-separated list of linux packages to install")
 parser.add_argument('-u', '--unique',         type=str, help="make name unique by prepending user and appending a suffix")
@@ -64,6 +64,8 @@ if not NAME: NAME = args.image
 NAME = NAME.translate( { ord('.'):ord('-'), ord('_'):ord('-') } )       # avoid _ and . in name. Always
 
 client = Client(token=hcloud_api_token)
+
+loca = client.locations.get_by_name(args.location)
 
 if debug:
   # list all servers in this project
@@ -146,12 +148,12 @@ def find_image(client, name):
 
 img = find_image(client, args.image)
 
-if debug: print(NAME, args.type, args.image, args.datacenter, ssh_key_names, ssh_pub_key, ssh_key_list, packages, file=sys.stderr)
-response = client.servers.create(name=NAME, server_type=ServerType(args.type), image=img, ssh_keys=ssh_key_list, labels=labels)
+if debug: print(NAME, args.type, args.image, args.location, ssh_key_names, ssh_pub_key, ssh_key_list, packages, file=sys.stderr)
+response = client.servers.create(name=NAME, server_type=ServerType(args.type), location=loca, image=img, ssh_keys=ssh_key_list, labels=labels)
 server = response.server
 IPADDR = server.data_model.public_net.ipv4.ip
 model = server.data_model.server_type.data_model
-print("Machine created: type=%s cpus=%s mem=%sgb disk=%sgb addr=%s" % (model.name, model.cores, model.memory, model.disk, IPADDR), file=sys.stderr)
+print("Machine created: type=%s cpus=%s mem=%sgb disk=%sgb addr=%s location='%s'" % (model.name, model.cores, model.memory, model.disk, IPADDR, loca.data_model.description), file=sys.stderr)
 
 server.change_dns_ptr(IPADDR, NAME+'.hcloud.owncloud.com')       # needs an FQDN
 
