@@ -32,7 +32,7 @@ wget https://secure.eicar.org/eicar.com
 smbclient //$smb_ip/shared -U testy testy -c 'put eicar.com; dir'
 occ app:enable windows_network_drive	# CAUTION: triggers license grace period!
 occ config:app:set core enable_external_storage --value yes
-occ files_external:create /WND windows_network_drive password::password -c host=$smb_ip -c share="/shared" -c user=testy -c password=testy
+occ files_external:create /WND windows_network_drive password::password -c host=$smb_ip -c share="shared" -c user=testy -c password=testy
 sleep 2
 screen -d -m -S wnd_listen -Logfile screenlog-wnd_listen -L occ wnd:listen -vvv $smb_ip shared testy testy 	# from https://github.com/owncloud/windows_network_drive/pull/148/files
 
