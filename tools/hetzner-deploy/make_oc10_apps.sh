@@ -112,12 +112,12 @@ for arg in "$@"; do
 	# a) correctname or correctname-app, c) having the versionnumber.
 	#
 	assetnames="$(echo "$rel_json" | jq '.assets[].name' -r 2>/dev/null)"
-	vers="$(echo $tagname | tr -d v)"
+	appversion="$(echo $tagname | tr -d v)"
 	set -x
         assetname=''
-	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-$vers")"			# substring web-4.4.0
-	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-app-$vers")"		# substring web-app-4.4.0
-	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname" | grep -F "$vers")"	# any combination of web and 4.4.0
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-$appversion")"		# substring web-4.4.0
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-app-$appversion")"		# substring web-app-4.4.0
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname" | grep -F "$appversion")"	# any combination of web and 4.4.0
 	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-app")"			# just substring web-app
 	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname")"				# just substring web
 	test -z "$assetname" && assetname="$(echo "$assetnames" | head -n 1)"					# fall back to the first
