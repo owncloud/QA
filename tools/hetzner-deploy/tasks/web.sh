@@ -1,11 +1,11 @@
 #! /bin/bash
-#
 # Reference: https://owncloud.dev/clients/web/deployments/oc10-app/
 #
 conf=/var/www/owncloud/config/config.json
 if [ -f $conf ]; then
   echo "$0 skipped, config file already exists."
   echo "HINT: To re-run this script, remove $conf"
+  sleep 5
   exit 0
 fi
 

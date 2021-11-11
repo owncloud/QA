@@ -89,13 +89,15 @@ for arg in "$@"; do
         echo "Using local file $arg ..."
       else
 	# Everything that is not a local file, and not a URL should be an app.
-	echo "$arg" | grep -q / || arg="owncloud/$arg"
-	oc_app="$(echo "$arg" | sed -e 's/[:=].*$//')"
-	tagname="v$(echo "$arg" | sed -e 's/.*[:=]//' -e 's/^v//')"	# should work with or without leading v.
+	appname=$arg
+	echo "$arg" | grep -q / || arg="owncloud/$arg"		# prepend owncloud/ orga, if no orga given.
+	oc_app="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
+	tagname="v$(echo "$arg" | sed -e 's/.*[:=]//' -e 's/^v//')"	# construct a tag. should work with or without leading v.
 	echo "Using https://github.com/$oc_app ..."
         curl=curl
         test -n "$GITHUB_USER" -a -n "$GITHUB_TOKEN" && curl="curl -u $GITHUB_USER:$GITHUB_TOKEN"
         releases_api_url="https://api.github.com/repos/$oc_app/releases"
+        # oc_app and arg are equal, when no version number was specified. then we query github for the latest tag.
         test "$oc_app" = "$arg" && tagname=$($curl -s "$releases_api_url" | jq '.[0].tag_name' -r 2>/dev/null)
 	rel_json="$($curl -s "$releases_api_url" | jq '.[] | select(.tag_name == "'"$tagname"'")')"
         if [ -z "$rel_json" -o "$rel_json" = "null" ]; then
@@ -105,11 +107,27 @@ for arg in "$@"; do
           test "$curl" = curl && echo '  Or retry after setting environment variables GITHUB_USER and GITHUB_TOKEN'
           exit 0
         fi
-        asseturl=$(echo  "$rel_json" | jq '.assets[0].url' -r 2>/dev/null)
-        assetname=$(echo "$rel_json" | jq '.assets[0].name' -r 2>/dev/null)
+	# There may be multiple assets, e.g. web app has md5sum.txt and other stuff first.
+	# Rank the assets by
+	# a) correctname or correctname-app, c) having the versionnumber.
+	#
+	assetnames="$(echo "$rel_json" | jq '.assets[].name' -r 2>/dev/null)"
+	vers="$(echo $tagname | tr -d v)"
+	set -x
+        assetname=''
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-$vers")"			# substring web-4.4.0
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-app-$vers")"		# substring web-app-4.4.0
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname" | grep -F "$vers")"	# any combination of web and 4.4.0
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-app")"			# just substring web-app
+	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname")"				# just substring web
+	test -z "$assetname" && assetname="$(echo "$assetnames" | head -n 1)"					# fall back to the first
+	assetname="$(echo "$assetname" | head -n 1)"								# assert only one match.
+	set +x
+	asseturl="$(echo "$rel_json" | jq '.assets[] | select(.name == "'$assetname'") | .url' -r 2>/dev/null)"	# get url from name
 	echo "... expanded to $asseturl -> $assetname (from tag $tagname)"
 	arg="$tmpdir/$assetname"
 	$curl -L -H 'Accept: application/octet-stream' "$asseturl" > "$arg"
+	sleep 3
       fi
 
       ;;
