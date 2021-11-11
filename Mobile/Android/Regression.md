@@ -47,12 +47,12 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | **OAuth2** |   |  |
 | Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
 | Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app |
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keeps on using the app |
 | Remove token | 1\. After being logged, remove token in server side<br>2. perform some action in app | Redirected to login  |
 | **OIDC** |   |  |
 | Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed |
 | Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded |
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app |
+| Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keeps on using the app |
 | Logout | Logout in a open and active OIDC session | Moved to login view| | |
 | **Redirections** |   |  |
 | Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
@@ -67,6 +67,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Create a new account, but it is an existing one. |1. There is an account whith a user in one server<br>2. Try to create the same account | A error: "An account for the same user and server already exists in the device" |
 | Edit and change the password | 1. Edit one account with the key icon<br>2. Enter incorrect password| Credentials error | 
 | Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account |
+| Remove accounts files removed | 1. Remove an account with downloaded files, from Accounts manager | Account is not in account manager<br>Content inside is removed (check in Device Explorer) |
 | Remove auto upload account | 1. Remove an account from Accounts manager, that is the account selected for auto uploads| Warning is shown, user has to accept the deletion |
 | Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account |
 | Sync Account | 1. Add an account without browsing into in<br>2. Sync the app with the sync icon<br>3. Remove connection from device<br>4. Browse through the account| Everything is discovered |
@@ -95,7 +96,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Create a folder without connection | Create a folder without connection | An error message is shown |
 | Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown|
 | Rename folder/file without connection | Rename a folder/file without connection | An error message is shown|
-| Downlad a file/folder without connection | Download a file/folder without connection | An error message is shown |
+| Download a file/folder without connection | Download a file/folder without connection | An error message is shown |
 | Upload a file without connection | 1. Upload a file  without connection<br>2. Click in the notification | 1. An error message is shown<br>2. Check that the notification is correct |
 | Move a file/folder without connection | Select to move a file/folder without connection | An error is shown |
 | Share by link | Select to share by link a file | An error is shown |
@@ -115,7 +116,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Clear Uploaded | 1. Upload some files<br>2. Clear the Uplaoded list when the files have been uploaded | Uploaded list cleared | 
 | Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | 
 | Retry Failed I | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Recover wifi connection | 2. Files are moved to Failed<br>3. Files are automatically retried and moved to Current | 
-| Retry Failed II | 1. Upload a bunch of files<br>2. Set the server in maintenance mode while the files are being uploaded<br>3. Recover wifi connection<br>4. Retry manually  | 2. Files are moved to Failed<br>3. Files are not retried<br>4. Files are automatically retried and moved to Current | 
+| Retry Failed II | 1. Upload a bunch of files<br>2. Set the server in maintenance mode while the files are being uploaded<br>3. Switch maintenance mode off<br>4. Retry manually  | 2. Files are moved to Failed<br>3. Files are not retried<br>4. Files are automatically retried and moved to Current | 
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
 | Error permissions | 1. Share a folder without permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  | [issue](https://github.com/owncloud/android/issues/2653)
 | Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  |
@@ -127,15 +128,19 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT |
 | **Auto Uploads** |   |  |
 | Auto uploads pictures| 1. Enable auto uploads pictures and close the app<br>2. Take a picture<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, pictures are uploaded after maximum 15 minutes  |
-| Auto uploads pictures account & folder| 1. Enable auto uploads pictures<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures<br>4. Select another account and its root folder as target<br>5. Take more pictures<br>| 3. Pictures uploaded to this location after 15 min max<br>5. Pictures uploaded to this location after 15 min max  |
+| Auto uploads pictures account & folder| 1. Enable auto uploads pictures<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures| Pictures uploaded to this location after 15 min max  |
 | Auto uploads pictures, only wifi| 1. Enable auto uploads pictures and only with wifi<br>2. Using 3G/4G, take a picture<br>3. When wifi is back, take another picture | 2. The picture is not uploaded and no error is notified<br>3. The picture is upload after 15 mins maximum |
+| Auto uploads pictures, only charging| 1. Enable auto uploads pictures with only charging option<br>2. Without charging, take a picture <br>3. Plug the device on, take another picture | 2. The picture is not uploaded<br>3. The picture is upload after 15 mins maximum |
 | Auto uploads pictures, select move or copy| 1. Enable auto uploads of pictures<br>2. In "Original file will be", select move<br>3. Take a picture<br>4. In "Original file will be", select copy<br>5. Take a picture| 3. The original is not stored in device<br>5. The original is stored in device and in app |
 | Auto Upload pictures, change Camera folder | 1. Set a source folder<br>2. Take pictures with the camera<br>3. Change the folder<br>4. Take pictures | 2. Pictures uploaded<br>4. Pictures not uploaded |
 | Auto uploads videos| 1. Enable auto uploads videos and close the app<br>2. Take a video<br>3. Take another video<br>4. Switch off the device<br>| Open the device after 5 minutes, videos are uploaded after maximum 15 minutes  |
-| Auto uploads videos account & folder| 1. Enable auto uploads videos<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures<br>4. Select another account and its root folder as target<br>5. Take more videos<br>| 3. Videos uploaded to this location after 15 min max<br>5. Videos uploaded to this location after 15 min max  |
+| Auto uploads pictures account & folder| 1. Enable auto uploads pictures<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures| Pictures uploaded to this location after 15 min max  | 
 | Auto uploads videos, only wifi| 1. Enable auto uploads videos and only with wifi<br>2. Using 3G/4G, take a video <br>3. When wifi is back, take another video | 2. The video is not uploaded and no error is notified<br>3. The video is upload after 15 mins maximum |
+| Auto uploads videos, only charging| 1. Enable auto uploads videos wuth only charging option<br>2. Without charging, take a video <br>3. Plug the device on, take another video | 2. The video is not uploaded<br>3. The video is upload after 15 mins maximum |
 | Auto uploads videos, select move or copy| 1. Enable auto uploads of videos <br>2. In "Original file will be", select move<br>3. Take a picture<br>4. In "Original file will be", select copy<br>5. Take a video| 3. The original is not stored in device<br>5. The original is stored in device and in app |
 | Auto Upload videos, change Camera folder | 1. Set a source folder<br>2. Take videos with the camera<br>3. Change the folder<br>4. Take videos | 2. Videos uploaded<br>4. Videos not uploaded |
+| Retry one | 1. Perform one auto uploads (only one file), making it fail (removing target folder, swithching server off)<br>2. Restablish correct connections<br>3. Click on the failed upload in uploads view | 1. Auto uploads fail, and they are listed in the Failed list of Uploads view<br>2. Upload retried and completed |
+| Retry all | 1. Perform some auto uploads (videos and photos), making it fail (removing target folder, swithching server off)<br>2. Restablish correct connections<br>3. Click on the "Retry" button | 1. Auto uploads fail, and they are listed in the Failed list of Uploads view<br>2. Uploads retried and completed |
 | **Upload from external** |   |  |
 | Upload a file from an external app | Upload a file from external app (google drive, dropbox...) | The files are uploaded and correctly managed in uploads view |  | Test also with Android 6
 | Upload several files from an external app | Upload a file from external app | The files are uploaded and correctly managed in uploads view | | Test also with Android 6
@@ -144,6 +149,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly |
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward and change orientation | Video is streamed correctly |
 | Stream a video with https (non trusted server) | 1. With a https server stream a video. | Video is not streamed, so that the server is not secure. |
+| Stream vide with non playable format | Try to stream a MOV video file | Video is not streamed, downloaded instead 
 | **Conflict handling** |   |  |
 | Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated |
 | Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected and notification shows it<br>6. Server version is downloaded to the device |
@@ -172,8 +178,6 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Move/Copy into av. offline | Move some content into an av. offline folder | Content is downloaded and sync |
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is downloaded but not av.offine |
 | Modify av. offline| 1. Set a txt file as. av offline (or a folder that contains it).<br>2. Close the app<br>3. With an external editor, modify the file | file is uploaded to the server in maximum 15 minutes, without opening the app |
-| Modify external app closed | 1. Set a txt file as. av offline (or a folder that contains it).<br>2. Close the app<br>3. With an external editor, or other client, modify the file | file is uploaded to the server in maximum 15 minutes, without opening the app |
-| Modify external app opened | 1. Set a txt file as. av offline (or a folder that contains it).2. With an external editor, or other client, modify the file | file is uploaded to the server in maximum 15 minutes, just browsing to the containing folder |
 | Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. |
 | Delete locally | Try to delete locally an av. offline folder | Action can not be performed |
 |**Basic Operations**||||||
@@ -193,8 +197,8 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Copy files | 1. Select several files<br>2. Tap on copy and select a target folder | Files are copied correctly |
 | Move files | 1. Select several files<br>2. Tap on move and select a target folder | Files are moved correctly |
 | Available offline | 1. Select several files<br>2. Tap on available offline | Files are set as available offline |
-| Sellect all | 1. Select "Select all"<br>2. Make any action | All files in the list with the action |
-| Sellect inverse | 1. Select some items<br>2. Select "inverse"<br>3. Make any action | Inverse selection of fils with the action |
+| Select all | 1. Select "Select all"<br>2. Make any action | All files in the list with the action |
+| Select inverse | 1. Select some items<br>2. Select "inverse"<br>3. Make any action | Inverse selection of fils with the action |
 | **Multiselection folders** |   |  |
 | Sync folders | 1. Select several folders (with subfolders) and not in root<br>2. Tap on sync | Folders are downloaded correctly |
 | Delete folders | 1. Select several folders<br>2. Tap on delete | Folders are deleted correctly |
@@ -268,7 +272,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Animations in power save | Enable power save mode. | Animations in app disabled (while browsing) |
 | Notification music player |  Upload a music file and play it | Notification with the progress of the file is shown  |
 | Local search | Enter a pattern that matches with any item on the file list | Correct filtered |
-| Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Logcat and Logfiles are generated. Filters work properly. Content can be cleared (even files) and shared |
+| Logging | 1. Perform several actions in the account<br>2. In Settings, open Logs | Log file is diplayed and can be deleted, opened with and shared with |
 | Logging HTTP on | 1. In Settings, enable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are logged including headers and body|
 | Logging HTTP off | 1. In Settings, disable `Logging HTTP requests`<br>2. Perform several actions in the account with network requests | Requests are not logged |
 | Allow Touches | 1. In Settings > Security, enable `Touches with other visible windows`<br>2. Switch some light modulation app like Twilight on  | It is posible to touch in the app | 
