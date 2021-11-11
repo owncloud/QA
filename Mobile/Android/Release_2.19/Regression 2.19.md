@@ -227,7 +227,7 @@ Not tested this version: quota, conflict, multiselection
 | Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date |P m11
 | Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input |P m11
 | Share created link | Create a new public link<br>Share it with another app by using the Share Sheet  | Correctly shared |P m11
-| **Share with users** |   |  |
+| **Share with users** |  1 device |  |
 |Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon | P m11 | AUTO
 | Shared with a group | Prerrequisites: create a group whose name includes special characters<br>1. From the mobile app select to share a folder<br>2. Search the group and select it | Check that any user from the group has access to the folder<br>Check that the file includes the share icon |P m11 | AUTO
 | Shared with an already shared user | Share an item with an user who has already the item shared with | An error is shown | P m11
@@ -263,5 +263,5 @@ Not tested this version: quota, conflict, multiselection
 | [3351](https://github.com/owncloud/android/issues/3351) | |  | P m11 m7 | FIXED Round button out of screen
 | [125](https://github.com/owncloud/android/issues/125) | |  | P m11 m7
 | **Upgrade** |   |  |
-| Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Migration Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed<br>Everything downloaded and av. offline migrated|
-| Upgrade from 2.18.1 | Install 2.18.1 and then, upgrade to the current one |  Migration Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed<br>Everything downloaded and av. offline migrated|
+| Upgrade from latest beta version | Install the previous version and then, upgrade to the current one |  Migration Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed<br>Everything downloaded and av. offline migrated| P m11 m7
+| Upgrade from 2.18.3 | Install 2.18.3 and then, upgrade to the current one |  Migration Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed<br>Everything downloaded and av. offline migrated| P m7 m11
