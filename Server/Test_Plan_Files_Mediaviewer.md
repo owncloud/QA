@@ -15,6 +15,9 @@ docker exec -ti $(docker ps -q | head -1) occ app:disable gallery
 
 ## Testing functionality
 
+Run all the tests listed here with one of the browsers mentioned below. Choose randomly. 
+Then repeat a few (randomly chosen) tests with all browsers.
+
 Test Case | Expected Result | Result | Related Comment
 ------------- | -------------- | ----- | ------
 **CLI commands** |  |   |
@@ -39,14 +42,9 @@ Open an image file and click Zoom out button | The image gets zoomed out | :cons
 Open a media file and click Download button (:arrow_down:) | The media files gets downloaded | :construction: |
 Open an image file and click "X" button | The viewer disappears | :construction: |
 Open an image file and click anywhere outside the viewer | The viewer disappears | :construction: |
-Open an image file (in folder having multiple other media files) and click ">"(next) button | The next image should appear | :construction: |
-Open an image file (with no other media files) and click ">"(next) button | Nothing should happen. The viewer still has old image. | :construction: |
-Open an image file (in folder having multiple other media files) and click "<"(prev) button | The next image should appear | :construction: |
-Open an image file (with no other media files) and click "<"(prev) button | Nothing should happen. The viewer still has the old image. | :construction: |
-Open the last media file in the folder and click ">"(next) button | Nothing should happen. The viewer still has the old image. | :construction: |
-Open the first media file in the folder and click "<"(prev) button | Nothing should happen. The viewer still has the old image. | :construction: |
 Open an image and zoom in/zoom out/rotate and open next image | Next image should not be zoomed in/zoomed out/rotated | :construction: |
-Open an image/video and press :arrow_left:/:arrow_right: key | Previous/Next media files should appear | :construction: |
+In a folder with multiple media: Open an image/video and press :arrow_left:/:arrow_right: key | Previous/Next media files should appear | :construction: |
+In a folder with one file: Open an image/video and press :arrow_left:/:arrow_right: key | Previous/Next buttons have no effect | :construction: |
 Open an image/video and swipe left/right | Previous/Next media files should appear | :construction: |
 Open a video file and click play button inside the viewer. | The video starts playing | :construction: |
 Play a video file, mute sound (:sound:) button and unmute again. | The video plays with sound muted and when unmuted, plays with sound. | :construction: | 
@@ -58,34 +56,32 @@ Open a video file and click anywhere outside the viewer | The viewer disappears 
 Play a video file, and click next/previous button | The video stops playing and the next/previous file should appear. | :construction: |
 Play a video file, and click anywhere on the scrubber/seek bar | The video skips and plays from the clicked position. | :construction: |
 Play a video file, and press next/previous button and re-return to the same video and play the video(without ever closing media_viewer) | The video stops playing. When returned to same video, the video plays from the same position previously stopped. | :construction: |
-Open a unsupported video file | The media viewer shows a helpful message | :construction: |
+Open a unsupported video file | The media viewer shows a helpful message (or offers download) | :construction: |
+
 Open a details tab with preview, and then open the image file from files list view in the mediaviewer | The media viewer should appear correctly as previous | :construction: |
 Open a video file and delete the video file in another tab, and try to play the video in first tab | A helpful message should be shown | :construction: |
 Sort on different order on files page and open any media file in the viewer and keep on swiping | The order of the media files should be same as the listing on the files page | :construction: |
-**DetailsDialog View** |  |   |
-|  |   |
-Open details dialog for a image file, click on the preview/icon of the file and repeat above tests. | | :construction:|
 **Favorites Page** |  |   |
 |  |   |
-Favorite media files and open Favorites, and repeat above tests. |  | :construction: |  |
+Mark Favorite images from multiple folders. Open Favorites. | Prev/Next goes through the list of all favorites | :construction: |  |
 |**Shared with Others Page** |  |   |
 |  |   |
-Share files with other media files and open `shared with others` page, and repeat above tests. | | :construction: |
+Share files with other media files and open `shared with others` | Prev/Next works as expected. | :construction: |
 |**Shared with You Page** |  |   |
 |  |   |
-Share files from other users' account and open `shared with you` page, and repeat above tests. | | :construction: |
+Share files from other users' account and open `shared with you` page. | Prev/Next works as expected. | :construction: |
 |**Tags Page** |  |   |
 |  |   |
-Set tags on media files and open `tags` page, and repeat above tests. | | :construction: |
+Set tags on media files and open `tags` page. | Prev/Next works as expected. | :construction: |
 |**Public Link Page** |  |   |
 |  |   |
-Share files by public link and open `Share by link` page, and repeat above tests. | | :construction: |
+Share files by public link and open `Share by link` page. | Prev/Next works as expected. | :construction: |
 |**Files Drop** |  |   |
 |  |   |
 Share a video via files_drop | Check that video plays correctly and buttons work |:construction: | |
 Share a folder via files_drop | Check that the viewer shows all files inside folders and buttons work correctly | :construction: | |
 |  |   |
-**Browser compatibilitiy** |  |   
+**Browser compatibilitiy** | Repeat at least one of the above items with each browser |
 | Mozilla Firefox | | :construction: |
 | Google Chrome | | :construction: |
 | Safari | | :construction: |
