@@ -9,7 +9,7 @@
 
 * References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_twofactor_totp.md)
 
-
+Run the tests below with freeotp and/or google authenticator. Optionally also some tests with another otp app.
 
 | Test Case                                | Expected Result                          | Result         | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | -------------- | --------------- |
