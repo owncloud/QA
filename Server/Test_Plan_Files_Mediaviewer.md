@@ -57,7 +57,6 @@ Play a video file, and click next/previous button | The video stops playing and 
 Play a video file, and click anywhere on the scrubber/seek bar | The video skips and plays from the clicked position. | :construction: |
 Play a video file, and press next/previous button and re-return to the same video and play the video(without ever closing media_viewer) | The video stops playing. When returned to same video, the video plays from the same position previously stopped. | :construction: |
 Open a unsupported video file | The media viewer shows a helpful message (or offers download) | :construction: |
-
 Open a details tab with preview, and then open the image file from files list view in the mediaviewer | The media viewer should appear correctly as previous | :construction: |
 Open a video file and delete the video file in another tab, and try to play the video in first tab | A helpful message should be shown | :construction: |
 Sort on different order on files page and open any media file in the viewer and keep on swiping | The order of the media files should be same as the listing on the files page | :construction: |
