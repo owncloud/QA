@@ -39,5 +39,10 @@ This aims to be a client-agnostic testplan for the OAuth2 application, centered 
 | Failed attempt in the authorization login form | The query parameters for the [Authorization Request] are preserved in next attempts | :gear: | See original issue in: https://github.com/owncloud/core/issues/28129 |
 | **Relevant Smoke Tests** | | |
 | Unauthenticated Actions: Public File Drop | Files get uploaded normally | :construction: | See https://github.com/owncloud/oauth2/pull/100 |
+| **OAuth with new Web App** | | |
+| Register Web app via CLI | `occ app:enable web`<br>` client_id="$(tr -dc 'a-z0-9' < /dev/urandom \| head -c 32)"` <br> `client_secret="$(tr -dc 'a-z0-9' < /dev/urandom \| head -c 32)"` <br> `web_baseurl="https://$oc10_fqdn/index.php/apps/web"` <br> `occ config:system:set web.baseUrl --value $web_baseurl` <br> `occ oauth:add-client "ownCloud Web" $client_id $client_secret $web_baseurl/oidc-callback.html` | :construction: | |
+| Successful [Authorization Request] without any session open in the browser | Login form with an additional informative note about the application requesting access to ownCloud is displayed | :heavy_check_mark:  | |
+| Successful [Authorization Request] with a valid session in the browser | The "Authorize" screen is displayed | :heavy_check_mark:  | |
+
 
 [Authorization Request]: https://github.com/owncloud/oauth2/#protocol-flow
