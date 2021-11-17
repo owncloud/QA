@@ -36,6 +36,7 @@ test "$vers" = "8.2.11"       -o "$vers" = "8.2"         && tar=https://attic.ow
 test "$vers" = "8.1.12"       -o "$vers" = "8.1"         && tar=https://attic.owncloud.org/community/owncloud-8.1.12.tar.bz2
 test "$vers" = "8.0.16"       -o "$vers" = "8.0"         && tar=https://attic.owncloud.org/community/owncloud-8.0.16.tar.bz2
 test "$vers" = "7.0.15"       -o "$vers" = "7.0"         && tar=https://attic.owncloud.org/community/owncloud-7.0.15.tar.bz2
+test "$vers" = "daily"	      -o "$vers" = "master"	 && tar=https://download.owncloud.org/community/daily/owncloud-daily-master.tar.bz2
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
 case $vers in
@@ -123,8 +124,21 @@ for arg in "$@"; do
 	test -z "$assetname" && assetname="$(echo "$assetnames" | head -n 1)"					# fall back to the first
 	assetname="$(echo "$assetname" | head -n 1)"								# assert only one match.
 	set +x
-	asseturl="$(echo "$rel_json" | jq '.assets[] | select(.name == "'$assetname'") | .url' -r 2>/dev/null)"	# get url from name
-	echo "... expanded to $asseturl -> $assetname (from tag $tagname)"
+	if [ -n "$assetname" ]; then
+	  asseturl="$(echo "$rel_json" | jq '.assets[] | select(.name == "'$assetname'") | .url' -r 2>/dev/null)"	# get url from name
+	  echo "... expanded to $asseturl -> $assetname (from tag $tagname)"
+	else
+	  echo "ERROR: no asset found with name $appname, trying href from the body..."
+	  link=$(echo "$rel_json" | jq .body -r | grep $appname-$appversion)
+	  assetname=$(echo $link | sed -e 's/.*\[//' -e 's/\].*//')
+	  asseturl=$(echo $link | sed -e 's/.*(//' -e 's/).*//')
+	  test -n "$link" && echo "Link found: $link"
+	  sleep 10
+	fi
+	if [ -z "$assetname" ]; then
+	  echo "ERROR: no asset found with name $appname, and nothing linked in the body ..."
+	  exit 1;
+	fi
 	arg="$tmpdir/$assetname"
 	$curl -L -H 'Accept: application/octet-stream' "$asseturl" > "$arg"
 	sleep 3
