@@ -73,4 +73,7 @@ Smashbox status:
 Git master: [![Build Status](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/badge/icon)](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/)
 
 
-Next: Continue with https://github.com/owncloud/QA/blob/master/Server/Test_Plan_Simplified_Smoke_Test.md
+Next: 
+ - https://github.com/owncloud/QA/blob/master/Server/Test_Plan_Simplified_Smoke_Test.md
+ - Changelog Testing (or better do that before the smoke tests!)
+
