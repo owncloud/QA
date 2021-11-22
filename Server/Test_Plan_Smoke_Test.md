@@ -1,6 +1,24 @@
-# Smoke test
+# Test Plan
 
-## Previous requirements
+- Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_Smoke_Test.md
+
+## Setup
+
+Apps included:
+ - openidconnect 2.1.0
+ - windows-_network_drive 2.1.0
+ - ldap 0.16.0
+ - web 4.5.0
+
+### Test deployments
+
+ - localhost: `docker run --rm -ti -p 8080:8080 owncloud/server:10.9.0-beta1`
+
+ - https://oc1090beta1-primary-s3-113-rc3-20211119.jw-qa.owncloud.works
+   via `env OC10_VERSION=10.9.0beta1 OC10_TAR_URL=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2 hetzner_deploy/make_oc10_apps.sh files_primary_s3`
+
+
+## Requirements
 
 Prepare two servers with ssl activated and trusted certificates.
 
@@ -53,3 +71,6 @@ Pyocclient status:
 Smashbox status:
 
 Git master: [![Build Status](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/badge/icon)](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/)
+
+
+Next: Continue with https://github.com/owncloud/QA/blob/master/Server/Test_Plan_Simplified_Smoke_Test.md
