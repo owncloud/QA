@@ -3,9 +3,9 @@
 #### PR: <br>
 
 
-Device/s: <br>
-Server:  <br>
-Xcode version: <br>
+Device/s: iPhoneXR v15.1, iPadAirv17.4<br>
+Server: 10.8 <br>
+Xcode version: 13.1 (13A1030d)<br>
 
 How to read Results:
 
@@ -310,3 +310,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Voice Over | Enable Voice Over and perform some basic exploratory tests, putting more effort in the newest features| Commands and names are correctly spelt |  | |
 |**Upgrade**||||||
 | From previous| 1. Install previous version with basic, OAuth2 and OIDC accounts<br>2. Perform some actions like download some files, set folders as available offline and share some items<br>3. Enable all the Settings<br>4. Install current version| Correct Upgrade<br>Correct Release Notes<br>Settings are correct<br>All accounts are correct and actions persist|  | |
+|**Changelog**||||||
+| [#1044](https://github.com/owncloud/ios-app/pull/1044) |  |  |  |  |
+| [#1053](https://github.com/owncloud/ios-app/pull/1053) |  |  |  |  |
+| [#1051](https://github.com/owncloud/ios-app/pull/1051) |  |  |  |  |
