@@ -31,8 +31,8 @@ Server: 10.8
 | Passcode | 1. Select passcode<br>2. Enter correct passcode twice<br>3. Open Settings -> Security | Passcode is hidden, only biometrical displayed | P m11 m7 |  |
 | Pattern | 1. Select pattern<br>2. Enter correct passcode twice<br>3. Open Settings -> Security | Pattern is hidden, only biometrical displayed | P m11 m7 | FIXED: Biometrical locked |
 |**Migration**|||||||
-| Enabled -> Disabled | 1. Set parameter to true in setup.xml<br>2. Set correct pattern/passcode in the app<br>3. Set parameter to false and reinstall | Locking method is still active, but now, is also visible in Settings -> Security. It can be manually disabled | P m11  |  |
+| Enabled -> Disabled | 1. Set parameter to true in setup.xml<br>2. Set correct pattern/passcode in the app<br>3. Set parameter to false and reinstall | Locking method is still active, but now, is also visible in Settings -> Security. It can be manually disabled | P m11  m7 |  |
 | Disabled -> Enabled | 1. Set parameter to false in setup.xml<br>2. Open app<br>3. Set parameter to true and reinstall | Locking method is asked after installing. Option hidden in Settings | P m11 m7  |  |
-| Enabled -> Enabled | 1. Set parameter to true in setup.xml<br>2. Open app<br>3. Set parameter to true and reinstall | Nothing asked after installing. Option hidden in Settings | P m11 m7 |  |
+| Enabled -> Enabled | 1. Set parameter to true in setup.xml<br>2. Open app and enter passcode/pattern<br>3. Keep parameter to true and reinstall | Nothing asked after installing because lock method is already enabled. Option hidden in Settings | P m11 m7 |  |
 |**passcode_enforced = false**|||||||
 | No locking | 1. Install app | Locking method dialog not displayed.<br>All methods available in Settings -> Security, and all disabled from scratch | P m11 m7|  |
