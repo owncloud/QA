@@ -44,6 +44,11 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded |
 | Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app |
 | Logout | Logout in a open and active OIDC session | Moved to login view| | |
+| **Login view** |   |  |
+| One account | Enter correct credentials of an account | Login correct. One account view displayed with all sections: Display name, access files, edit login, manage storage, log out, settings, add account |
+| More than one account | Enter correct credentials of two accounts | Login correct. List view displayed with all accounts. Swiping: Edit login, manage storage, delete |
+| Edit login | 1. Enter correct credentials of one account<br>2. In server, change password<br>3. Select Edit login<br>4. Enter new credentials | Login correct |
+| Manage storage | 1. Enter correct credentials of one account<br>2. Download some files by clicking on them<br>3. In login view, select Manage Storage<br>4. Delete all offline files | All downloaded files are removed (download icon is again visible)|
 |**Settings**||||||
 | Passcode 4 digit | 1. Enable passcode<br>2. Select 4 digit<br>3. Set a code<br>2. Close app and open again| 4-digit passcode asked |  |  |
 | Passcode 6 digit | 1. Enable passcode<br>2. Select 6 digit<br>3. Set a code<br>2. Close app and open again| 6-digit passcode asked |  |  |

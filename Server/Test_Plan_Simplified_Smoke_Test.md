@@ -1,4 +1,7 @@
-## Test plan Simplified smoke test.
+## Test plan Simplified smoke test
+
+- Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_Simplified_Smoke_Test.md
+
 
 | Test Case                                | Expected Result                          | Result      | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | ----------- | --------------- |
