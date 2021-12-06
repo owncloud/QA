@@ -48,6 +48,8 @@ cat <<EO_AZ_CONF | docker_exec -T owncloud sh -c 'cat > config/openidconnect_azu
     'search-attribute' => 'unique_name',
     'use-access-token-payload-for-user-info' => true,
     'redirect-url' => 'https://\$OWNCLOUD_DOMAIN/index.php/apps/openidconnect/redirect',
+    // bring us back to the login page....
+    'post_logout_redirect_uri' => 'https://bit-sis.owncloud.works/',
   )
 );
 EO_AZ_CONF
