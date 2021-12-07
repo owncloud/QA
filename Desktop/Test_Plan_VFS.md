@@ -5,7 +5,7 @@
 
 ## Prerequirements
 
-Prepare a server with latest version e.g. on Hetzner ([make_oc10_apps.sh](https://github.com/owncloud/QA/blob/master/tools/hetzner-deploy/make_oc10_apps.sh)) or locally `docker run -ti --rm -p 8080:8080 owncloud/server:10.8`
+Prepare a server with the latest version on Hetzner ([make_oc10_apps.sh](https://github.com/owncloud/QA/blob/master/tools/hetzner-deploy/make_oc10_apps.sh)) or locally e.g. `docker run -ti --rm -p 8080:8080 owncloud/server:10.8`
 
 -> server URL
 
@@ -14,8 +14,8 @@ Have a client build ready, link URL here:
 -> e.g. https://download.owncloud.com/desktop/ownCloud/testing/2.9.2.6206/
 
 Test environment:
-- Windows 10 -> add the version here (`winver` or client 'About''Versions' tab ) 
-- Install libreoffice and CPUSTRES (activate 4-5 threads to get a CPU load of appr. 60 %)
+- Windows 10 -> add the version here (`winver` or client 'About' 'Versions' tab ) 
+- Install LibreOffice and CPUSTRES (activate 4-5 threads to get a CPU load of appr. 60 %)
 
 ### General Hints  
 
@@ -36,12 +36,13 @@ Test environment:
   * [ ] create a new folder and move some files into it -> check all files moved, files disappear at previous location
   * [ ] ...
 
-* [ ] Tests when file is locked ...
+* [ ] Tests when a file or folder is locked
   * [ ] Open a file in LibreOffice, edit, save, don't exit
   * [ ] 'Free up space' in Explorer -> no red error message, client shows "i" (Status: spinning icon)
   * [ ] Exit libreoffice -> file is dehydrated correctly (Status: placeholder)
+  * [ ] ...
   
-* [ ] Tests with long path (make sure LongPathsEnabled in Windows registry is off)
+* [ ] Test with a long path (make sure LongPathsEnabled in Windows registry is off **)
   * [ ] Create a file with a long path (> 260)
   * [ ] 'Free up space' -> no red error message 
   
@@ -52,11 +53,12 @@ Test environment:
   * [ ] on client dot menu: 'Availibility' 'Free up space' -> all files in sync root get dehydrated
   * [ ] Switch back to VFS OFF -> all files are physically (overlay icons are shown)
 
-* [ ] Connect to a server account having 'big' data prepared VFS ON
+* [ ] Connect to a server account having "big" data prepared VFS ON
   * [ ] many files
   * [ ] many subfolders
   * [ ] large file
   * [ ] ...
 
+  TODO: Provide a zip-file containing test-data e.g. on https://download.owncloud.com/desktop/
 
-  TODO: Provide data.zip e.g. on https://download.owncloud.com/desktop/
+** https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd
