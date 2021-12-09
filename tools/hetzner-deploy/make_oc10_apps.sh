@@ -17,27 +17,28 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.8.0
-vers=10.9.0beta1
-tar=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2
+vers=10.9.0RC1
+
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.8.0"       -o "$vers" = "10.8"        && tar=https://download.owncloud.org/community/owncloud-complete-20210721.tar.bz2
-test "$vers" = "10.7.0"       -o "$vers" = "10.7"        && tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
-test "$vers" = "10.6.0"       -o "$vers" = "10.6"        && tar=https://download.owncloud.org/community/owncloud-complete-20201216.tar.bz2
-test "$vers" = "10.5.0"       -o "$vers" = "10.5"        && tar=https://download.owncloud.org/community/owncloud-complete-20200731.tar.bz2
-test "$vers" = "10.4.1"       -o "$vers" = "10.4"        && tar=https://download.owncloud.org/community/owncloud-10.4.1.tar.bz2
-test "$vers" = "10.3.2"       -o "$vers" = "10.3"        && tar=https://download.owncloud.org/community/owncloud-10.3.2.tar.bz2
-test "$vers" = "10.2.1"       -o "$vers" = "10.2"        && tar=https://download.owncloud.org/community/owncloud-10.2.1.tar.bz2
-test "$vers" = "10.1.0"       -o "$vers" = "10.1"        && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
-test "$vers" = "10.0.0"       -o "$vers" = "10.0"        && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
-test "$vers" = "9.1.8"        -o "$vers" = "9.1"         && tar=https://attic.owncloud.org/community/owncloud-9.1.8.tar.bz2
-test "$vers" = "9.0.9"        -o "$vers" = "9.0"         && tar=https://attic.owncloud.org/community/owncloud-9.0.9.tar.bz2
-test "$vers" = "8.2.11"       -o "$vers" = "8.2"         && tar=https://attic.owncloud.org/community/owncloud-8.2.11.tar.bz2
-test "$vers" = "8.1.12"       -o "$vers" = "8.1"         && tar=https://attic.owncloud.org/community/owncloud-8.1.12.tar.bz2
-test "$vers" = "8.0.16"       -o "$vers" = "8.0"         && tar=https://attic.owncloud.org/community/owncloud-8.0.16.tar.bz2
-test "$vers" = "7.0.15"       -o "$vers" = "7.0"         && tar=https://attic.owncloud.org/community/owncloud-7.0.15.tar.bz2
-test "$vers" = "daily"	      -o "$vers" = "master"	 && tar=https://download.owncloud.org/community/daily/owncloud-daily-master.tar.bz2
+test "$vers" = "10.9.0RC1"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211209.tar.bz2
+test "$vers" = "10.9.0beta1"                    && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2
+test "$vers" = "10.8.0"   -o "$vers" = "10.8"   && tar=https://download.owncloud.org/community/owncloud-complete-20210721.tar.bz2
+test "$vers" = "10.7.0"   -o "$vers" = "10.7"   && tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
+test "$vers" = "10.6.0"   -o "$vers" = "10.6"   && tar=https://download.owncloud.org/community/owncloud-complete-20201216.tar.bz2
+test "$vers" = "10.5.0"   -o "$vers" = "10.5"   && tar=https://download.owncloud.org/community/owncloud-complete-20200731.tar.bz2
+test "$vers" = "10.4.1"   -o "$vers" = "10.4"   && tar=https://download.owncloud.org/community/owncloud-10.4.1.tar.bz2
+test "$vers" = "10.3.2"   -o "$vers" = "10.3"   && tar=https://download.owncloud.org/community/owncloud-10.3.2.tar.bz2
+test "$vers" = "10.2.1"   -o "$vers" = "10.2"   && tar=https://download.owncloud.org/community/owncloud-10.2.1.tar.bz2
+test "$vers" = "10.1.0"   -o "$vers" = "10.1"   && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
+test "$vers" = "10.0.0"   -o "$vers" = "10.0"   && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
+test "$vers" = "9.1.8"    -o "$vers" = "9.1"    && tar=https://attic.owncloud.org/community/owncloud-9.1.8.tar.bz2
+test "$vers" = "9.0.9"    -o "$vers" = "9.0"    && tar=https://attic.owncloud.org/community/owncloud-9.0.9.tar.bz2
+test "$vers" = "8.2.11"   -o "$vers" = "8.2"    && tar=https://attic.owncloud.org/community/owncloud-8.2.11.tar.bz2
+test "$vers" = "8.1.12"   -o "$vers" = "8.1"    && tar=https://attic.owncloud.org/community/owncloud-8.1.12.tar.bz2
+test "$vers" = "8.0.16"   -o "$vers" = "8.0"    && tar=https://attic.owncloud.org/community/owncloud-8.0.16.tar.bz2
+test "$vers" = "7.0.15"   -o "$vers" = "7.0"    && tar=https://attic.owncloud.org/community/owncloud-7.0.15.tar.bz2
+test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.org/community/daily/owncloud-daily-master.tar.bz2
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
 case $vers in
