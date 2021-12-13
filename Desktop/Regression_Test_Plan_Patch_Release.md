@@ -51,12 +51,15 @@ __TO DO__
 * [ ] Update to new version
      * [ ] No error messages, no obvious problems 
      * [ ] Make sure the account(s) is/are still configured and the users are logged in
-     * [ ] VFS is enabled
+     * [ ] winVFS is still enabled
      * [ ] "Open folder" and make sure folders/files are there  
-     * [ ] .sync_journal.db is there and the only *.db file (enable 'hidden files' in 'View')
-* [ ] Try to downgrade __TODO__ specify tests/result more clearly
-    * [ ] winVFS 2.9.x -> 2.9.0: a popup is shown, see https://github.com/owncloud/client/pull/9119, on 'Continue' the VFS sync folder connection is removed, see https://github.com/owncloud/client/issues/9114#issuecomment-939818671)
-    * [ ] winVFS 2.9.x -> 2.8.2: see https://github.com/owncloud/client/issues/9114#issuecomment-939929726
+     * [ ] check db in sync root: .sync_journal.db is the only *.db file (enable 'hidden files' in 'View')
+
+* [ ] Downgrade to current version 2.X.x is prevented
+    * [ ] Install the next client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
+    * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
+    * [ ] Start client 2.X.x -> red error message "Downgrading the folder from 2.X.x+1 to 2.X.x is not supported"
+    * [ ] Add a new account and try to reuse existing sync root -> error popup: "Existing connection... Please use another sync folder"
     * [ ] Windows without VFS, MacOS, Linux: downgrade should be possible
  ----
 * [ ] Install ownCloud desktop client on latest **macOS** using .pkg installer
