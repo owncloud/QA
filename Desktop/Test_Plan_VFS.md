@@ -17,25 +17,33 @@ Test environment:
 - Windows 10 -> add the version here (`winver` or client 'About' 'Versions' tab ) 
 - Install LibreOffice and CPUSTRES (activate 4-5 threads to get a CPU load of appr. 60 %)
 
-### General Hints  
+### VFS Documentation
 
-- VFS documentation see https://doc.owncloud.com/desktop/2.9/vfs.html
-- Enable client logging (on 'Settings' 'Log Settings')
+- https://doc.owncloud.com/desktop/2.9/vfs.html
+- https://www.userfilesystem.com/programming/faq/#nav_howdoesthefreeupspacemenuworks
+- https://docs.microsoft.com/en-us/windows/win32/cfapi/build-a-cloud-file-sync-engine#cloud-files-api-architecture
+
+### General
+
+- Enable the client logging (on 'Settings' 'Log Settings')
 - Login to the server and watch the trash bin
 
 ## Testing
 
 * [ ] Add an account and connect to the server with VFS ON
-  * [ ] 'Open folder' (Explorer) and check that all files are virtual (Status: placeholder file)
-  * [ ] open an existing file -> file is physically available (Status: full file)
+  * [ ] 'Open folder' (Explorer) and check that all files are virtual, Status: placeholder file (cloud icon)
+  * [ ] open an existing file -> file is physically available, Status: full file (green unfilled circle with green check mark)
   * [ ] create a new file, edit and save
   * [ ] right click: 'Free up space' -> placeholder is created, 'Activity' 'Sync Protocol' shows "Replaced by virtual file" 
   * [ ] create several new files more, edit some
-  * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created
+  * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created (files are dehydrated)
 
-  * [ ] create a new folder and move some files into it -> check all files moved, files disappear at previous location
-  * [ ] ...
-
+ * [ ] Tests concerning free up space
+  * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder and remain dehydrated
+    Known issue https://github.com/owncloud/client/issues/9101: moving dehydrated files to a newly created folder which isn't dehydrated already cause a hydration of the moved files
+  * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
+  * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
+     
 * [ ] Tests when a file or folder is locked
   * [ ] Open a file in LibreOffice, edit, save, don't exit
   * [ ] 'Free up space' in Explorer -> no red error message, client shows "i" (Status: spinning icon)
