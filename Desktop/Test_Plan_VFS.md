@@ -39,10 +39,9 @@ Test environment:
   * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created (files are dehydrated)
 
  * [ ] Tests concerning free up space
-  * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder and remain dehydrated
-    Known issue https://github.com/owncloud/client/issues/9101: moving dehydrated files to a newly created folder which isn't dehydrated already cause a hydration of the moved files
-  * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
-  * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
+   * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
+   * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
+   * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder, remain dehydrated and disappear from previous location (known issue: https://github.com/owncloud/client/issues/9101)
      
 * [ ] Tests when a file or folder is locked
   * [ ] Open a file in LibreOffice, edit, save, don't exit
