@@ -54,7 +54,7 @@ __TO DO__
      * [ ] winVFS is still enabled
      * [ ] "Open folder" and make sure folders/files are there  
      * [ ] check db in sync root: .sync_journal.db is the only *.db file (enable 'hidden files' in 'View')
-
+-----
 * [ ] Downgrade to current version 2.X.x is prevented
     * [ ] Install the next client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
     * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
