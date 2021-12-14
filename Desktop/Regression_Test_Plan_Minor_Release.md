@@ -114,7 +114,7 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 4| User adds the various types of files | 1. Microsoft word documents, Microsoft Excel, Microsoft Powerpoint, .JPG, .PDF, .MP3|The Sync files tab shoe all type of files added in th Desktop Client folder from desktop| :construction:  | All files snyced and shown in Activities Tab under synchronization protocol |
 5| Long file name  | 1. Create a file with this name "dfkjsdfjksdkdfjsdfuidjfkdsjfksdjfks djfksdjfksdjfksdjfkdsjfks djfkdsjfkdsfjlsdkfjsdkjflksdjfk lsdjfksdjfkdsjfkldsjfkldsjfkdsjfksd jfksdjfklsdjfklsdjflksdjflksdjfklsdj fklsdjfksdjfksdjfksdjfksdjfksdfj skdfjksdjfksdjfksdjfksdjfksd.pdf"|Sync is successful| :construction: | |
 6| User copies/drag&drops multiple files at a time to the Sync folder | 1. Users see the completed icon overlay on all type of files in Desktop Client folder on Desktop. 2. The Sync files tab shows all type of files added in the Desktop Client folder from Desktop|Sync is successful| :construction:  | |
-7| Sync files at the same time| 1. Add a file of 1MB onthe local inside folder, and in the same time, add another file on the same remote folder (make sure that file is on the server before the client finishes)|Look at Via Web and the Desktop Client to make sure that the sync is correct| :construction: | File will not synced by the client |
+7| Sync files at the same time| 1. Add a file of 1MB onthe local inside folder, and in the same time, add another file on the same remote folder (make sure that file is on the server before the client finishes)|Look at Via Web and the Desktop Client to make sure that the sync is correct| :x: | File will not synced by the client |
 8| Same name files, different extension | 1. Create the same name file with two differents extensions|The files are sync corectly|  :construction: | |
 9| Files with spaces in the name | 1. Move a file under the root sync folder with spaces in the name 2. Let them sync|The files are sync correctly|  :construction: | |
 10| Create and delete one file with special characters in the name| 1. Go to Desktop Client 2. Create a single folder 3. Move with in this folder a file with a special characters in the name fo example "~`!@#$^&()-_=+{[}];'," 4. Wait for the file to sync to the Via Web 5. Delete the file in Desktop Client |Look at Via Web and make sure that the file got deleted| :construction: | |
@@ -126,7 +126,7 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 16| Upload 1000Mb files| 1. Upload a folder 1000 file (1Mb each) |Sync is successful| :construction:  | |
 17| Upload 500Mb+500Mb files| 1. Upload two folders with 500 files each |Sync is successful| :construction:  | |
 18| Upload 1024Mb file| 1. Upload a 1GB file |Sync is successful| :construction:  | |
-19| Verify the limit of the quota| 1. Upload the necessary large files to fill the quota |Warning: "The available space of your workspace is running out, please delete some files to free space"| :construction: | A different Message will be shown |
+19| Verify the limit of the quota| 1. Upload the necessary large files to fill the quota |Warning: "The available space of your workspace is running out, please delete some files to free space"| :x: | A different Message will be shown |
 
 ### 4. Move files and folders
 #### NOTE: To automate these test we need to use files explorer instead of the client UI. So, these tests cannot be added.
@@ -148,7 +148,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 2 :robot: | Edit a .doc file| 1. Create a .doc file in a sync folder 2. Edit some text 3. Wait for it to sync 4. Modify the .doc file and add more content 5. Wait for it to sync 6. Modify the .doc file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark: |tst_editFiles|
 3 :robot: | Edit a .xls file| 1. Create a .xls file in a sync folder 2. Edit some content 3. Wait for it to sync 4. Modify the .xls file and add more content 5. Wait for it to sync 6. Modify the .xls file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
 4 :robot: | Replace a .pdf file| 1. Create a .pdf file in a sync folder 2. Replace it with a different pdf (but same name) 3. Wait for it to sync 4. Modify the .pdf file and add more content 5. Wait for it to sync 6. Modify the .pdf file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
-5 | Edit a file while the folder is renaming | 1. You should had any kind of file already sync 2. Go to Desktop Client 3. Open the file and edit it 4. Go to the Via Web and rename the folder 5. Sync with the oc-worker 6. Do not refresh the browser at the server and download the file edited | The file at the server had the same content| :construction:   | The file is not synced when I perform the following actions simultaneously: 1. Update the file in desktop 2. Rename the parent folder on the web ->https://github.com/owncloud/client/issues/8921 |
+5 | Edit a file while the folder is renaming | 1. You should had any kind of file already sync 2. Go to Desktop Client 3. Open the file and edit it 4. Go to the Via Web and rename the folder 5. Sync with the oc-worker 6. Do not refresh the browser at the server and download the file edited | The file at the server had the same content| :x:   | The file is not synced when I perform the following actions simultaneously: 1. Update the file in desktop 2. Rename the parent folder on the web ->https://github.com/owncloud/client/issues/8921 |
 
 ### 6. Delete Files and Folders
 
@@ -204,21 +204,21 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 13 | Share a Folder with Set expiration date| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date | You can configurate the expiration date | :construction:  | -> #8937                                                                  |
 14 :robot: | Share a Folder with Allow editing| Create a new folder 2. Share with oC 3. Check Share link option 4. Check Allow editing option  | The Folder can allow editing|  :heavy_check_mark: | tst_sharing                                                               |
 15 | Share a File with Password protect| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option  | You can write the Password protect | :heavy_minus_sign: | yet to be implemented(squish-test) no password option exists -- not a bug | |
-16 | Share a File with Set expiration date| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date |You can configurate the expiration date | :construction: | -> #8937                                                                  |
+16 | Share a File with Set expiration date| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date |You can configurate the expiration date | :x: | -> https://github.com/owncloud/client/issues/8937       |
 17 :robot: | Modify the Set expiration date option on the server| 1. Create a new file on the Desktop 2. Share with oC 3. Create Public link at the client; 4. Check the Set expiration date 5. Introduce one day for expiration date 6. Go to the Server and change the date 7. Go to the Desktop 8. Wait to sync | You can see the new date on Set expiration date | :heavy_check_mark: | tst_sharing  |
 18 :robot: | Public link a file and download it | 1) right click a file - open the share menu; 2) Create and copy public link to clipboard; 3) paste link in a web browser; 4) download | The file can be downloaded | :heavy_check_mark: | tst_sharing        |
-19 :robot: | Public link a folder and download it | 1) right click a folder - open the share menu; 2) Create public link; 3) 3dots menu -> "copy public link to clipboard (direct download)"; 4) paste link in a web browser | A zip archive of the folder can be downloaded | tst_sharing        |
+19 :robot: | Public link a folder and download it | 1) right click a folder - open the share menu; 2) Create public link; 3) 3dots menu -> "copy public link to clipboard (direct download)"; 4) paste link in a web browser | A zip archive of the folder can be downloaded | :heavy_check_mark: | tst_sharing        |
 20 :robot: | Public link to a file and disable it after | use the sharing menu to delete the public link | The link reports File not found. | :heavy_check_mark: |  tst_sharing  |
 21 :robot: | Public link to a file and 'add to your owncloud' a user that belongs to the server | | The file is shared | :heavy_check_mark: |  tst_sharing   |
 22 | ~Public link to a file and 'add to your owncloud' a user that belongs to the server and has been already shared another file~ | | The file is shared | :heavy_minus_sign: | That only tests the server                                                
-23 | Public link to a file and 'add to your owncloud' with a user that belongs to another server | | The file is shared |                    |
-24 | Public link to a file and 'add to your owncloud' with an LDAP user | | The file is shared |                    |
-25 | ~Optionally Public link to a file and 'add to your owncloud' with an Active Directory user~ | | The file is shared |                    |
-26 | ~Public link to a file and 'add to your owncloud' with a Shibboleth user autoprovisioned~ | | The file is shared | :heavy_minus_sign: | Shiboleth is not supported                                                
-27 | Try to reshare a file originally received from an LDAP user | | The file can be reshared, if "Allow Share" was set, otherwise it cannot be reshared | :construction:   | -> #8941                                                                  
+23 | Public link to a file and 'add to your owncloud' with a user that belongs to another server | | The file is shared | :construction: |   |
+24 | Public link to a file and 'add to your owncloud' with an LDAP user | | The file is shared |  :construction: |   |
+25 | ~Optionally Public link to a file and 'add to your owncloud' with an Active Directory user~ | | The file is shared |    :construction: |       |
+26 | ~Public link to a file and 'add to your owncloud' with a Shibboleth user autoprovisioned~ | | The file is shared | :heavy_minus_sign: | Shiboleth is not supported | 
+27 | Try to reshare a file originally received from an LDAP user | | The file can be reshared, if "Allow Share" was set, otherwise it cannot be reshared | :construction:  | -> #8941 | 
 28 | Public link to a file and 'add to your owncloud' with a user that belongs to another oC server below 8.2.X version | `docker run --rm -ti -p 8181:80 owncloud:8.1` | The file is added to the old server | :construction: |    |
-29 :robot: | Public link to a file and set a password with special characters | | The file is shared with a pwd |  :heavy_check_mark: | tst_sharing        |
-30 :robot: | Public link to a file and set a password. Modify Password Policies and retry | 1) enable password policy app allow passwords with 4 chars; 2) share with a 4 char password; 3) change password policy to min 8 chars. 4) use client sharing dialog to remove the password, and re-enter the same; 5) enter a password with 8 chars  | An error appears stating min passwiord length 8 for the short password; a longer password works  | :heavy_check_mark: | tst_sharing     |
+29 :robot: | Public link to a file and set a password with special characters | | The file is shared with a pwd |  :heavy_check_mark: | tst_sharing  |
+30 :robot: | Public link to a file and set a password. Modify Password Policies and retry | 1) enable password policy app allow passwords with 4 chars; 2) share with a 4 char password; 3) change password policy to min 8 chars. 4) use client sharing dialog to remove the password, and re-enter the same; 5) enter a password with 8 chars  | An error appears stating min passwiord length 8 for the short password; a longer password works  | :heavy_check_mark: | tst_sharing  |
 
 
 #### 9.2 Share with Users and Groups
@@ -254,89 +254,89 @@ TestID | Test Case | Expected Result | Result | Related Comment
 26 | Share a folder with user B with Can Share permissions enabled. Login as User B and reshare it | The folder can be reshared in the server with other user |:construction:| | Should be after 22 in test plan.
 27 | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it  | The folder can be edited in the server with other user | :construction:| |
 28 | Share a folder with user B with Change permission enabled. Login as User B and change it  | The folder can be changed in the server with other user | :construction:| |
-29 | Share a folder with user B with Create permissions enabled. Login as User B and create a file in it | The folder can be edited creating a file in the server with other user |  |
-30 | Share a folder with user B with Create permissions enabled. Login as User B and create a folder in it | The folder can be edited creating a folder in the server with other user |  |
-31 | Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be edited in the server with other user |  |
-32 | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. Try to edit it again | The folder cannot be edited the second time |  |
-33 | Share a file with user B without Can Share permission enabled. Login as User B and try to reshare it | The file cannot be reshared |    |
-34 | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited |   |
-35 | Share a file with user B without Change permission enabled. Login as User B and try to change it  | The file cannot be changed |   |
-36 | Share a folder with user B without Can Share permission enabled. Login as User B and try to reshare it | The folder cannot be reshared |  |
-37 | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited |    |
-38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it |   |
-39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |  |
-40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it |   |
-41 |~With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy~| The file is shared with pwd |:construction:|
-42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| 
-43 | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date |   |
-44 | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date |    |
-45 | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |    |
-46 | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown |   |
-47 | Try to search yourself in the users searchbox | The user should not be shown |  |
-48 | Search with minimum characters required. For example: 'pat' | All users that contains this pattern should be shown |   |
-49 | Try to search a remote user in the users searchbox | The user should be shown |   | 
-50 | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear |   |
-51 | Sharing API  | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear |    |
-52 | Enforce password protection  | Password should be always required |     |
-53 | Enforce password protection enabled. Try to disable the pwd  | Password should be always required |  | 
-54 | Set default expiration date  | The expiration date should be set by default |      |
-55 | Allow resharing disabled and Can Share enabled  | The user cannot reshare files |    |
-56 | Restrict users to only share with users in their groups | It should appear only the users from the group | | 
-57 | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing |    |
+29 | Share a folder with user B with Create permissions enabled. Login as User B and create a file in it | The folder can be edited creating a file in the server with other user | :construction:| |
+30 | Share a folder with user B with Create permissions enabled. Login as User B and create a folder in it | The folder can be edited creating a folder in the server with other user | :construction:| |
+31 | Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be edited in the server with other user | :construction:| |
+32 | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. Try to edit it again | The folder cannot be edited the second time | :construction:| |
+33 | Share a file with user B without Can Share permission enabled. Login as User B and try to reshare it | The file cannot be reshared |  :construction:|  |
+34 | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :construction:|  |
+35 | Share a file with user B without Change permission enabled. Login as User B and try to change it  | The file cannot be changed | :construction:|  |
+36 | Share a folder with user B without Can Share permission enabled. Login as User B and try to reshare it | The folder cannot be reshared | :construction:| |
+37 | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited |  :construction:|  |
+38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction:|  |
+39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |:construction:|  |
+40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction:|  |
+41 |~With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy~| The file is shared with pwd |:construction:| |
+42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| | 
+43 | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :construction:|  |
+44 | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :construction:|   |
+45 | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |   :construction:| |
+46 | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown | :construction:|  |
+47 | Try to search yourself in the users searchbox | The user should not be shown | :construction:| |
+48 | Search with minimum characters required. For example: 'pat' | All users that contains this pattern should be shown |  :construction:| |
+49 | Try to search a remote user in the users searchbox | The user should be shown |  :construction:| | 
+50 | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :construction:|  |
+51 | Sharing API  | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear |  :construction:|  |
+52 | Enforce password protection  | Password should be always required | :construction:| |
+53 | Enforce password protection enabled. Try to disable the pwd  | Password should be always required | :construction:| | 
+54 | Set default expiration date  | The expiration date should be set by default |    :construction:|  |
+55 | Allow resharing disabled and Can Share enabled  | The user cannot reshare files |   :construction:| |
+56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| | 
+57 | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing |  :construction:|  |
 
 ### 10. Selective_Sync
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | Check that in the setup options after fill in the server and the user you have to choose the server and local folder to sync| 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. The server and local folder to sync is shown|1. On server (you have to choose what do yo want to sync) 2. local folder (the local folder where the data are sync) |  |  |
-2a | Linux+Mac: Check that in the setup options the checkbox is enable to sync all the account by default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Choose what to sync" | At window is opened with the directory tree |  | Done for Ubuntu 20.04.2 LTS  |
-2b | Win10: Check that in the setup options the checkbox is enable to "use virtual files" default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Synchronize everything from server"; 4. "Choose what to sync" | At window is opened with the directory tree |  |  |
-3 | Check that all files and folders are synced when you select to sync all | 1. Start to setup oC Desktop 2. Fill in server, user and pass 3. Click on "Sync everything from server" and wait until everything is sync| Everything is synced |  |  |
-4 | Verify that you can select to sync only one folder | 1. Start to setup the oC Desktop 2. The new window select what folder sync is shown 3. Select to sync only one folder 4. Click on OK | Only one folder is sync |  |  |
-5 | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |  |  |
-6 | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured|  |  |
+1 | Check that in the setup options after fill in the server and the user you have to choose the server and local folder to sync| 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. The server and local folder to sync is shown|1. On server (you have to choose what do yo want to sync) 2. local folder (the local folder where the data are sync) | :construction: |  |
+2a | Linux+Mac: Check that in the setup options the checkbox is enable to sync all the account by default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Choose what to sync" | At window is opened with the directory tree |:construction:  | Done for Ubuntu 20.04.2 LTS  |
+2b | Win10: Check that in the setup options the checkbox is enable to "use virtual files" default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Synchronize everything from server"; 4. "Choose what to sync" | At window is opened with the directory tree | :construction: |  |
+3 | Check that all files and folders are synced when you select to sync all | 1. Start to setup oC Desktop 2. Fill in server, user and pass 3. Click on "Sync everything from server" and wait until everything is sync| Everything is synced | :construction: |  |
+4 | Verify that you can select to sync only one folder | 1. Start to setup the oC Desktop 2. The new window select what folder sync is shown 3. Select to sync only one folder 4. Click on OK | Only one folder is sync |:construction:  |  |
+5 | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |:construction:  |  |
+6 | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured|:construction:  |  |
 
 #### 10.1 Choose what to sync from the setup window
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Check that the folder unselected are not sync|  |  |
+1 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Check that the folder unselected are not sync|:construction:  |  |
 2 | The folder without subfolder doesn't show the arrow| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder | When you click on a folder without subfolder the arrows disappear sometimes|:x: |  The arrows are still there for folder without subfolder https://github.com/owncloud/client/issues/8935|
-3 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | The parent folder is sync but not the subfolder|  |  |
-4 | Upload from the server some files in a folder which is sync| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server | The files are download in the desktop client|  |  |
-5 | Upload from the Desktop some files | 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server in a folder wich is not sync | The files are sync with the server|  |  |
-6 | Upload from the server some files in a folder which is  not sync | 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder 4. Upload files from server which is not sync | The files are not downloads in the Desktop client |  |  |
-7 | Delete a folder sync, it is removed from the Desktop | 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kids of folder with and witout subfolders 4. Delete a folder sync, it is removed from the desktop | The folder is removed int he server |  |  |
-8 | Delete a sync folder from the server | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Delete a sync folder from the server | The folder is removed int he Desktop |  |  |
-9 | Create a folder in the root directory from the server | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Create a folder in the root directory from the server | The folder is sync |  |  |
-10 | Rename a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Rename a folder that is sync | It is renamed in the window "Choose what to sync" |  |  |
-11 | Delete a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | It is not shown in the window "Choose what to sync" |  |  |
-12 | Verify that when yo unselect all the folder, the root files continue sync| 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Root files are sync |  |  |
-13 | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  |  |  |
+3 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | The parent folder is sync but not the subfolder| :construction: |  |
+4 | Upload from the server some files in a folder which is sync| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server | The files are download in the desktop client|:construction:  |  |
+5 | Upload from the Desktop some files | 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server in a folder wich is not sync | The files are sync with the server| :construction: |  |
+6 | Upload from the server some files in a folder which is  not sync | 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder 4. Upload files from server which is not sync | The files are not downloads in the Desktop client | :construction: |  |
+7 | Delete a folder sync, it is removed from the Desktop | 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kids of folder with and witout subfolders 4. Delete a folder sync, it is removed from the desktop | The folder is removed int he server |:construction:  |  |
+8 | Delete a sync folder from the server | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Delete a sync folder from the server | The folder is removed int he Desktop | :construction: |  |
+9 | Create a folder in the root directory from the server | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Create a folder in the root directory from the server | The folder is sync | :construction: |  |
+10 | Rename a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Rename a folder that is sync | It is renamed in the window "Choose what to sync" |:construction:  |  |
+11 | Delete a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | It is not shown in the window "Choose what to sync" | :construction: |  |
+12 | Verify that when yo unselect all the folder, the root files continue sync| 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Root files are sync |:construction:  |  |
+13 | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  |:construction:  |  |
 
 
 #### 10.2 "Skip folders configuration"
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 |Skip folder configuration| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" | 1. No one local folder is sync 2. The setting window is opened and the account is registered|    | There is no skip button. The only way to reproduce this case is to mark "Manually create folder sync connection" on and click the "connect" button |
-2 |Sync only one folder the settings view | 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Settings window/add folder| The folder start to sync and the folder is available from the tray icon|    |  |
+1 |Skip folder configuration| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" | 1. No one local folder is sync 2. The setting window is opened and the account is registered| :construction:  | There is no skip button. The only way to reproduce this case is to mark "Manually create folder sync connection" on and click the "connect" button |
+2 |Sync only one folder the settings view | 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Settings window/add folder| The folder start to sync and the folder is available from the tray icon| :construction: |  |
 
 #### 10.3 "Add Folder..."
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 |Skip folder configuration from the setup window and select the local and remote folder front he setting window| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (choose an existing one) 6. Select the remote folder, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one|    |  |
-2 |Select a remote folder with special characters| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (create a new folder with special characters) 6. Select the remote folder with special characters, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one|    |  |
+1 |Skip folder configuration from the setup window and select the local and remote folder front he setting window| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (choose an existing one) 6. Select the remote folder, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one| :construction:   |  |
+2 |Select a remote folder with special characters| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (create a new folder with special characters) 6. Select the remote folder with special characters, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one|  :construction:  |  |
 
 ### 11. Overlay_icons
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | If the system is offlline, there are no overlay icons present | 1. Launch the Desktop 2. The overlay icons are not shown 3. Quit the Desktop | The overlay icons are not shown| :x: | The Overlay icons are there regardless of whether the client / server is on or off: TODO: test on win/mac/lin wit/without vfs each  |
-2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop 2. The overlay icons are still shown 3. Click on Pause | The overlay icons are still shown|    |  |
-3 | Green check (All files within the folder (all the way down the tree) are sync with the server, and there are no problems to report) | 1. The account is sync | The green check is shown in all the folders/files|    |  |
-4 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively sync) | 1. The account is sync | The files/folder that are waiting to sync have the blue icon|    |  |
-5 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters or a bad character in a name o a file firewall problem) | 1. The account is sync |The files that are not sync because they have a problem... Have a yellow warning triangle |    |  |
-6 | Red error Icon (There is a fatal problem in the sync process that can't be resolved) | 1. The account is sync | The files/folders that are not sync because have a problem... Have a red error icon|    |  |
+1 | If the system is offline, there are no overlay icons present | 1. Launch the Desktop 2. The overlay icons are not shown 3. Quit the Desktop | The overlay icons are not shown| :x: | The Overlay icons are there regardless of whether the client / server is on or off: TODO: test on win/mac/lin wit/without vfs each  |
+2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop 2. The overlay icons are still shown 3. Click on Pause | The overlay icons are still shown| :construction:   |  |
+3 | Green check (All files within the folder (all the way down the tree) are sync with the server, and there are no problems to report) | 1. The account is sync | The green check is shown in all the folders/files| :construction:  |  |
+4 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively sync) | 1. The account is sync | The files/folder that are waiting to sync have the blue icon|  :construction:  |  |
+5 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters or a bad character in a name o a file firewall problem) | 1. The account is sync |The files that are not sync because they have a problem... Have a yellow warning triangle | :construction:   |  |
+6 | Red error Icon (There is a fatal problem in the sync process that can't be resolved) | 1. The account is sync | The files/folders that are not sync because have a problem... Have a red error icon| :construction:   |  |
 
