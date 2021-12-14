@@ -60,7 +60,6 @@ __TO DO__
     * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
     * [ ] Start client 2.X.x -> red error message "Downgrading the folder from 2.X.x+1 to 2.X.x is not supported"
     * [ ] Add a new account and try to reuse existing sync root -> error popup: "Existing connection... Please use another sync folder"
-    * [ ] Windows without VFS, MacOS, Linux: downgrade should be possible
  ----
 * [ ] Install ownCloud desktop client on latest **macOS** using .pkg installer
      * [ ] Settings tab, About has correct versions:
