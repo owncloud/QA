@@ -33,9 +33,9 @@ Test environment:
 * [ ] Add an account and connect to the server with VFS ON
   * [ ] 'Open folder' (Explorer) and check that all files are virtual, Status: placeholder file (cloud icon)
   * [ ] open an existing file -> file is physically available, Status: full file (green unfilled circle with green check mark)
-  * [ ] create a new file, edit and save
+  * [ ] create a new file locally, edit and save -> if locked (ie. LibreOffice) the file icon stays in "cycle mode"
   * [ ] right click: 'Free up space' -> placeholder is created, 'Activity' 'Sync Protocol' shows "Replaced by virtual file" 
-  * [ ] create several new files more, edit some
+  * [ ] create several new files more, edit some -> files are synced if they are not locked
   * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created (files are dehydrated)
 
  * [ ] Tests concerning free up space
@@ -43,12 +43,29 @@ Test environment:
    * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
    * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder, remain dehydrated and disappear from previous location (known issue: https://github.com/owncloud/client/issues/9101)
      
+Use file lock detection tool such as https://lockhunter.com/?utm_source=saashub&utm_medium=marketplace&utm_campaign=saashub
+LO means LibreOffice, which locks the files that it opens on Windows
+
 * [ ] Tests when a file or folder is locked
-  * [ ] Open a file in LibreOffice, edit, save, don't exit
-  * [ ] 'Free up space' in Explorer -> no red error message, client shows "i" (Status: spinning icon)
-  * [ ] Exit libreoffice -> file is dehydrated correctly (Status: placeholder)
-  * [ ] ...
-  
+  * [ ] Open a file in LibreOffice, edit, save, don't exit, which results in having the document file locked
+  * [ ] 'Free up space' in Explorer on the locked file -> no red error message, client shows "i" (Status: spinning icon), Activity tells that file is in use
+  * [ ] Exit libreoffice -> file is dehydrated correctly (Status: placeholder) after a few seconds
+  * [ ] 'Free up space' in Explorer on the parent directory -> locked file stays locked, other non locked files are dehydrated
+  * [ ] Create file via LibreOffice, keep it open in LO, file is not synced. As soon as LO is closed, file is synced.
+  * [ ] Move locally locked file on the server -> Creates a new file, syncs it down
+  * [ ] Delete locked file on the server -> Red error message appears, file stays locally. After LO is closed, file is removed if file was NOT changed locally after the delete.
+  * [ ] Delete locked file on the server -> Red error message appears, file stays locally. Now, change the file locally in LO and save. After LO is closed, file is synced to cloud as new file. No version history any more.
+  * [ ] Lock file that is in sync locally with LO. Move the file on server side. Save File and close LO -> The file gets synced to the server with the former name and appears as new file.
+  * [ ] Create a directory and open a file within that with LO. Rename the parent dir on the server and leave the file unchanged. After LO is closed, the directory is renamed locally.
+  * [ ] Create a directory and open a file within that with LO. Rename the parent dir on the server change the file in LO. Save and close after the parent dir rename failed. After close of LO, dir gets renamed and file uploaded.
+
+
+* [ ] File Operations
+  * [ ] Move file and directory locally -> Both dehydrated and hydrated files are moved accordingly on the server
+  * [ ] Move file and directory on the server -> Both dehydrated and hydrated files are moved accordingly locally
+  * [ ] Create file in directory and open with LO. Do not change. Remove the directory on the server. After closing LO, directory and file are removed. (See #9293)
+  * [ ] Create file in directory and open with LO. Remove the directory on the server. Edit the file and save it. After closing LO, directory and file are created again. (See #9293)
+
 * [ ] Test with a long path (make sure LongPathsEnabled in Windows registry is off **)
   * [ ] Create a file with a long path (> 260)
   * [ ] 'Free up space' -> no red error message 
