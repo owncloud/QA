@@ -213,8 +213,32 @@ ldapsearch -x -H ldap://$ldapserver -b dc=owncloud,dc=com -D "$admin_dn" -w "$ad
 
 docker run --rm -p 6443:443 --name phpldapadmin-server --env PHPLDAPADMIN_LDAP_HOSTS=$ldapserver --detach osixia/phpldapadmin
 
-echo "Connect to php ldapadmin:"
-echo "  https://$(hostname -I  | sed -e 's/ .*//'):6443"
-echo "  Login DN: $admin_dn"
-echo "  Password: $admin_pass"
+cat << EOF1
+Connect to php ldapadmin:
+  https://$(hostname -I  | sed -e 's/ .*//'):6443
+  Login DN: $admin_dn
+  Password: $admin_pass
+EOF1
 
+cat << EOF2
+Connect owncloud via user_ldap:
+- Admin -> Settings -> Admin -> User Authentication
+   Host: $ldapserver	Port: 389
+   User DN: $admin_dn
+   Password: $admin_pass
+   One Base DN per line: dc=owncloud,dc=com
+   Test Base DN: 11 entries available
+   [x] Manually enter LDAP filters
+   -> Continue
+ - Groups
+   Click "Edit LDAP Query", Mode switch -> YES
+   -> The dropdown become active:
+   Only these object classes: ownCloud, posixGroup
+   Only from these groups: hackers, physics-lovers, sailors, users
+   Verify settings and count groups: 4 groups found
+   -> Back -> Back
+ - User
+   Click "Edit LDAP Query", Mode switch -> YES
+   -> Some dropdown become active.
+     -> A yellow message may pop up: Disabled as the ldap/AD server does not support memberOf
+EOF2
