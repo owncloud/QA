@@ -171,6 +171,10 @@ rm -rf $tmpdir
 dbpass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
 
 INIT_SCRIPT << EOF
+#
+# Deployed via https://github.com/owncloud/QA/blob/master/tools/hetzner-deploy/make_oc10_apps.sh
+# (C) 2020, jw@owncloud.com
+#
 TASKd=\$HOME/tasks
 ls -la \$TASKd
 

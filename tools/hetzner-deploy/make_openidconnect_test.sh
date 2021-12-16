@@ -55,6 +55,10 @@ OWNCLOUD_DOMAIN=oc$d_tag-oidc-$d_vers.jw-qa.owncloud.works
 # OWNCLOUD_DOMAIN=owncloud.docker-playground.local
 
 INIT_SCRIPT << EOF
+  #
+  # Deployed via https://github.com/owncloud/QA/blob/master/tools/hetzner-deploy/make_openidconnect_test.sh
+  # (C) 2020, jw@owncloud.com
+  #
   git clone https://github.com/owncloud-docker/compose-playground.git
   cd compose-playground/compose
   # git checkout pmaier-fixes || true
