@@ -28,6 +28,32 @@ olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.4 NAME 'sAMAccountName' DESC 'Origina
 olcObjectClasses: ( 1.3.6.1.4.1.39430.1.2.1 NAME 'ownCloud' DESC 'ownCloud LDAP Schema' AUXILIARY MAY ( ownCloudQuota $ ownCloudUUID $ ownCloudSelector $ sAMAccountName ) )
 EOF1
 
+## FROM https://stackoverflow.com/questions/6372365/support-reverse-group-membership-maintenance-for-openldap-2-3
+## Fails with DEBUG  | 2021-12-15 01:12:47 | ldap_add: No such object (32)
+## 	matched DN: cn=config
+## adding new entry "olcOverlay={1}memberof,olcDatabase={2}hdb,cn=config"
+## ldap_add: Insufficient access (50)
+##
+# cat <<EOF4 > $ldif/11_memberof.ldif
+# dn: olcOverlay={1}memberof,olcDatabase={2}hdb,cn=config
+# objectClass: olcConfig
+# objectClass: olcMemberOf
+# objectClass: olcOverlayConfig
+# objectClass: top
+# olcOverlay: {1}memberof
+# EOF4
+
+## FROM https://stackoverflow.com/questions/6372365/support-reverse-group-membership-maintenance-for-openldap-2-3
+## inspect with: ldapsearch -b cn=config -D 'cn=root,cn=config' -W
+cat <<EOF4 > $ldif/11_memberof.ldif
+dn: cn=module{0},cn=config
+objectClass: olcModuleList
+cn: module{0}
+olcModulePath: /usr/lib/openldap
+olcModuleLoad: {0}memberof
+olcModuleLoad: {1}refint
+EOF4
+
 cat <<EOF2 > $ldif/20_users.ldif
 dn: ou=users,dc=owncloud,dc=com
 objectClass: organizationalUnit
@@ -213,14 +239,14 @@ ldapsearch -x -H ldap://$ldapserver -b dc=owncloud,dc=com -D "$admin_dn" -w "$ad
 
 docker run --rm -p 6443:443 --name phpldapadmin-server --env PHPLDAPADMIN_LDAP_HOSTS=$ldapserver --detach osixia/phpldapadmin
 
-cat << EOF1
+cat << EOF5
 Connect to php ldapadmin:
   https://$(hostname -I  | sed -e 's/ .*//'):6443
   Login DN: $admin_dn
   Password: $admin_pass
-EOF1
+EOF5
 
-cat << EOF2
+cat << EOF6
 Connect owncloud via user_ldap:
 - Admin -> Settings -> Admin -> User Authentication
    Host: $ldapserver	Port: 389
@@ -241,4 +267,4 @@ Connect owncloud via user_ldap:
    Click "Edit LDAP Query", Mode switch -> YES
    -> Some dropdown become active.
      -> A yellow message may pop up: Disabled as the ldap/AD server does not support memberOf
-EOF2
+EOF6

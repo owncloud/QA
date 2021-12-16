@@ -16,7 +16,8 @@
 
 echo "Estimated setup time: 8 minutes ..."
 
-vers=2.1.0-rc2	# triggers https://github.com/owncloud/openidconnect/issues/181
+#vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
+vers=2.1.0
 oauth2_vers=0.5.1
 
 openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
@@ -40,7 +41,7 @@ source lib/make_machine.sh -u oidc-$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker
 comp_yml=kopano/konnect/docker-compose.yml
 reg_yml=kopano/konnect/konnectd-identifier-registration.yaml
 
-test -z "$OWNCLOUD_RELEASE_DOCKER_TAG" && OWNCLOUD_RELEASE_DOCKER_TAG=10.8.0	# found on https://hub.docker.com/r/owncloud/server/tags/
+test -z "$OWNCLOUD_RELEASE_DOCKER_TAG" && OWNCLOUD_RELEASE_DOCKER_TAG=10.9.0-rc1	# found on https://hub.docker.com/r/owncloud/server/tags/
 d_tag=$(echo $OWNCLOUD_RELEASE_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr -d .-)
 
 ## choose with or without version numbers and timestamps, in case we want multiple systems.
