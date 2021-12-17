@@ -93,7 +93,7 @@ for arg in "$@"; do
         echo "Using local file $arg ..."
       else
 	# Everything that is not a local file, and not a URL should be an app.
-	appname=$arg
+	appname="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
 	echo "$arg" | grep -q / || arg="owncloud/$arg"		# prepend owncloud/ orga, if no orga given.
 	oc_app="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
 	tagname="v$(echo "$arg" | sed -e 's/.*[:=]//' -e 's/^v//')"	# construct a tag. should work with or without leading v.
@@ -103,6 +103,7 @@ for arg in "$@"; do
         releases_api_url="https://api.github.com/repos/$oc_app/releases"
         # oc_app and arg are equal, when no version number was specified. then we query github for the latest tag.
         test "$oc_app" = "$arg" && tagname=$($curl -s "$releases_api_url" | jq '.[0].tag_name' -r 2>/dev/null)
+	echo $curl -s "$releases_api_url" \| jq '.[] | select(.tag_name == "'$tagname'"'
 	rel_json="$($curl -s "$releases_api_url" | jq '.[] | select(.tag_name == "'"$tagname"'")')"
         if [ -z "$rel_json" -o "$rel_json" = "null" ]; then
           echo "ERROR: no release tag $tagname seen in: https://github.com/$oc_app/releases"
