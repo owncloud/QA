@@ -38,10 +38,10 @@ Test environment:
   * [ ] create several new files more, edit some -> files are synced if they are not locked
   * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created (files are dehydrated)
 
- * [ ] Tests concerning free up space
-   * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
-   * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
-   * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder, remain dehydrated and disappear from previous location (known issue: https://github.com/owncloud/client/issues/9101)
+* [ ] Tests concerning free up space
+  * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
+  * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
+  * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder, remain dehydrated and disappear from previous location (known issue: https://github.com/owncloud/client/issues/9101)
      
 Use file lock detection tool such as https://lockhunter.com/?utm_source=saashub&utm_medium=marketplace&utm_campaign=saashub
 LO means LibreOffice, which locks the files that it opens on Windows
@@ -59,7 +59,6 @@ LO means LibreOffice, which locks the files that it opens on Windows
   * [ ] Create a directory and open a file within that with LO. Rename the parent dir on the server and leave the file unchanged. After LO is closed, the directory is renamed locally.
   * [ ] Create a directory and open a file within that with LO. Rename the parent dir on the server change the file in LO. Save and close after the parent dir rename failed. After close of LO, dir gets renamed and file uploaded.
 
-
 * [ ] File Operations
   * [ ] Move file and directory locally -> Both dehydrated and hydrated files are moved accordingly on the server
   * [ ] Move file and directory on the server -> Both dehydrated and hydrated files are moved accordingly locally
@@ -70,6 +69,11 @@ LO means LibreOffice, which locks the files that it opens on Windows
   * [ ] Create a file with a long path (> 260)
   * [ ] 'Free up space' -> no red error message 
   
+* [ ] Test with ignored or 'problematic' files, see https://doc.owncloud.com/desktop/2.9/filenames.html
+  * [ ] Test with files that are on the ignore list, ie. files with the extension `.part`.
+  * [ ] Create files that contain ':' or have a trailing space, they will be ignored in the sync
+  * [ ] Create files with problematic name like `CON`, `PRN` or `AUX`, expect reasonable sync indicator icons
+
 * [ ] Switch between VFS ON/OFF
   * [ ] Add a second account with VFS OFF
   * [ ] Switch to VFS ON using client dot menu -> file status changes (Status: full file)
