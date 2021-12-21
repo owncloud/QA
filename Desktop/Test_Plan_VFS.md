@@ -33,7 +33,7 @@ Test environment:
 * [ ] Add an account and connect to the server with VFS ON
   * [ ] 'Open folder' (Explorer) and check that all files are virtual, Status: placeholder file (cloud icon)
   * [ ] open an existing file -> file is physically available, Status: full file (green unfilled circle with green check mark)
-  * [ ] create a new file locally, edit and save -> if locked (ie. LibreOffice) the file icon stays in "cycle mode"
+  * [ ] create a new file locally, edit, save and exit -> if locked (ie. LibreOffice not exited) the file icon stays in "cycle mode", see "Tests when a file or folder is locked
   * [ ] right click: 'Free up space' -> placeholder is created, 'Activity' 'Sync Protocol' shows "Replaced by virtual file" 
   * [ ] create several new files more, edit some -> files are synced if they are not locked
   * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created (files are dehydrated)
@@ -43,8 +43,8 @@ Test environment:
   * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
   * [ ] Create a new folder and move (also use 'Cut' and'Paste') several dehydrated files into it -> all files are moved into the folder, remain dehydrated and disappear from previous location (known issue: https://github.com/owncloud/client/issues/9101)
      
-Use file lock detection tool such as https://lockhunter.com/?utm_source=saashub&utm_medium=marketplace&utm_campaign=saashub
-LO means LibreOffice, which locks the files that it opens on Windows
+- Use file lock detection tool such as https://lockhunter.com/?utm_source=saashub&utm_medium=marketplace&utm_campaign=saashub
+- LO means LibreOffice, which locks the files that it opens on Windows
 
 * [ ] Tests when a file or folder is locked
   * [ ] Open a file in LibreOffice, edit, save, don't exit, which results in having the document file locked
@@ -61,13 +61,19 @@ LO means LibreOffice, which locks the files that it opens on Windows
 
 * [ ] File Operations
   * [ ] Move file and directory locally -> Both dehydrated and hydrated files are moved accordingly on the server
+  * [ ] Move an empty dehydrated folder inside the sync root and to a location outside the sync root -> accordingly moved on server
   * [ ] Move file and directory on the server -> Both dehydrated and hydrated files are moved accordingly locally
   * [ ] Create file in directory and open with LO. Do not change. Remove the directory on the server. After closing LO, directory and file are removed. (See #9293)
   * [ ] Create file in directory and open with LO. Remove the directory on the server. Edit the file and save it. After closing LO, directory and file are created again. (See #9293)
+  * [ ] On server: create FolderA and 2 files NewFile and Newfile inside FolderB
+    * [ ] watch client -> a red warning message "...file name clash..." is shown , 'Not synced' tab also shows file name clash
+    * [ ] 'Open folder' and check status of FolderB and NewFile -> spinning icon ("cycle mode") for folder and file
+    * [ ] Move FolderB to another place (outside the syncroot) -> Known issue: FolderB is moved locally but not deleted on server
 
-* [ ] Test with a long path (make sure LongPathsEnabled in Windows registry is off **)
+
+* [ ] Test with a long path (make sure LongPathsEnabled in Windows registry is off ** )
   * [ ] Create a file with a long path (> 260)
-  * [ ] 'Free up space' -> no red error message 
+  * [ ] 'Free up space' -> no red error message
   
 * [ ] Test with ignored or 'problematic' files, see https://doc.owncloud.com/desktop/2.9/filenames.html
   * [ ] Test with files that are on the ignore list, ie. files with the extension `.part`.
@@ -77,9 +83,13 @@ LO means LibreOffice, which locks the files that it opens on Windows
 * [ ] Switch between VFS ON/OFF
   * [ ] Add a second account with VFS OFF
   * [ ] Switch to VFS ON using client dot menu -> file status changes (Status: full file)
-  * [ ] in Explorer: right-click on a folder and 'Free up space' -> all files in folder get dehydrated (Status: placeholder)
+  * [ ] in Explorer: right-click on a folder and 'Free up space' -> all files in folder get dehydrated (placeholder file, Status: cloud icon)
   * [ ] on client dot menu: 'Availibility' 'Free up space' -> all files in sync root get dehydrated
   * [ ] Switch back to VFS OFF -> all files are physically (overlay icons are shown)
+
+* [ ] Client sync operations
+  * [ ] 'Pause sync' (on client dot menu) while client is syncing  -> current 2.10 behaviour: 'Not Synced' tab shows entry "Operation canceled" ... "Fatal error" => Known issue: should NOT be a fatal error but a less severe status  
+  * [ ] 'Resume sync' -> sync is continued and runs successfully
 
 * [ ] Connect to a server account having "big" data prepared VFS ON
   * [ ] many files
@@ -87,6 +97,11 @@ LO means LibreOffice, which locks the files that it opens on Windows
   * [ ] large file
   * [ ] ...
 
-  TODO: Provide a zip-file containing test-data e.g. on https://download.owncloud.com/desktop/
+  TODO: Provide a zip-file containing test-data e.g. on https://download.owncloud.com/desktop/ or in the issue (test plan ticket)
+
+* [ ] Switch machine status (standby, suspend, hybernate ...)
+  * [ ] Close lid of a laptop while client is syncing -> reopen and see client continues the sync 
+  * [ ] On Windows VM command line: call shutdown /h -> client continues after relogin 
+  * [ ] ...
 
 ** https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd
