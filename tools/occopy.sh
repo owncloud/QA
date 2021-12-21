@@ -3,9 +3,9 @@
 # occopy - an owncloud-friendly command line client, based on cadaver
 # 
 # Why are all modern command line tools so non-scriptable?
-# dave cannot take stdin at all.
-# cadaver wants credentials in a stinking .netrc and takes commands from a file. well.
-# (Nobody has ever written a nice command line tool based on python webdavclient3, sigh?)
+# - dave cannot take stdin or parameters at all.
+# - wdc -- from https://pypi.org/project/webdavclient/ is broken. Maybe windows only?
+# - cadaver wants credentials in a stinking .netrc and takes commands from a file. well.
 #
 # (C) 2021 jw@owncloud.com Distribute under GPLv2
 # 
