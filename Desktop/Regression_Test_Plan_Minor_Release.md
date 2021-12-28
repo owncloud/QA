@@ -97,12 +97,12 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 7 :robot: | Verify that you can create a subfolder with long name | 1. Go to local sync folder, 2. Create a folder called "Folder1" 3. Create a subfolder called "LUsgzq!0k02sek+szBqrzN5=R#UJpWql&rwhnYVb~Gh!l!”  (optionally up to 255 characters), 4. This subfolder had a file called ilppng.PNG inside it 5. Wait for sync |The files are synced correctly| :heavy_check_mark: | tst_syncing |
 8 :robot: | Verify pre existing folders in local (Desktop client) are copied over to the server | 1. Turn off the Desktop client 2. Go to local sync folder 3. Create several folders inside the Desktop Client folder at several different levels, 4. Turn ON the Desktop Client  | Folders appear on the server | :heavy_check_mark: | tst_syncing |
 9 :robot: | Filenames that are rejected by the server are reported | 1. Go to local sync folder, 2. Create a file called `"a\\a"` (or another name not accepted by the server), 3. Wait for sync | The sync status reports an error, the file s not synced| :heavy_check_mark: | tst_syncing |
-10 | Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :heavy_check_mark: | tst_syncing |
+10 :robot: | Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :heavy_check_mark: | tst_syncing |
 11| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many internal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside the Destop Client folder |1. Make sure you get a popup saying that all the extracted files have synced. 2. Look at Via Web and make sure that the folder has been synced over| :construction: | |
 12| Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succeed if the name is less than 65 characters |The folder is synced| :construction: | |
 13| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'COM' and 'PRN' but not 'test% or 'foo%' |:construction: | |
 14| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'COM' or 'PRN' | :construction:  | Folder named COM will be synced |
-15| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
+15 :robot: | Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
 
 ### 3. Files
 
@@ -224,8 +224,8 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 #### 9.2 Share with Users and Groups
 
 TestID | Test Case | Expected Result | Result | Related Comment
------------- | ------------- | -------------- | ----- | ------
-1 | ~~Enable encryption app and encryption default module~~ | Encryption is enabled correctly | :construction:||
+------ | --------- | --------------- | ------ | ---------------
+1 | ~Enable encryption app and encryption default module~ | Encryption is enabled correctly | :construction:||
 2 :robot: | Share a file with a user that has been already shared another file | Both files appear in server | :heavy_check_mark:| tst_sharing |
 3 :robot: | Share a folder with a user | The folder appears in server | :heavy_check_mark:| tst_sharing |
 4 :robot: | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :heavy_check_mark:| tst_sharing |
@@ -288,21 +288,21 @@ TestID | Test Case | Expected Result | Result | Related Comment
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | Check that in the setup options after fill in the server and the user you have to choose the server and local folder to sync| 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. The server and local folder to sync is shown|1. On server (you have to choose what do yo want to sync) 2. local folder (the local folder where the data are sync) | :construction: |  |
-2a | Linux+Mac: Check that in the setup options the checkbox is enable to sync all the account by default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Choose what to sync" | At window is opened with the directory tree |:construction:  |  |
+1 :robot: | Check that in the setup options after fill in the server and the user you have to choose the server and local folder to sync| 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. The server and local folder to sync is shown|1. On server (you have to choose what do yo want to sync) 2. local folder (the local folder where the data are sync) | :heavy_check_mark: | tst_syncing |
+2a :robot: | Linux+Mac: Check that in the setup options the checkbox is enable to sync all the account by default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Choose what to sync" | At window is opened with the directory tree |:heavy_check_mark:  | tst_syncing |
 2b | Win10: Check that in the setup options the checkbox is enable to "use virtual files" default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Synchronize everything from server"; 4. "Choose what to sync" | At window is opened with the directory tree | :construction: |  |
-3 | Check that all files and folders are synced when you select to sync all | 1. Start to setup oC Desktop 2. Fill in server, user and pass 3. Click on "Sync everything from server" and wait until everything is sync| Everything is synced | :construction: |  |
-4 | Verify that you can select to sync only one folder | 1. Start to setup the oC Desktop 2. The new window select what folder sync is shown 3. Select to sync only one folder 4. Click on OK | Only one folder is sync |:construction:  |  |
-5 | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |:construction:  |  |
-6 | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured|:construction:  |  |
+3 :robot: | Check that all files and folders are synced when you select to sync all | 1. Start to setup oC Desktop 2. Fill in server, user and pass 3. Click on "Sync everything from server" and wait until everything is sync| Everything is synced | :heavy_check_mark: | tst_syncing |
+4 :robot: | Verify that you can select to sync only one folder | 1. Start to setup the oC Desktop 2. The new window select what folder sync is shown 3. Select to sync only one folder 4. Click on OK | Only one folder is sync |:heavy_check_mark:  | tst_syncing |
+5 :robot: | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |:heavy_check_mark:  | tst_syncing |
+6 :robot: | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured| :heavy_check_mark: | tst_syncing |
 
 #### 10.1 Choose what to sync from the setup window
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Check that the folder unselected are not sync|:construction:  |  |
+1 :robot: | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Check that the folder unselected are not sync| :heavy_check_mark: | tst_syncing |
 2 | The folder without subfolder doesn't show the arrow| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder | When you click on a folder without subfolder the arrows disappear sometimes|:construction: | |
-3 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | The parent folder is sync but not the subfolder| :construction: |  |
+3 :robot: | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | The parent folder is sync but not the subfolder| :heavy_check_mark: | tst_syncing |
 4 | Upload from the server some files in a folder which is sync| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server | The files are download in the desktop client|:construction:  |  |
 5 | Upload from the Desktop some files | 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server in a folder wich is not sync | The files are sync with the server| :construction: |  |
 6 | Upload from the server some files in a folder which is  not sync | 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder 4. Upload files from server which is not sync | The files are not downloads in the Desktop client | :construction: |  |
@@ -312,7 +312,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 10 | Rename a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Rename a folder that is sync | It is renamed in the window "Choose what to sync" |:construction:  |  |
 11 | Delete a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | It is not shown in the window "Choose what to sync" | :construction: |  |
 12 | Verify that when yo unselect all the folder, the root files continue sync| 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Root files are sync |:construction:  |  |
-13 | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  |:construction:  |  |
+13 :robot: | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  | :heavy_check_mark: | tst_syncing |
 
 
 #### 10.2 "Skip folders configuration"
