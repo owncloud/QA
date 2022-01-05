@@ -84,7 +84,7 @@ __TO DO__
  ```sudo apt install owncloud-client-nautilus```
      * [ ] Settings tab, About has correct versions:
          * ownCloud client version
-         * Qt 5.15.2
+         * Qt 5.12.10
          * OpenSSL at least 1.1.1 (depends on the operating system)
  * [ ] Visually check all tabs -> :robot: tst_checkAlltabs
      * [ ] Tabs look correct
@@ -103,7 +103,7 @@ __TO DO__
  ```sudo yum install owncloud-client-nautilus``` or openSUSE with KDE and Dolphin ``sudo zypper install owncloud-client-dolphin``
      * [ ] Settings tab, About has correct versions:
          * ownCloud client version
-         * Qt 5.15.2
+         * Qt 5.12.10
          * OpenSSL at least 1.1.1 (depends on the operating system)
  * [ ] Visually check all tabs
      * [ ] Tabs look correct
