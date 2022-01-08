@@ -92,7 +92,7 @@ else
   echo "  ssh -v -L 11443:127.0.0.1:1443 root@$IPADDR"
   echo ""
   echo "To review icap settings, use:"
-  echo "  occ config:list --output=plain | grep files-antivirus.icap"
+  echo "  occ config:list | jq .apps.files_antivirus"
   echo "To switch icap from from clamav-icap to kaspersky run these commands:"
   echo "  occ config:app:set files_antivirus av_host             --value=127.0.0.1"
   echo "  occ config:app:set files_antivirus av_port 	         --value=11344"
