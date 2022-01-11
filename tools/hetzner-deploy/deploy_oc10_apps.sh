@@ -21,6 +21,7 @@ vers=10.9.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.9.1RC2"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20220111.tar.bz2
 test "$vers" = "10.9.1RC1"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211228.tar.bz2
 test "$vers" = "10.9.0RC2"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211215.tar.bz2
 test "$vers" = "10.9.0RC1"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211209.tar.bz2
@@ -190,7 +191,7 @@ export LC_ALL=C LANGUAGE=C
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
 apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
 apt install -y php-json php-mbstring php-mysql php-sqlite3 php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
-apt install -y ssh bzip2 rwith sync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
+apt install -y ssh bzip2 zip rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
 # We almost always assign a DNS name.
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
 
@@ -306,6 +307,9 @@ occ config:system:set mail_smtpport     --value 1025
 
 ## always set here to either true or false, so that it appears in config.php for easier editing.
 occ config:system:set file_storage.save_version_author --type boolean --value true
+
+## allow entry of password in the user add dialog.
+occ config:app:set core umgmt_set_password --value true		# not a boolean here, but a string value :-(
 
 
 ## external SFTP storage

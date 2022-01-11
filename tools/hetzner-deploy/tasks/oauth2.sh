@@ -12,13 +12,13 @@ popd
 
 occ app:enable oauth2
 
-## TODO: add (without overwriting) to the whitelist.
+## add (without overwriting) to the whitelist.
 # 'integrity.ignore.missing.app.signature' => [ 0 => 'oauth', ],
+listlen=$(occ c:s:get integrity.ignore.missing.app.signature --output plain | wc -l)
+occ c:s:set integrity.ignore.missing.app.signature $listlen --value oauth2
 #
 cat << EOM >>  ~/POSTINIT.msg
 oauth2:  AccessToken.php: REFRESH_TIMEOUT modified from 3600 to 180 seconds.
-oauth2:  You may want to disable the integrity checker so that the above does not trigger warnings:
-oauth2:     occ c:s:set integrity.check.disabled --type bool --value true
 oauth2:  Please enable https with proper dns. Oauth2 requires an encrypted connection.
 oauth2:  mitmproxy reference: https://github.com/owncloud/enterprise/issues/4270#issuecomment-729922143
 oauth2:  Try: grep 'generating token' /var/www/owncloud/data/owncloud.log | grep mirall | jq '.time+" - "+.user'
