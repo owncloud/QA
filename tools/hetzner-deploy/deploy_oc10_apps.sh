@@ -184,11 +184,13 @@ ls -la \$TASKd
 # pipe apt output into here, to do what apt -q should have done, but does not do.
 noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected)"; }
 
+
+export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
 apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
 apt install -y php-json php-mbstring php-mysql php-sqlite3 php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
-apt install -y ssh bzip2 rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
+apt install -y ssh bzip2 rwith sync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
 # We almost always assign a DNS name.
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
 
@@ -302,6 +304,10 @@ occ config:system:set mail_smtpmode     --value smtp
 occ config:system:set mail_smtphost     --value \$hog_ip
 occ config:system:set mail_smtpport     --value 1025
 
+## always set here to either true or false, so that it appears in config.php for easier editing.
+occ config:system:set file_storage.save_version_author --type boolean --value true
+
+
 ## external SFTP storage
 apt install -y pure-ftpd | noclutter
 ftppass=ftp${RANDOM}data
@@ -315,6 +321,7 @@ test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$
 curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5
 cd
+ln -s /var/www/owncloud/{data,config} .
 
 #################################################################
 
