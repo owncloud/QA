@@ -97,12 +97,12 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 7 :robot: | Verify that you can create a subfolder with long name | 1. Go to local sync folder, 2. Create a folder called "Folder1" 3. Create a subfolder called "LUsgzq!0k02sek+szBqrzN5=R#UJpWql&rwhnYVb~Gh!l!”  (optionally up to 255 characters), 4. This subfolder had a file called ilppng.PNG inside it 5. Wait for sync |The files are synced correctly| :heavy_check_mark: | tst_syncing |
 8 :robot: | Verify pre existing folders in local (Desktop client) are copied over to the server | 1. Turn off the Desktop client 2. Go to local sync folder 3. Create several folders inside the Desktop Client folder at several different levels, 4. Turn ON the Desktop Client  | Folders appear on the server | :heavy_check_mark: | tst_syncing |
 9 :robot: | Filenames that are rejected by the server are reported | 1. Go to local sync folder, 2. Create a file called `"a\\a"` (or another name not accepted by the server), 3. Wait for sync | The sync status reports an error, the file s not synced| :heavy_check_mark: | tst_syncing |
-10 | Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :construction: | |
+10 :robot: | Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :heavy_check_mark: | tst_syncing |
 11| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many internal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside the Destop Client folder |1. Make sure you get a popup saying that all the extracted files have synced. 2. Look at Via Web and make sure that the folder has been synced over| :construction: | |
 12| Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succeed if the name is less than 65 characters |The folder is synced| :construction: | |
 13| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'COM' and 'PRN' but not 'test% or 'foo%' |:construction: | |
 14| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'COM' or 'PRN' | :construction:  | Folder named COM will be synced |
-15| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :construction: | All folder will be synced |
+15 :robot: | Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
 
 ### 3. Files
 
@@ -199,17 +199,17 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 8 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another folder from Desktop; 2. The needed permission is Edit-Write on the "other" folder. | The server of both users is updated, if the other folder is not shared with permissions, you can't the other foder | :construction: |     |
 9 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another folder from Desktop 2. Create a file inside the sahred folder| The server of both users is updated | :construction: |        |
 10 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another folder from Desktop 2. Create a file inside the shared folder 3. Update the file from user1| The Desktop update the file | :construction:   |     |
-11 | Share a file with many users | 1. Having one file shared with 80 users | The Desktop works fine, list of users can be scrolled | :construction: | tested with 25                                                            |
-12 :robot: | Share a Folder with Password protect| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option | You can write the password| :heavy_minus_sign: | no password option exists -- not a bug tst_sharing |
-13 | Share a Folder with Set expiration date| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date | You can configurate the expiration date | :construction:  | |                                                               |
+11 :robot: | Share a file with many users | 1. Having one file shared with 80 users | The Desktop works fine, list of users can be scrolled | :heavy_check_mark: :construction: | (automated with 3 users) prefer manual testing for larger users                                                            |
+12 :robot: | Share a Folder with Password protect| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option | You can write the password| :heavy_check_mark: | tst_sharing |
+13 :robot: | Share a Folder with Set expiration date| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date | You can configurate the expiration date | :heavy_check_mark: | tst_sharing |
 14 :robot: | Share a Folder with Allow editing| Create a new folder 2. Share with oC 3. Check Share link option 4. Check Allow editing option  | The Folder can allow editing|  :heavy_check_mark: | tst_sharing   |
-15 | Share a File with Password protect| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option  | You can write the Password protect | :heavy_minus_sign: | yet to be implemented(squish-test) no password option exists -- not a bug | |
-16 | Share a File with Set expiration date| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date |You can configurate the expiration date | :construction: |  |
+15 :robot: | Share a File with Password protect| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option  | You can write the Password protect | :heavy_check_mark: | tst_sharing |
+16 :robot: | Share a File with Set expiration date| 1. Create a new file 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date |You can configurate the expiration date | :heavy_check_mark: | tst_sharing |
 17 :robot: | Modify the Set expiration date option on the server| 1. Create a new file on the Desktop 2. Share with oC 3. Create Public link at the client; 4. Check the Set expiration date 5. Introduce one day for expiration date 6. Go to the Server and change the date 7. Go to the Desktop 8. Wait to sync | You can see the new date on Set expiration date | :heavy_check_mark: | tst_sharing  |
 18 :robot: | Public link a file and download it | 1) right click a file - open the share menu; 2) Create and copy public link to clipboard; 3) paste link in a web browser; 4) download | The file can be downloaded | :heavy_check_mark: | tst_sharing        |
 19 :robot: | Public link a folder and download it | 1) right click a folder - open the share menu; 2) Create public link; 3) 3dots menu -> "copy public link to clipboard (direct download)"; 4) paste link in a web browser | A zip archive of the folder can be downloaded | :heavy_check_mark: | tst_sharing        |
 20 :robot: | Public link to a file and disable it after | use the sharing menu to delete the public link | The link reports File not found. | :heavy_check_mark: |  tst_sharing  |
-21 :robot: | Public link to a file and 'add to your owncloud' a user that belongs to the server | | The file is shared | :heavy_check_mark: |  tst_sharing   |
+21 | Public link to a file and 'add to your owncloud' a user that belongs to the server | | The file is shared | :construction: |   |
 22 | ~Public link to a file and 'add to your owncloud' a user that belongs to the server and has been already shared another file~ | | The file is shared | :heavy_minus_sign: | That only tests the server                                                
 23 | Public link to a file and 'add to your owncloud' with a user that belongs to another server | | The file is shared | :construction: |   |
 24 | Public link to a file and 'add to your owncloud' with an LDAP user | | The file is shared |  :construction: |   |
@@ -224,20 +224,20 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 #### 9.2 Share with Users and Groups
 
 TestID | Test Case | Expected Result | Result | Related Comment
------------- | ------------- | -------------- | ----- | ------
-1 | ~~Enable encryption app and encryption default module~~ | Encryption is enabled correctly | :construction:||
-2 | Share a file with a user that has been already shared another file | Both files appear in server | :construction:| |
-3 | Share a folder with a user | The folder appears in server | :construction:| |
-4 | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :construction:||
-5 | Share a file with a group| The file appears in server |:construction:|  | 
+------ | --------- | --------------- | ------ | ---------------
+1 | ~Enable encryption app and encryption default module~ | Encryption is enabled correctly | :construction:||
+2 :robot: | Share a file with a user that has been already shared another file | Both files appear in server | :heavy_check_mark:| tst_sharing |
+3 :robot: | Share a folder with a user | The folder appears in server | :heavy_check_mark:| tst_sharing |
+4 :robot: | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :heavy_check_mark:| tst_sharing |
+5 :robot: | Share a file with a group| The file appears in server |:heavy_check_mark:| tst_sharing | 
 6 | Share a folder with an LDAP user | The folder appears in server |  :construction:|  |
 7 | ~Share a file with an Active Directory user~ | The file appears in server | :heavy_minus_sign: |
 8 | Share a folder with a Shibboleth user autoprovisioned| The folder appears in server | :heavy_minus_sign:  | SKIP. We don't support Shiboleth
 8a | Share a file with a Shibboleth SSO user| The file appears in server | :heavy_minus_sign:   | SKIP: We don't support Shiboleth
 9 | Share a folder with remote user on a 10.2.1 server| The folder appears |:construction:|  |
 10 | Receive a federated share from a 10.2.1 server | When auto-accept is disabled: Notification with Dismiss/Accept/decline appears in the "Server Activity" tab | :construction:|    |
-11 | Share a file with one user whose name contains special characters | The file appears in server |:construction:|  |
-12 | Share a folder with one users a file whose name contains special characters | The folder appears in server |:construction:|  |
+11 :robot: | Share a file with one user whose name contains special characters | The file appears in server |:heavy_check_mark:| tst_sharing |
+12 :robot: | Share a folder with one users a file whose name contains special characters | The folder appears in server |:heavy_check_mark:| tst_sharing |
 13 | Share a file bigger than 1 GB with one user | The file appears in server | :construction:| |
 14 | Try to federate share a file with one user | The file appears in server, expect delays |:construction:|  |
 15 | Share a file from SFTP with a user | The file appears in server |:construction:| |
@@ -247,62 +247,62 @@ TestID | Test Case | Expected Result | Result | Related Comment
 19 | Share a file from a Federated Sharing with a user | The file appears in server, expect delays |:construction:| |
 20 | ~Share a folder from redirect server with a user~ | The folder appears in server |:construction:| |
 21 | ~Using a redirect server, Share a file with a user~ | The file appears in server |:construction:| |
-22 | Share a file with user B with Can Share permissions enabled. Login as User B and reshare it | The file can be reshared in the server with other user| :construction:| |
-23 | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it  | The file can be edited in the server with other user | :construction:| |
-24 | Share a file with user B with Change permission enabled. Login as User B and change it  | The file can be changed in the server with other user | :construction:| |
+22 :robot: | Share a file with user B with Can Share permissions enabled. Login as User B and reshare it | The file can be reshared in the server with other user| :heavy_check_mark:| tst_sharing |
+23 :robot: | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it  | The file can be edited in the server with other user | :heavy_check_mark:| tst_sharing |
+24 :robot: | Share a file with user B with Change permission enabled. Login as User B and change it  | The file can be changed in the server with other user | :heavy_check_mark:| tst_sharing |
 25 | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. try to edit it again | The file can be edited in the server with other user |:construction:| |
-26 | Share a folder with user B with Can Share permissions enabled. Login as User B and reshare it | The folder can be reshared in the server with other user |:construction:| | Should be after 22 in test plan.
-27 | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it  | The folder can be edited in the server with other user | :construction:| |
-28 | Share a folder with user B with Change permission enabled. Login as User B and change it  | The folder can be changed in the server with other user | :construction:| |
-29 | Share a folder with user B with Create permissions enabled. Login as User B and create a file in it | The folder can be edited creating a file in the server with other user | :construction:| |
-30 | Share a folder with user B with Create permissions enabled. Login as User B and create a folder in it | The folder can be edited creating a folder in the server with other user | :construction:| |
+26 :robot: | Share a folder with user B with Can Share permissions enabled. Login as User B and reshare it | The folder can be reshared in the server with other user |:heavy_check_mark:| tst_sharing |
+27 :robot: | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it  | The folder can be edited in the server with other user | :heavy_check_mark:| tst_sharing |
+28 :robot: | Share a folder with user B with Change permission enabled. Login as User B and change it  | The folder can be changed in the server with other user | :heavy_check_mark:| tst_sharing |
+29 :robot: | Share a folder with user B with Create permissions enabled. Login as User B and create a file in it | The folder can be edited creating a file in the server with other user | :heavy_check_mark:| tst_sharing |
+30 :robot: | Share a folder with user B with Create permissions enabled. Login as User B and create a folder in it | The folder can be edited creating a folder in the server with other user | :heavy_check_mark:| tst_sharing |
 31 | Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be edited in the server with other user | :construction:| |
 32 | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. Try to edit it again | The folder cannot be edited the second time | :construction:| |
-33 | Share a file with user B without Can Share permission enabled. Login as User B and try to reshare it | The file cannot be reshared |  :construction:|  |
-34 | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :construction:|  |
+33 :robot: | Share a file with user B without Can Share permission enabled. Login as User B and try to reshare it | The file cannot be reshared |  :heavy_check_mark:| tst_sharing |
+34 :robot: | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :heavy_check_mark:| tst_sharing |
 35 | Share a file with user B without Change permission enabled. Login as User B and try to change it  | The file cannot be changed | :construction:|  |
-36 | Share a folder with user B without Can Share permission enabled. Login as User B and try to reshare it | The folder cannot be reshared | :construction:| |
-37 | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited |  :construction:|  |
+36 :robot: | Share a folder with user B without Can Share permission enabled. Login as User B and try to reshare it | The folder cannot be reshared | :heavy_check_mark:| tst_sharing |
+37 :robot: | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited |  :heavy_check_mark:| tst_sharing |
 38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction:|  |
 39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |:construction:|  |
 40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction:|  |
 41 |~With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy~| The file is shared with pwd |:construction:| |
 42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| | 
-43 | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :construction:|  |
-44 | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :construction:|   |
-45 | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |   :construction:| |
-46 | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown | :construction:|  |
-47 | Try to search yourself in the users searchbox | The user should not be shown | :construction:| |
-48 | Search with minimum characters required. For example: 'pat' | All users that contains this pattern should be shown |  :construction:| |
+43 :robot: | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :heavy_check_mark:| tst_sharing |
+44 :robot: | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :heavy_check_mark:| tst_sharing |
+45 :robot: | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |   :heavy_check_mark:| tst_sharing |
+46 :robot: | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown | :heavy_check_mark:| tst_sharing |
+47 :robot: | Try to search yourself in the users searchbox | The user should not be shown | :heavy_check_mark:| tst_sharing |
+48 :robot: | Search with minimum characters required. For example: 'pat' | All users that contains this pattern should be shown | :heavy_check_mark:| tst_sharing |
 49 | Try to search a remote user in the users searchbox | The user should be shown |  :construction:| | 
-50 | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :construction:|  |
+50 :robot: | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :heavy_check_mark:| tst_sharing |
 51 | Sharing API  | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear |  :construction:|  |
-52 | Enforce password protection  | Password should be always required | :construction:| |
-53 | Enforce password protection enabled. Try to disable the pwd  | Password should be always required | :construction:| | 
-54 | Set default expiration date  | The expiration date should be set by default |    :construction:|  |
-55 | Allow resharing disabled and Can Share enabled  | The user cannot reshare files |   :construction:| |
+52 :robot: | Enforce password protection  | Password should be always required | :heavy_check_mark:| tst_sharing |
+53 :robot: | Enforce password protection enabled. Try to disable the pwd  | Password should be always required | :heavy_check_mark:| tst_sharing | 
+54 :robot: | Set default expiration date  | The expiration date should be set by default | :heavy_check_mark:| tst_sharing |
+55 :robot: | Allow resharing disabled and Can Share enabled  | The user cannot reshare files | :heavy_check_mark:| tst_sharing |
 56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| | 
-57 | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing |  :construction:|  |
+57 :robot: | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing | :heavy_check_mark:| tst_sharing |
 
 ### 10. Selective_Sync
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | Check that in the setup options after fill in the server and the user you have to choose the server and local folder to sync| 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. The server and local folder to sync is shown|1. On server (you have to choose what do yo want to sync) 2. local folder (the local folder where the data are sync) | :construction: |  |
-2a | Linux+Mac: Check that in the setup options the checkbox is enable to sync all the account by default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Choose what to sync" | At window is opened with the directory tree |:construction:  |  |
+1 :robot: | Check that in the setup options after fill in the server and the user you have to choose the server and local folder to sync| 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. The server and local folder to sync is shown|1. On server (you have to choose what do yo want to sync) 2. local folder (the local folder where the data are sync) | :heavy_check_mark: | tst_syncing |
+2a :robot: | Linux+Mac: Check that in the setup options the checkbox is enable to sync all the account by default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Choose what to sync" | At window is opened with the directory tree |:heavy_check_mark:  | tst_syncing |
 2b | Win10: Check that in the setup options the checkbox is enable to "use virtual files" default | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Synchronize everything from server"; 4. "Choose what to sync" | At window is opened with the directory tree | :construction: |  |
-3 | Check that all files and folders are synced when you select to sync all | 1. Start to setup oC Desktop 2. Fill in server, user and pass 3. Click on "Sync everything from server" and wait until everything is sync| Everything is synced | :construction: |  |
-4 | Verify that you can select to sync only one folder | 1. Start to setup the oC Desktop 2. The new window select what folder sync is shown 3. Select to sync only one folder 4. Click on OK | Only one folder is sync |:construction:  |  |
-5 | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |:construction:  |  |
-6 | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured|:construction:  |  |
+3 :robot: | Check that all files and folders are synced when you select to sync all | 1. Start to setup oC Desktop 2. Fill in server, user and pass 3. Click on "Sync everything from server" and wait until everything is sync| Everything is synced | :heavy_check_mark: | tst_syncing |
+4 :robot: | Verify that you can select to sync only one folder | 1. Start to setup the oC Desktop 2. The new window select what folder sync is shown 3. Select to sync only one folder 4. Click on OK | Only one folder is sync |:heavy_check_mark:  | tst_syncing |
+5 :robot: | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |:heavy_check_mark:  | tst_syncing |
+6 :robot: | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured| :heavy_check_mark: | tst_syncing |
 
 #### 10.1 Choose what to sync from the setup window
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
-1 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Check that the folder unselected are not sync|:construction:  |  |
+1 :robot: | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Check that the folder unselected are not sync| :heavy_check_mark: | tst_syncing |
 2 | The folder without subfolder doesn't show the arrow| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder | When you click on a folder without subfolder the arrows disappear sometimes|:construction: | |
-3 | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | The parent folder is sync but not the subfolder| :construction: |  |
+3 :robot: | Verify that the folders that you unselect are not sync in Desktop| 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | The parent folder is sync but not the subfolder| :heavy_check_mark: | tst_syncing |
 4 | Upload from the server some files in a folder which is sync| 1. Start to setup the oC Desktop app 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server | The files are download in the desktop client|:construction:  |  |
 5 | Upload from the Desktop some files | 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Upload files from server in a folder wich is not sync | The files are sync with the server| :construction: |  |
 6 | Upload from the server some files in a folder which is  not sync | 1. Start to setupo the oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolder 4. Upload files from server which is not sync | The files are not downloads in the Desktop client | :construction: |  |
@@ -312,7 +312,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 10 | Rename a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders 4. Rename a folder that is sync | It is renamed in the window "Choose what to sync" |:construction:  |  |
 11 | Delete a folder that is sync | 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | It is not shown in the window "Choose what to sync" | :construction: |  |
 12 | Verify that when yo unselect all the folder, the root files continue sync| 1. Start to setup th oC Desktop 2. The new window to select what folder sync is shown 3. Unselect different kinds of folder with and without subfolders | Root files are sync |:construction:  |  |
-13 | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  |:construction:  |  |
+13 :robot: | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  | :heavy_check_mark: | tst_syncing |
 
 
 #### 10.2 "Skip folders configuration"
