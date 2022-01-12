@@ -75,6 +75,6 @@ All actions to be done on the release branch from here:
 - [ ] Create PR to merge changes back to the `master` branch with description "Closes #XYZ" with the release ticket number
 - [ ] Rename QA milestone to `$version` and close the milestone
 - [ ] Update https://confluence.owncloud.com/display/PROD/Upcoming+Releases
-- [ ] Ensure [release template](https://github.com/owncloud/administration-internal/edit/master/tools/release/templates/server_app_release_template.md) is up to date
+- [ ] Ensure [release template](https://github.com/owncloud/QA/edit/master/tools/release/templates/server_app_release_template.md) is up to date
 - [ ] Ensure the testplan template ([community](https://github.com/owncloud/QA/tree/master/Server) or [enterprise](https://github.com/owncloud/qa-enterprise/tree/master/Core)) is up to date
 - [ ] Close the testplan issue
