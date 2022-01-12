@@ -17,7 +17,7 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.9.0
+vers=10.9.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
@@ -26,7 +26,8 @@ test "$vers" = "10.9.1RC1"                      && tar=https://download.owncloud
 test "$vers" = "10.9.0RC2"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211215.tar.bz2
 test "$vers" = "10.9.0RC1"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211209.tar.bz2
 test "$vers" = "10.9.0beta1"                    && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2
-test "$vers" = "10.9.0"   -o "$vers" = "10.9"   && tar=https://download.owncloud.org/community/owncloud-complete-20211220.tar.bz2
+test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://download.owncloud.org/community/owncloud-complete-20220112.tar.bz2
+test "$vers" = "10.9.0"                         && tar=https://download.owncloud.org/community/owncloud-complete-20211220.tar.bz2
 test "$vers" = "10.8.0"   -o "$vers" = "10.8"   && tar=https://download.owncloud.org/community/owncloud-complete-20210721.tar.bz2
 test "$vers" = "10.7.0"   -o "$vers" = "10.7"   && tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
 test "$vers" = "10.6.0"   -o "$vers" = "10.6"   && tar=https://download.owncloud.org/community/owncloud-complete-20201216.tar.bz2
@@ -64,6 +65,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "  $0 customgroups"
   echo "  $0 owncloud/metrics=v0.6.1RC2"
   echo "  $0 https://storage.marketplace.owncloud.com/apps/metrics-1.0.0.tar.gz"
+  echo "  $0 https://storage.marketplace.owncloud.com/apps/files_clipboard-1.0.3.tar.gz"
   echo "  $0 --"
   echo ""
   echo "Local file names are copied into the machine."
