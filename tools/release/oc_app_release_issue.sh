@@ -36,7 +36,7 @@ if [ -z "$(which gh)" ]; then
 fi
 
 tmpl=server_app_release_template.md
-tmpl_paths=". $(dirname $0)/templates $HOME/src/github/owncloud/administration-internal/tools/release/templates"
+tmpl_paths=". $(dirname $0)/templates $HOME/src/github/owncloud/QA/tools/release/templates"
 
 tmpl_path=$OC_APP_RELEASE_TEMPLATE
 if [ -z "$tmpl_path" ]; then
@@ -51,7 +51,7 @@ fi
 
 if [ -z "$tmpl_path" ]; then
   echo "ERROR: Issue template not found."
-  echo "Try to cd into a git checkout of https://github.com/owncloud/administration-internal/tools/release"
+  echo "Try to cd into a git checkout of https://github.com/owncloud/QA/tools/release"
   echo "or set the environment vairable OC_APP_RELEASE_TEMPLATE to the location of the file"
   echo "or download the file '$tmpl' to your current working directory."
 fi
