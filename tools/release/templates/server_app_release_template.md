@@ -20,7 +20,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 - [ ] Create release branch with the format "release-$version"
 - [ ] Create "$version Testplan" ([QA templates](https://github.com/owncloud/QA/tree/master/Server) or [Enterprise](https://github.com/owncloud/qa-enterprise/tree/master/Core))
 - [ ] copy new/reopened issues from the previous release ticket as 'Issues to review' below.
-- [ ] check if [Non-normal Release Process](https://confluence.owncloud.com/display/OG/Apps+with+differences+in+release+process) applies, and adapt this checklist.
+- [ ] check if [Non-normal Release Process](https://confluence.owncloud.com/display/OG/Apps+with+special+release+process) applies, and adapt this checklist.
 
 ### Documentation
 
