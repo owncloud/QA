@@ -1,5 +1,6 @@
 # Encryption Test Plan
 
+TODO: qualify test items from https://github.com/owncloud/enterprise/issues/4933#issuecomment-1005287788 to become regression test items here.
 
 ## Setup
 <details><summary>Setup details (click to view)</summary>
