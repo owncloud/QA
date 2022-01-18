@@ -87,9 +87,9 @@ Prepare two LDAP backends for testing:
    - [ ] Show filtered results
 - [ ] Run occ command ```ldap:search``` name (fixed configuration – added “displayName” and/or other attributes in the User Search Attributes field in the wizard)
    - [ ] Show filtered results
-- [ ] Run occ command ```ldap:search``` group (fixed configuration – added “displayName” and/or other attributes in the Group Search Attributes field in the wizard)
+- [ ] Run occ command ```ldap:search --group``` group (fixed configuration – added “displayName” and/or other attributes in the Group Search Attributes field in the wizard)
    - [ ]  Show filtered results
-- [ ] Run occ command Group without search `occ ldap:search --group` -> #641
+- [ ] Run occ command Group without search `occ ldap:search --group ''`
    - [ ] Show groups (currently 15 or less)
 
 ### ldap:check-user
@@ -115,10 +115,6 @@ Prepare two LDAP backends for testing:
 ### user:sync
 - [ ] Run occ command ```sudo -u www-data ./occ user:sync "OCA\User_LDAP\User_Proxy"```
    - [ ] This command syncs users stored in LDAP external backend service
-
-### ldap:update-group
-- [ ] ~Run occ command ```ldap:update-group```~ XXX Command no longer exists. obsoleted by user:sync
-   - [ ] Update the specified group membership information stored locally
 
 
 
@@ -247,8 +243,8 @@ Prepare two LDAP backends for testing:
    - [ ]  1. A different group selector is visible, consisting of a search text input, two lists with available and selected groups And two buttons to move groups
 - [ ] 1. Have the extended group selector <br> 2. Perform search with the search input field
    - [ ]  1. According to the value entered groups are filtered correspondingly in both fields
-- [ ] 1. Have the extended group selector <br> 2. Select one or more groups in the “available groups” list <br> 3. Click the “>” button
-   - [ ]  1. The selected groups are added to the selected groups list <br> 2. The selected groups are removed from the available groups list
+- [ ] 1. Have the extended group selector <br> 2. Select one or more groups in the “available groups” list <br> 3. Click the “>” / "<" buttons.
+   - [ ]  1. The selected groups are added / removed as expected. -> #700
 - [ ] 1. Have the extended group selector <br> 2. Select one or more groups in the “available groups” list <br> 3. Click the “<” button
    - [ ]  1. The selected groups are removed from the selected groups list <br> 2. The selected groups are added to the available groups list
 - [ ] 1. Have a properly set up filter <br> 2. Click on “Verify settings and count users”
@@ -280,7 +276,7 @@ Prepare two LDAP backends for testing:
 
 ### Wizard Configuration groups
 - [ ] 1. Have other tabs completed correctly <br> 2. “Manually enter LDAP filters” is disabled <br> 3. Move to Groups tab
-   - [ ]  1. Detection for Obect Classes and Groups is running <br> 2.If more than 40 groups available, a different group selection tool is presented (not the known multiselect) <br> 3. No filter is created initially, no text next to “LDAP Filter:”
+   - [ ]  1. Detection for Object Classes and Groups is running <br> 2.If more than 40 groups available, a different group selection tool is presented (not the known multiselect) <br> 3. No filter is created initially, no text next to “LDAP Filter:”
 - [ ] 1. Have other tabs completed correctly <br> 2. “Manually enter LDAP filters” is enabled <br> 3. Move to Groups tab
    - [ ]  1. A raw input field for the LDAP filter is presented. <br> 2. The multi select box elements are disabled <br> 3. i.e. Neither object classes nor groups are being detected
 - [ ] 1. “Manually enter LDAP filters” is enabled <br> 2. The input field for manually writing LDAP filter is shown
@@ -336,7 +332,7 @@ Prepare two LDAP backends for testing:
 
 
 ### Maintenance Commands
-- [ ] `occ ldap:invalidate-cache <user name>`
+- [ ] `occ ldap:invalidate-cache`
 - [ ] `occ group:list-members <group name>`
 - [ ] `occ group:list-groups <user id>`
 - [ ] `occ file:scan --group <group>`
