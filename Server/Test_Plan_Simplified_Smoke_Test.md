@@ -19,12 +19,14 @@
 | Create a folder.                         | Folder is created, no MKCOL problems appear. | :gear: |                 |
 | Delete a folder.                         | Folder is removed.                       | :gear: |                 |
 | Move a folder inside another.            | No problems while moving the folder.     | :gear: |                 |
-| Share a file by link.                    | Link is created and can be accessed.     | :gear: |                 |
+| Share a file by private link.            | Link is created and can be accessed.     | :gear: |                 |
+| Share a file by public link.             | Link is created and can be accessed.     | :gear: |                 |
 | Share a file with another user.          | It is shared correctly.                  | :gear: |                 |
 | Share a file with a group.               | It is shared correctly.                  | :gear: |                 |
 | Share a file with another user in another server. | Federated sharing happens correctly.      | :gear: |                 |
 | Share a folder with userB giving edit permissions. As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :gear: |                 |
 | Federate share a folder giving edit permissions with userB in serverB, As userB open the received folder, download files inside, open them. Upload new files. Modify files and delete them. | userB doesn't find any problem while interacting with files. | :gear: |                 |
+| Mobile view test with galaxy s9 as "Smallest device" | All elements reachable | :construction: | |
 | **Desktop Client**                       |                                          |             |                 |
 | Set up two clients with the same user. Change files, add some, delete some, move some, create folders. | Changes sync properly in both clients without errors. | :construction: |                 |
 | Share a file using contextual menu with userB. | Option to share appears in the contextual menu and file is correctly shared. | :construction: |                 |
