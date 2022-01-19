@@ -210,7 +210,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 20 :robot: | Public link to a file and disable it after | use the sharing menu to delete the public link | The link reports File not found. | :heavy_check_mark: |  tst_sharing  |
 21 | Public link to a folder with 'Upload only (File Drop) | 1) classic web UI create the public link as another user,</br>2) as your user, paste the link to "add to your owncloud",</br>3) wait for sync, visit the folder on the deskop,</br>4) Rename a file in the folder | Rename fails, an error message is shown | :construction: | FIXME: 2.10.0 silently duplicates the file |
 22 | Try to reshare a file originally received from an LDAP user | | The file can be reshared, if "Allow Share" was set, otherwise it cannot be reshared | :construction:  | (2.9.0 issue https://github.com/owncloud/client/issues/8941 ) |
-29 :robot: | Public link to a file and set a password with special characters | | The file is shared with a pwd |  :heavy_check_mark: | tst_sharing  |
+23 :robot: | Public link to a file and set a password with special characters | | The file is shared with a pwd |  :heavy_check_mark: | tst_sharing  |
 30 :robot: | Public link to a file and set a password. Modify Password Policies and retry | 1) enable password policy app allow passwords with 4 chars; 2) share with a 4 char password; 3) change password policy to min 8 chars. 4) use client sharing dialog to remove the password, and re-enter the same; 5) enter a password with 8 chars  | An error appears stating min passwiord length 8 for the short password; a longer password works  | :heavy_check_mark: | tst_sharing  |
 
 
