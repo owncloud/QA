@@ -15,7 +15,7 @@ Prepare a 10.2.1 server with ssl activated and trusted certificates.
 Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND)
  - `env OC10_DNSNAME=oc1080-ldap-DATE bash make_oc10_apps.sh oauth2 user_ldap  password_policy files_pdfviewer windows_network_drive=2.0.0`
  -> server URL
-   
+
 Optional: Have an Active Directory server ready to be used with owncloud.
 
 ## Testing
@@ -36,13 +36,13 @@ Optional: Have an Active Directory server ready to be used with owncloud.
   -> ...
 * [ ] 8. Without connection
   -> ...
-* [ ] 9. Sharing 
+* [ ] 9. Sharing
   -> ...
 * [ ] 9.1 Share link
-* [ ] 9.2 Share with Users and Groups 
+* [ ] 9.2 Share with Users and Groups
   -> ...
-* [ ] 10. Selective_Sync 
-* [ ] 10.2 "Skip folders configuration" 
+* [ ] 10. Selective_Sync
+* [ ] 10.2 "Skip folders configuration"
 * [ ] 10.3 "Add Folder..."
   -> ...
 * [ ] 11. Overlay_icons
@@ -51,19 +51,19 @@ Optional: Have an Active Directory server ready to be used with owncloud.
 
 2. Add the [Regression_Test_Plan_Patch](https://github.com/owncloud/QA/blob/master/Desktop/Regression_Test_Plan_Patch_Release.md) items in a separate comment (test all platforms + migration).
 
-3. Copy each set (1. - 11.) of the minor release tests into a separate comment and add the links above. If more persons are testing, write the name beside the headline. 
+3. Copy each set (1. - 11.) of the minor release tests into a separate comment and add the links above. If more persons are testing, write the name beside the headline.
 
 4. For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
 
-5. Start testing: 
+5. Start testing:
    * "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
-   * Manual testing is only required for tests not covered by automated squish testing (marked as :robot:) 
+   * Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
       * Go to https://drone.owncloud.com/owncloud/client and look for the release tag vX.X.x, click on green checkmark of this commit and make sure all tests marked with :robot: were run (search both: GUI-tests-@smokeTest and GUI-tests-~@smokeTests)
-   * Add the test result to 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')     
+   * Add the test result to 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
 
 ---
 
-### Minor Release Tests 
+### Minor Release Tests
 
 ### 1. Settings windows - Login
 
@@ -188,17 +188,16 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 
 #### 9.1 Share link
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result             | Related Comment                                                           
+TestID | Test Case | Steps to reprouce| Expected Result | Result             | Related Comment
 ------------ | ------------- | -------------- | ----- |--------------------|---------------------------------------------------------------------------
 1 :robot: | Share a Folder/File with special characters| 1. User share a folder (special characters /, <,>,:,?) with you; 2. On the server accept the share, (if needed);  3. Refresh the parent folder | File/Folder is not displayed as shared| :heavy_check_mark: | tst_sharing |
 2 :robot: | Share a Folder/File with special characters| 1. User share a folder (special characters in the name $%ñ&) with you 2. Refresh the parent folder | File/Folder is displayed as shared | :heavy_check_mark: | sharing works on Linux and window. TODO: try mac tst_sharing |
 3 :robot: | Unshare the Folder/File | 1. User unshare a folder/file with you 2. Refresh the folder/file | File/Folder is not shown as shared| :heavy_check_mark: | tst_sharing   |
-5 :robot: | Unshare the Folder with you | 1. at client navigate to shared folder with file browse or shell; 2. User unshares this folder with you 3. Upload file from Desktop Client | Folder error| :heavy_check_mark: | Win+Linux: No error. A new (unshared) folder gets created  tst_sharing |
-6 | Verify shared icon | 1. User share a folder | When the folder/file are shared show a special icon | :construction: | Need to enable two ownCloud plugins in Nemo |
-7 | ~Verify shared icon~ | 1. User share a folder | When the folder or file is shared by link show a special icon | :construction:  | ?duplicate?  |
-8 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another folder from Desktop; 2. The needed permission is Edit-Write on the "other" folder. | The server of both users is updated, if the other folder is not shared with permissions, you can't the other foder | :construction: |     |
-9 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another folder from Desktop 2. Create a file inside the sahred folder| The server of both users is updated | :construction: |        |
-10 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another folder from Desktop 2. Create a file inside the shared folder 3. Update the file from user1| The Desktop update the file | :construction:   |     |
+4 | Unshare the Folder with you | 1. at client navigate to shared folder with file browse or shell; 2. User unshares this folder with you 3. Upload file from Desktop Client | New unshared folder | :construction: | |
+5 | Verify shared icon, Ubuntu | 1. Install nemo extension, 2. assert that both owncloud plugins are enabled in nemo, 3. Share a folder/file | A fork-icon is overlayed on shared folders/files | :construction: | |
+6 | Verify shared icon, Win+non-VFS | 1. User share a folder | When the folder or file is shared by link show a special icon | :construction:  |  |
+7 | Verify shared icon, Win+VFS | 1. User share a folder | No sharing indicator (only status) is shown in VFS mode | :construction:  |  |
+8 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another shared folder from Desktop; 2. The needed permission is Edit-Write on the "other" folder. | Cannot move to another shared folder (403 Forbidden) | :construction: |     |
 11 :robot: | Share a file with many users | 1. Having one file shared with 80 users | The Desktop works fine, list of users can be scrolled | :heavy_check_mark: :construction: | (automated with 3 users) prefer manual testing for larger users                                                            |
 12 :robot: | Share a Folder with Password protect| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option | You can write the password| :heavy_check_mark: | tst_sharing |
 13 :robot: | Share a Folder with Set expiration date| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date | You can configurate the expiration date | :heavy_check_mark: | tst_sharing |
@@ -209,44 +208,29 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 18 :robot: | Public link a file and download it | 1) right click a file - open the share menu; 2) Create and copy public link to clipboard; 3) paste link in a web browser; 4) download | The file can be downloaded | :heavy_check_mark: | tst_sharing        |
 19 :robot: | Public link a folder and download it | 1) right click a folder - open the share menu; 2) Create public link; 3) 3dots menu -> "copy public link to clipboard (direct download)"; 4) paste link in a web browser | A zip archive of the folder can be downloaded | :heavy_check_mark: | tst_sharing        |
 20 :robot: | Public link to a file and disable it after | use the sharing menu to delete the public link | The link reports File not found. | :heavy_check_mark: |  tst_sharing  |
-21 | Public link to a file and 'add to your owncloud' a user that belongs to the server | | The file is shared | :construction: |   |
-22 | ~Public link to a file and 'add to your owncloud' a user that belongs to the server and has been already shared another file~ | | The file is shared | :heavy_minus_sign: | That only tests the server                                                
-23 | Public link to a file and 'add to your owncloud' with a user that belongs to another server | | The file is shared | :construction: |   |
-24 | Public link to a file and 'add to your owncloud' with an LDAP user | | The file is shared |  :construction: |   |
-25 | ~Optionally Public link to a file and 'add to your owncloud' with an Active Directory user~ | | The file is shared |    :construction: |       |
-26 | ~Public link to a file and 'add to your owncloud' with a Shibboleth user autoprovisioned~ | | The file is shared | :heavy_minus_sign: | Shiboleth is not supported | 
-27 | Try to reshare a file originally received from an LDAP user | | The file can be reshared, if "Allow Share" was set, otherwise it cannot be reshared | :construction:  | | 
-28 | Public link to a file and 'add to your owncloud' with a user that belongs to another oC server below 8.2.X version | `docker run --rm -ti -p 8181:80 owncloud:8.1` | The file is added to the old server | :construction: |    |
-29 :robot: | Public link to a file and set a password with special characters | | The file is shared with a pwd |  :heavy_check_mark: | tst_sharing  |
-30 :robot: | Public link to a file and set a password. Modify Password Policies and retry | 1) enable password policy app allow passwords with 4 chars; 2) share with a 4 char password; 3) change password policy to min 8 chars. 4) use client sharing dialog to remove the password, and re-enter the same; 5) enter a password with 8 chars  | An error appears stating min passwiord length 8 for the short password; a longer password works  | :heavy_check_mark: | tst_sharing  |
+21 | Public link to a folder with 'Upload only (File Drop) | 1) classic web UI create the public link as another user,</br>2) as your user, paste the link to "add to your owncloud",</br>3) wait for sync, visit the folder on the deskop,</br>4) Rename a file in the folder | Rename fails, an error message is shown | :construction: | FIXME: 2.10.0 silently duplicates the file |
+22 | Try to reshare a file originally received from an LDAP user | | The file can be reshared, if "Allow Share" was set, otherwise it cannot be reshared | :construction:  | (2.9.0 issue https://github.com/owncloud/client/issues/8941 ) |
+23 :robot: | Public link to a file and set a password with special characters | | The file is shared with a pwd |  :heavy_check_mark: | tst_sharing  |
+24 :robot: | Public link to a file and set a password. Modify Password Policies and retry | 1) enable password policy app allow passwords with 4 chars; 2) share with a 4 char password; 3) change password policy to min 8 chars. 4) use client sharing dialog to remove the password, and re-enter the same; 5) enter a password with 8 chars  | An error appears stating min passwiord length 8 for the short password; a longer password works  | :heavy_check_mark: | tst_sharing  |
 
 
 #### 9.2 Share with Users and Groups
 
 TestID | Test Case | Expected Result | Result | Related Comment
 ------ | --------- | --------------- | ------ | ---------------
-1 | ~Enable encryption app and encryption default module~ | Encryption is enabled correctly | :construction:||
-2 :robot: | Share a file with a user that has been already shared another file | Both files appear in server | :heavy_check_mark:| tst_sharing |
-3 :robot: | Share a folder with a user | The folder appears in server | :heavy_check_mark:| tst_sharing |
-4 :robot: | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :heavy_check_mark:| tst_sharing |
-5 :robot: | Share a file with a group| The file appears in server |:heavy_check_mark:| tst_sharing | 
-6 | Share a folder with an LDAP user | The folder appears in server |  :construction:|  |
-7 | ~Share a file with an Active Directory user~ | The file appears in server | :heavy_minus_sign: |
-8 | Share a folder with a Shibboleth user autoprovisioned| The folder appears in server | :heavy_minus_sign:  | SKIP. We don't support Shiboleth
-8a | Share a file with a Shibboleth SSO user| The file appears in server | :heavy_minus_sign:   | SKIP: We don't support Shiboleth
-9 | Share a folder with remote user on a 10.2.1 server| The folder appears |:construction:|  |
+1 :robot: | Share a file with a user that has been already shared another file | Both files appear in server | :heavy_check_mark:| tst_sharing |
+2 :robot: | Share a folder with a user | The folder appears in server | :heavy_check_mark:| tst_sharing |
+3 :robot: | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :heavy_check_mark:| tst_sharing |
+4 :robot: | Share a file with a group| The file appears in server |:heavy_check_mark:| tst_sharing |
+5 | Share a folder with an LDAP user | The folder appears in server |  :construction:|  |
+6 | Share a folder with remote user on a 10.2.1 server| The folder appears |:construction:|  |
 10 | Receive a federated share from a 10.2.1 server | When auto-accept is disabled: Notification with Dismiss/Accept/decline appears in the "Server Activity" tab | :construction:|    |
 11 :robot: | Share a file with one user whose name contains special characters | The file appears in server |:heavy_check_mark:| tst_sharing |
 12 :robot: | Share a folder with one users a file whose name contains special characters | The folder appears in server |:heavy_check_mark:| tst_sharing |
 13 | Share a file bigger than 1 GB with one user | The file appears in server | :construction:| |
 14 | Try to federate share a file with one user | The file appears in server, expect delays |:construction:|  |
 15 | Share a file from SFTP with a user | The file appears in server |:construction:| |
-16 | ~Share a folder from SMB with a user~ | The folder appears in server |:construction:| |
-17 | Share a file from WND with a user | The file appears in server | :construction:| |
-18 | ~Share a folder from Sharepoint with a user~ | The folder appears in server | :construction:  |
-19 | Share a file from a Federated Sharing with a user | The file appears in server, expect delays |:construction:| |
-20 | ~Share a folder from redirect server with a user~ | The folder appears in server |:construction:| |
-21 | ~Using a redirect server, Share a file with a user~ | The file appears in server |:construction:| |
+19 | Share a file from a Federated Sharing with a user | The file appears in server |:construction:| |
 22 :robot: | Share a file with user B with Can Share permissions enabled. Login as User B and reshare it | The file can be reshared in the server with other user| :heavy_check_mark:| tst_sharing |
 23 :robot: | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it  | The file can be edited in the server with other user | :heavy_check_mark:| tst_sharing |
 24 :robot: | Share a file with user B with Change permission enabled. Login as User B and change it  | The file can be changed in the server with other user | :heavy_check_mark:| tst_sharing |
@@ -267,21 +251,21 @@ TestID | Test Case | Expected Result | Result | Related Comment
 39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |:construction:|  |
 40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction:|  |
 41 |~With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy~| The file is shared with pwd |:construction:| |
-42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| | 
+42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| |
 43 :robot: | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :heavy_check_mark:| tst_sharing |
 44 :robot: | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :heavy_check_mark:| tst_sharing |
 45 :robot: | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |   :heavy_check_mark:| tst_sharing |
 46 :robot: | Try to search a user that has already been shared the file in the users searchbox | The user should not be shown | :heavy_check_mark:| tst_sharing |
 47 :robot: | Try to search yourself in the users searchbox | The user should not be shown | :heavy_check_mark:| tst_sharing |
 48 :robot: | Search with minimum characters required. For example: 'pat' | All users that contains this pattern should be shown | :heavy_check_mark:| tst_sharing |
-49 | Try to search a remote user in the users searchbox | The user should be shown |  :construction:| | 
+49 | Try to search a remote user in the users searchbox | The user should be shown |  :construction:| |
 50 :robot: | Share a file with more than 4 users | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear | :heavy_check_mark:| tst_sharing |
-51 | Sharing API  | The users should be listed and ordered chronologicaly. If is needed a scrollbar will appear |  :construction:|  |
-52 :robot: | Enforce password protection  | Password should be always required | :heavy_check_mark:| tst_sharing |
-53 :robot: | Enforce password protection enabled. Try to disable the pwd  | Password should be always required | :heavy_check_mark:| tst_sharing | 
-54 :robot: | Set default expiration date  | The expiration date should be set by default | :heavy_check_mark:| tst_sharing |
+51 | Sharing Dialog<br>1)use a server with user01, user02, user03, ...<br>2)enter 'us' prefix in the search<br>3)matching users are listed.  | The users are listed alphabetically. An exact match is listed first. |  :construction:|  |
+52 :robot: | Enforce password protection on public links | Password should be always required | :heavy_check_mark:| tst_sharing |
+53 :robot: | Enforce password protection on public links<br>Try to disable the pwd | Password should be always required | :heavy_check_mark:| tst_sharing |
+54 :robot: | Set default expiration date  on public link | The expiration date should be set by default | :heavy_check_mark:| tst_sharing |
 55 :robot: | Allow resharing disabled and Can Share enabled  | The user cannot reshare files | :heavy_check_mark:| tst_sharing |
-56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| | 
+56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| |
 57 :robot: | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing | :heavy_check_mark:| tst_sharing |
 
 ### 10. Selective_Sync
@@ -334,7 +318,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 | If the system is offline, there are no overlay icons present | 1. Launch the Desktop 2. The overlay icons are not shown 3. Quit the Desktop | The overlay icons are not shown| :construction: |  |
-2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop 2. The overlay icons are still shown 3. Click on Pause | The overlay icons are still shown| :construction:   |  |
+2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop 2. The overlay icons are shown 3. Click on Pause | The overlay icons disappear | :construction:   |  |
 3 | Green check (All files within the folder (all the way down the tree) are sync with the server, and there are no problems to report) | 1. The account is sync | The green check is shown in all the folders/files| :construction:  |  |
 4 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively sync) | 1. The account is sync | The files/folder that are waiting to sync have the blue icon|  :construction:  |  |
 5 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters or a bad character in a name o a file firewall problem) | 1. The account is sync |The files that are not sync because they have a problem... Have a yellow warning triangle | :construction:   |  |
