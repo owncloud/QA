@@ -218,13 +218,12 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 
 TestID | Test Case | Expected Result | Result | Related Comment
 ------ | --------- | --------------- | ------ | ---------------
-1 | ~Enable encryption app and encryption default module~ | Encryption is enabled correctly | :construction:||
-2 :robot: | Share a file with a user that has been already shared another file | Both files appear in server | :heavy_check_mark:| tst_sharing |
-3 :robot: | Share a folder with a user | The folder appears in server | :heavy_check_mark:| tst_sharing |
-4 :robot: | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :heavy_check_mark:| tst_sharing |
-5 :robot: | Share a file with a group| The file appears in server |:heavy_check_mark:| tst_sharing |
-6 | Share a folder with an LDAP user | The folder appears in server |  :construction:|  |
-9 | Share a folder with remote user on a 10.2.1 server| The folder appears |:construction:|  |
+1 :robot: | Share a file with a user that has been already shared another file | Both files appear in server | :heavy_check_mark:| tst_sharing |
+2 :robot: | Share a folder with a user | The folder appears in server | :heavy_check_mark:| tst_sharing |
+3 :robot: | Share a folder with a user that has been already shared another folder and another file | Both folders appear and the file in server | :heavy_check_mark:| tst_sharing |
+4 :robot: | Share a file with a group| The file appears in server |:heavy_check_mark:| tst_sharing |
+5 | Share a folder with an LDAP user | The folder appears in server |  :construction:|  |
+6 | Share a folder with remote user on a 10.2.1 server| The folder appears |:construction:|  |
 10 | Receive a federated share from a 10.2.1 server | When auto-accept is disabled: Notification with Dismiss/Accept/decline appears in the "Server Activity" tab | :construction:|    |
 11 :robot: | Share a file with one user whose name contains special characters | The file appears in server |:heavy_check_mark:| tst_sharing |
 12 :robot: | Share a folder with one users a file whose name contains special characters | The folder appears in server |:heavy_check_mark:| tst_sharing |
