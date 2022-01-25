@@ -16,6 +16,9 @@ occ app:enable oauth2
 # 'integrity.ignore.missing.app.signature' => [ 0 => 'oauth', ],
 listlen=$(occ c:s:get integrity.ignore.missing.app.signature --output plain | wc -l)
 occ c:s:set integrity.ignore.missing.app.signature $listlen --value oauth2
+## Better approach probably:
+# append '/apps/oauth2/lib/Db/AccessToken.php' and '/apps/oauth2/lib/Db/AuthorizationCode.php'
+# to integrity.excluded.files => [ ... ]
 #
 cat << EOM >>  ~/POSTINIT.msg
 oauth2:  AccessToken.php: REFRESH_TIMEOUT modified from 3600 to 180 seconds.

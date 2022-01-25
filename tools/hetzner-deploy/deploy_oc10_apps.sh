@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # 2021-02-03, jw@owncloud.com
+# 2022-01-25, jw@owncloud.com, added marketplace download support
 #
 # Special apps supported:
 # - files_antivirus with a local clamav
@@ -64,13 +65,15 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "  $0 https://github.com/owncloud/files_antivirus/releases/download/v0.16.0RC1/files_antivirus-0.16.0RC1.tar.gz Kaspersky_ScanEngine-Linux-x86_64-2.0.0.1157-Release.tar.gz 575F7141.key"
   echo "  $0 customgroups"
   echo "  $0 owncloud/metrics=v0.6.1RC2"
-  echo "  $0 https://storage.marketplace.owncloud.com/apps/metrics-1.0.0.tar.gz"
-  echo "  $0 https://storage.marketplace.owncloud.com/apps/files_clipboard-1.0.3.tar.gz"
+  echo "  $0 ~/Download/richdocuments.tar.gz"
+  echo "  $0 marketplace:onlyoffice"
+  echo "  $0 marketplace:onlyoffice=7.1.3"
   echo "  $0 --"
   echo ""
   echo "Local file names are copied into the machine."
   echo "File URLs are passed into the machine and downloaded there."
-  echo "Other parameters that do not look like URLs and do not exist as local files:"
+  echo "Names prefixed marketplace: (or m:) are looked up at marketplace.owncloud.com"
+  echo "Other parameters that do not look like any of the above"
   echo "  should be names of github/owncloud projects."
   echo "  The latest release tar.gz is downloaded or a release asset matching a tag specified after '='."
   echo ""
@@ -88,16 +91,37 @@ mkdir -p $tmpdir
 test "$1" = "--" && shift
 ARGV=()
 for arg in "$@"; do
-  case arg in
+  case "$arg" in
     http://*)
+      echo "App is a URL..."
       ;;
     https://*)
+      echo "App is a URL ..."
+      ;;
+    marktplace:*|m:*)
+      echo "App lookup at marketplace ..."
+      arg="$(echo "$arg" | sed -e 's/^[^:]*://')"		# strip marketplace prefix
+      appname="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
+      test "$appname" != "$arg" && appvers="$(echo "$arg" | sed -e 's/.*[:=]//')" # only version suffix, if given.
+      curl=curl
+      if [ -z "$appvers" ]; then
+        # find the latest release
+	appvers="$($curl -s "https://marketplace.owncloud.com/ajax/apps/$appname" | jq '.releases[0].version' -r )"
+        test -z "$appvers" -o "$appvers" = null && { echo "Could not find $appname at https://marketplace.owncloud.com"; exit 1; }
+      fi
+      asseturl="$($curl -s "https://marketplace.owncloud.com/ajax/apps/$appname/$appvers" | jq .url -r)"
+      test -z "$asseturl" -o "$asseturl" = null && { echo "No asseturl for $appname $appvers at https://marketplace.owncloud.com"; exit 1; }
+      assetname=$appname-$appvers.tar.gz
+      echo "Found $assetname at marketplace: $asseturl"
+      arg="$tmpdir/$assetname"
+      $curl -L -H 'Accept: application/octet-stream' "$asseturl" > "$arg"
       ;;
     *)
       if [ -e $arg ]; then
         echo "Using local file $arg ..."
       else
 	# Everything that is not a local file, and not a URL should be an app.
+        echo "App lookup at github ..."
 	appname="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
 	echo "$arg" | grep -q / || arg="owncloud/$arg"		# prepend owncloud/ orga, if no orga given.
 	oc_app="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
@@ -355,7 +379,7 @@ for param in \$PARAM; do
 	    echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$app_name.sh return code $ret, check log."
           fi
 	else
-          echo "\$app installed. Try this to get activate: occ app:enable \$app_name"
+          echo "\$app installed. Try this to activate:\n\n\tocc app:enable \$app_name\n"
 	fi
         ;;
 
