@@ -6,17 +6,17 @@
 
 Apps included:
  - openidconnect 2.1.0
- - windows-_network_drive 2.1.0
+ - windows_network_drive 2.1.0
  - ldap 0.16.0
- - web 4.5.0
+ - web 4.9.0
 
 ### Test deployments
 
  - localhost: `docker run --rm -ti -p 8080:8080 owncloud/server:10.9.0-beta1`
 
  - https://oc1090beta1-primary-s3-113-rc3-20211119.jw-qa.owncloud.works
-   via `env OC10_VERSION=10.9.0beta1 OC10_TAR_URL=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2 hetzner_deploy/make_oc10_apps.sh files_primary_s3`
-
+   via `env OC10_VERSION=10.9.0beta1 OC10_TAR_URL=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2 hetzner_deploy/deploy_oc10_apps.sh web files_primary_s3 guests user_ldap impersonate oauth2 twofactor_totp windows_network_drive richdocuments`
+ - `env OC10_DNSNAME=update-from-1080-DATE OC10_VERSION=10.8 hetzner_deploy/deploy_oc10_apps.sh user_ldap`
 
 ## Requirements
 
@@ -57,20 +57,23 @@ TestID | Test Case | Expected Result | Result | Related Comment
 2 | Open internet explorer or edge and upload a new avatar for a regular user not LDAP | Interface can be used, avatar is uploaded, check that personal page has a scroll bar and scrolls fine. | :construction: |
 3 | Upload several files and folders inside external storages, open some. | No problems uploading, files can be downloaded and opened. | :construction: |
 4 | Delete files inside both external storages. Recover some after from the trashbin. |  Files are correctly deleted and restored. | :construction: |
-5 | Using webdav upload a 100MiB file.| No errors in this process | :construction: |
+5 | Win10 "Connect network drive" using the webdav URL hidden in the owncloud Files UI lower let corner under settings. | Works with checkbox '[x] Connect using differnt Credentials' | :construction: |
+6 | Using webdav upload a 100 MB file.| No errors in this process | :construction: |
+
+TODO:
+- Compare with [drone CI](https://drone.owncloud.com/owncloud/core) and add/remove items in this template.
+- Add regression test items  https://github.com/owncloud/enterprise/issues/4933#issuecomment-1005287788
 
 
 Pyocclient status:
-
-- Travis stable8		![stable8 pyocclient] (https://travis-ci.org/owncloud/pyocclient.svg?branch=stable8)
-- Travis stable8.1 	![stable8.1 pyocclient] (https://travis-ci.org/owncloud/pyocclient.svg?branch=stable8.1)
-- Travis stable8.2 	![stable8.2 pyocclient] (https://travis-ci.org/owncloud/pyocclient.svg?branch=stable8.2)
+- TODO: Clarify status. No updates found after 10.0
+- https://travis-ci.org/github/owncloud/pyocclient/branches 
 - Travis master 		![master pyocclient] (https://travis-ci.org/owncloud/pyocclient.svg?branch=master)
 
 
 Smashbox status:
-
-Git master: [![Build Status](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/badge/icon)](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/)
+- TODO: Clarify status. Dead links 2022-01-17, jw)
+- Git master: [![Build Status](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/badge/icon)](https://ci.owncloud.org/job/smashbox-on-docker-daily-master/)
 
 
 Next: 
