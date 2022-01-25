@@ -379,7 +379,7 @@ for param in \$PARAM; do
 	    echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$app_name.sh return code $ret, check log."
           fi
 	else
-          echo "\$app installed. Try this to activate:\n\n\tocc app:enable \$app_name\n"
+          echo -e "\$app installed. Try this to activate:\n\n\tocc app:enable \$app_name\n"
 	fi
         ;;
 
