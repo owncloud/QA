@@ -4,6 +4,14 @@
 
 ## Testing functionality
 
+## TODO
+- [ ] user rejects share. Content/filename should no longer be indexed. (Probably still there??)
+- [ ] user gets removed from share by share owner. Content/filename should no longer be indexed.
+- [ ] user accepts after reject. Content/filename is again indexed.
+- [ ] user gets re-added by share owner (after being removed). Content/filename is again indexed.
+- [ ] occ search:scan:rebuild removes all indexed flags from owncloud db. Cron pushes do the re-index, and entries in the db piecewise, each run.
+
+
 Test Case | Expected Result | Result | Related Comment
 ------------- | -------------- | ----- | ------
 **CLI commands** |  |   |
