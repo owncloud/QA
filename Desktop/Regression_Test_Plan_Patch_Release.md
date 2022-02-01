@@ -8,7 +8,7 @@
 __TO DO__
 - So far squish tests only run on Ubuntu, for future: should run on Windows and macOS as well
 - Qt and OpenSSL versions: is it necessary to check it here? (for Win and macOS configured in craft, for Linux the system OpenSSL is used, qt packages are ownCloud packages), versions are listed in automated test result (e.g. https://github.com/owncloud/client/issues/8870#issuecomment-896795228)
-- manual check remains for file browser integration (overlay icons)
+- manual check remains for file browser integration (overlay icons) and WinVFS
 
 <!-- Updates:
  * General tab -> Settings tab, About, Versions
@@ -48,8 +48,9 @@ __TO DO__
  ----
  * [ ] Install previous version of **Testpilot client on Win 10** VFS _ON_
      * [ ] Update to new version should be suggested (after changing 'Update channel' to 'Beta' on  "Settings" tab)
-* [ ] Update to new version
-     * [ ] No error messages, no obvious problems 
+* [ ] Update to new version while previous version of the client is still running
+     * [ ] Client is terminated without problems by the MSI installer  
+     * [ ] New version of the client starts, no error messages, no obvious problems 
      * [ ] Make sure the account(s) is/are still configured and the users are logged in
      * [ ] winVFS is still enabled
      * [ ] "Open folder" and make sure folders/files are there  
@@ -81,7 +82,7 @@ __TO DO__
      * [ ] Overlay icons have changed (after 'Free up space')
  ----
  * [ ] Install ownCloud client on **Ubuntu**, Mint or Debian with GNOME desktop
- ```sudo apt install owncloud-client-nautilus```
+ ```sudo apt install owncloud-client-nautilus``` (the ```Files``` file-browser)
      * [ ] Settings tab, About has correct versions:
          * ownCloud client version
          * Qt 5.12.10
@@ -116,7 +117,7 @@ __TO DO__
  * [ ] Create a public link
      * [ ] Public link has been created and can be opened in a browser
  * [ ] Enable VFS
-     * [ ] VFS has been enabled
+     * [ ] VFS has been enabled (suffix ```.owncloud``` after 'Free up space')
  ----
  * [ ] For Beta or RC: Install **Testpilot client on Windows 10**
      * [ ] disable VFS in connction wizard
