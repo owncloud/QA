@@ -330,6 +330,12 @@ occ config:system:set mail_from_address --value mail
 occ config:system:set mail_smtpmode     --value smtp
 occ config:system:set mail_smtphost     --value \$hog_ip
 occ config:system:set mail_smtpport     --value 1025
+echo >> ~/POSTINIT.msg "mailhog: try these commands: mailhog_dump, mailhog_del"
+echo > /usr/bin/mailhog_dump 'curl -s localhost:8025/api/v1/messages | jq ".[] | { To: .Content.Headers.To[0], Subj: .Content.Headers.Subject[0], Body: .Content.Body }" | \\'
+echo >> /usr/bin/mailhog_dump "perl -MMIME::QuotedPrint -ne 'print decode_qp(\\\$_)' | sed -e '"'s/=\\\\r\\\\n//g'"' -e '"'s/\\\\r\\\\n/\\n/g'"' -e '"'s/\\\\"/"/g'"' | less"
+echo > /usr/bin/mailhog_del "curl -X DELETE -s localhost:8025/api/v1/messages"
+chmod a+x /usr/bin/mailhog_*
+
 
 ## always set here to either true or false, so that it appears in config.php for easier editing.
 occ config:system:set file_storage.save_version_author --type boolean --value true
