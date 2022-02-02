@@ -12,13 +12,25 @@ Have a Desktop Client vX.X.0 ready to be used for testing.
 Prepare a 10.2.1 server with ssl activated and trusted certificates.
  - `env OC10_VERSION=10.2 bash make_oc10_apps.sh --`
  -> server URL
-Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND)
+ 
+Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used fpr specific tests
  - `env OC10_DNSNAME=oc1080-ldap-DATE bash make_oc10_apps.sh oauth2 user_ldap  password_policy files_pdfviewer windows_network_drive=2.0.0`
  -> server URL
+ 
+Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker `env OC10_VERSION=latest bash make_oc10_apps.sh --`
 
 Optional: Have an Active Directory server ready to be used with owncloud.
 
 ## Testing
+
+- For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
+- "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
+- Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
+- Go to https://drone.owncloud.com/owncloud/client and look for the release tag vX.X.x, click on green checkmark of this commit and make sure all tests marked with :robot: were run (search both: GUI-tests-@smokeTest and GUI-tests-~@smokeTests)
+- If more persons are testing, please write your name beside the section you are currently working on -> @tester1
+- Add the test result to the 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
+
+## Testplan Minor Release
 
 * [ ] 1. Install/Update - Connect - Login  @tester1
   -> https://github.com/owncloud/client/issues/xxxx#issuecomment-xxxxxxxxx
@@ -51,15 +63,7 @@ Optional: Have an Active Directory server ready to be used with owncloud.
 
 2. Add the [Regression_Test_Plan_Patch](https://github.com/owncloud/QA/blob/master/Desktop/Regression_Test_Plan_Patch_Release.md) items in a separate comment (test all platforms + migration).
 
-3. Copy each set (1. - 11.) of the minor release tests into a separate comment and add the links above. If more persons are testing, write the name beside the headline.
-
-4. For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
-
-5. Start testing:
-   * "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
-   * Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
-      * Go to https://drone.owncloud.com/owncloud/client and look for the release tag vX.X.x, click on green checkmark of this commit and make sure all tests marked with :robot: were run (search both: GUI-tests-@smokeTest and GUI-tests-~@smokeTests)
-   * Add the test result to 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
+3. Copy each set (1. - 11.) of the minor release tests into a separate comment and add the links above.
 
 ---
 
