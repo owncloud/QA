@@ -26,8 +26,8 @@ Optional: Have an Active Directory server ready to be used with owncloud.
 - For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
 - "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
 - Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
-- Go to https://drone.owncloud.com/owncloud/client and look for the release tag vX.X.x, click on green checkmark of this commit and make sure all tests marked with :robot: were run (search both: GUI-tests-@smokeTest and GUI-tests-~@smokeTests)
-- If more persons are testing, please write your name beside the section you are currently working on -> @tester1
+- Make sure all [squish tests](https://confluence.owncloud.com/display/OG/Squish+testing) run successful in CI 
+- If more persons are testing, please write your name beside the section you are currently working on, e.g. @tester1
 - Add the test result to the 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
 
 ## Testplan Minor Release
