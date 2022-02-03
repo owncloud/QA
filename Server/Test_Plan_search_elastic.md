@@ -2,6 +2,11 @@
 
 - Run Testplan with encryption disabled and enabled
 
+TODO:
+* [ ] Document how to "re-index" -- is this a comination of rebuild, reset, extra SQL commands? 
+* [ ] Test upgrade?
+
+
 ## Testing functionality
 
 Test Case | Expected Result | Result | Related Comment
