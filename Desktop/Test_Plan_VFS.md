@@ -31,12 +31,12 @@ Test environment:
 ## Testing
 
 * [ ] Add an account and connect to the server with VFS ON
-  * [ ] 'Open folder' (Explorer) and check that all files are virtual, Status: placeholder file (cloud icon)
-  * [ ] open an existing file -> file is physically available, Status: full file (green unfilled circle with green check mark)
-  * [ ] create a new file locally, edit, save and exit -> if locked (ie. LibreOffice not exited) the file icon stays in "cycle mode", see "Tests when a file or folder is locked
+  * [ ] 'Open folder' (Explorer) and check that all files are virtual, status: placeholder file (cloud icon)
+  * [ ] open an existing file -> file is physically available, status: full file (green unfilled circle with green check mark)
+  * [ ] create a new file locally, edit, save and exit -> status: full file
   * [ ] right click: 'Free up space' -> placeholder is created, 'Activity' 'Sync Protocol' shows "Replaced by virtual file" 
-  * [ ] create several new files more, edit some -> files are synced if they are not locked
-  * [ ] on client dot menu: 'Availibility' 'Free up local space' -> placeholder for all files are created (files are dehydrated)
+  * [ ] open LibreOffice, edit a new file and save, to not exit -> file status: spinning (cylcling) icon
+      * [ ] exit LibreOffice -> file status: full file
 
 * [ ] Tests concerning free up space
   * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
@@ -66,7 +66,7 @@ Test environment:
   * [ ] Create file in directory and open with LO. Do not change. Remove the directory on the server. After closing LO, directory and file are removed. (See #9293)
   * [ ] Create file in directory and open with LO. Remove the directory on the server. Edit the file and save it. After closing LO, directory and file are created again. (See #9293)
   * [ ] On server: create FolderA and 2 files NewFile and Newfile inside FolderB
-    * [ ] watch client -> a red warning message "...file name clash..." is shown , 'Not synced' tab also shows file name clash
+    * [ ] watch client -> a red warning message "...file name clash..." is shown for some seconds, then the "i" icon ('Activity''Not synced' tab also shows file name clash)
     * [ ] 'Open folder' and check status of FolderB and NewFile -> spinning icon ("cycle mode") for folder and file
     * [ ] Move FolderB to another place (outside the syncroot) -> Known issue: FolderB is moved locally but not deleted on server
 
@@ -84,7 +84,6 @@ Test environment:
   * [ ] Add a second account with VFS OFF
   * [ ] Switch to VFS ON using client dot menu -> file status changes (Status: full file)
   * [ ] in Explorer: right-click on a folder and 'Free up space' -> all files in folder get dehydrated (placeholder file, Status: cloud icon)
-  * [ ] on client dot menu: 'Availibility' 'Free up space' -> all files in sync root get dehydrated
   * [ ] Switch back to VFS OFF -> all files are physically (overlay icons are shown)
 
 * [ ] Client sync operations
