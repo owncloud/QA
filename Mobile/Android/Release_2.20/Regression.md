@@ -1,6 +1,6 @@
-#### Version
+#### Version 2.20
 
-#### PR: [https://github.com/owncloud/android/issues/]([https://github.com/owncloud/android/issues/])<br>
+#### PR: [https://github.com/owncloud/android/issues/3497]([https://github.com/owncloud/android/issues/3497])<br>
 
 
 Device/s: <br>
@@ -19,6 +19,8 @@ P m8 -> Passed in an phone with Android 8<br>
 F t8 -> Failed in an tabled with Android 8<br>
 P m8 t8 -> Passed with a phone with Android 8 and an tabled with Android 8 <br>
 P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Android 8  <br>
+
+Not tested: Document provoder
 
 
 | Title | Steps     | Expected Result | Result | Comments |
@@ -175,7 +177,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | audio without coverart | Open a MP3 file that does not include cover| Music played and placeholder note displayed |
 | audio with coverart | Open a MP3 file that includes cover| Music played and cover displayed |
 | unsupported | Download a unsupported file (pdf, office...) | Menu to open in a different app is raised up| | |
-| Open with | 1. Download a file<br>2. Select the option `Open with`<br>3. Select an app from the list<br>4. Edit the file | 3. Correctly opened<br>4. Correctly edited and synced with server| | |
+| Open with | 1. Download a file<br>2. Select the option `Open with`<br>3. Select an app from the list<br>4. Edit the file | 3. Correctly opened<br>4. Correctly edited and synces with server| | |
 | **Av. offline** |   |  |
 | Set a file as av. offline | 1. Long press on a file<br>2. Set as av. offline (down arrow with a line underneath) | File is downloaded |
 | Set a folder as av. offline | 1. Long press on a folder<br>2. Set as av. offline (down arrow with a line underneath) | All the content of the folder is downloaded |
@@ -287,3 +289,10 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
+| **Changelog** |   |  |
+| [#2690](https://github.com/owncloud/android/issues/2690) |  |  |
+| [#3060](https://github.com/owncloud/android/issues/3060) |  |  |
+| [#3285](https://github.com/owncloud/android/issues/3285) |  |  |
+| [#3458](https://github.com/owncloud/android/issues/3458) |  |  |
+| [#3524](https://github.com/owncloud/android/issues/3524) |  |  |
+| [#3521](https://github.com/owncloud/android/issues/3521) |  |  |
