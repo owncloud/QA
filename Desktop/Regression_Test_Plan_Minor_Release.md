@@ -13,20 +13,20 @@ Prepare a 10.2.1 server with ssl activated and trusted certificates.
  - `env OC10_VERSION=10.2 bash make_oc10_apps.sh --`
  -> server URL
  
-Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used fpr specific tests
+Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used for specific tests
  - `env OC10_DNSNAME=oc1080-ldap-DATE bash make_oc10_apps.sh oauth2 user_ldap  password_policy files_pdfviewer windows_network_drive=2.0.0`
  -> server URL
- 
-Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker `env OC10_VERSION=latest bash make_oc10_apps.sh --`
 
 Optional: Have an Active Directory server ready to be used with owncloud.
+
+Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker `env OC10_VERSION=latest bash make_oc10_apps.sh --`
 
 ## Testing
 
 - For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
 - "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
 - Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
-- Make sure all [squish tests](https://confluence.owncloud.com/display/OG/Squish+testing) run successful in CI 
+- Make sure all [squish tests](https://confluence.owncloud.com/display/OG/Squish+Testing#SquishTesting-Testplan) run successful in CI 
 - If more persons are testing, please write your name beside the section you are currently working on, e.g. @tester1
 - Add the test result to the 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
 
@@ -153,6 +153,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 3 :robot: | Edit a .xls file| 1. Create a .xls file in a sync folder 2. Edit some content 3. Wait for it to sync 4. Modify the .xls file and add more content 5. Wait for it to sync 6. Modify the .xls file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
 4 :robot: | Replace a .pdf file| 1. Create a .pdf file in a sync folder 2. Replace it with a different pdf (but same name) 3. Wait for it to sync 4. Modify the .pdf file and add more content 5. Wait for it to sync 6. Modify the .pdf file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
 5 | Edit a file while the folder is renaming | 1. You should had any kind of file already sync 2. Go to Desktop Client 3. Open the file and edit it 4. Go to the Via Web and rename the folder 5. Sync with the oc-worker 6. Do not refresh the browser at the server and download the file edited | The file at the server had the same content| :construction:  | |
+6 | Rename file and folder at the same time | 1. Go to web, and rename a folder <br>2. Rename a file contained in the folder from the file explorer on your local computer | File and folder should rename both in server and locally | :construction: | |
 
 ### 6. Delete Files and Folders
 
