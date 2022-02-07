@@ -35,9 +35,7 @@ Test environment:
   * [ ] open an existing file -> file is physically available, status: full file (green unfilled circle with green check mark)
   * [ ] create a new file locally, edit, save and exit -> status: full file
   * [ ] right click: 'Free up space' -> placeholder is created, 'Activity' 'Sync Protocol' shows "Replaced by virtual file" 
-  * [ ] open LibreOffice, edit a new file and save, to not exit -> file status: spinning (cylcling) icon
-      * [ ] exit LibreOffice -> file status: full file
-
+  
 * [ ] Tests concerning free up space
   * [ ] Create several new files in a subfolder, edit some of them, also have dehydrated files available
   * [ ] 'Open folder', right click on the folder in Explorer, 'Free up space' in Windows file menu -> all files are dehydrated, check all placeholder files are there, check trash bin on server
