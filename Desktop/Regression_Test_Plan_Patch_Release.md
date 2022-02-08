@@ -34,7 +34,7 @@ __TO DO__
          * OpenSSL 1.1.1i
 * [ ] Visually check all tabs
      * [ ] Tabs look correct
-* [ ] Connect to latest 10.X.x server
+* [ ] Connect to a latest 10.X.x server, e.g. demo.owncloud.org
      * [ ] VFS is enabled per default
          * [ ] Files are virtual (right click menu shows grayed out "Free up local space")
      * [ ] Sync a file to the server
@@ -43,7 +43,7 @@ __TO DO__
          * [ ] File has been shared successfully
      * [ ] Create a public link
          * [ ] Public link has been created and can be opened in a browser
-* [ ] Connect to latest oCIS server
+* [ ] Connect to a latest oCIS server, e.g. ocis.ocis-traefik.released.owncloud.works
      * [ ] VFS is enabled per default
          * [ ] All files and folders are synced from the server (check 'Synced' and 'Not synced' tab)
          * [ ] Files and folders are virtual (right click menu shows grayed out "Free up local space")
