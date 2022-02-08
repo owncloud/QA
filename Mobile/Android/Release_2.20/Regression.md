@@ -289,6 +289,7 @@ Not tested: Document provoder
 | Navigation bar | 1. Perform some uploads, set files and folders as av. offline and create some public links<br>2. Navigate through the items in the bottom navigation bar | Every tab shows the correct information |
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Wizard is shown. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
+| 6 - digit passcode | Install the previous version and enable 4-digit passcode<br>Upgrade to the new version vy setting 6 digits in setup.xml |  Just after upgrading, a new 6-digit passcode is asked to replace the 4-digit passcode|
 | **Changelog** |   |  |
 | [#2690](https://github.com/owncloud/android/issues/2690) |  |  |
 | [#3060](https://github.com/owncloud/android/issues/3060) |  |  |
