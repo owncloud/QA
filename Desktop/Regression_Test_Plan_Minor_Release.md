@@ -104,9 +104,9 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 10 :robot: | Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :heavy_check_mark: | tst_syncing |
 11| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many internal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside the Destop Client folder |1. Make sure you get a popup saying that all the extracted files have synced. 2. Look at Via Web and make sure that the folder has been synced over| :construction: | |
 12| Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succeed if the name is less than 65 characters |The folder is synced| :construction: | |
-13| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'COM' and 'PRN' but not 'test% or 'foo%' |:construction: | |
-14| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'COM' or 'PRN' | :construction:  | Folder named COM will be synced |
-15 :robot: | Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
+13| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'CON', 'COM1' and 'PRN' but not 'test% or 'foo%' |:construction: | |
+14| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'CON', 'COM1' or 'PRN' | :construction:  | |
+15 :robot: | Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
 
 ### 3. Files
 
@@ -255,8 +255,8 @@ TestID | Test Case | Expected Result | Result | Related Comment
 38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction:|  |
 39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |:construction:|  |
 40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction:|  |
-41 |~With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy~| The file is shared with pwd |:construction:| |
-42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| |
+41 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy | The file is shared with pwd |:construction:| |
+42 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy | An error should be shown | :construction:| |
 43 :robot: | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :heavy_check_mark:| tst_sharing |
 44 :robot: | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :heavy_check_mark:| tst_sharing |
 45 :robot: | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |   :heavy_check_mark:| tst_sharing |
