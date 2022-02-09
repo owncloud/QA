@@ -381,10 +381,11 @@ for param in \$PARAM; do
         if [ -f \$TASKd/\$app_name.sh ]; then
           echo "\$app requested. Running \$TASKd/\$app_name.sh ..."
           source \$TASKd/\$app_name.sh
-          if [ "$?" = 0 ]; then
+          \$ret = \$?
+          if [ "\$ret" = 0 ]; then
 	    echo >> ~/POSTINIT.msg "SUCCESS: \$TASKd/\$app_name.sh"
           else
-	    echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$app_name.sh return code $ret, check log."
+	    echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$app_name.sh return code \$ret, check log."
           fi
 	else
           echo -e "\$app installed. Try this to activate:\n\n\tocc app:enable \$app_name\n"
@@ -397,8 +398,18 @@ for param in \$PARAM; do
     occ app:list \$app_name
 
   else
-    # This param is not an app.
-    if [ -e "/root/\$param" ]; then
+    if [ -f "\$TASKd/\$param.sh" ]; then
+      # this is not a downloaded app, but bundled app that has an init script in the tasks folder.
+      echo "Running \$TASKd/\$param.sh ..."
+      source \$TASKd/\$param.sh
+      \$ret = \$?
+      if [ "\$ret" = 0 ]; then
+        echo >> ~/POSTINIT.msg "SUCCESS: \$TASKd/\$param.sh"
+      else
+        echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$param.sh return code \$ret, check log."
+      fi
+    elif [ -e "/root/\$param" ]; then
+      # This param is not an app.
       echo "File added: /root/\$param"
       case "\$param" in
 	*.crt)

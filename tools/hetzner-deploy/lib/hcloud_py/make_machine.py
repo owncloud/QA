@@ -119,7 +119,7 @@ user = user.split('@')[0]       # strip domain part, if any
 suff = ''.join(random.choice(string.ascii_lowercase+string.digits) for i in range(3))
 if args.unique: NAME = '-'.join([user, NAME, suff])
 
-labels = { 'owner': user, 'origin': 'make_machine_py', 'used_for': used_for }
+labels = { 'owner': user, 'origin': 'make_machine_py', 'for': used_for, 'fw.in-allow-mailhog-web': '', 'fw.in-allow-ssh-http-https-ping': '' }
 ssh_key_list = []
 for k in ssh_key_names:
   bk = client.ssh_keys.get_by_name(k)
