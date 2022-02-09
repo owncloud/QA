@@ -34,19 +34,37 @@ __TO DO__
          * OpenSSL 1.1.1i
 * [ ] Visually check all tabs
      * [ ] Tabs look correct
-* [ ] VFS is enabled per default. 
-     * [ ] Files are virtual (right click menu shows grayed out "free up local space")
-* [ ] Sync a file to the server
-     * [ ] File has been synced
-* [ ] Share a file with another user on the same server
-     * [ ] File has been shared successfully
-* [ ] Create a public link
-     * [ ] Public link has been created and can be opened in a browser
+* [ ] Connect to a latest 10.X.x server, e.g. demo.owncloud.org
+     * [ ] VFS is enabled per default
+         * [ ] Files are virtual (right click menu shows grayed out "Free up local space")
+     * [ ] Sync a file to the server
+         * [ ] File has been synced
+     * [ ] Share a file with another user on the same server
+         * [ ] File has been shared successfully
+     * [ ] Create a public link
+         * [ ] Public link has been created and can be opened in a browser
+* [ ] Connect to a latest oCIS server, e.g. ocis.ocis-traefik.released.owncloud.works (Test systems: https://owncloud.dev/ocis/deployment/continuous_deployment/)
+     * [ ] VFS is enabled per default
+         * [ ] All files and folders are synced from the server (check 'Synced' and 'Not synced' tab)
+         * [ ] Files and folders are virtual (right click menu shows grayed out "Free up local space")
+     * [ ] Sync a file/folder to the server
+         * [ ] File has been synced
+         * [ ] Folder has been synced
+     * [ ] Delete a file/folder locally
+         * [ ] File is deleted on server
+         * [ ] Folder is deleted on server
+     * [ ] Delete file/folder on server
+         * [ ] File is deleted locally
+         * [ ] Folder is deleted locally
+     * [ ] Share a file with another user on the same server
+         * [ ] File has been shared successfully
+     * [ ] Create a public link
+         * [ ] Public link has been created and can be opened in a browser
 * [ ] disable / re-enable VFS
      * [ ] VFS has been disabled / enabled
      * [ ] check Explorer icons: VFS off: overlay icons, VFS on: (Win) icon in 'Status' column
  ----
- * [ ] Install previous version of **Testpilot client on Win 10** VFS _ON_
+ * [ ] Install the previous version of **Testpilot client on Win 10** VFS _ON_
      * [ ] Update to new version should be suggested (after changing 'Update channel' to 'Beta' on  "Settings" tab)
 * [ ] Update to new version while previous version of the client is still running
      * [ ] Client is terminated without problems by the MSI installer  
@@ -56,8 +74,8 @@ __TO DO__
      * [ ] "Open folder" and make sure folders/files are there  
      * [ ] check db in sync root: .sync_journal.db is the only *.db file (enable 'hidden files' in 'View')
 -----
-* [ ] Downgrade to current version 2.X.x is prevented
-    * [ ] Install the next client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
+* [ ] Downgrade to new version 2.X.x is prevented
+    * [ ] Install the next (unreleased) client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
     * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
     * [ ] Start client 2.X.x -> red error message "Downgrading the folder from 2.X.x+1 to 2.X.x is not supported"
     * [ ] Add a new account and try to reuse existing sync root -> error popup: "Existing connection... Please use another sync folder"
