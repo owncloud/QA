@@ -12,13 +12,25 @@ Have a Desktop Client vX.X.0 ready to be used for testing.
 Prepare a 10.2.1 server with ssl activated and trusted certificates.
  - `env OC10_VERSION=10.2 bash make_oc10_apps.sh --`
  -> server URL
-Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND)
+ 
+Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used for specific tests
  - `env OC10_DNSNAME=oc1080-ldap-DATE bash make_oc10_apps.sh oauth2 user_ldap  password_policy files_pdfviewer windows_network_drive=2.0.0`
  -> server URL
 
 Optional: Have an Active Directory server ready to be used with owncloud.
 
+Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker `env OC10_VERSION=latest bash make_oc10_apps.sh --`
+
 ## Testing
+
+- For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
+- "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
+- Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
+- Make sure all [squish tests](https://confluence.owncloud.com/display/OG/Squish+Testing#SquishTesting-Testplan) run successful in CI 
+- If more persons are testing, please write your name beside the section you are currently working on, e.g. @tester1
+- Add the test result to the 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
+
+## Testplan Minor Release
 
 * [ ] 1. Install/Update - Connect - Login  @tester1
   -> https://github.com/owncloud/client/issues/xxxx#issuecomment-xxxxxxxxx
@@ -51,15 +63,7 @@ Optional: Have an Active Directory server ready to be used with owncloud.
 
 2. Add the [Regression_Test_Plan_Patch](https://github.com/owncloud/QA/blob/master/Desktop/Regression_Test_Plan_Patch_Release.md) items in a separate comment (test all platforms + migration).
 
-3. Copy each set (1. - 11.) of the minor release tests into a separate comment and add the links above. If more persons are testing, write the name beside the headline.
-
-4. For each test set, choose a random platform win/linux/mac, unless test items specify otherwise. Record which platform was used.
-
-5. Start testing:
-   * "Enable logging to temporary folder" and "Log Http traffic" (tab 'Settings', button 'Log Settings') to have log-files available if needed to report an issue.
-   * Manual testing is only required for tests not covered by automated squish testing (marked as :robot:)
-      * Go to https://drone.owncloud.com/owncloud/client and look for the release tag vX.X.x, click on green checkmark of this commit and make sure all tests marked with :robot: were run (search both: GUI-tests-@smokeTest and GUI-tests-~@smokeTests)
-   * Add the test result to 'Result' column. For success: :heavy_check_mark:, failure: :x: (link the reported #issue to 'Related Comment')
+3. Copy each set (1. - 11.) of the minor release tests into a separate comment and add the links above.
 
 ---
 
@@ -100,9 +104,9 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 10 :robot: | Verify one empty folder with a length longer than the allowed limit will not be synced | 1. Go to local sync folder 2. Create a single empty folder with a name longer than that allowed by ILP (more than 59 characters) 3. Look at the Via Web repository 4. Repeat this with a folder at the root level, and in various subfolders up to 5 levels deep 5. Sync |At the Via Web the folder has not been synced| :heavy_check_mark: | tst_syncing |
 11| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many internal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside the Destop Client folder |1. Make sure you get a popup saying that all the extracted files have synced. 2. Look at Via Web and make sure that the folder has been synced over| :construction: | |
 12| Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succeed if the name is less than 65 characters |The folder is synced| :construction: | |
-13| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'COM' and 'PRN' but not 'test% or 'foo%' |:construction: | |
-14| Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'COM' or 'PRN' | :construction:  | Folder named COM will be synced |
-15 :robot: | Invalid system names | 1. On the server, create folders named 'COM' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
+13| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'CON', 'COM1' and 'PRN' but not 'test% or 'foo%' |:construction: | |
+14| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'CON', 'COM1' or 'PRN' | :construction:  | |
+15 :robot: | Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
 
 ### 3. Files
 
@@ -149,6 +153,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 3 :robot: | Edit a .xls file| 1. Create a .xls file in a sync folder 2. Edit some content 3. Wait for it to sync 4. Modify the .xls file and add more content 5. Wait for it to sync 6. Modify the .xls file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
 4 :robot: | Replace a .pdf file| 1. Create a .pdf file in a sync folder 2. Replace it with a different pdf (but same name) 3. Wait for it to sync 4. Modify the .pdf file and add more content 5. Wait for it to sync 6. Modify the .pdf file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
 5 | Edit a file while the folder is renaming | 1. You should had any kind of file already sync 2. Go to Desktop Client 3. Open the file and edit it 4. Go to the Via Web and rename the folder 5. Sync with the oc-worker 6. Do not refresh the browser at the server and download the file edited | The file at the server had the same content| :construction:  | |
+6 | Rename file and folder at the same time | 1. Go to web, and rename a folder <br>2. Rename a file contained in the folder from the file explorer on your local computer | File and folder should rename both in server and locally | :construction: | |
 
 ### 6. Delete Files and Folders
 
@@ -250,8 +255,8 @@ TestID | Test Case | Expected Result | Result | Related Comment
 38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction:|  |
 39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |:construction:|  |
 40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction:|  |
-41 |~With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy~| The file is shared with pwd |:construction:| |
-42 | ~With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy~| An error should be shown | :construction:| |
+41 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy | The file is shared with pwd |:construction:| |
+42 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy | An error should be shown | :construction:| |
 43 :robot: | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :heavy_check_mark:| tst_sharing |
 44 :robot: | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :heavy_check_mark:| tst_sharing |
 45 :robot: | Share link a file with a user and set a password and a expiration date. Change the pwd | The file is shared with the updated pwd |   :heavy_check_mark:| tst_sharing |
