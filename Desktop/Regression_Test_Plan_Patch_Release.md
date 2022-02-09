@@ -43,7 +43,7 @@ __TO DO__
          * [ ] File has been shared successfully
      * [ ] Create a public link
          * [ ] Public link has been created and can be opened in a browser
-* [ ] Connect to a latest oCIS server, e.g. ocis.ocis-traefik.released.owncloud.works
+* [ ] Connect to a latest oCIS server, e.g. ocis.ocis-traefik.released.owncloud.works (Test systems: https://owncloud.dev/ocis/deployment/continuous_deployment/)
      * [ ] VFS is enabled per default
          * [ ] All files and folders are synced from the server (check 'Synced' and 'Not synced' tab)
          * [ ] Files and folders are virtual (right click menu shows grayed out "Free up local space")
