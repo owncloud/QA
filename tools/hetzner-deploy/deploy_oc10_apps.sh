@@ -432,8 +432,9 @@ if [ -n "\$oc10_fqdn" ]; then
   occ config:system:set trusted_domains 2 --value="\$oc10_fqdn"
   occ config:system:set overwrite.cli.url --value="https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
   echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
-  echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare     cf_dns $IPADDR \$oc10_fqdn"
-  echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
+  echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certiicate:"
+  echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"
+  # echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
   echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
 fi
 

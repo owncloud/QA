@@ -9,7 +9,7 @@ cf_zone_default=owncloud.works
 
 if [ -z "$1" -o "$1$2" = '-' -o "$1$2" = '--' ]; then
   cat <<EOF 
-Usage: $0 IPADDR [FQDN]
+Usage: $0 IPADDR [FQDN] [BOT:mailaddr]
 
 A cloudflare DNS record for the fully qualified domain name FQDN is created pointing to IPADDR.
 If an entry for FQDN already exists, it is first removed, then re-created with the new IPADDR.
@@ -19,6 +19,8 @@ To delete all entries for an IPADDR, you can pass '-' instead of a valid FQDN.
 
 The zone used is controlled by the environment variable CLOUDFLARE_DNS_ZONE, which defaults to $cf_zone_default.
 (With CLOUDFLARE_DNS_API the URL for a zone API can be directly given. This overrides CLOUDFLARE_DNS_ZONE.)
+
+TODO: If the optional third paramter is given, try to log into the machine and run certbot with the given email address.
 EOF
   exit 0
 fi
@@ -78,4 +80,11 @@ fi
   
 if [ "$1" != '-' -a -n "$1" ]; then
   cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$2"'","content":"'"$1"'","proxied":false}' | jq
+fi
+
+if [ -n "$3" ]; then
+  email=$(echo "$3" | cut -d: -f2)
+  set -x
+  sleep 3; sleep 2; sleep 1
+  ssh root@$1 certbot -m "$email" --no-eff-email --agree-tos --redirect -d "$2"
 fi
