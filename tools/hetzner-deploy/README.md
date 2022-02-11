@@ -1,9 +1,15 @@
 # Hetzner Deployment Scripts
 
-The tools here can deploy ocis and other installations into Hetzner cloud (or anywhere with root access).
-At Hetzner we use terraform or the hcloud API commands to create the machine. The machines will be made accessible via ssh.
+The tools here can deploy the classic owncloud 10 (with loading and intializing many apps) or ocis or other installations into Hetzner cloud
+(or anywhere with root access).
+At Hetzner we normally use the hcloud API via pythin, but can also use terraform or the hcloud CLI.
 
-Not tested on Mac. (Pull requests welcome)
+The machines will be
+- made accessible via ssh.
+- have a unique hetzner-name and an rdns entry.
+- start with some nice labels, (including some that start with 'fw.' -- those pull in default firewall rules for me.
+- will leave an ssh connection open to the machine, with some further instructions. E.g. how to assign a fully qualified domain name
+  and an ssl certificate using the cf_dns tools from the same repo.
 
 ## Example with full automation
 
@@ -14,12 +20,12 @@ Not tested on Mac. (Pull requests welcome)
 
 ```
 sudo apt install git
-git clone https://github.com/owncloud-docker/compose-playground
-cd compose-playground/examples/hetzner-deploy
+git clone https://github.com/owncloud/QA
+cd QA/tools/hetzner-deploy
 
 export HCLOUD_SSHKEY_NAMES=jw@owncloud.com
 export HCLOUD_TOKEN=mZdZX......................................................L8bml
-./make_oc10_apps.sh --
+./deploy_oc10_apps.sh --
 ```
 
 ## Simple example with manually created machine
@@ -30,8 +36,8 @@ export HCLOUD_TOKEN=mZdZX......................................................L
 
 ```
 sudo apt install git
-git clone https://github.com/owncloud-docker/compose-playground
-cd compose-playground/examples/hetzner-deploy
+git clone https://github.com/owncloud/QA
+cd QA/tools/hetzner-deploy
 
 export OC_DEPLOY_ADDR=xx.yy.zz.aa
 ./make_ocis_test.sh
@@ -45,9 +51,9 @@ export OC_DEPLOY_ADDR=xx.yy.zz.aa
 * Run from within that machine:
 
 ```
-apt install git
-git clone https://github.com/owncloud-docker/compose-playground
-cd compose-playground/examples/hetzner-deploy
+sudo apt install git
+git clone https://github.com/owncloud/QA
+cd QA/tools/hetzner-deploy
 
 export OC_DEPLOY_ADDR=localhost
 ./make_ocis_test.sh
@@ -58,11 +64,13 @@ export OC_DEPLOY_ADDR=localhost
 All these scripts are independant entry points. Each of them deploys a specific setup
 and gives some instruction for what to do next.
 
- * `env OCIS_VERSION=v1.0.0-beta5 ./make_ocis_eos_compose_test.sh` -- run ocis (with specified git branch) on eos.
+ * `env OC10_VERSION=1.9.1 ./deploy_oc10_apps.sh user_ldap richdocuments` -- start an owncloud connected to an ldap server, and a collabora server
 
- * `./make_ocis_eos_compose_test.sh` -- run ocis with eos as docker compose. Jürgen's favorite entry point.
+ * `env OCIS_VERSION=v1.0.0-beta5 ./deploy_ocis_eos_compose_test.sh` -- run ocis (with specified git branch) on eos.
 
- * `./make_ocis_make_generate_build_test.sh` -- build ocis from source, and run the binary (without docker)
+ * `./deploy_ocis_eos_compose_test.sh` -- run ocis with eos as docker compose. Jürgen's favorite entry point.
+
+ * `./deploy_ocis_make_generate_build_test.sh` -- build ocis from source, and run the binary (without docker)
 
  * `./make_machine.sh` -- creates a machine and returns its IP address.
    This is a general purpose script, check out the command line options.

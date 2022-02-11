@@ -48,7 +48,7 @@ test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
 case $vers in
-  10.3* | 10.2* | 10.1*)
+  10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.*)
     export HCLOUD_SERVER_IMAGE=ubuntu-18.04
     ;;
   9* | 8*)
@@ -186,7 +186,7 @@ done
 firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
 test "$firstarg" = "-" && firstarg=
 # try to keep the name short. certbot explodes on long names
-firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')
+firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-ransomware_protection/-rwp/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')
 test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr '[A-Z]_' '[a-z]-' | tr -d .=)-DATE"
 h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
@@ -360,6 +360,14 @@ cd
 ln -s /var/www/owncloud/{data,config} .
 echo "alias cd='cd -P'" >> ~/.bash_aliases
 . ~/.bash_aliases
+
+echo >> ~/env.sh "IPADDR=$IPADDR"
+echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"
+echo >> ~/env.sh "OC10_VERSION=$vers"
+echo >> ~/env.sh "OC10_TAR_URL=$tar"
+echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
+echo >> ~/env.sh "machine_type=$machine_type"
+echo >> ~/env.sh "ARGV='${ARGV[@]}'"
 
 #################################################################
 
