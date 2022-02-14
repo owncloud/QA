@@ -203,7 +203,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 6 | Verify shared icon, Win+non-VFS | 1. User share a folder | When the folder or file is shared by link show a special icon | :construction:  |  |
 7 | Verify shared icon, Win+VFS | 1. User share a folder | No sharing indicator (only status) is shown in VFS mode | :construction:  |  |
 8 | Move a shared folder with permissions | 1. Move a shared folder with permissions inside another shared folder from Desktop; 2. The needed permission is Edit-Write on the "other" folder. | Cannot move to another shared folder (403 Forbidden) | :construction: |     |
-11 :robot: | Share a file with many users | 1. Having one file shared with 80 users | The Desktop works fine, list of users can be scrolled | :heavy_check_mark: :construction: | (automated with 3 users) prefer manual testing for larger users                                                            |
+11 :robot: | Share a file with many users | 1. Having one file shared with 80 users | The Desktop works fine, list of users can be scrolled | :heavy_check_mark: | (automated with 3 users) prefer manual testing for larger users             |
 12 :robot: | Share a Folder with Password protect| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check Password protection 5. Introduce the password 6. Press Enter or Click on Set password option | You can write the password| :heavy_check_mark: | tst_sharing |
 13 :robot: | Share a Folder with Set expiration date| 1. Create a new folder 2. Share with oC 3. Check Share link option 4. Check the Set expiration date 5. Introduce one day for expiration date | You can configurate the expiration date | :heavy_check_mark: | tst_sharing |
 14 :robot: | Share a Folder with Allow editing| Create a new folder 2. Share with oC 3. Check Share link option 4. Check Allow editing option  | The Folder can allow editing|  :heavy_check_mark: | tst_sharing   |
@@ -239,23 +239,23 @@ TestID | Test Case | Expected Result | Result | Related Comment
 22 :robot: | Share a file with user B with Can Share permissions enabled. Login as User B and reshare it | The file can be reshared in the server with other user| :heavy_check_mark:| tst_sharing |
 23 :robot: | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it  | The file can be edited in the server with other user | :heavy_check_mark:| tst_sharing |
 24 :robot: | Share a file with user B with Change permission enabled. Login as User B and change it  | The file can be changed in the server with other user | :heavy_check_mark:| tst_sharing |
-25 | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. try to edit it again | The file can be edited in the server with other user |:construction:| |
+25 :robot: | Share a file with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. try to edit it again | The file can be edited in the server with other user | :heavy_check_mark: | tst_sharing |
 26 :robot: | Share a folder with user B with Can Share permissions enabled. Login as User B and reshare it | The folder can be reshared in the server with other user |:heavy_check_mark:| tst_sharing |
 27 :robot: | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it  | The folder can be edited in the server with other user | :heavy_check_mark:| tst_sharing |
 28 :robot: | Share a folder with user B with Change permission enabled. Login as User B and change it  | The folder can be changed in the server with other user | :heavy_check_mark:| tst_sharing |
 29 :robot: | Share a folder with user B with Create permissions enabled. Login as User B and create a file in it | The folder can be edited creating a file in the server with other user | :heavy_check_mark:| tst_sharing |
 30 :robot: | Share a folder with user B with Create permissions enabled. Login as User B and create a folder in it | The folder can be edited creating a folder in the server with other user | :heavy_check_mark:| tst_sharing |
-31 | Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be edited in the server with other user | :construction:| |
-32 | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. Try to edit it again | The folder cannot be edited the second time | :construction:| |
+31 :robot:| Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be edited in the server with other user | :heavy_check_mark: | tst_sharing |
+32 :robot: | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. Try to edit it again | The folder cannot be edited the second time | :heavy_check_mark: | tst_sharing |
 33 :robot: | Share a file with user B without Can Share permission enabled. Login as User B and try to reshare it | The file cannot be reshared |  :heavy_check_mark:| tst_sharing |
-34 :robot: | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :heavy_check_mark:| tst_sharing |
-35 | Share a file with user B without Change permission enabled. Login as User B and try to change it  | The file cannot be changed | :construction:|  |
+34 :robot: | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :heavy_check_mark: | tst_sharing |
+35 :robot: | Share a file with user B without Change permission enabled. Login as User B and try to change it  | The file cannot be changed | :heavy_check_mark: | tst_sharing |
 36 :robot: | Share a folder with user B without Can Share permission enabled. Login as User B and try to reshare it | The folder cannot be reshared | :heavy_check_mark:| tst_sharing |
 37 :robot: | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited |  :heavy_check_mark:| tst_sharing |
-38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction:|  |
-39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed |:construction:|  |
-40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction:|  |
-41 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy | The file is shared with pwd |:construction:| |
+38 :robot: | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :heavy_check_mark: | tst_sharing |
+39 :robot: | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed | :heavy_check_mark: | tst_sharing |
+40 :robot: | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :heavy_check_mark: | tst_sharing |
+41 :robot: | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy | The file is shared with pwd |:heavy_check_mark:| tst_sharing |
 42 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy | An error should be shown | :construction:| |
 43 :robot: | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :heavy_check_mark:| tst_sharing |
 44 :robot: | Share link a file with a user and set a password and a expiration date. Change the expiration date | The file is shared with the updated expiration date | :heavy_check_mark:| tst_sharing |
