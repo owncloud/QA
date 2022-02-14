@@ -83,6 +83,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_DNSNAME=oc1080rc1-DATE	set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
   echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
+  echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   exit 1
 fi
 
