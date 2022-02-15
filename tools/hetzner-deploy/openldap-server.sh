@@ -45,14 +45,16 @@ EOF1
 
 ## FROM https://stackoverflow.com/questions/6372365/support-reverse-group-membership-maintenance-for-openldap-2-3
 ## inspect with: ldapsearch -b cn=config -D 'cn=root,cn=config' -W
-cat <<EOF4 > $ldif/11_memberof.ldif
-dn: cn=module{0},cn=config
-objectClass: olcModuleList
-cn: module{0}
-olcModulePath: /usr/lib/openldap
-olcModuleLoad: {0}memberof
-olcModuleLoad: {1}refint
-EOF4
+## ldap_add: Insufficient access (50)
+#
+# cat <<EOF4 > $ldif/11_memberof.ldif
+# dn: cn=module{0},cn=config
+# objectClass: olcModuleList
+# cn: module{0}
+# olcModulePath: /usr/lib/openldap
+# olcModuleLoad: {0}memberof
+# olcModuleLoad: {1}refint
+# EOF4
 
 cat <<EOF2 > $ldif/20_users.ldif
 dn: ou=users,dc=owncloud,dc=com
@@ -267,4 +269,9 @@ Connect owncloud via user_ldap:
    Click "Edit LDAP Query", Mode switch -> YES
    -> Some dropdown become active.
      -> A yellow message may pop up: Disabled as the ldap/AD server does not support memberOf
+
+Finally log in as root, and run
+  occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
 EOF6
+
+
