@@ -79,19 +79,18 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | **Security** |   |  |
 | Passcode enabled without biometrical | 1. Enable passcode<br>2. Leave the app before entering<br>3. Open app<br>4. Enter a correct passcode twice and not enable biometrical<br>5. Leave the app and open it again| 3. Passcode not asked<br>4. Biometrical asked to be enabled<br>5. Passcode asked |
 | Passcode enable with biometrical | 1. Enable passcode<br>2. Leave the app before entering<br>3. Open app<br>4. Enter a correct passcode twice and enable biometrical<br>5. Leave the app and open it again| 3. Passcode not asked<br>4. Biometrical asked to be enabled<br>5. Biometrical asked |
-| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current pincode, don't enter it, leave the app<br>3. Open the app again<br>| Passcode is asked |
+| Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current passcode, don't enter it, leave the app<br>3. Open the app again<br>| Passcode is asked |
 | Disable app passcode | 1. Select to disable passcode<br>2. When it's asked to enter the current passcode, enter it<br>3. Leave the app<br>4. Open the app<br> | Passcode is not asked anymore |
-| Passcode security | 1. Select to disable passcode<br>2. Without entering it, kill the app<br>3. Open the app<br>| Passcode is asked |
 | Passcode security | 1. Go to device settings and clear data<br>2. Open the app<br>| Passcode is asked |
 | Pattern lock without biometrical | 1. Enable Pattern lock and not enable biometrical<br>2. Leave the app and enter again | Pattern lock is asked |
 | Pattern lock with biometrical | 1. Enable Pattern lock and enable biometrical<br>2. Leave the app and enter again | Biometrical is asked |
 | Disable pattern lock | 1. Select to disable pattern<br>2. When it's asked to enter the current pattern, don't enter it, leave the app<br>3. Open the app again<br>| Pattern is asked |
-| Disable pattern lock | 1. select to disable pattern<br>2. When it's asked to enter the current pattern, enter it<br>3.- Leave the app<br>4. Open the app<br>| Pattern is not asked anymore |
+| Disable pattern lock | 1. select to disable pattern<br>2. When it's asked to enter the current pattern, enter it<br>3. Leave the app<br>4. Open the app<br>| Pattern is not asked anymore |
 | Both at the same time | Try to enable pattern and passcode lock at the same time | Not posible |
 | Biometrical lock | Device supports biometrical | Option is displayed in `Settings`  |
 | Biometrical lock unsupported | Device does not support biometrical | Option is hidden in `Settings`  |
 | Biometrical lock | 1. After registering a finger, leave the app and enter again<br>2. Enter an incorrect finger<br>3. Enter a correct finger| 1. Biometrical asked<br>2. Error<br>3. App unlocked |
-| Biometrical cancel | 1. After registering a finger, leave the app and enter again<br>2. Repeat the process but cancel the biometrical | 1. Biometrical asked<br>2. Passcode/Pattern asked |
+| Biometrical cancel | 1. With a finger registered, leave the app and enter again<br>2. Repeat the process but cancel the biometrical | 1. Biometrical asked<br>2. Passcode/Pattern asked |
 | Upload file from camera with security | With a security method enabled (pattern/passcode/biometrical), upload from camera | Security not asked |
 | Upload file from external app with security | With a security method enabled (pattern/passcode/biometrical), upload from external app | Security asked |
 | Lock application Immediately | 1. In Settings > Security, enable passcode<br>2. In `Lock application`, let `immediately`<br>3. Reopen the app| app is locked with passcode| 
