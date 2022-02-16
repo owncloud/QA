@@ -2,6 +2,8 @@
 #
 # 2021-09-02, jw@owncloud.com
 
+# source ./env.sh	# probably not needed.
+
 pushd /var/www/owncloud/apps/
 sed -i -e 's/3600/180/g' oauth2/lib/Db/AccessToken.php
 sed -i -e 's/600/120/g'  oauth2/lib/Db/AuthorizationCode.php

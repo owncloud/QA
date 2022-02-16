@@ -6,6 +6,7 @@
 #  - https://github.com/scality/cloudserver#readme
 #  - https://s3-server.readthedocs.io/en/latest/
 
+# source ./env.sh	# probably not needed.
 
 curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
 chmod +x nodesource_setup.sh

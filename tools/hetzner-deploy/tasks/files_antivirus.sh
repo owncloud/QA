@@ -7,6 +7,9 @@
 # - files_antivirus with (if tar and key are present) Kaspersky Scan Engine
 
 # FIXME: this is needed to avoid an upgrade scenario during start: rm -rf /var/www/owncloud/apps/files_antivirus
+
+# source ./env.sh	# probably not needed.
+
 occ app:check files_antivirus         	# https://github.com/owncloud/files_antivirus/issues/394
 occ app:enable files_antivirus
 

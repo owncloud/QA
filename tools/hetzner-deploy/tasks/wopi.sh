@@ -7,6 +7,9 @@
 # - deepdiver's proxy setup
 # - only-office via https://api.onlyoffice.com/editors/wopi
 #
+
+. ./env.sh	# requires oc10_fqdn
+
 wopi_key="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
 test -z "$oc10_fqdn" && oc10_fqdn="wopi-$(date +%Y%m%d).jw-qa.owncloud.works"
 occ app:enable wopi	# CAUTION: triggers license grace period!

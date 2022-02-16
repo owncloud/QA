@@ -1,3 +1,5 @@
+# source ./env.sh	# probably not needed.
+
 apt install -y php-ldap ldap-utils	# probably already installed.
 # phpenmod php-ldap		# TODO: is this needed? My php -m shows ldap is builtin.
 

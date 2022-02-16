@@ -1,3 +1,5 @@
+# source ./env.sh	# probably not needed.
+
 occ app:enable richdocuments	# Does not trigger license grace period, but secureview is unavailable in the UI without license
 occ app:enable pdf_viewer	# for testing interoperability
 

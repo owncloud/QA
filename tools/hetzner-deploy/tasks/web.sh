@@ -1,6 +1,9 @@
 #! /bin/bash
 # Reference: https://owncloud.dev/clients/web/deployments/oc10-app/
 #
+
+source ./env.sh	# requires oc10_fqdn
+
 conf=/var/www/owncloud/config/config.json
 if [ -f $conf ]; then
   echo "$0 skipped, config file already exists."

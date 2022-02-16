@@ -4,6 +4,8 @@
 #
 # - encryption with hsmdaemon & softHSM
 
+# source ./env.sh	# probably not needed.
+
 if [ "$(echo hsmdaemon*.zip)" = 'hsmdaemon*.zip' ]; then
   echo "hsmdaemon-*.zip not deployed."
   echo "configuring encryption app without hsm support..."

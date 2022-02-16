@@ -1,3 +1,5 @@
+source ./env.sh	# requires oc10_fqdn
+
 occ app:enable onlyoffice
 occ app:enable pdf_viewer	# for testing interoperability
 
