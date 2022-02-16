@@ -48,11 +48,9 @@ All actions to be done on the release branch from here:
 - [ ] Upload as Github release using changelog entries
 - [ ] Test and document in testplan + manual explorative testing:
     - [ ] If this is an enterprise app: Enabling the app must start the grace period
-    - [ ] If this is the initial release of an app: Check that the minimum version constraint resolves correctly
     - [ ] Add section "Changlog Testing" using github releases text or CHANGELOG.md from release branch
     - [ ] Do changelog tests
     - [ ] Do regression tests
-    - [ ] smoke test with docker image `owncloud/server:latest`
     - [ ] => Final "Go" from QA (set 'QA-ready' label) => else do another RC after fixing issues in the "release-$version" branch
 
 #### Final
