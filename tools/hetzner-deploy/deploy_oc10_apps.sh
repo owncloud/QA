@@ -369,6 +369,7 @@ echo >> ~/env.sh "OC10_TAR_URL=$tar"
 echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
 echo >> ~/env.sh "machine_type=$machine_type"
 echo >> ~/env.sh "ARGV='${ARGV[@]}'"
+test -e $TASKd/env.sh || ln -s ~/env.sh $TASKd/env.sh
 
 #################################################################
 
@@ -390,7 +391,7 @@ for param in \$PARAM; do
         if [ -f \$TASKd/\$app_name.sh ]; then
           echo "\$app requested. Running \$TASKd/\$app_name.sh ..."
           source \$TASKd/\$app_name.sh
-          \$ret = \$?
+          ret=\$?
           if [ "\$ret" = 0 ]; then
 	    echo >> ~/POSTINIT.msg "SUCCESS: \$TASKd/\$app_name.sh"
           else
