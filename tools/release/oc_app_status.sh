@@ -14,16 +14,23 @@ appname=$1
 
 if [ -z "$1" ]; then
   echo "Usage:"
-  echo "	$0 APPNAME"
+  echo "	$0 APPNAME [-r]"
   echo "Find if a release is pending for the named app."
   echo "Report progress and suggest next steps."
+  echo ""
+  echo "With option -b, only the version number and [if found] the release ticket url are printed"
   exit 1
+fi
+
+releaseticket_batchmode=false
+if [ "$2" = '-r' ]; then
+  releaseticket_batchmode=true
 fi
 
 export LC_ALL=C
 
 if [ -z "$CURL_OPTS" -a -n "$GITHUB_TOKEN" -a -n "$GITHUB_USER" ]; then
-  echo '+ export CURL_OPTS="-u $GITHUB_USER:$GITHUB_TOKEN"'
+  echo 1>&2 '+ export CURL_OPTS="-u $GITHUB_USER:$GITHUB_TOKEN"'
   export CURL_OPTS="-u $GITHUB_USER:$GITHUB_TOKEN"
 fi
 
@@ -35,9 +42,9 @@ MS=$($curl -s "$api_url/milestones")
 MS_message=$(echo "$MS" | jq -r '.message' 2>/dev/null )	# suppress Cannot index array with string "message"
 
 if [ "$MS_message" != 'null' -a "$MS_message" != '' ]; then
-  echo "ERROR: Cannot fetch $api_url/milestones"
-  echo "       $MS_message"
-  echo 'Retry with: env CURL_OPTS="-u $GITHUB_USER:$GITHUB_TOKEN" ...'
+  echo 1>&2 "ERROR: Cannot fetch $api_url/milestones"
+  echo 1>&2 "       $MS_message"
+  echo 1>&2 'Retry with: env CURL_OPTS="-u $GITHUB_USER:$GITHUB_TOKEN" ...'
   exit 1
 fi
 
@@ -46,47 +53,53 @@ MS_number=$(echo "$QA"  | jq -r '.number')
 MS_state=$(echo "$QA"   | jq -r '.state' )
 
 if [ -z "$MS_number" -o "$MS_number" = "null" ]; then
-  echo "WARNING: no QA milestone found"
+  echo 1>&2 "WARNING: no QA milestone found"
 else
-  echo "Found QA milestone with state=$MS_state"
+  echo 1>&2 "Found QA milestone with state=$MS_state"
   if [ "$MS_state" != 'open' ]; then
-    echo "WARNING: expected state 'open'"
+    echo 1>&2 "WARNING: expected state 'open'"
   fi
 fi
 
 gh_issue_url=
 app_version=
 QA_issues=$($curl -s "$api_url/issues?milestone=$MS_number" | jq -r '.[].number' 2>/dev/null)
-echo ""
+echo 1>&2 ""
 if [ -n "$RELEASE_ISSUE" ]; then
   QA_issues="$RELEASE_ISSUE $QA_issues"
-  echo "Parsing issue titles from env var RELEASE_ISSUE (and QA milestone, if any):"
+  echo 1>&2 "Parsing issue titles from env var RELEASE_ISSUE (and QA milestone, if any):"
 else
-  echo "Parsing issue titles from QA milestone:"
+  echo 1>&2 "Parsing issue titles from QA milestone:"
 fi
 for i in $QA_issues; do
   title=$($curl -s "$api_url/issues/$i"  | jq -r '.title' )
   url="https://github.com/$orga/$appname/issues/$i"
-  echo "  $url - $title"
   ## sed sucks. isolate \d+\.\d+\.\d+
   # Return empty when title="Translations missed in Metrics view"
   # Return 1.0.0 when title="Metrics 1.0.0"
   vers=$(echo "$title" | sed -rne 's/.*[^0-9]([0-9]+\.[0-9]+\.[0-9]+).*/\1/p')
+  $releaseticket_batchmode || echo "  $url - $title"
   if [ -z "$app_version" -a -n "$vers" ]; then
-    echo "Version seen: $vers\n"
+    $releaseticket_batchmode || echo "Version seen: $vers\n"
     gh_issue_url="$url"
     app_version=$vers
   fi
 done
-echo ""
 
 if [ -z "$app_version" ]; then
-  echo "ERROR: No release ticket with a version number in QA milestone"
-  echo "Retry with: env RELEASE_ISSUE=nnnn ..."
+  echo 1>&2 "ERROR: No release ticket with a version number in QA milestone"
+  echo 1>&2 "Retry with: env RELEASE_ISSUE=nnnn ..."
   exit 1
 fi
 
+if $releaseticket_batchmode; then
+  echo      "$app_version $gh_issue_url"
+  # repeat the result on stderr, if stdout was redirected
+  test -t 1 || echo 1>&2 "$app_version $gh_issue_url"
+  exit 0
+fi
 
+echo ""
 gh_tag=v$app_version
 test -n "$GITHUB_TAG" && gh_tag="$GITHUB_TAG"
 

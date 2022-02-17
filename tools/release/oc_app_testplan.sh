@@ -16,11 +16,13 @@ test -n "$GITHUB_ORGA" && orga=$GITHUB_ORGA
 repo=$appname
 test -n "$GITHUB_REPO" && repo=$GITHUB_REPO
 
-if [ -z "$2" ]; then
+if [ -z "$1" ]; then
   echo "Usage:"
-  echo "	$0 APPNAME APPVERSION"
+  echo "	$0 APPNAME [APPVERSION [RELEASE_TICKET_URL]]"
   echo ""
   echo "Create a testplan ticket for an owncloud app. Please check 'oc_release app:status ...' first."
+  echo "If APPVERSION is not specified, app:status -r is checked to find version and ticket."
+  echo "If a release ticket url is known, it is mentioned in the final instructions."
   exit 1
 fi
 
@@ -93,14 +95,30 @@ Improve testplan | More tests | :construction: | TBD
 "
 done
 
+if [ -z "$appvers" ]; then
+  vers_url=$($(dirname "$0")/oc_app_status.sh $appname -r)
+  appvers=$(echo $vers_url | cut -d' ' -f1)
+  rel_url=$(echo $vers_url | cut -d' ' -f2)
+  if [ -z "$appvers" ]; then
+    echo "app:status $appname failed. Please specify the app version"
+    exit 0
+  fi
+fi
+
 if [ "$appname" != "$repo" ]; then
   appvers="$appname $appvers"
 fi
 
 echo "$plan" | grep 'dummy testplan'
-gh issue create -R $orga/$repo -t "[QA] $appvers Testplan" -b "$plan" && exit 0
+if gh issue create -R $orga/$repo -t "[QA] $appvers Testplan" -b "$plan"; then
+  if [ -n "$rel_url" ]; then
+    echo ""
+    echo "(Please add the above testplan url to the release ticket $rel_url )"
+  fi
+  exit 0
+fi
+
 echo "Command failed: gh issue create -R $orga/$repo -t '[QA] $appvers Testplan' ...."
 echo ""
 echo "Here is the testplan for the github issue:"
 echo "$plan"
-
