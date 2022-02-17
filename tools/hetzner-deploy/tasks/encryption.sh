@@ -3,6 +3,10 @@
 # 2021-06-18, jw@owncloud.com
 #
 # - encryption with hsmdaemon & softHSM
+#
+# FIXME: 
+# - expects version 0.8.0 of hsmdaemon. hsmdaemon-0.8.0.zip
+# - opens public port 8513
 
 # source ./env.sh	# probably not needed.
 
