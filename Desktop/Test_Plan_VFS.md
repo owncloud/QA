@@ -70,7 +70,7 @@ Test environment:
 
 
 * [ ] Test with a long path (make sure LongPathsEnabled in Windows registry is off ** )
-  * [ ] Create a file with a long path (> 260)
+  * [ ] Create a file inside some folders with a path length > 260 chars (> MAX_PATH length)
   * [ ] 'Free up space' -> no red error message
   
 * [ ] Test with ignored or 'problematic' files, see https://doc.owncloud.com/desktop/2.9/filenames.html
@@ -101,4 +101,6 @@ Test environment:
   * [ ] On Windows VM command line: call shutdown /h -> client continues after relogin 
   * [ ] ...
 
-** https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd
+** The client should handle a long path > 260 correctly despite the registration setting is off (for registry key see 
+https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd).
+  
