@@ -25,7 +25,7 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
 plugin_dir=/usr/share/elasticsearch/plugins/
-opts="-v $plugin_dir:$plugin_dir" -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE=$pwdfile"
+opts="-v $plugin_dir:$plugin_dir -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE=$pwdfile"
 # opts="$opts -e node.name=es01 -e cluster.initial_master_nodes=es01"
 opts="$opts -e xpack.security.enabled=false -e discovery.type=single-node"
 
