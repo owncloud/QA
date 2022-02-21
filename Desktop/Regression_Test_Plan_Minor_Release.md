@@ -251,10 +251,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 34 :robot: | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :heavy_check_mark: | tst_sharing |
 35 :robot: | Share a file with user B without Change permission enabled. Login as User B and try to change it  | The file cannot be changed | :heavy_check_mark: | tst_sharing |
 36 :robot: | Share a folder with user B without Can Share permission enabled. Login as User B and try to reshare it | The folder cannot be reshared | :heavy_check_mark:| tst_sharing |
-37 :robot: | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited |  :heavy_check_mark:| tst_sharing |
-38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | The folder cannot be edited creating a file in it | :construction: |  |
-39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change it  | The folder cannot be changed | :construction: |  |
-40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | The folder cannot be edited deleting files/folders in it | :construction: |  |
+37 :robot: | Share a folder with user B without Can Edit permissions enabled. Login as User B and try to edit it  | The folder cannot be edited, i.e. neither creating or deleting a file nor changing a file content is possible |  :heavy_check_mark:| tst_sharing |
+38 | Share a folder with user B without Create permissions enabled. Login as User B and try to create a file in it  | Creating a file inside the folder isn't possible | :construction: |  |
+39 | Share a folder with user B without Change permissions enabled. Login as User B and try to change a file inside the folder | The file content cannot be changed | :construction: |  |
+40 | Share a folder with user B without Delete permissions enabled. Login as User B and try to delete it  | Deleting the folder or files in it isn't possible | :construction: |  |
 41 | With Password Policy App enabled, Share link a file with a user  and set a password that matches with the pwd policy | The file is shared with pwd |:construction:|  |
 42 | With Password Policy App enabled, Share link a file with a user  and set a password that does not match with the pwd policy | An error should be shown | :construction:| |
 43 :robot: | Share link a file with a user and set a password and a expiration date | The file is shared with pwd and expiration date | :heavy_check_mark:| tst_sharing |
