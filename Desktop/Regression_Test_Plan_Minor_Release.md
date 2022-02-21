@@ -245,7 +245,7 @@ TestID | Test Case | Expected Result | Result | Related Comment
 28 :robot: | Share a folder with user B with Change permission enabled. Login as User B and change it  | The folder can be changed in the server with other user | :heavy_check_mark:| tst_sharing |
 29 :robot: | Share a folder with user B with Create permissions enabled. Login as User B and create a file in it | The folder can be edited creating a file in the server with other user | :heavy_check_mark:| tst_sharing |
 30 :robot: | Share a folder with user B with Create permissions enabled. Login as User B and create a folder in it | The folder can be edited creating a folder in the server with other user | :heavy_check_mark:| tst_sharing |
-31 :robot:| Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be edited in the server with other user | :heavy_check_mark: | tst_sharing |
+31 :robot:| Share a folder with user B with Can Edit permissions enabled. Login as User B and delete it  | The folder can be deleted in the server with other user | :heavy_check_mark: | tst_sharing |
 32 :robot: | Share a folder with user B with Can Edit permissions enabled. Login as User B and edit it. Change via Desktop the permissions. Try to edit it again | The folder cannot be edited the second time | :heavy_check_mark: | tst_sharing |
 33 :robot: | Share a file with user B without Can Share permission enabled. Login as User B and try to reshare it | The file cannot be reshared |  :heavy_check_mark:| tst_sharing |
 34 :robot: | Share a file with user B without Can Edit permission enabled. Login as User B and try to edit it  | The file cannot be edited | :heavy_check_mark: | tst_sharing |
