@@ -70,8 +70,10 @@ Test environment:
 
 
 * [ ] Test with a long path (make sure LongPathsEnabled in Windows registry is off ** )
-  * [ ] Create a file inside some folders with a path length > 260 chars (> MAX_PATH length)
-  * [ ] 'Free up space' -> no red error message
+  * [ ] On server: create a file (~ 30 chars) inside 6 subfolders (each ~ 50 chars) to get a path length > 260 chars (> MAX_PATH length)
+  * [ ] 'Open Folder' from client dot menu -> the file is synced correctly (status: cloud icon for folders and file )
+  * [ ] Edit the file, save and exit -> status: full file icon for the file (and all folders)
+  * [ ] Right click on top most folder and 'Free up space' -> no red error message, status turns to cloud icon for all folders and the file
   
 * [ ] Test with ignored or 'problematic' files, see https://doc.owncloud.com/desktop/2.9/filenames.html
   * [ ] Test with files that are on the ignore list, ie. files with the extension `.part`.
