@@ -34,9 +34,9 @@ The -e parameter causes multiple levels of subdirectories, by forcing that no mo
 The total size of the default setting is ca. 12 GB -- it takes a few minutes to complete, depending on hard disk size.
 
 
-* A quicker example with a deeper tree (ca 1.2 GB of data):
+* A quicker example with a deeper tree (ca 1.2 GB of data, and short file and folder names):
 
-`randfiles.py -m 100000 -e 1000`
+`randfiles.py -m 100000 -e 1000 -n 12 100k`
 ```
 104 files done. depth: 1
 209 files done. depth: 2
@@ -91,7 +91,7 @@ optional arguments:
                         Minimum number files/subdirs per directory. Default:
                         500
   -n MAX_NAME_LEN, --max_name_len MAX_NAME_LEN
-                        Maximum length of file/subdir names. Default: 200
+                        Maximum length of file/subdir names. Default: 50
   --min_name_len MIN_NAME_LEN
                         Minimum length of file/subdir names. Default: 10
   -b MAX_BODY_LEN, --max_body_len MAX_BODY_LEN
