@@ -47,7 +47,7 @@ conf = {
   'min_entries_per_dir': 500,
   'max_entries_per_dir': 10_000,
   'min_name_len': 10,
-  'max_name_len': 200,
+  'max_name_len': 50,
   'min_body_len': 1,
   'max_body_len': 1_000,
   'folder_ratio': 0.5,                # 2.0/100=0.02: 98% of all objects, are files; 2% are folders.
