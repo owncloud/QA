@@ -35,8 +35,7 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
 plugin_dir=/usr/share/elasticsearch/plugins/
 config_dir=/usr/share/elasticsearch/config/
-mkdir -p $config_dir; chmod 777 $config_dir	# avoid ERROR: unable to create temporary keystore at [/usr/share/elasticsearch/config/elasticsearch.keystore.tmp
-opts="-v $plugin_dir:$plugin_dir -v $config_dir:$config_dir -e ELASTIC_PASSWORD=$elastic_pass"
+opts="-v $plugin_dir:$plugin_dir -e ELASTIC_PASSWORD=$elastic_pass"
 # -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE="$pwdfile"
 # opts="$opts -e node.name=es01 -e cluster.initial_master_nodes=es01"
 opts="$opts -e xpack.security.enabled=true -e discovery.type=single-node"
@@ -100,6 +99,7 @@ else
   # Changed password for user elastic
   # PASSWORD elastic = 8mUS6nmLKtuzluOOz9bw
 
+  curl -u elastic:$elastic_pass http://$elastic_host:9200
 fi
 
 
