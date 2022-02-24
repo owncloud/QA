@@ -194,6 +194,7 @@ test -z "$h_name" && h_name=oc-$vers-DATE
 d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/" | tr '[A-Z]' '[a-z]' | tr . -)
 machine_type=cx11
 echo "$*" | grep files_antivirus && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
+echo "$*" | grep search_elastic  && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
 
 source $(dirname $0)/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
 
