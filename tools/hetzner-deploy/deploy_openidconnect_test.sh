@@ -19,6 +19,7 @@ echo "Estimated setup time: 8 minutes ..."
 #vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
 vers=2.1.1-rc1
 oauth2_vers=0.5.2
+oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
 
 openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
 oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
@@ -41,7 +42,7 @@ source lib/make_machine.sh -u oidc-$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker
 comp_yml=kopano/konnect/docker-compose.yml
 reg_yml=kopano/konnect/konnectd-identifier-registration.yaml
 
-test -z "$OWNCLOUD_RELEASE_DOCKER_TAG" && OWNCLOUD_RELEASE_DOCKER_TAG=10.9.0-rc1	# found on https://hub.docker.com/r/owncloud/server/tags/
+test -z "$OWNCLOUD_RELEASE_DOCKER_TAG" && OWNCLOUD_RELEASE_DOCKER_TAG=$oc10_vers
 d_tag=$(echo $OWNCLOUD_RELEASE_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr -d .-)
 
 ## choose with or without version numbers and timestamps, in case we want multiple systems.
@@ -145,9 +146,9 @@ INIT_SCRIPT << EOF
 
 # login via 'Kopano' with user: aaliyah_abernathy pass: secret
 
-# you may first need to add the DNS entries to cloudflare or to your local hosts file
-	echo $IPADDR $KOPANO_KONNECT_DOMAIN  | sudo tee -a /etc/hosts
-  	echo $IPADDR $OWNCLOUD_DOMAIN | sudo tee -a /etc/hosts
+# you may first need to add the DNS entries to cloudflare:
+	cf_dns $IPADDR $KOPANO_KONNECT_DOMAIN
+  	cf_dns $IPADDR $OWNCLOUD_DOMAIN
 ---------------------------------------------
 EOM
 EOF
