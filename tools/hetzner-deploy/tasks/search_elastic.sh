@@ -105,11 +105,10 @@ fi
 occ app:enable search_elastic
 occ config:app:set search_elastic servers --value "elastic:$elastic_pass@$elastic_host:9200"
 occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option: https://github.com/owncloud/search_elastic/issues/260
+occ occ config:app:set search_elastic nocontent --value false	# false: enable contents search. - true: only file name search
 occ search:index:create --all
 occ search:index:reset -f	# needed so that the web UI acknowledges '0 nodes marked as indexed, 0 documents in index using 226 bytes'
-sleep 3
-sleep 3
-sleep 3				# does a delay help here?
+sleep 3				# TODO: delay does not help here. file scan does not help here. User must forst edit a file via web ui.
 occ search:index:update		# try trigger 'OCA\Search_Elastic\Jobs\UpdateContent' -- FIXME: this probably only says 'No pending jobs found.'
 
 instanceid=$(sed -ne "s/^.*'instanceid'//p" config/config.php |  sed -e "s/[^']*'//" -e "s/'.*//")
@@ -137,7 +136,7 @@ EOE
 cat <<EOS > /usr/bin/elastic_sql
 #! /bin/bash
 if [ -z "\$1" -o "\$1" = "-h" ]; then
-  echo -e "Usage:\n\t \$0" '"select \"file.content_length\",mtime, name, size, users from \"oc-$instanceid\""'
+  echo -e "Usage:\n\t \$0" '"select \"file.content_length\",mtime, name, size, users, left(\"file.content\", 50) from \"oc-$instanceid\""'
   echo ""
   exit 1
 fi
@@ -156,7 +155,7 @@ elastic_search:
 elastic_search:  Edit some text files, then try
 elastic_search:    occ search:index:update
 elastic_search:    elastic_sql "show tables"
-elastic_search:    elastic_sql "select \"file.content_length\",mtime, name, size, users from \"oc-$instanceid\""
+elastic_search:    elastic_sql "select \"file.content_length\", name, size, users, left(\"file.content\", 50) from \"oc-$instanceid\""
 --------------------------------------------------------
 EOM
 
