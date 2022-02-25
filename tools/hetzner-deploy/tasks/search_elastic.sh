@@ -7,14 +7,12 @@
 # To use with authentication,
 # - In 7.2 docker parameter -e "ELASTIC_PASSWORD=my_own_password"
 # - in elasticsearch.yml: xpack.security.enabled: true
-# TODO: unclear what the username for that password is. Is it 'elastic'?
-# - bin/elasticsearch-setup-passwords auto
-#   can generate randowm passwirds for all users.
-# TODO: find out how to retrieve the passwords and usernames.
+#
+# Requires:
+# - 4GB of RAM, minimum, it's java!
+# - vm.max_map_count=262144 - see below.
 
 # source ./env.sh	# probably not needed
-
-occ app:enable search_elastic
 
 apt install -y  docker.io						# assert docker is here
 
@@ -99,16 +97,66 @@ else
   # Changed password for user elastic
   # PASSWORD elastic = 8mUS6nmLKtuzluOOz9bw
 
-  curl -u elastic:$elastic_pass http://$elastic_host:9200
+  curl -s -u elastic:$elastic_pass http://$elastic_host:9200
 fi
 
 
+## connect to owncloud and initialize an index
+occ app:enable search_elastic
+occ config:app:set search_elastic servers --value "elastic:$elastic_pass@$elastic_host:9200"
+occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option: https://github.com/owncloud/search_elastic/issues/260
+occ search:index:create --all
+occ search:index:reset -f	# needed so that the web UI acknowledges '0 nodes marked as indexed, 0 documents in index using 226 bytes'
+sleep 3
+sleep 3
+sleep 3				# does a delay help here?
+occ search:index:update		# try trigger 'OCA\Search_Elastic\Jobs\UpdateContent' -- FIXME: this probably only says 'No pending jobs found.'
+
+instanceid=$(sed -ne "s/^.*'instanceid'//p" config/config.php |  sed -e "s/[^']*'//" -e "s/'.*//")
+echo "select * from oc_appconfig where appid = 'search_elastic';" | mysql owncloud -t
+
+
+## communication log done with
+##
+##  docker exec -ti es01 bin/elasticsearch-sql-cli http://elastic:$elastic_pass@localhost:9200
+##  sql> select "file.content_length",mtime, name, size, users from "oc-$instanceid";
+##
+# 48190 write(7, "POST /_sql?error_trace HTTP/1.1\r\nAccept-Charset: UTF-8\r\nAuthorization: Basic ZWxhc3RpYzp1YTkxMTZycTdl\r\nContent-Type: application/json\r\nAccept: application/json\r\nCache-Control: no-cache\r\nPragma: no-cache\r\nUser-Agent: Java/17.0.1\r\nHost: localhost:9200\r\nConnection: keep-alive\r\nContent-Length: 250\r\n\r\n", 298 <unfinished ...>
+# 48190 write(7, "{\"query\":\"select \\\"file.content_length\\\",mtime, name, size, users from \\\"oc-ocfa7cgsd87h\\\"\",\"mode\":\"cli\",\"version\":\"7.17.0\",\"time_zone\":\"Z\",\"request_timeout\":\"90000ms\",\"page_timeout\":\"45000ms\",\"columnar\":false,\"binary_format\":false,\"keep_alive\":\"5d\"}"
+
+# condensed form:
+curl -H "Content-Type: application/json" -s "http://elastic:$elastic_pass@$elastic_host:9200/_sql" --data '{"query":"select \"file.content_length\",mtime, name, size, users from \"oc-'"$instanceid"'\"","binary_format":false}'  | sed -e 's/\[/\n[/g'
+
+cat >> ./env.sh << EOE
+elastic_host=$elastic_host
+elastic_user=elastic
+elastic_pass=$elastic_pass
+instanceid=$instanceid
+EOE
+
+cat <<EOS > /usr/bin/elastic_sql
+#! /bin/bash
+if [ -z "\$1" -o "\$1" = "-h" ]; then
+  echo -e "Usage:\n\t \$0" '"select \"file.content_length\",mtime, name, size, users from \"oc-$instanceid\""'
+  echo ""
+  exit 1
+fi
+qq="\$(echo "\$1" | sed -e 's/"/\\\\"/g')";
+json="{\"query\":\"\$qq\",\"binary_format\":false}"
+url="http://elastic:$elastic_pass@$elastic_host:9200/_sql"
+curl -H "Content-Type: application/json" -s "\$url" --data "\$json" | sed -e 's/\[/\n[/g'
+echo ""
+EOS
+chmod a+x /usr/bin/elastic_sql
+
 cat << EOM >>  ~/POSTINIT.msg
-elastic_search:  user: elastic
-elastic_search:  password: $elastic_pass
-elastic_search:  server: http://$elastic_host:9200
+elastic_search:  connection: $elastic_host:9200 - user: elastic - password: $elastic_pass
+elastic_search:  url: http://elastic:$elastic_pass@$elastic_host:9200
 elastic_search:
-elastic_search:  TODO: integrate with owncloud.
+elastic_search:  Edit some text files, then try
+elastic_search:    occ search:index:update
+elastic_search:    elastic_sql "show tables"
+elastic_search:    elastic_sql "select \"file.content_length\",mtime, name, size, users from \"oc-$instanceid\""
 --------------------------------------------------------
 EOM
 
