@@ -4,10 +4,18 @@
 # (instead of default kopano)
 
 export HOSTNAME_SUFFIX=azure
-export OWNCLOUD_RELEASE_DOCKER_TAG=10.7.0
+export OWNCLOUD_RELEASE_DOCKER_TAG=10.9.1
 
+# Pack all this into one bashrc, which is run after everything else. Quoting hell, but works.
+#
+# Variables used:
+#  - OWNCLOUD_DOMAIN	fqdn of the user facing owncloud server
+#
 export POSTINIT_BASHRC="
-oc_hostname=\"\$(sed -ne 's/127.* oc-/oc-/p' /etc/hosts)\"
+oc_hostname=\"\$(sed -ne 's/127.* oc/oc/p' /etc/hosts)\"
+
+# The 'http.cookie.samesite' None setting avoids an error:
+# Error in OpenIdConnect:AADSTS50148: The code_verifier does not match the code_challenge supplied in the authorization request for PKCE.
 
 docker_exec () { docker-compose -f ~/compose-playground/compose/merged.yml exec \"\$@\"; }
 oc_exec () { docker_exec owncloud \"\$@\"; }
@@ -49,9 +57,10 @@ cat <<EO_AZ_CONF | docker_exec -T owncloud sh -c 'cat > config/openidconnect_azu
     'use-access-token-payload-for-user-info' => true,
     'redirect-url' => 'https://\$OWNCLOUD_DOMAIN/index.php/apps/openidconnect/redirect',
     // bring us back to the login page....
-    'post_logout_redirect_uri' => 'https://bit-sis.owncloud.works/',
+    'post_logout_redirect_uri' => 'https://\$OWNCLOUD_DOMAIN.owncloud.works/',
   )
 );
+
 EO_AZ_CONF
 
 cat <<EOM
@@ -67,13 +76,13 @@ To finalize the switch to Azure-AD setup do:
 2) For the next step record the values of
 	Directory (tenant) ID		-> provider-url
 	Application (client) ID		-> client-id
-	Cert&Secrets->New->Value	-> client-secret
+	Certificates & Secrets->New->Value	-> client-secret
 	Expose an API -> Scopes:	-> scopes
 
-3) oc_exec vi config/openidconnect_azure.config.php
+3) docker exec -ti compose_owncloud_1 vi config/openidconnect_azure.config.php
 
 	Edit all XXX_DUMMY_XXX placeholders.
-	For the next step record the redirect-url seen there.
+	For the next step record the redirect-url and post_logout_redirect_uri seen there.
 
 4) at https://aad.portal.azure.com  -> ownCloud-QA
 	-> Manage -> Authenticaton -> Web -> Redirect URIs
@@ -81,6 +90,12 @@ To finalize the switch to Azure-AD setup do:
     		https://\$OWNCLOUD_DOMAIN
     		https://\$OWNCLOUD_DOMAIN/index.php/apps/openidconnect/redirect
 		-> Save
+
+5) to convert from config.php config to db config:
+	json=\$(php -r 'require(\"config/openidconnect_azure.config.php\"); echo json_encode(\$CONFIG[\"openid-connect\"], JSON_UNESCAPED_SLASHES);' | sed -e 's/(oidc)/(oidc-db)/')
+	mv config/openidconnect_azure.config.php  config/openidconnect_azure.config.php.off
+	occ config:app:set openidconnect openid-connect --value \"\$json\"
+	occ config:system:set http.cookie.samesite --value None
 
 (To switch back to Kopano, change 'openid-connect-off' to 'openid-connect' in config.php and remove openidconnect_azure.config.php)
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

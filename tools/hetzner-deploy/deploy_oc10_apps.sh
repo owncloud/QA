@@ -309,10 +309,11 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES O
 occ maintenance:install --database "mysql"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" ||   echo "occ maintenance:install with mysql failed"
 occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || { echo "occ maintenance:install with sqlite also failed"; exit 1; }
 
-occ config:system:set trusted_domains 1 --value="$IPADDR"
+occ config:system:set trusted_domains 1 --value "$IPADDR"
 occ log:owncloud --enable -vvv
 occ log:manage --level=debug -vvv
-# occ config:system:set log_query --value="true"	# seen in 9.1/admin_manual
+# occ config:system:set log_query --value true			# seen in 9.1/admin_manual
+occ config:system:set upgrade.disable-web --value false		# default is false. Just here to make it appear in config.php
 
 echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > /var/spool/cron/crontabs/www-data
 chown www-data.crontab /var/spool/cron/crontabs/www-data
@@ -344,6 +345,10 @@ occ config:system:set file_storage.save_version_author --type boolean --value tr
 
 ## allow entry of password in the user add dialog.
 occ config:app:set core umgmt_set_password --value true		# not a boolean here, but a string value :-(
+
+## even simpler than sftp...
+## https://doc.owncloud.com/server/next/admin_manual/configuration/files/external_storage/local.html
+occ config:system:set files_external_allow_create_new_local --value true
 
 
 ## external SFTP storage
@@ -440,8 +445,8 @@ done
 
 if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
-  occ config:system:set trusted_domains 2 --value="\$oc10_fqdn"
-  occ config:system:set overwrite.cli.url --value="https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
+  occ config:system:set trusted_domains 2 --value "\$oc10_fqdn"
+  occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
   echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
   echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certiicate:"
   echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"

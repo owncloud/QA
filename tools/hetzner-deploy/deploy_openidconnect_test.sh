@@ -17,7 +17,9 @@
 echo "Estimated setup time: 8 minutes ..."
 
 #vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
-vers=2.1.1-rc1
+vers=1.0.0
+# vers=2.1.1-rc1
+# vers=2.1.0
 oauth2_vers=0.5.2
 oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
 
@@ -105,6 +107,7 @@ INIT_SCRIPT << EOF
   # bash
 
   # workaround for https://github.com/owncloud-docker/base/pull/140
+  # 140 got superceeded by pull/178 which works only with knowledge about major or not major upgrade.
   docker-compose -f merged.yml exec owncloud occ market:uninstall openidconnect
   docker-compose -f merged.yml exec owncloud occ upgrade	# just in case one of the apps has a minor number jump.
   docker-compose -f merged.yml exec owncloud wget $openidconnect_url -O /tmp/o.tar.gz
