@@ -107,10 +107,10 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 13| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'CON', 'COM1' or 'PRN' | :construction:  | |
 14 :robot: | Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing |
 15 | Long path on Windows (VFS OFF) syncs ** | 1. On server: create a file (~ 30 chars) inside 6 subfolders (each ~ 50 chars) to get a path length > 260 chars (> MAX_PATH) 2. Start client and connect with VFS OFF 3. 'Open folder' and enter the subfolders 4. Create a new file | 1. Make sure all subfolders and file are available 2. New file is synced to server |  :construction:  | |
-16 | Long path on Windows (VFS ON) syncs | 1. On server: create a file (~ 30 chars) inside 6 subfolders (each ~ 50 chars) to get a path length > 260 chars (> MAX_PATH) 2. Start client, add account and connect with VFS ON 3. 'Open folder' and enter the subfolders 4. Create a new file | 1. Make sure all subfolders and file are available 2. New file is synced to server |  :construction:  | |
-17 | Long path explorative testing on Windows | Use test scenarios 15/16 to perform tests like: create more files/subfolders in Explorer or in terminal (PowerShell), move files/folders, rename, edit a file... | Folder/files are synced without errors | :construction:  | |
+16 | Long path on Windows (VFS ON) syncs ** | 1. On server: create a file (~ 30 chars) inside 6 subfolders (each ~ 50 chars) to get a path length > 260 chars (> MAX_PATH) 2. Start client, add account and connect with VFS ON 3. 'Open folder' and enter the subfolders 4. Create a new file | 1. Make sure all subfolders and file are available 2. New file is synced to server |  :construction:  | |
+17 | Long path explorative testing on Windows ** | Use test scenarios 15/16 to perform tests like: create more files/subfolders in Explorer or in terminal (PowerShell), move files/folders, rename, edit a file... | Folder/files are synced without errors | :construction:  | |
 
-** For 15-17 make sure LongPathsEnabled in Windows registry is 'off' (see https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd). Nevertheless the client should handle the long path > 260 correctly.
+** Make sure LongPathsEnabled in Windows registry is 'off' (see https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd). Nevertheless the client should handle the long path > 260 correctly.
 
 ### 3. Files
 
