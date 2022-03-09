@@ -152,6 +152,9 @@ INIT_SCRIPT << EOF
 # you may first need to add the DNS entries to cloudflare:
 	cf_dns $IPADDR $KOPANO_KONNECT_DOMAIN
   	cf_dns $IPADDR $OWNCLOUD_DOMAIN
+# CAUTION:
+#       kopano_konnect 0.33 suffers from token refresh problems with mobile and desktop
+#       https://github.com/owncloud/client/issues/9056#issuecomment-922363069
 ---------------------------------------------
 EOM
 EOF
