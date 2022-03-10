@@ -47,6 +47,8 @@ test "$vers" = "7.0.15"   -o "$vers" = "7.0"    && tar=https://attic.owncloud.or
 test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.org/community/daily/owncloud-daily-master.tar.bz2
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
+test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'sqlite'
+
 case $vers in
   10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.*)
     export HCLOUD_SERVER_IMAGE=ubuntu-18.04
@@ -83,6 +85,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_DNSNAME=oc1080rc1-DATE	set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
   echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
+  echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   exit 1
 fi
@@ -219,7 +222,7 @@ export LC_ALL=C LANGUAGE=C
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
 apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
 apt install -y php-json php-mbstring php-mysql php-sqlite3 php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
-apt install -y ssh bzip2 zip rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils | noclutter
+apt install -y ssh bzip2 zip rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils php-pgsql postgresql | noclutter
 # We almost always assign a DNS name.
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
 
@@ -304,9 +307,27 @@ occ app:list \\\$appname
 EOAI
 chmod a+x /usr/bin/oc_app_install
 
+## prepare databases to choose from
+# postgresql
+su - postgres -c "psql -c \"ALTER SYSTEM SET listen_addresses = '';\""	# no TCP connections please
+# There is probably an early 'local all all peer' rule, that prevents later md5 rules. Disarm that one first.
+sed -i -e 's/^local\s*all\s*all\s*peer.*/local all all md5/' /etc/postgresql/*/main/pg_hba.conf
+# Add an md5 rule for the owncloud user, so that we can authentiate a user that does not exist in linux with password
+echo "local owncloud owncloud md5" >> /etc/postgresql/*/main/pg_hba.conf
+service postgresql restart
+su - postgres -c "psql -c 'DROP DATABASE owncloud'" 2>&1 | grep -v 'does not exist'
+su - postgres -c "psql -c 'DROP ROLE     owncloud'" 2>&1 | grep -v 'does not exist'
+(echo "$dbpass"; echo "$dbpass"; ) | su - postgres -c "createuser -e -P owncloud" 2>&1 | grep -v '^Enter '
+su - postgres -c "createdb -e -O owncloud owncloud"
+
+# ... and myql/mariadb
 mysql -u root -e "DROP DATABASE owncloud;" 2>/dev/null || true
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES ON owncloud.* TO owncloud@localhost IDENTIFIED BY '$dbpass'"
-occ maintenance:install --database "mysql"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" ||   echo "occ maintenance:install with mysql failed"
+
+OC10_DATABASE_HOST=localhost
+test "$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
+
+occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "$OC10_DATABASE_HOST"--admin-user "admin" --admin-pass "admin" ||   echo "occ maintenance:install with $OC10_DATABASE failed"
 occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || { echo "occ maintenance:install with sqlite also failed"; exit 1; }
 
 occ config:system:set trusted_domains 1 --value "$IPADDR"
