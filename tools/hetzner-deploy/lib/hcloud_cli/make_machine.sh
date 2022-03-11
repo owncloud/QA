@@ -145,20 +145,26 @@ test -z "$IPADDR" && exit 1
 ssh-keygen -f ~/.ssh/known_hosts -R $IPADDR	# needed to make life easier later.
 # StrictHostKeyChecking=no automatically adds new host keys and accepts changed host keys.
 
-for i in 1 2 3 4 5 6 7 8 last; do
-  sleep 5
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 last; do
+  to=5
+  test "$i" -gt 10 && to=15
+  sleep $to
   echo -n .
-  timeout 5 ssh -o ConnectTimeout=5 -o CheckHostIP=no -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@$IPADDR uptime && break
+  timeout $to ssh -o ConnectTimeout=5 -o CheckHostIP=no -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@$IPADDR uptime && break
   if [ $i = last ]; then
     echo "Error: cannot ssh into machine at $IPADDR -- tried multiple times."
+    set -x
+    hcloud server describe -o json "$NAME" | jq .status
     exit 1
   fi
 done
 
+noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|Setting up|Creating config|Created symlink|Processing triggers|)"; }
+
 if [ -n "$extra_pkg" ]; then
   case "$server_image" in
     ubuntu*|debian*)
-      ssh root@$IPADDR sh -x -s <<END | grep -E -v "^(Preparing to|Get:|Selecting previously unselected)"
+      ssh root@$IPADDR sh -x -s <<END | noclutter
 	export LC_ALL=C
 	export DEBIAN_FRONTEND=noninteractive
         apt-get update

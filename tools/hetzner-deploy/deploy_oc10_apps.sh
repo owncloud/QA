@@ -151,7 +151,7 @@ for arg in "$@"; do
 	#
 	assetnames="$(echo "$rel_json" | jq '.assets[].name' -r 2>/dev/null)"
 	appversion="$(echo $tagname | tr -d v)"
-	set -x
+	#set -x
         assetname=''
 	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-$appversion")"		# substring web-4.4.0
 	test -z "$assetname" && assetname="$(echo "$assetnames" | grep -F "$appname-app-$appversion")"		# substring web-app-4.4.0
@@ -211,10 +211,10 @@ INIT_SCRIPT << EOF
 # (C) 2020, jw@owncloud.com
 #
 TASKd=\$HOME/tasks
-ls -la \$TASKd
+# ls -la \$TASKd
 
 # pipe apt output into here, to do what apt -q should have done, but does not do.
-noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected)"; }
+noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|Setting up|Creating config|Created symlink|Processing triggers|)"; }
 
 
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
@@ -327,8 +327,9 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES O
 OC10_DATABASE_HOST=localhost
 test "$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
 
-occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "$OC10_DATABASE_HOST"--admin-user "admin" --admin-pass "admin" ||   echo "occ maintenance:install with $OC10_DATABASE failed"
-occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || { echo "occ maintenance:install with sqlite also failed"; exit 1; }
+occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --admin-user "admin" --admin-pass "admin" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
+occ status    || sleep 15	# in case there was an error, let the user study that for a while...
+occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
 
 occ config:system:set trusted_domains 1 --value "$IPADDR"
 occ log:owncloud --enable -vvv
@@ -400,7 +401,7 @@ test -e $TASKd/env.sh || ln -s ~/env.sh $TASKd/env.sh
 
 #################################################################
 
-install_app() { ( test -f "\$1" && cat "\$1" || curl -L -s "\$1" ) | su www-data -s /bin/sh -c 'tar zxvf - -C /var/www/owncloud/apps-external'; }
+install_app() { echo "install_app: \$1"; ( test -f "\$1" && cat "\$1" || curl -L -s "\$1" ) | su www-data -s /bin/sh -c 'tar zxf - -C /var/www/owncloud/apps-external'; }
 
 apps_installed=
 for param in \$PARAM; do
