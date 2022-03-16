@@ -10,16 +10,19 @@
 Have a Desktop Client vX.X.0 ready to be used for testing.
  -> download URL
 Prepare a 10.2.1 server with ssl activated and trusted certificates.
- - `env OC10_VERSION=10.2 bash make_oc10_apps.sh --`
+ - `env OC10_VERSION=10.2 bash deploy_oc10_apps.sh --`
  -> server URL
  
 Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used for specific tests
- - `env OC10_DNSNAME=oc1080-ldap-DATE bash make_oc10_apps.sh oauth2 user_ldap  password_policy files_pdfviewer windows_network_drive=2.0.0`
+ - `env OC10_DNSNAME=oc1080-ldap-DATE bash deploy_oc10_apps.sh oauth2 user_ldap  password_policy files_pdfviewer windows_network_drive=2.0.0`
  -> server URL
 
 Optional: Have an Active Directory server ready to be used with owncloud.
 
-Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker `env OC10_VERSION=latest bash make_oc10_apps.sh --`
+Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker, e.g.:
+ - docker run --rm -ti -p 8080:8080 owncloud/server:10.9.1
+ - firefox http://localhost:8080
+
 
 ## Testing
 
