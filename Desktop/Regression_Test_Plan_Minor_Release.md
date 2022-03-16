@@ -19,7 +19,10 @@ Have the lastest released OC server ready with LDAP and two external storages of
 
 Optional: Have an Active Directory server ready to be used with owncloud.
 
-Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker `env OC10_VERSION=latest bash make_oc10_apps.sh --`
+Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker, e.g.:
+ - docker run --rm -ti -p 8080:8080 owncloud/server:10.9.1
+ - firefox http://localhost:8080
+
 
 ## Testing
 
