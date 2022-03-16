@@ -1,0 +1,22 @@
+#!/bin/sh
+# install an app from marketplace
+
+appname=$1
+appvers=$2
+
+curl=curl
+tmpdir="/tmp/oc_marketplace_dl"
+mkdir -p $tmpdir
+
+if [ -z "$appvers" ]; then
+  # find the latest release
+  appvers="$($curl -s "https://marketplace.owncloud.com/ajax/apps/$appname" | jq '.releases[0].version' -r )"
+  test -z "$appvers" -o "$appvers" = null && { echo "Could not find $appname at https://marketplace.owncloud.com"; exit 1; }
+fi
+asseturl="$($curl -s "https://marketplace.owncloud.com/ajax/apps/$appname/$appvers" | jq .url -r)"
+test -z "$asseturl" -o "$asseturl" = null && { echo "No asseturl for $appname $appvers at https://marketplace.owncloud.com"; exit 1; }
+assetname=$appname-$appvers.tar.gz
+echo "Found $assetname at marketplace: $asseturl"
+arg="$tmpdir/$assetname"
+$curl -s -L -H 'Accept: application/octet-stream' "$asseturl" > "$arg"
+ls -la $arg
