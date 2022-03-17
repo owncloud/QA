@@ -83,6 +83,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo ""
   echo "Environment:"
   echo "   OC10_DNSNAME=oc1080rc1-DATE	set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
+  echo "   OC10_FQDN=t3.owncloud.works	set the FQDN. Overrides OC10_DNSNAME."
   echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
@@ -382,6 +383,10 @@ occ files_external:create /SFTP sftp password::password -c host=localhost -c roo
 occ config:app:set core enable_external_storage --value yes
 
 test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/").jw-qa.owncloud.works"
+if [ -n "$OC10_FQDN" ]; then
+  oc10_fqdn="$OC10_FQDN"
+  OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
+fi
 
 curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5
