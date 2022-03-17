@@ -5,8 +5,7 @@ Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_search_ela
 ### setup
 
 * `hetzner_deploy/oc10.sh search_elastic`
-     - https://oc1091-search-elastic-200-20220218.jw-qa.owncloud.works
-     - https://oc1091-search-elastic-210-rc1-20220225.jw-qa.owncloud.works
+
 
 ## Testing functionality
 
@@ -18,7 +17,7 @@ TODO:
 * [ ] Document how to "re-index" --  https://github.com/owncloud/enterprise/issues/4999
   - `occ search:index:reset; occ search:index:rebuild;` - edit a text file in web ui - `occ search:index:update`
   - TODO: find a way without manually editing a file.
-* [x] Test upgrade -> https://github.com/owncloud/search_elastic/issues/255
+* [ ] Test upgrade -> https://github.com/owncloud/search_elastic/issues/255
 
 
 Test Case | Expected Result | Result | Related Comment
