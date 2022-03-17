@@ -170,13 +170,12 @@ EOS
 chmod a+x /usr/bin/elastic_sql
 
 cat << EOM >>  ~/POSTINIT.msg
-elastic_search:  connection: $elastic_host:9200 - user: elastic - password: $elastic_pass
 elastic_search:  url: http://elastic:$elastic_pass@$elastic_host:9200
 elastic_search:
 elastic_search:  Edit some text files, then try
 elastic_search:    occ search:index:update
 elastic_search:    elastic_sql "show tables"
-elastic_search:    elastic_sql "select \"file.content_length\", name, size, users, left(\"file.content\", 50) from \"oc-$instanceid\""
+elastic_search:    elastic_sql 'select "file.content_length", name, size, users, left("file.content", 50) from "oc-$instanceid"'
 --------------------------------------------------------
 EOM
 
