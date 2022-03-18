@@ -8,6 +8,8 @@
   `oc_release.sh app:get files_primary_s3`
 
 Have a primary storage configured for all files in the system (Scality or Ceph preferred, Minio is not officially supported - as originally they had no versioning support but since August 2021 that got added, as soon as its tested and documented we can claim support), see https://buildmedia.readthedocs.org/media/pdf/s3-server/doc-adddoc/s3-server.pdf
+
+https://doc.owncloud.com/server/next/admin_manual/configuration/files/external_storage/s3_compatible_object_storage_as_primary.html
 </details>
 
 ## Testing functionality
