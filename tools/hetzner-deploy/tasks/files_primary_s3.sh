@@ -8,7 +8,9 @@
 
 # source ./env.sh	# probably not needed.
 
-curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+## update 2022-03-18: Node.js 10.x is no longer actively supported!
+# curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
 chmod +x nodesource_setup.sh
 ./nodesource_setup.sh
 
@@ -81,7 +83,8 @@ chown www-data. /var/www/owncloud/config/s3primary.config.php
 
 screen -d -m -S s3prim -L env REMOTE_MANAGEMENT_DISABLE=1 yarn start
 
-while ! s3cmd mb s3://owncloud 2>/dev/null; do
+for i in 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
+  s3cmd mb s3://owncloud 2>/dev/null && break
   # wait for the server to to start...
   echo -n .
   sleep 2
