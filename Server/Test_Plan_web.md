@@ -84,7 +84,8 @@ Within the app I clicked around a lot and saw no issues. In particular:
 * [ ]    access content via public link
 * [ ]    delete files and folders, restore files and folders, and empty trash
 * [ ]    mark files as favorite, check that they are in the favorites list, remove again from favorites
-* [ ]    share with users and as public link from within the shared with others view
+* [ ]    share with users and as public link and from within the shared with others view
+   * [ ] open public link in Firefox, Chrome, Edge
 * [ ]    login as different user, accept and decline shares, download files from within the shares
 * [ ]    create a draw.io file, save and exit. Reopening works correct and shows content
 
@@ -98,4 +99,5 @@ The following menu items fall back into classic design
 * [ ]    admin -> Settings
 * [ ]    admin -> Profile -> Edit
 
-
+Browser compatibility
+* [ ] click through the UI in Firefox, Chrome and Edge. Watch for differences or glitches.
