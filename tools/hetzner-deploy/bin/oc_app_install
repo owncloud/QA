@@ -1,0 +1,24 @@
+#! /bin/sh
+if [ -z "$1" ]; then
+  echo "Usage: $0 APPTAR_FILE|APPTAR_URL|-"
+  exit 0
+fi
+mkdir /var/www/owncloud/apps-external/_tmp
+if [ "$1" = '-' ]; then
+  tar xzf - -C /var/www/owncloud/apps-external/_tmp || exit 1
+elif [ -e "$1" ]; then
+  tar xf "$1" -C /var/www/owncloud/apps-external/_tmp || exit 1
+else
+  curl -L "$1" | tar zxf - -C /var/www/owncloud/apps-external/_tmp || exit 1
+fi
+cd /var/www/owncloud/apps-external
+appname="$(cd _tmp; ls)"
+test -d $appname && mv $appname _tmp/old_$appname
+mv _tmp/$appname .
+rm -rf _tmp/old_$appname
+rmdir _tmp || exit 1
+chown -R www-data. $appname
+occ app:list $appname
+echo "Press ENTER to enable $appname, or CTRL-C to keep it as is."; read a
+occ app:enable $appname
+occ app:list $appname

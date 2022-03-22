@@ -1,0 +1,9 @@
+#! /bin/sh
+# Connect to mailhog and delete all messages
+#
+# (C) 2021 jw@owncloud.com, GPLv2
+
+server="$1"
+test -z "$server" && server=http://localhost:8025
+
+curl -X DELETE -s "$server/api/v1/messages"

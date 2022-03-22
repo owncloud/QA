@@ -201,6 +201,7 @@ echo "$*" | grep files_antivirus && machine_type=cx21	# c-icap docker consumes 1
 echo "$*" | grep search_elastic  && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
 
 source $(dirname $0)/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
+scp $(dirname $0)/bin/* root@$IPADDR:/usr/local/bin
 
 rm -rf $tmpdir
 
@@ -208,7 +209,7 @@ dbpass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
 
 INIT_SCRIPT << EOF
 #
-# Deployed via https://github.com/owncloud/QA/blob/master/tools/hetzner-deploy/make_oc10_apps.sh
+# Deployed via https://github.com/owncloud/QA/blob/master/tools/hetzner-deploy/deploy_oc10_apps.sh
 # (C) 2020, jw@owncloud.com
 #
 TASKd=\$HOME/tasks
@@ -266,48 +267,6 @@ for site in owncloud default-ssl; do
 done
 service apache2 restart
 
-cat << EOOCC > /usr/bin/occ
-#! /bin/sh
-cd /var/www/owncloud
-sudo -E -u www-data /usr/bin/php /var/www/owncloud/occ "\\\$@"
-EOOCC
-chmod a+x /usr/bin/occ
-
-cat << EOLV > /usr/bin/oc_log_view
-#! /bin/sh
-set -x
-tail -f /var/www/owncloud/data/owncloud.log | grep -v Session::validateToken | grep -v Session::checkTokenCredentials | grep -v DefaultTokenProvider::
-EOLV
-chmod a+x /usr/bin/oc_log_view
-
-cat << EOAI > /usr/bin/oc_app_install
-#! /bin/sh
-if [ -z "\\\$1" ]; then
-  echo "Usage: \\\$0 APPTAR_FILE|APPTAR_URL|-"
-  exit 0
-fi
-mkdir /var/www/owncloud/apps-external/_tmp
-if [ "\\\$1" = '-' ]; then
-  tar xzf - -C /var/www/owncloud/apps-external/_tmp || exit 1
-elif [ -e "\\\$1" ]; then
-  tar xf "\\\$1" -C /var/www/owncloud/apps-external/_tmp || exit 1
-else
-  curl -L "\\\$1" | tar zxf - -C /var/www/owncloud/apps-external/_tmp || exit 1
-fi
-cd /var/www/owncloud/apps-external
-appname="\\\$(cd _tmp; ls)"
-test -d \\\$appname && mv \\\$appname _tmp/old_\\\$appname
-mv _tmp/\\\$appname .
-rm -rf _tmp/old_\\\$appname
-rmdir _tmp || exit 1
-chown -R www-data. \\\$appname
-occ app:list \\\$appname
-echo "Press ENTER to enable \\\$appname, or CTRL-C to keep it as is."; read a
-occ app:enable \\\$appname
-occ app:list \\\$appname
-EOAI
-chmod a+x /usr/bin/oc_app_install
-
 ## prepare databases to choose from
 # postgresql
 su - postgres -c "psql -c \"ALTER SYSTEM SET listen_addresses = '';\""	# no TCP connections please
@@ -350,17 +309,22 @@ occ config:system:set redis --type json --value '{"host": "127.0.0.1", "port": "
 docker rm mailhog --force 2>/dev/null && true
 docker run --rm --name mailhog -d -p 8025:8025 mailhog/mailhog
 hog_ip=\$(docker inspect mailhog | jq .[0].NetworkSettings.IPAddress -r)
-mysql owncloud -e 'UPDATE oc_accounts SET email="admin@oc.example.com" WHERE user_id="admin";'
+
+
+sql="UPDATE oc_accounts SET email='admin@oc.example.com' WHERE user_id='admin';"
+test "$OC10_DATABASE" = mysql && mysql owncloud -e "$sql"
+test "$OC10_DATABASE" = pgsql && su - postgres -c "psql -d owncloud -c \\"$sql\\""
+
 occ config:system:set mail_domain       --value oc.example.com
 occ config:system:set mail_from_address --value mail
 occ config:system:set mail_smtpmode     --value smtp
 occ config:system:set mail_smtphost     --value \$hog_ip
 occ config:system:set mail_smtpport     --value 1025
+occ config:system:set mail_smtpauth	--value 1
+occ config:system:set mail_smtpname	--value smtpuser
+occ config:system:set mail_smtppassword	--value 1234567890
+occ config:system:set mail_smtpauhttype	--value PLAIN
 echo >> ~/POSTINIT.msg "mailhog: try these commands: mailhog_dump, mailhog_del"
-echo > /usr/bin/mailhog_dump 'curl -s localhost:8025/api/v1/messages | jq ".[] | { To: .Content.Headers.To[0], Subj: .Content.Headers.Subject[0], Body: .Content.Body }" | \\'
-echo >> /usr/bin/mailhog_dump "perl -MMIME::QuotedPrint -ne 'print decode_qp(\\\$_)' | sed -e '"'s/=\\\\r\\\\n//g'"' -e '"'s/\\\\r\\\\n/\\n/g'"' -e '"'s/\\\\"/"/g'"' | less"
-echo > /usr/bin/mailhog_del "curl -X DELETE -s localhost:8025/api/v1/messages"
-chmod a+x /usr/bin/mailhog_*
 
 
 ## always set here to either true or false, so that it appears in config.php for easier editing.

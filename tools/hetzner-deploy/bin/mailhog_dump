@@ -1,0 +1,19 @@
+#! /bin/sh
+# Connect to mailhog and dump human readable messages from the json api (not really json any more).
+#
+# (C) 2021 jw@owncloud.com, GPLv2
+
+server="$1"
+raw="$2"
+
+test -z "$server" && server=http://localhost:8025
+
+if [ -n "$raw" ]; then
+  curl -s "$server/api/v1/messages"
+  exit 0
+fi
+
+curl -s "$server/api/v1/messages" | \
+jq ".[] | { Date: .Content.Headers.Date[0], To: .Content.Headers.To[0], Subj: .Content.Headers.Subject[0], Body: .Content.Body }" | \
+perl -MMIME::QuotedPrint -ne 'print decode_qp($_)' | sed -e 's/=\\r\\n//g' -e 's/\\r\\n/\n/g' -e 's/\\"/"/g' | \
+less

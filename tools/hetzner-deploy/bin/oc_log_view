@@ -1,0 +1,3 @@
+#! /bin/sh
+set -x
+tail -f /var/www/owncloud/data/owncloud.log | grep -v Session::validateToken | grep -v Session::checkTokenCredentials | grep -v DefaultTokenProvider::
