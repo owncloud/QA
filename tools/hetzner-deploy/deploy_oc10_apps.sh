@@ -355,7 +355,8 @@ fi
 curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5
 cd
-ln -s /var/www/owncloud/{data,config} .
+ln -s /var/www/owncloud o
+ln -s o/data/owncloud.log .
 echo "alias cd='cd -P'" >> ~/.bash_aliases
 . ~/.bash_aliases
 

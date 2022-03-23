@@ -1,3 +1,14 @@
 #! /bin/sh
+# - filter out the most common session refresh event noise
+# - shorten {"reqId":"YjuN@9uc3QnGckRQiJK8DQAAAAA","level":0,"time":"2022-03-23T21:15:39+00:00","remoteAddr":"159.69.190.249", ...
+#        to {"t":"21:15:39","a":"159.69.190.249", ...
+#
+# modern versions of tail -f seem to be linebuffered automatically, grep luckily has an option.
+
 set -x
-tail -f /var/www/owncloud/data/owncloud.log | grep -v Session::validateToken | grep -v Session::checkTokenCredentials | grep -v DefaultTokenProvider::
+tail -f /var/www/owncloud/data/owncloud.log | \
+  grep --line-buffered -v 'Session::validateToken' | \
+  grep --line-buffered -v 'DefaultTokenProvider::' | \
+  grep --line-buffered -v 'Session::checkTokenCredentials' | \
+  sed -e 's/.*"time":"....-..-..T\(..:..:..\)+00:00/{"t":"\1/' -e 's/","remoteAddr":"/","a":"/'
+
