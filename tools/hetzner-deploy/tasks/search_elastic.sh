@@ -1,7 +1,8 @@
 #
 # References:
+# - https://www.elastic.co/blog/configuring-ssl-tls-and-https-to-secure-elasticsearch-kibana-beats-and-logstash
+# - https://techoverflow.net/2021/08/02/simple-elasticsearch-setup-with-docker-compose/
 # - https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
-# - https://stackoverflow.com/questions/46627979/what-is-the-default-user-and-password-for-elasticsearch#46627980
 # - https://confluence.owncloud.com/display/~abarz/Set+up+oC+and+elastic-search+with+docker
 #
 # To use with authentication,
@@ -12,20 +13,37 @@
 # - 4GB of RAM, minimum, it's java!
 # - vm.max_map_count=262144 - see below.
 
-# source ./env.sh	# probably not needed
+# source ./env.sh			# probably not needed
 
-apt install -y  docker.io						# assert docker is here
-occ app:enable search_elastic						# so that we can get it's version number
+elastic_proto="http"			# "http", or "https" untested! (Ignored in 2.1.0 or before)
+
+apt install -y  docker.io		# assert docker is here
+occ app:enable search_elastic		# so that we can get it's version number
 
 version_gt() { test "$(echo -e "$1\n$2" | sort -V | head -n 1)" != "$1"; }
 version="$(occ app:list search_elastic --output json | jq '.. | select(.Version?) | .Version' -r)"
 
-if version_gt "$version" 2.0.0; then
-  authentication=true
+elastic_pass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
+
+if version_gt "$version" 2.1.0; then
+  echo "Server protocol: $elastic_proto"
 else
-  echo "Server authentication is not supported in search_elastic 2.0.0"
+  echo "Server url is written without protocol in search_elastic <= 2.1.0"
+  elastic_proto=""
+fi
+
+if version_gt "$version" 2.0.0; then
+  use_authentication=true
+  if [ -z "$elastic_proto" ]; then
+    elastic_url="$elastic_proto://elastic:$elastic_pass@"	# host and port are added later
+  else
+    elastic_url="elastic:$elastic_pass@"
+  fi
+else
+  echo "Server authentication is not supported in search_elastic <= 2.0.0"
   echo "Will configure a server without authentication"
-  authentication=false
+  use_authentication=false
+  elastic_url=""
 fi
 
 ## avoid errors:
@@ -35,7 +53,6 @@ fi
 echo > /etc/sysctl.d/88-elastic.conf vm.max_map_count=262144
 sysctl -w vm.max_map_count=262144
 sysctl vm.max_map_count		# should print out 262144
-elastic_pass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
 pwdfile=/run/secrets/bootstrapPassword.txt
 mkdir -p "$(dirname $pwdfile)"
 echo $elastic_pass > $pwdfile
@@ -45,13 +62,19 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
 plugin_dir=/usr/share/elasticsearch/plugins/
 config_dir=/usr/share/elasticsearch/config/
-opts="-v $plugin_dir:$plugin_dir -e discovery.type=single-node"
+opts="-v $config_dir:$config_dir -v $plugin_dir:$plugin_dir -e discovery.type=single-node"
 # -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE="$pwdfile"
 # opts="$opts -e node.name=es01 -e cluster.initial_master_nodes=es01"
 
-if $authentication; then
+if $use_authentication; then
   opts="$opts -e xpack.security.enabled=true -e ELASTIC_PASSWORD=$elastic_pass"
 fi
+
+if [ "$elastic_proto" = "https" ]; then
+  opts="$opts -e xpack.security.http.ssl.enabled=true -e xpack.security.transport.ssl.enabled=true"
+fi
+
+opts="$opts -e 'ES_JAVA_OPTS=-Xms512m -Xmx512m'"	# probably not needed.
 
 # choose a version seen in https://github.com/elastic/elasticsearch/branches
 img=docker.elastic.co/elasticsearch/elasticsearch:7.17.0	# latest known es7
@@ -67,6 +90,7 @@ if [ -z "$elastic_host" ]; then
   echo "search_elastic: ERROR: could not get ip addr from server."
   docker logs es01 || true
 fi
+elastic_url="$elastic_url$elastic_host:9200"	# complete the url
 
 ## this is a java monster. It takes 30 seconds to boot and check if configs are wrong.
 for wait in 15 15 15 15 20 20 30 30; do
@@ -87,7 +111,11 @@ else
     docker logs es01 || true
   fi
   docker exec es01 bin/elasticsearch-plugin list
-  if $authentication; then
+  if [ "$elastic_proto" = "https" ]; then
+    docker exec -ti es01 sh -c "echo 'xpack.security.http.ssl.enabled: true' >> $config_dir/elasticsearch.yml"
+    docker exec -ti es01 sh -c "echo 'xpack.security.transport.ssl.enabled: true' >> $config_dir/elasticsearch.yml"
+  fi
+  if $use_authentication; then
     docker exec -ti es01 sh -c "echo 'xpack.security.enabled: true' >> $config_dir/elasticsearch.yml"
     docker exec es01 bin/elasticsearch-keystore show bootstrap.password || true
     # docker exec es01 bin/elasticsearch-setup-passwords auto -b
@@ -111,20 +139,15 @@ else
     #
     # Changed password for user elastic
     # PASSWORD elastic = 8mUS6nmLKtuzluOOz9bw
-    curl -s -u elastic:$elastic_pass http://$elastic_host:9200
+    curl -s -u elastic:$elastic_pass $elastic_url
   else
-    curl -s http://$elastic_host:9200
+    curl -s $elastic_url
   fi
 fi
 
 
 ## connect to owncloud and initialize an index
-if $authentication; then
-  occ config:app:set search_elastic servers --value "elastic:$elastic_pass@$elastic_host:9200"
-else
-  # specifying user:pass@ is a malformed URL for search_elastic 2.0.0
-  occ config:app:set search_elastic servers --value "$elastic_host:9200"
-fi
+occ config:app:set search_elastic servers --value "$elastic_url" # specifying user:pass@ is a malformed URL in search_elastic 2.0.0
 occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option: https://github.com/owncloud/search_elastic/issues/260
 occ config:app:set search_elastic nocontent --value false	# false: enable contents search. - true: only file name search
 occ search:index:create --all
@@ -145,12 +168,13 @@ echo "select * from oc_appconfig where appid = 'search_elastic';" | mysql ownclo
 # 48190 write(7, "{\"query\":\"select \\\"file.content_length\\\",mtime, name, size, users from \\\"oc-ocfa7cgsd87h\\\"\",\"mode\":\"cli\",\"version\":\"7.17.0\",\"time_zone\":\"Z\",\"request_timeout\":\"90000ms\",\"page_timeout\":\"45000ms\",\"columnar\":false,\"binary_format\":false,\"keep_alive\":\"5d\"}"
 
 # condensed form: (basic auth works with and without authentcated servers)
-curl -H "Content-Type: application/json" -s "http://elastic:$elastic_pass@$elastic_host:9200/_sql" --data '{"query":"select \"file.content_length\",mtime, name, size, users from \"oc-'"$instanceid"'\"","binary_format":false}'  | sed -e 's/\[/\n[/g'
+curl -H "Content-Type: application/json" -s "$elastic_url/_sql" --data '{"query":"select \"file.content_length\",mtime, name, size, users from \"oc-'"$instanceid"'\"","binary_format":false}'  | sed -e 's/\[/\n[/g'
 
 cat >> ./env.sh << EOE
 elastic_host=$elastic_host
 elastic_user=elastic
 elastic_pass=$elastic_pass
+elastic_url=$elastic_url
 instanceid=$instanceid
 EOE
 
@@ -163,14 +187,14 @@ if [ -z "\$1" -o "\$1" = "-h" ]; then
 fi
 qq="\$(echo "\$1" | sed -e 's/"/\\\\"/g')";
 json="{\"query\":\"\$qq\",\"binary_format\":false}"
-url="http://elastic:$elastic_pass@$elastic_host:9200/_sql"
+url="$elastic_url/_sql"
 curl -H "Content-Type: application/json" -s "\$url" --data "\$json" | sed -e 's/\[/\n[/g'
 echo ""
 EOS
 chmod a+x /usr/bin/elastic_sql
 
 cat << EOM >>  ~/POSTINIT.msg
-elastic_search:  url: http://elastic:$elastic_pass@$elastic_host:9200
+elastic_search:  url: $elastic_url
 elastic_search:
 elastic_search:  Edit some text files, then try
 elastic_search:    occ search:index:update

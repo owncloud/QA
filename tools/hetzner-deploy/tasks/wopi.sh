@@ -1,5 +1,15 @@
 #! /bin/bash
 #
+# References:
+# - https://github.com/owncloud/o365_proxy#readme
+#   docker login registry.owncloud.com; docker pull registry.owncloud.com/owncloud/o365_proxy:latest
+# - https://confluence.owncloud.com/pages/viewpage.action?pageId=28806097
+# - https://confluence.owncloud.com/display/~tbaader/Steps+to+set+up+WOPI+proxy+on+oC10+instance
+# - https://docs.microsoft.com/en-us/microsoft-365/cloud-storage-partner-program/online/build-test-ship/environments#wopi-discovery-urls
+# - https://confluence.owncloud.com/display/PROD/Office+365+WOPI+Proxy
+# - https://portal.owncloud.com/f/106331
+#
+#
 # Configure one of our well-known wopi servers.
 # Should work with 
 # - mso.owncloud.works			- maintained by Dmitry
