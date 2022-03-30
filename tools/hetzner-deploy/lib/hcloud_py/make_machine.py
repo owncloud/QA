@@ -38,7 +38,7 @@ server_image = os.environ.get('HCLOUD_SERVER_IMAGE')
 if server_image == None:
   server_image = "ubuntu-20.04"
 
-loc = "nbg1"    # "fsn1", "hel1", "nbg1"
+location_default = "hel1"    # "fsn1", "hel1", "nbg1"
 server_type = "cx11"
 used_for = "server_testing"
 debug = False
@@ -46,7 +46,7 @@ debug = False
 parser = argparse.ArgumentParser(description=sys.argv[0]+" V0.2")
 parser.add_argument('-i', '--image',          type=str, default=server_image, help="server image. Default: "+server_image)
 parser.add_argument('-t', '--type',           type=str, default=server_type, help="server type. Default: "+server_type)
-parser.add_argument('-L', '--location',       type=str, default=loc, help="Datacenter location. (E.g. nbg1, fsn1, hel1) Default: "+loc)
+parser.add_argument('-L', '--location',       type=str, default=location_default, help="Datacenter location. (E.g. nbg1, fsn1, hel1) Default: "+location_default)
 parser.add_argument('-s', '--ssh-key-names',  type=str, help="comma-separated names of uploaded public keys. Default: env HCLOUD_SSHKEY_NAMES", default=ssh_key_names)
 parser.add_argument('-p', '--packages',       type=str, help="comma-separated list of linux packages to install")
 parser.add_argument('-u', '--unique',         type=str, help="make name unique by prepending user and appending a suffix")

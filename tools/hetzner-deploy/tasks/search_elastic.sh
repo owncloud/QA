@@ -34,7 +34,7 @@ fi
 
 if version_gt "$version" 2.0.0; then
   use_authentication=true
-  if [ -z "$elastic_proto" ]; then
+  if [ -n "$elastic_proto" ]; then
     elastic_url="$elastic_proto://elastic:$elastic_pass@"	# host and port are added later
   else
     elastic_url="elastic:$elastic_pass@"
@@ -61,8 +61,8 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
 plugin_dir=/usr/share/elasticsearch/plugins/
-config_dir=/usr/share/elasticsearch/config/
-opts="-v $config_dir:$config_dir -v $plugin_dir:$plugin_dir -e discovery.type=single-node"
+config_dir=/usr/share/elasticsearch/config/	# do needs mode 777, and then still explodes with missing files. Do not use.
+opts="-v $plugin_dir:$plugin_dir -e discovery.type=single-node"
 # -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE="$pwdfile"
 # opts="$opts -e node.name=es01 -e cluster.initial_master_nodes=es01"
 
@@ -74,14 +74,15 @@ if [ "$elastic_proto" = "https" ]; then
   opts="$opts -e xpack.security.http.ssl.enabled=true -e xpack.security.transport.ssl.enabled=true"
 fi
 
-opts="$opts -e 'ES_JAVA_OPTS=-Xms512m -Xmx512m'"	# probably not needed.
+# opts="$opts -e 'ES_JAVA_OPTS=-Xms512m -Xmx512m'"	# probably not needed. FIXME: docker -e does not handle whitespace.
 
 # choose a version seen in https://github.com/elastic/elasticsearch/branches
-img=docker.elastic.co/elasticsearch/elasticsearch:7.17.0	# latest known es7
-# img=docker pull docker.elastic.co/elasticsearch/elasticsearch:8.0.0	# try es8 ?
+img=docker.elastic.co/elasticsearch/elasticsearch:7.17.1	# latest known es7
+# img=docker.elastic.co/elasticsearch/elasticsearch:8.0.0	# try es8 ?
 
-docker pull $img
-docker run --rm --name es01 $opts $img bin/elasticsearch-plugin install -b ingest-attachment
+docker pull $img || { sleep 30; docker pull $img; } || { sleep 60; docker pull $img; }	# their dockerhub is unreliable
+docker run --rm --name es01 $opts $img bin/elasticsearch-plugin install -b ingest-attachment || exit 0;
+# docker rm es01 > /dev/null 2>&1 || true
 docker run --name es01 $opts -d $img
 
 sleep 5
@@ -112,11 +113,11 @@ else
   fi
   docker exec es01 bin/elasticsearch-plugin list
   if [ "$elastic_proto" = "https" ]; then
-    docker exec -ti es01 sh -c "echo 'xpack.security.http.ssl.enabled: true' >> $config_dir/elasticsearch.yml"
-    docker exec -ti es01 sh -c "echo 'xpack.security.transport.ssl.enabled: true' >> $config_dir/elasticsearch.yml"
+    docker exec es01 sh -c "echo 'xpack.security.http.ssl.enabled: true' >> $config_dir/elasticsearch.yml"
+    docker exec es01 sh -c "echo 'xpack.security.transport.ssl.enabled: true' >> $config_dir/elasticsearch.yml"
   fi
   if $use_authentication; then
-    docker exec -ti es01 sh -c "echo 'xpack.security.enabled: true' >> $config_dir/elasticsearch.yml"
+    docker exec es01 sh -c "echo 'xpack.security.enabled: true' >> $config_dir/elasticsearch.yml"
     docker exec es01 bin/elasticsearch-keystore show bootstrap.password || true
     # docker exec es01 bin/elasticsearch-setup-passwords auto -b
     # Changed password for user apm_system
@@ -155,7 +156,7 @@ occ search:index:reset -f	# needed so that the web UI acknowledges '0 nodes mark
 sleep 3				# TODO: delay does not help here. file scan does not help here. User must force edit a file via web ui.
 occ search:index:update		# try trigger 'OCA\Search_Elastic\Jobs\UpdateContent' -- FIXME: this probably only says 'No pending jobs found.'
 
-instanceid=$(sed -ne "s/^.*'instanceid'//p" config/config.php |  sed -e "s/[^']*'//" -e "s/'.*//")
+instanceid=$(sed -ne "s/^.*'instanceid'//p" o/config/config.php |  sed -e "s/[^']*'//" -e "s/'.*//")
 echo "select * from oc_appconfig where appid = 'search_elastic';" | mysql owncloud -t
 
 
@@ -167,8 +168,25 @@ echo "select * from oc_appconfig where appid = 'search_elastic';" | mysql ownclo
 # 48190 write(7, "POST /_sql?error_trace HTTP/1.1\r\nAccept-Charset: UTF-8\r\nAuthorization: Basic ZWxhc3RpYzp1YTkxMTZycTdl\r\nContent-Type: application/json\r\nAccept: application/json\r\nCache-Control: no-cache\r\nPragma: no-cache\r\nUser-Agent: Java/17.0.1\r\nHost: localhost:9200\r\nConnection: keep-alive\r\nContent-Length: 250\r\n\r\n", 298 <unfinished ...>
 # 48190 write(7, "{\"query\":\"select \\\"file.content_length\\\",mtime, name, size, users from \\\"oc-ocfa7cgsd87h\\\"\",\"mode\":\"cli\",\"version\":\"7.17.0\",\"time_zone\":\"Z\",\"request_timeout\":\"90000ms\",\"page_timeout\":\"45000ms\",\"columnar\":false,\"binary_format\":false,\"keep_alive\":\"5d\"}"
 
-# condensed form: (basic auth works with and without authentcated servers)
-curl -H "Content-Type: application/json" -s "$elastic_url/_sql" --data '{"query":"select \"file.content_length\",mtime, name, size, users from \"oc-'"$instanceid"'\"","binary_format":false}'  | sed -e 's/\[/\n[/g'
+# curl -H "Content-Type: application/json" -s "$elastic_url/_sql" --data '{"query":"select * from \"oc-'"$instanceid"'\"","binary_format":false}'
+
+# cannot pipe into jq, we often have invalid utf8 in the table.
+cat <<EOS > /usr/bin/elastic_sql
+#! /bin/bash
+if [ -z "\$1" -o "\$1" = "-h" ]; then
+  echo -e "Usage:\n  \$0" "'select \"file.content_length\",mtime, name, size, users, left(\"file.content\", 50) from \"oc-$instanceid\"'"
+  echo ""
+  exit 1
+fi
+qq="\$(echo "\$1" | sed -e 's/"/\\\\"/g')";
+json="{\"query\":\"\$qq\",\"binary_format\":false}"
+url="$elastic_url/_sql"
+curl -H "Content-Type: application/json" -s "\$url" --data "\$json" | sed -e 's/\[/\n[/g' -e 's/,/,	/g'
+echo ""
+EOS
+chmod a+x /usr/bin/elastic_sql
+
+elastic_sql "select * from \"oc-$instanceid\""
 
 cat >> ./env.sh << EOE
 elastic_host=$elastic_host
@@ -177,21 +195,6 @@ elastic_pass=$elastic_pass
 elastic_url=$elastic_url
 instanceid=$instanceid
 EOE
-
-cat <<EOS > /usr/bin/elastic_sql
-#! /bin/bash
-if [ -z "\$1" -o "\$1" = "-h" ]; then
-  echo -e "Usage:\n\t \$0" '"select \"file.content_length\",mtime, name, size, users, left(\"file.content\", 50) from \"oc-$instanceid\""'
-  echo ""
-  exit 1
-fi
-qq="\$(echo "\$1" | sed -e 's/"/\\\\"/g')";
-json="{\"query\":\"\$qq\",\"binary_format\":false}"
-url="$elastic_url/_sql"
-curl -H "Content-Type: application/json" -s "\$url" --data "\$json" | sed -e 's/\[/\n[/g'
-echo ""
-EOS
-chmod a+x /usr/bin/elastic_sql
 
 cat << EOM >>  ~/POSTINIT.msg
 elastic_search:  url: $elastic_url

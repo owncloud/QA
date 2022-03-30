@@ -62,6 +62,7 @@ case $vers in
     ;;
 esac
 
+
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "Usage examples:"
   echo "  $0 https://github.com/owncloud/files_antivirus/releases/download/v0.16.0RC1/files_antivirus-0.16.0RC1.tar.gz Kaspersky_ScanEngine-Linux-x86_64-2.0.0.1157-Release.tar.gz 575F7141.key"
@@ -221,10 +222,29 @@ noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|Se
 
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
+
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
-apt install -y apache2 libapache2-mod-php mariadb-server openssl php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
-apt install -y php-json php-mbstring php-mysql php-sqlite3 php-ssh2 php-xml php-zip php-apcu php-redis redis-server php-gmp wget | noclutter
-apt install -y ssh bzip2 zip rsync curl jq inetutils-ping smbclient coreutils php-ldap ldap-utils php-pgsql postgresql | noclutter
+case "$(lsb_release -d -s)" in
+  "Ubuntu 21.10" )
+    # default is php8.1 - we need php7.4 - ondrej has it.
+    apt update
+    apt install -y software-properties-common
+    LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
+    apt update
+    apt install -y libapache2-mod-php7.4 php7.4-imagick php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl | noclutter
+    apt install -y php7.4-ldap php7.4-pgsql php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-ssh2 | noclutter
+    apt install -y php7.4-xml php7.4-zip php7.4-apcu php7.4-redis php7.4-gmp | noclutter
+    ;;
+  *)
+    apt install -y libapache2-mod-php php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
+    apt install -y php-ldap php-pgsql php-json php-mbstring php-mysql php-sqlite3 php-ssh2 | noclutter
+    apt install -y php-xml php-zip php-apcu php-redis php-gmp | noclutter
+    ;;
+esac
+php --version | grep 'PHP 8' && { echo "ERROR: ownCloud does not run on PHP 8 - sorry."; exit 1; }
+
+apt install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping | noclutter
+apt install -y smbclient coreutils ldap-utils postgresql | noclutter
 # We almost always assign a DNS name.
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
 
