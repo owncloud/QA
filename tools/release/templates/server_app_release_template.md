@@ -24,7 +24,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Documentation
 
-- [ ] Changes in the docs needed? If so create issue in owncloud/docs.
+- [ ] Changes in the docs needed? If so create issue in owncloud/docs-server.
 
 ### Marketing
 
