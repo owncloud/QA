@@ -9,12 +9,17 @@
 # - In 7.2 docker parameter -e "ELASTIC_PASSWORD=my_own_password"
 # - in elasticsearch.yml: xpack.security.enabled: true
 #
+# Evaluate SSL options:
+# - https://nginxproxymanager.com/ a docker image wit a UI
+#
+#
 # Requires:
 # - 4GB of RAM, minimum, it's java!
 # - vm.max_map_count=262144 - see below.
 
 # source ./env.sh			# probably not needed
 
+elastic_port="9200"			# always 9200, for both http or https
 elastic_proto="http"			# "http", or "https" untested! (Ignored in 2.1.0 or before)
 
 apt install -y  docker.io		# assert docker is here
@@ -123,7 +128,7 @@ if [ "$elastic_proto" = "https" ]; then
   #    -e cluster.name=${CLUSTER_NAME} \
 
   # docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt .
-  # curl --cacert http_ca.crt -u elastic https://localhost:9200
+  # curl --cacert http_ca.crt -u elastic https://localhost:$elastic_port
 fi
 docker run --name es01 $opts -d $img
 
@@ -133,7 +138,7 @@ if [ -z "$elastic_host" ]; then
   echo "search_elastic: ERROR: could not get ip addr from server."
   docker logs es01 || true
 fi
-elastic_url="$elastic_url$elastic_host:9200"	# complete the url
+elastic_url="$elastic_url$elastic_host:$elastic_port"	# complete the url
 
 ## this is a java monster. It takes 30 seconds to boot and check if configs are wrong.
 for wait in 15 15 15 15 20 20 30 30; do
@@ -190,7 +195,17 @@ fi
 
 
 ## connect to owncloud and initialize an index
-occ config:app:set search_elastic servers --value "$elastic_url" # specifying user:pass@ is a malformed URL in search_elastic 2.0.0
+if version_gt "$version" 2.1.0; then
+  # since 2.1.1 we need an encrypted password in a separate database field.
+  # encrypted like search_elastic/lib/SearchElasticConfigService.php setServerPassword
+  crypted="$(php -r 'require_once "/var/www/owncloud/lib/base.php"; echo OC::$server->getCrypto()->encrypt("$argv[1]") . "\n";' "$elastic_pass")"
+
+  occ config:app:set search_elastic servers     --value "$elastic_proto://$elastic_host:$elastic_port" 	# specifying user:pass@ fails to connect in search_elastic 2.1.1 and up
+  occ config:app:set search_elastic server_user --value "$elastic_user"
+  occ config:app:set search_elastic server_pass --value "$crypted"
+else
+  occ config:app:set search_elastic servers --value "$elastic_url" 			# specifying user:pass@ is a malformed URL in search_elastic 2.0.0
+fi
 occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option: https://github.com/owncloud/search_elastic/issues/260
 occ config:app:set search_elastic nocontent --value false	# false: enable contents search. - true: only file name search
 occ search:index:create --all
@@ -204,7 +219,7 @@ echo "select * from oc_appconfig where appid = 'search_elastic';" | mysql ownclo
 
 ## communication log done with
 ##
-##  docker exec -ti es01 bin/elasticsearch-sql-cli http://elastic:$elastic_pass@localhost:9200
+##  docker exec -ti es01 bin/elasticsearch-sql-cli http://elastic:$elastic_pass@localhost:$elastic_port
 ##  sql> select "file.content_length",mtime, name, size, users from "oc-$instanceid";
 ##
 # 48190 write(7, "POST /_sql?error_trace HTTP/1.1\r\nAccept-Charset: UTF-8\r\nAuthorization: Basic ZWxhc3RpYzp1YTkxMTZycTdl\r\nContent-Type: application/json\r\nAccept: application/json\r\nCache-Control: no-cache\r\nPragma: no-cache\r\nUser-Agent: Java/17.0.1\r\nHost: localhost:9200\r\nConnection: keep-alive\r\nContent-Length: 250\r\n\r\n", 298 <unfinished ...>
@@ -231,9 +246,11 @@ chmod a+x /usr/bin/elastic_sql
 elastic_sql "select * from \"oc-$instanceid\""
 
 cat >> ./env.sh << EOE
-elastic_host=$elastic_host
+elastic_proto=$elastic_proto
 elastic_user=elastic
 elastic_pass=$elastic_pass
+elastic_host=$elastic_host
+elastic_port=$elastic_port
 elastic_url=$elastic_url
 instanceid=$instanceid
 EOE
