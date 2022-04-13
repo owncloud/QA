@@ -10,7 +10,7 @@
 | Empty URL | Let empty URL | 1. Correct issue indicating error<br>2. Login button not displyed | P m11 |  |
 | Prefix http | Input correct http URL with protocol | Accepted | P m11 |  |
 | Prefix https | Input correct https URL with protocol | Accepted | P m11 |  |
-| No prefix http | Input correct http URL without protocol | Accepted | F m11 | It expects https. Regression |
+| No prefix http | Input correct http URL without protocol | Accepted | P m11 | New behaviour: It expects https. |
 | No prefix https | Input correct https URL without protocol | Accepted | P m11 |  |
 | Icon check | 1. Input correct URL<br>2. Tap on ownClouud icon| URL checked | P m11 |  |
 | Incorrect URL | Set Incorrect URL | 1. Correct issue indicating error<br>2. Login button not displyed | P m11 |  |
