@@ -31,8 +31,14 @@ occ config:system:set wopi.token.key            --value "$wopi_key"
 # occ config:system:set debug      --type boolean --value true
 
 occ config:system:set wopi.office-online.server --value 'https://mso.owncloud.works'	# Maintainer Dmitry
-
 # occ config:system:set wopi.office-online.server --value 'https://collabora.owncloud-demo.com'
+
+# Check for expired certs
+for server in mso.owncloud.works collabora.owncloud-demo.com office.owncloud.works; do
+  echo | openssl s_client -servername $server -connect $server:443 2>/dev/null | openssl x509 -noout -enddate | sed -e "s/notAfter=/Certificate end date: /" -e "s/\$/    $server/"
+  echo | openssl s_client -servername $server -connect $server:443 2>&1 | grep -A1 'verify error' && echo "WOPI: ERROR checking certficate: https://$server" | tee -a
+done
+
 echo >> ~/POSTINIT.msg "WOPI:  - To check the office-server, run:  occ c:s:get wopi.office-online.server"
 echo >> ~/POSTINIT.msg "WOPI:  - For collabora, try: occ c:s:del wopi.proxy.url; occ c:s:set wopi.office-online.server --value 'https://collabora.owncloud-demo.com'"
 echo >> ~/POSTINIT.msg "WOPI:  - For office365, try: cp ~/wopi-office365.config.php o/config/"

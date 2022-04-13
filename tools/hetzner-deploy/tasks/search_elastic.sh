@@ -61,7 +61,7 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
 plugin_dir=/usr/share/elasticsearch/plugins/
-config_dir=/usr/share/elasticsearch/config/	# do needs mode 777, and then still explodes with missing files. Do not use.
+config_dir=/usr/share/elasticsearch/config/	# needs mode 777, and then still explodes with missing files. Do not use.
 opts="-v $plugin_dir:$plugin_dir -e discovery.type=single-node"
 # -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE="$pwdfile"
 # opts="$opts -e node.name=es01 -e cluster.initial_master_nodes=es01"
@@ -71,6 +71,8 @@ if $use_authentication; then
 fi
 
 if [ "$elastic_proto" = "https" ]; then
+  # we don't have an ssh.key yet, this will cause an error, but only after the config_dir inside docker is initialized.
+  # We can harvest this, and run a new contianer from the modded config_dir.
   opts="$opts -e xpack.security.http.ssl.enabled=true -e xpack.security.transport.ssl.enabled=true"
 fi
 
@@ -83,6 +85,46 @@ img=docker.elastic.co/elasticsearch/elasticsearch:7.17.1	# latest known es7
 docker pull $img || { sleep 30; docker pull $img; } || { sleep 60; docker pull $img; }	# their dockerhub is unreliable
 docker run --rm --name es01 $opts $img bin/elasticsearch-plugin install -b ingest-attachment || exit 0;
 # docker rm es01 > /dev/null 2>&1 || true
+if [ "$elastic_proto" = "https" ]; then
+  ## we have two options to provide the cert data. a) elasticsearch.yml config file, b) environment
+  ## a) the config can be prepared by letting it crash like this:
+  # echo "Expected error message: java.lang.IllegalArgumentException: a key must be provided to run as a server."
+  # # the key should be configured using the [xpack.security.http.ssl.key] or [xpack.security.http.ssl.keystore.path] setting
+  # docker run --name es01 $opts $img > /dev/null
+  # docker cp -a es01:$config_dir .
+  # docker rm es01
+  # mv config $config_dir
+  # opts="-v $config_dir:$config_dir $opts"
+  ## add the needed keys to the config
+  ## b) by pumping up the environment
+  cert_ipaddr=$(docker run --rm --name es01 $opts $img hostname -I)
+  docker run --rm --name es01 $opts $img bin/elasticsearch-certutil cert --keep-ca-key --pem --name es01 --dns es01.local --ip $cert_ipaddr --out $config_dir/certs2.zip
+  unzip -v $config_dir/certs2.zip
+  opts="$opts \
+      -e node.name=es01 \
+      -e ELASTIC_PASSWORD=${ELASTIC_PASSWORD} \
+      -e bootstrap.memory_lock=true \
+      -e xpack.security.enabled=true \
+      -e xpack.security.http.ssl.enabled=true \
+      -e xpack.security.http.ssl.key=certs/es01/es01.key \
+      -e xpack.security.http.ssl.certificate=certs/es01/es01.crt \
+      -e xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt \
+      -e xpack.security.http.ssl.verification_mode=certificate \
+      -e xpack.security.transport.ssl.enabled=true \
+      -e xpack.security.transport.ssl.key=certs/es01/es01.key \
+      -e xpack.security.transport.ssl.certificate=certs/es01/es01.crt \
+      -e xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt \
+      -e xpack.security.transport.ssl.verification_mode=certificate \
+"
+  # XXX FIXME: what about these?
+  #    -e xpack.license.self_generated.type=${LICENSE} \
+  #    -e cluster.initial_master_nodes=es01,es02,es03 \
+  #    -e discovery.seed_hosts=es02,es03 \
+  #    -e cluster.name=${CLUSTER_NAME} \
+
+  # docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt .
+  # curl --cacert http_ca.crt -u elastic https://localhost:9200
+fi
 docker run --name es01 $opts -d $img
 
 sleep 5
