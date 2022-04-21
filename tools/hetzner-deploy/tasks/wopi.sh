@@ -21,6 +21,10 @@
 # Allow list for a wopi proxy is mentioned in https://confluence.owncloud.com/display/~tbaader/Allow+list+for+oC+WOPI+Proxy
 #  - This also mentions wopi.owncloud.online as a 'maybe' 	- FIXME: this leads to internal server error.
 #
+# TODO:
+#  - This script still cannot start owncloud instances that work with office-356 -- use https://wopi-qa.owncloud.team/oc1091/ instead.
+#  - Find a working proxy setup. https://github.com/owncloud/docs-server/pull/255 mentions 'wopi.proxy.url' => 'https://wopi.owncloud.com/wopi/files/' - which is unresolvable
+
 
 . ./env.sh	# requires oc10_fqdn
 
