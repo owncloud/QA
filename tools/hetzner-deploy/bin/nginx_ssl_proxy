@@ -1,0 +1,67 @@
+#! /bin/sh
+#
+# nginx-proxy.sh - a startup script for a simple ssl-terminating nginx proxy.
+#
+# (c) 2022 jw@owncloud.com - distribute under GPLv2 or ask.
+
+if [ "$3" = "" -o "$1" = "-h" ]; then
+  cat <<USAGE
+Usage:
+  $0 HTTPS_PORT BACKEND_HTTP_SERVER SSL_CERT_FILE [SSL_KEY_FILE]
+  
+  The HTTPS_PORT should be a free local port, where nginx will start listening for https requests.
+  If no SSL_KEY_FILE is given, the private key is expected to be in the same file as the certificate.
+  For details about generating an ssl-cert.crt and .key with a local certificate authority see e.g. ~/HOWTO/ssl-cert.txt
+USAGE
+  exit 1
+fi
+
+HTTPS_PORT="$1"
+BACKEND_HTTP_SERVER="$2"
+SSL_CERT_FILE="$3"
+SSL_KEY_FILE="$4"
+
+test -z "$SSL_KEY_FILE" && SSL_KEY_FILE="$SSL_CERT_FILE"
+# Volumes in docker-compose work as both, absolute and relative paths (but a / must be in the name).
+echo "$SSL_CERT_FILE" | grep / || SSL_CERT_FILE="./$SSL_CERT_FILE"
+echo "$SSL_KEY_FILE"  | grep / || SSL_KEY_FILE="./$SSL_KEY_FILE"
+
+test -f dhparam.pem || curl https://ssl-config.mozilla.org/ffdhe2048.txt > dhparam.pem
+
+mkdir -p conf.d
+cat << CONF > conf.d/nginx.conf
+server {
+    listen              80;
+    listen              443 ssl;
+    server_name         nginx.proxy;
+    ssl_certificate     /ssl-cert.crt;
+    ssl_certificate_key /ssl-cert.key;
+    # ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    # ssl_ciphers         HIGH:!aNULL:!MD5;
+    location / {
+	# proxy_set_header	Host $host;
+        # proxy_set_header        X-Real-IP $remote_addr;
+        # proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        # proxy_set_header        X-Forwarded-Proto $scheme;
+        proxy_pass 		$BACKEND_HTTP_SERVER;
+    }
+}
+CONF
+
+cat << DC_YML > docker-compose.yml
+version: "3"
+services:
+  nginx_ssl_proxy:
+    image: "nginx:latest"
+    command: "/usr/sbin/nginx -g 'daemon off;'"
+    ports:
+      - "$HTTPS_PORT:443"
+    volumes:
+      - "./dhparam.pem:/usr/local/etc/ssl/dhparam.pem"
+      - "./conf.d:/etc/nginx/conf.d"
+      - "$SSL_CERT_FILE:/ssl-cert.crt"
+      - "$SSL_KEY_FILE:/ssl-cert.key"
+DC_YML
+
+docker-compose up -d
+
