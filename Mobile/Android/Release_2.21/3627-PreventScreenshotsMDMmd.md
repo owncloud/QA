@@ -2,7 +2,7 @@
 
 #### Pr: https://github.com/owncloud/android/pull/3627
 
-Devices: Nexus 6P v7, Pixel5 v12. 
+Devices: Pixel5 v12
 
 Server: 10.9.1
 
@@ -19,37 +19,25 @@ Steps for every test:
  
 | Test Case | Steps | Expected Result | Result | Related Comment |
 | :-------- | :---- | :-------------- | :----: | :-------------: | 
-|**Release build**|||||||
-| Login View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Settings View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Passcode View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Pattern View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Biometrical View (auth) |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Auto Uploads View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| More View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Privacy View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Files View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Shares View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Public Share View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Private Share View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Uploads View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| New folder View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Image View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-| Txt View |  | 3. Screenshot taken<br>5. Screenshot not taken |  |  |
-|**Debug build**|||||||
-| Login View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Settings View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Passcode View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Pattern View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Biometrical View (auth) |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Auto Uploads View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| More View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Privacy View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Files View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Shares View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Public Share View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Private Share View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Uploads View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| New folder View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Image View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
-| Txt View |  | 3. Screenshot taken<br>5. Screenshot taken |  |  |
+|**Take screenshots**|||||||
+| Login View |  | 3. Screenshot not taken<br>5. Screenshot not taken | P m12 |  |
+| Settings View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Passcode View |  | 3. Screenshot not taken<br>5. Screenshot not taken | P m12 |  |
+| Pattern View |  | 3. Screenshot not taken<br>5. Screenshot not taken | P m12 |  |
+| Biometrical View (auth) |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Auto Uploads View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| More View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Privacy View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Files View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Shares View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Public Share View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Private Share View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Uploads View |  | 3. Screenshot taken<br>5. Screenshot not taken |  P m12|  |
+| New folder View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Image View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+| Txt View |  | 3. Screenshot taken<br>5. Screenshot not taken | P m12 |  |
+|**Parameter priority**|||||||
+| MDM true | Set parameter to true in MDM and false in `setup.xml`| Screenshots allowed but passcode, pattern and login view| P m12 |  |
+| MDM false | Set parameter to false in MDM and true in `setup.xml` | Screenshots allowed | P m12 |  |
+| no MDM, setup false |   Remove parameter from MDM and set false in `setup.xml` | Screenshots not allowed  | P m12 |
+| no MDM, setup true  | Remove parameter from MDM and set true in `setup.xml` | Screenshots allowed  | P m12 |

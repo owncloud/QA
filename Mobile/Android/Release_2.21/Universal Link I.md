@@ -37,6 +37,10 @@ Server: 10.9.1
 | Passcode | 1. Enable passcode<br>2. Open private link | After entering correct passcode, item is correctly open | F m7  |  After several openings, is not asked   |
 | Pattern | 1. Enable pattern<br>2. Open private link | After entering correct patern, item is correctly open | F m7  | After several openings, is not asked  |
 | Biometric | 1. Enable Biometric<br>2. Open private link | After entering correct biometric, item is correctly open | F m7  |  After several openings, is not asked  |
+|**Branding**|||||||
+| host = * | 1. Set `deep_link_host` = `*`<br>2. Open private link | Link correctly open | P m7 | Android 12 needs the url, as a must |
+| host != * | 1. Set `deep_link_host` != `*` with a correct value<br>2. Open private link on a server that matches the host | Link correctly open | P m7 m12|   |
+| host != * incorrect| 1. Set `deep_link_host` != `*` with a correct value<br>2. Open private link on a server that does not match the host | App not opened | P m7 m12 |   |
 |**Error handling**|||||||
 | No Connection non-downloaded file | 1. Get private link of a non-downloaded file<br>2. Open the link in a device | File can not be downloaded but browsed, correct error message about lack of connection | P m7 |  |
 | No Connection downloaded file | 1. Get private link of a downloaded file<br>2. Open the link in a device | App is opened and the file is browsed and opened. | P m7 |  | 
