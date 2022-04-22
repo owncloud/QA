@@ -12,6 +12,9 @@ Usage:
   The HTTPS_PORT should be a free local port, where nginx will start listening for https requests.
   If no SSL_KEY_FILE is given, the private key is expected to be in the same file as the certificate.
   For details about generating an ssl-cert.crt and .key with a local certificate authority see e.g. ~/HOWTO/ssl-cert.txt
+
+  Example:
+    $0 19443 http://172.17.0.1 ../example-san.crt ../example.key
 USAGE
   exit 1
 fi
@@ -23,8 +26,8 @@ SSL_KEY_FILE="$4"
 
 test -z "$SSL_KEY_FILE" && SSL_KEY_FILE="$SSL_CERT_FILE"
 # Volumes in docker-compose work as both, absolute and relative paths (but a / must be in the name).
-echo "$SSL_CERT_FILE" | grep / || SSL_CERT_FILE="./$SSL_CERT_FILE"
-echo "$SSL_KEY_FILE"  | grep / || SSL_KEY_FILE="./$SSL_KEY_FILE"
+echo "$SSL_CERT_FILE" | grep -q / || SSL_CERT_FILE="./$SSL_CERT_FILE"
+echo "$SSL_KEY_FILE"  | grep -q / || SSL_KEY_FILE="./$SSL_KEY_FILE"
 
 test -f dhparam.pem || curl https://ssl-config.mozilla.org/ffdhe2048.txt > dhparam.pem
 
@@ -40,9 +43,9 @@ server {
     # ssl_ciphers         HIGH:!aNULL:!MD5;
     location / {
 	# proxy_set_header	Host $host;
-        # proxy_set_header        X-Real-IP $remote_addr;
-        # proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        # proxy_set_header        X-Forwarded-Proto $scheme;
+        # proxy_set_header        X-Real-IP \$remote_addr;
+        # proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for;
+        # proxy_set_header        X-Forwarded-Proto \$scheme;
         proxy_pass 		$BACKEND_HTTP_SERVER;
     }
 }
