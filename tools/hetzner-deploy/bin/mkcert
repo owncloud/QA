@@ -1,0 +1,76 @@
+#! /bin/sh
+#
+# mkcert -- make an ssl certificate issued by a private CA
+
+subject_alt_names="DNS:localhost,DNS:docker.local,DNS:*.docker.local,IP:127.0.0.1,IP:172.17.0.2,IP:172.17.0.3,IP:172.19.0.2,IP:172.19.0.3"
+if [ "$1" = "-h" ]; then
+  cat <<USAGE
+Usage:
+  $0 [SUBJECT_ALT_NAMES]
+
+  SUBJECT_ALT_NAMES is a comma separated list of DNS:... and IP:... values.
+  Default: '$subject_alt_names'
+
+USAGE
+  exit 1
+fi
+test -n "$1" && subject_alt_names="$1"
+
+ca_subject="/C=DE/ST=Bavaria/L=Nuremberg/O=owncloud.works/OU=jw-qa/emailAddress=qa@owncloud.com/CN=jw-qa rootCA"
+ca_file="jw-qa-ca"	# .crt and .key suffixes.
+passphrase="jw-qa"	# used for both, the root CA, and the ssl-crt
+cert_file="local_cert"	# .csr and .crt and .key suffixes.
+cert_valid=90		# days
+ca_valid=30		# days
+# This subject line intentionally diffes (a bit) from the subject line of the CA, so that we later can see the difference ...
+csr_subject="/C=DE/ST=Bavaria/L=Nuremberg/O=owncloud.works/OU=jw-qa.owncloud.works/emailAddress=qa@owncloud.com/CN=localhost"
+
+# Generate a Root Certificate Authority:
+echo "$passphrase" | openssl genrsa -aes256 -out "$ca_file.key" -passout stdin 2048
+echo "$passphrase" | openssl req -new -x509 -days $ca_valid -key "$ca_file.key" -passin stdin -sha256 -extensions v3_ca -out "$ca_file.crt" -subj "$ca_subject"
+
+# Generate a privatekey for the certificate:
+echo "$passphrase" | openssl genrsa -out "$cert_file.key" -passout stdin 2048
+
+# Generate the certificate signing request, print its subject data and sign.
+openssl req -sha256 -new -subj "$csr_subject" -addext "subjectAltName = $subject_alt_names" -key "$cert_file.key" -out "$cert_file.csr"
+openssl req -noout -text -verify < "$cert_file.csr" | egrep -A1 'Subject'
+cat > v3_ext.cfg <<EOF
+[v3_ext]
+subjectAltName = $subject_alt_names
+EOF
+echo "$passphrase" | openssl x509 -sha256 -req -in "$cert_file.csr" -CA "$ca_file.crt" -CAkey "$ca_file.key" -passin stdin -CAcreateserial -days $cert_valid -extensions v3_ext -extfile v3_ext.cfg -out "$cert_file.crt"
+
+rm "$cert_file.csr" v3_ext.cfg		# signing request and config file no longer needed
+
+openssl verify -show_chain -CAfile "$ca_file.crt" "$cert_file.crt"
+# openssl x509 -noout -text < "$cert_file.crt"
+
+example_server="127.0.0.1:8080"
+test -n "$elastic_host" && example_server="$elastic_host:9200"
+
+cat <<EOM
+
+------------------------------------------------------------------------------------------------------
+Now add the CA to the system's CA database, so that curl, wget, php can verify our certificates. Try
+
+	sudo cp $ca_file.crt /usr/local/share/ca-certificates
+	sudo update-ca-certificates
+
+Browsers (firefox and google chrome) need the CA imported.
+Google Chrome:	Settings -> Security & Privacy -> Security -> Advanced -> Manage certificates -> Authorities -> import
+Firefox: 	about:preferences#privacy -> Certificates -> View certificates - Authoities -> Import...
+
+----
+
+To use the certificate in apache, edit e.g. /etc/apache2/sites-enabled/default-ssl.conf and specify
+$cert_file.crt and $cert_file.key as absolute paths.
+
+To start a reverse-proxy for ssl-termination, try
+
+	nginx_ssl_proxy 19443 http://$example_server "$cert_file.crt" "$cert_file.key"
+
+EOM
+
+
+
