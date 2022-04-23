@@ -14,7 +14,7 @@ Usage:
   For details about generating an ssl-cert.crt and .key with a local certificate authority see e.g. ~/HOWTO/ssl-cert.txt
 
   Example:
-    $0 19443 http://172.17.0.1 ../example-san.crt ../example.key
+    $0 19443 http://172.17.0.1:9200 ../example-san.crt ../example.key
 USAGE
   exit 1
 fi
