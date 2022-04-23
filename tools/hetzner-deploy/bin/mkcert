@@ -30,7 +30,7 @@ echo "$passphrase" | openssl genrsa -aes256 -out "$ca_file.key" -passout stdin 2
 echo "$passphrase" | openssl req -new -x509 -days $ca_valid -key "$ca_file.key" -passin stdin -sha256 -extensions v3_ca -out "$ca_file.crt" -subj "$ca_subject"
 
 # Generate a privatekey for the certificate:
-echo "$passphrase" | openssl genrsa -out "$cert_file.key" -passout stdin 2048
+openssl genrsa -out "$cert_file.key" 2048
 
 # Generate the certificate signing request, print its subject data and sign.
 openssl req -sha256 -new -subj "$csr_subject" -addext "subjectAltName = $subject_alt_names" -key "$cert_file.key" -out "$cert_file.csr"

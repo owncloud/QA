@@ -3,6 +3,11 @@
 # nginx-proxy.sh - a startup script for a simple ssl-terminating nginx proxy.
 #
 # (c) 2022 jw@owncloud.com - distribute under GPLv2 or ask.
+#
+# This proxy joins the default docker bridge network, althoug it is built with docker-compose.
+# Joining multiple networks (docker and also docker-compose ...) is apparently not possible.
+# See https://github.com/docker/compose/issues/3012, https://github.com/docker/compose/issues/3476
+
 
 if [ "$3" = "" -o "$1" = "-h" ]; then
   cat <<USAGE
@@ -11,6 +16,7 @@ Usage:
   
   The HTTPS_PORT should be a free local port, where nginx will start listening for https requests.
   If no SSL_KEY_FILE is given, the private key is expected to be in the same file as the certificate.
+  Before starting the proxy, the certificate is checked for validity (and matched against 'localhost' for information only)
   For details about generating an ssl-cert.crt and .key with a local certificate authority see e.g. ~/HOWTO/ssl-cert.txt
 
   Example:
@@ -29,7 +35,22 @@ test -z "$SSL_KEY_FILE" && SSL_KEY_FILE="$SSL_CERT_FILE"
 echo "$SSL_CERT_FILE" | grep -q / || SSL_CERT_FILE="./$SSL_CERT_FILE"
 echo "$SSL_KEY_FILE"  | grep -q / || SSL_KEY_FILE="./$SSL_KEY_FILE"
 
-test -f dhparam.pem || curl https://ssl-config.mozilla.org/ffdhe2048.txt > dhparam.pem
+# Assert, that the key is without passphrase:
+openssl rsa -noout < "$SSL_KEY_FILE" -passin pass:none -check || exit 1
+## Expected output, if it is with passphrase:
+# unable to load Private Key
+# 140358091203904:error:06065064:digital envelope routines:EVP_DecryptFinal_ex:bad decrypt:../crypto/evp/evp_enc.c:610:
+# 140358091203904:error:0906A065:PEM routines:PEM_do_header:bad decrypt:../crypto/pem/pem_lib.c:461:
+
+openssl x509 -noout < local_cert.crt -enddate -checkhost localhost -checkip 127.0.0.1
+## expected output:
+# notAfter=Apr 24 10:18:36 2022 GMT
+# Hostname localhost does match certificate
+# IP 127.0.0.1 does match certificate
+openssl x509 -noout < local_cert.crt -checkend 86400 >/dev/null || echo " ===== WARNING: Certificate epxires within 24h ===="
+
+
+test -f dhparam.pem || curl -s https://ssl-config.mozilla.org/ffdhe2048.txt > dhparam.pem
 
 mkdir -p conf.d
 cat << CONF > conf.d/nginx.conf
@@ -72,4 +93,5 @@ services:
 DC_YML
 
 docker-compose up -d
-
+sleep 1
+docker-compose logs
