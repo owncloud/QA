@@ -10,6 +10,9 @@ Usage:
 
   SUBJECT_ALT_NAMES is a comma separated list of DNS:... and IP:... values.
   Default: '$subject_alt_names'
+  An expired cert can be generated with:
+
+    env MKCERT_VALID_DAYS=0 $0
 
 USAGE
   exit 1
@@ -24,6 +27,8 @@ cert_valid=90		# days
 ca_valid=30		# days
 # This subject line intentionally diffes (a bit) from the subject line of the CA, so that we later can see the difference ...
 csr_subject="/C=DE/ST=Bavaria/L=Nuremberg/O=owncloud.works/OU=jw-qa.owncloud.works/emailAddress=qa@owncloud.com/CN=localhost"
+
+test -n "$MKCERT_VALID_DAYS" && cert_valid="$MKCERT_VALID_DAYS"
 
 # Generate a Root Certificate Authority:
 echo "$passphrase" | openssl genrsa -aes256 -out "$ca_file.key" -passout stdin 2048
