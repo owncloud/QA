@@ -359,11 +359,17 @@ occ config:system:set files_external_allow_create_new_local --value true
 
 
 ## external SFTP storage
-apt install -y pure-ftpd | noclutter
+# apt install -y pure-ftpd | noclutter	# not used. We use the local ssh-server
 ftppass=ftp${RANDOM}data
 deluser ftpdata 2>/dev/null && true
 echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""
-occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata" -c user=ftpdata -c password=\$ftppass
+mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
+touch /home/ftpdata/.ssh/authorized_keys
+chown -R ftpdata. /home/ftpdata
+chmod 700 /home/ftpdata/.ssh
+# switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
+
+occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
 occ config:app:set core enable_external_storage --value yes
 
 test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/").jw-qa.owncloud.works"
