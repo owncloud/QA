@@ -358,13 +358,17 @@ occ config:app:set core umgmt_set_password --value true		# not a boolean here, b
 occ config:system:set files_external_allow_create_new_local --value true
 
 
+## external FTP, FTPS storage
+apt install -y pure-ftpd | noclutter	# not used. We use the local ssh-server
+# install app files_external_ftp
+
 ## external SFTP storage
-# apt install -y pure-ftpd | noclutter	# not used. We use the local ssh-server
 ftppass=ftp${RANDOM}data
 deluser ftpdata 2>/dev/null && true
 echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""
 mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
 touch /home/ftpdata/.ssh/authorized_keys
+echo "Hello, world!" >  /home/ftpdata/data/hello.txt
 chown -R ftpdata. /home/ftpdata
 chmod 700 /home/ftpdata/.ssh
 # switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
