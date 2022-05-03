@@ -13,14 +13,19 @@ if [ "$3" = "" -o "$1" = "-h" ]; then
   cat <<USAGE
 Usage:
   $0 HTTPS_PORT BACKEND_HTTP_SERVER SSL_CERT_FILE [SSL_KEY_FILE]
-  
+
   The HTTPS_PORT should be a free local port, where nginx will start listening for https requests.
   If no SSL_KEY_FILE is given, the private key is expected to be in the same file as the certificate.
   Before starting the proxy, the certificate is checked for validity (and matched against 'localhost' for information only)
   For details about generating an ssl-cert.crt and .key with a local certificate authority see e.g. ~/HOWTO/ssl-cert.txt
 
   Example:
-    $0 19443 http://172.17.0.1:9200 ../example-san.crt ../example.key
+    $0 19443 http://172.17.0.1:9200 ../example.crt ../example.key
+
+    Then you can reach the service at http://172.17.0.1:9200 also at
+    - https://localhost:19443
+    and
+    - https://localhost:19443/subdomain-redirect
 USAGE
   exit 1
 fi
@@ -62,6 +67,15 @@ server {
     ssl_certificate_key /ssl-cert.key;
     # ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
     # ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    location /subdomain-redirect/ {
+	# proxy_set_header	Host \$host;
+        # proxy_set_header        X-Real-IP \$remote_addr;
+        # proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for;
+        # proxy_set_header        X-Forwarded-Proto \$scheme;
+        proxy_pass 		$BACKEND_HTTP_SERVER;
+    }
+
     location / {
 	# proxy_set_header	Host \$host;
         # proxy_set_header        X-Real-IP \$remote_addr;
@@ -69,6 +83,7 @@ server {
         # proxy_set_header        X-Forwarded-Proto \$scheme;
         proxy_pass 		$BACKEND_HTTP_SERVER;
     }
+
 }
 CONF
 

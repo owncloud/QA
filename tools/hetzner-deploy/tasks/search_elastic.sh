@@ -262,6 +262,14 @@ elastic_search:  Edit some text files, then try
 elastic_search:    occ search:index:update
 elastic_search:    elastic_sql "show tables"
 elastic_search:    elastic_sql 'select "file.content_length", name, size, users, left("file.content", 50) from "oc-$instanceid"'
+elastic_search:
+elastic_search:  To setup an https-reverse-proxy for the elastic server, do
+elastic_search:    env MKCERT_VALID_DAYS=7 bin/mkcert DNS:localhost
+elastic_search:    cp jw-qa-ca.crt /usr/local/share/ca-certificates; update-ca-certificates
+elastic_search:    bin/nginx_ssl_proxy 19443 http://elastic_host:9200 local_cert.crt local_cert.key
+elastic_search:  Then try using:
+elastic_search:    -    https://localhost:19443
+elastic_search:    - or https://localhost:19443/subdomain-redirect
 --------------------------------------------------------
 EOM
 
