@@ -229,7 +229,7 @@ export LC_ALL=C LANGUAGE=C
 
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
 case "\$(lsb_release -d -s)" in
-  "Ubuntu 24"* | "Ubuntu 23"* | "Ubuntu 22"* | "Ubuntu 21.10" )
+  "Ubuntu 22"* | "Ubuntu 21.10" )
     # default is php8.1 - we need php7.4 - ondrej has it.
     apt update
     apt install -y software-properties-common
