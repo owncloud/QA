@@ -50,7 +50,7 @@ test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'sqlite'
 
 case $vers in
-  10.10.* )
+  10.9.1 | 10.10.* )
     # Server 10.10 is incompatible with PHP 8.1, but we install php-7-4 from ondrej's ppa.
     export HCLOUD_SERVER_IMAGE=ubuntu-22.04
     ;;
