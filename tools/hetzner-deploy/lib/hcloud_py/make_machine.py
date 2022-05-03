@@ -6,10 +6,10 @@
 # We want to make the HCLOUD_SSHKEY_NAMES varible obsolete.
 # This can be done by checking $HOME/.ssh/ for existing private/public key pairs.
 # The public key of an existing pair could then be added to the newly created machine.
-# This technique is more reliably (and less cumbersome) than uploading and naming correct keys 
+# This technique is more reliably (and less cumbersome) than uploading and naming correct keys
 # with HCLOUD_SSHKEY_NAMES. Hcloud maintains keys per project. You need to re-upload when switching projects.
 #
-# With terraform, we support an aditional HCLOUD_SSHKEY variable, where such a private key can be 
+# With terraform, we support an aditional HCLOUD_SSHKEY variable, where such a private key can be
 # specified. Its use is however discouraged, and cannot reliably be automated, as terraform fails, if we specfy a key
 # that was already uploaded. Also with terraform there is no way to inspect uploaded keys and avoid sich conflicts.
 
@@ -23,10 +23,18 @@
 import os, sys, string, random, base64, hashlib, argparse, subprocess
 
 from hcloud import Client
+from hcloud.hcloud import VERSION as hcloud_version
 from hcloud.images.domain import Image
 from hcloud.ssh_keys.domain import SSHKey
 from hcloud.server_types.domain import ServerType
 from hcloud.images.client import ImagesClient
+
+hcloud_version_min = '1.16.0'
+if hcloud_version < hcloud_version_min:
+  # hcloud api became incompatble with 1.10.0
+  print("ERROR: running with hcloud version %s -- minimum required version is %s" % (hcloud_version, hcloud_version_min), file=sys.stderr)
+  print("To update to the latest version, try:\n\t sudo pip3 install -U hcloud\n", file=sys.stderr)
+  sys.exit(1)
 
 hcloud_api_token = os.environ.get('HCLOUD_TOKEN')
 if hcloud_api_token == None:
@@ -69,12 +77,12 @@ loca = client.locations.get_by_name(args.location)
 
 if debug:
   # list all servers in this project
-  for s in client.servers.get_all(): 
+  for s in client.servers.get_all():
     sd = s.data_model
     print("%-12s" % sd.name, "%-15s" % sd.public_net.ipv4.ip if sd.public_net else None, sd.server_type.data_model.name, sd.image.name if sd.image else None, sd.created, sd.status, sd.labels, file=sys.stderr)
-  
+
   # list all ssh-keys in this project
-  for k in client.ssh_keys.get_all(): 
+  for k in client.ssh_keys.get_all():
     kd = k.data_model
     print(kd.fingerprint, kd.created, kd.name, kd.labels, file=sys.stderr)
 
