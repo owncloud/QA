@@ -50,10 +50,14 @@ test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'sqlite'
 
 case $vers in
-  10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.*)
+  10.10.* )
+    # Server 10.10 is incompatible with PHP 8.1, but we install php-7-4 from ondrej's ppa.
+    export HCLOUD_SERVER_IMAGE=ubuntu-22.04
+    ;;
+  10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.* )
     export HCLOUD_SERVER_IMAGE=ubuntu-18.04
     ;;
-  9* | 8*)
+  9* | 8* )
     # Server 8.1 is incompatible with PHP 7.1, debian-9 has PHP-7.0
     export HCLOUD_SERVER_IMAGE=debian-9
     echo "CAUTION: vers=$vers using $tar"
@@ -224,12 +228,15 @@ export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whi
 export LC_ALL=C LANGUAGE=C
 
 # FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
-case "$(lsb_release -d -s)" in
-  "Ubuntu 21.10" )
+case "\$(lsb_release -d -s)" in
+  "Ubuntu 24"* | "Ubuntu 23"* | "Ubuntu 22"* | "Ubuntu 21.10" )
     # default is php8.1 - we need php7.4 - ondrej has it.
     apt update
     apt install -y software-properties-common
-    LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
+    echo "+ add-apt-repository ppa:ondrej/php"
+    echo "+ add-apt-repository ppa:ondrej/apache2"
+    LC_ALL=C.UTF-8 add-apt-repository --yes ppa:ondrej/php
+    LC_ALL=C.UTF-8 add-apt-repository --yes ppa:ondrej/apache2
     apt update
     apt install -y libapache2-mod-php7.4 php7.4-imagick php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl | noclutter
     apt install -y php7.4-ldap php7.4-pgsql php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-ssh2 | noclutter
@@ -241,7 +248,15 @@ case "$(lsb_release -d -s)" in
     apt install -y php-xml php-zip php-apcu php-redis php-gmp | noclutter
     ;;
 esac
-php --version | grep 'PHP 8' && { echo "ERROR: ownCloud does not run on PHP 8 - sorry."; exit 1; }
+
+php --version
+if [ -n "\$(php --version | grep 'PHP 8')" ]; then
+  echo ""
+  echo "ERROR: ownCloud does not run on PHP 8"
+  echo "Check if '\$(lsb_release -d -s)' is covered in $0"
+  echo ""
+  exit 1
+fi
 
 apt install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping | noclutter
 apt install -y smbclient coreutils ldap-utils postgresql | noclutter

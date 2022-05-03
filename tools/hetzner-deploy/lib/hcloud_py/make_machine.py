@@ -179,14 +179,24 @@ ssh-keygen -f ~/.ssh/known_hosts -R $IPADDR	# needed to make life easier later.
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 last; do
   to=5
-  test "$i" -gt 10 && to=15
+  test "$i" -gt 10 && to=15 || true
   sleep $to
   echo -n .
   timeout $to ssh -o ConnectTimeout=5 -o CheckHostIP=no -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@$IPADDR uptime && break
   if [ "$i" = "last" ]; then
     echo "Error: cannot ssh into machine at $IPADDR -- tried multiple times."
     set -x
-    hcloud server describe -o json "$NAME" | jq .status
+    status=$(hcloud server describe -o json "$NAME" | jq .status -r)
+    if [ "$status" = "off" ]; then
+      # this sometimes happens.
+      echo "The server is '$status' - resetting ..."
+      hcloud server reset "$NAME"
+      sleep 10
+      hcloud server describe -o json "$NAME" | jq .status -r
+      sleep 10
+      echo "... retrying one final attempt to connect ..."
+      timeout 20 ssh -o ConnectTimeout=5 -o CheckHostIP=no -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@$IPADDR uptime && break
+    fi
     exit 1
   fi
 done
