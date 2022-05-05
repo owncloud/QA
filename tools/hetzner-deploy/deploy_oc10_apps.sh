@@ -22,21 +22,20 @@ vers=10.10.0RC1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.10.0RC1"                     && tar=https://download.owncloud.org/community/testing/owncloud-complete-20220504.tar.bz2
-test "$vers" = "10.9.1RC2"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20220111.tar.bz2
-test "$vers" = "10.9.1RC1"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211228.tar.bz2
-test "$vers" = "10.9.0RC2"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211215.tar.bz2
-test "$vers" = "10.9.0RC1"                      && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211209.tar.bz2
-test "$vers" = "10.9.0beta1"                    && tar=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2
-test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://download.owncloud.org/community/owncloud-complete-20220112.tar.bz2
-test "$vers" = "10.9.0"                         && tar=https://download.owncloud.org/community/owncloud-complete-20211220.tar.bz2
-test "$vers" = "10.8.0"   -o "$vers" = "10.8"   && tar=https://download.owncloud.org/community/owncloud-complete-20210721.tar.bz2
-test "$vers" = "10.7.0"   -o "$vers" = "10.7"   && tar=https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
-test "$vers" = "10.6.0"   -o "$vers" = "10.6"   && tar=https://download.owncloud.org/community/owncloud-complete-20201216.tar.bz2
-test "$vers" = "10.5.0"   -o "$vers" = "10.5"   && tar=https://download.owncloud.org/community/owncloud-complete-20200731.tar.bz2
-test "$vers" = "10.4.1"   -o "$vers" = "10.4"   && tar=https://download.owncloud.org/community/owncloud-10.4.1.tar.bz2
-test "$vers" = "10.3.2"   -o "$vers" = "10.3"   && tar=https://download.owncloud.org/community/owncloud-10.3.2.tar.bz2
-test "$vers" = "10.2.1"   -o "$vers" = "10.2"   && tar=https://download.owncloud.org/community/owncloud-10.2.1.tar.bz2
+test "$vers" = "10.10.0RC1"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220504.tar.bz2
+test "$vers" = "10.9.1RC2"                      && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220111.tar.bz2
+test "$vers" = "10.9.1RC1"                      && tar=https://download.owncloud.com/server/testing/owncloud-complete-20211228.tar.bz2
+test "$vers" = "10.9.0RC2"                      && tar=https://download.owncloud.com/server/testing/owncloud-complete-20211215.tar.bz2
+test "$vers" = "10.9.0RC1"                      && tar=https://download.owncloud.com/server/testing/owncloud-complete-20211209.tar.bz2
+test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://attic.owncloud.org/community/owncloud-complete-20220112.tar.bz2
+test "$vers" = "10.9.0"                         && tar=https://attic.owncloud.org/community/owncloud-complete-20211220.tar.bz2
+test "$vers" = "10.8.0"   -o "$vers" = "10.8"   && tar=https://attic.owncloud.org/community/owncloud-complete-20210721.tar.bz2
+test "$vers" = "10.7.0"   -o "$vers" = "10.7"   && tar=https://attic.owncloud.org/community/owncloud-complete-20210326.tar.bz2
+test "$vers" = "10.6.0"   -o "$vers" = "10.6"   && tar=https://attic.owncloud.org/community/owncloud-complete-20201216.tar.bz2
+test "$vers" = "10.5.0"   -o "$vers" = "10.5"   && tar=https://attic.owncloud.org/community/owncloud-complete-20200731.tar.bz2
+test "$vers" = "10.4.1"   -o "$vers" = "10.4"   && tar=https://attic.owncloud.org/community/owncloud-10.4.1.tar.bz2
+test "$vers" = "10.3.2"   -o "$vers" = "10.3"   && tar=https://attic.owncloud.org/community/owncloud-10.3.2.tar.bz2
+test "$vers" = "10.2.1"   -o "$vers" = "10.2"   && tar=https://attic.owncloud.org/community/owncloud-10.2.1.tar.bz2
 test "$vers" = "10.1.0"   -o "$vers" = "10.1"   && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
 test "$vers" = "10.0.0"   -o "$vers" = "10.0"   && { echo "No tar known for version $vers - OC10_TAR_URL not set."; exit 1; }
 test "$vers" = "9.1.8"    -o "$vers" = "9.1"    && tar=https://attic.owncloud.org/community/owncloud-9.1.8.tar.bz2
@@ -76,6 +75,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "  $0 ~/Download/richdocuments.tar.gz"
   echo "  $0 marketplace:onlyoffice"
   echo "  $0 marketplace:onlyoffice=7.1.3"
+  echo "  $0 bundled:web"
   echo "  $0 --"
   echo ""
   echo "Local file names are copied into the machine."
@@ -109,9 +109,13 @@ for arg in "$@"; do
     https://*)
       echo "App is a URL ..."
       ;;
-    marktplace:*|m:*)
-      echo "App lookup at marketplace ..."
+    bundled:* | builtin:* | b:* )
+      arg="$(echo "$arg" | sed -e 's/^\w*:/b:/')"		# makemachine.sh ignores b:... arguments, and just passes them on into PARAM
+      echo "$arg: App is bundled ..."
+      ;;
+    marketplace:* | m:* )
       arg="$(echo "$arg" | sed -e 's/^[^:]*://')"		# strip marketplace prefix
+      echo "m:$arg: App lookup at marketplace ..."
       appname="$(echo "$arg" | sed -e 's/[:=].*$//')"		# strip version suffix, if given.
       test "$appname" != "$arg" && appvers="$(echo "$arg" | sed -e 's/.*[:=]//')" # only version suffix, if given.
       curl=curl
@@ -194,7 +198,7 @@ for arg in "$@"; do
 done
 
 ## Default to always have a DNS name. Uncomment the next line, to skip preparations for DNS.
-firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
+firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@^\w*:@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
 test "$firstarg" = "-" && firstarg=
 # try to keep the name short. certbot explodes on long names
 firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-ransomware_protection/-rwp/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')
@@ -389,6 +393,9 @@ chown -R ftpdata. /home/ftpdata
 chmod 700 /home/ftpdata/.ssh
 # switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
 
+occ app:list '^files_external$' --output=json
+occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
+
 occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
 occ config:app:set core enable_external_storage --value yes
 
@@ -452,16 +459,22 @@ for param in \$PARAM; do
     occ app:list \$app_name
 
   else
+    echo "\$param" | grep -q '^b:' && bundled_app=true
+    param="\$(echo "\$param" | sed -e 's/^b://')"	# this is how we tunnel bundled apps in here.
     if [ -f "\$TASKd/\$param.sh" ]; then
       # this is not a downloaded app, but bundled app that has an init script in the tasks folder.
       echo "Running \$TASKd/\$param.sh ..."
       source \$TASKd/\$param.sh
-      \$ret = \$?
+      ret=\$?
       if [ "\$ret" = 0 ]; then
         echo >> ~/POSTINIT.msg "SUCCESS: \$TASKd/\$param.sh"
       else
         echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$param.sh return code \$ret, check log."
       fi
+    elif \$bundled_app; then
+      # this is not a downloaded app, but bundled app and we have no init script for this.
+      echo "+ occ app:enable \$param"
+      occ app:enable \$param
     elif [ -e "/root/\$param" ]; then
       # This param is not an app.
       echo "File added: /root/\$param"

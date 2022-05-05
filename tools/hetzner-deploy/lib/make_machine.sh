@@ -53,8 +53,13 @@ for param in $PARAM; do
     echo "+ scp -q -r '$param' root@$IPADDR:"
     scp -q -r "$param" root@$IPADDR:
   else
-    echo "+ ssh root@$IPADDR wget '$param' "
-    ssh root@$IPADDR wget --progress=bar:force:noscroll "$param"
+    if echo "$param" | grep -q '^b:'; then
+      # nothing to do, but only a comment is invalid syntax in an if clause.
+      echo "bundled app: $param"
+    else
+      echo "+ ssh root@$IPADDR wget '$param' "
+      ssh root@$IPADDR wget --progress=bar:force:noscroll "$param"
+    fi
   fi
   sleep 2
   if [ -z "$PARAM_BASENAME" ]; then

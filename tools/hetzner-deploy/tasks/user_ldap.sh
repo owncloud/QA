@@ -1,6 +1,14 @@
 # source ./env.sh	# probably not needed.
 
-apt install -y php-ldap ldap-utils	# probably already installed.
+case "$(lsb_release -d -s)" in
+  "Ubuntu 22"* | "Ubuntu 21.10" )
+    apt install -y php7.4-ldap ldap-utils	# probably already installed.
+    ;;
+  * )
+    apt install -y php-ldap ldap-utils	# probably already installed.
+    ;;
+esac
+
 # phpenmod php-ldap		# TODO: is this needed? My php -m shows ldap is builtin.
 
 # https://doc.owncloud.com/server/admin_manual/configuration/user/user_auth_ldap.html#ldaps-configuration

@@ -17,7 +17,15 @@
 
 # source ./env.sh	# probably not needed.
 
-apt install -y php-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
+case "$(lsb_release -d -s)" in
+  "Ubuntu 22"* | "Ubuntu 21.10" )
+    apt install -y php7.4-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
+    ;;
+  * )
+    apt install -y php-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
+    ;;
+esac
+
 pecl install smbclient-stable || exit 1
 echo 'extension="smbclient.so"' > /etc/php/7.4/mods-available/smbclient.ini
 phpenmod -v ALL smbclient
