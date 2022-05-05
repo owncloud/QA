@@ -17,14 +17,8 @@
 
 # source ./env.sh	# probably not needed.
 
-case "$(lsb_release -d -s)" in
-  "Ubuntu 22"* | "Ubuntu 21.10" )
-    apt install -y php7.4-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
-    ;;
-  * )
-    apt install -y php-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
-    ;;
-esac
+# There is no php7.4-pear, not even in ondrej's ppa.
+apt install -y php-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
 
 pecl install smbclient-stable || exit 1
 echo 'extension="smbclient.so"' > /etc/php/7.4/mods-available/smbclient.ini
