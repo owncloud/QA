@@ -49,6 +49,7 @@ if server_image == None:
 location_default = "hel1"    # "fsn1", "hel1", "nbg1"
 server_type = "cx11"
 used_for = "server_testing"
+debug = True
 debug = False
 
 parser = argparse.ArgumentParser(description=sys.argv[0]+" V0.2")
@@ -201,7 +202,7 @@ for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 last; do
   fi
 done
 
-noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|Setting up|Creating config|Created symlink|Processing triggers|)"; }
+noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|WARNING: apt does not have a|Creating config|Created symlink|Processing triggers|)"; }
 
 if [ -n "$extra_pkg" ]; then
   case "$server_image" in

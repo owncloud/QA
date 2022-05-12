@@ -53,7 +53,8 @@ test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'sqlite
 case $vers in
   10.9.1 | 10.10.* )
     # Server 10.10 is incompatible with PHP 8.1, but we install php-7-4 from ondrej's ppa.
-    export HCLOUD_SERVER_IMAGE=ubuntu-22.04
+    # We switch the default to the new 'problematic' image, but we want to be able to manually override this.
+    test -z "$HCLOUD_SERVER_IMAGE" && export HCLOUD_SERVER_IMAGE=ubuntu-22.04
     ;;
   10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.* )
     export HCLOUD_SERVER_IMAGE=ubuntu-18.04
@@ -227,7 +228,7 @@ TASKd=\$HOME/tasks
 # ls -la \$TASKd
 
 # pipe apt output into here, to do what apt -q should have done, but does not do.
-noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|Setting up|Creating config|Created symlink|Processing triggers|)"; }
+noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|WARNING: apt does not have|Creating config|Created symlink|Processing triggers|)"; }
 
 
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
