@@ -361,10 +361,13 @@ occ config:system:set mail_from_address --value mail
 occ config:system:set mail_smtpmode     --value smtp
 occ config:system:set mail_smtphost     --value \$hog_ip
 occ config:system:set mail_smtpport     --value 1025
-occ config:system:set mail_smtpauth	--value 1
-occ config:system:set mail_smtpname	--value smtpuser
-occ config:system:set mail_smtppassword	--value 1234567890
-occ config:system:set mail_smtpauhttype	--value PLAIN
+## We don't really need auth for mailhog. Both with and without is supported. Mailhog accepts any password.
+if true; then
+  occ config:system:set mail_smtpauth	--value 1
+  occ config:system:set mail_smtpname	--value smtpuser
+  occ config:system:set mail_smtppassword	--value 1234567890
+  occ config:system:set mail_smtpauthtype	--value PLAIN
+fi
 echo >> ~/POSTINIT.msg "mailhog: try these commands: mailhog_dump, mailhog_del"
 
 
