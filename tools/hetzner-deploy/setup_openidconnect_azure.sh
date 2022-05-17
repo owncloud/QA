@@ -102,4 +102,4 @@ To finalize the switch to Azure-AD setup do:
 EOM
 "
 
-bash ./make_openidconnect_test.sh "$@"
+bash ./deploy_openidconnect_test.sh "$@"

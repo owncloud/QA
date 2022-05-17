@@ -25,13 +25,12 @@ occ oauth:add-client "ownCloud Web" $client_id $client_secret $web_baseurl/oidc-
 occ config:system:set web.rewriteLinks --type boolean --value true
 ## defaultapp='web': make the new web UI the default entry point. (classic UI: defaultapp='files')
 ## FIXME: only when we are sure it really works...
-# occ config:system:set defaultapp --value web
+occ config:system:set defaultapp --value web
 
-# Inconsistent https and http usage: see https://github.com/owncloud/web/issues/5491
 cat <<EOF > $conf
 {
   "server" : "https://$oc10_fqdn",
-  "theme": "owncloud",
+  "theme": "https://$oc10_fqdn/themes/owncloud/theme.json",
   "auth": {
     "clientId": "$client_id",
     "url":     "https://$oc10_fqdn/index.php/apps/oauth2/api/v1/token",
@@ -39,22 +38,22 @@ cat <<EOF > $conf
   },
   "apps" : [
     "files",
-    "media-viewer",
+    "preview",
     "draw-io"
   ],
   "applications" : [
     {
       "title": {
         "en": "Classic Design",
-        "de": "Dateien",
-        "fr": "Fichiers",
+        "de": "Klassisches Design",
+        "fr": "Design classique",
         "zh_CN": "文件"
       },
-      "icon": "switch_ui",
-      "url": "http://$oc10_fqdn/index.php/apps/files"
+      "icon": "swap-box",
+      "url": "https://$oc10_fqdn/index.php/apps/files"
     },
     {
-      "icon": "application",
+      "icon": "settings-4",
       "menu": "user",
       "target": "_self",
       "title": {
