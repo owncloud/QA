@@ -35,6 +35,7 @@ onlyoffice:  Try editing at
 onlyoffice:	firefox http://$oc10_fqdn:780/example/
 onlyoffice:	firefox http://$(hostname -I | cut -d ' ' -f 1):780/example/
 onlyoffice:
+onlyoffice:  TODO: add ssl cert.
 onlyoffice:  TODO: integrate with owncloud.
 --------------------------------------------------------
 EOM
