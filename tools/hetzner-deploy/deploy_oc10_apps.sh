@@ -22,7 +22,7 @@ vers=10.10.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220518.tar.bz2
+test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/owncloud-complete-20220518.tar.bz2
 test "$vers" = "10.10.0RC3"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220517.tar.bz2
 test "$vers" = "10.10.0RC2"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220509.tar.bz2
 test "$vers" = "10.10.0RC1"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220504.tar.bz2
