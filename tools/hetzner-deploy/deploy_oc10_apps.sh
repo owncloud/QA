@@ -246,6 +246,7 @@ case "\$(lsb_release -d -s)" in
     apt install -y libapache2-mod-php7.4 php7.4-imagick php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl | noclutter
     apt install -y php7.4-ldap php7.4-pgsql php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-ssh2 | noclutter
     apt install -y php7.4-xml php7.4-zip php7.4-apcu php7.4-redis php7.4-gmp | noclutter
+    apt install -y php7.4-phpseclib php7.4-bcmath php7.4-igbinary | noclutter	# seen in https://github.com/owncloud/docs-server/pull/369/files
     ;;
   *)
     apt install -y libapache2-mod-php php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
