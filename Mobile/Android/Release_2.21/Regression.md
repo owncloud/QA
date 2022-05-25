@@ -1,4 +1,4 @@
-#### Version
+#### Version 2.21
 
 #### PR: [https://github.com/owncloud/android/issues/]([https://github.com/owncloud/android/issues/])<br>
 
@@ -20,6 +20,7 @@ F t8 -> Failed in an tabled with Android 8<br>
 P m8 t8 -> Passed with a phone with Android 8 and an tabled with Android 8 <br>
 P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Android 8  <br>
 
+User quota, Uploads
 
 | Title | Steps     | Expected Result | Result | Comments |
 | :---- | :-------- | :-------------- | :----: | :------- |
@@ -171,6 +172,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | png | Download a png file | Image is correctly displayed| | |
 | jpg | Download a jpg file | Image is correctly displayed| | |
 | gif | Open a GIF file | GIF correctly reproduced in both orientations |
+| svg | Open a SVG file | SVG correctly displayed |
 | audio without coverart | Open a MP3 file that does not include cover| Music played and placeholder note displayed |
 | audio with coverart | Open a MP3 file that includes cover| Music played and cover displayed |
 | unsupported | Download a unsupported file (pdf, office...) | Menu to open in a different app is raised up| | |
@@ -291,3 +293,16 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Hidden files | 1. Create file and folder starting with "." (will be hidden)<br>2. Enable option "show hidden files" in Settings > Advanced<br>3. Disable option "show hidden files" in Settings > Advanced | 2. Hidden file and folder shown<br>3. Hidden file and folder not shown|
 | **Upgrade** |   |  |
 | Upgrade from latest version | Install the previous version and then, upgrade to the current one |  Release notes is shown and also linked in Settings. App correctly upgraded, accounts are not missed, settings are not missed, download and av. offline are not missed|
+| **Issues** |   |  |
+|[https://github.com/owncloud/android/issues/3557](https://github.com/owncloud/android/issues/3557) ||||
+|[https://github.com/owncloud/android/issues/3571](https://github.com/owncloud/android/issues/3571) ||||
+|[https://github.com/owncloud/android/issues/3580](https://github.com/owncloud/android/issues/3580) ||||
+|[https://github.com/owncloud/android/issues/3581](https://github.com/owncloud/android/issues/3581) ||||
+|[https://github.com/owncloud/android/issues/3591](https://github.com/owncloud/android/issues/3591) ||||
+|[https://github.com/owncloud/android/issues/1106](https://github.com/owncloud/android/issues/1106) ||||
+|[https://github.com/owncloud/android/issues/1414](https://github.com/owncloud/android/issues/1414) ||||
+|[https://github.com/owncloud/android/issues/1419](https://github.com/owncloud/android/issues/1419) ||||
+|[https://github.com/owncloud/android/issues/3441](https://github.com/owncloud/android/issues/3441) ||||
+|[https://github.com/owncloud/android/issues/3491](https://github.com/owncloud/android/issues/3491) ||||
+|[https://github.com/owncloud/android/issues/3507](https://github.com/owncloud/android/issues/3507) ||||
+|[https://github.com/owncloud/android/issues/3650](https://github.com/owncloud/android/issues/3650) ||||
