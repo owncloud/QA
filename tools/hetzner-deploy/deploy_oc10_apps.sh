@@ -22,7 +22,7 @@ vers=10.10.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/owncloud-complete-20220518.tar.bz2
+test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
 test "$vers" = "10.10.0RC3"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220517.tar.bz2
 test "$vers" = "10.10.0RC2"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220509.tar.bz2
 test "$vers" = "10.10.0RC1"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220504.tar.bz2
@@ -246,7 +246,8 @@ case "\$(lsb_release -d -s)" in
     apt install -y libapache2-mod-php7.4 php7.4-imagick php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl | noclutter
     apt install -y php7.4-ldap php7.4-pgsql php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-ssh2 | noclutter
     apt install -y php7.4-xml php7.4-zip php7.4-apcu php7.4-redis php7.4-gmp | noclutter
-    apt install -y php7.4-phpseclib php7.4-bcmath php7.4-igbinary | noclutter	# seen in https://github.com/owncloud/docs-server/pull/369/files
+    apt install -y php7.4-bcmath php7.4-igbinary | noclutter	# seen in https://github.com/owncloud/docs-server/pull/369/files
+    apt install -y php7.4-phpseclib || echo "php7.4-phpseclib seen in https://github.com/owncloud/docs-server/pull/369/files failed to install"
     ;;
   *)
     apt install -y libapache2-mod-php php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
@@ -274,8 +275,9 @@ if [ -f owncloud/config/config.php ]; then
  echo "ERROR: /var/www/owncloud/config/config.php already exists."
  echo "ERROR: Cannot continue. Please (backup and) remove."
 fi
+set -x
 echo "... installing $tar"
-curl $tar | tar jxf - || exit 1
+curl -L $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
 
 webroute=/owncloud	# what we document
