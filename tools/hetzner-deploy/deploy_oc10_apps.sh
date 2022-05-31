@@ -275,8 +275,9 @@ if [ -f owncloud/config/config.php ]; then
  echo "ERROR: /var/www/owncloud/config/config.php already exists."
  echo "ERROR: Cannot continue. Please (backup and) remove."
 fi
-set -x
+# set -x
 echo "... installing $tar"
+echo "+ curl -L $tar | tar jxf -"
 curl -L $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
 
