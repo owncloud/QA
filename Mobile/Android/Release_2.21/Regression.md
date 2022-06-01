@@ -271,6 +271,7 @@ User quota, Uploads
 | Share with users + Share with link | 1. From the previous test case - previosly shared user, select shared with user<br>2. Select to share by link | Check that the link works<br>Check, at least one user have still access to the file |
 | Share with privileges - edit and share | 1. Share a file with edit permission with user1<br>2. Login with user1 and try to edit the file<br>3. Grant user1 to share | 2. user1 can see and edit the file<br>3. user1 can share the file |
 | Share with privileges - folders | 1. Share a folder with user1 with create and delete privileges, and without change<br>2. Login with user1 and try to upload/delete files<br>3. Change the content of any file | 2. user1 can create/delete in the folder<br>3. user1 can not change the file in the folder |
+| Share folder from inside | 1. Browse into any folder<br>2. Share it with user1 by using the share icon on the top (no matter permissions) | Folder is correctly shared with user1 |
 | Privileges inheritance | 1. Share a folder with user1 with share and create privileges, and without change and delete<br>2. Login with user1 and try to re-share the folder with create privilege<br>3. Re-share with change and/or delete privileges (check in server side)| 2. user1 can reshare the file<br>3. user1 can not reshare the file |
 | Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file |
 | Federated Share disabled | 1. In server, disable the option federated share<br>2. Share a folder with user1 in other server<br>3. Login with user1<br> | The file can not be federated shared |
@@ -306,3 +307,4 @@ User quota, Uploads
 |[https://github.com/owncloud/android/issues/3491](https://github.com/owncloud/android/issues/3491) ||||
 |[https://github.com/owncloud/android/issues/3507](https://github.com/owncloud/android/issues/3507) ||||
 |[https://github.com/owncloud/android/issues/3650](https://github.com/owncloud/android/issues/3650) ||||
+|[https://github.com/owncloud/android/issues/1273](https://github.com/owncloud/android/issues/1273) ||||
