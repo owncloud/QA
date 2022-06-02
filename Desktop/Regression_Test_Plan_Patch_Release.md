@@ -64,7 +64,8 @@ __TO DO__
      * [ ] Create a public link ('Explorer' right click menu)
          * [ ] Public link has been created and can be opened in a browser
 * [ ] Login to oCIS and share a folder and a file with another user
-     * [ ] Add the user account on client and check whether the shares are available
+     * [ ] Check on the server, that the other user accepts the share
+     * [ ] Add the other user account in the client and check whether the two new shares are visible
 * [ ] Login to oCIS server and create a space (see https://owncloud.dev/ocis/getting-started/demo-users/ for accounts having the right to create spaces)
      * [ ] add the space in client (button "Add a space")
      * [ ] space is added / VFS is enabled per default
