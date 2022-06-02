@@ -160,7 +160,7 @@ __TO DO__
      * [ ] Folder is not deleted on server  
  * [ ] Make sure the testpilotcloud-client is "branded" which means that everywhere the colorful testpilotcloud icon is shown and all text mentions 'Testpilot' instead of the usual ownCloud icon and 'ownCloud' client.  
      * [ ] This applies to:
-         * MSI-installer, Connection Wizard, Settings page, About dialog.
+         * MSI-installer, Connection Wizard, Sync-Folder-Connection Logo, About dialog.
 
 ----
 
