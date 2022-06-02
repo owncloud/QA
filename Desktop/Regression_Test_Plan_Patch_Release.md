@@ -86,7 +86,7 @@ __TO DO__
     * [ ] Install the next (unreleased) client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
     * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
     * [ ] Start client 2.X.x -> red error message "Downgrading the folder from 2.X.x+1 to 2.X.x is not supported"
-    * [ ] Add a new account and try to reuse existing sync root -> error popup: ""The folder ... is used in a folder sync connection! Please pick another one!"
+    * [ ] Add a new account and try to reuse existing sync root -> error popup: "The folder ... is used in a folder sync connection! Please pick another one!"
  ----
 * [ ] Install ownCloud desktop client on latest **macOS** using .pkg installer
      * [ ] Settings tab, About has correct versions:
