@@ -147,7 +147,7 @@ for arg in "$@"; do
         releases_api_url="https://api.github.com/repos/$oc_app/releases"
         # oc_app and arg are equal, when no version number was specified. then we query github for the latest tag.
         test "$oc_app" = "$arg" && tagname=$($curl -s "$releases_api_url" | jq '.[0].tag_name' -r 2>/dev/null)
-	echo $curl -s "$releases_api_url" \| jq '.[] | select(.tag_name == "'$tagname'"'
+	# echo      $curl -s "$releases_api_url" \| jq '.[] | select(.tag_name == "'$tagname'"'
 	rel_json="$($curl -s "$releases_api_url" | jq '.[] | select(.tag_name == "'"$tagname"'")')"
         if [ -z "$rel_json" -o "$rel_json" = "null" ]; then
           echo "ERROR: no release tag $tagname seen in: https://github.com/$oc_app/releases"
@@ -210,8 +210,9 @@ machine_type=cx11
 echo "$*" | grep files_antivirus && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
 echo "$*" | grep search_elastic  && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
 
-source $(dirname $0)/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
-scp $(dirname $0)/bin/* root@$IPADDR:/usr/local/bin
+mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
+source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
+scp $mydir/bin/* root@$IPADDR:/usr/local/bin
 
 rm -rf $tmpdir
 
@@ -225,8 +226,12 @@ INIT_SCRIPT << EOF
 TASKd=\$HOME/tasks
 # ls -la \$TASKd
 
-# pipe apt output into here, to do what apt -q should have done, but does not do.
-noclutter() { grep -E -v "^(Preparing to|Get:|Selecting previously unselected|WARNING: apt does not have|Creating config|Created symlink|Processing triggers|)"; }
+## aptQ silences most of the usless clutter from apt. This is what apt -q should do, but does not do.
+# We use tr to "insert" a newline at [Y/n], so that prompts are visible
+# We use stdbuf on tr, so that it is not linebuffered
+# We use2 >&1, so that stderr is captured.
+# At the end we use a test of PIPESTATUS, so that the return value is whatever apt returns.
+aptQ() { echo "+ apt $@"; apt "$@" 2>&1 | stdbuf -o0 tr ] '\n' | grep -E -v "^(Preparing to|Get:|Selecting previously unselected|^WARNING: apt does not have|Creating config|Created symlink|Processing triggers|^Fetched |^Setting up |^Need to |^After this |^\s*\(Reading |^Reading |^Building|^$|^0 upgraded, )"; test ${PIPESTATUS[0]} -eq 0; }
 
 
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
@@ -236,23 +241,23 @@ export LC_ALL=C LANGUAGE=C
 case "\$(lsb_release -d -s)" in
   "Ubuntu 22"* | "Ubuntu 21.10" )
     # default is php8.1 - we need php7.4 - ondrej has it.
-    apt update
-    apt install -y software-properties-common
+    aptQ update
+    aptQ install -y software-properties-common
     echo "+ add-apt-repository ppa:ondrej/php"
     echo "+ add-apt-repository ppa:ondrej/apache2"
     LC_ALL=C.UTF-8 add-apt-repository --yes ppa:ondrej/php
     LC_ALL=C.UTF-8 add-apt-repository --yes ppa:ondrej/apache2
-    apt update
-    apt install -y libapache2-mod-php7.4 php7.4-imagick php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl | noclutter
-    apt install -y php7.4-ldap php7.4-pgsql php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-ssh2 | noclutter
-    apt install -y php7.4-xml php7.4-zip php7.4-apcu php7.4-redis php7.4-gmp | noclutter
-    apt install -y php7.4-bcmath php7.4-igbinary | noclutter	# seen in https://github.com/owncloud/docs-server/pull/369/files
-    apt install -y php7.4-phpseclib || echo "php7.4-phpseclib seen in https://github.com/owncloud/docs-server/pull/369/files failed to install"
+    aptQ update
+    aptQ install -y libapache2-mod-php7.4 php7.4-imagick php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-intl
+    aptQ install -y php7.4-ldap php7.4-pgsql php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-ssh2
+    aptQ install -y php7.4-xml php7.4-zip php7.4-apcu php7.4-redis php7.4-gmp
+    aptQ install -y php7.4-bcmath php7.4-igbinary  # seen in https://github.com/owncloud/docs-server/pull/369/files
+    aptQ install -y php-phpseclib || echo "php-phpseclib seen in https://github.com/owncloud/docs-server/pull/369/files failed to install, check https://phpseclib.com/docs/install"
     ;;
   *)
-    apt install -y libapache2-mod-php php-imagick php-common php-curl php-gd php-imap php-intl | noclutter
-    apt install -y php-ldap php-pgsql php-json php-mbstring php-mysql php-sqlite3 php-ssh2 | noclutter
-    apt install -y php-xml php-zip php-apcu php-redis php-gmp | noclutter
+    aptQ install -y libapache2-mod-php php-imagick php-common php-curl php-gd php-imap php-intl
+    aptQ install -y php-ldap php-pgsql php-json php-mbstring php-mysql php-sqlite3 php-ssh2
+    aptQ install -y php-xml php-zip php-apcu php-redis php-gmp
     ;;
 esac
 
@@ -265,10 +270,10 @@ if [ -n "\$(php --version | grep 'PHP 8')" ]; then
   exit 1
 fi
 
-apt install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping | noclutter
-apt install -y smbclient coreutils ldap-utils postgresql | noclutter
+aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
+aptQ install -y smbclient coreutils ldap-utils postgresql
 # We almost always assign a DNS name.
-apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare | noclutter
+aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
 cd /var/www
 if [ -f owncloud/config/config.php ]; then
@@ -386,7 +391,7 @@ occ config:system:set files_external_allow_create_new_local --value true
 
 
 ## external FTP, FTPS storage
-apt install -y pure-ftpd | noclutter	# not used. We use the local ssh-server
+aptQ install -y pure-ftpd  # not used. We use the local ssh-server
 # install app files_external_ftp
 
 ## external SFTP storage
@@ -427,7 +432,7 @@ echo >> ~/env.sh "OC10_TAR_URL=$tar"
 echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
 echo >> ~/env.sh "machine_type=$machine_type"
 echo >> ~/env.sh "ARGV='${ARGV[@]}'"
-test -e $TASKd/env.sh || ln -s ~/env.sh $TASKd/env.sh
+test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
 #################################################################
 
