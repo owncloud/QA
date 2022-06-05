@@ -19,10 +19,10 @@ Have the lastest released OC server ready with LDAP and two external storages of
 
 Optional: Have an Active Directory server ready to be used with owncloud.
 
-Avoid to use the same server for all persons who are testing but prepare an indivdual latest server in docker, e.g.:
- - docker run --rm -ti -p 8080:8080 owncloud/server:10.9.1
+Avoid to have the same test server for all who are testing. You can use an individual latest docker server, e.g.:
+ - docker run --rm -ti -p 8080:8080 owncloud/server:10.10.0
  - firefox http://localhost:8080
-
+but testing should be also done with a 'real' server, for that the BTR team can provide some test servers. 
 
 ## Testing
 
