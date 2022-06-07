@@ -5,6 +5,7 @@
 # References: https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
 #
 # (C) 2021-11-10 - jw@owncloud.com
+# (C) 2022-06-07 - jw@owncloud.com
 
 
 cf_zone_default=owncloud.works
@@ -12,11 +13,12 @@ subdomain=jw-qa
 
 if [ "$1" = '-h' -o "$1" = '--help' ]; then
   cat <<EOF
-Usage: $0 [subdomain] [-c]
+Usage: $0 [subdomain] [-c|-C]
 
-Enumerate all DNS records in $subdomain.$CLOUDFLARE_DNS_ZONE and 
-optionally (-c) check for running machines with ping.
-With -c you are also prompted if you wish to delete nonresponsive entries.
+Enumerate all DNS records in $subdomain.$CLOUDFLARE_DNS_ZONE .
+Option -c checks for running machines with ping.
+Option -C checks ssh root login via ssh-key with a timeout of 10 seconds.
+with -c or -C you are also prompted if you wish to delete nonresponsive entries.
 
 The DNS zone is defined by the environment variable CLOUDFLARE_DNS_ZONE,
 which defaults to $cf_zone_default .
@@ -30,11 +32,19 @@ EOF
 fi
 
 purge=false
+check=
 if [ "$1" = '-c' -o "$2" = '-c' ]; then
   purge=true
+  check=ping
 fi
 
-if [ "$1" != '' -a "$1" != '-c' ]; then
+if [ "$1" = '-C' -o "$2" = '-C' ]; then
+  purge=true
+  check=ssl
+fi
+
+
+if [ "$1" != '' -a "$1" != '-c' -a "$1" != '-C' ]; then
   subdomain=$1
 fi
 
@@ -104,15 +114,24 @@ for entry in $(echo "$json"  | jq '.result[] | .modified_on+"@"+.content+"@"+.na
   fqdn=$3
   printf "%-16s %55s\n" $ipaddr $fqdn
   if [ "$purge" = true ]; then
-    if ! env LC_ALL=C timeout 1 ping -i 0.5 -c 3 "$fqdn" 2>&1 | grep -q 'bytes from'; then
-      echo "$fqdn" | grep -F '*' && wildcard="$wildcard $fqdn" || orphan="$orphan $fqdn"
+    if echo "$fqdn" | grep -F '*'; then
+      wildcard="$wildcard $fqdn"
+    elif [ "$check" = ping ]; then
+      if ! env LC_ALL=C timeout 1 ping -i 0.5 -c 3 "$fqdn" 2>&1 | grep -q 'bytes from'; then
+        orphan="$orphan $fqdn"
+      fi
+    elif [ "$check" = ssl ]; then
+      if ! timeout 10 ssh "root@$fqdn" /bin/true; then
+        echo "-- please retry: ssh 'root@$fqdn' /bin/true && echo okay"
+        orphan="$orphan $fqdn"
+      fi
     fi
   fi
 done
 
 if [ "$purge" != true ]; then
 #  echo
-#  echo "Hint: use -c to check (and optionally purge) nonresponsive entries"
+#  echo "Hint: use -c or -C to check (and optionally purge) nonresponsive entries"
   exit 0
 fi
 
@@ -129,7 +148,7 @@ fi
 
 if [ -z "$orphan" ]; then
   echo
-  echo "All checked entries respond to ping. Great!"
+  echo "All checked entries respond to $check. Great!"
   exit 0
 fi
 
