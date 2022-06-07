@@ -231,7 +231,7 @@ TASKd=\$HOME/tasks
 # We use stdbuf on tr, so that it is not linebuffered
 # We use2 >&1, so that stderr is captured.
 # At the end we use a test of PIPESTATUS, so that the return value is whatever apt returns.
-aptQ() { echo "+ apt $@"; apt "$@" 2>&1 | stdbuf -o0 tr ] '\n' | grep -E -v "^(Preparing to|Get:|Selecting previously unselected|^WARNING: apt does not have|Creating config|Created symlink|Processing triggers|^Fetched |^Setting up |^Need to |^After this |^\s*\(Reading |^Reading |^Building|^$|^0 upgraded, )"; test ${PIPESTATUS[0]} -eq 0; }
+aptQ() { echo "+ apt \$@"; apt "\$@" 2>&1 | stdbuf -o0 tr ] '\n' | grep -E -v "^(Preparing to|Get:|Selecting previously unselected|^WARNING: apt does not have|Creating config|Created symlink|Processing triggers|^Fetched |^Setting up |^Need to |^After this |^\s*\(Reading |^Reading |^Building|^\$|^0 upgraded, )"; test \${PIPESTATUS[0]} -eq 0; }
 
 
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
