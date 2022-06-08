@@ -14,7 +14,8 @@ if dpkg -l openssl | egrep -q 'openssl\s*3\.'; then
     # Woraround from https://github.com/owncloud/core/issues/40071#issuecomment-1133422548
     echo "Re-enable legacy cypher support in /etc/ssl/openssl.cnf"
     sed -i -e 's/\(default = default_sect\)/\1\nlegacy = legacy_sect/' /etc/ssl/openssl.cnf
-    sed -i -e 's/\(\[default_sect\]\)/[legacy_sect]\nactivate = 1\n\n\1/' /etc/ssl/openssl.cnf
+    # CAUTION: We must explicitly enable default, or ssh stops working
+    sed -i -e 's/\(\[default_sect\]\)/[legacy_sect]\nactivate = 1\n\n\1\nactivate = 1/' /etc/ssl/openssl.cnf
     (set -x; grep -C2 legacy_sect /etc/ssl/openssl.cnf)
 fi
 
