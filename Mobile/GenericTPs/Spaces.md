@@ -10,25 +10,31 @@
 | Spaces available | Authenticate in a oCIS server account with spaces available (created remotely)| Personal and spaces are listed (check with server) |  |  |  |
 |**Spaces list (local)**| In a local authenticated oCIS session|
 | Create new space | Create new space with title | Space is created with correct title (check in server) |  |  |  |
+| Create many spaces | Create many spaces with title that covers all the screen | Spaces are created with correct title (check in server). List correctly displayed |  |  |  |
 | Rename space | Rename an existing space | Space is renamed correctly (check in server) |  |  |  |
 | Add subtitle | 1. Create space without subtitle<br>2. Edit the space to add a subtitle | Subtitle is displayed below the title (check also in server) |  |  |  |
 | Edit subtitle | 1. Create space without subtitle<br>2. Edit the space to add a subtitle<br>3. Change subtitle | New subtitle correctly displayed (check also in server) |  |  |  |
 | Add image | 1. Create space without image<br>2. Edit the space to add a image | Image is displayed by clicking on the space name, in the top side of the files view (check also in server) |  |  |  |
 | Edit image | 1. Create space without image<br>2. Edit the space to add a image<br>3. Replace the image for another one | Last image is displayed by clicking on the space name, in the top side of the files view (check also in server) |  |  |  |
 | Change quota | 1. Create space<br>2. Edit the quota, from 1GB to 5GB<br>3. Upload a 2GB file<br>4. Upload a 6GB file | 2. Check in server that the quota was correctly edited<br>3. Upload succeeded<br>4. Upload fails |  |  |  |
-| Disable space | 1. Create a new space<br>2. Upload some files or create folders inside<br>3. Disable the space<br>4. Enter in the space | Content is not available (check also in server) |  |  |  |
+| Disable space | 1. Create a new space<br>2. Upload some files or create folders inside<br>3. Disable the space<br>4. Enter in the space | Content is not available and thumbnail not visible (check also in server) |  |  |  |
 | Remove space option availability | 1. Open the list of options of an available and enabled space<br>2. Disable the space | 1. Remove option is not available<br>2. Remove option is available |  |  |  |
+| Enable space | Over a disabled space, open the list of options and select "Enable"| Content is available and thumbnail visible (check also in server)  |  |  |  |
 | Remove space | 1. Disable an existing space<br>2. Remove the space | Space removed and no longer listed (check also in server) |  |  |  |
+| Remove all spaces | 1. Disable all existing spaces<br>2. Remove all spaces | Spaces removed and no longer listed (check also in server) |  |  |  |
 |**Spaces list (remote)**| In a remote authenticated oCIS session|
 | Create new space | Using web, create new space with title | Space is listed in app |  |  |  |
+| Create many spaces | Using web, create many spaces with title that covers all the app screen | Spaces are created with correct title. List correctly displayed in both orientations in app |  |  |  |
 | Rename space | Using web, rename an existing space | Space is renamed correctly in app |  |  |  |
 | Add subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app |  |  |  |
 | Edit subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle<br>3. In web, change subtitle | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app<br>3. Subtitle changed in app |  |  |  |
 | Add image | 1. Using web, create space without image<br>2. In web, edit the space to add a image | 1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view |  |  |  |
 | Edit image | 1. Using web, create space without image<br>2. In web, edit the space to add a image<br>3. In web, replace the image for another one |  1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view<br>3. Last image is displayed in app by clicking on the space name, in the top side of the files view (check also in server) |  |  |  |
 | Change quota | 1. Using web, create space<br>2. In web, edit the quota, from 1GB to 5GB| Check in app that the quota was correctly edited |  |  |  |
-| Disable space | 1. Using web, create a new space<br>2. Upload some files or create folders inside<br>3. In web, disable the space<br>4. In app, enter in the space | 3. In app, space is marked as disabled<br>4. In app, content is not available  |  |  |  |
+| Disable space | 1. Using web, create a new space<br>2. Upload some files or create folders inside<br>3. In web, disable the space<br>4. In app, enter in the space | 3. In app, space is marked as disabled<br>4. In app, content is not available and thumbnail not visible |  |  |  |
+| Enable space | 1. Using web, Oover a disabled space, open the list of options and select "Enable"<br>2. In app, open space | Content is available (check also in server) and thumbnail visible |  |  |  |
 | Remove space | 1. Using web, disable an existing space<br>2. In web, remove the space | In app, space removed and no longer listed |  |  |  |
+| Remove all spaces | 1. Using web, disable all existing spaces<br>2. Remove all spaces | Spaces removed and no longer listed  |  |  |  |
 | Remove space from inside | 1. In app, enter in an existing space<br>2. Using web, disable an existing space<br>3. In web, remove the space | In app, error when any action is done over the removed space |  |  |  |
 |**Spaces file operations (local)**| 
 | Create folder root | Create a new folder with special characters in spaces' root by using the '+' button on the top | Folder created in spaces (check in server) |  |  |  |
@@ -64,9 +70,6 @@
 | Delete by swipe | 1. Select any item of the spaces list to "Delete", using the swipe action in the row| Item correctly deleted (check in server) |  |  |  |
 | Av. offline file | 1. Select any file of the spaces list to "Available offline" | File correctly av.offline.<br>Check that file appears in "Quick access" as av. offline<br> Check tha file is open and accesible in offline|  |  |  |
 | Av. offline folder | 1. Select any folder of the spaces list to "Available offline" | Folder correctly av.offline.<br>Check that folder appears in "Quick access" as av. offline<br> Check that folder is open and accesible in offline|  |  |  |
-| Share with user as viewer | Share any item with user as viewer | Check with the recipient user that can view and preview the content | 
-| Share with user as editor | Share any item with user as editor | Check with the recipient user that can perform any operation but sharing (upload, edit, delete) | 
-| Share with user as manager | Share any item with user as manager | Check with the recipient user that can perform any operation (upload, edit, delete, share)| 
 |**Spaces file operations (remote)**| 
 | Create folder root | In web, create a new folder with special characters in spaces' root  | Folder listed in app |  |  |  |
 | Create folder non-root | In web, create a new folder with special characters in spaces' not root  | Folder listed in app |  |  |  |
@@ -85,12 +88,85 @@
 | Cut/Paste folder | 1. In web, select any folder with subfolders of the spaces list to "Cut"<br>2. Select as target folder to paste, another container folder| Folder and subfolders correctly listed in app |  |  |  |
 | Delete file | 1. In web, select any file of the spaces list to "Delete"| File correctly deleted in app |  |  |  |
 | Delete folder | 1. In web, select any folder with subfolders of the spaces list to "Delete" | Folder and subfolders correctly deleted in app |  |  |  |
+|**Files app**| 
+| Only personal  | 1. Log in a account with no spaces<br>2. Open Files App | Straight to the list of files |  |  |
+| With spaces | 1. Log in a account with some spaces<br>2. Open Files App | After selecting the account, the list of spaces is there to browse through |  |  |
+| Browse spaces | 1. Log in a account with some spaces<br>2. Open Files App | After selecting the account, the list of spaces is there to browse through |  |  |
+| Create folder root | Create a new folder with special characters in spaces' root  | Folder created in spaces (check in server) |  |  |  |
+| Create folder non-root | Create a new folder with special characters in spaces' not root | Folder created in spaces (check in server) |  |  |  |
+| Copy to root| 1. Select a diferent provider and copy some files and folders from there<br>2. Paste into an space in its root folder | Content correctly copied, check in server |  |  |  |
+| Copy to non-root| 1. Select a diferent provider and copy some files and folders from there<2. Paste into an space in any non-root folder | Content correctly copied, check in server |  |  |  |
+| Move file| 1. Select any file of the spaces list to "Move"<br>2. Select target folder in the space | File moved to the target inside the space (check in server) |  |  |  |
+| Move folder| 1. Select any folder with subfolders of the spaces list to "Move"<br>2. Select target folder in the space | Folder and its content moved to the target inside the space (check in server) |  |  |  |
+| Move to same place| 1. Select any item of the spaces list to "Move"<br>2. Select as target folder in the space the current container folder | Error,not posible |  |  |  |
+| Copy file| 1. Select any file of the spaces list to "Copy"<br>2. Select target folder in the space | File copied to the target inside the space (check in server) |  |  |  |
+| Copy folder| 1. Select any folder with subfolders of the spaces list to "Copy"<br>2. Select target folder in the space | Folder and its content copied to the target inside the space (check in server) |  |  |  |
+| Copy to same place| 1. Select any item of the spaces list to "Copy"<br>2. Select as target folder in the space the current container folder | Error, not posible |  |  |  |
+| Rename | 1. Select any item of the spaces list to "Rename"<br>2. Enter same name<br>3. Enter different name | 2. Error<br>3. Item correctly renamed (check in server) |  |  |  |
+| Duplicate file | Select any file of the spaces list to "Duplicate" | Item correctly duplicated in the same location (check in server) |  |  |  |
+| Duplicate folder | Select any folder with subfolders of the spaces list to "Duplicate" | Folder and subfolders correctly duplicated in the same location (check in server) |  |  |  |
+| Share with user as viewer | Share any item with user as viewer | Check with the recipient user that can view and preview the content and the item is shared in app and web | 
+| Share by link | Share any item by link | Check that the link works fine and the item is shared by link in app and web | 
 |**Spaces sharing and membering**| 
 | Add member as viewer | Add another user as viewer to the space| Check with the recipient user that can view and preview the content | 
 | Add member as editor | Add another user as editor to the space| Check with the recipient user that can perform any operation but sharing (upload, edit, delete) | 
 | Add member as manager | Add another user as manager to the space| Check with the recipient user that can perform any operation (upload, edit, delete, share)| 
+| Change member's role | 1. Change the rol of a viewer user to editor<br>2. Change the rol of the editor to manager<br>3. Change the rol of the manager to viewer| 1. New options to add content are now available, but not sharing options<br>2. Sharing options are now available<br>3. No sharing, no upload options available. | 
 | Remove member | Remove an existing member from the space | Check with the recipient user that can not access the space anymore | 
-|**Files app**| 
-| Only personal  | 1. Log in a account with no spaces<br>2. Open Files App | Straight to the list of files |  |  |
-| With spaces | 1. Log in a account with some spaces<br>2. Open Files App | After selecting the account, the list of spaces is there to browse through |  |  |
-|**iPad**| 
+| Disable user | Disable from server a user that is member of a space | Check with the user is not allowed to do operations over the space | 
+| Remove user | Remove from server a user that is member of a space | Check with the user is not member anymore anymore | 
+|**Spaces share as viewer**| 
+| Share file/folder | Open file/folder card | No available |  |  |
+| Links | Open file/folder card |   No available |  |  |
+| Favorite | Open file/folder card | No available |  |  |
+| Open In | Open file/folder card | Available, working fine |  |  |
+| Move | Open file/folder card | No available |  |  |
+| Rename | Open file/folder card |No available |  |  |
+| Duplicate | Open file/folder card |  No available |  |  |
+| Copy | Open file/folder card | No available |  |  |
+| Available Offline | Open file/folder card | Available, working fine |  |  |
+| Cut | Open file/folder card | No available |  |  |
+| Delete | Open file/folder card | No available |  |  |
+| Upload file | Open "+" menu | No available |  |  |
+| Create folder | Open "+" menu | No available |  |  |
+| Upload from photo library | Open "+" menu | No available |  |  |
+| Take photo or video | Open "+" menu | No available |  |  |
+| Scan document | Open "+" menu | No available |  |  |
+| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |  |  |
+|**Spaces share as editor**| 
+| Share file/folder | Open file/folder card |No available |  |  |
+| Links | Open file/folder card |  No available |  |  |
+| Favorite | Open file/folder card | Available, working fine |  |  |
+| Open In | Open file/folder card | Available, working fine |  |  |
+| Move | Open file/folder card | Available, working fine |  |  |
+| Rename | Open file/folder card |Available, working fine |  |  |
+| Duplicate | Open file/folder card |  Available, working fine |  |  |
+| Copy | Open file/folder card | Available, working fine |  |  |
+| Available Offline | Open file/folder card | Available, working fine |  |  |
+| Cut | Open file/folder card | Available, working fine |  |  |
+| Delete | Open file/folder card | Available, working fine |  |  |
+| Upload file | Open "+" menu | Available, working fine |  |  |
+| Create folder | Open "+" menu | Available, working fine |  |  |
+| Upload from photo library | Open "+" menu | Available, working fine |  |  |
+| Take photo or video | Open "+" menu | Available, working fine |  |  |
+| Scan document | Open "+" menu | Available, working fine |  |  |
+| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |  |  |
+|**Spaces share as manager**| 
+| Share file/folder | Open file/folder card |Available, working fine |  |  |
+| Links | Open file/folder card |  Available, working fine |  |  |
+| Favorite | Open file/folder card | Available, working fine |  |  |
+| Open In | Open file/folder card | Available, working fine |  |  |
+| Move | Open file/folder card | Available, working fine |  |  |
+| Rename | Open file/folder card |Available, working fine |  |  |
+| Duplicate | Open file/folder card |  Available, working fine |  |  |
+| Copy | Open file/folder card | Available, working fine |  |  |
+| Available Offline | Open file/folder card | Available, working fine |  |  |
+| Cut | Open file/folder card | Available, working fine |  |  |
+| Delete | Open file/folder card | Available, working fine |  |  |
+| Upload file | Open "+" menu | Available, working fine |  |  |
+| Create folder | Open "+" menu | Available, working fine |  |  |
+| Upload from photo library | Open "+" menu | Available, working fine |  |  |
+| Take photo or video | Open "+" menu | Available, working fine |  |  |
+| Scan document | Open "+" menu | Available, working fine |  |  |
+| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |  |  |
+|**iPad/Tablet**| 
