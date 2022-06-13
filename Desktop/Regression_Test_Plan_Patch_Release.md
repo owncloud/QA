@@ -106,6 +106,7 @@ __TO DO__
      * [ ] Public link has been created and can be opened in a browser
  * [ ] Enable VFS
      * [ ] VFS has been enabled
+     * [ ] Overlay icons have changed (after 'Free up space') - overlay icons do not change for experimental VFS
  ----
  * [ ] Install ownCloud client on **Ubuntu**, Mint or Debian with GNOME desktop
  ```sudo apt install owncloud-client-nautilus``` (the ```Files``` file-browser)
