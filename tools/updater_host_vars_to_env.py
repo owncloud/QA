@@ -57,4 +57,5 @@ for ch in chs:
  
 print("")
 print(pre + "EOL_LATEST=%s" % all['owncloudupdater_eol_latest'])
+print("")
 
