@@ -14,7 +14,7 @@ Have a client build ready, link URL here:
 -> e.g. https://download.owncloud.com/desktop/ownCloud/testing/2.9.2.6206/
 
 Test environment:
-- Windows 10 -> add the version here (`winver` or client 'About' 'Versions' tab ) 
+- Windows 10 / 11 -> add the version here (`winver` or client 'About' 'Versions' tab ) 
 - Install LibreOffice and CPUSTRES (activate 4-5 threads to get a CPU load of appr. 60 %)
 
 ### VFS Documentation
