@@ -236,6 +236,7 @@ occ search:index:update		# try trigger 'OCA\Search_Elastic\Jobs\UpdateContent' -
 
 instanceid=$(sed -ne "s/^.*'instanceid'//p" o/config/config.php |  sed -e "s/[^']*'//" -e "s/'.*//")
 mysql owncloud -e "SELECT * FROM oc_appconfig WHERE appid = 'search_elastic'"
+mysql owncloud -e 'SELECT * FROM oc_credentials where identifier like "search_elastic:%"'
 
 
 ## communication log done with
@@ -264,7 +265,7 @@ echo ""
 EOS
 chmod a+x /usr/bin/elastic_sql
 
-elastic_sql "select * from \"oc-$instanceid\""
+elastic_sql "select * from \"oc-$instanceid\"" | strings | head -20
 
 cat >> ./env.sh << EOE
 elastic_proto=$elastic_proto
