@@ -24,5 +24,5 @@ fi
 if [ -z "$KASKPERSKY_KSE_LICENSE" -o -z "$KASKPERSKY_KSE_RELEASE_URL" ]; then exit 1; fi
 
 set -x
-bash ./make_oc10_apps.sh $av_app $KASKPERSKY_KSE_RELEASE_URL $KASKPERSKY_KSE_LICENSE
+bash ./deploy_oc10_apps.sh $av_app $KASKPERSKY_KSE_RELEASE_URL $KASKPERSKY_KSE_LICENSE
 
