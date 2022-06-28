@@ -195,18 +195,39 @@ fi
 
 
 ## connect to owncloud and initialize an index
-if version_gt "$version" 2.1.0; then
+if version_gt "$version" 2.1.99; then
+  echo " ... configuring elastic search connection with app version 2.2.0 or later"
+  ## via occ and mysql: (requires internal knowledge about interface ICredentialsManager, oc will explode, if we do something wrong there)
+  # occ config:app:set search_elastic servers             --value "$elastic_proto://$elastic_host:$elastic_port"
+  # occ config:app:set search_elastic auth_param:username --value "elastic"
+  # occ config:app:set search_elastic server_auth         --value "userPass"	# or "apiKey"
+  # encrypted like lib/private/Security/CredentialsManager.php -> store
+  # crypted="$(php -r 'require_once "/var/www/owncloud/lib/base.php"; echo OC::$server->getCrypto()->encrypt(\json_encode("$argv[1]")) . "\n";' "$elastic_pass")"
+  # mysql owncloud -e "DELETE FROM oc_credentials WHERE identifier = 'search_elastic:auth_param:apiKey'"
+  # mysql owncloud -e "DELETE FROM oc_credentials WHERE identifier = 'search_elastic:auth_param:password'"
+  # mysql owncloud -e "INSERT INTO oc_credentials (user, identifier, credentials) VALUES ('', 'search_elastic:auth_param:password', '$crypted')"
+
+
+  ## via REST API json (requires internal knowledge about login form fields, oc protected by API):
+  elastic_auth="\"authParams\": { \"username\":\"elastic\", \"password\":\"$elastic_pass\" }"
+  elastic_json="{ \"servers\":\"$elastic_proto://$elastic_host:$elastic_port\", \"authType\":\"userPass\", $elastic_auth }"
+
+  requesttoken=$(curl -s -L -c cookie.jar 'http://localhost' | sed -n -e 's@">$@@' -e 's@.*name="requesttoken" value="@@p')
+  curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/login' --data-raw "user=admin&password=admin&timezone-offset=2&timezone=Europe%2FBerlin&requesttoken=$requesttoken" | grep admin
+  curl -v -L -b cookie.jar -c cookie.jar -X POST -H "Content-Type: application/json" -d "$elastic_json" 'http://localhost/index.php/apps/search_elastic/settings/servers'
+
+elif version_gt "$version" 2.1.0; then
   # since 2.1.1 we need an encrypted password in a separate database field.
   # encrypted like search_elastic/lib/SearchElasticConfigService.php setServerPassword
   crypted="$(php -r 'require_once "/var/www/owncloud/lib/base.php"; echo OC::$server->getCrypto()->encrypt("$argv[1]") . "\n";' "$elastic_pass")"
 
   occ config:app:set search_elastic servers     --value "$elastic_proto://$elastic_host:$elastic_port" 	# specifying user:pass@ fails to connect in search_elastic 2.1.1 and up
-  occ config:app:set search_elastic server_user --value "$elastic_user"
+  occ config:app:set search_elastic server_user --value "elastic"
   occ config:app:set search_elastic server_pass --value "$crypted"
 else
   occ config:app:set search_elastic servers --value "$elastic_url" 			# specifying user:pass@ is a malformed URL in search_elastic 2.0.0
 fi
-occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option: https://github.com/owncloud/search_elastic/issues/260
+# occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option before 2.1.0-rc3: https://github.com/owncloud/search_elastic/issues/260
 occ config:app:set search_elastic nocontent --value false	# false: enable contents search. - true: only file name search
 occ search:index:create --all
 occ search:index:reset -f	# needed so that the web UI acknowledges '0 nodes marked as indexed, 0 documents in index using 226 bytes'
@@ -214,7 +235,7 @@ sleep 3				# TODO: delay does not help here. file scan does not help here. User 
 occ search:index:update		# try trigger 'OCA\Search_Elastic\Jobs\UpdateContent' -- FIXME: this probably only says 'No pending jobs found.'
 
 instanceid=$(sed -ne "s/^.*'instanceid'//p" o/config/config.php |  sed -e "s/[^']*'//" -e "s/'.*//")
-echo "select * from oc_appconfig where appid = 'search_elastic';" | mysql owncloud -t
+mysql owncloud -e "SELECT * FROM oc_appconfig WHERE appid = 'search_elastic'"
 
 
 ## communication log done with

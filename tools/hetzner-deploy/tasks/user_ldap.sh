@@ -104,7 +104,7 @@ fi
 
 ## FIXME: user:sync backend "OCA\User_LDAP\User_Proxy" becomes only available, when the wizard UI is used. Not when the config is scripted like above.
 ## FIXME: find what is missing...
-# 
+#
 # requesttoken=$(curl -s -L -c cookie.jar 'http://localhost' | sed -n -e 's@">$@@' -e 's@.*name="requesttoken" value="@@p')
 # curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/login' --data-raw "user=admin&password=admin&timezone-offset=2&timezone=Europe%2FBerlin&requesttoken=$requesttoken" | grep admin
 # curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/apps/user_ldap/ajax/getConfiguration.php' --data-raw "ldap_serverconfig_chooser=s01" | jq
