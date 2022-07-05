@@ -21,4 +21,3 @@ Server:
 | Move folder to itself | 1. Select a folder to move<br>2. Select as location the folder itself | Not allowed, error message displayed |  |   
 | Move folder to a descendant | 1. Select a folder to move<br>2. Select as location a folder inside the original folder | Not allowed, error message displayed |  |   |
 | Moved item removed | 1. Select an item to move<br>2. Select a correct location<br>3. Before submitting, remove the original file in webUI or other client | Error message. List of files refreshed without the item |  |  |
-| Move to inexistent location | 1. Select an item to move<br>2. Select a correct location<br>3. Before submitting, remove the target location in webUI or other client | Error message. List of files refreshed without the item |  |  |

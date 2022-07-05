@@ -12,8 +12,11 @@
 | Create new space | Create new space with title | Space is created with correct title (check in server) |  |  |  |
 | Create many spaces | Create many spaces with title that covers all the screen | Spaces are created with correct title (check in server). List correctly displayed |  |  |  |
 | Rename space | Rename an existing space | Space is renamed correctly (check in server) |  |  |  |
+| Change description viewer | 1. Share an space with a user, granting only viewer permission<br>2. Create a text file in the space<br>3. In the new member account, select the text file to set as space description | Not posible, no permissions granted | NA |  |  |
+| Change description editor | 1. Share an space with a user, granting editor permission<br>2. Create a text file in the space<br>3. In the new member account, select the text file to set as space description | Permission changes to the content of the file | NA |  |  |
+| Change description manager | 1. Share an space with a user, granting manager permission<br>2. Create a text file in the space<br>3. In the new member account, select the text file to set as space description | Permission changes to the content of the file | NA |  |  |
 | Add subtitle | 1. Create space without subtitle<br>2. Edit the space to add a subtitle | Subtitle is displayed below the title (check also in server) |  |  |  |
-| Edit subtitle | 1. Create space without subtitle<br>2. Edit the space to add a subtitle<br>3. Change subtitle | New subtitle correctly displayed (check also in server) |  |  |  |
+| Edit subtitle | 1. Create space without subtitle<br>2. Edit the space to add a subtitle<br>3. Change subtitle, adding a very long one (exceeding screen size) | New subtitle correctly displayed (check also in server) |  |  |  |
 | Add image | 1. Create space without image<br>2. Edit the space to add a image | Image is displayed by clicking on the space name, in the top side of the files view (check also in server) |  |  |  |
 | Edit image | 1. Create space without image<br>2. Edit the space to add a image<br>3. Replace the image for another one | Last image is displayed by clicking on the space name, in the top side of the files view (check also in server) |  |  |  |
 | Change quota | 1. Create space<br>2. Edit the quota, from 1GB to 5GB<br>3. Upload a 2GB file<br>4. Upload a 6GB file | 2. Check in server that the quota was correctly edited<br>3. Upload succeeded<br>4. Upload fails |  |  |  |
@@ -26,8 +29,9 @@
 | Create new space | Using web, create new space with title | Space is listed in app |  |  |  |
 | Create many spaces | Using web, create many spaces with title that covers all the app screen | Spaces are created with correct title. List correctly displayed in both orientations in app |  |  |  |
 | Rename space | Using web, rename an existing space | Space is renamed correctly in app |  |  |  |
+| Change description | 1. In web, share an space with a user, granting editor permission<br>2. In web, create a text file in the space<br>3. In web, in the new member account, select the text file to set as space description | In app, title changes |  |  |  |
 | Add subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app |  |  |  |
-| Edit subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle<br>3. In web, change subtitle | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app<br>3. Subtitle changed in app |  |  |  |
+| Edit subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle<br>3. In web, change subtitle,  adding a very long one (exceeding screen size) | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app<br>3. Subtitle changed in app |  |  |  |
 | Add image | 1. Using web, create space without image<br>2. In web, edit the space to add a image | 1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view |  |  |  |
 | Edit image | 1. Using web, create space without image<br>2. In web, edit the space to add a image<br>3. In web, replace the image for another one |  1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view<br>3. Last image is displayed in app by clicking on the space name, in the top side of the files view (check also in server) |  |  |  |
 | Change quota | 1. Using web, create space<br>2. In web, edit the quota, from 1GB to 5GB| Check in app that the quota was correctly edited |  |  |  |
@@ -79,13 +83,7 @@
 | Upload several file non-root | In web, upload a new file in spaces' not root | Files listed in app |  |  |  |
 | Move file| 1. In web, select any file of the spaces list to "Move"<br>2. Select target folder in the space | File listed in the target inside the space in the app |  |  |  |
 | Move folder| 1. In web, select any folder with subfolders of the spaces list to "Move"<br>2. Select target folder in the space | Folder and its content listed in the target inside the space in the app |  |  |  |
-| Copy file| 1. In web, select any file of the spaces list to "Copy"<br>2. Select target folder in the space | File listed in the target inside the space in the app |  |  |  |
-| Copy folder| 1. In web, select any folder with subfolders of the spaces list to "Copy"<br>2. Select target folder in the space | Folder and its content listed in the target inside the space in app |  |  |  |
 | Rename | 1. In web, select any item of the spaces list to "Rename"<br>2. Enter different name | Item correctly listed with new name in app|  |  |  |
-| Duplicate file | In web, select any file of the spaces list to "Duplicate" | New item correctly listed in the same location in app |  |  |  |
-| Duplicate folder | In web, select any folder with subfolders of the spaces list to "Duplicate" | Folder and subfolders correctly listed in the same location in app |  |  |  |
-| Cut/Paste file | 1. In web, select any file of the spaces list to "Cut"<br>2. Select as target folder to paste, another container folder| File correctly listed in app|  |  |  |
-| Cut/Paste folder | 1. In web, select any folder with subfolders of the spaces list to "Cut"<br>2. Select as target folder to paste, another container folder| Folder and subfolders correctly listed in app |  |  |  |
 | Delete file | 1. In web, select any file of the spaces list to "Delete"| File correctly deleted in app |  |  |  |
 | Delete folder | 1. In web, select any folder with subfolders of the spaces list to "Delete" | Folder and subfolders correctly deleted in app |  |  |  |
 |**Files app**| 
@@ -107,7 +105,15 @@
 | Duplicate folder | Select any folder with subfolders of the spaces list to "Duplicate" | Folder and subfolders correctly duplicated in the same location (check in server) |  |  |  |
 | Share with user as viewer | Share any item with user as viewer | Check with the recipient user that can view and preview the content and the item is shared in app and web | 
 | Share by link | Share any item by link | Check that the link works fine and the item is shared by link in app and web | 
-|**Spaces sharing and membering**| 
+|**Spaces sharing and membering (remote)**| 
+| Add member as viewer | In web, add another user as viewer to the space| In app, check with the recipient user that can view and preview the content | 
+| Add member as editor | In web, add another user as editor to the space| In app, check with the recipient user that can perform any operation but sharing (upload, edit, delete) | 
+| Add member as manager | In web, add another user as manager to the space| In app, check with the recipient user that can perform any operation (upload, edit, delete, share)| 
+| Change member's role | 1. In web, change the rol of a viewer user to editor<br>2. Change the rol of the editor to manager<br>3. Change the rol of the manager to viewer| 1. In app, new options to add content are now available, but not sharing options<br>2. In app, sharing options are now available<br>3. In app, no sharing, no upload options available. | 
+| Remove member | In web, remove an existing member from the space | In app, check with the recipient user that can not access the space anymore | 
+| Disable user | In web, disable from server a user that is member of a space | In app, check with the user is not allowed to do operations over the space | 
+| Remove user | In web, remove from server a user that is member of a space | In app, check with the user is not member anymore anymore | 
+|**Spaces sharing and membering (local)**| 
 | Add member as viewer | Add another user as viewer to the space| Check with the recipient user that can view and preview the content | 
 | Add member as editor | Add another user as editor to the space| Check with the recipient user that can perform any operation but sharing (upload, edit, delete) | 
 | Add member as manager | Add another user as manager to the space| Check with the recipient user that can perform any operation (upload, edit, delete, share)| 
@@ -123,9 +129,9 @@
 | Move | Open file/folder card | No available |  |  |
 | Rename | Open file/folder card |No available |  |  |
 | Duplicate | Open file/folder card |  No available |  |  |
-| Copy | Open file/folder card | No available |  |  |
+| Copy | Open file/folder card | Available |  |  |
 | Available Offline | Open file/folder card | Available, working fine |  |  |
-| Cut | Open file/folder card | No available |  |  |
+| Cut | Open file/folder card | No available |  | |
 | Delete | Open file/folder card | No available |  |  |
 | Upload file | Open "+" menu | No available |  |  |
 | Create folder | Open "+" menu | No available |  |  |
