@@ -22,7 +22,7 @@
 elastic_port="9200"			# always 9200, for both http or https
 elastic_proto="http"			# "http", or "https" untested! (Ignored in 2.1.0 or before)
 
-apt install -y  docker.io		# assert docker is here
+apt install -y docker-compose docker.io	# assert docker is here
 occ app:enable search_elastic		# so that we can get it's version number
 
 version_gt() { test "$(echo -e "$1\n$2" | sort -V | head -n 1)" != "$1"; }
@@ -120,6 +120,7 @@ if [ "$elastic_proto" = "https" ]; then
       -e xpack.security.transport.ssl.certificate=certs/es01/es01.crt \
       -e xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt \
       -e xpack.security.transport.ssl.verification_mode=certificate \
+      -e xpack.security.authc.api_key.enabled=true \
 "
   # XXX FIXME: what about these?
   #    -e xpack.license.self_generated.type=${LICENSE} \
@@ -267,6 +268,15 @@ chmod a+x /usr/bin/elastic_sql
 
 elastic_sql "select * from \"oc-$instanceid\"" | strings | head -20
 
+cat <<EOA > /usr/bin/elastic_api_key
+#! /bin/bash
+# This requires xpack.security.authc.api_key.enabled=true
+json="{\"name\":\"jw-qa\", \"metadata\":{ \"application\":\"ownCloud\", \"testing\": true }}"
+url="$elastic_url/_security/api_key"
+curl -H "Content-Type: application/json" -s "\$url" --data "\$json" | jq
+EOA
+chmod a+x /usr/bin/elastic_api_key
+
 cat >> ./env.sh << EOE
 elastic_proto=$elastic_proto
 elastic_user=elastic
@@ -286,9 +296,9 @@ elastic_search:    elastic_sql "show tables"
 elastic_search:    elastic_sql 'select "file.content_length", name, size, users, left("file.content", 50) from "oc-$instanceid"'
 elastic_search:
 elastic_search:  To setup an https-reverse-proxy for the elastic server, do
-elastic_search:    env MKCERT_VALID_DAYS=7 bin/mkcert DNS:localhost
-elastic_search:    cp jw-qa-ca.crt /usr/local/share/ca-certificates; update-ca-certificates
-elastic_search:    bin/nginx_ssl_proxy 19443 http://elastic_host:9200 local_cert.crt local_cert.key
+elastic_search:    env MKCERT_VALID_DAYS=7 /usr/local/bin/mkcert DNS:localhost
+elastic_search:    cp ./jw-qa-ca.crt /usr/local/share/ca-certificates; update-ca-certificates
+elastic_search:    /usr/local/bin/nginx_ssl_proxy 19443 http://$elastic_host:9200 ./local_cert.crt ./local_cert.key
 elastic_search:  Then try using:
 elastic_search:    -    https://localhost:19443
 elastic_search:    - or https://localhost:19443/subdomain-redirect

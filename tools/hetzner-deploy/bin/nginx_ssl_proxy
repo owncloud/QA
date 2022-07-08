@@ -50,8 +50,9 @@ openssl rsa -noout < "$SSL_KEY_FILE" -passin pass:none -check || exit 1
 openssl x509 -noout < local_cert.crt -enddate -checkhost localhost -checkip 127.0.0.1
 ## expected output:
 # notAfter=Apr 24 10:18:36 2022 GMT
-# Hostname localhost does match certificate
-# IP 127.0.0.1 does match certificate
+echo "|Expected output (don't worry):"
+echo "| Hostname localhost does match certificate"
+echo "| IP 127.0.0.1 does match certificate"
 openssl x509 -noout < local_cert.crt -checkend 86400 >/dev/null || echo " ===== WARNING: Certificate epxires within 24h ===="
 
 
