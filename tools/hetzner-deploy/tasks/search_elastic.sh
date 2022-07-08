@@ -81,6 +81,11 @@ if [ "$elastic_proto" = "https" ]; then
   opts="$opts -e xpack.security.http.ssl.enabled=true -e xpack.security.transport.ssl.enabled=true"
 fi
 
+# Static setting are documented in https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html as
+# "can only be configured on an unstarted or shut down node using elasticsearch.yml."
+# These can be set in docker like this:
+opts="$opts -e xpack.security.authc.api_key.enabled=true"	# enable the API Key service
+
 # opts="$opts -e 'ES_JAVA_OPTS=-Xms512m -Xmx512m'"	# probably not needed. FIXME: docker -e does not handle whitespace.
 
 # choose a version seen in https://github.com/elastic/elasticsearch/branches
@@ -120,7 +125,6 @@ if [ "$elastic_proto" = "https" ]; then
       -e xpack.security.transport.ssl.certificate=certs/es01/es01.crt \
       -e xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt \
       -e xpack.security.transport.ssl.verification_mode=certificate \
-      -e xpack.security.authc.api_key.enabled=true \
 "
   # XXX FIXME: what about these?
   #    -e xpack.license.self_generated.type=${LICENSE} \
@@ -301,7 +305,10 @@ elastic_search:    cp ./jw-qa-ca.crt /usr/local/share/ca-certificates; update-ca
 elastic_search:    /usr/local/bin/nginx_ssl_proxy 19443 http://$elastic_host:9200 ./local_cert.crt ./local_cert.key
 elastic_search:  Then try using:
 elastic_search:    -    https://localhost:19443
-elastic_search:    - or https://localhost:19443/subdomain-redirect
+elastic_search:    - or https://localhost:19443/subdomain-redirect/
+elastic_search:
+elastic_search:  Default is user/pass auth. At admin's settings->search, try to switch to API-Key with the "encoded" value from
+elastic_search:	   elastic_api_key
 --------------------------------------------------------
 EOM
 

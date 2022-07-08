@@ -18,10 +18,11 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.10.0
+vers=10.11.0-alpha.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.11.0-alpha.1"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220708.tar.bz2
 test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
 test "$vers" = "10.10.0RC3"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220517.tar.bz2
 test "$vers" = "10.10.0RC2"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220509.tar.bz2
@@ -202,7 +203,8 @@ firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@^\w*:@@' -e 's@\b\.tar\.
 test "$firstarg" = "-" && firstarg=
 # try to keep the name short. certbot explodes on long names
 firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-ransomware_protection/-rwp/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')
-test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr '[A-Z]_' '[a-z]-' | tr -d .=)-DATE"
+# make dns/docker friendly: lowercase all; remove .; _ to -; shorten -alpha, -beta to a,b in both oc10 and app version.
+test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr '[A-Z]_' '[a-z]-' | tr -d .= | sed -e 's/-\?alpha/a/g' -e 's/-\?beta/b/g' -e 's/-\?rc/rc/g')-DATE"
 h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
 d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/" | tr '[A-Z]' '[a-z]' | tr . -)
