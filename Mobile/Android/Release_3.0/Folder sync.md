@@ -22,3 +22,7 @@ Server:
 | Sync two folders not downloaded | 1. Select two folders <br>2. click on Sync | All files inside folders and subfolders are downloaded and marked with blue badge while syncing and green after syncing. Preview available without connection |  |  |
 | Sync three folders downloaded | 1. Select two folders which content is already downloaded <br>2. click on Sync | All files inside folders and subfolders are downloaded and marked with blue badge while syncing and green after syncing. Preview available without connection |  |  |
 | Sync with conflict | 1. Update remotely some files inside different folders<br>2. Update locally same files using the "Open with" option or document provider<br>3. In app, select containing folders<br>4. Click on Sync | Folders containing files modified are marked with conflict badge<br>Other files in the folder are downloaded |   |  |
+|**Errors**||
+| Folder sync no connection | 1. Remove device connection<br>2. Select a folder to sync | Correct error message |  |  |
+| Folder sync no server connection | 1. Put server down<br>2. Select a folder to sync | Correct error message |  |  |
+| Maintenance mode | 1. Put server in maintenance mode<br>2. Select a folder yo sync| Correct error message |  |  |
