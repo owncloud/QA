@@ -72,14 +72,14 @@ but testing should be also done with a 'real' server, for that the BTR team can 
 
 ### Minor Release Tests
 
-### 1. Settings windows - Login
+### 1. Install - Login
 
 TestID | Test Case | Steps to reproduce |Expected Result |Result | Related Comment (Squish-Test)
 ------------ | ------------- | ------------- | ------- | ----- | ------
 1 | Update Installation | 1. You need to have installed a previous version 2. Update to the new version |Test on Win, macOS, Linux| :construction: Win,<br>  :construction: macOS,<br> :construction: Linux  | |
 2 | Install the new version | 1. Delete the previous version 2. Install the new version || :construction: Win,<br>:construction: macOS,<br> :construction: Linux | |
-3 :robot: | Verify that you can enter a server address (valid server cert)| 1. Launch desktop app 2. enter a server address 3. Click on Next 4. The lock is shown closed - SSL details on mouse over| | :heavy_check_mark: | tst_addAccount |
-4 :robot: | Verify that you can enter a server address (self signed cert)| 1. Launch desktop app 2. enter a server address 3. Click on Next 4. If it is the first time you should accept the certificate - click on the checkbox and OK (The lock is shown in closed - the server validated SSL connection window is opened)| |:heavy_check_mark: | tst_addAccount |
+3 :robot: | Verify that you can enter a server address (valid server cert)| 1. Launch desktop client/add account 2. enter a server address 3. Click on Next 4. The lock is shown closed - SSL details on mouse over| | :heavy_check_mark: | tst_addAccount |
+4 :robot: | Verify that you can enter a server address (self signed cert)| 1. Launch desktop client/add account 2. enter a server address 3. Click on Next 4. If it is the first time you should accept the certificate - click on the checkbox and OK (The lock is shown in closed - the server validated SSL connection window is opened)| |:heavy_check_mark: | tst_addAccount |
 5 :robot: | Introduce username/password  | 1. Fill in username and password |If the credentials are not correct a message is shown "Error: Wrong credentials" | :heavy_check_mark: | tst_addAccount |
 6 :robot: | Verify that all contents of the server account is synced to the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desired | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount |
 7 :robot: | Verify that only the folder(s) selected are synced in the local folder  | 0. Disable VFS, 1. Click on Choose what to sync 2. The remote folder(s) are shown, select which you want to sync 3. Select the local folder |The selected folders selected are synced | :heavy_check_mark: | tst_syncing |
