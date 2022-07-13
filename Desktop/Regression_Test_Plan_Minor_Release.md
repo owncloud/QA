@@ -84,8 +84,8 @@ TestID | Test Case | Steps to reproduce |Expected Result |Result | Related Comme
 6 :robot: | Verify that all contents of the server account is synced to the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desired | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount |
 7 :robot: | Verify that only the folder(s) selected are synced in the local folder  | 0. Disable VFS, 1. Click on Choose what to sync 2. The remote folder(s) are shown, select which you want to sync 3. Select the local folder |The selected folders selected are synced | :heavy_check_mark: | tst_syncing |
 8 :robot: | Verify that you can skip folder configuration | 1. Click on "Manually create folder sync connection" | No settings dialog opens, the account shows only an "Add Folder Sync Connection" button.  | :heavy_check_mark: | tst_syncing  |
-9 | Connect to a server with LDAP (or optinally AD) | 0. Only for minor releases, 1. Setup owncloud server with openldap, 2. Connect. | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  |  |
-10 | Connect to a 8.1.x server | 0. Only for minor releases, 1. `docker run -ti -p 8181:80 owncloud:8.1`, 2. Connect.  A warning appears: "The server version 8.1.12.2 is unsupported", but syncing works. | | :construction: | |
+9 | Connect to a server with LDAP (or optinally AD) | 1. Setup owncloud server with openldap, 2. Connect. | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  |  |
+10 | Connect to a 8.1.x server | 1. `docker run -ti -p 8181:80 owncloud:8.1`, 2. Connect.  A warning appears: "The server version 8.1.12.2 is unsupported", but syncing works. | | :construction: | |
 
 
 ### 2. Folders
