@@ -143,6 +143,10 @@ _TO DO_
       * [ ] on Ubuntu latest/latest LTS
       * [ ] on Fedora latest
       * [ ] check 'Updates' on "Settings" tab should show: No updates available"
+ * [ ] For client version > 3.0.0 only: Install the tespilotcloud Linux-AppImage on one platform
+    * [ ] switch to beta channel works
+    * [ ] online update is available (must have prepared online updater for this)
+    * [ ] update succeeds.
  ----
  * [ ] For Beta or RC: Install **Testpilot client on Windows 10**
      * [ ] disable VFS in connction wizard
