@@ -84,7 +84,7 @@ _TO DO_
      * [ ] "Open folder" and make sure folders/files are there  
      * [ ] check db in sync root: .sync_journal.db is the only data base file (enable 'hidden files' in 'View')
 -----
-* [ ] Downgrade to new version X.X.x is prevented
+* [ ] Downgrade to new version is prevented
     * [ ] Install the next (unreleased) client version (from 'daily' repo) on **Win 10**, configure an account with VFS _ON_
     * [ ] Downgrade to X.X.x (need to deinstall newer version first)
     * [ ] Start client X.X.x -> red error message "Downgrading the folder from 'daily' version to X.X.x is not supported"
