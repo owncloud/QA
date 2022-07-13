@@ -14,15 +14,39 @@ curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
 chmod +x nodesource_setup.sh
 ./nodesource_setup.sh
 
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor > /usr/share/keyrings/yarnkey.gpg
+echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" >> /etc/apt/sources.list.d/yarn.list
 
-apt update && apt install -y nodejs git make g++ yarn s3cmd screen
+apt update && apt install -y nodejs git make gcc g++ yarn s3cmd screen
 
-git clone https://github.com/scality/S3.git
-cd ./S3
+## is S3 the older version of cloudserver? seems so...
+# git clone https://github.com/scality/S3.git
+# cd ./S3
+git clone https://github.com/scality/cloudserver.git
+cd cloudserver
+
 yarn cache clean
-yarn install --frozen-lockfile
+## yarn install usually fails once with
+# error https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz: Extracting tar content of undefined failed,
+# the file appears to be corrupt: "ENOENT: no such file or directory, chmod
+# '/usr/local/share/.cache/yarn/v6/npm-lodash-4.17.21-679591c564c3bffaae8454cf0b3df370c3d6911c-integrity/node_modules/lodash/fp/isArrayBuffer.js'"
+#
+# As long as people are discussing https://github.com/yarnpkg/yarn/issues/4147
+# we'll have to use --frozen-lockfile to actually lock the lockfile, otherwise it is unlocked,
+# updates itself and we get unpredictable dependency versions.
+when=$(date +%s)
+while ! yarn install --frozen-lockfile; do
+  echo " ... retrying yarn install ...";
+  if [ $(expr $(date +%s) - $when) -gt 600 ]; then
+    # why did it take so long? Try clean the cache...
+    echo " ... with clean caches after 10 min of bad luck ... ";
+    when=$(date +%s)
+    yarn cache clean
+  fi
+  sleep 5
+done
+# still, at runtime, it sometimes fails with Error: Cannot find module 'lodash/assign'
+yarn add lodash
 
 ## Caution: Keep in sync with s3cfg and s3prim.config.php below
 cat << EOF > conf/authdata.json
@@ -58,8 +82,8 @@ $CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
-            // replace with your bucket
-            'bucket' => 'owncloud',
+            // replace with your bucket, '_' is not allowed.
+            'bucket' => 'oc-primary',
             // uncomment to enable server side encryption
             //'serversideencryption' => 'AES256',
             'options' => [
@@ -84,15 +108,20 @@ chown www-data. /var/www/owncloud/config/s3primary.config.php
 screen -d -m -S s3prim -L env REMOTE_MANAGEMENT_DISABLE=1 yarn start
 
 for i in 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
-  s3cmd mb s3://owncloud 2>/dev/null && break
+  s3cmd mb s3://oc-primary 2>/dev/null && break
   # wait for the server to to start...
   echo -n .
   sleep 2
+  if ! screen -ls s3prim > /dev/null; then
+    echo >> ~/POSTINIT.msg "S3:	Starting scality cloudserver failed. See ~/cloudserver/screenlog.0"
+    tail screenlog.0
+    exit 1
+  fi
 done
 grep '"action"' screenlog.0
 
-s3cmd info s3://owncloud
-s3cmd du s3://owncloud
+s3cmd info s3://oc-primary
+s3cmd du s3://oc-primary
 
 occ app:enable files_primary_s3
 
