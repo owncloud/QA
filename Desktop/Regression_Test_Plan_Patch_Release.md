@@ -82,12 +82,12 @@ _TO DO_
      * [ ] Make sure the account(s) is/are still configured and the users are logged in
      * [ ] winVFS is still enabled
      * [ ] "Open folder" and make sure folders/files are there  
-     * [ ] check db in sync root: .sync_journal.db is the only *.db file (enable 'hidden files' in 'View')
+     * [ ] check db in sync root: .sync_journal.db is the only data base file (enable 'hidden files' in 'View')
 -----
-* [ ] Downgrade to new version 2.X.x is prevented
-    * [ ] Install the next (unreleased) client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
-    * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
-    * [ ] Start client 2.X.x -> red error message "Downgrading the folder from 2.X.x+1 to 2.X.x is not supported"
+* [ ] Downgrade to new version X.X.x is prevented
+    * [ ] Install the next (unreleased) client version (from 'daily' repo) on **Win 10**, configure an account with VFS _ON_
+    * [ ] Downgrade to X.X.x (need to deinstall newer version first)
+    * [ ] Start client X.X.x -> red error message "Downgrading the folder from 'daily' version to X.X.x is not supported"
     * [ ] Add a new account and try to reuse existing sync root -> error popup: "The folder ... is used in a folder sync connection! Please pick another one!"
  ----
 * [ ] Install ownCloud desktop client on latest **macOS** using .pkg installer
@@ -136,6 +136,13 @@ _TO DO_
      * [ ] Public link has been created and can be opened in a browser
  * [ ] Enable VFS
      * [ ] VFS has been enabled (suffix ```.owncloud``` after 'Free up space')
+ ----
+ * [ ] Run the ownCloud Linux-AppImage on some platforms
+      * [ ] on CentOS 7
+        * [ ] Overlay icons in 'Nautilus' are shown (install 'owncloud-client-nautilus' from 2.10.1 repo)
+      * [ ] on Ubuntu latest/latest LTS
+      * [ ] on Fedora latest
+      * [ ] check 'Updates' on "Settings" tab should show: No updates available"
  ----
  * [ ] For Beta or RC: Install **Testpilot client on Windows 10**
      * [ ] disable VFS in connction wizard
