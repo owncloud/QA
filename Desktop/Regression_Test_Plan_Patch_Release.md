@@ -87,7 +87,7 @@ _TO DO_
 * [ ] Downgrade to new version is prevented
     * [ ] Install the next (unreleased) client version (from 'daily' repo) on **Win 10**, configure an account with VFS _ON_
     * [ ] Downgrade to current release candidate (need to deinstall newer daily version first)
-    * [ ] Start client X.X.x -> red error message "Downgrading the folder from 'daily' version to X.X.x is not supported"
+    * [ ] Start client -> red error message "Downgrading the folder from 'daily' version to X.X.x is not supported"
     * [ ] Add a new account and try to reuse existing sync root -> error popup: "The folder ... is used in a folder sync connection! Please pick another one!"
  ----
 * [ ] Install ownCloud desktop client on latest **macOS** using .pkg installer
