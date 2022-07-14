@@ -143,8 +143,8 @@ _TO DO_
       * [ ] on Ubuntu latest/latest LTS
       * [ ] on Fedora latest
       * [ ] check 'Updates' on "Settings" tab should show: No updates available"
- * [ ] For client version > 3.0.0 only: Install the tespilotcloud Linux-AppImage on one platform
-    * [ ] switch to beta channel works
+ * [ ] For client version > 3.0.0 only: Install the previous stable version of the testpilotcloud Linux-AppImage on one platform
+    * [ ] switch to Beta update channel works
     * [ ] online update is available (must have prepared online updater for this)
     * [ ] update succeeds.
  ----
