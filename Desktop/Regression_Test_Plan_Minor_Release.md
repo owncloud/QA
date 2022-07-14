@@ -117,6 +117,8 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 
 ### 3. Files
 
+Note: "Via Web" means check files on server in web browser
+
 TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 :robot: | User should see the single file on Via Web when the file is successfully sync in Desktop Client sync folder | 1. Drop one selected file in Desktop Client sync folder 2. User can see end receive notification from System tray that single file is successfully added in Desktop Client sync folder 3. Go to Desktop Client system tray icon and select launch Via Web| Verify that user can see that the single file is sync on Desktop Clien Sync folder and is available on Via Web| :heavy_check_mark: | tst_syncing |
