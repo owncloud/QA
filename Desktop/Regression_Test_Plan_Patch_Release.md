@@ -1,11 +1,11 @@
 ## Regression Testplan Patch Release
 
-### Template: 
+## Template: 
 [Regression_Test_Plan_Patch_Release.md](https://github.com/owncloud/QA/blob/master/Desktop/Regression_Test_Plan_Patch_Release.md)
 
 (from: https://testlink.owncloud.team/linkto.php?tprojectPrefix=desktop&item=testcase&id=desktop-158)
 
-__TO DO__
+_TO DO_
 - So far squish tests only run on Ubuntu, for future: should run on Windows and macOS as well
 - Qt and OpenSSL versions: is it necessary to check it here? (for Win and macOS configured in craft, for Linux the system OpenSSL is used, qt packages are ownCloud packages), versions are listed in automated test result (e.g. https://github.com/owncloud/client/issues/8870#issuecomment-896795228)
 - manual check remains for file browser integration (overlay icons) and WinVFS
@@ -21,7 +21,8 @@ __TO DO__
 | 1 | Fresh install on Win10 using MSI | The MSI details page has<br>- Verified publisher: ownCloud GmbH<br>- certificate expires > 1y | <ul><li>[ ] </ul></li> | <ul><li>[ ] </uk></li> |
 -->
 
-### Download:
+## Download:
+-> URL
 
 ----
 * [ ] Fresh install on **Win10**/**Win11** using the unbranded ownCloud client MSI installer.
@@ -30,7 +31,7 @@ __TO DO__
          * certificate expires > 1y
      * [ ] Settings tab, About has correct versions:
          * ownCloud client version
-         * Qt 5.15.2 for client 3.0.0
+         * Qt 5.15.5 for client 3.0.0
          * OpenSSL 1.1.1n for client 3.0.0
 * [ ] Visually check all tabs
      * [ ] Tabs look correct
@@ -43,6 +44,9 @@ __TO DO__
          * [ ] File has been shared successfully
      * [ ] Create a public link
          * [ ] Public link has been created and can be opened in a browser
+     * [ ] disable / re-enable VFS (right-click on dot menu)
+         * [ ] VFS has been disabled / enabled
+         * [ ] check Explorer icons: VFS _OFF_: overlay icons, VFS _ON_: (Win) icon in 'Status' column
 * [ ] Connect to a latest oCIS server, e.g. ocis.ocis-traefik.released.owncloud.works (see: https://owncloud.dev/ocis/deployment/continuous_deployment/ and https://owncloud.dev/ocis/getting-started/demo-users/)
      * [ ] VFS is enabled per default
 * [ ] Login to oCIS server in browser and create some folders/subfolders and files 
@@ -69,9 +73,6 @@ __TO DO__
 * [ ] Login to oCIS server and create a space (see https://owncloud.dev/ocis/getting-started/demo-users/ for accounts having the right to create spaces)
      * [ ] add the space in client (button "Add a space")
      * [ ] space is added / VFS is enabled per default
-* [ ] disable / re-enable VFS
-     * [ ] VFS has been disabled / enabled
-     * [ ] check Explorer icons: VFS _OFF_: overlay icons, VFS _ON_: (Win) icon in 'Status' column
  ----
  * [ ] Install the previous stable version of **Testpilot client on Win 10** VFS _ON_
      * [ ] Update to new version should be suggested on 'Update channel' 'Beta' (see "Settings" tab)
@@ -81,18 +82,18 @@ __TO DO__
      * [ ] Make sure the account(s) is/are still configured and the users are logged in
      * [ ] winVFS is still enabled
      * [ ] "Open folder" and make sure folders/files are there  
-     * [ ] check db in sync root: .sync_journal.db is the only *.db file (enable 'hidden files' in 'View')
+     * [ ] check db in sync root: .sync_journal.db is the only data base file (enable 'hidden files' in 'View')
 -----
-* [ ] Downgrade to new version 2.X.x is prevented
-    * [ ] Install the next (unreleased) client version (daily2.X.x+1 or 2.X+1) on **Win 10**, configure an account with VFS _ON_
-    * [ ] Downgrade to 2.X.x (need to deinstall newer version first)
-    * [ ] Start client 2.X.x -> red error message "Downgrading the folder from 2.X.x+1 to 2.X.x is not supported"
+* [ ] Downgrade to new version is prevented
+    * [ ] Install the next (unreleased) client version (from 'daily' repo) on **Win 10**, configure an account with VFS _ON_
+    * [ ] Downgrade to current release candidate (need to deinstall newer daily version first)
+    * [ ] Start client -> red error message "Downgrading the folder from 'daily' version to X.X.x is not supported"
     * [ ] Add a new account and try to reuse existing sync root -> error popup: "The folder ... is used in a folder sync connection! Please pick another one!"
  ----
 * [ ] Install ownCloud desktop client on latest **macOS** using .pkg installer
      * [ ] Settings tab, About has correct versions:
          * ownCloud client version
-         * Qt 5.15.2 for client 3.0.0
+         * Qt 5.15.5 for client 3.0.0
          * OpenSSL 1.1.1n for client 3.0.0
 * [ ] Visually check all tabs
      * [ ] Tabs look correct
@@ -135,6 +136,17 @@ __TO DO__
      * [ ] Public link has been created and can be opened in a browser
  * [ ] Enable VFS
      * [ ] VFS has been enabled (suffix ```.owncloud``` after 'Free up space')
+ ----
+ * [ ] Run the ownCloud Linux-AppImage on some platforms
+      * [ ] on CentOS 7
+        * [ ] Overlay icons in 'Nautilus' are shown (install 'owncloud-client-nautilus' from 2.10.1 repo)
+      * [ ] on Ubuntu latest/latest LTS
+      * [ ] on Fedora latest
+      * [ ] check 'Updates' on "Settings" tab should show: No updates available"
+ * [ ] For client version > 3.0.0 only: Install the previous stable version of the testpilotcloud Linux-AppImage on one platform
+    * [ ] switch to Beta update channel works
+    * [ ] online update is available (must have prepared online updater for this)
+    * [ ] update succeeds.
  ----
  * [ ] For Beta or RC: Install **Testpilot client on Windows 10**
      * [ ] disable VFS in connction wizard

@@ -84,8 +84,8 @@ TestID | Test Case | Steps to reproduce |Expected Result |Result | Related Comme
 6 :robot: | Verify that all contents of the server account is synced to the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desired | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount |
 7 :robot: | Verify that only the folder(s) selected are synced in the local folder  | 0. Disable VFS, 1. Click on Choose what to sync 2. The remote folder(s) are shown, select which you want to sync 3. Select the local folder |The selected folders selected are synced | :heavy_check_mark: | tst_syncing |
 8 :robot: | Verify that you can skip folder configuration | 1. Click on "Manually create folder sync connection" | No settings dialog opens, the account shows only an "Add Folder Sync Connection" button.  | :heavy_check_mark: | tst_syncing  |
-9 | Connect to a server with LDAP (or optinally AD) | 0. Only for minor releases, 1. Setup owncloud server with openldap, 2. Connect. | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  |  |
-10 | Connect to a 8.1.x server | 0. Only for minor releases, 1. `docker run -ti -p 8181:80 owncloud:8.1`, 2. Connect.  A warning appears: "The server version 8.1.12.2 is unsupported", but syncing works. | | :construction: | |
+9 | Connect to a server with LDAP (or optinally AD) | 1. Setup owncloud server with openldap, 2. Connect. | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  |  |
+10 | Connect to a 8.1.x server | 1. `docker run -ti -p 8181:80 owncloud:8.1`, 2. Connect.  A warning appears: "The server version 8.1.12.2 is unsupported", but syncing works. | | :construction: | |
 
 
 ### 2. Folders
@@ -117,18 +117,20 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 
 ### 3. Files
 
+Note: "Via Web" means check files on server in web browser
+
 TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 :robot: | User should see the single file on Via Web when the file is successfully sync in Desktop Client sync folder | 1. Drop one selected file in Desktop Client sync folder 2. User can see end receive notification from System tray that single file is successfully added in Desktop Client sync folder 3. Go to Desktop Client system tray icon and select launch Via Web| Verify that user can see that the single file is sync on Desktop Clien Sync folder and is available on Via Web| :heavy_check_mark: | tst_syncing |
 2 | User should see the multiple file on Via Web when the files or folders are successfully sync in Desktop Client Sync folder | 1. Drop multiple selected files in Desktop Client Sync folder 2. User can see and receive notification from System tray that multiple files or folders are successfully added in Desktop Client Sync folder 3. Go to Desktop Client System tray icon and select launch Via Web|Verify that User can see that multiple files are sync on Desktop Client folder and are available on Via Web| :construction: | File is synced. But no Popup Notification will be shown |
 3| User adds file to the sync folder will show up in repository  | 1. Users see a completed icon overlay on the copied file(s) in the Desktop client folder 2. The Sync Files tab shows the files added in the Desktop Client folder from desktop|| :construction:  | |
-4| User adds the various types of files | 1. Microsoft word documents, Microsoft Excel, Microsoft Powerpoint, .JPG, .PDF, .MP3|The Sync files tab shoe all type of files added in th Desktop Client folder from desktop| :construction:  | All files snyced and shown in Activities Tab under synchronization protocol |
-5|  File with long name can be synced | Create a file with this name "thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIs.txt" | Sync is successful | :construction: | |
-6| File with a name longer than 233 raise an error | Try to sync a file with a file name > 233 characters | The "Not synced" tab shows an error, the file is blacklisted | :construction: | |
+4 :robot: | User adds the various types of files | 1. Microsoft word documents, Microsoft Excel, Microsoft Powerpoint, .JPG, .PDF, .MP3|The Sync files tab shoe all type of files added in th Desktop Client folder from desktop| :heavy_check_mark:  | tst_syncing |
+5 :robot: |  File with long name can be synced | Create a file with this name "thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIs.txt" | Sync is successful | :heavy_check_mark: | tst_syncing |
+6 :robot: | File with a name longer than 233 raise an error | Try to sync a file with a file name > 233 characters | The "Not synced" tab shows an error, the file is blacklisted | :heavy_check_mark: | tst_syncing |
 7| User copies/drag&drops multiple files at a time to the Sync folder | 1. Users see the completed icon overlay on all type of files in Desktop Client folder on Desktop. 2. The Sync files tab shows all type of files added in the Desktop Client folder from Desktop|Sync is successful| :construction:  | |
 8| Sync files at the same time| 1. Add a file of 1MB onthe local inside folder, and in the same time, add another file on the same remote folder (make sure that file is on the server before the client finishes)|Look at Via Web and the Desktop Client to make sure that the sync is correct| :construction: | |
 9| Same name files, different extension | 1. Create the same name file with two differents extensions|The files are sync corectly|  :construction: | |
-10| Files with spaces in the name | 1. Move a file under the root sync folder with spaces in the name 2. Let them sync|The files are sync correctly|  :construction: | |
+10 :robot: | Files with spaces in the name | 1. Move a file under the root sync folder with spaces in the name 2. Let them sync|The files are sync correctly|  :heavy_check_mark: | tst_syncing |
 11| Create and delete one file with special characters in the name| 1. Go to Desktop Client 2. Create a single folder 3. Move with in this folder a file with a special characters in the name fo example "~`!@#$^&()-_=+{[}];'," 4. Wait for the file to sync to the Via Web 5. Delete the file in Desktop Client |Look at Via Web and make sure that the file got deleted| :construction: | |
 12| User copies large files to the Desktop Client folder on the Desktop| 1. User see in-progress overlay icon while upload is in progress in Desktop 2. User sees the completed sync icon overlay once the upload process is done|The Sync files tab shows file added in th Desktop Client folder from desktop| :construction:  | |
 13| upload 50Mb file| 1. Create a folder under sync folder 2. Copy a large file (50MB) in this folder|After several sync processes the file is correct| :construction:   | |
@@ -136,8 +138,8 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 15| Upload 3000Mb files| 1. Upload a large .pdf (3GB) file through web browser|Sync is successful| :construction:  | |
 16| Upload 2048Mb files| 1. Upload a large file (2GB=2147483648 bytes) through web browser|Sync is successful|  :construction:  | |
 17| Upload 1000Mb files| 1. Upload a folder 1000 file (1Mb each) |Sync is successful| :construction:  | |
-18| Upload 500Mb+500Mb files| 1. Upload two folders with 500 files each |Sync is successful| :construction:  | |
-19| Upload 1024Mb file| 1. Upload a 1GB file |Sync is successful| :construction:  | |
+18 :robot: | Upload 500Mb+500Mb files| 1. Upload two folders with 500 files each |Sync is successful| :heavy_check_mark:  | tst_syncing |
+19 :robot: | Upload 1024Mb file| 1. Upload a 1GB file |Sync is successful| :heavy_check_mark:  | tst_syncing |
 20| Verify the limit of the quota| 1. Upload the necessary large files to fill the quota |Warning: "The available space of your workspace is running out, please delete some files to free space"| :construction: | |
 
 ### 4. Move files and folders
