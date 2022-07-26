@@ -18,10 +18,11 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.11.0-alpha.1
+vers=10.11.0-alpha.2
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.11.0-alpha.2"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220720.tar.bz2
 test "$vers" = "10.11.0-alpha.1"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220708.tar.bz2
 test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
 test "$vers" = "10.10.0RC3"                     && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220517.tar.bz2
@@ -209,8 +210,12 @@ h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
 d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/" | tr '[A-Z]' '[a-z]' | tr . -)
 machine_type=cx11
-echo "$*" | grep files_antivirus && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
-echo "$*" | grep search_elastic  && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
+echo "$*" | grep files_antivirus  && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
+echo "$*" | grep search_elastic   && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
+echo "$*" | grep files_primary_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
+
+alias title="wmctrl -r :ACTIVE: -N"
+title "$hname - hetzner"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
 source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
