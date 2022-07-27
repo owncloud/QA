@@ -25,7 +25,7 @@ INIT_SCRIPT << EOF
   ## (ports 440, 441, 442, 446, 447 all show up fine in lsof, but not 443, 444, or 445)
   # setcap cap_net_bind_service=+eip /usr/sbin/sshd
   # setenforce 0
-  ## Solution: it only seems it does not work when using `lsof | grep :443`
+  ## Solution: it only seems it does not work when using 'lsof | grep :443'
   ## This is because lsof does not say :443, it says :https, gna gna...
 
   cat <<EOM > ~/POSTINIT.msg
