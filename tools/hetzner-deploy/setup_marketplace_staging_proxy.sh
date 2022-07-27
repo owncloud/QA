@@ -14,21 +14,17 @@ title "$d_name - hetzner"
 
 source lib/make_machine.sh -u $d_name -p screen,telnet,selinux-utils "$@"
 
-# No code here. Just instructions.
+# Almost no code here. Mostly instructions.
 
 INIT_SCRIPT << EOF
-  # allow ports to bind to all interfaces. Without 'GatewayPorts' we can only bind to localhost
+  ## Allow ports to bind to all interfaces. Without 'GatewayPorts' we can only bind to localhost
   echo >> /etc/ssh/sshd_config GatewayPorts yes
   systemctl restart sshd
 
-  ## we want to allow sshd to bind to port 443 and 80.
-  ## (ports 440, 441, 442, 446, 447 all show up fine in lsof, but not 443, 444, or 445)
-  # setcap cap_net_bind_service=+eip /usr/sbin/sshd
+  ## Not needed: disable selinux
   # setenforce 0
-  ## Solution: it only seems it does not work when using 'lsof | grep :443'
-  ## This is because lsof does not say :443, it says :https, gna gna...
 
-  cat <<EOM > ~/POSTINIT.msg
+  cat << EOM > ~/POSTINIT.msg
 ---------------------------------------------
 From a laptop within ownCloud VPN run:
   ssh -v -R 443:marketplace.staging.owncloud.services:443 -N -o ExitOnForwardFailure=yes root@$IPADDR
