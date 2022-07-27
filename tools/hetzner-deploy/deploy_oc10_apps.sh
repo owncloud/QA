@@ -214,8 +214,8 @@ echo "$*" | grep files_antivirus  && machine_type=cx21	# c-icap docker consumes 
 echo "$*" | grep search_elastic   && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
 echo "$*" | grep files_primary_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
 
-alias title="wmctrl -r :ACTIVE: -N"
-title "$hname - hetzner"
+function title() { wmctrl -r :ACTIVE: -N "$@"; }
+title "$d_name - hetzner"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
 source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
