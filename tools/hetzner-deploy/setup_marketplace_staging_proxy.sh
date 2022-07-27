@@ -4,6 +4,10 @@
 #
 # https://doc.owncloud.com/server/developer_manual/testing/ui-testing.html
 # See also: https://github.com/owncloud/files_texteditor/issues/345#issuecomment-834498939
+#
+# This works for a while, then suddenly fails with:
+# - No marketplace connection: Client error response [url] https://marketplace.staging.owncloud.services/api/v1/platform/10.8.0/apps.json [status code] 403 [reason phrase] Forbidden
+#
 
 echo "Estimated setup time: 2 minutes ..."
 
