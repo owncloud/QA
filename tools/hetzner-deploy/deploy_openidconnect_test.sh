@@ -95,6 +95,7 @@ INIT_SCRIPT << EOF
     config > merged.yml
   docker-compose -f merged.yml up -d
 
+  sleep 5
   while ! docker exec compose_owncloud_1 occ status 2>/dev/null| grep 'installed: true'; do
      echo "Waiting for ownCloud to become ready ..."
      sleep 5
@@ -107,6 +108,7 @@ INIT_SCRIPT << EOF
   # echo 'starting a temp shell. type exit to continue'
   # bash
 
+  sleep 5
   # workaround for https://github.com/owncloud-docker/base/pull/140
   # 140 got superceeded by pull/178 which works only with knowledge about major or not major upgrade.
   docker-compose -f merged.yml exec owncloud occ market:uninstall openidconnect
@@ -114,6 +116,7 @@ INIT_SCRIPT << EOF
   docker-compose -f merged.yml exec owncloud wget $openidconnect_url -O /tmp/o.tar.gz
   docker-compose -f merged.yml exec owncloud occ market:install -n -l /tmp/o.tar.gz
   docker-compose -f merged.yml exec owncloud occ market:upgrade -n --major openidconnect
+  docker-compose -f merged.yml exec owncloud occ upgrade	# just in case one of the apps has a minor number jump.
   docker-compose -f merged.yml exec owncloud occ app:enable openidconnect
   docker-compose -f merged.yml exec owncloud occ app:list 'openidconnect|oauth2' && echo OWNCLOUD IS READY
  
