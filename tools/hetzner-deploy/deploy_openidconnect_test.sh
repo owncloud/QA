@@ -1,14 +1,14 @@
 #!/bin/bash
 #
-# see also:
+# See also:
 #  https://github.com/owncloud-docker/compose-playground/issues/6
 #  https://github.com/owncloud-docker/compose-playground/pull/51 	pmaier-fixes
 #  https://github.com/owncloud-docker/compose-playground/blob/master/compose/kopano/konnect/README.md
-#  https://doc.owncloud.com/server/10.8/admin_manual/configuration/user/oidc/
+#  https://doc.owncloud.com/server/10.10/admin_manual/configuration/user/oidc/
 #
-# CAUTION: https://github.com/owncloud/openidconnect/ has a README.md
-#		- some concepts there are correct, e.g. index.php/apps/openidconnect/config rewrite
-#		- some other parts may need verification.
+# CAUTION: https://github.com/owncloud/openidconnect/#readme
+#  - some concepts there are correct, e.g. index.php/apps/openidconnect/config rewrite
+#  - some other parts may need verification.
 #
 # 2020-10-16, jw@owncloud.com
 # 2020-11-30, jw@owncloud.com
