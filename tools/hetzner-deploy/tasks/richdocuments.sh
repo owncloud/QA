@@ -1,7 +1,8 @@
 # source ./env.sh	# probably not needed.
 
 occ app:enable richdocuments	# Does not trigger license grace period, but secureview is unavailable in the UI without license
-occ app:enable pdf_viewer	# for testing interoperability
+# occ app:enable pdf_viewer	# for testing interoperability
+occ app:enable files_pdfviewer	# for testing interoperability
 
 ## configure one of our OLD trusty servers. TODO: deploy own collabora host.
 # occ config:app:set richdocuments wopi_url --value https://collabora.owncloud.works:443
@@ -18,7 +19,7 @@ occ config:app:set richdocuments secure_view_open_action_default   --value true	
 # - pdf are seen by receiving user with watermarks
 # - jpg and other non-securable files are not visible at all.
 cat << EOM >>  ~/POSTINIT.msg
-richdocuments:  Also enabled app pdf_viewer
+richdocuments:  Also enabled app files_pdfviewer
 richdocuments:  Secure_view settings: open_action_default=true, has_watermark_default=true, can_print_default=false
 richdocuments:	Do this manually after checking that it is initially grayed out:
 richdocuments:		occ config:app:set richdocuments secure_view_option --value true
