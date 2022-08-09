@@ -72,7 +72,7 @@ echo >> /etc/postgresql/12/main/pg_hba.conf     "local   all   postgres         
 service postgresql restart
 
 rm -rf /opt/kaspersky
-tarname="$(ls Kaspersky_ScanEngine*.tar.gz | head -n 1)"
+tarname="$(ls Kaspersky_ScanEngine*.tar.gz 2>/dev/null | head -n 1)"
 if [ ! -f "$tarname" ]; then
   echo "Kaspersky_ScanEngine not initialized: No match for Kaspersky_ScanEngine*.tar.gz"
 else
@@ -94,20 +94,25 @@ else
   echo "Make the Kaspersky ScanEngine Web GUI locally as https://localhost:11443 via ssh-tunnel:"
   echo "  ssh -v -L 11443:127.0.0.1:1443 root@$IPADDR"
   echo ""
-  echo "Review icap settings:"
-  echo "  occ config:list | jq .apps.files_antivirus"
-  echo "Switch icap from from clamav-icap to kaspersky run these commands:"
+  echo "Switch icap from clamav-icap to kaspersky run these commands:"
   echo "  occ config:app:set files_antivirus av_host             --value=127.0.0.1"
   echo "  occ config:app:set files_antivirus av_port 	         --value=11344"
   echo "  occ config:app:set files_antivirus av_mode             --value=icap"
   echo "  occ config:app:set files_antivirus av_request_service  --value=req"
   echo "  occ config:app:set files_antivirus av_response_header --value='X-Virus-ID'"
-  echo ""
-  echo "Switch off icap:"
-  echo "  occ config:app:set files_antivirus av_mode             --value=socket"
-  echo ""
-  echo "View the syslog of clamd:"
-  echo "  journalctl -u clamav-daemon -p0..7 --no-ho -f"
-  echo ""
 fi
-fi
+echo ""
+echo "Make a remote fortinet or McAfee webgateway ICAP socket appear at localhost:"
+echo "  ssh -N -v -L 61344:192.168.0.32:1344 root@157.90.80.61 -p 16806"
+echo "  ssh -N -v -L 61344:192.168.0.2:1344 root@157.90.80.61 -p 16806"
+echo "Inspect traffic at that local socket:"
+echo '  tcpdump -A -s 1500 "port 61344" -i lo 	# for hexdump use -X'
+echo ""
+echo "Review icap settings:"
+echo "  occ config:list | jq .apps.files_antivirus"
+echo "Switch off icap:"
+echo "  occ config:app:set files_antivirus av_mode             --value=socket"
+echo ""
+echo "View the syslog of clamd:"
+echo "  journalctl -u clamav-daemon -p0..7 --no-ho -f"
+echo ""
