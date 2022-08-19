@@ -1,8 +1,10 @@
+References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_Files_Antivirus.md)
+
 ## Setup
 
-References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_Files_Antivirus.md)
   - Download: https://www.eicar.org/?page_id=3950
-
+  - `oc10.sh files_antivirus` 
+     -> https://oc10110a2-antivirus-110rc2-20220729.jw-qa.owncloud.works
 
 ## File antivirus Test Plan
 
@@ -87,13 +89,23 @@ set "File size limit" to 100 bytes
 uploads of `eicar.com` (68byte) should be blocked
 uploads of `eicar_com.zip` (184byte) should pass
 
-| upload test ↓ Testfile→       | eicar.com <br> blocked | eicar_com.zip <br> passing |
+| upload test ↓ Testfile→       | expected result | eicar.com |
 | ----------------------------- | ---------------------- | -------------------------- |
-| old dav path without chunking	|    🚧                  |       🚧                    |
-| old dav path with chunking    |    🚧                  |       🚧                    |
-| new dav path without chunking |    🚧                  |       🚧                    |
-| new dav path with chunking    |    🚧                  |       🚧                    |
-| public upload                 |    🚧                  |       🚧                    |
+| old dav path without chunking	| blocked |   🚧                   |
+| old dav path with chunking    | blocked |   🚧                   |
+| new dav path without chunking | blocked |   🚧                   |
+| new dav path with chunking    | blocked |   🚧                   |
+| public upload                 | blocked |   🚧                   |
+
+
+| upload test ↓ Testfile→       | expected result | eicar.com.zip |
+| ----------------------------- | ---------------------- | -------------------------- |
+| old dav path without chunking	| passed |    🚧                   |
+| old dav path with chunking    | blocked |   🚧                   |
+| new dav path without chunking | passed |    🚧                   |
+| new dav path with chunking    | blocked |   🚧                   |
+| public upload                 | passed |    🚧                   |
+
 
 ### background scan
 
