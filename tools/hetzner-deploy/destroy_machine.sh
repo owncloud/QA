@@ -16,6 +16,17 @@ fi
 test -z "$TF_USER" && TF_USER=$USER
 name=$1
 
+if echo $name | grep -q \.; then
+  echo "$name contains dots - it is pobably an FQDN - Trying ssh..."
+  hostname=$(timeout 10 ssh root@$name hostname)
+  echo "Seen hostname: $hostname"
+  echo "Trying to remove the FQDN from cloudflare DNS"
+  echo | cf_dns - $name
+  echo "+ $0 $hostname"
+  name=$hostname
+fi
+
+
 if [ -f "$(dirname $0)/lib/hcloud_cli/bin/hcloud" ]; then
   "$(dirname $0)/lib/hcloud_cli/bin/hcloud" server delete "$name"
   exit 0
