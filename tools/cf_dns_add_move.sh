@@ -7,15 +7,24 @@
 
 cf_zone_default=owncloud.works
 
+if [ "$1" = "-l" ]; then
+  cf_dns_list "$2"
+  exit 0
+fi
+
 if [ -z "$1" -o "$1$2" = '-' -o "$1$2" = '--' ]; then
   cat <<EOF 
-Usage: $0 IPADDR [FQDN] [BOT:mailaddr]
+Usage:
+	$0 IPADDR [FQDN] [BOT:mailaddr]
+	$0 -l [-c]
 
 A cloudflare DNS record for the fully qualified domain name FQDN is created pointing to IPADDR.
 If an entry for FQDN already exists, it is first removed, then re-created with the new IPADDR.
 To delete an entry, you can pass '-' instead of a valid IPADDR.
 To list all entries for an IPADDR, do not pass an FQDN.
 To delete all entries for an IPADDR, you can pass '-' instead of a valid FQDN.
+
+The form cf_dns -l is an alias for cf_dns_list.
 
 The zone used is controlled by the environment variable CLOUDFLARE_DNS_ZONE, which defaults to $cf_zone_default.
 (With CLOUDFLARE_DNS_API the URL for a zone API can be directly given. This overrides CLOUDFLARE_DNS_ZONE.)
