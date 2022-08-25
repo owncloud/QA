@@ -22,6 +22,10 @@ if echo $name | grep -q \.; then
   echo "Seen hostname: $hostname"
   echo "Trying to remove the FQDN from cloudflare DNS"
   echo | cf_dns - $name
+  if [ -z "$hostname" ]; then
+    echo "Oops, failed to get hostname. Retry $0 with the ip address?"
+    exit 1
+  fi
   echo "+ $0 $hostname"
   name=$hostname
 fi
