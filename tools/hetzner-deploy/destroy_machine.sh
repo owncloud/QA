@@ -16,7 +16,7 @@ fi
 test -z "$TF_USER" && TF_USER=$USER
 name=$1
 
-if echo $name | grep -q \.; then
+if echo $name | grep -q '\.'; then
   echo "$name contains dots - it is pobably an FQDN - Trying ssh..."
   hostname=$(timeout 10 ssh root@$name hostname)
   echo "Seen hostname: $hostname"
