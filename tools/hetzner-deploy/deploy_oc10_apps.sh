@@ -215,6 +215,7 @@ echo "$*" | grep files_antivirus   && machine_type=cx21	# c-icap docker consumes
 echo "$*" | grep search_elastic    && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
 echo "$*" | grep files_primary_s3  && machine_type=cx21	# yarn tsc fails very often on a cx11.
 echo "$*" | grep files_external_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
+echo "$*" | grep objectstore       && machine_type=cx21	# yarn tsc fails very often on a cx11.
 
 function title() { wmctrl -r :ACTIVE: -N "$@"; }
 title "$d_name - hetzner"
