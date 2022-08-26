@@ -6,7 +6,7 @@
 #  - https://github.com/scality/cloudserver#readme
 #  - https://s3-server.readthedocs.io/en/latest/
 #
-# CAUTION: keep in sync with files_primary_s3 and objectstore
+# CAUTION: keep in sync with files_external_s3 and files_primary_s3
 
 # source ./env.sh	# probably not needed.
 
@@ -19,6 +19,36 @@ host_bucket = %(bucket).localhost:8000
 signature_v2 = False
 use_https = False
 EOF
+
+## Caution: Keep in sync with s3cfg and authdata.json above
+cat <<'EOF' > /var/www/owncloud/config/objectstore.config.php
+<?php
+$CONFIG = [
+    'objectstore' => [
+        'class' => 'OCA\ObjectStore\S3',
+        'arguments' => [
+            // replace with your bucket, '_' is not allowed.
+            'bucket' => 'oc-primary',
+            // uncomment to enable server side encryption
+            //'serversideencryption' => 'AES256',
+            'options' => [
+                // version and region are required
+                'version' => '2006-03-01',
+                // change to your region
+                'region'  => 'eu-central-1',
+                'credentials' => [
+                    // replace key and secret with your credentials
+                    'key' => 'owncloud',
+                    'secret' => 'owncloud',
+                ],
+                'use_path_style_endpoint' => true,
+                'endpoint' => 'http://localhost:8000/',
+            ],
+        ],
+    ],
+];
+EOF
+chown www-data. /var/www/owncloud/config/objectstore.config.php
 
 if [ ! -x ~/nodesource_setup.sh ]; then
   ## update 2022-03-18: Node.js 10.x is no longer actively supported!
@@ -63,7 +93,7 @@ else
   # still, at runtime, it sometimes fails with Error: Cannot find module 'lodash/assign'
   yarn add lodash
 
-  ## Caution: Keep in sync with s3cfg and s3ext.config.php below
+  ## Caution: Keep in sync with s3cfg and s3prim.config.php below
   cat << EOF > conf/authdata.json
 {
     "accounts": [{
@@ -84,7 +114,7 @@ EOF
 fi
 
 for i in 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
-  s3cmd mb s3://oc-external 2>/dev/null && break
+  s3cmd mb s3://oc-primary 2>/dev/null && break
   # wait for the server to to start...
   echo -n .
   sleep 2
@@ -96,29 +126,16 @@ for i in 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
 done
 grep '"action"' screenlog.0
 
-s3cmd info s3://oc-external
-s3cmd du s3://oc-external
-success=$?
+s3cmd info s3://oc-primary
+s3cmd du s3://oc-primary
 
-occ app:enable files_external_s3
+occ app:enable objectstore
 
-occ files_external:create /s3-bucket files_external_s3 amazons3::accesskey -c bucket=oc-external -c hostname=localhost -c port=8000 -c use_ssl=0 -c use_path_style=0 -c key=owncloud -c secret=owncloud
-
-s3cmd put /var/www/owncloud/data/owncloud.log s3://oc-external/logs/oc.log
-s3cmd put ~/env.sh s3://oc-external/env.sh.txt
-
-occ file:scan --all	# Do we still suffer from https://github.com/owncloud/files_external_s3/issues/971 ?
-app=external_s3
-if [ $success -eq 0 ]; then
-  cat << EOM | sed -e "s/^/$app: /g" >>  ~/POSTINIT.msg
-Storage created: /s3-bucket
-To clean up the bucket use:
-	s3cmd del --recursive --force s3://oc-external/
-EOM
-fi
-
+app=objectstore
 cat << EOM | sed -e "s/^/$app: /g" >>  ~/POSTINIT.msg
+See the urn:oid:* objects in the primary storage with
+	s3cmd ls -l s3://oc-primary
+
 To view the scality S3 server log:
 	screen -D -R s3server
 EOM
-
