@@ -61,7 +61,7 @@ if [ ! -x ~/nodesource_setup.sh ]; then
   echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" >> /etc/apt/sources.list.d/yarn.list
 fi
 
-apt update && apt install -y nodejs git make gcc g++ yarn s3cmd screen nc
+apt update && apt install -y nodejs git make gcc g++ yarn s3cmd screen netcat
 
 if nc -z localhost 8000; then
   echo "S3 server on localhost:8000 is already running"
