@@ -1,8 +1,6 @@
 This is the server app release template, please copy the part below in a new ticket.
 For instructions around app releases, see https://confluence.owncloud.com/display/OG/Releasing+Apps
 
-**REMINDER:** Please add your name to the checkbox when you have completed an item
-
 ### Reason
 
 - Release needed for "ticket X", "feature Y"
