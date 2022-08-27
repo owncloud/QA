@@ -63,7 +63,7 @@ fi
 
 apt update && apt install -y nodejs git make gcc g++ yarn s3cmd screen netcat
 
-if ! nc -z localhost 8000; then
+if nc -z localhost 8000; then
   echo "S3 server on localhost:8000 is already running"
 else
   # s3 server not yet there. (may have been started by one of the other s3 tasks...)
@@ -120,11 +120,11 @@ for i in 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
   sleep 2
   if ! screen -ls s3server > /dev/null; then
     echo >> ~/POSTINIT.msg "S3:	Starting scality cloudserver failed. See ~/cloudserver/screenlog.0"
-    tail screenlog.0
+    tail ~/cloudserver/screenlog.0
     exit 1
   fi
 done
-grep '"action"' screenlog.0
+grep '"action"' ~/cloudserver/screenlog.0
 
 s3cmd info s3://oc-primary
 s3cmd du s3://oc-primary
