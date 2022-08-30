@@ -542,6 +542,12 @@ if [ -n "\$grace_period" ]; then
 GRACE
 fi
 
+for uid in Alice bob carol dave einstein; do
+  env OC_PASS=secret occ user:add --password-from-env -g $uid-g $uid
+done
+env occ user:modify alice display name "Alice in Wonderland"
+env occ user:modify carol display name "Carol Lewis"
+
 uptime
 cat << EOM
 ( Mailhog access: http://$IPADDR:8025 )

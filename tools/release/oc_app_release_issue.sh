@@ -85,6 +85,7 @@ else
   body="$(cat $tmpl_path)"
 fi
 
-gh issue create -R $orga/$repo -t "$appname $appvers" -b "$body"
+gh issue create -R $orga/$repo -t "$appname $appvers release" -b "$body"
 
 echo "TODO: Create a QA milestone in https://github.com/$orga/$repo and add the new issue."
+
