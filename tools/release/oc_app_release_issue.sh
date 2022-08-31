@@ -6,6 +6,8 @@
 # References: 
 #	- https://github.com/cli/cli/releases/
 #	- https://github.com/owncloud/QA/blob/master/Server
+# 
+# TODO: add 'orga label
 
 appname=$1
 appvers=$2

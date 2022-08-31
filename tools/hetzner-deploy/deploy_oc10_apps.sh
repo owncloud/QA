@@ -543,7 +543,7 @@ GRACE
 fi
 
 for uid in Alice bob carol dave einstein; do
-  env OC_PASS=secret occ user:add --password-from-env -g $uid-g $uid
+  env OC_PASS=secret occ user:add --password-from-env -g \$uid-g \$uid
 done
 env occ user:modify alice display name "Alice in Wonderland"
 env occ user:modify carol display name "Carol Lewis"
