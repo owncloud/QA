@@ -46,7 +46,7 @@ server_image = os.environ.get('HCLOUD_SERVER_IMAGE')
 if server_image == None:
   server_image = "ubuntu-20.04"
 
-location_default = "hel1"    # "fsn1", "hel1", "nbg1"
+location_default = "fsn1"       # hel1"    # "fsn1", "hel1", "nbg1"
 server_type = "cx11"
 used_for = "server_testing"
 debug = True
