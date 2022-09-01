@@ -22,6 +22,7 @@ vers=10.11.0-beta.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.12.0-beta.1"                 && tar=http://195.201.128.253/44af8b01825208430bd37b80b17c53b4/owncloud-complete-20220901.tar.bz2
 test "$vers" = "10.11.0-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220824.tar.bz2
 test "$vers" = "10.11.0-alpha.2"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220720.tar.bz2
 test "$vers" = "10.11.0-alpha.1"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220708.tar.bz2
@@ -545,8 +546,8 @@ fi
 for uid in Alice bob carol dave einstein; do
   env OC_PASS=secret occ user:add --password-from-env -g \$uid-g \$uid
 done
-env occ user:modify alice display name "Alice in Wonderland"
-env occ user:modify carol display name "Carol Lewis"
+occ user:modify alice displayname "Alice in Wonderland"
+occ user:modify carol displayname "Carol Lewis"
 
 uptime
 cat << EOM
