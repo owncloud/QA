@@ -22,7 +22,7 @@ vers=10.11.0-beta.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.12.0-beta.1"                 && tar=http://195.201.128.253/44af8b01825208430bd37b80b17c53b4/owncloud-complete-20220901.tar.bz2
+test "$vers" = "10.12.0-beta.1"                 && tar=http://195.201.128.253/44af8b01825208430bd37b80b17c53b4/owncloud-complete-20220902.tar.bz2
 test "$vers" = "10.11.0-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220824.tar.bz2
 test "$vers" = "10.11.0-alpha.2"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220720.tar.bz2
 test "$vers" = "10.11.0-alpha.1"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220708.tar.bz2
