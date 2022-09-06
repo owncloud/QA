@@ -25,7 +25,7 @@ olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.1 NAME 'ownCloudQuota' DESC 'User Quo
 olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.2 NAME 'ownCloudUUID' DESC 'A non-reassignable and persistent account ID)' EQUALITY uuidMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.1.16.1 SINGLE-VALUE )
 olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.3 NAME 'ownCloudSelector' DESC 'A selector attribute for a route in the ownCloud Infinte Scale proxy)' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
 olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.4 NAME 'sAMAccountName' DESC 'Originally from LSDN, but openldap does not have that field.' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
-olcObjectClasses: ( 1.3.6.1.4.1.39430.1.2.1 NAME 'ownCloud' DESC 'ownCloud LDAP Schema' AUXILIARY MAY ( ownCloudQuota $ ownCloudUUID $ ownCloudSelector $ sAMAccountName ) )
+olcObjectClasses:  ( 1.3.6.1.4.1.39430.1.2.1 NAME 'ownCloud' DESC 'ownCloud LDAP Schema' AUXILIARY MAY ( ownCloudQuota $ ownCloudUUID $ ownCloudSelector $ sAMAccountName ) )
 EOF1
 
 ## FROM https://stackoverflow.com/questions/6372365/support-reverse-group-membership-maintenance-for-openldap-2-3
@@ -223,8 +223,27 @@ gidNumber: 30001
 ownCloudUUID:: NjA0MGFhMTctOWM2NC00ZmVmLTliZDAtNzcyMzRkNzFiYWQw
 uniqueMember: uid=einstein,ou=users,dc=owncloud,dc=com
 uniqueMember: cn=hackers,ou=groups,dc=owncloud,dc=com
-
 EOF3
+
+cat << EOF5 > $ldif/40_jwextra_schema.ldif
+# This is a schema extension.
+# We add private attributes to objectclass jwextra. the class is loaded at startup already,
+# because I have not found a ways to load it with ldapadd during runtime. I always get permission denied.
+#
+# To use these attributes
+# - run ldapadd to load the file
+# - create a new object and add jwextra to its list of objectclasses.
+#
+# 1.3.6.1.4.1.39430	is the owncloud OID schema prefix.
+#  - we use 1.1.10, 1.1.11, 1.1.12, ... for attributes
+#  - and 1.3.2 for the class name
+dn: cn=jwextra,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: jwextra
+olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.10 NAME 'name' DESC 'A generic name attribute.' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.11 NAME 'fixID' DESC 'For testing https://github.com/owncloud/enterprise/issues/5071 .' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
+olcObjectClasses: ( 1.3.6.1.4.1.39430.1.3.2 NAME 'jwextra' DESC 'jwextra LDAP Schema' AUXILIARY MAY ( name $ fixID ) )
+EOF5
 
 admin_pass="12345678"
 admin_dn="cn=admin,dc=owncloud,dc=com"
@@ -241,15 +260,15 @@ ldapsearch -x -H ldap://$ldapserver -b dc=owncloud,dc=com -D "$admin_dn" -w "$ad
 
 docker run --rm -p 6443:443 --name phpldapadmin-server --env PHPLDAPADMIN_LDAP_HOSTS=$ldapserver --detach osixia/phpldapadmin
 
-cat << EOF5
+cat << EOF6
 -----------------------------------------------
 Connect to php ldapadmin:
   https://$(hostname -I  | sed -e 's/ .*//'):6443
   Login DN: $admin_dn
   Password: $admin_pass
-EOF5
+EOF6
 
-cat << EOF6
+cat << EOF7
 -----------------------------------------------
 Connect owncloud via user_ldap:
 - Admin -> Settings -> Admin -> User Authentication
@@ -274,6 +293,23 @@ Connect owncloud via user_ldap:
 
 Finally from the login shell:
   occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
-EOF6
+
+Extend the LDAP Schema
+ - Edit ~/ldif/40_jwextra_schema.ldif
+	For each attribute add an olcAttributeTypes line.
+	Make sure all attributes in the file are listed in the olcObjectClasses line.
+ - run (FIXME: ldapadd always fails. We must docker kill and restart)
+	ldapadd -H ldap://$ldapserver -D "$admin_dn" -w "$admin_pass" -v -f ldif/40_jwextra_schema.ldif
+ - Then create objects that inherit from objectclass jwextra or add jwextra to te objectclass list of existing objects.
+ - Then ldapadmin should allow the new attributes for 'Add new attribute'
+ - to update an existing Schema, (FIXME: ldapmodify always fails. Must docker kill and restart...)
+    - Edit the file to include the line 'changetype: modify' as the second line.
+    - Run
+	ldapmodify -H ldap://$ldapserver -D "$admin_dn" -w "$admin_pass" -v -f ldif/40_jwextra_schema.ldif
+      still fails to update... No such object, Insufficient access, or similar.
+EOF7
+
+
+
 
 
