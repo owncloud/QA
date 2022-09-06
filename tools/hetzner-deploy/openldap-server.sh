@@ -240,7 +240,7 @@ cat << EOF5 > $ldif/40_jwextra_schema.ldif
 dn: cn=jwextra,cn=schema,cn=config
 objectClass: olcSchemaConfig
 cn: jwextra
-olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.10 NAME 'name' DESC 'A generic name attribute.' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.10 NAME 'myname' DESC 'A generic name attribute.' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
 olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.11 NAME 'fixID' DESC 'For testing https://github.com/owncloud/enterprise/issues/5071 .' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
 olcObjectClasses: ( 1.3.6.1.4.1.39430.1.3.2 NAME 'jwextra' DESC 'jwextra LDAP Schema' AUXILIARY MAY ( name $ fixID ) )
 EOF5
