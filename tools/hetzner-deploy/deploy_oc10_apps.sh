@@ -26,12 +26,12 @@ test "$vers" = "10.11.0-rc.1"                   && tar=https://download.owncloud
 test "$vers" = "10.12.0-beta.2"                 && tar=http://195.201.128.253/44af8b01825208430bd37b80b17c53b4/owncloud-complete-20220902.tar.bz2
 test "$vers" = "10.11.0-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220824.tar.bz2
 test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
-test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://attic.owncloud.org/community/owncloud-complete-20220112.tar.bz2
-test "$vers" = "10.9.0"                         && tar=https://attic.owncloud.org/community/owncloud-complete-20211220.tar.bz2
-test "$vers" = "10.8.0"   -o "$vers" = "10.8"   && tar=https://attic.owncloud.org/community/owncloud-complete-20210721.tar.bz2
-test "$vers" = "10.7.0"   -o "$vers" = "10.7"   && tar=https://attic.owncloud.org/community/owncloud-complete-20210326.tar.bz2
-test "$vers" = "10.6.0"   -o "$vers" = "10.6"   && tar=https://attic.owncloud.org/community/owncloud-complete-20201216.tar.bz2
-test "$vers" = "10.5.0"   -o "$vers" = "10.5"   && tar=https://attic.owncloud.org/community/owncloud-complete-20200731.tar.bz2
+test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220112.tar.bz2
+test "$vers" = "10.9.0"                         && tar=https://download.owncloud.com/server/stable/owncloud-complete-20211220.tar.bz2
+test "$vers" = "10.8.0"   -o "$vers" = "10.8"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20210721.tar.bz2
+test "$vers" = "10.7.0"   -o "$vers" = "10.7"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20210326.tar.bz2
+test "$vers" = "10.6.0"   -o "$vers" = "10.6"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20201216.tar.bz2
+test "$vers" = "10.5.0"   -o "$vers" = "10.5"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20200731.tar.bz2
 test "$vers" = "10.4.1"   -o "$vers" = "10.4"   && tar=https://attic.owncloud.org/community/owncloud-10.4.1.tar.bz2
 test "$vers" = "10.3.2"   -o "$vers" = "10.3"   && tar=https://attic.owncloud.org/community/owncloud-10.3.2.tar.bz2
 test "$vers" = "10.2.1"   -o "$vers" = "10.2"   && tar=https://attic.owncloud.org/community/owncloud-10.2.1.tar.bz2
@@ -364,7 +364,7 @@ occ config:system:set redis --type json --value '{"host": "127.0.0.1", "port": "
 ## initialize mailhog
 docker rm mailhog --force 2>/dev/null && true
 docker run --rm --name mailhog -d -p 8025:8025 mailhog/mailhog
-hog_ip=\$(docker inspect mailhog | jq .[0].NetworkSettings.IPAddress -r)
+hog_ip=\$(docker inspect mailhog | jq '.[0].NetworkSettings.IPAddress' -r)
 
 
 sql="UPDATE oc_accounts SET email='admin@oc.example.com' WHERE user_id='admin';"
