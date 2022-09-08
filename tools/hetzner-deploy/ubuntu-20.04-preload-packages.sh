@@ -15,6 +15,24 @@ apt install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rs
 apt install -y smbclient coreutils ldap-utils postgresql
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
+apt install -y pure-ftpd build-essential automake autoconf libtool opensc unzip libssl-dev
+apt install -y clamav clamav-daemon p7zip-full postgresql docker.io nodejs git make gcc g++ yarn s3cmd screen netcat
+
+### do not preinstall the following, they eat precious CPU time after boot.
+# apt install -y clamav-daemon
+## do not preinstall the following, they don't share anything with :latest
+# docker pull osixia/openldap:1.5.0
+# docker pull osixia/phpldapadmin:0.9.0
+## do not preinstall the following, there is only latest. We want docker run to check for updates, so that no extra docker pull is needed.
+# docker pull dperson/samba:latest
+# docker pull deepdiver/icap-clamav-service:latest
+
+## Pull version numbers, so that latest is always a quick update check.
+docker pull mailhog/mailhog:v1.0.1
+
+
+
+
 echo ""
 echo "Now shutdown and save a snapshot named ubuntu-20.04-preload"
 echo ""
