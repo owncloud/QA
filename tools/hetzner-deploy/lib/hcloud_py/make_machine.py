@@ -51,6 +51,7 @@ server_type = "cx11"
 used_for = "server_testing"
 debug = True
 debug = False
+prefer_preload = True           # False: disable "...-preload" image lookup in find_image()
 
 parser = argparse.ArgumentParser(description=sys.argv[0]+" V0.2")
 parser.add_argument('-i', '--image',          type=str, default=server_image, help="server image. Default: "+server_image)
@@ -146,6 +147,21 @@ def find_image(client, name):
   """ finds images, snapshots, or backups
   """
   ic = ImagesClient(client)
+
+  if debug:
+    for i in ic.get_all():
+      print("Seen image '%s', description '%s', type=%s" % (i.name, i.description, i.type), file=sys.stderr)
+
+  if prefer_preload:
+    for i in ic.get_all():
+      if i.name == name + "-preload":
+        print("Using image '%s' by name, type=%s" % (i.name, i.type), file=sys.stderr)
+        return i
+    for i in ic.get_all():
+      if i.description == name + "-preload":
+        print("Using image '%s' by description '%s', type=%s" % (i.name, i.description, i.type), file=sys.stderr)
+        return i
+
   for i in ic.get_all():
     if i.name == name:
       print("Using image '%s' by name, type=%s" % (name, i.type), file=sys.stderr)

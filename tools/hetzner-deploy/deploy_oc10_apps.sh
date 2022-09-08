@@ -244,7 +244,11 @@ aptQ() { echo "+ apt \$@"; apt "\$@" 2>&1 | stdbuf -o0 tr ] '\n' | grep -E -v "^
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
 
-# FROM https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
+# FROM
+# * https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
+# * https://doc.owncloud.com/server/next/admin_manual/installation/manual_installation/manual_installation_prerequisites.html
+# * https://doc.owncloud.com/server/next/admin_manual/installation/manual_installation/server_prep_ubuntu_20.04.html#clean-ubuntu-20-04-installation
+#####
 case "\$(lsb_release -d -s)" in
   "Ubuntu 22"* | "Ubuntu 21.10" )
     # default is php8.1 - we need php7.4 - ondrej has it.
