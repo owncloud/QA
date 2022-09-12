@@ -3,6 +3,7 @@
 #
 # 2021-03-01 jw, 	support for POSTINIT_MSG, POSTINIT_BASHRC added.
 # 2021-07-16 jw, 	print better instructions also when running standalone
+# 2022-09-12, jw	if cf_dns_add_move.sh is found, automate cloudflare DNS and certbot.
 
 if [ -z "$BASH_SOURCE" ]; then
   libdir=$(dirname $0)/lib	# a source command does not update $0, we have to add the lib ourselves. grrr.
@@ -70,6 +71,34 @@ for param in $PARAM; do
 done
 
 echo "$PARAM_BASENAME"
+
+# try find cf_dns
+cf_dns=$(type -P cf_dns)
+test -z "$cf_dns" && cf_dns=$(type -P cf_dns_add_move)
+test -z "$cf_dns" && cf_dns=$(type -P cf_dns_add_move.sh)
+test -z "$cf_dns" && cf_dns=$libdir/../../cf_dns_add_move.sh
+
+if [ -n "$cf_dns" ]; then
+  # Automate DNS name and certbot.
+  # A DNS-name can be obtained through cloudflare via the cf_dns script.
+  # But as the required credentials are quite powerfull, we do not expose them to our new cloud machine.
+  # Instead, we run cf_dns from the local machine, using this trick:
+  # - as we just scp'd stuff into the new cloud machine, we can scp into the machine
+  # - During its initialization, the new cloud machine eventually creates a /root/env.sh file containing the
+  #   fqdn chosen by the init script.
+  # - We a) don't know exactly when that happens, and b) cannot simply fetch this env.sh after the init script is done,
+  #   as the init script may shell out an interactive prompt with the user, and we only re-gain control here, when the
+  #   user is done with the machine. We want the user to have DNS name and certificates ready before he goes interactive.
+  # - Thus we instead fork a cf_dns --poll call as a background job. (--poll waits ca 10 min for this env.sh to appear)
+  #   - the backgound job should not mess with onscreen IO, so we fully redirect its output to a file.
+  #   - when done, (successful or not), we scp the tempfile into the machine as CF_DNS.msg, and hope to do that, before the init script is done.
+  #   - if all that succeeds, the init script in the machine simply prints out the content of CF_DNS.msg at the end,
+  #     otherwise it prints a suggestion to run cf_dns manually.
+  # What a mess, to just keep the credentials away from the cloud instance.
+  cf_dns_tmp=/tmp/cf_dns_$$.log
+  ($cf_dns $IPADDR --poll < /dev/null > $cf_dns_tmp 2>&1; scp -q $cf_dns_tmp root@$IPADDR:CF_DNS.msg; rm -f $cf_dns_tmp) &
+  echo "+ $cf_dns $IPADDR --poll &"
+fi
 
 tmpscriptfile=./tmpscript$$.sh
 scriptfile=$tmpscriptfile

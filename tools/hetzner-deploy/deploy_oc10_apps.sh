@@ -233,6 +233,25 @@ INIT_SCRIPT << EOF
 TASKd=\$HOME/tasks
 # ls -la \$TASKd
 
+## Prepare FQDN and env.sh as early as possible, so that cf_dns can run in parallel.
+## FIXME: Can we run cf_dns before we pass control into the new machine?
+
+test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/").jw-qa.owncloud.works"
+if [ -n "$OC10_FQDN" ]; then
+  oc10_fqdn="$OC10_FQDN"
+  OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
+fi
+
+echo >> ~/env.sh "IPADDR=$IPADDR"
+echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"
+echo >> ~/env.sh "OC10_VERSION=$vers"
+echo >> ~/env.sh "OC10_TAR_URL=$tar"
+echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
+echo >> ~/env.sh "machine_type=$machine_type"
+echo >> ~/env.sh "ARGV='${ARGV[@]}'"
+test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
+
+
 ## aptQ silences most of the usless clutter from apt. This is what apt -q should do, but does not do.
 # We use tr to "insert" a newline at [Y/n], so that prompts are visible
 # We use stdbuf on tr, so that it is not linebuffered
@@ -422,12 +441,6 @@ occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
 occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
 occ config:app:set core enable_external_storage --value yes
 
-test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/").jw-qa.owncloud.works"
-if [ -n "$OC10_FQDN" ]; then
-  oc10_fqdn="$OC10_FQDN"
-  OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
-fi
-
 curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5
 cd
@@ -435,16 +448,6 @@ ln -s /var/www/owncloud o
 ln -s o/data/owncloud.log .
 echo "alias cd='cd -P'" >> ~/.bash_aliases
 . ~/.bash_aliases
-
-echo >> ~/env.sh "IPADDR=$IPADDR"
-echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"
-echo >> ~/env.sh "OC10_VERSION=$vers"
-echo >> ~/env.sh "OC10_TAR_URL=$tar"
-echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
-echo >> ~/env.sh "machine_type=$machine_type"
-echo >> ~/env.sh "ARGV='${ARGV[@]}'"
-test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
-
 #################################################################
 
 install_app() { echo "install_app: \$1"; ( test -f "\$1" && cat "\$1" || curl -L -s "\$1" ) | su www-data -s /bin/sh -c 'tar zxf - -C /var/www/owncloud/apps-external'; }
@@ -521,11 +524,16 @@ if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
   occ config:system:set trusted_domains 2 --value "\$oc10_fqdn"
   occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
-  echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
-  echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certificate:"
-  echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"
-  # echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
-  echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
+  if grep -q 'Congratulations!' ~/CF_DNS.msg >/dev/null 2>&1; then
+    echo >> ~/POSTINIT.msg "DNS: SSL-Cert succeeded via cf_dns - access this system"
+    echo >> ~/POSTINIT.msg "DNS: 	https://\$oc10_fqdn$webroute"
+  else
+    echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
+    echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certificate:"
+    echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"
+    # echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
+    echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
+  fi
 fi
 
 for app in \$apps_installed; do

@@ -13,9 +13,10 @@ if [ "$1" = "-l" ]; then
 fi
 
 if [ -z "$1" -o "$1$2" = '-' -o "$1$2" = '--' ]; then
-  cat <<EOF 
+  cat <<EOF
 Usage:
 	$0 IPADDR [FQDN] [BOT:mailaddr]
+	$0 IPADDR --poll
 	$0 -l [-c]
 
 A cloudflare DNS record for the fully qualified domain name FQDN is created pointing to IPADDR.
@@ -23,6 +24,8 @@ If an entry for FQDN already exists, it is first removed, then re-created with t
 To delete an entry, you can pass '-' instead of a valid IPADDR.
 To list all entries for an IPADDR, do not pass an FQDN.
 To delete all entries for an IPADDR, you can pass '-' instead of a valid FQDN.
+
+The form cf_dns IPADDR --poll tries to log into the machine as root and read ~/env.sh for *fqdn=... setting.
 
 The form cf_dns -l is an alias for cf_dns_list.
 
@@ -78,6 +81,20 @@ if [ "$2" = '-' -o "$2" = '' ]; then
   exit 0
 fi
 
+if [ "$2" = '--poll' ]; then
+  # Try max 10 min
+  for try in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29; do
+    fqdn=$(timeout 10 ssh root@$1 grep fqdn= env.sh | sed -e 's/^.*fqdn=//')
+    if [ -n "$fqdn" ]; then
+      break
+    fi
+    sleep 10
+  done
+  echo "$0: Poll result: FQDN = '$fqdn'"
+  set $1 $fqdn bot:qa@owncloud.com
+  ## Fallthrough...
+fi
+
 record_id="$(cf_curl GET "$CLOUDFLARE_DNS_API?name=$2" | jq '.result[0].id' -r)"
 echo $record_id
 if [ "$record_id" != null -a -n "$record_id" ]; then
@@ -86,7 +103,7 @@ if [ "$record_id" != null -a -n "$record_id" ]; then
   read a
   test -n "$record_id" && cf_curl DELETE $CLOUDFLARE_DNS_API/$record_id | jq '"Success: " + (.success|tostring) +  " " + .errors[0].message'
 fi
-  
+
 if [ "$1" != '-' -a -n "$1" ]; then
   cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$2"'","content":"'"$1"'","proxied":false}' | jq
 fi
