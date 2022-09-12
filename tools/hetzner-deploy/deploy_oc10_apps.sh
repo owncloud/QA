@@ -526,13 +526,16 @@ if [ -n "\$oc10_fqdn" ]; then
   occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
   if grep -q 'Congratulations!' ~/CF_DNS.msg >/dev/null 2>&1; then
     echo >> ~/POSTINIT.msg "DNS: SSL-Cert succeeded via cf_dns - access this system"
-    echo >> ~/POSTINIT.msg "DNS: 	https://\$oc10_fqdn$webroute"
+    echo >> ~/POSTINIT.msg "DNS:"
+    echo >> ~/POSTINIT.msg "DNS: 				https://\$oc10_fqdn$webroute"
+    echo >> ~/POSTINIT.msg ""
   else
     echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
     echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certificate:"
     echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"
     # echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
     echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
+    echo >> ~/POSTINIT.msg ""
   fi
 fi
 

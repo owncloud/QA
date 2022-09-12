@@ -160,7 +160,7 @@ function RUN_SCRIPT {
 	ssh root@$IPADDR
 
 # When you no longer need the machine, destroy it with e.g.
-        ./destroy_machine.sh $NAME
+        $libdir/../destroy_machine.sh $IPADDR
 
 ---------------------------------------------
 EOF
@@ -183,7 +183,7 @@ if [ "$OC_DEPLOY" != 'simple' ]; then
 	ssh root@$IPADDR
 
 # When you no longer need the machine, destroy it with e.g.
-        $libdir/../destroy_machine.sh $NAME
+        $libdir/../destroy_machine.sh $IPADDR
 
 ---------------------------------------------
 EOF

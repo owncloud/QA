@@ -17,11 +17,12 @@ test -z "$TF_USER" && TF_USER=$USER
 name=$1
 
 if echo $name | grep -q '\.'; then
-  echo "$name contains dots - it is pobably an FQDN - Trying ssh..."
+  echo "$name contains dots - removing cloudflare DNS entries ..."
+  echo | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
+  echo | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
+
+  echo "Retrieving hostname via ssh ..."
   hostname=$(timeout 10 ssh root@$name hostname)
-  echo "Seen hostname: $hostname"
-  echo "Trying to remove the FQDN from cloudflare DNS"
-  echo | cf_dns - $name
   if [ -z "$hostname" ]; then
     echo "Oops, failed to get hostname. Retry $0 with the ip address?"
     exit 1
