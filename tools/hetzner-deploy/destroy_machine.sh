@@ -18,8 +18,8 @@ name=$1
 
 if echo $name | grep -q '\.'; then
   echo "$name contains dots - removing cloudflare DNS entries ..."
-  echo | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
-  echo | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
+  yes | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
+  yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
 
   echo "Retrieving hostname via ssh ..."
   hostname=$(timeout 10 ssh root@$name hostname)

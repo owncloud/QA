@@ -417,11 +417,13 @@ occ config:app:set core umgmt_set_password --value true		# not a boolean here, b
 
 ## even simpler than sftp...
 ## https://doc.owncloud.com/server/next/admin_manual/configuration/files/external_storage/local.html
-occ config:system:set files_external_allow_create_new_local --value true
+# Holger says, this is strongly discouraged, as it mixes owncloud admin with local sysamin scopes:
+occ config:system:set files_external_allow_create_new_local --value false
 
 
 ## external FTP, FTPS storage
 aptQ install -y pure-ftpd  # not used. We use the local ssh-server
+aptQ install -y sshfs 	   # for /mnt/sftp mount, which is then unused.
 # install app files_external_ftp
 
 ## external SFTP storage
@@ -440,6 +442,12 @@ occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
 
 occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
 occ config:app:set core enable_external_storage --value yes
+
+## mount the SFTP also as a linux filesystem, so that we can play with files_external
+mkdir /mnt/sftp
+echo $ftppass | sshfs -o password_stdin -o allow_other ftpdata@localhost:/home/ftpdata/data /mnt/sftp
+# occ files_external:create /local-mnt-sftp local null::null -c datadir=/mnt/sftp
+
 
 curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5

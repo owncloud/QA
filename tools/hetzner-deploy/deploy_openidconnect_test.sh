@@ -27,6 +27,10 @@ oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
 openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
 oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
 
+# preload images may come up with a running apache...
+systemctl apache2 disable
+service apache2 stop
+
 for url in $oauth2_url $openidconnect_url; do
   code=$(curl -s -I -L -w "%{http_code}\n" $url -o /dev/null)
   if [ "$code" != 200 ]; then
@@ -40,7 +44,7 @@ done
 test -z "$HOSTNAME_SUFFIX" && HOSTNAME_SUFFIX=test
 
 d_vers=$(echo $vers  | tr '[A-Z]' '[a-z]' | tr -d .-)-$(date +%Y%m%d)
-source lib/make_machine.sh -u oidc-$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker.io,docker-compose "$@"
+source lib/make_machine.sh -t cx21 -u oidc-$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker.io,docker-compose "$@"
 
 comp_yml=kopano/konnect/docker-compose.yml
 reg_yml=kopano/konnect/konnectd-identifier-registration.yaml
