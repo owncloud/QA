@@ -5,9 +5,10 @@
 
 To trigger email sending for testing:
 
-    SQL: update oc_activity_mq set amq_timestamp=0,amq_latest_send=0;
-    SQL: update oc_jobs set last_run=0,last_checked=0,reserved_at=0;
-    CLI: php cron.php
+
+    mysql owncloud -e 'update oc_activity_mq set amq_timestamp=0,amq_latest_send=0;'
+    mysql owncloud -e 'update oc_jobs set last_run=0,last_checked=0,reserved_at=0;'
+    occ system:cron
 
 This will send out the activity email currently in the queue.
 
