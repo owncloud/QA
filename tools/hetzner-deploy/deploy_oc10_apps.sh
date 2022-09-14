@@ -18,13 +18,12 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.11.0-rc.1
+vers=10.11.0-rc.2
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.11.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220914.tar.bz2
 test "$vers" = "10.11.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220906.tar.bz2
-test "$vers" = "10.12.0-beta.2"                 && tar=http://195.201.128.253/44af8b01825208430bd37b80b17c53b4/owncloud-complete-20220902.tar.bz2
-test "$vers" = "10.11.0-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20220824.tar.bz2
 test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
 test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220112.tar.bz2
 test "$vers" = "10.9.0"                         && tar=https://download.owncloud.com/server/stable/owncloud-complete-20211220.tar.bz2
