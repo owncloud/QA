@@ -19,17 +19,13 @@ echo "Estimated setup time: 8 minutes ..."
 #vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
 # vers=2.1.1-rc1
 # vers=2.1.0
-vers=2.2.0-rc.2
+vers=2.2.0-rc.3
 oauth2_vers=0.5.3
 # oc10_vers=10.10		# found on https://hub.docker.com/r/owncloud/server/tags/
 oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
 
 openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
 oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
-
-# preload images may come up with a running apache...
-systemctl apache2 disable
-service apache2 stop
 
 for url in $oauth2_url $openidconnect_url; do
   code=$(curl -s -I -L -w "%{http_code}\n" $url -o /dev/null)
@@ -71,6 +67,10 @@ INIT_SCRIPT << EOF
   cd compose-playground/compose
   # git checkout pmaier-fixes || true
   git branch -a
+
+  # preload images may come up with a running apache...
+  systemctl apache2 disable
+  service apache2 stop
 
   # allow switch back and forth
   sed -i -e 's@OWNCLOUD_APPS_INSTALL=.*@OWNCLOUD_APPS_INSTALL=$openidconnect_url $oauth2_url@g' $comp_yml
