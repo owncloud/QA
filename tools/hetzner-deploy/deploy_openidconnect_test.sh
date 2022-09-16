@@ -18,11 +18,12 @@ echo "Estimated setup time: 8 minutes ..."
 
 #vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
 # vers=2.1.1-rc1
-# vers=2.1.0
-vers=2.2.0-rc.3
+vers=2.1.0
+# vers=2.2.0-rc.3
 oauth2_vers=0.5.3
 # oc10_vers=10.10		# found on https://hub.docker.com/r/owncloud/server/tags/
-oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
+# oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
+oc10_vers=10.11.0-rc.2	# found on https://hub.docker.com/r/owncloud/server/tags/
 
 openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
 oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
@@ -69,8 +70,9 @@ INIT_SCRIPT << EOF
   git branch -a
 
   # preload images may come up with a running apache...
-  systemctl apache2 disable
-  service apache2 stop
+  systemctl disable apache2 || true
+  service apache2 stop || true
+  killall apache2 || true
 
   # allow switch back and forth
   sed -i -e 's@OWNCLOUD_APPS_INSTALL=.*@OWNCLOUD_APPS_INSTALL=$openidconnect_url $oauth2_url@g' $comp_yml
@@ -104,6 +106,8 @@ INIT_SCRIPT << EOF
      echo "Waiting for ownCloud to become ready ..."
      sleep 5
   done
+  screen -m -d -S compose-logs -L -Logfile /root/screenlogs docker-compose -f merged.yml logs -f
+
   docker exec compose_owncloud_1 occ app:list 'openidconnect|oauth2'
   sleep 3
   docker exec compose_owncloud_1 occ upgrade	# just in case one of the apps has a minor number jump.
@@ -123,7 +127,7 @@ INIT_SCRIPT << EOF
   docker-compose -f merged.yml exec owncloud occ upgrade	# just in case one of the apps has a minor number jump.
   docker-compose -f merged.yml exec owncloud occ app:enable openidconnect
   docker-compose -f merged.yml exec owncloud occ app:list 'openidconnect|oauth2' && echo OWNCLOUD IS READY
- 
+
   while ! docker exec compose_owncloud_1 occ user:sync -l 2>/dev/null | grep 'User_LDAP'; do
     echo "Waiting for user_ldap to become ready ..."
     sleep 5;
@@ -132,19 +136,14 @@ INIT_SCRIPT << EOF
 
   cat <<EOM
 ---------------------------------------------
-# start a screen session, watch the logs with
-	docker-compose -f merged.yml logs -f
-
-# you may now first need to add the DNS entries at https://dash.cloudflare.com
-	cf_dns $IPADDR $KOPANO_KONNECT_DOMAIN
-	cf_dns $IPADDR $OWNCLOUD_DOMAIN
 
 # wait 10 min or restart caddy (as often as needed)
 	docker-compose -f merged.yml restart caddy
 
-# until you see log messages like
-	caddy_1           | 2020/10/07 00:22:01 [INFO] [konnect-1-0-0rc4.oidc-jw-qa.owncloud.works] Server responded with a certificate.
-	caddy_1           | 2020/10/07 00:22:04 [INFO] [owncloud-1-0-0rc4.oidc-jw-qa.owncloud.works] Server responded with a certificate.
+# Check the file ~/screenlogs for cert success messages:
+	grep 'responded with' ~/screenlogs
+	caddy_1           | 2022/10/07 00:22:01 [INFO] [$KOPANO_KONNECT_DOMAIN] Server responded with a certificate.
+	caddy_1           | 2022/10/07 00:22:04 [INFO] [$OWNCLOUD_DOMAIN] Server responded with a certificate.
 
 # to start a migration from oauth to openidconnect:
 	a) docker exec compose_owncloud_1 occ app:enable oauth2
