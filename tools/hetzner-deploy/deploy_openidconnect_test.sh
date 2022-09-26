@@ -16,16 +16,17 @@
 
 echo "Estimated setup time: 8 minutes ..."
 
-#vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
-# vers=2.1.1-rc1
-vers=2.1.0
-# vers=2.2.0-rc.3
+#oidc_vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
+# oidc_vers=2.1.1-rc1
+# oidc_vers=2.1.0
+oidc_vers=2.2.0-rc.4
 oauth2_vers=0.5.3
-# oc10_vers=10.10		# found on https://hub.docker.com/r/owncloud/server/tags/
-# oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
-oc10_vers=10.11.0-rc.2	# found on https://hub.docker.com/r/owncloud/server/tags/
 
-openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$vers/openidconnect-$vers.tar.gz
+oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
+# oc10_vers=10.10		# found on https://hub.docker.com/r/owncloud/server/tags/
+# oc10_vers=10.11.0	# found on https://hub.docker.com/r/owncloud/server/tags/
+
+openidconnect_url=https://github.com/owncloud/openidconnect/releases/download/v$oidc_vers/openidconnect-$oidc_vers.tar.gz
 oauth2_url=https://github.com/owncloud/oauth2/releases/download/v$oauth2_vers/oauth2-$oauth2_vers.tar.gz
 
 for url in $oauth2_url $openidconnect_url; do
@@ -40,8 +41,8 @@ done
 
 test -z "$HOSTNAME_SUFFIX" && HOSTNAME_SUFFIX=test
 
-d_vers=$(echo $vers  | tr '[A-Z]' '[a-z]' | tr -d .-)-$(date +%Y%m%d)
-source lib/make_machine.sh -t cx21 -u oidc-$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker.io,docker-compose "$@"
+d_vers=$(echo $oidc_vers  | tr '[A-Z]' '[a-z]' | tr -d .-)-$(date +%Y%m%d)
+source lib/make_machine.sh -t cx21 -u oidc$d_vers-$HOSTNAME_SUFFIX -p git,screen,docker.io,docker-compose "$@"
 
 comp_yml=kopano/konnect/docker-compose.yml
 reg_yml=kopano/konnect/konnectd-identifier-registration.yaml
@@ -50,10 +51,8 @@ test -z "$OWNCLOUD_RELEASE_DOCKER_TAG" && OWNCLOUD_RELEASE_DOCKER_TAG=$oc10_vers
 d_tag=$(echo $OWNCLOUD_RELEASE_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr -d .-)
 
 ## choose with or without version numbers and timestamps, in case we want multiple systems.
-KOPANO_KONNECT_DOMAIN=konnect-oidc-$d_vers.jw-qa.owncloud.works
-OWNCLOUD_DOMAIN=oc$d_tag-oidc-$d_vers.jw-qa.owncloud.works
-# KOPANO_KONNECT_DOMAIN=konnect.oidc-jw-qa.owncloud.works
-# OWNCLOUD_DOMAIN=owncloud.oidc-jw-qa.owncloud.works
+KOPANO_KONNECT_DOMAIN=k-oc$d_tag-oidc$d_vers.jw-qa.owncloud.works
+OWNCLOUD_DOMAIN=oc$d_tag-oidc$d_vers.jw-qa.owncloud.works
 
 ## if you cannot work with cloudflare, you may try an /etc/hosts setup using:
 # KOPANO_KONNECT_DOMAIN=konnect.docker-playground.local
