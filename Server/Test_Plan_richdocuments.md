@@ -20,6 +20,7 @@ Smoke test text document | Basic editing works | :construction:  |
 Smoke test spreadsheet | Basic editing works | :construction:  |
 Smoke test impress | Basic editing works | :construction:  |
 Smoke test impress | Full screen Presentation | :no_entry_sign:  | Chrome console log: Refused to display 'https://collabora.owncloud-demo.com/' in a frame because it set 'X-Frame-Options' to 'sameorigin'.
+Smoke test drawing | Basic editing works | :construction:  |
 enable pdfviewer | edit chooser popup allows choice | :construction:   | 
 Smoke test PDF | option collabora allows to add comments, then download | :construction:   |   
 Smoke test PDF | option files_pdfviewer works | :construction: |
