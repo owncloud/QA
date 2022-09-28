@@ -22,7 +22,7 @@ if echo $name | grep -q '\.'; then
   yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
 
   echo "Retrieving hostname via ssh ..."
-  hostname=$(timeout 10 ssh root@$name hostname)
+  hostname=$(set -x; timeout 10 ssh root@$name hostname)
   if [ -z "$hostname" ]; then
     echo "Oops, failed to get hostname. Retry $0 with the ip address?"
     exit 1
