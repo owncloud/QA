@@ -94,6 +94,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
+  echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
   exit 1
 fi
 
