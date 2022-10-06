@@ -7,7 +7,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Product approval 
 
-- [ ] Verify transifex commits are in master: If a folder https://github.com/owncloud/<APPNAME>/tree/master/l10n exists, then https://drone.owncloud.com/owncloud/<APPNAME> should receive nightly '[tx] updated from transifex` ...
+- [ ] Verify transifex commits are in master: If a toplevel folder `l10n` exists, then `git log` should show '[tx] updated from transifex` ...
 - [ ] Ping pmaier to check `info.xml` description and screenshot
 - [ ] Get approval on translations from pmaier - send the date of the last tx commit from drone to Patrick
 
@@ -22,7 +22,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Documentation
 
-- [ ] Changes in the docs needed? If so create issue in owncloud/docs-server.
+- [ ] Changes in the docs needed? If so create issue in https://github.com/owncloud/docs-server/issues/new .
 
 ### Marketing
 
@@ -33,16 +33,15 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 ### Build
 
 All actions to be done on the release branch from here:
-- [ ] Bump version in `info.xml` (no version suffix)
+- [ ] Bump version in `appinfo/info.xml` (no version suffix)
+- [ ] Check php version dependency and minimum ownCloud version dependency in `appinfo/info.xml`
 - [ ] Bump "sonar.projectVersion=" in `sonar-project.properties` (no version suffix)
-- [ ] Check php version dependency in `info.xml`
-- [ ] Check minimum ownCloud version dependency in `info.xml`
 - [ ] Change CHANGELOG.md 'Unreleased' to '$version' (today's date)
 
 #### Beta/RC
 
-- [ ] Ping product owner to create github tag for `v${version}-rc1` on release branch (see https://confluence.owncloud.com/display/EN/Product+Owners+List)
-- [ ] Build and sign RC tarball from github tag `v${version}-rc1` (see handbook for how to build)
+- [ ] `git tag -s v${version}-rc.1` on release branch (see https://confluence.owncloud.com/display/EN/Product+Owners+List)
+- [ ] Build and sign RC tarball from github tag `v${version}-rc.1` (see handbook for how to build)
 - [ ] Upload as Github release using changelog entries
 - [ ] Test and document in testplan + manual explorative testing:
     - [ ] If this is an enterprise app: Enabling the app must start the grace period
