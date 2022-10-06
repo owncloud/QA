@@ -1,9 +1,9 @@
 #! /bin/sh
-# oc_app_build.sh - use a gitea checkout to build an app
+# oc_app_build.sh - use a gitea checkout to build & sign an app
 #
 # (C) 2021 jw@owncloud.com, distribute under GPLv2
 #
-# References: 
+# References:
 #	- https://github.com/cli/cli/releases/
 #	- https://github.com/owncloud/QA/blob/master/Server
 
@@ -26,6 +26,7 @@ fi
 
 if [ -z "$2" ]; then
   echo "Usage:"
+  echo "	oc_release app:sign ."
   echo "	$0 APPNAME APPVERSION"
   echo ""
   echo "build an app, using $appsigning_dir/$build_sh "
@@ -37,4 +38,12 @@ tagname="v$appvers"				# always with leading v
 set -x
 cd $appsigning_dir
 bash ./$build_sh $appname $tagname
-cp work/release/$appname/$tagname/$appname-$appvers.tar.gz $appdest_dir || echo "ERROR: something is different than normal. Visit: $appsigning_dir"
+set +x
+title=$(echo $appvers | sed -e 's/-rc\./+RC+/')
+
+echo "Now create a new release at"
+echo "	https://github.com/owncloud/$appname/releases/new?tag=$tagname&title=$title"
+echo ""
+echo "Copy / paste the latet changlog entries from the above output..."
+echo "and upload ~/download/apps/$appname-$appvers.tar.gz"
+echo ""

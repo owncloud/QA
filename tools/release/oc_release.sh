@@ -53,6 +53,7 @@ fi
 shift
 
 # abbreviations for the lazy:
+test "$cmd" = app:sign  && cmd="app:build"
 test "$cmd" = ac        && cmd="app:check"
 test "$cmd" = app:get   && cmd="app:run"
 test "$cmd" = ag        && cmd="app:run"
