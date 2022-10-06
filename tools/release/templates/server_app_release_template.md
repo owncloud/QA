@@ -22,7 +22,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Documentation
 
-- [ ] Changes in the docs needed? If so create issue in owncloud/docs-server.
+- [ ] Changes in the docs needed? If so create issue in https://github.com/owncloud/docs-server/issues/new .
 
 ### Marketing
 
@@ -34,15 +34,14 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 All actions to be done on the release branch from here:
 - [ ] Bump version in `appinfo/info.xml` (no version suffix)
+- [ ] Check php version dependency and minimum ownCloud version dependency in `appinfo/info.xml`
 - [ ] Bump "sonar.projectVersion=" in `sonar-project.properties` (no version suffix)
-- [ ] Check php version dependency in `appinfo/info.xml`
-- [ ] Check minimum ownCloud version dependency in `appinfo/info.xml`
 - [ ] Change CHANGELOG.md 'Unreleased' to '$version' (today's date)
 
 #### Beta/RC
 
-- [ ] Ping product owner to create github tag for `v${version}-rc1` on release branch (see https://confluence.owncloud.com/display/EN/Product+Owners+List)
-- [ ] Build and sign RC tarball from github tag `v${version}-rc1` (see handbook for how to build)
+- [ ] `git tag -s v${version}-rc.1` on release branch (see https://confluence.owncloud.com/display/EN/Product+Owners+List)
+- [ ] Build and sign RC tarball from github tag `v${version}-rc.1` (see handbook for how to build)
 - [ ] Upload as Github release using changelog entries
 - [ ] Test and document in testplan + manual explorative testing:
     - [ ] If this is an enterprise app: Enabling the app must start the grace period
