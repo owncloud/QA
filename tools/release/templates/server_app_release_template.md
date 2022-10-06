@@ -33,10 +33,10 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 ### Build
 
 All actions to be done on the release branch from here:
-- [ ] Bump version in `info.xml` (no version suffix)
+- [ ] Bump version in `appinfo/info.xml` (no version suffix)
 - [ ] Bump "sonar.projectVersion=" in `sonar-project.properties` (no version suffix)
-- [ ] Check php version dependency in `info.xml`
-- [ ] Check minimum ownCloud version dependency in `info.xml`
+- [ ] Check php version dependency in `appinfo/info.xml`
+- [ ] Check minimum ownCloud version dependency in `appinfo/info.xml`
 - [ ] Change CHANGELOG.md 'Unreleased' to '$version' (today's date)
 
 #### Beta/RC
