@@ -7,7 +7,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Product approval 
 
-- [ ] Verify transifex commits are in master: If a folder https://github.com/owncloud/<APPNAME>/tree/master/l10n exists, then https://drone.owncloud.com/owncloud/<APPNAME> should receive nightly '[tx] updated from transifex` ...
+- [ ] Verify transifex commits are in master: If a toplevel folder `l10n` exists, then `git log` should show '[tx] updated from transifex` ...
 - [ ] Ping pmaier to check `info.xml` description and screenshot
 - [ ] Get approval on translations from pmaier - send the date of the last tx commit from drone to Patrick
 
