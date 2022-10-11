@@ -73,7 +73,8 @@ if [ "$1" = '.' ]; then
   # tag=$(sed -n -e 's@</.*>@@' -e 's@\s*<version>@@p' appinfo/info.xml)
   # 
   # lazy github lookup of app name and tag
-  appname=$(git remote -v | grep '(fetch)' | sed -e 's@.*/@@' -e 's/\s.*//')
+  # (there might be a .git suffix at the end. )
+  appname=$(git remote -v | grep '(fetch)' | sed -e 's@.*/@@' -e 's/\s.*//' -e 's/\.git$//')
   if [ -z "$2" ]; then
     tagname=$(git tag -l --sort -taggerdate | head -n 1)
   else
