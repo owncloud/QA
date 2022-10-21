@@ -374,7 +374,7 @@ occ status -q || occ maintenance:install --database "sqlite" --database-name "ow
 
 occ config:system:set trusted_domains 1 --value "$IPADDR"
 occ log:owncloud --enable -vvv
-occ log:manage --level=debug -vvv
+occ log:manage --level=info -vvv				# info=1, okayis - debug=0, way too much token refresh nonsense.
 # occ config:system:set log_query --value true			# seen in 9.1/admin_manual
 occ config:system:set upgrade.disable-web --value false		# default is false. Just here to make it appear in config.php
 
