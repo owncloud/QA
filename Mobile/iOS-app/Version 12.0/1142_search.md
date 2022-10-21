@@ -1,7 +1,7 @@
 ###  New Search
 
+**Devices**: iPhoneXR v16
 **Server**: 2.0.0beta8<br>
-**Devices**: iPhone13 v16
 
 Structure:
 
@@ -20,7 +20,7 @@ At least:
 | Test Case | Description | Expected | Result | Comments |
 | :-------- | :---------- | :------- | :----: | :------- |
 |**Folder Scope**||
-| Empty | Select Type = folder when no folders are available | No matches view |  |  |  |
+| Empty | Select Type = folder when no folders are available | No matches view | P m16 |  |  |
 | Type search by folder | 1. Select Type = folder<br>2. Add some text to search bar | 1. Only folders inside the current folder displayed<br>2. Only folders inside the current folder that match the search string displayed |  |  |  |
 | Type search by file | 1. Select Type = file<br>br>2. Add some text to search bar | 1. Only files (no folders) inside the current folder displayed<br>2. Only files inside the current folder that match the search string displayed |  |  |  |
 | Type search by document | 1. Select Type = document<br>2. Add some text to search bar | 1. Only Document files inside the current folder displayed<br>2. Only documents inside the current folder that match the search string displayed |  |  |  |

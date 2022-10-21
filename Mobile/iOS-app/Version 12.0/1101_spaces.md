@@ -1,16 +1,16 @@
 ###  Spaces (oCIS)
 
-**Server**: 2.0.0beta3<br>
-**Devices**: iPhoneXR v15.4
+**Server**: 2.0.0beta8<br>
+**Devices**: iPhoneXR v16
 
 ---
  
 | Test Case | Description | Expected | Result | Comments |
 | :-------- | :---------- | :------- | :----: | :------- |
 |**Spaces detection**||
-| oC10 server | Authenticate in a oC10 server | Straigth to the list of files | P m15  |  |  |
-| No spaces| Authenticate in a oCIS server account with no spaces available | Straigth to the list of files | F m15 | Shows first the list. Straightforward to the files? |  |
-| Spaces available | Authenticate in a oCIS server account with spaces available (created remotely)| Personal and spaces are listed (check with server) | P m15 |  |  |
+| oC10 server | Authenticate in a oC10 server | Straigth to the list of files | P m16  |  |  |
+| No spaces| Authenticate in a oCIS server account with no spaces available | Straigth to the list of files | F m16 | Shows first the list. Straightforward to the files? |  |
+| Spaces available | Authenticate in a oCIS server account with spaces available (created remotely)| Personal and spaces are listed (check with server) | P m16 |  |  |
 |**Spaces list (local)**| In a local authenticated oCIS session|
 | Create new space | Create new space with title | Space is created with correct title (check in server) | NA |  |  |
 | Create many spaces | Create many spaces with title that covers all the screen | Spaces are created with correct title (check in server). List correctly displayed | NA |  |  |
@@ -29,20 +29,20 @@
 | Remove space | 1. Disable an existing space<br>2. Remove the space | Space removed and no longer listed (check also in server) | NA |  |  |
 | Remove all spaces | 1. Disable all existing spaces<br>2. Remove all spaces | Spaces removed and no longer listed (check also in server) | NA |  |  |
 |**Spaces list (remote)**| In a remote authenticated oCIS session|
-| Create new space | Using web, create new space with title | Space is listed in app |P m15  |  |  |
-| Create many spaces | Using web, create many spaces with title that covers all the app screen | Spaces are created with correct title. List correctly displayed in both orientations in app | P m15 |  |  |
-| Rename space | Using web, rename an existing space | Space is renamed correctly in app | P m15 |  |  |
-| Change description | 1. In web, share an space with a user, granting editor permission<br>2. In web, create a text file in the space<br>3. In web, in the new member account, select the text file to set as space description | In app, title changes | P m15 |  |  |
-| Add subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app | P m15 |  |  |
-| Edit subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle<br>3. In web, change subtitle, adding a very long one (exceeding screen size) | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app<br>3. Subtitle changed in app | P m15 |  |  |
-| Add image | 1. Using web, create space without image<br>2. In web, edit the space to add a image | 1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view | P m15 |  |  |
-| Edit image | 1. Using web, create space without image<br>2. In web, edit the space to add a image<br>3. In web, replace the image for another one |  1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view<br>3. Last image is displayed in app by clicking on the space name, in the top side of the files view (check also in server) | F m15 | With many spaces, image repeated? |  |
+| Create new space | Using web, create new space with title | Space is listed in app |P m16  |  |  |
+| Create many spaces | Using web, create many spaces with title that covers all the app screen | Spaces are created with correct title. List correctly displayed in both orientations in app | P m16 |  |  |
+| Rename space | Using web, rename an existing space | Space is renamed correctly in app | P m16 |  |  |
+| Change description | 1. In web, share an space with a user, granting editor permission<br>2. In web, create a text file in the space<br>3. In web, in the new member account, select the text file to set as space description | In app, title changes | P m16 |  |  |
+| Add subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app | P m16 |  |  |
+| Edit subtitle | 1. Using web, create space without subtitle<br>2. In web, edit the space to add a subtitle<br>3. In web, change subtitle, adding a very long one (exceeding screen size) | 1. Check that space is created without subtitle in app<br>2. Subtitle added in app<br>3. Subtitle changed in app | P m16 |  |  |
+| Add image | 1. Using web, create space without image<br>2. In web, edit the space to add a image | 1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view | P m16 |  |  |
+| Edit image | 1. Using web, create space without image<br>2. In web, edit the space to add a image<br>3. In web, replace the image for another one |  1. In app, check that space is created without image<br>2. Image is displayed in app by clicking on the space name, in the top side of the files view<br>3. Last image is displayed in app by clicking on the space name, in the top side of the files view (check also in server) | P m16 | sometimes, with many spaces, image repeated. Put an eye here |  |
 | Change quota | 1. Using web, create space<br>2. In web, edit the quota, from 1GB to 5GB| Check in app that the quota was correctly edited | NA |  |  |
-| Disable space | 1. Using web, create a new space<br>2. Upload some files or create folders inside<br>3. In web, disable the space<br>4. In app, enter in the space | 3. In app, space is marked as disabled<br>4. In app, content is not available and thumbnail not visible | NA | Don't change correctly the thumbnail |  |
-| Enable space | 1. Using web, over a disabled space, open the list of options and select "Enable"<br>2. In app, open space | Content is available (check also in server) and thumbnail visible | P m15 |  |  |
-| Remove space | 1. Using web, disable an existing space<br>2. In web, remove the space | In app, space removed and no longer listed | P m15 |  |  |
-| Remove all spaces | 1. Using web, disable all existing spaces<br>2. Remove all spaces | Spaces removed and no longer listed  | P m15 |  |  |
-| Remove space from inside | 1. In app, enter in an existing space<br>2. Using web, disable an existing space<br>3. In web, remove the space | In app, error when any action is done over the removed space | ¿? | It keeps into the space but without thumbnail |  |
+| Disable space | 1. Using web, create a new space<br>2. Upload some files or create folders inside<br>3. In web, disable the space<br>4. In app, enter in the space | 3. In app, space is marked as disabled<br>4. In app, space is not available | F m16 | Space browsable |  |
+| Enable space | 1. Using web, over a disabled space, open the list of options and select "Enable"<br>2. In app, open space | Content is available (check also in server) and thumbnail visible | P m16 |  |  |
+| Remove space | 1. Using web, disable an existing space<br>2. In web, remove the space | In app, space removed and no longer listed | P m16 |  |  |
+| Remove all spaces | 1. Using web, disable all existing spaces<br>2. Remove all spaces | Spaces removed and no longer listed  | P m16 |  |  |
+| Remove space from inside | 1. In app, enter in an existing space<br>2. Using web, disable an existing space<br>3. In web, remove the space | In app, error when any action is done over the removed space | F m16 | Not friendly error|  |
 |**Spaces file operations (local)**| 
 | Create folder root | Create a new folder with special characters in spaces' root by using the '+' button on the top | Folder created in spaces (check in server) | P m15 |  |  |
 | Create folder non-root | Create a new folder with special characters in spaces' not root by using the '+' button on the top | Folder created in spaces (check in server) |P m15   |  |  |

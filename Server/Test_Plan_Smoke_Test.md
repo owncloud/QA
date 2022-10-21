@@ -62,7 +62,10 @@ TestID | Test Case | Expected Result | Result | Related Comment
 
 TODO:
 - Compare with [drone CI](https://drone.owncloud.com/owncloud/core) and add/remove items in this template.
-- Add regression test items  https://github.com/owncloud/enterprise/issues/4933#issuecomment-1005287788
+- Add regression test items
+   - https://github.com/owncloud/enterprise/issues/4933#issuecomment-1005287788
+   - https://github.com/owncloud/enterprise/issues/5423
+
 
 
 Pyocclient status:
