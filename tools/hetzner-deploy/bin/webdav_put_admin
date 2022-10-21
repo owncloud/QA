@@ -1,0 +1,21 @@
+#! /bin/bash
+hostname=localhost
+test -f /root/env.sh && source /root/env.sh
+test -n "$IPADDR" && hostname=$IPADDR
+test -n "$oc10_fqdn" && hostname=$oc10_fqdn
+
+from="$1"
+to="$2"
+
+if [ -z "$from" ]; then
+  cat << EOF
+Usage:
+	$0 localfile [remotefile]
+	$0 localfile [remotefolder/]
+
+EOF
+  exit 1
+fi
+
+set -x
+curl --user admin:admin -o /dev/stderr -T "$from" "https://$hostname/remote.php/dav/files/admin/$to"

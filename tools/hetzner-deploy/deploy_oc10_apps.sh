@@ -303,6 +303,7 @@ fi
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
 aptQ install -y smbclient coreutils ldap-utils postgresql
+aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl
 # We almost always assign a DNS name.
 aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 

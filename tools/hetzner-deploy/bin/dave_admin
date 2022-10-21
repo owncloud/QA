@@ -1,0 +1,11 @@
+#! /bin/bash
+hostname=localhost
+test -f /root/env.sh && source /root/env.sh
+test -n "$IPADDR" && hostname=$IPADDR
+test -n "$oc10_fqdn" && hostname=$oc10_fqdn
+
+echo "HINT: dave does not have a progress meter and fails uploading big files. Use webdav_put_admin instead."
+set -x
+dave -u admin -p admin https://$hostname/remote.php/dav/files/admin/
+
+
