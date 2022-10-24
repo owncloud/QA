@@ -160,7 +160,10 @@ INIT_SCRIPT << EOF
   	cf_dns $IPADDR $OWNCLOUD_DOMAIN
 # CAUTION:
 #       kopano_konnect 0.33 suffers from token refresh problems with mobile and desktop
-#       https://github.com/owncloud/client/issues/9056#issuecomment-922363069
+#       	https://github.com/owncloud/client/issues/9056#issuecomment-922363069
+#	when you run into 'trusted domains' issues (with e.g. .well-known or normal web access), try:
+#		vi /var/lib/docker/volumes/*/_data/config/overwrite.config.php
+		'trusted_domains' => array ( 'localhost', $_SERVER['HTTP_HOST'], ),
 ---------------------------------------------
 EOM
 EOF
