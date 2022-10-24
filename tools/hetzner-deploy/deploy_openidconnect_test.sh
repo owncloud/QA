@@ -19,7 +19,7 @@ echo "Estimated setup time: 8 minutes ..."
 #oidc_vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
 # oidc_vers=1.0.0
 # oidc_vers=2.1.1
-oidc_vers=2.2.0-rc.6
+oidc_vers=2.2.0-rc.5
 oauth2_vers=0.5.3
 
 # oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
@@ -86,6 +86,17 @@ INIT_SCRIPT << EOF
   echo >> /etc/hosts 127.0.0.1 $KOPANO_KONNECT_DOMAIN
   echo >> /etc/hosts 127.0.0.1 $OWNCLOUD_DOMAIN
 
+
+  # workaround for https://central.owncloud.org/t/important-changes-to-owncloud-server-container-deployments/39642
+  cat > owncloud-trusted-domains.yml << EOT
+version: '3.4'
+
+services:
+  owncloud:
+    environment:
+      - OWNCLOUD_TRUSTED_DOMAINS=$OWNCLOUD_DOMAIN
+EOT
+
   export OWNCLOUD_RELEASE_DOCKER_TAG=$OWNCLOUD_RELEASE_DOCKER_TAG
   docker-compose \
     -f owncloud-base.yml \
@@ -97,6 +108,7 @@ INIT_SCRIPT << EOF
     -f owncloud-exported-ports.yml \
     -f ldap/openldap-autoconfig-base.yml \
     -f kopano/konnect/docker-compose.yml \
+    -f owncloud-trusted-domains.yml \
     config > merged.yml
   docker-compose -f merged.yml up -d
 
