@@ -46,7 +46,7 @@ server_image = os.environ.get('HCLOUD_SERVER_IMAGE')
 if server_image == None:
   server_image = "ubuntu-20.04"
 
-location_default = "fsn1"       # hel1"    # "fsn1", "hel1", "nbg1"
+location_default = "hel1"       # hel1"    # "fsn1", "hel1", "nbg1"
 server_type = "cx11"
 used_for = "server_testing"
 debug = True
@@ -196,7 +196,8 @@ ssh-keygen -f ~/.ssh/known_hosts -R $IPADDR	# needed to make life easier later.
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 last; do
   to=5
-  test "$i" -gt 10 && to=20 || true
+  test "$i" -gt 10 && to=60 || true
+  test "$i" -gt 20 && to=180 || true
   sleep $to
   echo -n .
   timeout $to ssh -o ConnectTimeout=5 -o CheckHostIP=no -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@$IPADDR uptime && break

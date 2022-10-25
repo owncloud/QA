@@ -209,9 +209,13 @@ h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
 d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/" | tr '[A-Z]' '[a-z]' | tr . -)
 machine_type=cx11
+# cx11: 20 GB
+# cx21: 40 GB
+# cpx21: 80 GB
+# cpx31: 160 GB
 echo "$*" | grep files_antivirus   && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
 echo "$*" | grep search_elastic    && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
-echo "$*" | grep files_primary_s3  && machine_type=cx21	# yarn tsc fails very often on a cx11.
+echo "$*" | grep files_primary_s3  && machine_type=cpx31 # yarn tsc fails very often on a cx11.
 echo "$*" | grep files_external_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
 echo "$*" | grep objectstore       && machine_type=cx21	# yarn tsc fails very often on a cx11.
 
