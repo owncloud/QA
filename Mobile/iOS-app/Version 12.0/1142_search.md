@@ -1,6 +1,6 @@
 ###  New Search
 
-**Devices**: iPhoneXR v16
+**Devices**: iPhoneXR v16<br>
 **Server**: 2.0.0beta8<br>
 
 Structure:
@@ -21,31 +21,32 @@ At least:
 | :-------- | :---------- | :------- | :----: | :------- |
 |**Folder Scope**||
 | Empty | Select Type = folder when no folders are available | No matches view | P m16 |  |  |
-| Type search by folder | 1. Select Type = folder<br>2. Add some text to search bar | 1. Only folders inside the current folder displayed<br>2. Only folders inside the current folder that match the search string displayed |  |  |  |
-| Type search by file | 1. Select Type = file<br>br>2. Add some text to search bar | 1. Only files (no folders) inside the current folder displayed<br>2. Only files inside the current folder that match the search string displayed |  |  |  |
-| Type search by document | 1. Select Type = document<br>2. Add some text to search bar | 1. Only Document files inside the current folder displayed<br>2. Only documents inside the current folder that match the search string displayed |  |  |  |
-| Type search by spreadsheet | 1. Select Type = spreadsheet<br>2. Add some text to search bar | 1. Only spreadsheet files inside the current folder displayed<br>2. Only spreadsheets inside the current folder that match the search string displayed |  |  |  |
-| Type search by presentation | 1. Select Type = presentation<br>2. Add some text to search bar | 1. Only presentations inside the current folder displayed<br>2. Only presentation inside the current folder that match the search string displayed |  |  |  |
-| Type search by PDF | 1. Select Type = PDF<br>2. Add some text to search bar | 1. Only PDF files inside the current folder displayed<br>2. Only PDFs inside the current folder that match the search string displayed |  |  |  |
-| Type search by image | 1. Select Type = image<br>2. Add some text to search bar | 1. Only image files inside the current folder displayed<br>2. Only images inside the current folder that match the search string displayed |  |  |  |
-| Type search by video | 1. Select Type = video<br>2. Add some text to search bar | 1. Only video files inside the current folder displayed<br>2. Only videos inside the current folder that match the search string displayed |  |  |  |
+| Type search by folder | 1. Select Type = folder<br>2. Add some text to search bar | 1. Only folders inside the current folder displayed<br>2. Only folders inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by file | 1. Select Type = file<br>br>2. Add some text to search bar | 1. Only files (no folders) inside the current folder displayed<br>2. Only files inside the current folder that match the search string displayed | F m16 | Results hidden behind soft keyboard |  |
+| Type search by document | 1. Select Type = document<br>2. Add some text to search bar | 1. Only Document files inside the current folder displayed<br>2. Only documents inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by spreadsheet | 1. Select Type = spreadsheet<br>2. Add some text to search bar | 1. Only spreadsheet files inside the current folder displayed<br>2. Only spreadsheets inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by presentation | 1. Select Type = presentation<br>2. Add some text to search bar | 1. Only presentations inside the current folder displayed<br>2. Only presentation inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by PDF | 1. Select Type = PDF<br>2. Add some text to search bar | 1. Only PDF files inside the current folder displayed<br>2. Only PDFs inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by image | 1. Select Type = image<br>2. Add some text to search bar | 1. Only image files inside the current folder displayed<br>2. Only images inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by video | 1. Select Type = video<br>2. Add some text to search bar | 1. Only video files inside the current folder displayed<br>2. Only videos inside the current folder that match the search string displayed | P m16 |  |  |
+| Type search by audio | 1. Select Type = audio<br>2. Add some text to search bar | 1. Only audio files inside the current folder displayed<br>2. Only audios inside the current folder that match the search string displayed | P m16 |  |  |
 | Date search by today | 1. Select Date = Today<br>2. Add some text to search bar | 1. Only items created today displayed<br>2. Only items created today that match the search string displayed |  |  |  |
 | Date search by this week | 1. Select Date = This week<br>2. Add some text to search bar | 1. Only items inside the current folder created this week displayed<br>2. Only items inside the current folder created this week that match the search string displayed |  |  |  |
 | Date search by this month | 1. Select Date = This month<br>2. Add some text to search bar | 1. Only items inside the current folder created this month displayed<br>2. Only items inside the current folder created this month that match the search string displayed |  |  |  |
 | Date search by this year | 1. Select Date = This month<br>2. Add some text to search bar | 1. Only items inside the current folder created this year displayed<br>2. Only items inside the current folder created this year that match the search string displayed |  |  |  |
-| Size search by <10MB| 1. Select Size <10MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <10MB displayed<br>2. Only items inside the current folder which size is <10MB that match the search string displayed |  |  |  |
-| Size search by >10MB| 1. Select Size >10MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >10MB displayed<br>2. Only items inside the current folder which size is >10MB that match the search string displayed |  |  |  |
-| Size search by <100MB| 1. Select Size <100MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <100MB displayed<br>2. Only items inside the current folder which size is <100MB that match the search string displayed |  |  |  |
-| Size search by >100MB| 1. Select Size >100MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >100MB displayed<br>2. Only items inside the current folder which size is >100MB that match the search string displayed |  |  |  |
-| Size search by <500MB| 1. Select Size <500MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <500MB displayed<br>2. Only items inside the current folder which size is <500MB that match the search string displayed |  |  |  |
-| Size search by >500MB| 1. Select Size >500MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >500MB displayed<br>2. Only items inside the current folder which size is >500MB that match the search string displayed |  |  |  |
-| Size search by <1GB| 1. Select Size <1GB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <1GB displayed<br>2. Only items inside the current folder which size is <1GB that match the search string displayed |  |  |  |
-| Size search by >1GB| 1. Select Size >1GB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >1GB displayed<br>2. Only items inside the current folder which size is >1GB that match the search string displayed |  |  |  |
+| Size search by <10MB| 1. Select Size <10MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <10MB displayed<br>2. Only items inside the current folder which size is <10MB that match the search string displayed |P m16  |  |  |
+| Size search by >10MB| 1. Select Size >10MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >10MB displayed<br>2. Only items inside the current folder which size is >10MB that match the search string displayed | P m16 |  |  |
+| Size search by <100MB| 1. Select Size <100MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <100MB displayed<br>2. Only items inside the current folder which size is <100MB that match the search string displayed | P m16 |  |  |
+| Size search by >100MB| 1. Select Size >100MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >100MB displayed<br>2. Only items inside the current folder which size is >100MB that match the search string displayed |P m16  |  |  |
+| Size search by <500MB| 1. Select Size <500MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <500MB displayed<br>2. Only items inside the current folder which size is <500MB that match the search string displayed |P m16  |  |  |
+| Size search by >500MB| 1. Select Size >500MB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >500MB displayed<br>2. Only items inside the current folder which size is >500MB that match the search string displayed | P m16 |  |  |
+| Size search by <1GB| 1. Select Size <1GB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is <1GB displayed<br>2. Only items inside the current folder which size is <1GB that match the search string displayed |P m16  |  |  |
+| Size search by >1GB| 1. Select Size >1GB<br>2. Add some text to search bar | 1. Only items inside the current folder which size is >1GB displayed<br>2. Only items inside the current folder which size is >1GB that match the search string displayed | P m16 |  |  |
 |**Tree Scope**||
-| Empty | Select Type = folder when no folders are available in tree | No matches view |  |  |  |
-| Type search by folder | 1. Select Type = folder<br>2. Add some text to search bar | 1. Only folders inside the tree displayed<br>2. Only folders inside the tree that match the search string displayed |  |  |  |
-| Type search by file | 1. Select Type = file<br>br>2. Add some text to search bar | 1. Only files (no folders) inside the tree displayed<br>2. Only files inside the tree that match the search string displayed |  |  |  |
-| Type search by document | 1. Select Type = document<br>2. Add some text to search bar | 1. Only Document files inside the tree displayed<br>2. Only documents inside the tree that match the search string displayed |  |  |  |
+| Empty | Select Type = folder when no folders are available in tree | No matches view | F m16 | Different results in Folder scope |  |
+| Type search by folder | 1. Select Type = folder<br>2. Add some text to search bar | 1. Only folders inside the tree displayed<br>2. Only folders inside the tree that match the search string displayed | F m16 | Parent folder in results |  |
+| Type search by file | 1. Select Type = file<br>br>2. Add some text to search bar | 1. Only files (no folders) inside the tree displayed<br>2. Only files inside the tree that match the search string displayed | P m16 |  |  |
+| Type search by document | 1. Select Type = document<br>2. Add some text to search bar | 1. Only Document files inside the tree displayed<br>2. Only documents inside the tree that match the search string displayed | P m16 |  |  |
 | Type search by spreadsheet | 1. Select Type = spreadsheet<br>2. Add some text to search bar | 1. Only spreadsheet files inside the tree displayed<br>2. Only spreadsheets inside the tree that match the search string displayed |  |  |  |
 | Type search by presentation | 1. Select Type = presentation<br>2. Add some text to search bar | 1. Only presentations inside the tree displayed<br>2. Only presentation inside the tree that match the search string displayed |  |  |  |
 | Type search by PDF | 1. Select Type = PDF<br>2. Add some text to search bar | 1. Only PDF files inside the tree displayed<br>2. Only PDFs inside the tree that match the search string displayed |  |  |  |
