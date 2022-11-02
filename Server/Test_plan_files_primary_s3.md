@@ -1,6 +1,6 @@
 # `files_primary_s3` Test Plan
 
-<a href="https://github.com:owncloud/QA/blob/master/Server/Test_Plan_files_primary_s3.md">Template</a>
+<a href="https://github.com/owncloud/QA/edit/master/Server/Test_plan_files_primary_s3.md">Template</a>
 
 ## Setup
 <details><summary>Setup details (click to view)</summary>
