@@ -89,7 +89,7 @@
 | Rename | 1. In web, select any item of the spaces list to "Rename"<br>2. Enter different name | Item correctly listed with new name in app| P m15 |  |  |
 | Delete file | 1. In web, select any file of the spaces list to "Delete"| File correctly deleted in app | P m15 |  |  |
 | Delete folder | 1. In web, select any folder with subfolders of the spaces list to "Delete" | Folder and subfolders correctly deleted in app | P m15 |  |  |
-|**Files app**| 
+|**iOS Files app**| 
 | Only personal  | 1. Log in a account with no spaces<br>2. Open Files App | Straight to the list of files | P m15 |  |
 | With spaces | 1. Log in a account with some spaces<br>2. Open Files App | After selecting the account, the list of spaces is there to browse through | P m15 |  |
 | Browse spaces | 1. Log in a account with some spaces<br>2. Open Files App | After selecting the account, the list of spaces is there to browse through |  |  |
