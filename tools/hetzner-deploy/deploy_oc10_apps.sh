@@ -382,8 +382,8 @@ occ log:manage --level=info -vvv				# info=1, okayis - debug=0, way too much tok
 # occ config:system:set log_query --value true			# seen in 9.1/admin_manual
 occ config:system:set upgrade.disable-web --value false		# default is false. Just here to make it appear in config.php
 
-echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > /var/spool/cron/crontabs/www-data
-chown www-data.crontab /var/spool/cron/crontabs/www-data
+echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > oc.crontab
+crontab -u www-data oc.crontab		# only the crontab command triggers a reload.
 occ background:cron
 
 occ config:system:set memcache.local --value '\OC\Memcache\APCu'
