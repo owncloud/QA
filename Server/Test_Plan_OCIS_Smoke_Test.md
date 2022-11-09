@@ -9,15 +9,15 @@ Admin:
 
 Marie:
 - [ ] accept "folder_to_share"
-- [ ] upload new file "file.txt" to "folder_to_share" (admin see file.txt)
+- [ ] upload new file "file.txt" to "folder_to_share" (admin sees file.txt)
 - [ ] open sample.pdf
-- [ ] rename sample.pdf to file.pdf (use rigth click) (admin now see file.pdf)
+- [ ] rename sample.pdf to file.pdf (use rigth click) (admin now sees file.pdf)
 
 Admin:
 - [ ] add new file.jpeg to "folder_to_share"
 - [ ] move file.pdf to root (ctrl x -> ctrl v) "personal" (marie can not see file.pdf)
 - [ ] add new "file.txt" (select replace option) create new version. (use drag and drop)
-- [ ] open "file.tx" in markdown-editor. Change and save. (admin see "file.txt" updated)
+- [ ] open "file.tx" in markdown-editor. Change and save. (admin sees "file.txt" updated)
 
 Marie:
 - [ ] can download both versions
@@ -57,13 +57,13 @@ Admin:
 
 Admin:
 - [ ] create folder "for upload"
-- [ ] add link with name "to_upload" with role "Uploader" with pass and expiration date
-- [ ] open link (can only upload)
+- [ ] add link with name "to_upload" with role "Uploader" with password and expiration date
+- [ ] open link and enter password (can only upload)
 - [ ] upload file (admin can see new file)
 - [ ] change share "for upload" from "Uploader" to "editor"
 - [ ] admin add new file to folder "for upload"
 - [ ] refresh link (file exist)
-- [ ] admin change pass (refresh link has to type new pass)
+- [ ] admin changes password (refresh link has to type new password)
 
 ## Case 4: admin create link to file
 
@@ -71,8 +71,8 @@ Admin:
 - [ ] create file png
 - [ ] add link with main menu
 - [ ] open link(can open, download, see) in the incognito tab
-- [ ] edit link by adding pass
-- [ ] refresh page (input pass)
+- [ ] edit link by adding password
+- [ ] refresh page (input password)
 - [ ] delete link
 - [ ] refresh page (resource not found)
 - [ ] delete file
@@ -81,6 +81,9 @@ Admin:
 - [ ] Empty trash
 
 ## Case 5: space story:
+Admin
+- [ ] make Katherine Space Admin
+
 Katherine:
 - [ ] create space
 - [ ] add space image
