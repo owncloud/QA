@@ -3,13 +3,12 @@
 Admin:
 - [ ] upload big file 10gb (Show details, pause upload, resume upload work correct)
 - [ ] upload folder with 803 small images.
-- [ ] Check pagination, count items per page. Have a bug https://github.com/owncloud/web/issues/6768
+- [ ] Check pagination, count items per page.
 - [ ] upload folder(drag folder) "folder_to_share" with file.pdf
 - [ ] share folder "folder_to_share" to marie with edit right
 
 Marie:
 - [ ] accept "folder_to_share"
-- [ ] rename "folder_to_share" - cannot rename folder in new implementation
 - [ ] upload new file "file.txt" to "folder_to_share" (admin see new file)
 - [ ] open pdf file
 - [ ] rename file.pdf (use rigth click) (admin see that file changed name)
@@ -17,7 +16,7 @@ Marie:
 Admin:
 - [ ] add new file.jpeg to "folder_to_share"
 - [ ] move file.pdf to root "personal" (marie can not see file.pdf) cmd c -> cmd v
-- [ ]  add new "file.txt" create new version. (use drag and drop)
+- [ ] add new "file.txt" create new version. (use drag and drop)
 - [ ] open txt file in markdown-editor. Change and save.
 
 Marie:
@@ -49,7 +48,6 @@ Admin:
 - [ ] share share "file.txt" with edit right
 
 Marie:
-- [ ] rename file - cannot rename in new implementation
 - [ ] change content of the file (can see new version)
 
 Admin:
@@ -92,7 +90,7 @@ Katherine:
 - [ ] increase quota to 5Gb and try again
 - [ ] delete file
 - [ ] add member Marie with edit role
-- [ ]  add member Einstein with viewer role
+- [ ] add member Einstein with viewer role
 
 Marie:
 - [ ] can see space without accepting
@@ -122,4 +120,4 @@ Admin (test via api):
 ## Case 7: Search
 - [ ] personal space
 - [ ] project space
-- [ ] share jail - doesn't work
+- [ ] share jail
