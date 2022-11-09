@@ -4,31 +4,31 @@ Admin:
 - [ ] upload big file 10gb (Show details, pause upload, resume upload work correct)
 - [ ] upload folder with 803 small images.
 - [ ] Check pagination, count items per page.
-- [ ] upload folder(drag folder) "folder_to_share" with file.pdf
-- [ ] share folder "folder_to_share" to marie with edit right
+- [ ] upload folder(drag folder) "folder_to_share" with sample.pdf
+- [ ] share folder "folder_to_share" to marie with editor role
 
 Marie:
 - [ ] accept "folder_to_share"
-- [ ] upload new file "file.txt" to "folder_to_share" (admin see new file)
-- [ ] open pdf file
-- [ ] rename file.pdf (use rigth click) (admin see that file changed name)
+- [ ] upload new file "file.txt" to "folder_to_share" (admin see file.txt)
+- [ ] open sample.pdf
+- [ ] rename sample.pdf to file.pdf (use rigth click) (admin now see file.pdf)
 
 Admin:
 - [ ] add new file.jpeg to "folder_to_share"
-- [ ] move file.pdf to root "personal" (marie can not see file.pdf) cmd c -> cmd v
-- [ ] add new "file.txt" create new version. (use drag and drop)
-- [ ] open txt file in markdown-editor. Change and save.
+- [ ] move file.pdf to root (ctrl x -> ctrl v) "personal" (marie can not see file.pdf)
+- [ ] add new "file.txt" (select replace option) create new version. (use drag and drop)
+- [ ] open "file.tx" in markdown-editor. Change and save. (admin see "file.txt" updated)
 
 Marie:
 - [ ] can download both versions
-- [ ] restore old version
+- [ ] can restore old version
 
 Admin:
-- [ ] change share "folder_to_share" from "edit" to "viewer" (marie cannot rename/move/delete/download file in folder and cannot create new document in the folder)
+- [ ] change share "folder_to_share" from role "editor" to "viewer" (marie cannot rename/move/delete files in folder and cannot create new document in the folder)
 
 Marie:
-- [ ] decline folder (removed from shares folder)
-- [ ] accept again
+- [ ] can decline "folder_to_share" 
+- [ ] can accept again
 
 Admin:
 - [ ] delete folder "folder_to_share" (removed from shared with me, removed from Marie)
@@ -37,21 +37,21 @@ Admin:
 
 Admin:
 - [ ] upload file.jpeg
-- [ ] share file.jpeg to marie with rigth viewer (use main menu. find marie by email marie@example.org)
+- [ ] share file.jpeg to marie with role viewer (use main menu. find marie by email marie@example.org)
 
 Marie:
-- [ ] accept file (marie can open/download/copy file but cannot delete/move/rename)
-- [ ] open file in Mediaviewer
-- [ ] download file
+- [ ] accept file
+- [ ] can open/download/copy file 
+- [ ] cannot delete/move/rename file
 
 Admin:
-- [ ] share share "file.txt" with edit right
+- [ ] share share "file.txt" with editor role
 
 Marie:
 - [ ] change content of the file (can see new version)
 
 Admin:
-- [ ] unshare "file.jpeg" (marie cannot see "file.jpeg")
+- [ ] remove share "file.jpeg" (marie cannot see "file.jpeg")
 
 ## Case 3: admin create public links to folder
 
@@ -60,7 +60,7 @@ Admin:
 - [ ] add link with name "to_upload" with role "Uploader" with pass and expiration date
 - [ ] open link (can only upload)
 - [ ] upload file (admin can see new file)
-- [ ] change share "for upload" from "Uploader" to "edit"
+- [ ] change share "for upload" from "Uploader" to "editor"
 - [ ] admin add new file to folder "for upload"
 - [ ] refresh link (file exist)
 - [ ] admin change pass (refresh link has to type new pass)
@@ -71,7 +71,7 @@ Admin:
 - [ ] create file png
 - [ ] add link with main menu
 - [ ] open link(can open, download, see) in the incognito tab
-- [ ] change link, add pass
+- [ ] edit link by adding pass
 - [ ] refresh page (input pass)
 - [ ] delete link
 - [ ] refresh page (resource not found)
@@ -89,7 +89,7 @@ Katherine:
 - [ ] try to upload file (more 1 Gb)
 - [ ] increase quota to 5Gb and try again
 - [ ] delete file
-- [ ] add member Marie with edit role
+- [ ] add member Marie with editor role
 - [ ] add member Einstein with viewer role
 
 Marie:
@@ -110,7 +110,7 @@ Einstein:
 
 ## Case 6: create new user via accounts:
 Admin (test via api):
-- [ ]  create new account "tom" use graph Api
+- [ ] create new account "tom" use graph Api
 - [ ] create new group
 - [ ] add user to group
 - [ ] share folder with group
