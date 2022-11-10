@@ -41,7 +41,8 @@ Admin:
 
 Marie:
 - [ ] accept file
-- [ ] can open/download/copy file 
+- [ ] can open/download file
+- [ ] can share/copy quicklink
 - [ ] cannot delete/move/rename file
 
 Admin:
