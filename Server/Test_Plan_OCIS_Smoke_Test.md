@@ -81,8 +81,6 @@ Admin:
 - [ ] Empty trash
 
 ## Case 5: space story:
-Admin
-- [ ] make Katherine Space Admin
 
 Katherine:
 - [ ] create space
