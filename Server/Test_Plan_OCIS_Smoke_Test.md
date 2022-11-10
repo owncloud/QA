@@ -112,8 +112,8 @@ Einstein:
 - [ ] cannot disable space
 
 ## Case 6: create new user via accounts:
-Admin (test via api):
-- [ ] create new account "tom" use graph Api
+Admin:
+- [ ] create new user account
 - [ ] create new group
 - [ ] add user to group
 - [ ] share folder with group
