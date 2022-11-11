@@ -98,7 +98,7 @@ Marie:
 - [ ] can see space without accepting
 - [ ] change image and description
 - [ ] can upload file/folder and create file and folder
-- [ ] cannot create resource sharing and space sharing
+- [ ] can create resource but cannot share space or space resource
 - [ ] can see deleted files and can restore files from trash
 - [ ] cannot disable space
 
@@ -106,7 +106,7 @@ Einstein:
 - [ ] can see space without accepting
 - [ ] cannot change image and description
 - [ ] cannot upload file/folder and create file and folder
-- [ ] cannot create resource sharing and space sharing
+- [ ] cannot create resource and share space
 - [ ] can see deleted files and cannot restore files from trash
 - [ ] cannot disable space
 
