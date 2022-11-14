@@ -95,6 +95,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
+  echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
   exit 1
 fi
 
@@ -208,10 +209,13 @@ test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr '[A-Z]_'
 h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
 d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/" | tr '[A-Z]' '[a-z]' | tr . -)
-machine_type=cx11
+
+test -z "$HCLOUD_MACHINE_TYPE" && HCLOUD_MACHINE_TYPE=cx11
+machine_type=$HCLOUD_MACHINE_TYPE
 # cx11: 20 GB
 # cx21: 40 GB
 # cpx21: 80 GB
+# ccx11: 80 GB, 2 CPUs dedicated.
 # cpx31: 160 GB
 echo "$*" | grep files_antivirus   && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
 echo "$*" | grep search_elastic    && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
