@@ -245,6 +245,87 @@ olcAttributeTypes: ( 1.3.6.1.4.1.39430.1.1.11 NAME 'fixID' DESC 'For testing htt
 olcObjectClasses: ( 1.3.6.1.4.1.39430.1.3.2 NAME 'jwextra' DESC 'jwextra LDAP Schema' AUXILIARY MAY ( name $ fixID ) )
 EOF5
 
+# -------------------------- begin of lemmings generator
+function generate_user()
+{
+  namepre=$1
+  namecnt=$2
+  ownCloudUUID=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 36 | base64)
+  userPassword=e1NTSEF9WHlSZjJxcnMycXhSbkM4emVVV3lOMWVtVENqOVB0RVIK	# slappasswd -s secret | base64
+  ucfirst=$(echo $namepre | sed -e 's/./\U&/')
+  uidNumber=$(expr 20000 + $namecnt)
+
+cat << EOU
+dn: ou=users,dc=owncloud,dc=com
+objectClass: organizationalUnit
+ou: users
+
+# Start dn with uid (user identifier / login), not cn (Firstname + Surname)
+dn: uid=$namepre$namecnt,ou=users,dc=owncloud,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: ownCloud
+objectClass: person
+objectClass: posixAccount
+objectClass: top
+uid: $namepre$namecnt
+givenName: N$namecnt
+sn: $ucfirst
+cn: n$namecnt-$namepre
+sAMAccountName: N$namecnt$ucfirst
+displayName: N$namecnt $ucfirst
+description: Number $namecnt of $ucfirst.
+mail: $namepre$namecnt@example.org
+uidNumber: $uidNumber
+gidNumber: 30000
+homeDirectory: /home/$namepre$namecnt
+ownCloudUUID:: $ownCloudUUID
+userPassword:: $userPassword
+
+EOU
+}
+
+function generate_users_and_group()
+{
+  namepre=$1
+  namecnt=$2
+
+  for u in $(seq -w 1 $namecnt); do
+    generate_user $namepre $u
+  done
+
+  ownCloudUUID=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 36 | base64)
+  ucfirst=$(echo $namepre | sed -e 's/./\U&/')
+  gidNumber=$(expr 30000 + $(echo $1 | sum | head -c 3))
+
+   cat << EOG
+dn: ou=groups,dc=owncloud,dc=com
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=${namepre}s,ou=groups,dc=owncloud,dc=com
+objectClass: top
+objectClass: extensibleObject
+objectClass: posixGroup
+# objectClass: groupOfUniqueNames
+objectClass: ownCloud
+cn: $namepre-group
+description: $ucfirst group
+gidNumber: $gidNumber
+ownCloudUUID:: $ownCloudUUID
+EOG
+
+  for g in $(seq -w 1 $namecnt); do
+    echo "uniqueMember: uid=$namepre$g,ou=users,dc=owncloud,dc=com"
+  done
+  echo ""
+}
+
+generate_users_and_group lemming 1000  > $ldif/45-lem1000.ldif
+generate_users_and_group rabbit  1000 >> $ldif/45-lem1000.ldif
+# -------------------------- end of lemmings generator
+
+
 admin_pass="12345678"
 admin_dn="cn=admin,dc=owncloud,dc=com"
 
