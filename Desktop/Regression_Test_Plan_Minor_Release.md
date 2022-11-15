@@ -194,7 +194,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 | Viewer can view files in Space | 1. Add a space as a user with Viewer permissions 2. Open a file from the space | The file has been opened | | |
-2 | Viewer cannot edit files in Space | 1. Make changes in a file 2. Save | Not allowed | | |
+2 | Viewer cannot edit files in Space | 1. Add a space as a user with Viewer permissions  2. Make changes in a file 3. Save the file | Changes are not synced | | |
 3 | Editor can rename files in Space | 1. Add a space as a user with Editor permissions 2. Rename a file in the space | Change has been saved and synced | | |
 4 | Manager can add new folders in Space | 1. Add a space as a user with Manager permissions 2. Create a new folder in the space | Folder has been synced | | |
 
