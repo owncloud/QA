@@ -387,6 +387,8 @@ Connect owncloud via user_ldap:
    Click "Edit LDAP Query", (if needed: Mode switch -> YES)
    -> Some dropdown become active.
    Verify settings and count users: 4 users found
+ - Expert
+   Attribute for internal username: sAMAccountName	( to avoid UUIDs in the oc user listing)
 
 Finally from the login shell:
   time occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
