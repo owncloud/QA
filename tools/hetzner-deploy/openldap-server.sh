@@ -1,4 +1,12 @@
-# setup for a small local ldap server.
+# Setup for a small local ldap server.
+#
+# - upon first start, this
+#   * this creates some ldif files,
+#   * starts a docker based server, and
+#   * prints instructions for usage with owncloud.
+# - re-running this script (after changes)
+#   * recreates the ldif files, then
+#   * only prints instructions to restart the server.
 
 ldif=$HOME/ldif	# must be absolute path, because of docker.
 mkdir -p $ldif
@@ -250,15 +258,15 @@ function generate_user()
 {
   namepre=$1
   namecnt=$2
-  ownCloudUUID=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 36 | base64)
+  ownCloudUUID=$(uuidgen | tr -d '\n' | base64)
   userPassword=e1NTSEF9WHlSZjJxcnMycXhSbkM4emVVV3lOMWVtVENqOVB0RVIK	# slappasswd -s secret | base64
   ucfirst=$(echo $namepre | sed -e 's/./\U&/')
   uidNumber=$(expr 20000 + $namecnt)
 
 cat << EOU
-dn: ou=users,dc=owncloud,dc=com
-objectClass: organizationalUnit
-ou: users
+# dn: ou=users,dc=owncloud,dc=com
+# objectClass: organizationalUnit
+# ou: users
 
 # Start dn with uid (user identifier / login), not cn (Firstname + Surname)
 dn: uid=$namepre$namecnt,ou=users,dc=owncloud,dc=com
@@ -290,18 +298,19 @@ function generate_users_and_group()
   namepre=$1
   namecnt=$2
 
+  echo 1>&2 "+ generate_users_and_group $1 $2 ..."
   for u in $(seq -w 1 $namecnt); do
     generate_user $namepre $u
   done
 
-  ownCloudUUID=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 36 | base64)
+  ownCloudUUID=$(uuidgen | tr -d '\n' | base64)
   ucfirst=$(echo $namepre | sed -e 's/./\U&/')
   gidNumber=$(expr 30000 + $(echo $1 | sum | head -c 3))
 
    cat << EOG
-dn: ou=groups,dc=owncloud,dc=com
-objectClass: organizationalUnit
-ou: groups
+# dn: ou=groups,dc=owncloud,dc=com
+# objectClass: organizationalUnit
+# ou: groups
 
 dn: cn=${namepre}s,ou=groups,dc=owncloud,dc=com
 objectClass: top
@@ -325,13 +334,20 @@ generate_users_and_group lemming 1000  > $ldif/45-lem1000.ldif
 generate_users_and_group rabbit  1000 >> $ldif/45-lem1000.ldif
 # -------------------------- end of lemmings generator
 
-
-admin_pass="12345678"
 admin_dn="cn=admin,dc=owncloud,dc=com"
+admin_pass="12345678"
 
 ports="-p 389:389 -p 636:636"
 mount="$ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom"
 opts="-v $mount $ports --env LDAP_ADMIN_PASSWORD=$admin_pass --env LDAP_ORGANISATION=ownCloud --env LDAP_DOMAIN=owncloud.com"
+
+docker container inspect -f 'openldap is already running' openldap 2> /dev/null && {
+  echo " - to reload try:"
+  echo "    docker kill openldap"
+  echo "    docker run --rm --name openldap $opts osixia/openldap --copy-service --loglevel debug"
+  exit 0
+}
+
 
 docker run --rm --name openldap $opts -d osixia/openldap --copy-service --loglevel debug
 sleep 5
@@ -373,7 +389,7 @@ Connect owncloud via user_ldap:
    Verify settings and count users: 4 users found
 
 Finally from the login shell:
-  occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
+  time occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
 
 Extend the LDAP Schema
  - Edit ~/ldif/40_jwextra_schema.ldif
