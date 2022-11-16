@@ -175,4 +175,3 @@
 | Take photo or video | Open "+" menu | Available, working fine |  |  |
 | Scan document | Open "+" menu | Available, working fine |  |  |
 | Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |  |  |
-|**iPad/Tablet**| 
