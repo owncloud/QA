@@ -8,7 +8,7 @@ source ./env.sh		# needed for oc10_fqdn
 occ app:enable files_external
 occ app:enable files_external_dropbox
 
-cat <<EOF 
+cat << EOF | sed -e "s/^/external_dropbox: /g" >>  ~/POSTINIT.msg
 firefox https://www.dropbox.com/developers
  -> [App console] -> [Create app]
  1) Choose an API
