@@ -189,7 +189,16 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 6 | Deselect to the option "Allow apps to use the Share API"| 1. Install the new version 2. Go to Server Client 3. Sing in as Admin user 4. Go to Admin 5. On Sharing option, deselect to the option "Allow apps to use the Sahre API" 6. Go to the Desktop Client 7. Configure one account 8. Open folder 9. Create new folder (e.g Example1) 10. Right click on the folder Example1 11. Click on "Share with oC" 12. If you introduce the Password and press enter|| :question: | There is no option "share with oc". Sharing with disabled Shareing Api doesn't work. |
 7 | If you share a folder with another user, and then rename the folder on the Desktop does not change the name| 1. Install the new version with 2 accounts (user1, user2) 2. Go to Server Client with user1 3. Create a new folder (e.g. Share with) 4. Click on Share, and share with user2 5. Go to  Desktop Client with user2 6. Wait sync 7. Go to Server client with user1 8. Rename the Folder (Share with) to (Share with user2" 9. Go to Desktop client with user2 11. Wait sync | The folder name has not change. The shared folder is actually a virtual mount point for all recipients, so renaming it doesn't affect all recipients. Only the contents of it will be visible for anyone. Works as expected| :construction:  | |
 
-### 8. Without connection
+### 8. Spaces and permissions
+
+TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
+------------ | ------------- | -------------- | ----- | ------ | ------
+1 | Viewer can view files in Space | 1. Add a space as a user with Viewer permissions 2. Open a file from the space | The file has been opened | | |
+2 | Viewer cannot edit files in Space | 1. Add a space as a user with Viewer permissions  2. Make changes in a file 3. Save the file | Changes are not synced | | |
+3 | Editor can rename files in Space | 1. Add a space as a user with Editor permissions 2. Rename a file in the space | Change has been saved and synced | | |
+4 | Manager can add new folders in Space | 1. Add a space as a user with Manager permissions 2. Create a new folder in the space | Folder has been synced | | |
+
+### 9. Without connection
 #### NOTE: It would be better to have the following tested manually instead of automating them
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
@@ -199,9 +208,9 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 3 | Upload the same folder from the server and form the client with differente files inside| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server | :construction:   | |
 4 | Remove folder from the client| 1. Remove one folder from the local folder 2. The connection is back | The folder is not on the server | :construction:  | |
 
-### 9. Sharing
+### 10. Sharing
 
-#### 9.1 Share link
+#### 10.1 Share link
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result             | Related Comment
 ------------ | ------------- | -------------- | ----- |--------------------|---------------------------------------------------------------------------
@@ -229,7 +238,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result             | R
 24 | Public link to a file and set a password. Modify Password Policies and retry | 1) enable Password Policy server app allow passwords with 4 chars; 2) share with a 4 char password; 3) change password policy to min 8 chars. 4) use client sharing dialog to remove the password, and re-enter the short password; 5) enter a password with 8 chars  | An error appears stating min passwiord length 8 for the short password; a longer than 8 chars password works  | :construction: |  |
 
 
-#### 9.2 Share with Users and Groups
+#### 10.2 Share with Users and Groups
 
 TestID | Test Case | Expected Result | Result | Related Comment
 ------ | --------- | --------------- | ------ | ---------------
@@ -281,7 +290,7 @@ TestID | Test Case | Expected Result | Result | Related Comment
 56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| |
 57 :robot: | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing | :heavy_check_mark:| tst_sharing |
 
-### 10. Selective_Sync
+### 11. Selective_Sync
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
@@ -293,7 +302,7 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 5 :robot: | Verify that the folder to select are sorted by name/size| 1. Start to setup the oC Desktop 2. The new window to select what folder sync is shown 3. Select all the folder except one of them| Everything except one folder is synced  |:heavy_check_mark:  | tst_syncing |
 6 :robot: | Check that there are another option: skip sync, so that nothing is synced | 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Manually create folder sync connection"| The settings windows is openend but no local folder is configured| :heavy_check_mark: | tst_syncing |
 
-#### 10.1 Choose what to sync from the setup window
+#### 11.1 Choose what to sync from the setup window
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
@@ -312,21 +321,21 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 13 :robot: | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  | :heavy_check_mark: | tst_syncing |
 
 
-#### 10.2 "Skip folders configuration"
+#### 11.2 "Skip folders configuration"
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 |Skip folder configuration| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" | 1. No one local folder is sync 2. The setting window is opened and the account is registered| :construction:  | There is no skip button. The only way to reproduce this case is to mark "Manually create folder sync connection" on and click the "connect" button |
 2 |Sync only one folder the settings view | 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Settings window/add folder| The folder start to sync and the folder is available from the tray icon| :construction: |  |
 
-#### 10.3 "Add Folder..."
+#### 11.3 "Add Folder..."
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
 1 |Skip folder configuration from the setup window and select the local and remote folder front he setting window| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (choose an existing one) 6. Select the remote folder, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one| :construction:   |  |
 2 |Select a remote folder with special characters| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (create a new folder with special characters) 6. Select the remote folder with special characters, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one|  :construction:  |  |
 
-### 11. Overlay_icons
+### 12. Overlay_icons
 
 TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
 ------------ | ------------- | -------------- | ----- | ------ | ------
