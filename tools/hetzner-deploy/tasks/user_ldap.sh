@@ -116,7 +116,7 @@ if occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-ac
   echo "ldap user:sync tested successfully, adding to crontab"
   if ! grep -q user:sync $crontab; then
     echo "*/5  *  *  *  * /var/www/owncloud/occ user:sync 'OCA\User_LDAP\User_Proxy' -c -r -m disable -vvv" >> $crontab
-    chown www-data.crontab $crontab
+    crontab -u www-data $crontab	# fix permissions and wake up cron
   fi
 else
   echo "ERROR: ldap user:sync failed" | tee -a ~/POSTINIT.msg

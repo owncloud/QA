@@ -20,6 +20,30 @@ mkdir -p $ldif
 # popd
 
 
+## https://www.ibm.com/docs/en/zos/2.2.0?topic=introduction-ldap-schema-attributes
+## Supported LDAP syntaxes: general use
+# 1.3.6.1.4.1.1466.115.121.1.5 	Binary 			Binary data
+# 1.3.6.1.4.1.1466.115.121.1.6 	Bit String* 		Bit data format (for example '0110'B)
+# 1.3.6.1.4.1.1466.115.121.1.7 	Boolean 		TRUE, FALSE
+# 1.3.6.1.4.1.1466.115.121.1.12 Distinguished Name 	Sequence of attribute type and value pairs
+# 1.3.6.1.4.1.1466.115.121.1.15 Directory String 	UTF-8 characters
+# 1.3.6.1.4.1.1466.115.121.1.27 Integer 		+/- 62 digit integer
+# 1.3.6.1.4.1.1466.115.121.1.28 JPEG* 			Binary data (no format checking)
+# 1.3.6.1.4.1.1466.115.121.1.36 Numeric String* 	List of space-separated numbers
+# 1.3.6.1.4.1.1466.115.121.1.38 Object Identifier 	Name or numeric object identifier
+# 1.3.6.1.4.1.1466.115.121.1.40 Octet String 		Octet data
+
+## Supported LDAP syntaxes: server use
+# 1.3.6.1.4.1.1466.115.121.1.3 	Attribute Type Description
+# 1.3.6.1.4.1.1466.115.121.1.16 DIT Content Rule Description
+# 1.3.6.1.4.1.1466.115.121.1.17 DIT Structure Rule Description
+# 1.3.6.1.4.1.1466.115.121.1.30 Matching Rule Description
+# 1.3.6.1.4.1.1466.115.121.1.31 Matching Rule Use Description
+# 1.3.6.1.4.1.1466.115.121.1.35 Name Form Description
+# 1.3.6.1.4.1.1466.115.121.1.37 Object Class Description
+# 1.3.6.1.4.1.1466.115.121.1.54 LDAP Syntax Description
+# 1.3.6.1.4.1.1466.115.121.1.58 Substring Assertion
+
 ## FIXME: sAMAccountName is not set. Needed to verify e.g. https://github.com/owncloud/oauth2/pull/307#issuecomment-947578357
 cat <<EOF1 > $ldif/10_owncloud_schema.ldif
 # This LDIF files describes the ownCloud schema and can be used to
