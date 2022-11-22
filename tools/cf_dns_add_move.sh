@@ -99,9 +99,13 @@ record_id="$(cf_curl GET "$CLOUDFLARE_DNS_API?name=$2" | jq '.result[0].id' -r)"
 echo $record_id
 if [ "$record_id" != null -a -n "$record_id" ]; then
   old_ip="$(cf_curl GET "$CLOUDFLARE_DNS_API/$record_id" | jq '.result.content' -r)"
-  echo "Press ENTER to remove existing record: $2 -> $old_ip"
-  read a
-  test -n "$record_id" && cf_curl DELETE $CLOUDFLARE_DNS_API/$record_id | jq '"Success: " + (.success|tostring) +  " " + .errors[0].message'
+  if [ "$old_ip" = "$1" ]; then
+    echo "Identical DNS-Record for $1 already exists."
+  else
+    echo "Press ENTER to remove existing record: $2 -> $old_ip"
+    read a
+    test -n "$record_id" && cf_curl DELETE $CLOUDFLARE_DNS_API/$record_id | jq '"Success: " + (.success|tostring) +  " " + .errors[0].message'
+  fi
 fi
 
 if [ "$1" != '-' -a -n "$1" ]; then

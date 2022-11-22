@@ -45,7 +45,8 @@ for i in 10 9 8 7 6 5 4 3 2 1; do
   test "$cicap_addr" != null -a "$cicap_addr" != "" && break;
   echo "waiting for c-icap: $i"; sleep 5;
 done
-echo -e "\r\n\r" | netcat "$cicap_addr" 1344 | grep Server
+echo "Testing $cicap_addr 1344 ..."
+echo -e "\r\n\r" | timeout 20 netcat "$cicap_addr" 1344 | grep Server || echo "ERROR: no server reported"
 
 ### If socket version
 occ config:app:set files_antivirus av_socket          --value="/var/run/clamav/clamd.ctl"

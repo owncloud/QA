@@ -16,6 +16,7 @@ esac
 # refers to a 7 year old https://github.com/valerytschopp/owncloud-ldap-schema saying:
 #  ownCloud Inc. has register the OID http://oid-info.com/get/1.3.6.1.4.1.39430 and we extended it to define the required LDAP objects
 #
+# Proxy idea: https://ldaptor.readthedocs.io/en/latest/cookbook/ldap-proxy.html
 
 ## From Gerald
 ldap_server=95.217.210.161
