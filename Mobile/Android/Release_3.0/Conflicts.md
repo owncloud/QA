@@ -3,7 +3,7 @@
 #### PRs: https://github.com/owncloud/android/pull/3766
 
 Devices: Samsung A52, Android 12 <br>
-Server: oC10 10.11, oCIS 2.0.0beta8
+Server: oC10 10.11, oCIS 2.0.0-rc.1
 
 
 ---
