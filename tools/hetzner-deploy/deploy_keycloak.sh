@@ -1,0 +1,122 @@
+#! /bin/bash
+#
+# deploy_keycloak.sh - sets up a hetzner machine with a standalone keycloak server.
+# It has its own database, its own openldap behind, and its own nginx in fron.
+#
+#
+# References:
+#
+# - https://www.keycloak.org/server/containers
+# - https://www.keycloak.org/server/configuration-production
+
+
+test -z "$HCLOUD_MACHINE_TYPE" && HCLOUD_MACHINE_TYPE=cx11
+machine_type=$HCLOUD_MACHINE_TYPE
+test -z "$KEYCLOAK_DNSNAME" && KEYCLOAK_DNSNAME="keycloak-DATE.jw-qa.owncloud.works"
+KEYCLOAK_DNSNAME=$(echo $KEYCLOAK_DNSNAME | sed -e "s/DATE/$(date +%Y%m%d)/")
+d_name=$(echo $KEYCLOAK_DNSNAME  | sed -e "s/\..*//" | tr '[A-Z]' '[a-z]' | tr . -)
+
+mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
+source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,curl,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
+
+INIT_SCRIPT << EOF
+set -x
+# Health check endpoints are available at https://localhost:8443/health,
+# https://localhost:8443/health/ready and https://localhost:8443/health/live.
+# Use with --health-enabled
+#
+# The published Keycloak containers have a directory /opt/keycloak/data/import.
+# If you put one or more import files in that directory via a volume mount or
+# other means and add the startup argument --import-realm, the Keycloak
+# container will import that data on startup! This may only make sense to do in
+# Dev mode.
+#
+# If enabled, metrics are available at the '/metrics' endpoint.
+#
+# keycloak's docker container advertises port 8443, but there is nothing per default in development mode.
+# It has a hostname and a portnumber option.
+# --hostname=localhost --hostname-port=17443
+#
+screen -d -m -S keycloak -Logfile screenlog-keycloak -L \
+  docker run --rm --name keycloak -ti -e KEYCLOAK_ADMIN_PASSWORD=kadmin -e KEYCLOAK_ADMIN=kadmin -p 17443:8443 -p 4488:8080 quay.io/keycloak/keycloak \
+    start-dev --import-realm --metrics-enabled=true --health-enabled=true --hostname-port=17443
+
+# wait until keycloak is up:
+for i in 10 9 8 7 6 5 4 3 2 1 last; do
+  # TODO: maybe use one of the healcheck backends here??
+  echo -e "HEAD / HTTP/1.1\r\n\r" | timeout 2 netcat localhost 4488 | grep '200 OK' && break
+  echo " ... waiting for keycloak on port 4488 ... \$i"
+  if [ "\$i" = last ]; then 
+    echo "ERROR: keycloak startup failed, check screenlog-keycloak"
+    exit 1
+  fi
+  sleep 15
+done
+
+apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
+
+echo >> ~/env.sh "IPADDR=$IPADDR"
+echo >> ~/env.sh "oc10_fqdn=$KEYCLOAK_DNSNAME"	# queried by make_machine.sh from the outside, so that it can run certbot for us.
+
+keycloak_ip=\$(docker inspect keycloak | jq '.[0].NetworkSettings.IPAddress' -r)
+BACKEND_HTTP_SERVER="http://\$keycloak_ip:8080"
+SSL_CERT_FILE=./fullcert.pem		# must contain a /
+SSL_KEY_FILE=./privkey.pem
+HTTPS_PORT=19443
+
+
+
+mkdir -p proxy/conf.d
+cat << CONF > proxy/conf.d/nginx.conf
+server {
+    listen              80;
+    listen              443 ssl;
+    server_name         nginx.proxy;
+    ssl_certificate     /ssl-cert.crt;
+    ssl_certificate_key /ssl-cert.key;
+    # ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    # ssl_ciphers         HIGH:!aNULL:!MD5;
+    location / {
+        # proxy_set_header      Host $host;
+        # proxy_set_header        X-Real-IP $remote_addr;
+        # proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        # proxy_set_header        X-Forwarded-Proto $scheme;
+        proxy_pass              \$BACKEND_HTTP_SERVER;
+    }
+}
+CONF
+
+curl https://ssl-config.mozilla.org/ffdhe2048.txt > proxy/dhparam.pem
+
+for i in 10 9 8 7 6 5 4 3 2 1 last; do
+  privkey=\$(find /etc/letsencrypt/live/ -name privkey.pem)
+  test -f "$privkey" && break
+  echo "... waiting for privkey.pem to appear in /etc/letsencrypt/live/ ... \$i"
+  if [ "\$i" = last ]; then 
+    echo "ERROR: letsencrypt did not deliver a cert? Try manually later."
+  fi
+  sleep 15
+done
+
+# derive certfile name from privkey name. Compare output in CF_DNS.msg
+certfile=\$(echo "$privkey" | sed -e 's/privkey\.pem/fullchain.pem/')
+cp \$certfile \$privkey proxy/
+
+cat << DC_YML > proxy/docker-compose.yml
+version: "3"
+services:
+  nginx_ssl_proxy:
+    image: "nginx:latest"
+    command: "/usr/sbin/nginx -g 'daemon off;'"
+    ports:
+      - "\$HTTPS_PORT:443"
+    volumes:
+      - "./dhparam.pem:/usr/local/etc/ssl/dhparam.pem"
+      - "./conf.d:/etc/nginx/conf.d"
+      - "./fullchain.pem:/ssl-cert.crt"
+      - "./privkey.pem:/ssl-cert.key"
+DC_YML
+
+cd proxy;
+docker-compose up
+

@@ -251,15 +251,6 @@ if [ -n "$OC10_FQDN" ]; then
   OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
 fi
 
-echo >> ~/env.sh "IPADDR=$IPADDR"
-echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"
-echo >> ~/env.sh "OC10_VERSION=$vers"
-echo >> ~/env.sh "OC10_TAR_URL=$tar"
-echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
-echo >> ~/env.sh "machine_type=$machine_type"
-echo >> ~/env.sh "ARGV='${ARGV[@]}'"
-test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
-
 
 ## aptQ silences most of the usless clutter from apt. This is what apt -q should do, but does not do.
 # We use tr to "insert" a newline at [Y/n], so that prompts are visible
@@ -267,10 +258,19 @@ test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 # We use2 >&1, so that stderr is captured.
 # At the end we use a test of PIPESTATUS, so that the return value is whatever apt returns.
 aptQ() { echo "+ apt \$@"; apt "\$@" 2>&1 | stdbuf -o0 tr ] '\n' | grep -E -v "^(Preparing to|Get:|Selecting previously unselected|^WARNING: apt does not have|Creating config|Created symlink|Processing triggers|^Fetched |^Setting up |^Need to |^After this |^\s*\(Reading |^Reading |^Building|^\$|^0 upgraded, )"; test \${PIPESTATUS[0]} -eq 0; }
-
-
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
+
+# We almost always assign a DNS name.
+aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
+echo >> ~/env.sh "IPADDR=$IPADDR"
+echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"	# queried by make_machine.sh from the outside, so that it can run certbot for us.
+echo >> ~/env.sh "OC10_VERSION=$vers"
+echo >> ~/env.sh "OC10_TAR_URL=$tar"
+echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
+echo >> ~/env.sh "machine_type=$machine_type"
+echo >> ~/env.sh "ARGV='${ARGV[@]}'"
+test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
 # FROM
 # * https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
@@ -312,8 +312,6 @@ fi
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
 aptQ install -y smbclient coreutils ldap-utils postgresql
 aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl
-# We almost always assign a DNS name.
-aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
 cd /var/www
 if [ -f owncloud/config/config.php ]; then
