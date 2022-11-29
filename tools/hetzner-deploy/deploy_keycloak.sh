@@ -21,6 +21,14 @@ source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,curl
 
 INIT_SCRIPT << EOF
 set -x
+
+# Let certbot come by as early as possible.
+apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
+
+echo >> ~/env.sh "IPADDR=$IPADDR"
+echo >> ~/env.sh "oc10_fqdn=$KEYCLOAK_DNSNAME"	# queried by make_machine.sh from the outside, so that it can run certbot for us.
+
+
 # Health check endpoints are available at https://localhost:8443/health,
 # https://localhost:8443/health/ready and https://localhost:8443/health/live.
 # Use with --health-enabled
@@ -50,13 +58,8 @@ for i in 10 9 8 7 6 5 4 3 2 1 last; do
     echo "ERROR: keycloak startup failed, check screenlog-keycloak"
     exit 1
   fi
-  sleep 15
+  sleep 20
 done
-
-apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
-
-echo >> ~/env.sh "IPADDR=$IPADDR"
-echo >> ~/env.sh "oc10_fqdn=$KEYCLOAK_DNSNAME"	# queried by make_machine.sh from the outside, so that it can run certbot for us.
 
 keycloak_ip=\$(docker inspect keycloak | jq '.[0].NetworkSettings.IPAddress' -r)
 BACKEND_HTTP_SERVER="http://\$keycloak_ip:8080"
@@ -88,20 +91,21 @@ CONF
 
 curl https://ssl-config.mozilla.org/ffdhe2048.txt > proxy/dhparam.pem
 
-for i in 10 9 8 7 6 5 4 3 2 1 last; do
+for i in 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 last; do
   privkey=\$(find /etc/letsencrypt/live/ -name privkey.pem)
-  test -f "$privkey" && break
+  test -f "\$privkey" && break
   echo "... waiting for privkey.pem to appear in /etc/letsencrypt/live/ ... \$i"
   if [ "\$i" = last ]; then 
     echo "ERROR: letsencrypt did not deliver a cert? Try manually later."
   fi
-  sleep 15
+  sleep 20
 done
 
 # derive certfile name from privkey name. Compare output in CF_DNS.msg
-certfile=\$(echo "$privkey" | sed -e 's/privkey\.pem/fullchain.pem/')
+certfile=\$(echo "\$privkey" | sed -e 's/privkey\.pem/fullchain.pem/')
 cp \$certfile \$privkey proxy/
 
+# CAUTION: keep in sync with bin/nginx_ssl_proxy
 cat << DC_YML > proxy/docker-compose.yml
 version: "3"
 services:
@@ -115,6 +119,11 @@ services:
       - "./conf.d:/etc/nginx/conf.d"
       - "./fullchain.pem:/ssl-cert.crt"
       - "./privkey.pem:/ssl-cert.key"
+
+    # The default 172.17.0.0/16 docker network is the "bridge".
+    # We want to join there, so that we can proxy for standalone docker containers.
+    network_mode: bridge
+
 DC_YML
 
 cd proxy;
