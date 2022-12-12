@@ -1,4 +1,4 @@
-1. Create a new testplan ticket in the owncloud/client repo, copy the text below into it:
+1. Create a new testplan ticket in the [owncloud/client](https://github.com/owncloud/client) repo, copy the text below into it:
 
 ```
 # Regression test for the Desktop Client
@@ -9,8 +9,8 @@
 
 Have a Desktop Client vX.X.0 ready to be used for testing.
  -> download URL
-Prepare a 10.2.1 server with ssl activated and trusted certificates.
- - `env OC10_VERSION=10.2 bash deploy_oc10_apps.sh --`
+Prepare a 10.x.x server with ssl activated and trusted certificates.
+ - `env OC10_VERSION=10.x bash deploy_oc10_apps.sh --`
  -> server URL
  
 Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used for specific tests
@@ -20,8 +20,8 @@ Have the lastest released OC server ready with LDAP and two external storages of
 Optional: Have an Active Directory server ready to be used with owncloud.
 
 Avoid to have the same test server for all who are testing. You can use an individual latest docker server, e.g.:
- - docker run --rm -ti -p 8080:8080 owncloud/server:10.10.0
- - firefox http://localhost:8080
+ - docker run --rm -ti -p 8080:8080 owncloud/server:latest
+ - browser: http://localhost:8080
 but testing should be also done with a 'real' server, for that the BTR team can provide some test servers. 
 
 ## Testing
@@ -74,18 +74,18 @@ but testing should be also done with a 'real' server, for that the BTR team can 
 
 ### 1. Install - Login
 
-TestID | Test Case | Steps to reproduce |Expected Result |Result | Related Comment (Squish-Test) | Server
------------- | ------------- | ------------- | ------- | ----- | ------ | -----
-1 | Update Installation | 1. You need to have installed a previous version 2. Update to the new version |Test on Win, macOS, Linux| :construction: Win,<br>  :construction: macOS,<br> :construction: Linux  | |
-2 | Install the new version | 1. Delete the previous version 2. Install the new version || :construction: Win,<br>:construction: macOS,<br> :construction: Linux | |
-3 | Verify that you can enter a server address (valid server cert)| 1. Launch desktop client/add account 2. enter a server address 3. Click on Next 4. The lock is shown closed - SSL details on mouse over| | :heavy_check_mark: | tst_addAccount |
-4 :robot: | Verify that you can enter a server address (self signed cert)| 1. Launch desktop client/add account 2. enter a server address 3. Click on Next 4. If it is the first time you should accept the certificate - click on the checkbox and OK (The lock is shown in closed - the server validated SSL connection window is opened)| |:heavy_check_mark: | tst_addAccount | :robot: oC10,<br> :robot: oCIS |
-5 :robot: | Introduce username/password  | 1. Fill in username and password |If the credentials are not correct a message is shown "Error: Wrong credentials" | :heavy_check_mark: | tst_addAccount |  :robot: oC10,<br> :robot: oCIS |
-6 :robot: | Verify that all contents of the server account is synced to the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desired | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount | :robot: oC10,<br> :robot: oCIS |
-7 :robot: | Verify that only the folder(s) selected are synced in the local folder  | 0. Disable VFS, 1. Click on Choose what to sync 2. The remote folder(s) are shown, select which you want to sync 3. Select the local folder |The selected folders selected are synced | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-8 :robot: | Verify that you can skip folder configuration | 1. Click on "Manually create folder sync connection" | No settings dialog opens, the account shows only an "Add Folder Sync Connection" button.  | :heavy_check_mark: | tst_syncing  | :robot: oC10,<br> :robot: oCIS |
-9 | Connect to a server with LDAP (or optinally AD) | 1. Setup owncloud server with openldap, 2. Connect. | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  |  |
-10 | Connect to a 8.1.x server | 1. `docker run -ti -p 8181:80 owncloud:8.1`, 2. Connect.  A warning appears: "The server version 8.1.12.2 is unsupported", but syncing works. | | :construction: | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-Test) | Server
+------ | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Update Installation | 1. You need to have installed a previous version<br>2. Update to the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
+2 | Install the new version | 1. Delete the previous version<br>2. Install the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
+3 | Verify that you can enter a server address (self signed cert) | 1. Launch desktop client<br>2. Enter a server address<br>3. Click on Next<br>4. If it is the first time you should accept the certificate || :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+4 | Valid Login | 1. Log in with the correct username and password | Login successful | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+4 | Invalid Login | 1. Try to log in with wrong username or password | Error message `Login failed: username and/or password incorrect` is shown | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+5:x: move to syncing | Verify that everything is synced to the local folder | 1. Login account<br>2. Choose "Download everything" (default option)<br>3. Select the desired local folder | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+6:x: move to syncing | Verify that only the folder(s) selected are synced to the local folder | 1. Login account<br/>2. Choose "Configure sync manually" from advanced configuration<br>3. Click Next until you can select folders<br>4. Select folders to sync<br>5. Add Sync Connection | Only the selected folders are synced | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+7:x: move to syncing | Verify that you can skip folder configuration | 1. Login account<br/>2. Choose "Configure sync manually" from advanced configuration<br>3. Finish setup and Close the "Add Folder Sync Connection" dialog | Account is added and no folder connection is displayed | :heavy_check_mark: | tst_syncing  | :robot: oC10<br>:robot: oCIS
+8 | Connect to a server with LDAP (or optionally AD) | 1. Setup owncloud server with openldap<br>2. Add an account to desktop client | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  ||
+9 | Connect to an old server (v8.x.x) | 1. Setup an old server:`docker run -ti -p 8181:80 owncloud:8.1`<br>2. Add an account to desktop client | Unsupported warning message is displayed | :construction: ||
 
 
 ### 2. Folders
