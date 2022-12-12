@@ -75,17 +75,14 @@ but testing should be also done with a 'real' server, for that the BTR team can 
 ### 1. Install - Login
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-Test) | Server
------- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
 1 | Update Installation | 1. You need to have installed a previous version<br>2. Update to the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
 2 | Install the new version | 1. Delete the previous version<br>2. Install the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
 3 | Verify that you can enter a server address (self signed cert) | 1. Launch desktop client<br>2. Enter a server address<br>3. Click on Next<br>4. If it is the first time you should accept the certificate || :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
 4 | Valid Login | 1. Log in with the correct username and password | Login successful | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
-4 | Invalid Login | 1. Try to log in with wrong username or password | Error message `Login failed: username and/or password incorrect` is shown | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
-5:x: move to syncing | Verify that everything is synced to the local folder | 1. Login account<br>2. Choose "Download everything" (default option)<br>3. Select the desired local folder | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
-6:x: move to syncing | Verify that only the folder(s) selected are synced to the local folder | 1. Login account<br/>2. Choose "Configure sync manually" from advanced configuration<br>3. Click Next until you can select folders<br>4. Select folders to sync<br>5. Add Sync Connection | Only the selected folders are synced | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
-7:x: move to syncing | Verify that you can skip folder configuration | 1. Login account<br/>2. Choose "Configure sync manually" from advanced configuration<br>3. Finish setup and Close the "Add Folder Sync Connection" dialog | Account is added and no folder connection is displayed | :heavy_check_mark: | tst_syncing  | :robot: oC10<br>:robot: oCIS
-8 | Connect to a server with LDAP (or optionally AD) | 1. Setup owncloud server with openldap<br>2. Add an account to desktop client | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  ||
-9 | Connect to an old server (v8.x.x) | 1. Setup an old server:`docker run -ti -p 8181:80 owncloud:8.1`<br>2. Add an account to desktop client | Unsupported warning message is displayed | :construction: ||
+5 | Invalid Login | 1. Try to log in with wrong username or password | Error message `Login failed: username and/or password incorrect` is shown | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+6 | Connect to a server with LDAP (or optionally AD) | 1. Setup owncloud server with openldap<br>2. Add an account to desktop client | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  ||
+7 | Connect to an old server (v8.x.x) | 1. Setup an old server:`docker run -ti -p 8181:80 owncloud:8.1`<br>2. Add an account to desktop client | Unsupported warning message is displayed | :construction: ||
 
 
 ### 2. Folders
