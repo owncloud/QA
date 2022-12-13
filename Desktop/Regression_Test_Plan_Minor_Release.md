@@ -180,12 +180,12 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 
 ### 8. Spaces and permissions
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 | Viewer can view files in Space | 1. Add a space as a user with Viewer permissions 2. Open a file from the space | The file has been opened | | |
-2 | Viewer cannot edit files in Space | 1. Add a space as a user with Viewer permissions  2. Make changes in a file 3. Save the file | Changes are not synced | | |
-3 | Editor can rename files in Space | 1. Add a space as a user with Editor permissions 2. Rename a file in the space | Change has been saved and synced | | |
-4 | Manager can add new folders in Space | 1. Add a space as a user with Manager permissions 2. Create a new folder in the space | Folder has been synced | | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Viewer can view files in Space | 1. In the server, create a space, upload a file in it and add a user with Viewer role<br>2. As a space member (Viewer), add that space to the desktop client<br>3. Open the local sync folder and open that file | The file can be opened | :construction: ||
+2 | Viewer cannot edit files in Space | 1. In the server, create a space, upload a file in it and add a user with Viewer role<br/>2. As a space member (Viewer), add that space to the desktop client<br/>3. Open the local sync folder<br>4. Edit that file and save it | Changes are not synced | :construction: ||
+3 | Editor can rename files in Space | 1. In the server, create a space, upload a file in it and add a user with Editor role<br/>2. As a space member (Editor), add that space to the desktop client<br/>3. Open the local sync folder<br>4. Rename that file | The files is renamed and synced | :construction: ||
+4 | Manager can add new folders in Space | 1. In the server, create a space, upload a file in it and add a user with Manager role<br/>2. As a space member (Manager), add that space to the desktop client<br/>3. Open the local sync folder<br/>4. Create a new folder | New folder is synced | :construction: ||
 
 ### 9. Without connection
 #### NOTE: It would be better to have the following tested manually instead of automating them
