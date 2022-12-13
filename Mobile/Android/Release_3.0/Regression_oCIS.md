@@ -67,13 +67,13 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Edit and change the password | 1. Edit one account with the key icon<br>2. Enter incorrect password| Credentials error | P m12
 | Remove accounts | 1. Remove an account from Accounts manager<br>2. Remove all accounts from Accounts manager | 1. Account is not in account manager. List of servers shown, you can select other one.<br>2. List of servers shown, you can add a new account | P m12
 | Remove accounts files removed | 1. Remove an account with downloaded files, from Accounts manager | Account is not in account manager<br>Content inside is removed (check in Device Explorer) | P m12
-| Remove auto upload account | 1. Remove an account from Accounts manager, that is the account selected for auto uploads| Warning is shown, user has to accept the deletion | P m12 | sometimes flaky?¿ 
-| Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account | F m12 | Sign in is lost (known)
+| Remove auto upload account | 1. Remove an account from Accounts manager, that is the account selected for auto uploads| Warning is shown, user has to accept the deletion | P m12 | 
+| Remove account from server | 1. Remove an account from server<br>2. In app, pull to refresh | Auth fail is shown and the possibility to change to another attached account | F m12 | FiXED: Sign in is lost
 | Sync Account | 1. Add an account without browsing into in<br>2. Sync the app with the sync icon<br>3. Remove connection from device<br>4. Browse through the account| Everything is discovered | P m12
 | **User quota** |   |  |
 | Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed | P m12
-| 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar | F m12 | not correctly displayed
-| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar | F m12 | not correctly displayed
+| 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar | F m12 | not correctly displayed (17)
+| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar | F m12 | not correctly displayed (17)
 | No restriction | Set Qouta to "No restriction" | "No storage information available" | P m12 | 
 | **Security** |   |  |
 | Passcode enabled without biometrical | 1. Enable passcode<br>2. Leave the app before entering<br>3. Open app<br>4. Enter a correct passcode twice and not enable biometrical<br>5. Leave the app and open it again| 3. Passcode not asked<br>4. Biometrical asked to be enabled<br>5. Passcode asked | P m12
@@ -102,8 +102,8 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Create a folder without connection | Create a folder without connection | An error message is shown | P m12
 | Delete a folder/file without connection | Delete a folder from the server without connection | An error message is shown| P m12
 | Rename folder/file without connection | Rename a folder/file without connection | An error message is shown| P m12
-| Download a file/folder without connection | Download a file/folder without connection | An error message is shown | F m12 | no error message
-| Upload a file without connection | 1. Upload a file  without connection<br>2. Recover connection | 1. File enqueued<br>2. File resumed and uploaded | F m12 | Files finished not listed 
+| Download a file/folder without connection | Download a file/folder without connection | An error message is shown | P m12 | FIXED: no error message
+| Upload a file without connection | 1. Upload a file  without connection<br>2. Recover connection | 1. File enqueued<br>2. File resumed and uploaded | P m12 | Files finished not listed (EXPECTED)
 | Move a file/folder without connection | Select to move a file/folder without connection | An error is shown | P m12
 | Share by link | Select to share by link a file | An error is shown | P m12
 | Share with user | Select to share with a user | An error is shown | P m12 | Improvement: Toast instead of snackbar
@@ -115,21 +115,21 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Antivirus | 1. Enable antivirus in server<br>2. Upload EICAR file<br>| Correct error message in notification |
 | **Uploads** |   |  |
 | Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct | P m12
-| Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view | F m12 | Unknown error
+| Upload a very big file | Upload a file > 1GB to oC | The file is uploaded and correctly managed in uploads view | P m12 | 
 | Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view | P m12
 | Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list | P m12
-| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view | F m12 | Cancelled in list view
+| Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view | F m12 | Cancelled in list view (Regression)
 | Clear Uploaded | 1. Upload some files<br>2. Clear the Uplaoded list when the files have been uploaded | Uploaded list cleared | P m12
 | Retry Failed I | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Recover wifi connection | 2. Files are moved to Enqueued<br>3. Files are automatically retried and moved to Current | P m12
 | Retry Failed II | 1. Upload a bunch of files<br>2. Set the server in maintenance mode while the files are being uploaded<br>3. Switch maintenance mode off<br>4. Retry manually  | 2. Files are moved to Failed<br>3. Files are not retried<br>4. Files are automatically retried and moved to Current | 
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore | F m12 | Folder recreated
 | Error permissions | 1. Share a folder without permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  | [issue](https://github.com/owncloud/android/issues/2653)
-| Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  | F m12 | Unknown error
+| Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  | P m12 | FIXED: Unknown error, workers finish the job
 | Delete account | 1. In settings view, remove one account | All uploads from the removed account are removed from uploads view | P m12 |
 | Multiaccount | 1. Add three different accounts<br>2. Upload files from all of them at the same time  | Files are correctly uploaded in each account and folder | P m12
 | Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder | P m12
 | bigfilechunking true | 1. Select upload a file to a server with the capability `bigfilechunking true`  and `chunking>=1.0` (oC10) | Pic uploaded with chunking NG (MKCOL, PUT, PUT, PUT, MOVE)| P m12
-| bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT | F m12 | Unknown error
+| bigfilechunking false | 1. Select upload a file to a server with the capability `bigfilechunking false` (oCIS) | Pic uploaded with a single PUT | P m12 | FIXED: Unknown error
 | **Auto Uploads** |   |  |
 | Auto uploads pictures| 1. Enable auto uploads pictures and close the app<br>2. Take a picture<br>3. Take another picture<br>4. Switch off the device<br>| Open the device after 5 minutes, pictures are uploaded after maximum 15 minutes  | P m12
 | Auto uploads pictures account & folder| 1. Enable auto uploads pictures<br>2. Set an account and folder (non-root) as target<br>3. Take some pictures| Pictures uploaded to this location after 15 min max  | P m12
@@ -151,7 +151,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Stream a video with http | 1. With a http server stream a video (basic auth). Use the controls to move forward and backward and change orientation | Video is streamed correctly | P m12
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward and change orientation | Video is streamed correctly | P m12
 | Stream a video with https (non trusted server) | 1. With a https server stream a video. | Video is not streamed, so that the server is not secure. | P m12
-| Stream video with non playable format | Try to stream a ogv (or any other not supported format) video file | Video is not streamed, downloaded instead | F m12 | bad error message
+| Stream video with non playable format | Try to stream a ogv (or any other not supported format) video file | Video is not streamed, downloaded instead | F m12 | bad error message, not downloaded after
 | **Conflict handling** |   |  |
 | Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated | P m12
 | Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected and notification shows it<br>6. Server version is downloaded to the device | P m12
@@ -184,7 +184,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Move/Copy into av. offline | Move some content into an av. offline folder | Content is downloaded and sync |P m12
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is downloaded but not av.offine |P m12
 | Modify av. offline| 1. Set a txt file as. av offline (or a folder that contains it).<br>2. Close the app<br>3. With an external editor, modify the file | file is uploaded to the server in maximum 15 minutes, without opening the app |P m12
-| Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. | F m12 | no way to cancel 
+| Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. | P m12 | FIXED: no way to cancel 
 | Delete locally | Try to delete locally an av. offline folder | Action can not be performed |P m12
 |**Basic Operations**||||||
 | Create folder | Create a new folder  | Folder is created inside the oC account | P m12 |  |  |
@@ -213,7 +213,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Copy a folder from other location | From doc prov, copy a folder from other location to oC| Correctly copied | F m12 | Could not copy |
 |**Create File** |   |  |
 | Create new file root| From a 3rd party app, create new file and save in oC, selecting the root folder | new file is correctly saved | F m12 | Crash  |  |
-| Create new file non-root| From a 3rd party app, create new file and save in oC, selecting a non-root folder | new file is correctly saved in the folder | F m12 | Saved in the parent folder  |  | 
+| Create new file non-root| From a 3rd party app, create new file and save in oC, selecting a non-root folder | new file is correctly saved in the folder | P m12 | FIXED: Saved in the parent folder  |  | 
 | Create new file special chars| From a 3rd party app, create new file and save in oC, selecting a non-root folder which contains special characters | new file is correctly saved in the folder  | |   |
 | Conflict | From a 3rd party app, create new file and save in oC, setting an existing name | added a numeral to the file name | P m12 |  |  |
 | Multiaccount | Add several accounts<br>From a 3rd party app, create new file and save in local and in oC in different accounts and target folders | File is correctly saved in all accounts  | P m12 |  |
@@ -225,8 +225,8 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Rename folder | Rename a folder in root folder and non-root folder | Folders renamed correctly | P m12 |  |  |
 | Edit file | Open a file stored in oC<br>Modify the file | File is saved in oC with the update | |   |  |
 | **Share by link** |   |  |
-| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works | F m12 | Error if file is not in root
-| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work | F m12 | Error while removing
+| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works | F m12 | FIXED: Error if file is not in root. Not displayed!
+| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work | P m12 | FIXED: Error while removing
 | Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link | P m12
 | Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder from the long press menu | Sharing option is visible but only with the link. |
 | Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared | P m12
@@ -236,13 +236,13 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Download / View / Upload | 1. Share link of a folder<br>2. Select "Download / View / Upload"  | Folder is shared and content is "updatable" |P m12
 | Upload only | 1. Share link of a folder<br>2. Select "Upload Only"  | Folder is shared and content is not visible, but it is posible to upload content |P m12
 | Edit links | After creating a link on the same file, edit the information: permissions, password, expiration date | Check in server the new fields | P m12 | check permissions levels in oCIS
-| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear | F m12 | Error while removing
+| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear | P m12 | FIXED: Error while removing
 | Enforced Password | Create a new public link with the password enforced in server | The link can not be saved until password is typed |
 | Expiration default | Create a new public link with default expiration in server | The link by default has the default expiration date |
 | Expiration enforced | Create a new public link with the expiration enforced in server | The link can not be saved until expiration is input |
 | Share created link | Create a new public link<br>Share it with another app by using the Share Sheet  | Correctly shared |
 | **Share with users** |   |  |
-|Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon | F m12 | Error if file is not in root
+|Shared with one user (regular server)| Select to share a file whose name contains special characters with a user whose name includes special characters| Check that user2 has access to the file<br>Check that the file includes the share icon | F m12 | FIXED: Error if file is not in root. Not Displayed
 | Shared with a group | Prerrequisites: create a group whose name includes special characters<br>1. From the mobile app select to share a folder<br>2. Search the group and select it | Check that any user from the group has access to the folder<br>Check that the file includes the share icon | P m12
 | Shared with an already shared user | Share an item with an user who has already the item shared with | An error is shown | F m12 | incorrect error
 | Forbidden reshare | 1. In server disable the capability "allow resharing"<br>2. Try to reshare a shared file or folder | Option not displayed | F m12 | Incorrect error
