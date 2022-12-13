@@ -132,16 +132,16 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 15 | Verify the limit of the quota | 1. Open local sync folder<br/>2. Upload the necessary large files to fill up the quota | Warning: "The available space of your workspace is running out, please delete some files to free space" | :construction: ||
 
 ### 4. Move files and folders
-#### NOTE: To automate these test we need to use files explorer instead of the client UI. So, these tests cannot be added.
+#### NOTE: Could be automated using move functions from python
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
------------- | ------------- | -------------- | ----- | ------ | ------
-1 | Move from sublevels to root | 1. Move a couple of files (File1 and File2) with different content under the root sync folder 2. Let them sync 3. Move other file under the root sync folder| The content of files is correct |  :construction: | |
-2 | Move folder down | 1. Move one folder from sync root to a 5 deep level folder 2. Sync| The content of the folder is correct | :construction:  | |
-3 | Move folder up | 1. Move one folder from 5 deep level folder to the sync root 2. Sync| The content of the folder is correct |  :construction:  | |
-4 | Move files from one folder another| 1. Move a couple of files under the root sync folder 2. Create a folder 3. Let them sync 4. Move the files to the new folder 5. Let them sync| The files in the correct size in Via Web| :construction:   | |
-5 | Move two or more folders down | 1. Move two or more folders from sync root to a 5 dep level folder 2. Sync| The content of the folder is correct |:construction:   | |
-6 | Move two or more folders up | 1. Move one folder from 5 deep level folder to the sync root 2. Sync| The content of the folder is correct | :construction:    | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Move from sub-levels to root | 1. Move couple of files and folders from different sub-levels to the sync root<br>2. Wait for sync to complete<br>3. Check the contents of files and folders | The contents are correct (on the server) | :construction: ||
+2 | Move a folder down to sub-folder | 1. Move a folder from sync root to a 5 level deep sub-folder<br>2. Wait for sync to complete<br/>3. Check the folder content | The content of the folder is correct (on the server) | :construction: ||
+3 | Move a folder up from sub-folder to the root | 1. Move a folder from a 5 level deep folder to the sync root<br>2. Wait for sync to complete<br/>3. Check the folder content | The content of the folder is correct (on the server) | :construction: ||
+4 | Move files from one folder to another | 1. Move some files from `Folder1` to `Folder2`<br>2. Wait for sync to complete<br/>3. Check both folders contents | Both folders have the correct content (on the server) | :construction: ||
+5 | Move two or more folders down to sub-folder | 1. Move two or more folders from sync root to a 5 level deep sub-folder<br/>2. Wait for sync to complete<br/>3. Check the folders contents | The contents of the all the folders are correct (on the server) | :construction: ||
+6 | Move two or more folders up from sub-folder to the root | 1. Move two or more folders from a 5 level deep folder to the sync root<br/>2. Wait for sync to complete<br/>3. Check the folders contents | The contents of the all the folders are correct (on the server) | :construction: ||
 
 ### 5. Edit Files
 
