@@ -156,14 +156,14 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 
 ### 6. Delete Files and Folders
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -------
-1 :robot: | Delete one file| 1. Go to Desktop Client 2. Create or copy a single file with a short name (less than 20 characters) 3. Wait for the file to sync to the Via Web 4. Delete the file in Desktop Client|The file is been deleted on Via Web|  :heavy_check_mark:   |tst_deletFilesFolders |:robot: oC10,<br> :robot: oCIS |
-2 | Delete one file with long name| 1. Go to Desktop Client 2. Create or copy a single file with a long name (more than 240 characters) 3. Wait for the file to sync to the Via Web 4. Delete the file in Desktop Client|The folder is been deleted on Via Web| :heavy_check_mark: |tst_deletFilesFolders Maximum length of filename is 228 chraracter |
-3 :robot: | Delete one folder| 1. Go to Desktop Client 2. Create a single folder with a short name (more than 20 characters) 3. Wait for the folder to sync to the Via Web 4. Delete the folder in Desktop Client|The folder is been deleted on Via Web|   :heavy_check_mark:  |tst_deletFilesFolders |:robot: oC10,<br> :robot: oCIS |
-4 | Delete one folder with long name| 1. Go to Desktop Client 2. Create a single folder with a long name (59 characters+a terminating zero bytes) 3. Wait for the folder to sync to the Via Web 4. Delete the folder in Desktop Client|The folder is been deleted on Via Web| :heavy_check_mark: |tst_deletFilesFolders |
-5 | Delete multiple files| 1. Go to Desktop Client 2. Create or copy a multiple files 3. Wait for the files to sync to the Via Web 4. Delete the file in Desktop Client|The files get deleted on Via Web| :construction: | |
-6 | Delete large file (2048Mb)| 1. Go to Desktop Client 2. Create or copy a single big file (2GB) 3. Wait for the file to sync to th Via Web 4. Delete the file in Desktop Client|The file get deleted on Via Web| :construction: | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Delete a file | 1. On the server, create a file<br>2. Add that account to the desktop client<br>3. Open the local sync folder<br>4. Delete that file | The file is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders | :robot: oC10<br>:robot: oCIS
+2 | Delete a file with long name | 1. On the server, create a file with long name<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that file | The file is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders (Maximum length of filename is 228 chraracter) | :robot: oC10<br/>:robot: oCIS
+3 | Delete a folder | 1. On the server, create a folder<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that folder | The folder is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders | :robot: oC10<br>:robot: oCIS
+4 | Delete a folder with long name | 1. On the server, create a folder with long name<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that folder | The folder is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders | :robot: oC10<br/>:robot: oCIS
+5 | Delete multiple files | 1. On the server, create some files<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete some files | The files get deleted on the server | :construction: ||
+6 | Delete a large file (2048MB) | 1. On the server, create a large file (2048MB)<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that file | The file gets deleted on the server | :construction: ||
 
 
 ### 7. Sync process
