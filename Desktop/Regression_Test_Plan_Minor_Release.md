@@ -188,14 +188,14 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 4 | Manager can add new folders in Space | 1. In the server, create a space, upload a file in it and add a user with Manager role<br/>2. As a space member (Manager), add that space to the desktop client<br/>3. Open the local sync folder<br/>4. Create a new folder | New folder is synced | :construction: ||
 
 ### 9. Without connection
-#### NOTE: It would be better to have the following tested manually instead of automating them
+#### NOTE: We could give it a try to automate
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 | Upload several files and folder to the sync folder without internet| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server |  :construction:  | |
-2 | Upload several files and folder with special characters to the sync folder without internet| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server |  :construction:  | |
-3 | Upload the same folder from the server and form the client with differente files inside| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server | :construction:   | |
-4 | Remove folder from the client| 1. Remove one folder from the local folder 2. The connection is back | The folder is not on the server | :construction:  | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Upload several files and folder to the sync folder without Internet | 1. Add an account to the desktop client<br>2. Disconnect the Internet<br>3. Upload several files and folder in the sync folder<br>4. Connect the Internet<br>5. Wait for sync | The files and folder are synced to the server | :construction: ||
+2 | Upload several files and folder with special characters to the sync folder without Internet | 1. Add an account to the desktop client<br>2. Disconnect the Internet<br>3. Upload several files and folder (having special characters) in the sync folder<br>4. Connect the Internet<br>5. Wait for sync | The files and folder are sync with the server | :construction: ||
+3 | Upload the same folder from the server and form the client with different files inside | 1. Add an account to the desktop client<br>2. Disconnect the Internet<br>3. In the server, upload a folder with some files<br>4. In the local sync folder, upload same named folder with different files in it<br>5. Connect the Internet<br/>6. Wait for sync | The files and folder are synced to the server | :construction: ||
+4 | Remove folder from the client without Internet | 1. Add an account to the desktop client<br/>2. Disconnect the Internet<br/>3. Remove a folder from the local sync folder<br/>4. Connect the Internet<br/>5. Wait for sync | The folder is deleted from the server | :construction: ||
 
 ### 10. Sharing
 
