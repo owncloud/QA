@@ -310,12 +310,12 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 13 | When you click on "Choose what to sync" folder tree is shown | 1. Click on "Choose what to sync" | It takes folder time to appear the folder tree,  | :heavy_check_mark: | tst_syncing | |
 
 
-#### 11.2 "Skip folders configuration"
+#### 11.2 "Skip sync folder configuration"
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 |Skip folder configuration| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" | 1. No one local folder is sync 2. The setting window is opened and the account is registered| :construction:  | There is no skip button. The only way to reproduce this case is to mark "Manually create folder sync connection" on and click the "connect" button |
-2 |Sync only one folder the settings view | 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Settings window/add folder| The folder start to sync and the folder is available from the tray icon| :construction: |  |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Skip folder configuration | 1. Start the desktop client and fill in server, user and password<br/>2. From the advanced configuration, choose `Configure synchronization manually`<br>3. Connect the account | - No local sync folder is created<br>- The setting window is opened and the account is registered | :construction: ||
+2 | Add local sync folder from the settings window | 1. Add an account to desktop client with manual sync configuration<br/>2. From the opened settings window, choose the local sync folder and remote folder, and add the connection | The folder start to sync and the folder is available | :construction: ||
 
 #### 11.3 "Add Folder Sync Connection"
 
