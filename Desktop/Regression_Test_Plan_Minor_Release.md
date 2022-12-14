@@ -279,7 +279,7 @@ TestID | Test Case | Expected Result | Result | Related Comment | Server
 58 | Try to share with "Allow apps to use the Share API" disabled | 1. In the server, disable `Allow apps to use the Share API` from Sharing settings<br>2. Add an account to the desktop client<br>3. Open the local sync folder<br>4. Create a new folder<br>5. From file explorer, try to share this folder: `Right click on folder` -> `ownCloud option` | There is no "Share" option while navigating to ownCloud menu option | :construction: ||
 59 | Sharing a folder with another user and then renaming it will not change the folder name for another user (sharee) | 1. As `user1`, share a folder with `user2` from the server<br>2. Add `user2` to the desktop client<br>3. As `user1`, rename the shared folder to something else in the server<br>4. As `user2`, wait for sync from desktop client | The folder name for `user1` is not changed. (The shared folder is actually a virtual mount point for all recipients, so renaming it doesn't affect all recipients. Only the contents of it will be visible for anyone) | :construction: ||
 
-### 11. Selective sync
+### 11. Syncing
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
@@ -287,31 +287,30 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 2.a | **Linux**+**Mac**: Check that the `Download everything` is selected by default | 1. Start the desktop client and fill in server, user and password<br>2. Check the advanced configuration | `Download everything` option is selected | :construction: ||
 2.b | **Win**: Check that the `Use virtual files` is selected by default | 1. Start the desktop client and fill in server, user and password<br>2. Check the advanced configuration | `Use virtual files` option is selected | :construction: ||
 3 | Check that all files and folders are synced when you choose to sync all | 1. Start the desktop client and fill in server, user and password<br>2. Finish the account setup | Everything is synced | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
-4 | Verify that you can select to sync only one folder | 1. Add an account to desktop client with manual sync configuration<br>2. In the `Add Folder...` window, choose the local folder and remote folder  and Next<br>3. Select only one folder and add the connection | Only one folder is sync | :heavy_check_mark: | tst_syncing | :robot: oC10
-5 | Verify that the folders to select are sorted by name/size | 1. In the `Add Folder...` window, choose the local folder and remote folder and Next<br>2. Sort the folders by name and size | Sorting works | :heavy_check_mark: | tst_syncing | :robot: oC10
-
-#### 11.1 Choose what to sync from the setup window
-
-ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
--- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
-1 | Verify that the unselected folders are not synced | 1. Add an account to desktop client with manual sync configuration<br>2. In the `Add Folder...` window, choose the local folder and remote folder<br>3. Unselect various remote folders from `Deselect remote folders...` window and add the connection | Unselected folders are not synced | :heavy_check_mark: | tst_syncing | :robot: oC10
-2 | Folder without subfolder doesn't show the arrow | 1. From the `Deselect remote folders...` window, observe the arrow of different folders with or without subfolders | When you click/sort folders without subfolder the arrow disappear sometimes | :construction: ||
-3 | Verify that the subfolders that you unselect are not synced | 1. From the `Deselect remote folders...` window, select a folder that has many subfolders<br>2. Extend that folder and unselect some subfolders<br>3. Add the connection | The parent folder is synced but not the unselected subfolders | :heavy_check_mark: | tst_syncing | :robot: oC10
-4 | Upload some files from the server in a folder which is selected to be synced | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the server, upload some files on that folder<br>3. Wait for sync | The added files are synced down | :construction: ||
-5 | Upload some files from the file explorer in the synced folder | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the file explorer, upload some files on that folder<br>3. Wait for sync | The files are synced to the server | :construction: ||
-6 | Upload some files from the server in a folder which is  not synced | 1. From the `Deselect remote folders...` window, unselect a folder and add connection<br>2. From the server, upload some files in that unselected folder | The folder and files are not available in the sync folder | :construction: ||
-7 | Delete a synced folder from the file explorer | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the local sync folder, delete that folder<br>3. Wait for sync | The folder is removed in the server | :construction: ||
-8 | Delete a synced folder from the server | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the server, delete that folder<br>3. Wait for sync | The folder is removed from the local sync folder | :construction: ||
 9 | Create a folder in the root directory from the server | 1. Add an account to desktop client<br>2. From the server, add a folder in the root<br>3. Wait for sync | The new folder is synced to the local sync folder | :construction: ||
-12 | Verify that when yo unselect all the folders, the root files continue to sync | 1. From the `Deselect remote folders...` window, unselect all the folders<br>2. Add the connection | Root files are synced | :construction: ||
 
-
-#### 11.2 "Skip sync folder configuration"
+#### 11.1 Skip sync folder configuration
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
 1 | Skip folder configuration | 1. Start the desktop client and fill in server, user and password<br>2. From the advanced configuration, choose `Configure synchronization manually`<br>3. Connect the account | - No local sync folder is created<br>- The setting window is opened and the account is registered | :construction: ||
 2 | Add local sync folder from the settings window | 1. Add an account to desktop client with manual sync configuration<br>2. From the opened settings window, choose the local sync folder and remote folder, and add the connection | The folder start to sync and the folder is available | :construction: ||
+
+#### 11.2 Selective sync
+
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Verify that you can select to sync only one folder | 1. Add an account to desktop client with manual sync configuration<br>2. In the `Add Folder...` window, choose the local folder and remote folder  and Next<br>3. Select only one folder and add the connection | Only one folder is synced | :heavy_check_mark: | tst_syncing | :robot: oC10
+2 | Verify that the unselected folders are not synced | 1. Add an account to desktop client with manual sync configuration<br>2. In the `Add Folder...` window, choose the local folder and remote folder and Next<br>3. Unselect various remote folders from `Deselect remote folders...` window and add the connection | Unselected folders are not synced | :heavy_check_mark: | tst_syncing | :robot: oC10
+3 | Verify that the subfolders that you unselect are not synced | 1. From the `Deselect remote folders...` window, select a folder that has many subfolders<br>2. Extend that folder and unselect some subfolders<br>3. Add the connection | The parent folder is synced but not the unselected subfolders | :heavy_check_mark: | tst_syncing | :robot: oC10
+4 | Folder without subfolder doesn't show the arrow | 1. From the `Deselect remote folders...` window, observe the arrow of different folders with or without subfolders | When you click/sort folders without subfolder the arrow disappear sometimes | :construction: ||
+5 | Upload some files from the server in a folder which is selected to be synced | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the server, upload some files on that folder<br>3. Wait for sync | The added files are synced down | :construction: ||
+6 | Upload some files from the file explorer in the synced folder | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the file explorer, upload some files on that folder<br>3. Wait for sync | The files are synced to the server | :construction: ||
+7 | Upload some files from the server in a folder which is  not synced | 1. From the `Deselect remote folders...` window, unselect a folder and add connection<br>2. From the server, upload some files in that unselected folder | The folder and files are not available in the sync folder | :construction: ||
+8 | Delete a synced folder from the file explorer | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the local sync folder, delete that folder<br>3. Wait for sync | The folder is removed in the server | :construction: ||
+9 | Delete a synced folder from the server | 1. From the `Deselect remote folders...` window, select a folder to sync and add connection<br>2. From the server, delete that folder<br>3. Wait for sync | The folder is removed from the local sync folder | :construction: ||
+10 | Verify that when yo unselect all the folders, the root files continue to sync | 1. From the `Deselect remote folders...` window, unselect all the folders<br>2. Add the connection | Root files are synced | :construction: ||
+11 | Verify that the folders to select are sorted by name/size | 1. In the `Add Folder...` window, choose the local folder and remote folder and Next<br>2. Sort the folders by name and size | Sorting works | :heavy_check_mark: | tst_syncing | :robot: oC10
 
 #### 11.3 "Add Folder Sync Connection"
 
