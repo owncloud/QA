@@ -9,7 +9,7 @@
 # - https://www.keycloak.org/server/containers
 # - https://www.keycloak.org/server/configuration-production
 # - https://www.keycloak.org/server/hostname
-
+# - https://www.nginx.com/resources/wiki/start/topics/examples/likeapache/
 
 test -z "$HCLOUD_MACHINE_TYPE" && HCLOUD_MACHINE_TYPE=cx11
 machine_type=$HCLOUD_MACHINE_TYPE
@@ -59,7 +59,7 @@ for i in 10 9 8 7 6 5 4 3 2 1 last; do
   # TODO: maybe use one of the healcheck backends here??
   echo -e "HEAD / HTTP/1.1\r\n\r" | timeout 2 netcat localhost 4488 | grep '200 OK' && break
   echo " ... waiting for keycloak on port 4488 ... \$i"
-  if [ "\$i" = last ]; then 
+  if [ "\$i" = last ]; then
     echo "ERROR: keycloak startup failed, check screenlog-keycloak"
     exit 1
   fi
@@ -73,6 +73,34 @@ SSL_KEY_FILE=./privkey.pem
 
 
 
+
+# https://www.nginx.com/resources/wiki/start/topics/examples/likeapache/
+# Let’s say we want to establish simple proxy between myhost:80 and myapp:8080. The Apache rule is simple:
+#  <VirtualHost myhost:80>
+#     ServerName myhost
+#     DocumentRoot /path/to/myapp/public
+#     ProxyPass / http://myapp:8080/
+#     ProxyPassReverse / http://myapp:8080/
+# </VirtualHost>
+#
+# But NGINX does not have ProxyPassReverse… The solution is adding a few missing HTTP headers.
+# server {
+#     listen myhost:80;
+#     server_name  myhost;
+#     location / {
+#         root /path/to/myapp/public;
+#         proxy_set_header X-Forwarded-Host $host:$server_port;
+#         proxy_set_header X-Forwarded-Server $host;
+#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#         proxy_pass http://myapp:8080;
+#     }
+# }
+# These variables are meant to appear verbatim as variables. At some point the documention reveals e.g.:
+# NGINX even provides a $proxy_add_x_forwarded_for variable to automatically append $remote_addr to any incoming X-Forwarded-For headers.
+#
+# CAUTION: keycloack behind proxy exposes internal addess in jwks_uri userinfo_endpoint token_endpoint, when the X-Forwarded-For headers are missing.
+#          do not try to fix these URLs in keycloak, the proxy is responsible for getting them correct. (For whatever reason...)
+
 mkdir -p proxy/conf.d
 cat << CONF > proxy/conf.d/nginx.conf
 server {
@@ -84,10 +112,12 @@ server {
     # ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
     # ssl_ciphers         HIGH:!aNULL:!MD5;
     location / {
-        # proxy_set_header      Host $host;
-        # proxy_set_header        X-Real-IP $remote_addr;
-        # proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        # proxy_set_header        X-Forwarded-Proto $scheme;
+        proxy_set_header        Host \\$host;
+        proxy_set_header        X-Real-IP \\$remote_addr;
+        proxy_set_header        X-Forwarded-Host \\$host:\\$server_port;
+        proxy_set_header        X-Forwarded-Server \\$host;
+        proxy_set_header        X-Forwarded-For \\$proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto \\$scheme;
         proxy_pass              \$BACKEND_HTTP_SERVER;
     }
 }
@@ -99,7 +129,7 @@ for i in 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 last; do
   privkey=\$(find /etc/letsencrypt/live/ -name privkey.pem)
   test -f "\$privkey" && break
   echo "... waiting for privkey.pem to appear in /etc/letsencrypt/live/ ... \$i"
-  if [ "\$i" = last ]; then 
+  if [ "\$i" = last ]; then
     echo "ERROR: letsencrypt did not deliver a cert? Try manually later."
   fi
   sleep 20

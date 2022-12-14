@@ -104,6 +104,7 @@ else
 fi
 echo ""
 echo "Make a remote fortinet or McAfee webgateway ICAP socket appear at localhost:"
+echo "  firefox https://\$OPENSENSE_HOST:\$OPENSENSE_PORT/firewall_nat.php # configure open ports as needed."
 echo "  ssh -N -v -L 61344:192.168.0.32:1344 root@157.90.80.61 -p 16806"
 echo "  ssh -N -v -L 61344:192.168.0.2:1344 root@157.90.80.61 -p 16806"
 echo "Inspect traffic at that local socket:"

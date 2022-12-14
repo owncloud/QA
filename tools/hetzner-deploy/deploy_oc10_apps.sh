@@ -66,6 +66,7 @@ case $vers in
     ;;
 esac
 
+location=nbg1		# hel1, fsn1, nbg1
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "Usage examples:"
@@ -96,8 +97,11 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
   echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
+  echo "   HCLOUD_LOCATION=hel1		to define the compute center location. hel1, fsn1, nbg1. Default: $location"
   exit 1
 fi
+
+test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 
 tmpdir="/tmp/make_oc10_apps_dl_$$"
 mkdir -p $tmpdir
@@ -227,7 +231,7 @@ function title() { wmctrl -r :ACTIVE: -N "$@"; }
 title "$d_name - hetzner"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
-source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
+source $mydir/lib/make_machine.sh -L $location -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin
 
 rm -rf $tmpdir
