@@ -317,12 +317,12 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 1 |Skip folder configuration| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" | 1. No one local folder is sync 2. The setting window is opened and the account is registered| :construction:  | There is no skip button. The only way to reproduce this case is to mark "Manually create folder sync connection" on and click the "connect" button |
 2 |Sync only one folder the settings view | 1. Start to setupo oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Settings window/add folder| The folder start to sync and the folder is available from the tray icon| :construction: |  |
 
-#### 11.3 "Add Folder..."
+#### 11.3 "Add Folder Sync Connection"
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 |Skip folder configuration from the setup window and select the local and remote folder front he setting window| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (choose an existing one) 6. Select the remote folder, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one| :construction:   |  |
-2 |Select a remote folder with special characters| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (create a new folder with special characters) 6. Select the remote folder with special characters, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one|  :construction:  |  |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Skip folder configuration from the setup window and select the local and remote folder from the setting window | 1. Start the desktop client and fill in server, user and password<br>2. Choose `Configure synchronization manually` from the advanced configuration<br>3. Finish the setup<br>4. Click on `Add Folder Sync Connection`<br>5. Select the local folder (choose an existing one)<br>6. Select the remote folder and Next<br>7. Select the sub-folders of the remote folder and click on `Add Sync Connection` | The local folder selected is synced with the remote one | :construction: ||
+2 | Select a remote folder with special characters | 1. Add an account to desktop client with manual sync configuration<br>2. Click on `Add Folder Sync Connection`<br/>3. Select the local folder (create a new folder with special characters)<br/>4. Select the remote folder with special characters and Next<br>5. Select the sub-folders of the remote folder and click on `Add Sync Connection` | The local folder selected is synced with the remote one | :construction: ||
 
 ### 12. Overlay icons
 
