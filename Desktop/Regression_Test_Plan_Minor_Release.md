@@ -324,14 +324,14 @@ TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comme
 1 |Skip folder configuration from the setup window and select the local and remote folder front he setting window| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (choose an existing one) 6. Select the remote folder, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one| :construction:   |  |
 2 |Select a remote folder with special characters| 1. Start to setup oC Desktop 2. Fill in server, user and password 3. Click on "Skip folders configuration" 4. Click on Add folder 5. Select the local folder (create a new folder with special characters) 6. Select the remote folder with special characters, click on continue 7. Select the subfolders of the remote folder and click on add | 1. The local folder selected is sync wich the remote one|  :construction:  |  |
 
-### 12. Overlay_icons
+### 12. Overlay icons
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment| Server
------------- | ------------- | -------------- | ----- | ------ | ------| -----
-1 | If the system is offline, there are no overlay icons present | 1. Launch the Desktop 2. The overlay icons are not shown 3. Quit the Desktop | The overlay icons are not shown| :construction: |  |
-2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop 2. The overlay icons are shown 3. Click on Pause | The overlay icons disappear | :construction:   |  |
-3 | Green check (All files within the folder (all the way down the tree) are sync with the server, and there are no problems to report) | 1. The account is sync | The green check is shown in all the folders/files| :construction:  |  |
-4 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively sync) | 1. The account is sync | The files/folder that are waiting to sync have the blue icon|  :construction:  |  |
-5 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters or a bad character in a name o a file firewall problem) | 1. The account is sync |The files that are not sync because they have a problem... Have a yellow warning triangle | :construction:   |  |
-6 | Red error Icon (There is a fatal problem in the sync process that can't be resolved) | 1. The account is sync | The files/folders that are not sync because have a problem... Have a red error icon| :construction:   |  |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | If the system is offline, there are no overlay icons present | 1. Disconnect the Internet<br>2. Launch the Desktop client<br>3. Check the overlay icons in the local sync folder | The overlay icons are not shown| :construction: ||
+2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop client<br>2. Check the overlay icons<br>3. Pause the sync<br>4. Check the overlay icons | The overlay icons disappear | :construction: ||
+3 | Green check (All files within a folder all the way down the tree are synced with the server) | 1. Open the local sync folder<br>2. Add a folder having multiple nested files and folders<br>3. Check the overlay icons | The green check is shown in all the folders/files | :construction: ||
+4 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively in sync) | 1. Open the local sync folder<br/>2. Add some files and folders<br/>3. Check the overlay icons | The files/folder that are waiting to sync have the blue icons | :construction: ||
+5 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters, a bad character in a name or a file firewall problem) | 1. Open the local sync folder<br/>3. Add a problematic file<br/>3. Check the overlay icons | The files that are not synced due to a problem have the yellow warning triangle icons | :construction: ||
+6 | Red error Icon (There is a fatal problem in the sync process that can't be resolved) | 1. Open the local sync folder<br/>3. Create a sync error<br/>3. Check the overlay icons | The files/folders that are not synced due to a fatal problem have the red error icons | :construction: ||
 
