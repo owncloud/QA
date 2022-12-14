@@ -1,4 +1,4 @@
-1. Create a new testplan ticket in the owncloud/client repo, copy the text below into it:
+1. Create a new testplan ticket in the [owncloud/client](https://github.com/owncloud/client) repo, copy the text below into it:
 
 ```
 # Regression test for the Desktop Client
@@ -9,8 +9,8 @@
 
 Have a Desktop Client vX.X.0 ready to be used for testing.
  -> download URL
-Prepare a 10.2.1 server with ssl activated and trusted certificates.
- - `env OC10_VERSION=10.2 bash deploy_oc10_apps.sh --`
+Prepare a 10.x.x server with ssl activated and trusted certificates.
+ - `env OC10_VERSION=10.x bash deploy_oc10_apps.sh --`
  -> server URL
  
 Have the lastest released OC server ready with LDAP and two external storages of your choice (SFTP and WND) used for specific tests
@@ -20,8 +20,8 @@ Have the lastest released OC server ready with LDAP and two external storages of
 Optional: Have an Active Directory server ready to be used with owncloud.
 
 Avoid to have the same test server for all who are testing. You can use an individual latest docker server, e.g.:
- - docker run --rm -ti -p 8080:8080 owncloud/server:10.10.0
- - firefox http://localhost:8080
+ - docker run --rm -ti -p 8080:8080 owncloud/server:latest
+ - browser: http://localhost:8080
 but testing should be also done with a 'real' server, for that the BTR team can provide some test servers. 
 
 ## Testing
@@ -74,18 +74,15 @@ but testing should be also done with a 'real' server, for that the BTR team can 
 
 ### 1. Install - Login
 
-TestID | Test Case | Steps to reproduce |Expected Result |Result | Related Comment (Squish-Test) | Server
------------- | ------------- | ------------- | ------- | ----- | ------ | -----
-1 | Update Installation | 1. You need to have installed a previous version 2. Update to the new version |Test on Win, macOS, Linux| :construction: Win,<br>  :construction: macOS,<br> :construction: Linux  | |
-2 | Install the new version | 1. Delete the previous version 2. Install the new version || :construction: Win,<br>:construction: macOS,<br> :construction: Linux | |
-3 | Verify that you can enter a server address (valid server cert)| 1. Launch desktop client/add account 2. enter a server address 3. Click on Next 4. The lock is shown closed - SSL details on mouse over| | :heavy_check_mark: | tst_addAccount |
-4 :robot: | Verify that you can enter a server address (self signed cert)| 1. Launch desktop client/add account 2. enter a server address 3. Click on Next 4. If it is the first time you should accept the certificate - click on the checkbox and OK (The lock is shown in closed - the server validated SSL connection window is opened)| |:heavy_check_mark: | tst_addAccount | :robot: oC10,<br> :robot: oCIS |
-5 :robot: | Introduce username/password  | 1. Fill in username and password |If the credentials are not correct a message is shown "Error: Wrong credentials" | :heavy_check_mark: | tst_addAccount |  :robot: oC10,<br> :robot: oCIS |
-6 :robot: | Verify that all contents of the server account is synced to the local folder | 1. Choose to sync everything from server (default option) 2. Select the local folder desired | All the files/folders are synced down | :heavy_check_mark: | tst_addAccount | :robot: oC10,<br> :robot: oCIS |
-7 :robot: | Verify that only the folder(s) selected are synced in the local folder  | 0. Disable VFS, 1. Click on Choose what to sync 2. The remote folder(s) are shown, select which you want to sync 3. Select the local folder |The selected folders selected are synced | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-8 :robot: | Verify that you can skip folder configuration | 1. Click on "Manually create folder sync connection" | No settings dialog opens, the account shows only an "Add Folder Sync Connection" button.  | :heavy_check_mark: | tst_syncing  | :robot: oC10,<br> :robot: oCIS |
-9 | Connect to a server with LDAP (or optinally AD) | 1. Setup owncloud server with openldap, 2. Connect. | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  |  |
-10 | Connect to a 8.1.x server | 1. `docker run -ti -p 8181:80 owncloud:8.1`, 2. Connect.  A warning appears: "The server version 8.1.12.2 is unsupported", but syncing works. | | :construction: | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-Test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Update Installation | 1. You need to have installed a previous version<br>2. Update to the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
+2 | Install the new version | 1. Delete the previous version<br>2. Install the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
+3 | Verify that you can enter a server address (self signed cert) | 1. Launch desktop client<br>2. Enter a server address<br>3. Click on Next<br>4. If it is the first time you should accept the certificate || :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS|
+4 | Valid Login | 1. Log in with the correct username and password | Login successful | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+5 | Invalid Login | 1. Try to log in with wrong username or password | Error message `Login failed: username and/or password incorrect` is shown | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
+6 | Connect to a server with LDAP (or optionally AD) | 1. Setup owncloud server with openldap<br>2. Add an account to desktop client | Make sure no technical user name shows up in UI (e.g. account name, sharing...) | :construction:  ||
+7 | Connect to an old server (v8.x.x) | 1. Setup an old server:`docker run -ti -p 8181:80 owncloud:8.1`<br>2. Add an account to desktop client | Unsupported warning message is displayed | :construction: ||
 
 
 ### 2. Folders
@@ -93,25 +90,23 @@ TestID | Test Case | Steps to reproduce |Expected Result |Result | Related Comme
 - 'Go to local sync folder and create a folder' means: "Open folder" on client dot ... menu, create a new folder in file browser
 - 'Verify on the server' means:  the folder is sent from client to server / check either with a) web browser, b) another client, or c) via server introspection
 
-TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comment (Squish-test) | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | ----
-1 :robot: | Verify that you can create one folder  | 1. Go to local sync folder 2. Create a single folder 3. Wait for sync | The folder is visible on the server | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-2 | Verify that you can create one folder with long name  | 1. Go to local sync folder 2. Create a single folder with a long name (about 100 characters) 3. Wait for sync |The folder visible on the server | :heavy_check_mark: | tst_syncing | |
-3 :robot: | Verify that you can create one folder with special characters in the name | 1. Go to local sync folder 2. Create a single folder with a special character(s) in the name (e.g $%ñ&) 3. Wait for sync | The folder appears on the server | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-4 :robot: | Verify that you can sync many subfolders | 1. Go to local sync folder 2. Copy a folder with 5 empty subfolders and 5 folders containing files 3. Wait for sync | All 10 subfolders are visible on the server | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-5 | Verify that you can create multiples folders at once | 1. Create a folder with 400 subfolders outside the sync root, 2. Move that into the sync root, 3. Wait for sync  | All 400 folders appear on the server | :construction: | |
-6 :robot: | Verify that you can copy one folder | 1. Go to local sync folder 2. Create a single folder with some files in it 3. Copy and paste the folder 4. Wait for sync | Both copies appears on the server | :heavy_check_mark: | tst_syncing |  :robot: oC10,<br> :robot: oCIS |
-7 :robot: | Verify that you can create a subfolder with long name | 1. Go to local sync folder, 2. Create a folder called "Folder1" 3. Create a subfolder called "LUsgzq!0k02sek+szBqrzN5=R#UJpWql&rwhnYVb~Gh!l!”  (optionally up to 220 characters), 4. This subfolder had a file called ilppng.PNG inside it 5. Wait for sync |The files are synced correctly| :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-8 :robot: | Verify pre existing folders in local (Desktop client) are copied over to the server | 1. Turn off the Desktop client 2. Go to local sync folder 3. Create several folders inside the Desktop Client folder at several different levels, 4. Turn ON the Desktop Client  | Folders appear on the server | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-9 :robot: | Filenames that are rejected by the server are reported | 1. Go to local sync folder, 2. Create a file called `"a\\a"` (or another name not accepted by the server), 3. Wait for sync | The sync status reports an error, the file s not synced| :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-10| Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a .zip file with many internal folders and files 2. Copy the .zip file to the Desktop Client folder 3. Unzip the .zip file inside the Destop Client folder |1. Make sure you get a popup saying that all the extracted files have synced. 2. Look at Via Web and make sure that the folder has been synced over| :construction: | |
-11| Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters 2. Then sync it with some contents, it should try three times and then be blacklisted 3. If you rename the folder it should try again, and succeed if the name is less than 65 characters |The folder is synced| :construction: | |
-12| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A MacOS client syncs down 'CON', 'COM1' and 'PRN' but not 'test% or 'foo%' |:construction: | |
-13| Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A windows client syncs down 'test%' and 'foo%' but not 'CON', 'COM1' or 'PRN' | :construction:  | |
-14 :robot: | Invalid system names | 1. On the server, create folders named 'CON', 'COM1' and 'test%' and two files named 'PRN' and 'foo%' | A Linux client syncs down all. | :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-15 | Long path on Windows (VFS OFF) syncs ** | 1. On server: create a file (~ 30 chars) inside 6 subfolders (each ~ 50 chars) to get a path length > 260 chars (> MAX_PATH) 2. Start client and connect with VFS OFF 3. 'Open folder' and enter the subfolders 4. Create a new file | 1. Make sure all subfolders and file are available 2. New file is synced to server |  :construction:  | |
-16 | Long path on Windows (VFS ON) syncs ** | 1. On server: create a file (~ 30 chars) inside 6 subfolders (each ~ 50 chars) to get a path length > 260 chars (> MAX_PATH) 2. Start client, add account and connect with VFS ON 3. 'Open folder' and enter the subfolders 4. Create a new file | 1. Make sure all subfolders and file are available 2. New file is synced to server |  :construction:  | |
-17 | Long path explorative testing on Windows ** | Use test scenarios 15/16 to perform tests like: create more files/subfolders in Explorer or in terminal (PowerShell), move files/folders, rename, edit a file... | Folder/files are synced without errors | :construction:  | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Verify that you can create a folder | 1. Add an account to desktop client<br>2. Open local sync folder<br>3. Create a folder<br>4. Wait for sync to complete | The folder is available on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+2 | Verify that you can create a folder with long name | 1. Create a folder with a long name (~100 characters)<br>2. Wait for sync to complete | The folder is available on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+3 | Verify that you can create a folder with special characters | 1. Create a folder with special characters (e.g. `$%ñ&`)<br>2. Wait for sync to complete | The folder is available on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+4 | Create a new folder with space at the end | 1. Open the local sync folder<br>2. Create a folder with space at the end | Look if it syncs | :construction: | If you create a folder with a space at the end, your os (nautilus @ ubuntu) will remove this space. The folder is syncing |
+5 | Verify that you can sync a folder with many subfolders | 1. Outside the sync root, create a folder with 5 empty subfolders and 5 subfolders containing files<br>2. Move that folder into the sync root<br>3. Wait for sync to complete | All 10 subfolders appear on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+6 | Verify that you can sync many folders at once | 1. Create 400 folders outside the sync root<br>2. Move those folders into the sync root<br>3. Wait for sync to complete | All 400 folders appear on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+7 | Verify that you can copy a folder | 1. Open local sync folder<br>2. Create a folder with some files in it<br>3. Copy and paste that folder<br>4. Wait for sync to complete | Both original and copied folders appear on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+8 | Verify that you can create a subfolder with long name | 1. Open local sync folder<br>2. Create a folder<br>3. Create a subfolder with long name (~220 characters)<br>4. Wait for sync to complete | Folder and subfolder are available on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+9 | Verify that pre-existing folders are synced to the server | 1. Quit the desktop client<br>2. Goto the local sync folder<br>3. Create folders at several levels<br>4. Open the desktop client<br>5. Wait for sync to complete | All folders appear on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br/>:robot: oCIS
+10 | Sync works for .zip/.rar files with elaborate internal folder structures | 1. Create a zip file with many internal folders and files<br>2. Copy that zip file into the sync root<br>3. Unzip that zip file inside the sync root | All extracted files and folders are available on the server | :construction: ||
+11 | Files that error with API should try 3 times, and then blacklist | 1. Try to sync a folder that has more than 65 characters<br>2. Then sync it with some contents, it should try three times and then be blacklisted<br>3. If you rename the folder, it should try again and succeed if the name is less than 65 characters | The folder is synced | :construction: ||
+12 | Invalid system names | 1. On the server, create folders `CON`, `COM1` and `test%` and files `PRN` and `foo%`<br>2. Add that account to desktop client | - MacOS client syncs down `CON`, `COM1` and `PRN` but not `test%` and `foo%`<br>- Windows client syncs down `test%` and `foo%` but not `CON`, `COM1` and `PRN`<br>- Linux client syncs down all | :construction: Win<br>:construction: macOS<br>:heavy_check_mark: Linux | tst_syncing | :robot: oC10<br>:robot: oCIS
+13 | Long path on Windows (VFS OFF) syncs ** | 1. On the server, create a file (~30 chars) inside 6 subfolders (each ~50 chars) to get a path length > 260 chars (> MAX_PATH)<br>2. Start desktop client and add that account with VFS OFF<br>3. Open local sync folder and enter the subfolders<br>4. Create a new file | 1. All subfolders and a file are available in the local sync folder<br>2. New file is synced to the server | :construction: Win ||
+14 | Long path on Windows (VFS ON) syncs ** | 1. On the server, create a file (~30 chars) inside 6 subfolders (each ~50 chars) to get a path length > 260 chars (> MAX_PATH)<br>2. Start desktop client and add that account with VFS ON<br>3. Open local sync folder and enter the subfolders<br>4. Create a new file | 1. All subfolders and a file are available in the local sync folder<br>2. New file is synced to the server | :construction: Win ||
+15 | Long path explorative testing on Windows ** | Use test scenarios 12-13 to perform tests like: create more files/subfolders in Explorer or in terminal (PowerShell), move files/folders, rename, edit a file, etc. | Folder/files are synced without errors | :construction: Win ||
 
 ** Make sure LongPathsEnabled in Windows registry is 'off' (see https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd). Nevertheless the client should handle the long path > 260 correctly.
 
@@ -119,94 +114,86 @@ TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comm
 
 Note: "Via Web" means check files on server in web browser
 
-TestID | Test Case | Steps to reproduce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 :robot: | User should see the single file on Via Web when the file is successfully sync in Desktop Client sync folder | 1. Drop one selected file in Desktop Client sync folder 2. User can see end receive notification from System tray that single file is successfully added in Desktop Client sync folder 3. Go to Desktop Client system tray icon and select launch Via Web| Verify that user can see that the single file is sync on Desktop Clien Sync folder and is available on Via Web| :heavy_check_mark: | tst_syncing | :robot: oC10,<br> :robot: oCIS |
-2 | User should see the multiple file on Via Web when the files or folders are successfully sync in Desktop Client Sync folder | 1. Drop multiple selected files in Desktop Client Sync folder 2. User can see and receive notification from System tray that multiple files or folders are successfully added in Desktop Client Sync folder 3. Go to Desktop Client System tray icon and select launch Via Web|Verify that User can see that multiple files are sync on Desktop Client folder and are available on Via Web| :construction: | File is synced. But no Popup Notification will be shown |
-3| User adds file to the sync folder will show up in repository  | 1. Users see a completed icon overlay on the copied file(s) in the Desktop client folder 2. The Sync Files tab shows the files added in the Desktop Client folder from desktop|| :construction:  | |
-4 :robot: | User adds the various types of files | 1. Microsoft word documents, Microsoft Excel, Microsoft Powerpoint, .JPG, .PDF, .MP3|The Sync files tab shoe all type of files added in th Desktop Client folder from desktop| :heavy_check_mark:  | tst_syncing |:robot: oC10,<br> :robot: oCIS |
-5 :robot: |  File with long name can be synced | Create a file with this name "thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIs.txt" | Sync is successful | :heavy_check_mark: | tst_syncing |:robot: oC10,<br> :robot: oCIS |
-6 :robot: | File with a name longer than 233 raise an error | Try to sync a file with a file name > 233 characters | The "Not synced" tab shows an error, the file is blacklisted | :heavy_check_mark: | tst_syncing |:robot: oC10 |
-7| User copies/drag&drops multiple files at a time to the Sync folder | 1. Users see the completed icon overlay on all type of files in Desktop Client folder on Desktop. 2. The Sync files tab shows all type of files added in the Desktop Client folder from Desktop|Sync is successful| :construction:  | |
-8| Sync files at the same time| 1. Add a file of 1MB onthe local inside folder, and in the same time, add another file on the same remote folder (make sure that file is on the server before the client finishes)|Look at Via Web and the Desktop Client to make sure that the sync is correct| :construction: | |
-9| Same name files, different extension | 1. Create the same name file with two differents extensions|The files are sync corectly|  :construction: | |
-10 :robot: | Files with spaces in the name | 1. Move a file under the root sync folder with spaces in the name 2. Let them sync|The files are sync correctly|  :heavy_check_mark: | tst_syncing |:robot: oC10,<br> :robot: oCIS |
-11| Create and delete one file with special characters in the name| 1. Go to Desktop Client 2. Create a single folder 3. Move with in this folder a file with a special characters in the name fo example "~`!@#$^&()-_=+{[}];'," 4. Wait for the file to sync to the Via Web 5. Delete the file in Desktop Client |Look at Via Web and make sure that the file got deleted| :construction: | |
-12| User copies large files to the Desktop Client folder on the Desktop| 1. User see in-progress overlay icon while upload is in progress in Desktop 2. User sees the completed sync icon overlay once the upload process is done|The Sync files tab shows file added in th Desktop Client folder from desktop| :construction:  | |
-13| upload 50Mb file| 1. Create a folder under sync folder 2. Copy a large file (50MB) in this folder|After several sync processes the file is correct| :construction:   | |
-14| Upload 150Mb files| 1. Upload a large .pdf (100-150MB) file through web browser|Sync is successful| :construction:  | |
-15| Upload 3000Mb files| 1. Upload a large .pdf (3GB) file through web browser|Sync is successful| :construction:  | |
-16| Upload 2048Mb files| 1. Upload a large file (2GB=2147483648 bytes) through web browser|Sync is successful|  :construction:  | |
-17| Upload 1000Mb files| 1. Upload a folder 1000 file (1Mb each) |Sync is successful| :construction:  | |
-18 :robot: | Upload 500Mb+500Mb files| 1. Upload two folders with 500 files each |Sync is successful| :heavy_check_mark:  | tst_syncing |:robot: oC10,<br> :robot: oCIS |
-19 :robot: | Upload 1024Mb file| 1. Upload a 1GB file |Sync is successful| :heavy_check_mark:  | tst_syncing |:robot: oC10,<br> :robot: oCIS |
-20| Verify the limit of the quota| 1. Upload the necessary large files to fill the quota |Warning: "The available space of your workspace is running out, please delete some files to free space"| :construction: | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Verify that you can create a file | 1. Add an account to desktop client<br/>2. Open local sync folder<br>3. Create a file | - observe a BLUE progress icon followed by a GREEN icon in the file explorer<br>- the file is available on the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+2 | Add various types of files | 1. Open local sync folder<br>2. Create/upload various types of files `Microsoft Word`, `Microsoft Excel`, `Microsoft Powerpoint`, `JPG`, `PDF`, `MP3`, etc |- the Sync files tab shows all the files as synced<br>- all files are available on the server | :heavy_check_mark: | tst_syncing |:robot: oC10<br>:robot: oCIS
+3 | File with long name can be synced | 1. Open local sync folder<br/>2. Create a file with long name: `thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIsAVeryLongFileNameToCheckThatItWorks-thisIs.txt` | Sync is successful | :heavy_check_mark: | tst_syncing |:robot: oC10<br>:robot: oCIS
+4 | File with a name having 233 characters or more cannot be synced | 1. Open local sync folder<br/>2. Create a file having >=233 characters<br>3. Observe the sync process | The "Not synced" tab shows an error, the file is blacklisted | :heavy_check_mark: | tst_syncing |:robot: oC10
+5 | User copies/drag&drops multiple files at a time to the Sync folder | 1. Copy some files to the local sync folder<br>2. Drag&Drop some files to the lcoal sync folder | - user can see the completed GREEN icon overlay on all types of files<br>- the Sync files tab shows all files as synced | :construction: ||
+6 | Sync files (from server and desktop client) at the same time | 1. Add a file of 1MB inside the local sync folder, and in the same time, add another file on the same remote folder (make sure that the server file is uploaded before the client finishes) | Look at Via Web and the Desktop Client to make sure that the sync is correct | :construction: ||
+7 | Same name files but with different extensions | 1. Open local sync folder<br/>2. Create two files with same name but different extensions | Both files sync correctly | :heavy_check_mark: | tst_syncing | :robot: oC10<br/>:robot: oCIS
+8 | File with spaces in the name | 1. Open local sync folder<br/>2. Create, copy or move a file (having space in its name) in the local sync folder | File syncs correctly | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+9 | Create and delete a file with special characters in the name | 1. Open local sync folder<br/>2. Create/upload a file with special characters in its name (e.g. **~`!@#$^&()-_=+{[}];',**)<br>3. Wait for sync to complete<br>4. Delete the file from the local sync folder | Look via the Web and make sure that the file got deleted | :construction: ||
+10 | Upload a 50MB file | 1. Create a folder inside the local sync folder<br>2. Copy a large file (50MB) in this folder | The file is synced to the server | :construction: ||
+11 | Upload a 3GB file | 1. On the server, upload a large 3GB file<br>2. Add that account to desktop client | File is synced to the desktop client | :construction: ||
+12 | Upload multiple files (resulting to 1000MB) | 1. Open local sync folder<br/>2. Upload a folder containing 1000 files (1MB each) | All files are synced to the server | :construction: ||
+13 | Upload 500MB + 500MB files | 1. Open local sync folder<br/>2. Upload two folders containing 500 files each (1MB per file) | All files are synced to the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+14 | Upload a 1024MB file | 1. Open local sync folder<br/>2. Upload a 1GB file | The file is synced to the server | :heavy_check_mark: | tst_syncing | :robot: oC10<br>:robot: oCIS
+15 | Verify the limit of the quota | 1. Open local sync folder<br/>2. Upload the necessary large files to fill up the quota | Warning: "The available space of your workspace is running out, please delete some files to free space" | :construction: ||
 
 ### 4. Move files and folders
-#### NOTE: To automate these test we need to use files explorer instead of the client UI. So, these tests cannot be added.
+#### NOTE: Could be automated using move functions from python
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment
------------- | ------------- | -------------- | ----- | ------ | ------
-1 | Move from sublevels to root | 1. Move a couple of files (File1 and File2) with different content under the root sync folder 2. Let them sync 3. Move other file under the root sync folder| The content of files is correct |  :construction: | |
-2 | Move folder down | 1. Move one folder from sync root to a 5 deep level folder 2. Sync| The content of the folder is correct | :construction:  | |
-3 | Move folder up | 1. Move one folder from 5 deep level folder to the sync root 2. Sync| The content of the folder is correct |  :construction:  | |
-4 | Move files from one folder another| 1. Move a couple of files under the root sync folder 2. Create a folder 3. Let them sync 4. Move the files to the new folder 5. Let them sync| The files in the correct size in Via Web| :construction:   | |
-5 | Move two or more folders down | 1. Move two or more folders from sync root to a 5 dep level folder 2. Sync| The content of the folder is correct |:construction:   | |
-6 | Move two or more folders up | 1. Move one folder from 5 deep level folder to the sync root 2. Sync| The content of the folder is correct | :construction:    | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Move from sub-levels to root | 1. Move couple of files and folders from different sub-levels to the sync root<br>2. Wait for sync to complete<br>3. Check the contents of files and folders | The contents are correct (on the server) | :construction: ||
+2 | Move a folder down to sub-folder | 1. Move a folder from sync root to a 5 level deep sub-folder<br>2. Wait for sync to complete<br/>3. Check the folder content | The content of the folder is correct (on the server) | :construction: ||
+3 | Move a folder up from sub-folder to the root | 1. Move a folder from a 5 level deep folder to the sync root<br>2. Wait for sync to complete<br/>3. Check the folder content | The content of the folder is correct (on the server) | :construction: ||
+4 | Move files from one folder to another | 1. Move some files from `Folder1` to `Folder2`<br>2. Wait for sync to complete<br/>3. Check both folders contents | Both folders have the correct content (on the server) | :construction: ||
+5 | Move two or more folders down to sub-folder | 1. Move two or more folders from sync root to a 5 level deep sub-folder<br/>2. Wait for sync to complete<br/>3. Check the folders contents | The contents of the all the folders are correct (on the server) | :construction: ||
+6 | Move two or more folders up from sub-folder to the root | 1. Move two or more folders from a 5 level deep folder to the sync root<br/>2. Wait for sync to complete<br/>3. Check the folders contents | The contents of the all the folders are correct (on the server) | :construction: ||
 
 ### 5. Edit Files
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment(Squish-test) | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -------
-1 :robot: | Edit a .txt file| 1. Create a .txt file in a sync folder 2. Edit some text 3. Wait for it to sync 4. Modify the .txt file and add more content 5. Wait for it to sync 6. Modify the .txt file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles |:robot: oC10,<br> :robot: oCIS |
-2 | Edit a .doc file| 1. Create a .doc file in a sync folder 2. Edit some text 3. Wait for it to sync 4. Modify the .doc file and add more content 5. Wait for it to sync 6. Modify the .doc file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark: |tst_editFiles|
-3 | Edit a .xls file| 1. Create a .xls file in a sync folder 2. Edit some content 3. Wait for it to sync 4. Modify the .xls file and add more content 5. Wait for it to sync 6. Modify the .xls file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
-4 | Replace a .pdf file| 1. Create a .pdf file in a sync folder 2. Replace it with a different pdf (but same name) 3. Wait for it to sync 4. Modify the .pdf file and add more content 5. Wait for it to sync 6. Modify the .pdf file and add more content 7. Wait for it to sync | The file at the server had the same content after the sync is completed| :heavy_check_mark:  |tst_editFiles|
-5 | Edit a file while the folder is renaming | 1. You should had any kind of file already sync 2. Go to Desktop Client 3. Open the file and edit it 4. Go to the Via Web and rename the folder 5. Sync with the oc-worker 6. Do not refresh the browser at the server and download the file edited | The file at the server had the same content| :construction:  | |
-6 | Rename file and folder at the same time | 1. Go to web, and rename a folder <br>2. Rename a file contained in the folder from the file explorer on your local computer | File and folder should rename both in server and locally | :construction: | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Edit a .txt file | 1. Create a .txt file in the local sync folder<br>2. Add some text<br>3. Wait for it to sync<br>4. Modify the .txt file and add more content<br>5. Wait for it to sync<br>6. Modify the .txt file and add more content<br>7. Wait for it to sync | The file at the server had the same content after the sync is completed | :heavy_check_mark: | tst_editFiles | :robot: oC10<br>:robot: oCIS
+2 | Edit a .doc file | 1. Create a .doc file in the local sync folder<br>2. Add some text<br>3. Wait for it to sync<br>4. Modify the .doc file and add more content<br>5. Wait for it to sync<br>6. Modify the .doc file and add more content<br>7. Wait for it to sync | The file at the server had the same content after the sync is completed | :construction: ||
+3 | Edit a .xls file | 1. Create a .xls file in the local sync folder<br/>2. Add some text<br/>3. Wait for it to sync<br/>4. Modify the .xls file and add more content<br/>5. Wait for it to sync<br/>6. Modify the .xls file and add more content<br/>7. Wait for it to sync | The file at the server had the same content after the sync is completed | :construction: ||
+4 | Replace a .pdf file | 1. Create a .pdf file in the local sync folder<br>2. Replace it with a same name pdf file having different content<br>3. Wait for it to sync<br>4. Modify the .pdf file and add more content<br>5. Wait for it to sync<br>6. Modify the .pdf file and add more content<br>7. Wait for it to sync | The file at the server had the same content after the sync is completed | :construction: ||
+5 | Edit a file while the folder is renaming | 1. Add an account to desktop client that has a folder containing a file in it<br/>2. From the file explorer, open that file and edit it<br>3. From the web, rename the folder<br>4. Sync with the oc-worker<br>5. Do not refresh the browser and download the file edited | The file on the server has the same content | :construction: ||
+6 | Rename file and folder at the same time | 1. Add an account to desktop client that has a folder containing a file in it<br>2. From the web, rename that folder and at the same time from the file explorer, rename a file contained in that folder | File and folder should be renamed both in the server and locally | :construction: ||
 
 ### 6. Delete Files and Folders
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -------
-1 :robot: | Delete one file| 1. Go to Desktop Client 2. Create or copy a single file with a short name (less than 20 characters) 3. Wait for the file to sync to the Via Web 4. Delete the file in Desktop Client|The file is been deleted on Via Web|  :heavy_check_mark:   |tst_deletFilesFolders |:robot: oC10,<br> :robot: oCIS |
-2 | Delete one file with long name| 1. Go to Desktop Client 2. Create or copy a single file with a long name (more than 240 characters) 3. Wait for the file to sync to the Via Web 4. Delete the file in Desktop Client|The folder is been deleted on Via Web| :heavy_check_mark: |tst_deletFilesFolders Maximum length of filename is 228 chraracter |
-3 :robot: | Delete one folder| 1. Go to Desktop Client 2. Create a single folder with a short name (more than 20 characters) 3. Wait for the folder to sync to the Via Web 4. Delete the folder in Desktop Client|The folder is been deleted on Via Web|   :heavy_check_mark:  |tst_deletFilesFolders |:robot: oC10,<br> :robot: oCIS |
-4 | Delete one folder with long name| 1. Go to Desktop Client 2. Create a single folder with a long name (59 characters+a terminating zero bytes) 3. Wait for the folder to sync to the Via Web 4. Delete the folder in Desktop Client|The folder is been deleted on Via Web| :heavy_check_mark: |tst_deletFilesFolders |
-5 | Delete multiple files| 1. Go to Desktop Client 2. Create or copy a multiple files 3. Wait for the files to sync to the Via Web 4. Delete the file in Desktop Client|The files get deleted on Via Web| :construction: | |
-6 | Delete large file (2048Mb)| 1. Go to Desktop Client 2. Create or copy a single big file (2GB) 3. Wait for the file to sync to th Via Web 4. Delete the file in Desktop Client|The file get deleted on Via Web| :construction: | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Delete a file | 1. On the server, create a file<br>2. Add that account to the desktop client<br>3. Open the local sync folder<br>4. Delete that file | The file is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders | :robot: oC10<br>:robot: oCIS
+2 | Delete a file with long name | 1. On the server, create a file with long name<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that file | The file is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders (Maximum length of filename is 228 chraracter) | :robot: oC10<br/>:robot: oCIS
+3 | Delete a folder | 1. On the server, create a folder<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that folder | The folder is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders | :robot: oC10<br>:robot: oCIS
+4 | Delete a folder with long name | 1. On the server, create a folder with long name<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that folder | The folder is deleted on the server | :heavy_check_mark: | tst_deletFilesFolders | :robot: oC10<br/>:robot: oCIS
+5 | Delete multiple files | 1. On the server, create some files<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete some files | The files get deleted on the server | :construction: ||
+6 | Delete a large file (2048MB) | 1. On the server, create a large file (2048MB)<br/>2. Add that account to the desktop client<br/>3. Open the local sync folder<br/>4. Delete that file | The file gets deleted on the server | :construction: ||
 
 
 ### 7. Sync process
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 | Move some files while sync| 1. Move a couple of files (File1 and File2) with different content under the root sync folder 2. Let them sync 3. Move other file under the root sync folder and while sync 4. Delete File1 and rename File2 with the name File1| The content of files is correct| :construction:   | |
-2 | Rename the file while sync| 1. Create a .txt file with some text in it 2. Let it sync 3. Rename the file and let is sync 4. While #3 is sync, edit the content of the .txt file| The content of file is correct| :construction: | |
-3 | Deleted folders while sync| 1. Create a tree of folders+subfolders (e.g folder1, folder2, folder3 and some .txt files in this folder) 2. Delete the folders while sync| Look at Via Web and make sure that the folders got deleted| :construction:  | |
-4 | Deleted folders while sync with two clients| 1. Create a tree of folders+subfolders (e.g folder1, folder2, folder3 and some .txt files in this folder) 2. Delete some folders and keep another while sync 3. Sync with another client at the same time| Look at Via Web and make sure that the folders got deleted and the remains folders sync correctly| :construction:   | |
-5 | Create a new folder with space ar the end| 1. Create a folder with space at end| Look if is sync| :question:  | If you create a folder with a space at the end, your os (nautilus @ ubuntu) will remove this space. The folder is syncing  |
-6 | Deselect to the option "Allow apps to use the Share API"| 1. Install the new version 2. Go to Server Client 3. Sing in as Admin user 4. Go to Admin 5. On Sharing option, deselect to the option "Allow apps to use the Sahre API" 6. Go to the Desktop Client 7. Configure one account 8. Open folder 9. Create new folder (e.g Example1) 10. Right click on the folder Example1 11. Click on "Share with oC" 12. If you introduce the Password and press enter|| :question: | There is no option "share with oc". Sharing with disabled Shareing Api doesn't work. |
-7 | If you share a folder with another user, and then rename the folder on the Desktop does not change the name| 1. Install the new version with 2 accounts (user1, user2) 2. Go to Server Client with user1 3. Create a new folder (e.g. Share with) 4. Click on Share, and share with user2 5. Go to  Desktop Client with user2 6. Wait sync 7. Go to Server client with user1 8. Rename the Folder (Share with) to (Share with user2" 9. Go to Desktop client with user2 11. Wait sync | The folder name has not change. The shared folder is actually a virtual mount point for all recipients, so renaming it doesn't affect all recipients. Only the contents of it will be visible for anyone. Works as expected| :construction:  | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Move a file while in sync | 1. Move couple of files (`File1` and `File2`) with different contents to the root sync folder<br>2. Let them sync<br>3. Move other files to the root sync folder and while in sync,  delete `File1` and rename `File2` to`File1` | The content of file is correct | :construction: ||
+2 | Edit a file while in sync | 1. Create a .txt file with some content<br>2. Let it sync<br>3. Rename the file and while in sync, edit the content of the .txt file | The content of file is correct | :construction: ||
+3 | Delete folders while in sync | 1. Create folders tree folders+subfolders (e.g folder1, folder2, folder3 and some .txt files in this folder)<br>2. Delete some folders while in sync | Folders get deleted on the server | :construction: ||
+4 | Delete folders while sync with two clients | 1. Create a tree of folders+subfolders (e.g folder1, folder2, folder3 and some .txt files in this folder)<br>2. Delete some folders and while in sync, sync with another client at the same time | In the server, make sure that the folders got deleted and the remaining folders sync correctly | :construction: ||
 
 ### 8. Spaces and permissions
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 | Viewer can view files in Space | 1. Add a space as a user with Viewer permissions 2. Open a file from the space | The file has been opened | | |
-2 | Viewer cannot edit files in Space | 1. Add a space as a user with Viewer permissions  2. Make changes in a file 3. Save the file | Changes are not synced | | |
-3 | Editor can rename files in Space | 1. Add a space as a user with Editor permissions 2. Rename a file in the space | Change has been saved and synced | | |
-4 | Manager can add new folders in Space | 1. Add a space as a user with Manager permissions 2. Create a new folder in the space | Folder has been synced | | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Viewer can view files in Space | 1. In the server, create a space, upload a file in it and add a user with Viewer role<br>2. As a space member (Viewer), add that space to the desktop client<br>3. Open the local sync folder and open that file | The file can be opened | :construction: ||
+2 | Viewer cannot edit files in Space | 1. In the server, create a space, upload a file in it and add a user with Viewer role<br/>2. As a space member (Viewer), add that space to the desktop client<br/>3. Open the local sync folder<br>4. Edit that file and save it | Changes are not synced | :construction: ||
+3 | Editor can rename files in Space | 1. In the server, create a space, upload a file in it and add a user with Editor role<br/>2. As a space member (Editor), add that space to the desktop client<br/>3. Open the local sync folder<br>4. Rename that file | The files is renamed and synced | :construction: ||
+4 | Manager can add new folders in Space | 1. In the server, create a space, upload a file in it and add a user with Manager role<br/>2. As a space member (Manager), add that space to the desktop client<br/>3. Open the local sync folder<br/>4. Create a new folder | New folder is synced | :construction: ||
 
 ### 9. Without connection
-#### NOTE: It would be better to have the following tested manually instead of automating them
+#### NOTE: We could give it a try to automate
 
-TestID | Test Case | Steps to reprouce| Expected Result | Result | Related Comment | Server
------------- | ------------- | -------------- | ----- | ------ | ------ | -----
-1 | Upload several files and folder to the sync folder without internet| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server |  :construction:  | |
-2 | Upload several files and folder with special characters to the sync folder without internet| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server |  :construction:  | |
-3 | Upload the same folder from the server and form the client with differente files inside| 1. Upload several files and folder without internet 2. The connection is back | The files and folder are sync with the server | :construction:   | |
-4 | Remove folder from the client| 1. Remove one folder from the local folder 2. The connection is back | The folder is not on the server | :construction:  | |
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Upload several files and folder to the sync folder without Internet | 1. Add an account to the desktop client<br>2. Disconnect the Internet<br>3. Upload several files and folder in the sync folder<br>4. Connect the Internet<br>5. Wait for sync | The files and folder are synced to the server | :construction: ||
+2 | Upload several files and folder with special characters to the sync folder without Internet | 1. Add an account to the desktop client<br>2. Disconnect the Internet<br>3. Upload several files and folder (having special characters) in the sync folder<br>4. Connect the Internet<br>5. Wait for sync | The files and folder are sync with the server | :construction: ||
+3 | Upload the same folder from the server and form the client with different files inside | 1. Add an account to the desktop client<br>2. Disconnect the Internet<br>3. In the server, upload a folder with some files<br>4. In the local sync folder, upload same named folder with different files in it<br>5. Connect the Internet<br/>6. Wait for sync | The files and folder are synced to the server | :construction: ||
+4 | Remove folder from the client without Internet | 1. Add an account to the desktop client<br/>2. Disconnect the Internet<br/>3. Remove a folder from the local sync folder<br/>4. Connect the Internet<br/>5. Wait for sync | The folder is deleted from the server | :construction: ||
 
 ### 10. Sharing
 
@@ -289,6 +276,8 @@ TestID | Test Case | Expected Result | Result | Related Comment | Server
 55 | Allow resharing disabled and Can Share enabled  | The user cannot reshare files | :heavy_check_mark:| tst_sharing |
 56 | Restrict users to only share with users in their groups | It should appear only the users from the group |:construction:| |
 57 | Disallow username autocompletion in share dialogs | Full username needs to be entered in order to sharing | :heavy_check_mark:| tst_sharing |
+58 | Try to share with "Allow apps to use the Share API" disabled | 1. In the server, disable `Allow apps to use the Share API` from Sharing settings<br>2. Add an account to the desktop client<br>3. Open the local sync folder<br>4. Create a new folder<br>5. From file explorer, try to share this folder: `Right click on folder` -> `ownCloud option` | There is no "Share" option while navigating to ownCloud menu option | :construction: ||
+59 | Sharing a folder with another user and then renaming it will not change the folder name for another user (sharee) | 1. As `user1`, share a folder with `user2` from the server<br>2. Add `user2` to the desktop client<br>3. As `user1`, rename the shared folder to something else in the server<br>4. As `user2`, wait for sync from desktop client | The folder name for `user1` is not changed. (The shared folder is actually a virtual mount point for all recipients, so renaming it doesn't affect all recipients. Only the contents of it will be visible for anyone) | :construction: ||
 
 ### 11. Selective_Sync
 

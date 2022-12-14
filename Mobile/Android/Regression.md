@@ -37,7 +37,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Wrong url | Log in owncloud by typing an incorrect url (such as  .serverurl.es) | It's not possible to access to owncloud. An error is shown |
 | Empty credentials | 1. Type a correct url and let credentials empty | Log in button is hidden |
 | Credentials error are detected | 1 Correct url<br>2. Log in owncloud with incorrect user or password |  Credential error is shown |
-| Username/Passwd with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |
+| Username/Password with special character | 1. Create a user whose id is: e@some.es and the password: $h<br>2. Log in owncloud by typing a correct url<br>3. Type username + password,  | It's possible to access to owncloud |
 | Upercase url | Type a correct URL in uppercase.  | It's possible to access to owncloud |
 | With blanks | Set some blanks after and before user name | Correct access |
 | LDAP with UID | Login with an LDAP user, that uses as id the UID | Correct access |
@@ -56,7 +56,6 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Logout | Logout in a open and active OIDC session | Moved to login view| | |
 | **Redirections** |   |  |
 | Actions on a redirect servers (301) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
-| Actions on a redirect servers (302) | 1. Log in no self signed servers<br>2. Create a folder<br>3. Upload a file<br>4. Share a file by link<br>5. Share a file with another user | All actions OK |
 | **Accounts manager** |   |  |
 | Create a new basic account from accounts manager<br>| Create a new account| Account is created and is visible in accounts manager |
 | Create a new OAuth2 account from accounts manager<br>| Create a new account<br>| Account is created and is visible in accounts manager |
@@ -74,7 +73,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | **User quota** |   |  |
 | Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed |
 | 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar |
-| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly dispplayed in drawer with correct progress bar |
+| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly displayed in drawer with correct progress bar |
 | 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" |
 | **Security** |   |  |
 | Passcode enabled without biometrical | 1. Enable passcode<br>2. Leave the app before entering<br>3. Open app<br>4. Enter a correct passcode twice and not enable biometrical<br>5. Leave the app and open it again| 3. Passcode not asked<br>4. Biometrical asked to be enabled<br>5. Passcode asked |
@@ -115,18 +114,17 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Insufficient Quota | 1. Set a low quota for a user.<br>2. Try to upload a file greater than the quota | In uploads view, the error is correct | | https://github.com/owncloud/android/issues/2653
 | Antivirus | 1. Enable antivirus in server<br>2. Upload EICAR file<br>| Correct error message in notification |
 | **Uploads** |   |  |
-| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view. Check notification correct |
+| Upload a File | Upload a file from oC | The file is uploaded and correctly managed in uploads view |
 | Upload a very big file | Upload a file > 500 MB  from oC | The file is uploaded and correctly managed in uploads view |
 | Upload several Files | Upload several files from oC, come of them with special characters and in different folders | The files are uploaded and correctly managed in uploads view |
-| Upload more than 30 | Upload more than 30 files| Only the last 30 are displayed in uploaded list |
 | Cancel uploads | 1. Upload some files<br>2. Cancel some of them before finishing | The cancelled are not uploaded and the uploaded are correctly stored. Checking the uploads view |
 | Clear Uploaded | 1. Upload some files<br>2. Clear the Uplaoded list when the files have been uploaded | Uploaded list cleared | 
 | Clear Failed | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Clear list | 2. Files are moved to Failed<br>3. List cleared | 
-| Retry Failed I | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Recover wifi connection | 2. Files are moved to Failed<br>3. Files are automatically retried and moved to Current | 
+| Retry Failed I | 1. Upload a bunch of files<br>2. Remove the device connection while the files are being uploaded<br>3. Recover wifi connection | 2. Files are moved to Failed<br>3. Files are automatically retried and moved to Enqueued | 
 | Retry Failed II | 1. Upload a bunch of files<br>2. Set the server in maintenance mode while the files are being uploaded<br>3. Switch maintenance mode off<br>4. Retry manually  | 2. Files are moved to Failed<br>3. Files are not retried<br>4. Files are automatically retried and moved to Current | 
 | Deleted Folder | 1. Upload files to a folder<br>2. In server, delete de target folder | Uploads fails, so the target folder does not exist anymore |
 | Error permissions | 1. Share a folder without permissions<br>2. Login with the sharee and upload a file into the folder | File are moved to failed with error of permissions  | [issue](https://github.com/owncloud/android/issues/2653)
-| Close app | 1. Upload files<br>2. Before the upload finishes, close the app | File are moved to failed with error of closed app  |
+| Close app | 1. Upload files<br>2. Before the upload finishes, close the app and then reopen it | Files are totally uploaded  |
 | Delete account | 1. In settings view, remove one account | All uploads from the removed account are removed from uploads view |
 | Multiaccount | 1. Add three different accounts<br>2. Upload files from all of them at the same time  | Files are correctly uploaded in each account and folder |
 | Upload from camera | Select upload from camera with only one camera app and take a pic | Pic uploaded to the correct folder |
@@ -159,7 +157,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Stream video with non playable format | Try to stream a ogv (or any other not supported format) video file | Video is not streamed, downloaded instead 
 | **Conflict handling** |   |  |
 | Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated |
-| Update file - Conflict Server | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected and notification shows it<br>6. Server version is downloaded to the device |
+| Update file - Conflict Server | 1. Create a txt file in non-root folder, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected and marked in file and parent folder<br>6. Server version is downloaded to the device |
 | Update file - Conflict Device | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Device" | 5. Conflict is detected and notification shows it<br>6. Device version is uploaded to the server |
 | Update file - Conflict Both | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Both" | 5. Conflict is detected and notification shows it<br>6. Device version is uploaded to the server and server version is downloaded |
 | **Download and preview** |   |  |
@@ -175,6 +173,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | audio with coverart | Open a MP3 file that includes cover| Music played and cover displayed |
 | unsupported | Download a unsupported file (pdf, office...) | Menu to open in a different app is raised up| | |
 | Open with | 1. Download a file<br>2. Select the option `Open with`<br>3. Select an app from the list<br>4. Edit the file | 3. Correctly opened<br>4. Correctly edited and synced with server| | |
+| Open in web (oCIS) | 1. In `Details` view, select `Open in web` for any kind of file available to open in the server | File opened in browser| | |
 | **Details view** |   |  |
 | View | Open details view of a file | Correctly displayed in both orientations | | |
 | Not Downloaded | 1. Open details view of a file<br>2. Click on thumbnail | File is downloaded and displayed | | |
