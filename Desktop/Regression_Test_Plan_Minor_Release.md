@@ -197,7 +197,7 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 
 ### 10. Sharing
 
-**NOTE: To share `Right click on the resource` -> `Select ownCloud option from menu` -> `Share`** 
+**NOTE: To open sharing dialog `Right click on the resource` -> `Select ownCloud option from menu` -> `Share`** 
 
 #### 10.1 Share overlay icon
 
@@ -226,8 +226,8 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 9 | Create a public link of a file with password containing special characters | 1. From the Public link sharing dialog,  check the **Password protect**<br>2. Set the password (with special characters)<br>3. Create the link share | Public link is created with the password | :heavy_check_mark: | tst_sharing | :robot: oC10
 10 | Modify the expiration date from the server | 1. Open public link share dialog and create a share with an expiration date<br>2. From the server, change the expiration date of that link share<br>3. Check the new expiration date in the sharing dialog | You can see the new expiration date | :heavy_check_mark: | tst_sharing | :robot: oC10
 11 | Create a public link share and delete it | 1. Create the public link share and copy the link<br>2. Delete the link share<br>3. Paste link in the browser and check | The link reports File not found | :heavy_check_mark: | tst_sharing | :robot: oC10
-12 | Create a public link share of a folder with Edit permission | 1. Open the public link share dialog<br>2. Check **Download/View/Edit** role<br>3. Create the link share<br>4. Open the link share in the browser and perform upload, edit, delete actions | The folder can allow editing | :construction: ||
-13 | Create a public link share of a folder with Upload permission only | 1. Open the public link share dialog<br/>2. Check **Upload only** role<br/>3. Create the link share<br/>4. Open the link share in the browser and check that you can only upload | Only upload is possible | :construction: ||
+12 | Create a public link share of a folder with Edit permission | 1. Open the public link share dialog<br>2. Check **Download/View/Edit** role<br>3. Create the link share<br>4. Open the link share in the browser and perform upload, edit, delete actions | The folder can allow editing | :heavy_check_mark: | tst_sharing | :robot: oC10
+13 | Create a public link share of a folder with Upload permission only | 1. Open the public link share dialog<br/>2. Check **Upload only** role<br/>3. Create the link share<br/>4. Open the link share in the browser and check that you can only upload | Only upload is possible | :heavy_check_mark: | tst_sharing | :robot: oC10
 14 | Create a public link with a password. In the server, modify `Password Policies` and edit password | 1. In the server, enable `Password Policy` app and set minimum password to 4 characters<br>2. Open the public link share dialog and create the link share with password<br>3. In the server, change password policy to minimum 8 characters<br>4. From link sharing dialog, edit the password of that link share with short password (< 8 chars)<br>5. Edit password with 8 or more characters | - An error appears stating min password length 8 for the short password<br>- Longer than 8 chars password works | :construction: ||
 15 | Try to re-share a file originally received from an LDAP user | 1. LDAP user shares a file with `admin` (with allow share)<br>2. Add `admin` account to desktop client<br>3. Open the sharing dialog of the shared file<br>4. Re-share the with another user<br>5. LDAP user removes share permission from the share<br>6. From desktop client, try to re-share with another user | The file can be re-shared if "Allow Share" was set, otherwise it cannot be re-shared | :construction: ||
 
