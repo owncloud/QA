@@ -133,7 +133,6 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 15 | Verify the limit of the quota | 1. Open local sync folder<br>2. Upload the necessary large files to fill up the quota | Warning: "The available space of your workspace is running out, please delete some files to free space" | :construction: ||
 
 ### 4. Move files and folders
-#### NOTE: Could be automated using move functions from python
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
@@ -186,7 +185,6 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 4 | Manager can add new folders in Space | 1. In the server, create a space, upload a file in it and add a user with Manager role<br>2. As a space member (Manager), add that space to the desktop client<br>3. Open the local sync folder<br>4. Create a new folder | New folder is synced | :construction: ||
 
 ### 9. Without connection
-#### NOTE: We could give it a try to automate
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
