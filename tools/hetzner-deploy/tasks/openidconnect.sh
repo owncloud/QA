@@ -6,9 +6,12 @@ source ./env.sh	# probably not needed.
 
 # CAUTION: the client id and secret must be set from within the keycloak admin interface!
 keycloak_realm=owncloud.works
-keycloak_url=https://keycloak-20221129.jw-qa.owncloud.works:19443/realms/$keycloak_realm
+keycloak_base_url=https://keycloak-20221129.jw-qa.owncloud.works:19443
 keycloak_client_id=openidconnect-220rc6-20221216
 keycloak_client_secret=g6XbJF3raJis7YFB8rXQtrgnWu1qT5X6
+
+keycloak_url="$keycloak_base_url/realms/$keycloak_realm"
+keycloak_admin_url="$keycloak_base/admin/master/console/#/$keycloak_realm"
 
 occ app:enable openidconnect
 
@@ -44,7 +47,7 @@ cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
 // otherwise owncloud explodes in apps/opeindconnect/redirect with 
 // "The provider authorization_endpoint could not be fetched. Make sure your provider has a well known configuration available."
 //
-// Without autoprovisioning, keycloack users end up in owncloud with 
+// Without autoprovisioning, keycloak users end up in owncloud with 
 // "User with kalice@exmaoke.com is not known."
 //
 \$CONFIG = [
@@ -81,7 +84,7 @@ EOF
 cat << EOM | sed -e "s/^/openidconnect: /g" >>  ~/POSTINIT.msg
 CAUTION: Written keycloak config with dummy values.
 Please enter this owncloud instance as a client in keycloak.
-The admin interface may be found at $keycloak_base/admin/master/console/#/$keycloak_realm/clients
+The admin interface may be found at $keycloak_admin_url/clients
 Then paste the new client id and secret into o/config/oidc-keycloak.config.php
 EOM
 
