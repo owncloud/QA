@@ -10,7 +10,8 @@
 | Title | Steps     | Expected Result | Result | Comments |
 | :---- | :-------- | :-------------- | :----: | :------- |
 |**UI**||||
-| Empty list  | 1. Enter oCIS with spaces server URL and correct credentials<br>2. In bottom bar, click on Spaces | Empty view |  |  |
+| View |  1. Enter oCIS with spaces server URL and correct credentials<br>2. In bottom bar, click on Spaces | Top bar: "Spaces", hamburguer and avatar/account selector<br>Bottom bar: 5 items<br>
+| Empty list  | 1. Enter oCIS without spaces server URL and correct credentials<br>2. In bottom bar, click on Spaces | Empty view |  |  |
 | Non-Empty list. Only Name | 1. In oCIS server, create three different spaces without subtitle and image. (admin permissions to do that)<br>2. In app, in bottom bar, click on Spaces | Spaces correctly listed with correct names, without subtitle and image |  |  |
 | Non-Empty list. Name & Subtitle | 1. In oCIS server, create three different spaces without image, adding a subtitle. (admin permissions to do that)<br>2. In app, in bottom bar, click on Spaces | Spaces correctly listed with correct names and subtitles, without image |  |  |
 | Non-Empty list. Name, Subtitle and Image| 1. In oCIS server, create three different spaces with image and subtitle. (admin permissions to do that)<br>2. In app, in bottom bar, click on Spaces | Spaces correctly listed with correct names, subtitles and images. |  |  |
