@@ -1,6 +1,12 @@
 #! /bin/bash
 #
 # 2022-12-17, jw@owncloud.com
+#
+# References:
+#  - https://doc.owncloud.com/server/next/admin_manual/configuration/user/oidc/oidc.html
+#    Says, "A distributed memcache setup - such as Redis or Memcached - is required to operate this app"
+#    -> we don't have that, and it still works.... Oooh!
+#  - https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_apps_sample_php_parameters.html#app-openid-connect-oidc
 
 source ./env.sh	# probably not needed.
 
@@ -56,12 +62,14 @@ cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
     'client-id'       => '$keycloak_client_id',
     'client-secret'   => '$keycloak_client_secret',
     'loginButtonName' => 'Keycloak OIDC',
+    // 'post_logout_redirect_uri' => 'https://$oc10_fqdn/index.php',	// FIXME: https://github.com/owncloud/openidconnect/issues/276
+    // mode: This is the attribute in the owncloud accounts table to search for users. The default value is email. The alternative value is: userid.
+    // 'mode' => 'email',	// FIXME: https://github.com/owncloud/openidconnect/issues/277
     'auto-provision'  => [
       // explicit enable the auto provisioning mode
       'enabled' => true,
       // documentation about standard claims: https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
-      // the mode to search for user in ownCloud - either userid or email
-      'mode' => 'email',
+      'mode' => 'email',	// FIXME: https://github.com/owncloud/openidconnect/issues/277
       // only relevant in userid mode,  defines the claim which holds the email of the user
       'email-claim' => 'email',
       // defines the claim which holds the display name of the user
