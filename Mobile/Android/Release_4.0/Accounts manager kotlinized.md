@@ -1,7 +1,7 @@
 ### Accounts manager kotlinized
 
 
-#### PR: 
+#### PR: https://github.com/owncloud/android/pull/3799
 
 **Devices**: Samsung A51, Android 12 <br>
 **Server**: 10.11, oCIS 2.0
