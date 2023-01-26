@@ -27,15 +27,18 @@ cat <<EO_AZ_CONF | docker_exec -T owncloud sh -c 'cat > config/openidconnect_azu
   'openid-connect' =>
   array (
     // from Directory (tenant) ID
-    'provider-url' => 'https://login.microsoftonline.com/XXX_DUMMY_XXX/v2.0',
+    //      Verzeichnis-ID (mandant)
+    'provider-url' => 'https://login.microsoftonline.com/ccb3d46e-f612-456c-ac25-18eecd3c7147/v2.0',
     // from Application (client) ID
-    'client-id' => 'XXX_DUMMY_XXX',
+    //      Anwendungs-ID (client)
+    'client-id' => 'd4cf3f6c-8fe2-4531-9416-62b494489773',
     // from Certificates & Secrets -> New -> Value
+    //      Zertifikate & Geheimnisse -> Neuer geheimer Clientschlüssel -> name: oidc220rc1, ablauf: 2025-01-25  -> Wert
     'client-secret' => 'XXX_DUMMY_XXX',
     'loginButtonName' => 'Azure AD (oidc)',
     'scopes' =>
     array (
-          // from Expose an API -> Scopes:
+          // from Expose an API -> Scopes: (same as client-id above)
           'openid', 'api://XXX_DUMMY_XXX/owncloud', 'profile', 'email', 'offline_access'
     ),
     'auto-provision' => [

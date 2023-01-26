@@ -7,6 +7,7 @@
 #    Says, "A distributed memcache setup - such as Redis or Memcached - is required to operate this app"
 #    -> we don't have that, and it still works.... Oooh!
 #  - https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_apps_sample_php_parameters.html#app-openid-connect-oidc
+#  - setup with authelia or authenitic IDP: https://helgeklein.com/blog/owncloud-infinite-scale-with-openid-connect-authentication-for-home-networks/
 
 source ./env.sh	# probably not needed.
 
@@ -88,11 +89,60 @@ cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
 
 EOF
 
+cat <<EO_AZ_CONF>/var/www/owncloud/config/oidc-azure.config.php.disabled
+// see also: HOWTO/azure-ad.txt
+// 
+<?php
+\$CONFIG = array (
+  'http.cookie.samesite' => 'None',
+  'openid-connect' => [
+    // from Directory (tenant) ID
+    //      Verzeichnis-ID (mandant)
+    'provider-url' => 'https://login.microsoftonline.com/ccb3d46e-f612-456c-ac25-18eecd3c7147/v2.0',
+    // from Application (client) ID
+    //      Anwendungs-ID (client)
+    'client-id' => 'd4cf3f6c-8fe2-4531-9416-62b494489773',
+    // from Certificates & Secrets -> New -> Value
+    //      Zertifikate & Geheimnisse -> Neuer geheimer Clientschlüssel -> name: oidc220rc1, ablauf: 2025-01-25 -> Wert
+    'client-secret' => 'XXX_DUMMY_XXX',
+    'loginButtonName' => 'Azure AD (oidc)',
+    'scopes' => [
+          // from Expose an API -> Scopes: (same as client-id above)
+          'openid', 'api://XXX_DUMMY_XXX/owncloud', 'profile', 'email', 'offline_access'
+    ],
+    'auto-provision' => [
+        // explicit enable the auto provisioning mode
+        'enabled' => true,
+        // documentation about standard claims: https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+        // only relevant in userid mode,  defines the claim which holds the email of the user
+        'email-claim' => 'email',
+        // defines the claim which holds the display name of the user
+        'display-name-claim' => 'given_name',
+        // defines the claim which holds the picture of the user - must be a URL
+        // 'picture-claim' => 'picture',        // https://github.com/owncloud/openidconnect/issues/138
+        // defines a list of groups to which the newly created user will be added automatically
+        'groups' => ['admin', 'guests', 'employees'],
+    ],
+    'mode' => 'email',
+    'autoRedirectOnLoginPage' => false,
+    'search-attribute' => 'unique_name',
+    'use-access-token-payload-for-user-info' => true,
+    'redirect-url' => 'https://$OWNCLOUD_DOMAIN/index.php/apps/openidconnect/redirect',
+    // bring us back to the login page....
+    'post_logout_redirect_uri' => 'https://$OWNCLOUD_DOMAIN.owncloud.works/',
+  ]
+);
+EO_AZ_CONF
 
 cat << EOM | sed -e "s/^/openidconnect: /g" >>  ~/POSTINIT.msg
 CAUTION: Written keycloak config with dummy values.
 Please enter this owncloud instance as a client in keycloak.
 The admin interface may be found at $keycloak_admin_url/clients
 Then paste the new client id and secret into o/config/oidc-keycloak.config.php
+
+To switch from keycloak to azure, 
+ - fill in variables in o/config/oidc-azure.config.php.disabled
+ - mv o/config/oidc-azure.config.php{.disabled,}
+ - mv o/config/oidc-keycloak.config.php{,.disabled}
 EOM
 

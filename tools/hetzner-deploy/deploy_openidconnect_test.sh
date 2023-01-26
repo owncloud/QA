@@ -19,7 +19,7 @@ echo "Estimated setup time: 8 minutes ..."
 #oidc_vers=2.1.0-rc1	# triggers https://github.com/owncloud/openidconnect/issues/181
 # oidc_vers=1.0.0
 # oidc_vers=2.1.1
-oidc_vers=2.2.0-rc.6
+oidc_vers=2.2.0-rc.7
 oauth2_vers=0.5.3
 
 # oc10_vers=10.9.1	# found on https://hub.docker.com/r/owncloud/server/tags/
