@@ -8,8 +8,9 @@
 # 2021-06-06, v0.2, jw	- support for python scripts added. oc_app_drone_tests.py drafted.
 # 2021-07-28, v0.3, jw	- added support for app:checklist output.
 # 2021-08-16, v0.4, jw	- added support to build an app.
+# 2023-01-27, v0.5, jw	- build:app now can also build from a branch
 
-version=0.3
+version=0.5
 
 mydir=$(dirname $(readlink -f $0))
 cmd=$1
@@ -41,6 +42,7 @@ Usage:
 
   $self app:build .
   $self app:build oauth2 v0.5.0-rc1
+  env OC_REL_VESION_IS_BRANCH=1 $self app:build oauth2 e5544-feature
 	Build a signed tar.gz archive. Needs a checkout copy of the appsigning scripts.
 
   $self app:drone:tests   files_mediaviewer 1.2.3

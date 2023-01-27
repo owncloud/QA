@@ -26,20 +26,27 @@ fi
 
 if [ -z "$2" ]; then
   echo "Usage:"
-  echo "	oc_release app:sign ."
+  echo "	oc_release app:build ."
+  echo "	env OC_REL_VESION_IS_BRANCH=1 oc_release app:build . BRANCH"
   echo "	$0 APPNAME APPVERSION"
   echo ""
   echo "build an app, using $appsigning_dir/$build_sh "
   exit 1
 fi
 
-appvers=$(echo "$appvers" | sed -e 's/^v//')	# always without leading v
-tagname="v$appvers"				# always with leading v
+if [ -n "$OC_REL_VESION_IS_BRANCH" ]; then
+  tagname="$appvers"
+else
+  appvers=$(echo "$appvers" | sed -e 's/^v//')	# always without leading v
+  tagname="v$appvers"				# always with leading v
+fi
 set -x
 cd $appsigning_dir
 bash ./$build_sh $appname $tagname
 set +x
 title=$(echo $appvers | sed -e 's/-rc\./+RC+/')
+
+test -n "$OC_REL_VESION_IS_BRANCH" && exit 0	# don't recommend upload when built from a branch.
 
 echo "Now create a new release at"
 echo "	https://github.com/owncloud/$appname/releases/new?tag=$tagname&title=$title"
