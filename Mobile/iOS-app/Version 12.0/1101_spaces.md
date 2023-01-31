@@ -131,63 +131,63 @@
 | Disable user | Disable from server a user that is member of a space | Check with the user is not allowed to do operations over the space | NA
 | Remove user | Remove from server a user that is member of a space | Check with the user is not member anymore anymore | NA
 |**Spaces share as viewer**| 
-| Share file/folder | Open file/folder card | No available |   |  |
-| Links | Open file/folder card |   No available |  | |
-| Favorite | Open file/folder card | No available |   | |
-| Open In | Open file/folder card | Available |   |  |
-| Move | Open file/folder card | No available |   |  |
-| Rename | Open file/folder card |No available |   |  |
-| Duplicate | Open file/folder card |  No available |   |  |
-| Copy | Open file/folder card | Available |   |  |
-| Available Offline | Open file/folder card | Available |   |  |
-| Cut | Open file/folder card | No available |   |    |
-| Delete | Open file/folder card | No available |  |  |
-| Upload file | Open "+" menu | No available |  |  |
-| Create folder | Open "+" menu | No available |   |  |
-| Upload from photo library | Open "+" menu | No available |   |  |
-| Take photo or video | Open "+" menu | No available |  |  |
-| Scan document | Open "+" menu | No available |   |  |
-| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |  |  |
+| Share file/folder | Open file/folder card | No available | P m16  |  |
+| Links | Open file/folder card |   No available | F m16 | Available without options |
+| Favorite | Open file/folder card | No available | NA  | |
+| Open In | Open file/folder card | Available | P m16  |  |
+| Move | Open file/folder card | No available | P m16  |  |
+| Rename | Open file/folder card |No available | P m16  |  |
+| Duplicate | Open file/folder card |  No available | P m16 |  |
+| Copy | Open file/folder card | Available | P m16  |  |
+| Available Offline | Open file/folder card | Available | P m16  |  |
+| Cut | Open file/folder card | No available | F m16  |  Not available. Nothing happens  |
+| Delete | Open file/folder card | No available | P m16 |  |
+| Upload file | Open "+" menu | No available | P m16 | "+" is visible |
+| Create folder | Open "+" menu | No available | P m16  | "+" is visible  |
+| Upload from photo library | Open "+" menu | No available |  P m16 | "+" is visible  |  |
+| Take photo or video | Open "+" menu | No available | P m16 |  "+" is visible |
+| Scan document | Open "+" menu | No available |  P m16 | "+" is visible  |
+| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed | P m16 |  |
 |**Spaces share as editor**| 
-| Share file/folder | Open file/folder card |No available |   |  |
-| Links | Open file/folder card |  No available |  |  |
-| Favorite | Open file/folder card | Available |  |  |
-| Open In | Open file/folder card | Available |   |  |
-| Move | Open file/folder card | Available |  |  |
-| Rename | Open file/folder card |Available |   |  |
-| Duplicate | Open file/folder card |  Available|   |  |
-| Copy | Open file/folder card | Available |   |  |
-| Available Offline | Open file/folder card | Available |  |  |
-| Cut | Open file/folder card | Available |   |  |
-| Delete | Open file/folder card | Available |   |  |
-| Upload file | Open "+" menu | Available |   |  |
-| Create folder | Open "+" menu | Available |   |  |
-| Upload from photo library | Open "+" menu | Available |  |  |
-| Take photo or video | Open "+" menu | Available |   |  |
-| Scan document | Open "+" menu | Available |  |  |
-| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |   |  |
+| Share file/folder | Open file/folder card |No available | P m16  |  |
+| Links | Open file/folder card |  No available | F m16 | Available without options |
+| Favorite | Open file/folder card | Available | NA  |  |
+| Open In | Open file/folder card | Available | P m16  |  |
+| Move | Open file/folder card | Available | P m16  |  |
+| Rename | Open file/folder card |Available | P m16   |  |
+| Duplicate | Open file/folder card |  Available| P m16   |  |
+| Copy | Open file/folder card | Available | P m16   |  |
+| Available Offline | Open file/folder card | Available | P m16  |  |
+| Cut | Open file/folder card | Available | P m16   |  |
+| Delete | Open file/folder card | Available |  P m16  |  |
+| Upload file | Open "+" menu | Available | P m16   |  |
+| Create folder | Open "+" menu | Available | P m16   |  |
+| Upload from photo library | Open "+" menu | Available |P m16   |  |
+| Take photo or video | Open "+" menu | Available | P m16   |  |
+| Scan document | Open "+" menu | Available | P m16  |  |
+| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed | P m16  |  |
 |**Spaces share as manager**| 
-| Share file/folder | Open file/folder card |Available |   |  |
-| Links | Open file/folder card |  Available |   |  |
-| Favorite | Open file/folder card | Available |  |  |
-| Open In | Open file/folder card | Available |  |  |
-| Move | Open file/folder card | Available |  |  |
-| Rename | Open file/folder card |Available |   |  |
-| Duplicate | Open file/folder card |  Available|   |  |
-| Copy | Open file/folder card | Available |   |  |
-| Available Offline | Open file/folder card | Available |   |  |
-| Cut | Open file/folder card | Available |   |  |
-| Delete | Open file/folder card | Available |  |  |
-| Upload file | Open "+" menu | Available |   |  |
-| Create folder | Open "+" menu | Available|   |  |
-| Upload from photo library | Open "+" menu | Available |   |  |
-| Take photo or video | Open "+" menu | Available |   |  |
-| Scan document | Open "+" menu | Available |   |  |
-| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed |   |  |
+| Share file/folder | Open file/folder card |Available | P m16  |  |
+| Links | Open file/folder card |  Available |  P m16  |  |
+| Favorite | Open file/folder card | Available | NA |  |
+| Open In | Open file/folder card | Available | P m16  |  |
+| Move | Open file/folder card | Available | P m16  |  |
+| Rename | Open file/folder card |Available | P m16   |  |
+| Duplicate | Open file/folder card |  Available|  P m16  |  |
+| Copy | Open file/folder card | Available |   P m16 |  |
+| Available Offline | Open file/folder card | Available | P m16   |  |
+| Cut | Open file/folder card | Available |P m16    |  |
+| Delete | Open file/folder card | Available | P m16  |  |
+| Upload file | Open "+" menu | Available | P m16   |  |
+| Create folder | Open "+" menu | Available| P m16   |  |
+| Upload from photo library | Open "+" menu | Available |  P m16  |  |
+| Take photo or video | Open "+" menu | Available | P m16   |  |
+| Scan document | Open "+" menu | Available |  P m16  |  |
+| Download and preview | Click on any previewable file (txt, image...)| File correctly previewed | P m16   |  |
 |**Miscellaneous**|
-| Introduction view |Open app from scratch | Splash view + correct introduction |   |  |
-| Dark Themes  | 1. Set Dark theme, open sidebar and browse though folders | Theme correctly applied |   |  |
-| Light Themes  | 1. Set Light theme, open sidebar and browse though folders | Theme correctly applied |   |  |
+| Introduction view |Open app from scratch | Splash view + correct introduction |  F m16 |  | Lost
+| Dark Themes  | 1. Set Dark theme, open sidebar and browse though folders | Theme correctly applied | F m16  | Lost  |
+| Light Themes  | 1. Set Light theme, open sidebar and browse though folders | Theme correctly applied | F m16  | Lost |
 | Auto uploads Personal | 1. Enable camera uploads<br>2. Set a Personal space as destination | Correctly set|   |  |
 | Auto uploads Space with permissions | 1. Enable camera uploads<br>2. Set a custom space with editor or manager permission as destination | Correctly set |   |  |
 | Auto uploads Space without permissions | 1. Enable camera uploads<br>2. Set a custom space with viewer permission as destination | Not posible, account with no write permission |   |  |
