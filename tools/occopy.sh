@@ -40,7 +40,7 @@ Usage:
 	get file [localname]	- download a file. Optionally speciying a different local file name.
 	mget fileglob ...	- download multiple files (with globbing) into the curent directory.
 	put file [remotename]   - upload a file. Optionally specfiying a different remote name.
-	mget file ...		- upload multiple files.
+	mput file ...		- upload multiple files.
 	mkdir dirname		- create a new directory (mkcol)
 	rmdir dirname		- delete a directory 
 	move old new		- rename a file or directory

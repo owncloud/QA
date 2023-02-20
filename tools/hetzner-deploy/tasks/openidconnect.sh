@@ -65,7 +65,6 @@ cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
     'loginButtonName' => 'Keycloak OIDC',
     // 'post_logout_redirect_uri' => 'https://$oc10_fqdn/index.php',	// FIXME: https://github.com/owncloud/openidconnect/issues/276
     // mode: This is the attribute in the owncloud accounts table to search for users. The default value is email. The alternative value is: userid.
-    // 'mode' => 'email',	// FIXME: https://github.com/owncloud/openidconnect/issues/277
     'auto-provision'  => [
       // explicit enable the auto provisioning mode
       'enabled' => true,
