@@ -457,7 +457,8 @@ occ config:app:set core enable_external_storage --value yes
 
 ## mount the SFTP also as a linux filesystem, so that we can play with files_external
 mkdir /mnt/sftp
-echo $ftppass | sshfs -o password_stdin -o allow_other ftpdata@localhost:/home/ftpdata/data /mnt/sftp
+# May ask for authenticity of host unless we provide -o StrictHostKeyChecking=no
+echo "\$ftppass" | sshfs -o password_stdin -o StrictHostKeyChecking=no -o allow_other ftpdata@localhost:/home/ftpdata/data /mnt/sftp
 # occ files_external:create /local-mnt-sftp local null::null -c datadir=/mnt/sftp
 
 
