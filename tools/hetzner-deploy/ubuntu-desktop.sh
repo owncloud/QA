@@ -11,15 +11,15 @@ systemctl set-default graphical
 
 # recommended by /home/testy/HOWTO/remote-desktop-sharing.txt
 aptQ install -y x2goserver x2goserver-xsession
-testypass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
-echo -e "$testypass\n$testypass" | adduser testy --gecos ""
+adduser testy --gecos "" --disabled-password
 mkdir ~testy/.ssh
 cp .ssh/authorized_keys ~testy/.ssh/
 chown -R testy. ~testy/.ssh
 chmod 700 /home/testy/.ssh
+# TODO: add testy to sudoers.
 
 echo "Now reboot... and connect with x2goclient"
 echo "	Host: $IPADDR"
 echo "	User: testy"
-echo "	Password: $testypass"
+echo "	with same ssh-key as user root"
 
