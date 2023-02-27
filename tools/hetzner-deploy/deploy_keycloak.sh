@@ -156,6 +156,15 @@ cp \$certfile \$privkey proxy/
 #  network-scoped alias is supported only for containers in user defined networks
 #
 
+cat << REF_SH > refresh_cert.sh
+certbot renew
+cp \$certfile \$privkey proxy
+cd proxy
+docker-compose down
+docker-compose up -d
+REF_SH
+
+
 cat << DC_YML > proxy/docker-compose.yml
 version: "3.0"
 services:
