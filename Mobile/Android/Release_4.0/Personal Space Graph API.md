@@ -3,8 +3,8 @@
 
 #### PR: 
 
-**Devices**: <br>
-**Server**: 
+**Devices**: Samsung A51, Android 12 <br>
+**Server**: oC 10.11, oCIS 2.0.0 
 
 
 | Title | Steps     | Expected Result | Result | Comments |
@@ -23,11 +23,11 @@
 | Upload from camera | Upload content from camera in root and non-root to personal | Content correctly created | P m12 |  |
 | Upload external | Upload content from Photos app in root and non-root to personal | Content correctly created | P m12 |  |
 | Upload text | Upload text from Browser app in root and non-root to personal | Content correctly created | P m12 |  |
-| Camera upload | Camera Upload Videos and Pictures in root and non-root to personal | Content correctly created |  |  |
+| Camera upload | Camera Upload Videos and Pictures in root and non-root to personal | Content correctly created | P m12 |  |
 | Delete | Delete file and folder inside personal | Content correctly deleted | P m12  |  |
-| Open With / Send | Open With / Send  file and folder inside personal | Content correctly downloaded and opened / sent to other apps |  |  |
-| Share with | Share with another user in personal | Content correctly shared | NA | Not implemented yet |
-| Public link | Create a public link in personal | Link correctly created | NA | Not implemented yet |
+| Open With / Send | Open With / Send  file and folder inside personal | Content correctly downloaded and opened / sent to other apps | P m12 |  |
+| Share with | Share with another user in personal | Content correctly shared | P m12 | |
+| Public link | Create a public link in personal | Link correctly created | P m12 |  |
 |**Shares space**||||
 | No shares | No accepted shares in the account | Empty view| P m12 |  |
 | New share | From another account, share file and folder to your account. In server, accept the shares | Shares listed in the shares section in bottom bar| P m12 | TO DO: In first open, pull to refresh does not work |
