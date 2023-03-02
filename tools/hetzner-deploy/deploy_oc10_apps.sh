@@ -389,6 +389,8 @@ occ log:owncloud --enable -vvv
 occ log:manage --level=info -vvv				# info=1, okayis - debug=0, way too much token refresh nonsense.
 # occ config:system:set log_query --value true			# seen in 9.1/admin_manual
 occ config:system:set upgrade.disable-web --value false		# default is false. Just here to make it appear in config.php
+occ config:system:set htaccess.RewriteBase --value '/'		# index.php less setup
+occ maintenance:update:htaccess					# index.php less setup
 
 echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > oc.crontab
 crontab -u www-data oc.crontab		# only the crontab command triggers a reload.

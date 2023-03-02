@@ -104,8 +104,8 @@ fi
 ## prepare user sync every 5 min. sync users
 
 ## Workaround for a backend initialization bug: It initializes only, when queried via POST requests. occ only sees the backend afterwards.
-curl_POST() { curl -L -s -b cookie.jar -c cookie.jar "https://$oc10_fqdn/index.php/$1" --data-raw "$2"; }
-curl_POST login 'user=admin&password=admin' | grep data-user							# prints username and token
+curl_POST() { curl -L -s -b cookie.jar -c cookie.jar "https://$oc10_fqdn/index.php/$1" --data-raw "$2"; } 	# index.php urls work also in index.php-less setup
+curl_POST login 'user=admin&password=admin' | grep data-user							# login, fetch cookie, prints username and token
 # curl_POST apps/user_ldap/ajax/getConfiguration.php "ldap_serverconfig_chooser=s01" | jq 			# -> huge json structure, but still shows no LDAP backend.
 curl_POST apps/user_ldap/ajax/testConfiguration.php  "ldap_serverconfig_chooser=s01" | jq			# "status": "success"
 curl_POST apps/user_ldap/ajax/wizard.php             "ldap_serverconfig_chooser=s01&action=countInBaseDN" | jq	# "ldap_test_base": 10
