@@ -89,8 +89,9 @@ opts="$opts -e xpack.security.authc.api_key.enabled=true"	# enable the API Key s
 # opts="$opts -e 'ES_JAVA_OPTS=-Xms512m -Xmx512m'"	# probably not needed. FIXME: docker -e does not handle whitespace.
 
 # choose a version seen in https://github.com/elastic/elasticsearch/branches
-img=docker.elastic.co/elasticsearch/elasticsearch:7.17.1	# latest known es7
-# img=docker.elastic.co/elasticsearch/elasticsearch:8.0.0	# try es8 ?
+# Check for latest image https://hub.docker.com/_/elasticsearch/tags
+# img=docker.elastic.co/elasticsearch/elasticsearch:7.17.9	# latest known es7
+img=docker.elastic.co/elasticsearch/elasticsearch:8.6.2	# try es8 ?
 
 docker pull $img || { sleep 30; docker pull $img; } || { sleep 60; docker pull $img; }	# their dockerhub is unreliable
 docker run --rm --name es01 $opts $img bin/elasticsearch-plugin install -b ingest-attachment || exit 0;

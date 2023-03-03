@@ -42,6 +42,7 @@ test "$vers" = "10.0.0"   -o "$vers" = "10.0"   && { echo "No tar known for vers
 test "$vers" = "9.1.8"    -o "$vers" = "9.1"    && tar=https://attic.owncloud.org/community/owncloud-9.1.8.tar.bz2
 test "$vers" = "9.0.9"    -o "$vers" = "9.0"    && tar=https://attic.owncloud.org/community/owncloud-9.0.9.tar.bz2
 test "$vers" = "8.2.11"   -o "$vers" = "8.2"    && tar=https://attic.owncloud.org/community/owncloud-8.2.11.tar.bz2
+## oc7 says, that when running php7.4, we should use oc82, but oc82 explodes already with php 7.3
 test "$vers" = "8.1.12"   -o "$vers" = "8.1"    && tar=https://attic.owncloud.org/community/owncloud-8.1.12.tar.bz2
 test "$vers" = "8.0.16"   -o "$vers" = "8.0"    && tar=https://attic.owncloud.org/community/owncloud-8.0.16.tar.bz2
 test "$vers" = "7.0.15"   -o "$vers" = "7.0"    && tar=https://attic.owncloud.org/community/owncloud-7.0.15.tar.bz2
@@ -61,7 +62,9 @@ case $vers in
     ;;
   9* | 8* )
     # Server 8.1 is incompatible with PHP 7.1, debian-9 has PHP-7.0
-    export HCLOUD_SERVER_IMAGE=debian-9
+    # Server 8.2 is incompatible with PHP 7.3, which is found on debian-10
+    # Hetzner no longer offers debian-9, 2023-03-01, jw
+    export HCLOUD_SERVER_IMAGE=debian-10
     echo "CAUTION: vers=$vers using $tar"
     echo "CAUTION: Trying this on Debian-9, untested..."
     sleep 5
