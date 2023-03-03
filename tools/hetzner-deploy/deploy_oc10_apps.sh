@@ -585,8 +585,11 @@ fi
 for uid in Alice bob carol dave einstein; do
   env OC_PASS=secret occ user:add --password-from-env -g \$uid-g \$uid
 done
-occ user:modify alice displayname "Alice in Wonderland"
-occ user:modify carol displayname "Carol Lewis"
+occ user:modify alice displayname "Alice in Wonderland, down the rabbit hole and through the lookin"	# max 64 chars
+occ user:modify carol displayname "Carol
+L€wis"
+env OC_PASS="s€cret" occ user:resetpassword --password-from-env einstein
+
 
 uptime
 cat << EOM
