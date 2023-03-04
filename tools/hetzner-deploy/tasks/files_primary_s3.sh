@@ -5,6 +5,7 @@
 #  - https://confluence.owncloud.com/display/~gleikam/Install+Scality+S3+Server+%28Zenko+CloudServer%29+on+ubuntu+20.04
 #  - https://github.com/scality/cloudserver#readme
 #  - https://s3-server.readthedocs.io/en/latest/
+#  - Hints for using a dockerized ceph instead: https://github.com/owncloud/core/pull/40389#issue-1388808146
 #
 # CAUTION: keep in sync with files_external_s3 and objectstore
 
@@ -29,6 +30,7 @@ $CONFIG = [
         'arguments' => [
             // replace with your bucket, '_' is not allowed.
             'bucket' => 'oc-primary',
+	    'availableStorage' => 1099511627776,	// just some hint, but looks better in metrics.
             // uncomment to enable server side encryption
             //'serversideencryption' => 'AES256',
             'options' => [
