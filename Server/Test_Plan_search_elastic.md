@@ -9,7 +9,7 @@ Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_search_ela
 
 ## Testing functionality
 
-- Run Testplan with encryption disabled and enabled
+
 - After each change, be sure to run `occ search:index:update` before testing the result.
 - `occ search:index:update` only updates the index for users, who have edited something.
 
@@ -93,7 +93,6 @@ XLS file located inside a folder. A user searches for content included in the fi
 |  |   |
 Check that Full Search menu in admin section works fine using FireFox as browser |  | :construction:  |
 Check that Full Search menu in admin section works fine using Chrome as browser |  | :construction:  |
-Check that Full Search menu in admin section works fine using IE11 as browser |  | :construction:  |
 Check that Full Search menu in admin section works fine using Edge as browser |  | :construction:  |
 Check that Full Search menu in admin section works fine using Safari as browser |  | :construction:  |
 ----
