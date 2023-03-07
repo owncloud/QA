@@ -256,7 +256,7 @@ mysql owncloud -e 'SELECT * FROM oc_credentials where identifier like "search_el
 # curl -H "Content-Type: application/json" -s "$elastic_url/_sql" --data '{"query":"select * from \"oc-'"$instanceid"'\"","binary_format":false}'
 
 # cannot pipe into jq, we often have invalid utf8 in the table.
-cat <<EOS > /usr/bin/elastic_sql
+cat <<EOSQ > /usr/bin/elastic_sql
 #! /bin/bash
 if [ -z "\$1" -o "\$1" = "-h" ]; then
   echo -e "Usage:\n  \$0" "'select \"file.content_length\",mtime, name, size, users, left(\"file.content\", 50) from \"oc-$instanceid\"'"
@@ -268,8 +268,18 @@ json="{\"query\":\"\$qq\",\"binary_format\":false}"
 url="$elastic_url/_sql"
 curl -H "Content-Type: application/json" -s "\$url" --data "\$json" | sed -e 's/\[/\n[/g' -e 's/,/,	/g'
 echo ""
-EOS
+EOSQ
 chmod a+x /usr/bin/elastic_sql
+
+# cannot pipe into jq, we often have invalid utf8 in the table.
+cat <<EOSE > /usr/bin/elastic_search_all
+#! /bin/bash
+url="$elastic_url/oc-$instanceid/_search"
+json="'{ "query": { "size": 1000, "from": 0, "match_all": {} } }'"
+# curl -H "Content-Type: application/json" -s "\$url" --data "\$json"
+curl -s "$url?pretty=true&q=*:*&size=10000"
+EOSE
+chmod a+x /usr/bin/elastic_search_all
 
 elastic_sql "select * from \"oc-$instanceid\"" | strings | head -20
 
@@ -299,6 +309,8 @@ elastic_search:  Edit some text files, then try
 elastic_search:    occ search:index:update
 elastic_search:    elastic_sql "show tables"
 elastic_search:    elastic_sql 'select "file.content_length", name, size, users, left("file.content", 50) from "oc-$instanceid"'
+elastic_search:    elastic_sql 'select "file.content_length", name, size, left("file.content", 50) from "oc-$instanceid"'	# if array is not supported
+elastic_search:    elastic_search_all
 elastic_search:
 elastic_search:  To setup an https-reverse-proxy for the elastic server, do
 elastic_search:    env MKCERT_VALID_DAYS=7 /usr/local/bin/mkcert DNS:localhost
