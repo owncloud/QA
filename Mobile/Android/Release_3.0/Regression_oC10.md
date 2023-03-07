@@ -183,7 +183,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Move/Copy into av. offline | Move some content into an av. offline folder | Content is downloaded and sync |P m12
 | Move/Copy from av. offline | Move some content from an av. offline folder to another folder that is not av. offline | Content is downloaded but not av.offine |P m12
 | Modify av. offline| 1. Set a txt file as. av offline (or a folder that contains it).<br>2. Close the app<br>3. With an external editor, modify the file | file is uploaded to the server in maximum 15 minutes, without opening the app |P m12
-| Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. | F m12 | no way to cancel 
+| Cancel | 1. Set as av.offline a folder with huge content<br>2. During the download, cancel it | The content already downloaded remains downloaded. The folder is not av. offline. | P m12 | FIXED: no way to cancel 
 | Delete locally | Try to delete locally an av. offline folder | Action can not be performed |P m12
 |**Basic Operations**||||||
 | Create folder | Create a new folder  | Folder is created inside the oC account | P m12 |  |  |
@@ -211,8 +211,8 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Copy several folders to other location | From doc prov, copy several folders to other location| Correct copied | P m12 |  |
 | Copy a folder from other location | From doc prov, copy a folder from other location to oC| Correctly copied | F m12 | Could not copy |
 |**Create File** |   |  |
-| Create new file root| From a 3rd party app, create new file and save in oC, selecting the root folder | new file is correctly saved | F m12 | Crash  |  |
-| Create new file non-root| From a 3rd party app, create new file and save in oC, selecting a non-root folder | new file is correctly saved in the folder | F m12 | Saved in the parent folder  |  | 
+| Create new file root| From a 3rd party app, create new file and save in oC, selecting the root folder | new file is correctly saved | P m12 |  |  |
+| Create new file non-root| From a 3rd party app, create new file and save in oC, selecting a non-root folder | new file is correctly saved in the folder | P m12 | Saved in the parent folder  |  | 
 | Create new file special chars| From a 3rd party app, create new file and save in oC, selecting a non-root folder which contains special characters | new file is correctly saved in the folder  | |   |
 | Conflict | From a 3rd party app, create new file and save in oC, setting an existing name | added a numeral to the file name | P m12 |  |  |
 | Multiaccount | Add several accounts<br>From a 3rd party app, create new file and save in local and in oC in different accounts and target folders | File is correctly saved in all accounts  | P m12 |  |
