@@ -1,5 +1,7 @@
 # Files Text Editor
 
+Template: https://github.com/owncloud/QA/edit/master/Server/Test_Plan_Files_Texteditor.md
+
 ### Server: v10
 
 ### Setup
@@ -28,6 +30,7 @@ however it is not necessary to manually perform test cases already covered autom
 | Perform the above tests in a sub-folder | Create a folder and navigate into it. Create and edit text files in the subfolder, like in the steps above. | Same results as above. | :gear: | |
 | Cannot create a text file when app disabled | As an admin, disable the files_texteditor app. As a regular user, go to the files page and click the "+". | An entry for "Text file" does not appear. | :construction: | |
 | Cannot edit a text file when app disabled | As an admin, disable the files_texteditor app, . As a regular user, go to the files page and click on an existing text file. | No text editor window appears. You are prompted to download the file. | :construction: | |
-| Autosave | Edit a few lines, wait 2 seconds | A '*' appears while editing. The word 'saved' appears, when waiting for a few seconds. | :construction: | |
+| Autosave | Edit a few lines, wait 2 seconds | A '*' appears while editing. The word 'saved' appears, when waiting for a few seconds, the '*' disappears. | :construction: | |
 | Public Link | Create a public share on a text file with edit permission | Text editor works for anonymous users through the public link | :construction: | |
+| Shared Editing | Edit a file in a shared folder. View the shared folder as a differnet user. Try texteditor on the file as a different user | Second user sees a lock icon and texteditor opens readonly | :construction: | |
 
