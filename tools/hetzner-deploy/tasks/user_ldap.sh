@@ -1,4 +1,4 @@
-source ./env.sh		# need to access https://$oc10_fqdn to initialize the Backend
+source ./env.sh		# need to access https://$IPADDR to initialize the Backend
 
 case "$(lsb_release -d -s)" in
   "Ubuntu 22"* | "Ubuntu 21.10" )
@@ -56,6 +56,7 @@ occ app:enable user_ldap
 # - They have User_Proxy set as their backend
 occ config:app:set user_ldap reuse_accounts --value=yes
 
+set -x
 # https://doc.owncloud.com/server/admin_manual/configuration/user/user_auth_ldap.html#ldaps-configuration
 confID=s01
 occ ldap:create-empty-config "$confID"
@@ -104,8 +105,13 @@ fi
 ## prepare user sync every 5 min. sync users
 
 ## Workaround for a backend initialization bug: It initializes only, when queried via POST requests. occ only sees the backend afterwards.
-curl_POST() { curl -L -s -b cookie.jar -c cookie.jar "https://$oc10_fqdn/index.php/$1" --data-raw "$2"; } 	# index.php urls work also in index.php-less setup
-curl_POST login 'user=admin&password=admin' | grep data-user							# login, fetch cookie, prints username and token
+## Caution: $oc10_fqdn is not yet in trusted_domains, but $IPADDR is.
+curl_POST() { curl -L -s -k -b cookie.jar -c cookie.jar "https://$IPADDR/index.php/$1" --data-raw "$2"; } 	# index.php urls work also in index.php-less setup
+for try in 1 2 3 4 5 fail; do
+  curl_POST login 'user=admin&password=admin' | grep data-user && break							# login, fetch cookie, prints username and token
+  sleep 5
+done
+if [ $try = fail ]; then echo "Login failed:"; set -x; curl_POST login 'user=admin&password=admin'; fi
 # curl_POST apps/user_ldap/ajax/getConfiguration.php "ldap_serverconfig_chooser=s01" | jq 			# -> huge json structure, but still shows no LDAP backend.
 curl_POST apps/user_ldap/ajax/testConfiguration.php  "ldap_serverconfig_chooser=s01" | jq			# "status": "success"
 curl_POST apps/user_ldap/ajax/wizard.php             "ldap_serverconfig_chooser=s01&action=countInBaseDN" | jq	# "ldap_test_base": 10
