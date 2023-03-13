@@ -111,6 +111,22 @@ else
     }]
 }
 EOF
+  # TODO: This probably does not work, unless we add to config.json: "include": ["./conf/versioning.json"]
+  # https://readthedocs.org/projects/s3-server/downloads/pdf/development-8.0/ has a (useless?) versioning chapter
+  cat << EOF > conf/versioning.json
+{
+    "metadata": {
+        "versioning": {
+            "susended": false,
+            "params": {
+		"configuration": {
+		    "Status": "Enabled"
+		}
+        }
+    }
+}
+EOF
+  # does not work when REMOTE_MANAGEMENT_DISABLE=0, jw 2023-03-13
   screen -d -m -S s3server -L env REMOTE_MANAGEMENT_DISABLE=1 yarn start
   cd
 fi

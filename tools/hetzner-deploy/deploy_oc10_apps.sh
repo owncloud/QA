@@ -18,10 +18,12 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.12.0-rc.2
+vers=10.12.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.12.0"  -o "$vers" = "10.12"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230313.tar.bz2
+test "$vers" = "10.12.0-rc.3"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230308.tar.bz2
 test "$vers" = "10.12.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230228.tar.bz2
 test "$vers" = "10.12.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230223.tar.bz2
 test "$vers" = "10.11.0"  -o "$vers" = "10.11"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220919.tar.bz2
@@ -69,7 +71,7 @@ case $vers in
     ;;
 esac
 
-location=nbg1		# hel1, fsn1, nbg1
+location=hel1		# hel1, fsn1, nbg1
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "Usage examples:"
@@ -100,7 +102,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
   echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
-  echo "   HCLOUD_LOCATION=hel1		to define the compute center location. hel1, fsn1, nbg1. Default: $location"
+  echo "   HCLOUD_LOCATION=nbg1		to define the compute center location. hel1, fsn1, nbg1. Default: $location"
   exit 1
 fi
 
