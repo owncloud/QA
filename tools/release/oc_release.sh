@@ -65,7 +65,7 @@ test "$cmd" = ari       && cmd="app:release:issue"
 test "$cmd" = ai        && cmd="app:release:issue"
 test "$cmd" = app:issue && cmd="app:release:issue"
 test "$cmd" = app:tests && cmd="app:drone:tests"
-if [ "$cmd" = app:checklist ]; then
+if [ "$cmd" = checklist -o "$cmd" = app:checklist -o "$cmd" = app:release:checklist ]; then
   cmd="app:release:issue"
   set name version -
 fi
