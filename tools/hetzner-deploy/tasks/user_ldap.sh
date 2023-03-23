@@ -1,5 +1,7 @@
 source ./env.sh		# need to access https://$IPADDR to initialize the Backend
 
+sync_early=true;	# set to false, if you want to prepare e.g. homeFolderNamingRule first.
+
 case "$(lsb_release -d -s)" in
   "Ubuntu 22"* | "Ubuntu 21.10" )
     apt install -y php7.4-ldap ldap-utils	# probably already installed.
@@ -120,15 +122,17 @@ curl_POST apps/user_ldap/ajax/wizard.php             "ldap_serverconfig_chooser=
 crontab=/var/spool/cron/crontabs/www-data
 occ user:sync -l | grep -q User_LDAP || echo "FIXME: admin must visit User Authentication page to initialize class OCA\User_LDAP\User_Proxy" >> ~/POSTINIT.msg
 test $ldap_server == 95.217.210.161 &&  echo "TODO: admin please visit User Authentication page Login Attributes and check usernames testy, user1, user2" >> ~/POSTINIT.msg
-if occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable; then
-  echo "ldap user:sync tested successfully, adding to crontab"
-  if ! grep -q user:sync $crontab; then
-    echo "*/5  *  *  *  * /var/www/owncloud/occ user:sync 'OCA\User_LDAP\User_Proxy' -c -r -m disable -vvv" >> $crontab
-    crontab -u www-data $crontab	# fix permissions and wake up cron
+if $sync_early; then
+  if occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable; then
+    echo "ldap user:sync tested successfully, adding to crontab"
+    if ! grep -q user:sync $crontab; then
+      echo "*/5  *  *  *  * /var/www/owncloud/occ user:sync 'OCA\User_LDAP\User_Proxy' -c -r -m disable -vvv" >> $crontab
+      crontab -u www-data $crontab	# fix permissions and wake up cron
+    fi
+  else
+    echo "ERROR: ldap user:sync failed" | tee -a ~/POSTINIT.msg
+    sleep 5
   fi
-else
-  echo "ERROR: ldap user:sync failed" | tee -a ~/POSTINIT.msg
-  sleep 5
 fi
 
 echo "database table oc_accounts has:"
