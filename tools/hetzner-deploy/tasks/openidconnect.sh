@@ -9,7 +9,7 @@
 #  - https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_apps_sample_php_parameters.html#app-openid-connect-oidc
 #  - setup with authelia or authenitic IDP: https://helgeklein.com/blog/owncloud-infinite-scale-with-openid-connect-authentication-for-home-networks/
 
-source ./env.sh	# probably not needed.
+source ./env.sh	# needed for $webroute
 
 # CAUTION: the client id and secret must be set from within the keycloak admin interface!
 keycloak_realm=owncloud.works
@@ -18,7 +18,7 @@ keycloak_client_id=openidconnect-220rc6-20221216
 keycloak_client_secret=g6XbJF3raJis7YFB8rXQtrgnWu1qT5X6
 
 keycloak_url="$keycloak_base_url/realms/$keycloak_realm"
-keycloak_admin_url="$keycloak_base/admin/master/console/#/$keycloak_realm"
+keycloak_admin_url="$keycloak_base_url/admin/master/console/#/$keycloak_realm"
 
 occ app:enable openidconnect
 
@@ -35,7 +35,7 @@ cat <<EOF>/etc/apache2/conf-available/owncloud-oidc.conf
 <Location /.well-known/openid-configuration >
   <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteRule .* /index.php/apps/openidconnect/config [P]
+    RewriteRule .* $webroute/index.php/apps/openidconnect/config [P]
   </IfModule>
 </Location>
 
@@ -55,7 +55,7 @@ cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
 // "The provider authorization_endpoint could not be fetched. Make sure your provider has a well known configuration available."
 //
 // Without autoprovisioning, keycloak users end up in owncloud with 
-// "User with kalice@exmaoke.com is not known."
+// "User with kalice@example.com is not known."
 //
 \$CONFIG = [
   'openid-connect' => [
@@ -63,7 +63,7 @@ cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
     'client-id'       => '$keycloak_client_id',
     'client-secret'   => '$keycloak_client_secret',
     'loginButtonName' => 'Keycloak OIDC',
-    // 'post_logout_redirect_uri' => 'https://$oc10_fqdn/index.php',	// FIXME: https://github.com/owncloud/openidconnect/issues/276
+    // 'post_logout_redirect_uri' => 'https://$oc10_fqdn/$webroute/index.php',	// FIXME: https://github.com/owncloud/openidconnect/issues/276
     // mode: This is the attribute in the owncloud accounts table to search for users. The default value is email. The alternative value is: userid.
     'auto-provision'  => [
       // explicit enable the auto provisioning mode
@@ -126,9 +126,9 @@ cat <<EO_AZ_CONF>/var/www/owncloud/config/oidc-azure.config.php.disabled
     'autoRedirectOnLoginPage' => false,
     'search-attribute' => 'unique_name',
     'use-access-token-payload-for-user-info' => true,
-    'redirect-url' => 'https://$OWNCLOUD_DOMAIN/index.php/apps/openidconnect/redirect',
+    'redirect-url' => 'https://$oc10_fqdn/$webroute/index.php/apps/openidconnect/redirect',
     // bring us back to the login page....
-    'post_logout_redirect_uri' => 'https://$OWNCLOUD_DOMAIN.owncloud.works/',
+    'post_logout_redirect_uri' => 'https://$oc10_fqdn/$webroute/index.php',
   ]
 );
 EO_AZ_CONF
