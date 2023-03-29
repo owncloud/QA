@@ -15,7 +15,7 @@ apt install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rs
 apt install -y smbclient coreutils ldap-utils postgresql
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
-apt install -y pure-ftpd build-essential automake autoconf libtool opensc unzip libssl-dev
+apt install -y pure-ftpd build-essential automake autoconf libtool opensc unzip libssl-dev sshfs
 apt install -y clamav p7zip-full postgresql docker.io nodejs git make gcc g++ yarn s3cmd screen netcat
 
 ### do not preinstall the following, they eat precious CPU time after boot.

@@ -71,6 +71,8 @@ case $vers in
     ;;
 esac
 
+# webroute=/owncloud	# what we document
+webroute=/		# what users expect
 location=hel1		# hel1, fsn1, nbg1
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
@@ -99,6 +101,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
+  echo "   OC10_WEBROUTE=/owncloud	define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
   echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
@@ -107,6 +110,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
 fi
 
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
+test -n "$OC10_WEBROUTE" && webroute="$OC10_WEBROUTE"
 
 tmpdir="/tmp/make_oc10_apps_dl_$$"
 mkdir -p $tmpdir
@@ -274,7 +278,7 @@ export LC_ALL=C LANGUAGE=C
 aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 echo >> ~/env.sh "IPADDR=$IPADDR"
 echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"	# queried by make_machine.sh from the outside, so that it can run certbot for us.
-echo >> ~/env.sh "webroute=\$webroute"		# in case rewriteBase is nonenmpty
+echo >> ~/env.sh "webroute=$webroute"		# in case rewriteBase is nonenmpty
 echo >> ~/env.sh "OC10_VERSION=$vers"
 echo >> ~/env.sh "OC10_TAR_URL=$tar"
 echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
@@ -334,10 +338,8 @@ echo "+ curl -L $tar | tar jxf -"
 curl -L $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
 
-webroute=/owncloud	# what we document
-# webroute=/		# what users expect
 cat <<EOCONF > /etc/apache2/sites-available/owncloud.conf
-Alias \$webroute "/var/www/owncloud/"
+Alias $webroute "/var/www/owncloud/"
 
 <Directory /var/www/owncloud/>
   Options +FollowSymlinks
@@ -393,7 +395,7 @@ occ log:owncloud --enable -vvv
 occ log:manage --level=info -vvv				# info=1, okayis - debug=0, way too much token refresh nonsense.
 # occ config:system:set log_query --value true			# seen in 9.1/admin_manual
 occ config:system:set upgrade.disable-web --value false		# default is false. Just here to make it appear in config.php
-occ config:system:set htaccess.RewriteBase --value "\$webroute"	# index.php less setup
+occ config:system:set htaccess.RewriteBase --value "$webroute"	# index.php less setup
 occ maintenance:update:htaccess					# index.php less setup
 
 echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > oc.crontab
@@ -470,7 +472,7 @@ echo "\$ftppass" | sshfs -o password_stdin -o StrictHostKeyChecking=no -o allow_
 # occ files_external:create /local-mnt-sftp local null::null -c datadir=/mnt/sftp
 
 
-curl -k https://$IPADDR\$webroute/status.php
+curl -k https://$IPADDR$webroute/status.php
 echo; sleep 5
 cd
 ln -s /var/www/owncloud o
@@ -552,18 +554,18 @@ done
 if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
   occ config:system:set trusted_domains 2 --value "\$oc10_fqdn"
-  occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn\$webroute"	# Avoid http://localhost in notifcations emails.
+  occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
   if grep -q 'Congratulations!' ~/CF_DNS.msg >/dev/null 2>&1; then
     echo >> ~/POSTINIT.msg "DNS: SSL-Cert succeeded via cf_dns - access this system"
     echo >> ~/POSTINIT.msg "DNS:"
-    echo >> ~/POSTINIT.msg "DNS: 				https://\$oc10_fqdn\$webroute"
+    echo >> ~/POSTINIT.msg "DNS: 				https://\$oc10_fqdn$webroute"
     echo >> ~/POSTINIT.msg ""
   else
     echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
     echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certificate:"
     echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"
     # echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
-    echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn\$webroute"
+    echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
     echo >> ~/POSTINIT.msg ""
   fi
 fi
@@ -598,6 +600,6 @@ cat << EOM
 Server $vers is ready.
 
 From remote
-	firefox https://$IPADDR\$webroute
+	firefox https://$IPADDR$webroute
 EOM
 EOF
