@@ -13,6 +13,9 @@
 | Label "open with" in read only mode | User1 shares a txt file with User2 without edit permission | Label "open with" adds a "read only" clarification in list of files, details view and preview | 
 | Can share |  1. User1 shares a txt file with User2 including share permission<br>2. User2 shares with user3  | User3 has access to the file. Check in web | 
 | Can not share |  1. User1 shares a txt file with User2 without share permission<br>2. User2 shares with user3 | Not posible. User3 does not have access to the file | 
+| Can not move |   |  | 
+| Can not delete |   | | 
+| Can not rename |   |  | 
 |**Folders - oCIS**||||
 | Viewer |  Open an available space with viewer permission| FAB is hidden in all folders and subfolders | P m12 | |
 | Writer - Manager | Open an available space with writer or manager permissions permission| FAB is displayed in all folders and subfolders |  P m12 | |
