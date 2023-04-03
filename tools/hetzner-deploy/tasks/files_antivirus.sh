@@ -104,9 +104,11 @@ else
 fi
 echo ""
 echo "Make a remote fortinet or McAfee webgateway ICAP socket appear at localhost:"
-echo "  firefox https://\$OPENSENSE_HOST:\$OPENSENSE_PORT/firewall_nat.php # configure open ports as needed."
-echo "  ssh -N -v -L 61344:192.168.0.32:1344 root@157.90.80.61 -p 16806"
-echo "  ssh -N -v -L 61344:192.168.0.2:1344 root@157.90.80.61 -p 16806"
+echo "  firefox https://\$OPENSENSE_HOST:\$OPENSENSE_PORT/firewall_nat.php #enable forward 13441 and 13442 to McAfee and fortinet"
+echo "   .../firewall_rules.php?if=wan # add a rule to allow source=$IPADDR to reach \OPENSENSE_HOST:13441"
+echo "   ... but then, the nat rules just don't work... -> we have to use a jump host instead:"
+echo "  ssh -N -v -L 61344:192.168.0.32:1344 root@157.90.80.61 -p 16806	# fortinet"
+echo "  ssh -N -v -L 61344:192.168.0.2:1344 root@157.90.80.61 -p 16806	# McAfee"
 echo "Inspect traffic at that local socket:"
 echo '  tcpdump -A -s 1500 "port 61344" -i lo 	# for hexdump use -X'
 echo ""
