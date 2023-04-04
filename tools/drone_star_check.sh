@@ -8,13 +8,13 @@
 star=.drone.star
 buildifier="docker run -v $(pwd)/$star:/$star owncloudci/bazel-buildifier buildifier"
 
-if [ ! - f "$star" ]; then
+if [ ! -f "$star" ]; then
   echo "ERROR: no $star file found here."
   exit -1
 fi
 
 $buildifier --mode=check $star || bad=true
-test [ -n "$bad" ]; then
+if [ -n "$bad" ]; then
   echo "ERROR: buildifier --mode=check"
   cp $star $star.backup
   # --mode=diff exists, but does not work.
