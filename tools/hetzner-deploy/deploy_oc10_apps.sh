@@ -2,6 +2,7 @@
 #
 # 2021-02-03, jw@owncloud.com
 # 2022-01-25, jw@owncloud.com, added marketplace download support
+# 2023-04-05, jw@owncloud.com, testing prerequisites from https://doc.owncloud.com/server/10.12/developer_manual/testing/ui-testing.html
 #
 # Special apps supported:
 # - files_antivirus with a local clamav
@@ -290,6 +291,17 @@ echo >> ~/env.sh "ARGV='${ARGV[@]}'"
 
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
+# We need a 2.x composer (ubuntu only has 1.x), in case we want to run some unit or acceptance tests here.
+wget https://getcomposer.org/installer -O composer-setup.php
+php ./composer-setup.php
+chmod a+x composer.phar
+mv composer.phar /usr/local/bin/composer	# has prioity over /usr/bin/composer
+## From https://doc.owncloud.com/server/10.12/developer_manual/testing/ui-testing.html
+#docker pull selenium/standalone-chrome:3.141.59-oxygen
+#docker pull selenium/standalone-chrome-debug:3.141.59-oxygen
+#docker pull selenium/standalone-firefox
+#docker pull selenium/standalone-firefox-debug
+
 # FROM
 # * https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
 # * https://doc.owncloud.com/server/next/admin_manual/installation/manual_installation/manual_installation_prerequisites.html
@@ -341,6 +353,7 @@ echo "... installing $tar"
 echo "+ curl -L $tar | tar jxf -"
 curl -L $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
+chmod a+x owncloud/tests/acceptance/run.sh	# in case we want to run some acceptance tests here.
 
 cat <<EOCONF > /etc/apache2/sites-available/owncloud.conf
 Alias $webroute "/var/www/owncloud/"

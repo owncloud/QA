@@ -9,7 +9,7 @@ apt install -y php-ldap php-pgsql php-json php-mbstring php-mysql php-sqlite3 ph
 apt install -y git screen wget apache2 ssl-cert docker.io jq
 apt install -y vim screen docker.io docker-compose binutils ldap-utils
 apt install -y php-xml php-zip php-apcu php-redis php-gmp
-apt install -y git screen docker.io composer make libxml2-utils apache2 libapache2-mod-php openssl php-imagick php-common php-curl php-gd php-imap php-intl php-json php-mbstring php-mysql php-ssh2 php-xml php-zip php-apcu php-ldap php-gmp wget npm
+apt install -y git screen docker.io make libxml2-utils apache2 libapache2-mod-php openssl php-imagick php-common php-curl php-gd php-imap php-intl php-json php-mbstring php-mysql php-ssh2 php-xml php-zip php-apcu php-ldap php-gmp wget npm
 apt install -y php-pear php7.4-dev libsmbclient libsmbclient-dev make
 apt install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
 apt install -y smbclient coreutils ldap-utils postgresql
@@ -28,7 +28,15 @@ apt install -y clamav p7zip-full postgresql docker.io nodejs git make gcc g++ ya
 # docker pull deepdiver/icap-clamav-service:latest
 
 ## Pull version numbers, so that latest is always a quick update check.
-docker pull mailhog/mailhog:v1.0.1
+docker pull mailhog/mailhog:v1.0.1			# v1.0.1 = 8d76a3d4ffa3 = latest as per 2023-04-05
+## From https://doc.owncloud.com/server/10.12/developer_manual/testing/ui-testing.html
+
+# Is the added size here slowing down the startup time? They are ca 1GB each.
+docker pull selenium/standalone-chrome:3.141.59-oxygen	# do not use latest-> https://github.com/owncloud/core/issues/35444
+docker pull selenium/standalone-chrome-debug:3.141.59-oxygen
+docker pull selenium/standalone-firefox:111.0		# 111.0 = fd26d59b7f7e = latest as per 2023-04-05
+docker pull selenium/standalone-firefox-debug:111.0
+
 
 
 
