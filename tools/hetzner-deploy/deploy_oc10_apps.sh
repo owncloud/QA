@@ -18,14 +18,12 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.12.0
+vers=10.12.1-rc.2
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.12.1-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230404-qa.tar.bz2
 test "$vers" = "10.12.0"  -o "$vers" = "10.12"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230313.tar.bz2
-test "$vers" = "10.12.0-rc.3"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230308.tar.bz2
-test "$vers" = "10.12.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230228.tar.bz2
-test "$vers" = "10.12.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230223.tar.bz2
 test "$vers" = "10.11.0"  -o "$vers" = "10.11"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220919.tar.bz2
 test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
 test "$vers" = "10.9.1"   -o "$vers" = "10.9"   && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220112.tar.bz2
@@ -273,17 +271,23 @@ fi
 aptQ() { echo "+ apt \$@"; apt "\$@" 2>&1 | stdbuf -o0 tr ] '\n' | grep -E -v "^(Preparing to|Get:|Selecting previously unselected|^WARNING: apt does not have|Creating config|Created symlink|Processing triggers|^Fetched |^Setting up |^Need to |^After this |^\s*\(Reading |^Reading |^Building|^\$|^0 upgraded, )"; test \${PIPESTATUS[0]} -eq 0; }
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
+aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
+
+export TEST_SERVER_URL=https://\$oc10_fqdn
+export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=admin works, but not mentioned in the docs.
+export BROWSER=chrome
+
+env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute machine_type TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
 
 # We almost always assign a DNS name.
-aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
-echo >> ~/env.sh "IPADDR=$IPADDR"
-echo >> ~/env.sh "oc10_fqdn=\$oc10_fqdn"	# queried by make_machine.sh from the outside, so that it can run certbot for us.
-echo >> ~/env.sh "webroute=$webroute"		# in case rewriteBase is nonenmpty
+
+# Attention: quoting hell ahead. INIT.bashrc should really be a file all by itself, instead of being embedded here.
+echo > ~/env.sh "IPADDR=$IPADDR"
+for i in \$env_sh_vars; do eval echo export "\$i=\'\\\$\$i\'"; done >> ~/env.sh
 echo >> ~/env.sh "OC10_VERSION=$vers"
 echo >> ~/env.sh "OC10_TAR_URL=$tar"
-echo >> ~/env.sh "HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE"
-echo >> ~/env.sh "machine_type=$machine_type"
 echo >> ~/env.sh "ARGV='${ARGV[@]}'"
+
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
 # FROM
