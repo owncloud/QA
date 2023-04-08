@@ -276,9 +276,11 @@ aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
 export TEST_SERVER_URL=https://\$oc10_fqdn
 export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=admin works, but not mentioned in the docs.
+export HCLOUD_MACHINE_TYPE=$machine_type
+export HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE
 export BROWSER=chrome
 
-env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute machine_type TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
+env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute HCLOUD_MACHINE_TYPE TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
 
 # We almost always assign a DNS name.
 
