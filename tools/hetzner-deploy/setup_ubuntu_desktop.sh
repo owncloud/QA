@@ -18,6 +18,7 @@ source lib/make_machine.sh -u $d_name -t cx21 -L $location -p software-propertie
 scp ubuntu-desktop.sh root@$IPADDR:
 
 INIT_SCRIPT << EOF
+  export IPADDR=$IPADDR
   bash ./ubuntu-desktop.sh
 
   cat << EOM > ~/POSTINIT.msg

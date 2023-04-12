@@ -10,13 +10,20 @@ apt purge -y mate-power-manager	# it crashes on a VM
 systemctl set-default graphical
 
 # recommended by /home/testy/HOWTO/remote-desktop-sharing.txt
-aptQ install -y x2goserver x2goserver-xsession
+aptQ install -y x2goserver x2goserver-xsession firefox
 adduser testy --gecos "" --disabled-password
 mkdir ~testy/.ssh
 cp .ssh/authorized_keys ~testy/.ssh/
 chown -R testy. ~testy/.ssh
 chmod 700 /home/testy/.ssh
-# TODO: add testy to sudoers.
+# Add testy to sudoers. Group sudo does not work, it asks for a password which we don't have.
+echo "testy ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/testy
+
+if [ -S "$XDG_RUNTIME_DIR/bus" ]; then
+  # Avoid silly firefox snap error: /user.slice/user-1000.slice/session-1.scope is not cgroup
+  # The original value does not work: unix:abstract=/tmp/dbus-BaDXy43fk3,guid=d592fd877e5484036b9090ad6436d879
+  export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+fi
 
 echo "Now reboot... and connect with x2goclient"
 echo "	Host: $IPADDR"
