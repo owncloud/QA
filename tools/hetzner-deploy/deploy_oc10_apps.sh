@@ -212,7 +212,9 @@ for arg in "$@"; do
 done
 
 ## Default to always have a DNS name. Uncomment the next line, to skip preparations for DNS.
-firstarg="-$(echo "${ARGV[0]}" | sed -e 's@.*/@@' -e 's@^\w*:@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
+for firstarg in ${ARGV[@]}; do case "$firstarg" in -*);; *) break;; esac; done
+# firstarg is now the first non-option argument.
+firstarg="-$(echo "$firstarg" | sed -e 's@.*/@@' -e 's@^\w*:@@' -e 's@\b\.tar\.gz\b@@' )"	# cut away any path prefix, and any tar.gz suffix
 test "$firstarg" = "-" && firstarg=
 # try to keep the name short. certbot explodes on long names
 firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-ransomware_protection/-rwp/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')

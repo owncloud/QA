@@ -6,7 +6,7 @@ aptQ update
 aptQ upgrade -y
 aptQ install -y software-properties-common
 aptQ install -y x11vnc ubuntu-mate-desktop	# ca 2GB of packages
-apt purge mate-power-manager	# it crashes on a VM
+apt purge -y mate-power-manager	# it crashes on a VM
 systemctl set-default graphical
 
 # recommended by /home/testy/HOWTO/remote-desktop-sharing.txt
