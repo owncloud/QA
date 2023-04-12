@@ -84,10 +84,12 @@ fi
 if [ "$2" = '--poll' ]; then
   # Try max 10 min
   for try in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29; do
-    fqdn=$(timeout 10 ssh root@$1 grep fqdn= env.sh | sed -e 's/^.*fqdn=//')
+    # extract the string that follows after fqdn= and strip quotes.
+    fqdn=$(timeout 10 ssh root@$1 grep fqdn= env.sh | sed -e 's/^.*fqdn=//' -e "s/[\"']//g")
     if [ -n "$fqdn" ]; then
       break
     fi
+    echo "$0: retry $try ssh root@$1 ..."
     sleep 10
   done
   echo "$0: Poll result: FQDN = '$fqdn'"

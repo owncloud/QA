@@ -19,11 +19,11 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.12.1-rc.2
+vers=10.12.1-rc.3
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.12.1-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230404-qa.tar.bz2
+test "$vers" = "10.12.1-rc.3"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230406-qa.tar.bz2
 test "$vers" = "10.12.0"  -o "$vers" = "10.12"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230313.tar.bz2
 test "$vers" = "10.11.0"  -o "$vers" = "10.11"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220919.tar.bz2
 test "$vers" = "10.10.0"  -o "$vers" = "10.10"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20220518.tar.bz2
@@ -274,6 +274,7 @@ export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whi
 export LC_ALL=C LANGUAGE=C
 aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
+export EMAIL_HOST=localhost
 export TEST_SERVER_URL=https://\$oc10_fqdn
 export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=admin works, but not mentioned in the docs.
 export HCLOUD_MACHINE_TYPE=$machine_type
@@ -303,6 +304,7 @@ mv composer.phar /usr/local/bin/composer	# has prioity over /usr/bin/composer
 #docker pull selenium/standalone-chrome-debug:3.141.59-oxygen
 #docker pull selenium/standalone-firefox
 #docker pull selenium/standalone-firefox-debug
+#docker pull inbucket/inbucket
 
 # FROM
 # * https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
