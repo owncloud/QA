@@ -484,6 +484,8 @@ chmod 700 /home/ftpdata/.ssh
 
 occ app:list '^files_external$' --output=json
 occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
+occ market:install files_clipboard
+occ app:enable files_clipboard	# a copy paste function is great for testing ...
 
 occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
 occ config:app:set core enable_external_storage --value yes

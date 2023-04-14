@@ -23,10 +23,13 @@ if [ -S "$XDG_RUNTIME_DIR/bus" ]; then
   # Avoid silly firefox snap error: /user.slice/user-1000.slice/session-1.scope is not cgroup
   # The original value does not work: unix:abstract=/tmp/dbus-BaDXy43fk3,guid=d592fd877e5484036b9090ad6436d879
   export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+  echo export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus" >> ~/.profile
 fi
 
 echo "Now reboot... and connect with x2goclient"
 echo "	Host: $IPADDR"
 echo "	User: testy"
 echo "	with same ssh-key as user root"
+echo "Remove black borders from window decoration:"
+echo "  Control Center -> Windows -> Composting Manager -> [x] disable composting"
 
