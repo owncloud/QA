@@ -33,8 +33,8 @@ INIT_SCRIPT << EOF
 
   cat <<EOM
 ---------------------------------------------
-# machine prepared.
-# connect from remote:
+# Machine prepared via owncloud-docker/compose-playground.
+# Connect from remote:
 	curl -k https://$IPADDR:9200/status.php
 
 # Follow the instructions at
