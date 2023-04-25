@@ -17,11 +17,13 @@
 
 # source ./env.sh	# probably not needed.
 
+phpver=$(ls /etc/php/ | head -n 1)
+
 # There is no php7.4-pear, not even in ondrej's ppa.
-apt install -y php-pear php7.4-dev libsmbclient libsmbclient-dev make smbclient || exit -1
+apt install -y php-pear php$phpver-dev libsmbclient libsmbclient-dev make smbclient || exit -1
 
 pecl install smbclient-stable || exit 1
-echo 'extension="smbclient.so"' > /etc/php/7.4/mods-available/smbclient.ini
+echo 'extension="smbclient.so"' > /etc/php/$phpver/mods-available/smbclient.ini
 phpenmod -v ALL smbclient
 service apache2 reload
 #

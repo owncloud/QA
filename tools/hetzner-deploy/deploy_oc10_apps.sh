@@ -225,18 +225,25 @@ h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-DATE
 d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/" | tr '[A-Z]' '[a-z]' | tr . -)
 
-test -z "$HCLOUD_MACHINE_TYPE" && HCLOUD_MACHINE_TYPE=cx11
-machine_type=$HCLOUD_MACHINE_TYPE
-# cx11: 20 GB
-# cx21: 40 GB
-# cpx21: 80 GB
-# ccx11: 80 GB, 2 CPUs dedicated.
-# cpx31: 160 GB
-echo "$*" | grep files_antivirus   && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
-echo "$*" | grep search_elastic    && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
-echo "$*" | grep files_primary_s3  && machine_type=cpx31 # yarn tsc fails very often on a cx11.
-echo "$*" | grep files_external_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
-echo "$*" | grep objectstore       && machine_type=cx21	# yarn tsc fails very often on a cx11.
+if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
+  machine_type=cx11
+  # cx11: 20 GB
+  # cx21: 40 GB
+  # cpx21: 80 GB
+  # ccx11: 80 GB, 2 CPUs dedicated.
+  # cpx31: 160 GB
+  echo "$*" | grep files_antivirus   && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
+  echo "$*" | grep search_elastic    && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
+  echo "$*" | grep files_primary_s3  && machine_type=cpx31 # yarn tsc fails very often on a cx11.
+  echo "$*" | grep files_external_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
+  echo "$*" | grep objectstore       && machine_type=cx21	# yarn tsc fails very often on a cx11.
+fi
+
+network=$HCLOUD_NETWORK_NAME
+if [ -z "$HCLOUD_NETWORK_NAME" ]; then
+  echo "$*" | grep user_ldap             && network=testlab-network	# ldap may want to use ad01.testlab.owncloud.works
+  echo "$*" | grep windows_network_drive && network=testlab-network	# wnd may want to use wnd.testlab.owncloud.works
+fi
 
 function title() { wmctrl -r :ACTIVE: -N "$@"; }
 title "$d_name - hetzner"
@@ -244,6 +251,17 @@ title "$d_name - hetzner"
 mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
 source $mydir/lib/make_machine.sh -L $location -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin
+
+if [ -z "$network" ]; then
+  if [ -z "$(which hcloud)" ]; then
+    echo "ERROR: HCLOUD_NETWORK_NAME=$network but no hcloud binary found."
+    echo " (press CTRL-C to abort or wait 5 sec to continue anyway)"
+    sleep 5
+  else
+    echo "+ hcloud server attach-to-network -n $network $NAME"
+    hcloud server attach-to-network -n "$network" "$NAME" || true # continue anyway...
+  fi
+fi
 
 rm -rf $tmpdir
 
@@ -281,10 +299,17 @@ export EMAIL_HOST=localhost
 export TEST_SERVER_URL=https://\$oc10_fqdn
 export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=admin works, but not mentioned in the docs.
 export HCLOUD_MACHINE_TYPE=$machine_type
+export HCLOUD_NETWORK_NAME=$network
 export HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE
 export BROWSER=chrome
 
-env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute HCLOUD_MACHINE_TYPE TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
+if [ "$network" = 'testlab-network' ]; then
+ # we expect these machines in the network
+ ping -c 1 -W 1 10.1.0.3 > /dev/null && echo >> /etc/hosts "10.1.0.3 ad01.testlab.owncloud.works"
+ ping -c 1 -W 1 10.1.0.4 > /dev/null && echo >> /etc/hosts "10.1.0.4 wnd.testlab.owncloud.works"
+fi
+
+env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute HCLOUD_NETWORK_NAME HCLOUD_MACHINE_TYPE TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
 
 # We almost always assign a DNS name.
 

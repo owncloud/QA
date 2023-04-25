@@ -19,6 +19,21 @@ esac
 #  ownCloud Inc. has register the OID http://oid-info.com/get/1.3.6.1.4.1.39430 and we extended it to define the required LDAP objects
 #
 # Proxy idea: https://ldaptor.readthedocs.io/en/latest/cookbook/ldap-proxy.html
+#
+# Thomas Kinsky says:
+# there is shat-ldap, for the shat/kibana poc, not really needed anymore with
+# some users configured very basically (openldap 2.4) with memberof overlay,
+# might need some configuration
+
+## hetzner QA project: testlab-network
+# ldap_server=ad01.testlab.owncloud.works	# 10.1.0.3
+# ldap_login="CN=Administrator,CN=Users,DC=TESTLAB,DC=OWNCLOUD,DC=WORKS"
+# base="DC=TESTLAB,DC=OWNCLOUD,DC=WORKS"
+# -> Test Base DN: 	253 entries available within the provided Base DN
+#
+## this returns ca 6000 lines, with users administrator, e.einstein, w.heisenberg
+# ldapsearch -d 0 -H ldap://10.1.0.3 -D administrator@testlab.owncloud.works -w "$password" -b dc=testlab,dc=owncloud,dc=works
+## but owncloud cannot find any users there....
 
 ## From Gerald
 ldap_server=95.217.210.161
