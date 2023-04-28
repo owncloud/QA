@@ -69,5 +69,5 @@ Server: oCIS 3.0.0, oC 10.12.1
 | **Files App** |   |  |
 | Share in Files app | 1. Share an item with a user<br>2. Share by link the same item <br>3. Open Files App and select the ownCloud provider<br>3. Long press over the shared item in Files App<br>4. Click on `Share` | Sharing view with all existing shares listed  |  P m16 |  |  |
 | **Errors** |   |  |
-| No connection | 1. Remove device connection<br>2. Share item with user<br>3. Create new link<br>4. Edit Share/Link<br>5. Remove Share/Link| Error:  No connection | F m16 | Links: incorrect error  |  | |
+| No connection | 1. Remove device connection<br>2. Share item with user<br>3. Create new link<br>4. Edit Share/Link<br>5. Remove Share/Link| Sharing dialog dimissed in all cases<br>In Sharing shorcuts in sidebar menu: `Sharing requires an internet connction.`| P m16 |  |  | |
 | Server out| 1. Switch server down<br>2. Share item with user<br>3. Create new link<br>4. Edit Share/Link<br>5. Remove Share/Link| Error: No connection | F m16 | Links: incorrect error  |  |
