@@ -48,7 +48,7 @@ All actions to be done on the release branch from here:
     - [ ] Add section "Changlog Testing" using github releases text or CHANGELOG.md from release branch
     - [ ] Do changelog tests
     - [ ] Do regression tests
-    - [ ] PHP 7.3 compatibility (`HCLOUD_SERVER_IMAGE=debian-10 oc10.sh ...`)
+    - [ ] PHP 7.3 compatibility (`HCLOUD_SERVER_IMAGE=debian-10 OC10_VERSION=10.11 oc10.sh ...`)
     - [ ] => Final "Go" from QA (set 'QA-ready' label) => else do another RC after fixing issues in the "release-$version" branch
 
 #### Final
