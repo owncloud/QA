@@ -2,6 +2,7 @@
 
 The toplevel checkmark indictes the test was performed.
 The indented checkmarks indicate the results were as expected.
+
 Template: https://github.com/owncloud/QA/edit/master/Server/Test_Plan_drawio.md
 
 This is a quick smoke test only. We don't test drawio itself, only the integration with ownCloud.
