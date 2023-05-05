@@ -2,6 +2,7 @@
 
 The toplevel checkmark indictes the test was performed.
 The indented checkmarks indicate the results were as expected.
+Template: https://github.com/owncloud/QA/edit/master/Server/Test_Plan_drawio.md
 
 This is a quick smoke test only. We don't test drawio itself, only the integration with ownCloud.
 
@@ -18,6 +19,7 @@ This is a quick smoke test only. We don't test drawio itself, only the integrati
 * [ ] File locking
    * [ ] Multiple users cannot open a drawing for editing simultaneously. -> #5
    * [ ] all additional users see a readonly view, as if through a readonly share.
+   * [ ] When the locking user closes the drawing (both, with or without saving), the drawing is unlocked.
 * [ ] editing through a share
    * [ ] Drawing file shared as read-write can be updated.
    * [ ] Drawing file in a shared folder can be updated, if the folder is shared rad/write
