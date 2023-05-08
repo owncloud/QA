@@ -110,6 +110,7 @@ occ ldap:set-config "$confID" ldapQuotaDefault '66 MB'
 occ ldap:set-config "$confID" ldapUserDisplayName cn
 occ ldap:set-config "$confID" ldapUserDisplayName2 displayuser
 occ ldap:set-config "$confID" ldapUserFilter '(|(objectclass=inetOrgPerson)(objectclass=organizationalPerson))'
+occ ldap:set-config "$confID" ldap_configuration_active 1	# Initialization "bug": default is inactive here, but active when user click on the web UI.
 
 conftest=$(occ ldap:test-config "$confID" | tee -a /dev/stderr)
 if echo "$conftest" | grep -q -i invalid; then
@@ -121,18 +122,18 @@ fi
 
 ## prepare user sync every 5 min. sync users
 
-## Workaround for a backend initialization bug: It initializes only, when queried via POST requests. occ only sees the backend afterwards.
-## Caution: $oc10_fqdn is not yet in trusted_domains, but $IPADDR is.
-curl_POST() { curl -L -s -k -b cookie.jar -c cookie.jar "https://$IPADDR/index.php/$1" --data-raw "$2"; } 	# index.php urls work also in index.php-less setup
-for try in 1 2 3 4 5 fail; do
-  curl_POST login 'user=admin&password=admin' | grep data-user && break							# login, fetch cookie, prints username and token
-  sleep 5
-done
-if [ $try = fail ]; then echo "Login failed:"; set -x; curl_POST login 'user=admin&password=admin'; fi
-# curl_POST apps/user_ldap/ajax/getConfiguration.php "ldap_serverconfig_chooser=s01" | jq 			# -> huge json structure, but still shows no LDAP backend.
-curl_POST apps/user_ldap/ajax/testConfiguration.php  "ldap_serverconfig_chooser=s01" | jq			# "status": "success"
-curl_POST apps/user_ldap/ajax/wizard.php             "ldap_serverconfig_chooser=s01&action=countInBaseDN" | jq	# "ldap_test_base": 10
-## TODO: check if getConfiguration is also needed.
+# ## Workaround for a backend initialization bug: It initializes only, when queried via POST requests. occ only sees the backend afterwards.
+# ## Caution: $oc10_fqdn is not yet in trusted_domains, but $IPADDR is.
+# curl_POST() { curl -L -s -k -b cookie.jar -c cookie.jar "https://$IPADDR/index.php/$1" --data-raw "$2"; } 	# index.php urls work also in index.php-less setup
+# for try in 1 2 3 4 5 fail; do
+#   curl_POST login 'user=admin&password=admin' | grep data-user && break							# login, fetch cookie, prints username and token
+#   sleep 5
+# done
+# if [ $try = fail ]; then echo "Login failed:"; set -x; curl_POST login 'user=admin&password=admin'; fi
+# # curl_POST apps/user_ldap/ajax/getConfiguration.php "ldap_serverconfig_chooser=s01" | jq 			# -> huge json structure, but still shows no LDAP backend.
+# curl_POST apps/user_ldap/ajax/testConfiguration.php  "ldap_serverconfig_chooser=s01" | jq			# "status": "success"
+# curl_POST apps/user_ldap/ajax/wizard.php             "ldap_serverconfig_chooser=s01&action=countInBaseDN" | jq	# "ldap_test_base": 10
+# ## TODO: check if getConfiguration is also needed.
 
 crontab=/var/spool/cron/crontabs/www-data
 occ user:sync -l | grep -q User_LDAP || echo "FIXME: admin must visit User Authentication page to initialize class OCA\User_LDAP\User_Proxy" >> ~/POSTINIT.msg
