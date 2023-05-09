@@ -18,7 +18,7 @@
 |**Create new document**| In oCIS server with app provider|
 | New name | 1. In list of files, click on FAB<br>2. Click on `New Document`<br>3. Select any type<br>4. Add a correct name for the file<br>5. Save the file in the web<br>6. Close web editor | Back to the app, showing list of files that includes the new file<br>Check in web that content was saved | P m12 |  |  |
 |**Errors**| 
-| Existing name | 1. In list of files, click on FAB<br>2. Click on `New Document`<br>3. Select any type<br>4. Add a name for the file that already exist in the current folder (same extension)| Error: ??? | F m12 | Error message not correct |  |
+| Existing name | 1. In list of files, click on FAB<br>2. Click on `New Document`<br>3. Select any type<br>4. Add a name for the file that already exist in the current folder (same extension)| Error:  | P m12 | Server issue: https://github.com/owncloud/ocis/issues/6140 |  |
 | Empty name | 1. In list of files, click on FAB<br>2. Click on `New Document`<br>3. Select any type<br>4. Let file name empty and submit| Error: Filename must not be empty | P m12 |  |  |
 | Forbidden characters | 1. In list of files, click on FAB<br>2. Click on `New Document`<br>3. Select any type<br>4. Set a file name that contains forbidden characters ("/" , "\\")| Error: Filename must not be empty | P m12 | To improve |  |
 | Created other client | 1. In web (or other client), create new file of an specific type and let it open in the browser<br>2. In app, click on `New Document`<br>3. Select same type as in 1.<br>4. Add same name as 1.| Error: File could not be created because permission error | P m12 |  |  |
