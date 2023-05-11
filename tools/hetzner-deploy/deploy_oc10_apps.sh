@@ -73,6 +73,7 @@ esac
 
 # webroute=/owncloud	# what we document
 webroute=/		# what users expect
+admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
 location=hel1		# hel1, fsn1, nbg1
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
@@ -102,15 +103,17 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
   echo "   OC10_WEBROUTE=/owncloud	define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
+  echo "   OC10_ADMIN_PASS='Passw0rd!'	define password for the owncoud addmin acocunt. Default: $admin_pass"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
   echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
-  echo "   HCLOUD_LOCATION=nbg1		to define the compute center location. hel1, fsn1, nbg1. Default: $location"
+  echo "   HCLOUD_LOCATION=nbg1		define the compute center location. hel1, fsn1, nbg1. Default: $location"
   exit 1
 fi
 
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 test -n "$OC10_WEBROUTE" && webroute="$OC10_WEBROUTE"
+test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
 
 tmpdir="/tmp/make_oc10_apps_dl_$$"
 mkdir -p $tmpdir
@@ -297,7 +300,7 @@ aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
 export EMAIL_HOST=localhost
 export TEST_SERVER_URL=https://\$oc10_fqdn
-export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=admin works, but not mentioned in the docs.
+export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=$admin_pass ... works, but not mentioned in the docs.
 export HCLOUD_MACHINE_TYPE=$machine_type
 export HCLOUD_NETWORK_NAME=$network
 export HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE
@@ -435,9 +438,9 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES O
 OC10_DATABASE_HOST=localhost
 test "$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
 
-occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --admin-user "admin" --admin-pass "admin" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
+occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --admin-user "admin" --admin-pass "$OC10_ADMIN_PASS" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
 occ status    || sleep 15	# in case there was an error, let the user study that for a while...
-occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "admin" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
+occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "$OC10_ADMIN_PASS" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
 
 occ config:system:set trusted_domains 1 --value "$IPADDR"
 occ log:owncloud --enable -vvv
