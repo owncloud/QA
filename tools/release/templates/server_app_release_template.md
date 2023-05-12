@@ -32,7 +32,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Build
 
-All actions to be done on the release branch from here:
+All actions to be done on the release branch (`git pull; git checkout -b release-x.x.x`) from here:
 - [ ] Bump version in `appinfo/info.xml` (no version suffix)
 - [ ] Check php version dependency and minimum ownCloud version dependency in `appinfo/info.xml`
 - [ ] Bump "sonar.projectVersion=" in `sonar-project.properties` (no version suffix)
