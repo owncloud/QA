@@ -438,9 +438,11 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES O
 OC10_DATABASE_HOST=localhost
 test "$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
 
-occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --admin-user "admin" --admin-pass "$OC10_ADMIN_PASS" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
+set -x
+occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --admin-user "admin" --admin-pass "$admin_pass" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
 occ status    || sleep 15	# in case there was an error, let the user study that for a while...
-occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "$OC10_ADMIN_PASS" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
+set +x
+occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "$admin_pass" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
 
 occ config:system:set trusted_domains 1 --value "$IPADDR"
 occ log:owncloud --enable -vvv
@@ -655,5 +657,6 @@ Server $vers is ready.
 
 From remote
 	firefox https://$IPADDR$webroute
+		admin / $admin_pass
 EOM
 EOF
