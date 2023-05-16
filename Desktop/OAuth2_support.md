@@ -119,7 +119,7 @@ Coming from an old version of the client (< 2.4.0) will require to re-login into
 
 Some extra verifications after upgrading the client:
 
-- [Account Configuration](https://doc.owncloud.org/desktop/2.3/advancedusage.html#configuration-file):
+- [Account Configuration](https://doc.owncloud.com/desktop/next/advanced_usage/configuration_file.html):
     - [ ] Include the `i\http_oauth=[bool]` on every account (`i`) in the config file. `[bool]` it's based in the server's support for OAuth2. 
 - Session Cookie:
     - [ ] The session cookies are replaced by empty ones 

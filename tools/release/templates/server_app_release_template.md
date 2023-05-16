@@ -7,9 +7,8 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Product approval 
 
-- [ ] Verify transifex commits are in master: If a toplevel folder `l10n` exists, then `git log` should show '[tx] updated from transifex` ...
-- [ ] Ping pmaier to check `info.xml` description and screenshot
-- [ ] Get approval on translations from pmaier - send the date of the last tx commit from drone to Patrick
+- [ ] Verify transifex commits (enterprise should update weekly, others daily): If folder `l10n` exists, then `git log` should show '[tx] updated from transifex` ...
+- [ ] Ping ProductManagement to check `info.xml` description and screenshot
 
 ### QA
 
@@ -48,6 +47,7 @@ All actions to be done on the release branch (`git pull; git checkout -b release
     - [ ] Add section "Changlog Testing" using github releases text or CHANGELOG.md from release branch
     - [ ] Do changelog tests
     - [ ] Do regression tests
+    - [ ] Watch out for untranslated strings when locale is de oder de_DE.
     - [ ] PHP 7.3 compatibility (`HCLOUD_SERVER_IMAGE=debian-10 OC10_VERSION=10.11 oc10.sh ...`)
     - [ ] => Final "Go" from QA (set 'QA-ready' label) => else do another RC after fixing issues in the "release-$version" branch
 
