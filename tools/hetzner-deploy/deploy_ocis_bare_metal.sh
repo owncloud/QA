@@ -68,6 +68,11 @@ user_speech_url=https://www.einstein-website.de/z_biography/einstein1930.mp3
 INIT_SCRIPT <<EOF
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#install-and-configure-the-infinite-scale-binary
+
+export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
+export LC_ALL=C LANGUAGE=C
+apt -y install apache2 certbot python3-certbot-apache
+
 wget -O /usr/local/bin/ocis $ocis_url
 chmod +x /usr/local/bin/ocis
 
@@ -83,8 +88,10 @@ mkdir -p /etc/ocis
 touch /etc/ocis/ocis.env
 chown -R ocis:ocis /etc/ocis
 
+# ocis_fqdn is used by cf_dns ...
 cat <<EOT>> /etc/ocis/ocis.env
 OCIS_URL=https://$BASE_DOMAIN
+ocis_fqdn=$BASE_DOMAIN
 OCIS_VERSION_STRING=\$(ocis version | grep -i version)
 PROXY_HTTP_ADDR=0.0.0.0:9200
 PROXY_TLS=false
@@ -95,18 +102,88 @@ OCIS_LOG_LEVEL=warn
 OCIS_CONFIG_DIR=/etc/ocis
 OCIS_BASE_DATA_PATH=/var/lib/ocis
 EOT
-
 ln -s /etc/ocis/ocis.env env.sh
 
 rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.
 sudo -u ocis ocis init --insecure --force-overwrite --config-path /etc/ocis
-## this prints the admin_password. You can always retrieve the password with
-# grep admin_password /etc/ocis/ocis.yaml
-## 
+admin_pass="$(yq -r .idm.service_user_passwords.admin_password /etc/ocis/ocis.yaml)"
+##
 # import yaml
 # o = yaml.load(open('/etc/ocis/ocis.yaml'))
 # o['idm']['service_user_passwords']['admin_password']
+##
 
+cat <<EOT>> /etc/systemd/system/ocis.service
+[Unit]
+Description=OCIS server
+
+[Service]
+Type=simple
+User=ocis
+Group=ocis
+EnvironmentFile=/etc/ocis/ocis.env
+ExecStart=/usr/local/bin/ocis server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOT
+
+systemctl daemon-reload
+systemctl enable --now ocis
+
+# https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#apache-as-reverse-proxy
+apachectl configtest
+
+for mod in ssl headers env dir mime unique_id rewrite setenvif proxy; do
+  a2enmod \$mod 
+done
+a2ensite default-ssl
+
+cat <<EOT>> /etc/apache2/sites-available/ocis.conf
+<IfModule mod_rewrite.c>
+  <VirtualHost *:80>
+    ServerName $BASE_DOMAIN
+
+    # redirect all http urls to https
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L,QSA]
+
+  </VirtualHost>
+</IfModule>
+
+<IfModule mod_ssl.c>
+  <VirtualHost *:443>
+    ServerName $BASE_DOMAIN
+
+    SSLProxyEngine on
+    SSLProxyVerify none
+    SSLProxyCheckPeerCN off
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerExpire off
+
+    ProxyPass / https://localhost:9200/
+    ProxyPassReverse / https://localhost:9200/
+
+    #important, otherwise 400 errors from idp
+    ProxyPreserveHost on
+
+    ##
+    # SSLCertificateFile /etc/letsencrypt/live/ocis.example.com/fullchain.pem
+    # SSLCertificateKeyFile /etc/letsencrypt/live/ocis.example.com/privkey.pem
+
+    ## this file does not exist
+    # Include /etc/letsencrypt/options-ssl-apache.conf
+    # SSLOpenSSLConfCmd DHParameters /etc/letsencrypt/ssl-dhparams.pem
+  </VirtualHost>
+</IfModule>
+EOT
+a2ensite ocis
+systemctl reload apache2
+### fixme: really run this here?? The docs say so... https://github.com/owncloud/docs-ocis/blob/master/modules/ROOT/pages/depl-examples/bare-metal.adoc#issuing-a-certificate-via-certbot-for-apache
+
+# certbot --apache -d $BASE_DOMAIN
 
 # screen -d -m -S ocis-server -Logfile screenlog-ocis -L /usr/local/bin/ocis server
 
@@ -127,6 +204,7 @@ wait_for_ocis () {
   done
 }
 
+pip install yq		# yaml frontend for jq.
 pip install boltdb
 
 go install go.etcd.io/bbolt/cmd/bbolt@latest	# cli-tool to inspect boltdb files.
@@ -213,7 +291,17 @@ echo >> .env DEMO_USERS=true
 # # inspect some boltdb contents
 # 
 #   cp data/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
+#
+# ---------------------------------------------
 # 
+# # restart ocis after editing /etc/ocis/ocis.env
+#
+# systemctl restart ocis
+#
+# # view the ocis server logs
+#
+# journalctl -f -u ocis
+#
 # ---------------------------------------------
 # EOM
 EOF
