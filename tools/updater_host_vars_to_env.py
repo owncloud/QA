@@ -34,6 +34,8 @@ if len(sys.argv) > 1:
   else:
     yml = sys.argv[1]
 
+print('# To check the syntax, you may want to run a command similar to:\n#\n#     yamllint --strict -d "{extends: default, rules: {line-length: {max: 130}}}" %s\n#' % yml, file=sys.stderr)
+
 
 pre = 'OWNCLOUD_UPDATER_SERVER_' # prefix for all env variables
 all = yaml.safe_load(open(yml))
