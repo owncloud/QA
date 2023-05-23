@@ -27,9 +27,18 @@ if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=v3.0.0-alpha.2
   export OCIS_VERSION=daily
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
-  sleep 3
+  sleep 2
 fi
 vers=$(echo "$OCIS_VERSION" | sed -e 's/^v//')
+
+if [ -n "$OCIS_DNSNAME" ]; then
+  dns_name=$(echo "$OCIS_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/")
+else
+  dns_name=ocis-$(echo $vers  | tr '[A-Z]' '[a-z]' | tr . -)-$(date +%Y%m%d)
+  echo "No OCIS_DNSNAME specified, using $dns_name"
+  sleep 2
+fi
+export BASE_DOMAIN=$dns_name.jw-qa.owncloud.works
 
 if [ "$vers" == "testing" -o "$vers" == "daily" ]; then
   ocis_url=https://download.owncloud.com/ocis/ocis/daily/ocis-testing-linux-amd64
@@ -52,15 +61,11 @@ fi
 
 echo "Download from $ocis_url"
 
-d_tag=$(echo $vers  | tr '[A-Z]' '[a-z]' | tr . -)-$(date +%Y%m%d)
-export BASE_DOMAIN=ocis-$d_tag.jw-qa.owncloud.works
-
 # It does not work with the ubuntu-20.04-preload server image.
 export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
 # use a cx31 -- we need more than 40GB disk space.
 source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
-set -x
 
 if [ -z "$IPADDR" ]; then
   echo "Error: make_machine.sh failed."
@@ -73,7 +78,6 @@ user_portrait_url=https://upload.wikimedia.org/wikipedia/commons/3/32/Max_Lieber
 user_speech_url=https://www.einstein-website.de/z_biography/einstein1930.mp3
 
 INIT_SCRIPT <<EOF
-set -x
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#install-and-configure-the-infinite-scale-binary
 
@@ -190,63 +194,32 @@ cat <<EOT>> /etc/apache2/sites-available/ocis.conf
   </VirtualHost>
 </IfModule>
 EOT
+
+# we must not enable site ocis, before certbot was here.
+# when proxing everything, letsencrypt fails with
+#  
+for i in \$(seq 1 60); do
+  if [ -f ~/CF_DNS.msg ]; then
+    echo "########################### CF_DNS.msg ###########################"
+    cat ~/CF_DNS.msg
+    echo "########################### ---------- ###########################"
+    break
+  fi
+  sleep 3
+  echo "CF_DNS.msg not found. Retrying \$i ..."
+  test "\$i" == 60 && echo " gving up."
+done
 a2ensite ocis
 systemctl reload apache2
-### fixme: really run this here?? The docs say so... https://github.com/owncloud/docs-ocis/blob/master/modules/ROOT/pages/depl-examples/bare-metal.adoc#issuing-a-certificate-via-certbot-for-apache
 
+### We run cf_dns locally, which sshs into the deplyment and does it. Check CF_DNS.msg
 # certbot --apache -d $BASE_DOMAIN
 
-# screen -d -m -S ocis-server -Logfile screenlog-ocis -L /usr/local/bin/ocis server
-
-wait_for_ocis () {
-  ## it compiles code upon first start. this can take ca 6 minutes.
-  while true; do
-    docker-compose -f $compose_yml logs --tail=10 ocis
-    docker-compose -f $compose_yml ps
-    if [ -n "\$(docker-compose -f $compose_yml ps | grep 'Up' | grep '0.0.0.0:443->443/tcp')" ]; then
-      if [ "\$(docker-compose exec ocis wget -O - http://localhost:9200/.well-known/openid-configuration | grep https: | wc -l)" -gt 3 ]; then
-	break
-      fi
-      echo " ... 0.0.0.0:443 is up, but no .well-known seen."
-    else
-      echo " ... waiting for a service at 0.0.0.0:443 ..."
-    fi
-    sleep 10;
-  done
-}
-
-echo >> .env IPADDR=$IPADDR
-echo >> .env OCIS_VERSION=$OCIS_VERSION
-echo >> .env OCIS_DOCKER_TAG=$OCIS_DOCKER_TAG
-echo >> .env OCIS_DOMAIN=$OCIS_DOMAIN
-echo >> .env TRAEFIK_DOMAIN=$TRAEFIK_DOMAIN
-echo >> .env OCIS_LOG_LEVEL=debug
-## Seen in $compose_yml
-# basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
-echo >> .env PROXY_ENABLE_BASIC_AUTH=true
-echo >> .env DEMO_USERS=true
-
-# wait_for_ocis
-
-# # ocis.sh webdav health
-# 
-# if [ -f ~/INIT.bashrc ]; then
-#   echo >  ./$version_file '\`\`\`'
-#   echo >> ./$version_file "OCIS_VERSION:         $OCIS_VERSION"
-#   echo >> ./$version_file "ocis version:         \$(ocis.sh version | head -2)"
-#   echo >> ./$version_file "git log:              \$(git log --decorate=full | head -1)"
-# 
-#   echo >> ./dependencies.md "\`\`\`\n$ocis_bin contains:"
-#   docker-compose -f $compose_yml exec ocis strings $ocis_bin | grep '^dep\s' | sort -u >> ./dependencies.md
-#   ## FIXME: most dependencies disappeared. Only: github.com/owncloud/libre-graph-api-go  v1.0.2-0.20230330145712
-# 
 #   # make some files appear within the owncloud
 #   echo '\`\`\`' > ~/INIT.bashrc.md
 #   cat ~/INIT.bashrc >>  ~/INIT.bashrc.md
 #   wget $user_speech_url	  -O speech.ogg
 #   wget $user_portrait_url -O portrait.jpg
-# 
-#   echo "127.0.0.1 $OCIS_DOMAIN" >> /etc/hosts	# local DNS entry, in case remote DNS is not yet set up
 # 
 #   # FIXME: we no longer support basic auth webdav.
 #   # FIXME: old URL scheme is /remote.php/webdav, new schemes are
@@ -257,17 +230,15 @@ echo >> .env DEMO_USERS=true
 #   # To capture the http respponse code, use e.g. this:
 #   #   curl -s -w '%{stderr}%{http_code}\n'  2> http_code.txt ....
 #   # First try auto-create einstein's home ...
-#   #   curl -k -u einstein:relativity -X PROPFIND         https://$OCIS_DOMAIN/remote.php/webdav
+#   #   curl -k -u einstein:relativity -X PROPFIND         https://$BASE_DOMAIN/remote.php/webdav
 #   #   # ... then prepopulating some files
-#   #   curl -k -u einstein:relativity -X MKCOL            https://$OCIS_DOMAIN/remote.php/webdav/init
-#   #   curl -k -u einstein:relativity -T ./speech.ogg     https://$OCIS_DOMAIN/remote.php/webdav/speech.ogg
-#   #   curl -k -u einstein:relativity -T ./portrait.jpg   https://$OCIS_DOMAIN/remote.php/webdav/portrait.jpg
-#   #   curl -k -u einstein:relativity -T ./$version_file  https://$OCIS_DOMAIN/remote.php/webdav/init/$version_file
-#   #   curl -k -u einstein:relativity -T ~/INIT.bashrc.md https://$OCIS_DOMAIN/remote.php/webdav/init/INIT.bashrc.md
+#   #   curl -k -u einstein:relativity -X MKCOL            https://$BASE_DOMAIN/remote.php/webdav/init
+#   #   curl -k -u einstein:relativity -T ./speech.ogg     https://$BASE_DOMAIN/remote.php/webdav/speech.ogg
+#   #   curl -k -u einstein:relativity -T ./portrait.jpg   https://$BASE_DOMAIN/remote.php/webdav/portrait.jpg
+#   #   curl -k -u einstein:relativity -T ./$version_file  https://$BASE_DOMAIN/remote.php/webdav/init/$version_file
+#   #   curl -k -u einstein:relativity -T ~/INIT.bashrc.md https://$BASE_DOMAIN/remote.php/webdav/init/INIT.bashrc.md
 # fi
-# 
-# echo "Now log in with user admin at https://${OCIS_DOMAIN}"
-# 
+
 uptime
 sleep 3
 cat <<EOM
@@ -276,21 +247,17 @@ cat <<EOM
 # This shell is now connected to root@$IPADDR
 # Connect your browser or client to
 
-   https://$OCIS_DOMAIN
+   URL:		https://$BASE_DOMAIN
+   Login:	admin
+   Password:	\$admin_pass
 
 ---------------------------------------------
 # inspect some boltdb contents
 
   cp data/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
 
-# restart ocis after editing /etc/ocis/ocis.env
-
-systemctl restart ocis
----------------------------------------------
-
-# view the ocis server logs
-
-journalctl -f -u ocis
+# restart ocis after editing /etc/ocis/ocis.env: systemctl restart ocis
+# view the ocis server logs:                     journalctl -f -u ocis
 
 ---------------------------------------------
 EOM
