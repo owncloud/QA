@@ -7,10 +7,10 @@
 #
 # Apache error messages seen:
 # - AH01144: No protocol handler was valid for the URL /
-#	fix: a2enmod proxy_http		(a2enmd proxy is not enough)
+#     fix: a2enmod proxy_http  (a2enmd proxy is not enough)
 # - AH02003: SSL Proxy connect failed
 #   Library Error: error:0A00010B:SSL routines::wrong version number
-#	fix: use http://localhost:9200 (instead of https://)
+#     fix: use http://localhost:9200 (instead of https://)
 #
 # 2023-05-23, jw@owncloud.com
 
@@ -19,7 +19,7 @@ echo "Estimated setup time (when weather is fine): 2 minutes ..."
 compose_subdir=deployments/examples/ocis_traefik
 compose_yml=docker-compose.yml
 ocis_bin=/usr/bin/ocis
-
+ocis_data=/var/lib/ocis
 
 if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=v1.0.0-rc7
@@ -46,26 +46,28 @@ else
 
   ocis_url=https://download.owncloud.com/ocis/ocis/stable/$vers/ocis-$vers-linux-amd64
   http_code=$(curl -s -L --head -w '%{http_code}\n' $ocis_url -o /dev/null)
-  
+
   if [ "$http_code" != 200 ]; then
     echo "Version $vers not found in stable. Trying testing..."
     ocis_url=https://download.owncloud.com/ocis/ocis/testing/$vers/ocis-$vers-linux-amd64
     http_code=$(curl -s -L --head -w '%{http_code}\n' $ocis_url -o /dev/null)
   fi
-  
+
   if [ "$http_code" != 200 ]; then
     echo "Version $vers not found: check https://download.owncloud.com/ocis/ocis/"
     exit 1
   fi
-fi  
+fi
 
 echo "Download from $ocis_url"
 
 # It does not work with the ubuntu-20.04-preload server image.
 export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
+mydir="$(dirname -- "$(readlink -f -- "$0")")"   # find related scripts, even if called through a symlink.
 # use a cx31 -- we need more than 40GB disk space.
-source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
+source $mydir/lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
+scp $mydir/bin/* root@$IPADDR:/usr/local/bin    # mpkq et al..
 
 if [ -z "$IPADDR" ]; then
   echo "Error: make_machine.sh failed."
@@ -81,14 +83,15 @@ INIT_SCRIPT <<EOF
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#install-and-configure-the-infinite-scale-binary
 
-export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
+export DEBIAN_FRONTEND=noninteractive    # try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
 apt -y install apache2 certbot python3-certbot-apache
 
-pip install yq		# yaml frontend for jq.
+pip install yq       # yaml frontend for jq.
+pip install msgpack  # for mpkq
 pip install boltdb
 
-go install go.etcd.io/bbolt/cmd/bbolt@latest	# cli-tool to inspect boltdb files.
+go install go.etcd.io/bbolt/cmd/bbolt@latest   # cli-tool to inspect boltdb files.
 export PATH="$PATH:/root/go/bin"
 
 wget -O /usr/local/bin/ocis $ocis_url
@@ -98,8 +101,8 @@ chmod +x /usr/local/bin/ocis
 useradd --system --no-create-home --shell=/sbin/nologin ocis
 
 # Infinite Scale Data Directory
-mkdir -p /var/lib/ocis
-chown ocis:ocis /var/lib/ocis
+mkdir -p $ocis_data
+chown ocis:ocis $ocis_data
 
 # Infinite Scale Configuration File
 mkdir -p /etc/ocis
@@ -118,11 +121,12 @@ OCIS_INSECURE=false
 OCIS_LOG_LEVEL=warn
 
 OCIS_CONFIG_DIR=/etc/ocis
-OCIS_BASE_DATA_PATH=/var/lib/ocis
+OCIS_BASE_DATA_PATH=$ocis_data
 EOT
 ln -s /etc/ocis/ocis.env env.sh
+ln -s $ocis_data o
 
-rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.
+rm -f /etc/ocis/ocis.yaml # BUG: --force-overwrite does not work.
 sudo -u ocis ocis init --insecure --force-overwrite --config-path /etc/ocis
 admin_pass="\$(yq -r .idm.service_user_passwords.admin_password /etc/ocis/ocis.yaml)"
 ##
@@ -147,14 +151,12 @@ Restart=always
 WantedBy=multi-user.target
 EOT
 
-systemctl daemon-reload
-systemctl enable --now ocis
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#apache-as-reverse-proxy
 apachectl configtest
 
 for mod in ssl headers env dir mime unique_id rewrite setenvif proxy_http; do
-  a2enmod \$mod 
+  a2enmod \$mod
 done
 a2ensite default-ssl
 
@@ -195,22 +197,27 @@ cat <<EOT>> /etc/apache2/sites-available/ocis.conf
 </IfModule>
 EOT
 
-# we must not enable site ocis, before certbot was here.
-# when proxing everything, letsencrypt fails with
-#  
-for i in \$(seq 1 60); do
+a2ensite ocis
+systemctl reload apache2
+
+systemctl daemon-reload
+systemctl enable --now ocis
+
+## CHECK: we must not enable site ocis, before certbot was here.
+## when proxing everything, letsencrypt fails with
+## or maybe not??
+#
+for i in \$(seq 1 10); do
   if [ -f ~/CF_DNS.msg ]; then
     echo "########################### CF_DNS.msg ###########################"
     cat ~/CF_DNS.msg
     echo "########################### ---------- ###########################"
     break
   fi
-  sleep 3
+  sleep 10
   echo "CF_DNS.msg not found. Retrying \$i ..."
-  test "\$i" == 60 && echo " gving up."
+  test "\$i" == 10 && echo " gving up."
 done
-a2ensite ocis
-systemctl reload apache2
 
 ### We run cf_dns locally, which sshs into the deplyment and does it. Check CF_DNS.msg
 # certbot --apache -d $BASE_DOMAIN
@@ -218,9 +225,9 @@ systemctl reload apache2
 #   # make some files appear within the owncloud
 #   echo '\`\`\`' > ~/INIT.bashrc.md
 #   cat ~/INIT.bashrc >>  ~/INIT.bashrc.md
-#   wget $user_speech_url	  -O speech.ogg
+#   wget $user_speech_url   -O speech.ogg
 #   wget $user_portrait_url -O portrait.jpg
-# 
+#
 #   # FIXME: we no longer support basic auth webdav.
 #   # FIXME: old URL scheme is /remote.php/webdav, new schemes are
 #   #   /remote.php/dav/files/$UUID
@@ -241,16 +248,20 @@ systemctl reload apache2
 
 uptime
 sleep 3
-cat <<EOM
+cat <<EOM | tee -a ~/POSTINIT.msg
 
 ---------------------------------------------
 # This shell is now connected to root@$IPADDR
 # Connect your browser or client to
 
-   URL:		https://$BASE_DOMAIN
-   Login:	admin
-   Password:	\$admin_pass
+   URL:      https://$BASE_DOMAIN
+   Login:    admin
+   Password: \$admin_pass
 
+# If that URL shows a default Ubuntu page, try:
+  vi -o /etc/apache2/sites-available/{000-default-le-ssl.conf,ocis.conf}
+  ... and copy the ... /etc/letsencrypt/... lines maually.maually.
+  a2dissite 000-default-le-ssl; systemctl reload apache2
 ---------------------------------------------
 # inspect some boltdb contents
 
@@ -258,6 +269,7 @@ cat <<EOM
 
 # restart ocis after editing /etc/ocis/ocis.env: systemctl restart ocis
 # view the ocis server logs:                     journalctl -f -u ocis
+# examine the ocis data folder:                  tree -f $ocis_data
 
 ---------------------------------------------
 EOM

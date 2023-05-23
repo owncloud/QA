@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+#
+# inspect a msgpack file, similar to yq: we are a wrapper to jq.
+# Requires:
+#   pip install msgpack
+#   apt install jq	#optional
+#
+# 2023-05-23, jw@owncloud.com
+#
+
+import msgpack
+import sys, json, subprocess, re
+
+if len(sys.argv) not in (2, 3, 4):
+  print("""Usage:
+
+	%s [ JQ_FILTER ] [ -r ] FILE.mpk
+
+  Examples:
+	mpkq '.\"user.ocis.name\"' -r FILE.mpk
+	mpkq user.ocis.cs.sha1 -r FILE.mpk | tr -d '\\x'""" % sys.argv[0])
+  sys.exit(1)
+file = sys.argv[-1]
+
+def bin_dumper(bin):
+  if type(bin) == type(bytes()):
+    try:
+      return bytes.decode(bin, encoding='utf-8', errors='strict')
+    except:
+      pass
+    # we want a hexdump in \xNN notation. bin.hex only takes a single char, so we replace that later.
+    return "\\x" + bin.hex(':').replace(':', "\\x")
+  return "ERROR: unknown type in bin_dumper(): " + str(type(bin))
+
+with open(file, 'rb') as f:
+  # raw=False converts the keys from bytes to strings
+  mpk_dict = msgpack.unpack(f, raw=False)
+  json_str = json.dumps(mpk_dict, default=bin_dumper, indent=2, sort_keys=True)
+  try:
+    jq_cmd = ["jq"]
+    if len(sys.argv) >= 3:
+      jq_filter = sys.argv[1]
+      # allow bare user.ocis.cs.sha1 syntax instead of '."user.ocis.cs.sha1"'
+      if re.match('^[a-z0-9.]*$', jq_filter):
+        jq_filter = '."' + jq_filter + '"'
+      jq_cmd.append(jq_filter)
+    if len(sys.argv) == 4:
+      jq_cmd.append(sys.argv[2])
+    jq = subprocess.Popen(jq_cmd, stdin=subprocess.PIPE)
+    jq.communicate(bytes(json_str, 'UTF-8'))
+  except:
+    print("ERROR: jq failed. Dumping as is ...", file=sys.stderr)
+    print(json_str)
+
