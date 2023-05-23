@@ -5,7 +5,14 @@
 # - https://owncloud.github.io/ocis/
 # - https://owncloud.github.io/ocis/deployment/basic-remote-setup/
 #
-# 2023-05-15, jw@owncloud.com
+# Apache error messages seen:
+# - AH01144: No protocol handler was valid for the URL /
+#	fix: a2enmod proxy_http		(a2enmd proxy is not enough)
+# - AH02003: SSL Proxy connect failed
+#   Library Error: error:0A00010B:SSL routines::wrong version number
+#	fix: use http://localhost:9200 (instead of https://)
+#
+# 2023-05-23, jw@owncloud.com
 
 echo "Estimated setup time (when weather is fine): 2 minutes ..."
 
@@ -66,12 +73,19 @@ user_portrait_url=https://upload.wikimedia.org/wikipedia/commons/3/32/Max_Lieber
 user_speech_url=https://www.einstein-website.de/z_biography/einstein1930.mp3
 
 INIT_SCRIPT <<EOF
+set -x
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#install-and-configure-the-infinite-scale-binary
 
 export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
 apt -y install apache2 certbot python3-certbot-apache
+
+pip install yq		# yaml frontend for jq.
+pip install boltdb
+
+go install go.etcd.io/bbolt/cmd/bbolt@latest	# cli-tool to inspect boltdb files.
+export PATH="$PATH:/root/go/bin"
 
 wget -O /usr/local/bin/ocis $ocis_url
 chmod +x /usr/local/bin/ocis
@@ -106,7 +120,7 @@ ln -s /etc/ocis/ocis.env env.sh
 
 rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.
 sudo -u ocis ocis init --insecure --force-overwrite --config-path /etc/ocis
-admin_pass="$(yq -r .idm.service_user_passwords.admin_password /etc/ocis/ocis.yaml)"
+admin_pass="\$(yq -r .idm.service_user_passwords.admin_password /etc/ocis/ocis.yaml)"
 ##
 # import yaml
 # o = yaml.load(open('/etc/ocis/ocis.yaml'))
@@ -135,7 +149,7 @@ systemctl enable --now ocis
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#apache-as-reverse-proxy
 apachectl configtest
 
-for mod in ssl headers env dir mime unique_id rewrite setenvif proxy; do
+for mod in ssl headers env dir mime unique_id rewrite setenvif proxy_http; do
   a2enmod \$mod 
 done
 a2ensite default-ssl
@@ -157,25 +171,22 @@ cat <<EOT>> /etc/apache2/sites-available/ocis.conf
   <VirtualHost *:443>
     ServerName $BASE_DOMAIN
 
+    # disable all security checks on the ssl connection to localhost:9200
+    # FIXME: docs do not mention 'SSLProxyProtocol all', does not help..
+    # We must use http:// protocol with port 9200, not https!
     SSLProxyEngine on
     SSLProxyVerify none
     SSLProxyCheckPeerCN off
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
+    SSLProxyProtocol all
 
-    ProxyPass / https://localhost:9200/
-    ProxyPassReverse / https://localhost:9200/
+    ProxyPass / http://localhost:9200/
+    ProxyPassReverse / http://localhost:9200/
 
     #important, otherwise 400 errors from idp
     ProxyPreserveHost on
 
-    ##
-    # SSLCertificateFile /etc/letsencrypt/live/ocis.example.com/fullchain.pem
-    # SSLCertificateKeyFile /etc/letsencrypt/live/ocis.example.com/privkey.pem
-
-    ## this file does not exist
-    # Include /etc/letsencrypt/options-ssl-apache.conf
-    # SSLOpenSSLConfCmd DHParameters /etc/letsencrypt/ssl-dhparams.pem
   </VirtualHost>
 </IfModule>
 EOT
@@ -203,12 +214,6 @@ wait_for_ocis () {
     sleep 10;
   done
 }
-
-pip install yq		# yaml frontend for jq.
-pip install boltdb
-
-go install go.etcd.io/bbolt/cmd/bbolt@latest	# cli-tool to inspect boltdb files.
-export PATH="$PATH:/root/go/bin"
 
 echo >> .env IPADDR=$IPADDR
 echo >> .env OCIS_VERSION=$OCIS_VERSION
@@ -263,45 +268,30 @@ echo >> .env DEMO_USERS=true
 # 
 # echo "Now log in with user admin at https://${OCIS_DOMAIN}"
 # 
-# uptime
-# sleep 5
-# cat <<EOM
-# 
-# ---------------------------------------------
-# # This shell is now connected to root@$IPADDR
-# # Connect your browser or client to
-# 
-#    https://$OCIS_DOMAIN
-# 
-# # You may first need to add the DNS entries at https://dash.cloudflare.com
-# 	cf_dns $IPADDR '*.$BASE_DOMAIN'
-# 
-# # Try also
-# 
-#    curl -k -s https://$OCIS_DOMAIN/.well-known/openid-configuration | grep https
-# 
-#    # FIXME: outdated
-#    # curl -k -X PROPFIND https://$OCIS_DOMAIN/remote.php/webdav -u einstein:relativity
-# 
-# # If login fails, try
-# 
-#    # FIXME: outdated
-#    # docker-compose exec ocis bash -c 'ocis kill glauth; sleep 5; ocis glauth server &'
-# 
-# # inspect some boltdb contents
-# 
-#   cp data/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
-#
-# ---------------------------------------------
-# 
-# # restart ocis after editing /etc/ocis/ocis.env
-#
-# systemctl restart ocis
-#
-# # view the ocis server logs
-#
-# journalctl -f -u ocis
-#
-# ---------------------------------------------
-# EOM
+uptime
+sleep 3
+cat <<EOM
+
+---------------------------------------------
+# This shell is now connected to root@$IPADDR
+# Connect your browser or client to
+
+   https://$OCIS_DOMAIN
+
+---------------------------------------------
+# inspect some boltdb contents
+
+  cp data/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
+
+# restart ocis after editing /etc/ocis/ocis.env
+
+systemctl restart ocis
+---------------------------------------------
+
+# view the ocis server logs
+
+journalctl -f -u ocis
+
+---------------------------------------------
+EOM
 EOF
