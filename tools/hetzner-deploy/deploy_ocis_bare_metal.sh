@@ -22,8 +22,8 @@ ocis_bin=/usr/bin/ocis
 ocis_data=/var/lib/ocis
 
 if [ -z "$OCIS_VERSION" ]; then
-  export OCIS_VERSION=v1.0.0-rc7
-  export OCIS_VERSION=v2.0.0
+#  export OCIS_VERSION=v1.0.0-rc7
+#  export OCIS_VERSION=v2.0.0
   export OCIS_VERSION=v3.0.0-alpha.2
   export OCIS_VERSION=daily
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
@@ -248,7 +248,7 @@ done
 
 uptime
 sleep 3
-cat <<EOM | tee -a ~/POSTINIT.msg
+cat <<EOM >> ~/POSTINIT.msg
 
 ---------------------------------------------
 # This shell is now connected to root@$IPADDR
@@ -263,13 +263,13 @@ cat <<EOM | tee -a ~/POSTINIT.msg
   ... and copy the ... /etc/letsencrypt/... lines maually.maually.
   a2dissite 000-default-le-ssl; systemctl reload apache2
 ---------------------------------------------
-# inspect some boltdb contents
+# Inspect some boltdb contents
 
   cp data/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
 
-# restart ocis after editing /etc/ocis/ocis.env: systemctl restart ocis
-# view the ocis server logs:                     journalctl -f -u ocis
-# examine the ocis data folder:                  tree -f $ocis_data
+# Restart after editing /etc/ocis/ocis.env:  systemctl restart ocis
+# View the ocis server logs:                 journalctl -f -u ocis
+# Examine the ocis data folder:              tree -fF $ocis_data | sed -e 's@ [^ ]*\\(/../\\)$@\\1@'
 
 ---------------------------------------------
 EOM
