@@ -85,11 +85,15 @@ INIT_SCRIPT <<EOF
 
 export DEBIAN_FRONTEND=noninteractive    # try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
-apt -y install apache2 certbot python3-certbot-apache
+apt -y install apache2
+apt -y install certbot python3-certbot-apache	# ubuntu 22.04 has certbot 1.21.0 - DEPRECATED. use pip install certbot
 
-pip install yq       # yaml frontend for jq.
-pip install msgpack  # for mpkq
+# apt -y install augeas-tools	# dependency of pip install certbot
+# pip install certbot		# version 2.6.0 seen 2023-05-23
+pip install yq       		# yaml frontend for jq.
+pip install msgpack  		# for mpkq
 pip install boltdb
+
 
 go install go.etcd.io/bbolt/cmd/bbolt@latest   # cli-tool to inspect boltdb files.
 export PATH="$PATH:/root/go/bin"
