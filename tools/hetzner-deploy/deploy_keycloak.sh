@@ -50,9 +50,13 @@ echo >> ~/env.sh "oc10_fqdn=$KEYCLOAK_DNSNAME"	# queried by make_machine.sh from
 # It has a hostname and a portnumber option, but that does not enable ssl.
 # --hostname=https://www.keycloak.org/server/hostname --hostname-port=19443
 #
+mkdir -p  /opt/keycloak/data	# persist the data folder
+chmod 777 /opt/keycloak/data
 screen -d -m -S keycloak -Logfile screenlog-keycloak -L \
-  docker run --rm --name keycloak -ti -e KEYCLOAK_ADMIN_PASSWORD=kadmin -e KEYCLOAK_ADMIN=kadmin -p 4488:8080 quay.io/keycloak/keycloak \
-    start-dev --import-realm --metrics-enabled=false --health-enabled=true --hostname-url=https://$KEYCLOAK_DNSNAME:$HTTPS_PORT --hostname-admin-url=https://$KEYCLOAK_DNSNAME:$HTTPS_PORT/
+  docker run --rm --name keycloak -ti -v /opt/keycloak/data:/opt/keycloak/data \
+    -e KEYCLOAK_ADMIN_PASSWORD=$kadmin_pass -e KEYCLOAK_ADMIN=kadmin -p 4488:8080 \
+    quay.io/keycloak/keycloak start-dev --import-realm --metrics-enabled=false --health-enabled=true \
+        --hostname-url=https://$KEYCLOAK_DNSNAME:$HTTPS_PORT --hostname-admin-url=https://$KEYCLOAK_DNSNAME:$HTTPS_PORT/
 
 # wait until keycloak is up:
 for i in 10 9 8 7 6 5 4 3 2 1 last; do
