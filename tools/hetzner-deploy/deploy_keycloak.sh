@@ -1,7 +1,7 @@
 #! /bin/bash
 #
 # deploy_keycloak.sh - sets up a hetzner machine with a standalone keycloak server.
-# It has its own database, its own openldap behind, and its own nginx in fron.
+# It has its own database, its own openldap behind, and its own nginx in front.
 #
 #
 # References:
