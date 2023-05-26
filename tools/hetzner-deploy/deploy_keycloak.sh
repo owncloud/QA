@@ -158,8 +158,16 @@ cp \$certfile \$privkey proxy/
 
 cat << REF_SH > refresh_cert.sh
 certbot renew
-cp \$certfile \$privkey proxy
+
+ls -lL $certfile $privkey proxy
+cp $certfile $privkey proxy
+
 cd proxy
+echo "check if these match:"
+docker inspect keycloak | grep '"IPAddress"'
+grep proxy_pass conf.d/nginx.conf
+sleep 3
+
 docker-compose down
 docker-compose up -d
 REF_SH
