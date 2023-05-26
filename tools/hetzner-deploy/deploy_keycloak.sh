@@ -50,8 +50,25 @@ echo >> ~/env.sh "oc10_fqdn=$KEYCLOAK_DNSNAME"	# queried by make_machine.sh from
 # It has a hostname and a portnumber option, but that does not enable ssl.
 # --hostname=https://www.keycloak.org/server/hostname --hostname-port=19443
 #
-mkdir -p  /opt/keycloak/data	# persist the data folder
-chmod 777 /opt/keycloak/data
+
+kadmin_pass=kadmin
+test -n "$KEYCLOAK_ADMIN_PASS" && kadmin_pass="$KEYCLOAK_ADMIN_PASS"
+
+mkdir -p     /opt/keycloak/data/import
+# place realm configs here before startup. See https://www.keycloak.org/server/importExport
+if [ -e /opt/keycloak/data/h2 ]; then
+  echo "using existing /opt/keycloak/data/h2 ..."
+fi
+if [ -f ~/keycloak_realms.tar.bz2 ]; then
+  if [ -e /opt/keycloak/data/h2 ]; then
+    echo "ignoring ~/keycloak_realms.tar.bz2 because of exising /opt/keycloak/data/h2 ..."
+  else
+    echo "importing ~/keycloak_realms.tar.bz2 ..."
+    tar -C /opt/keycloak/data/import xf ~/keycloak_realms.tar.bz2
+  fi
+fi
+
+chmod -R 777 /opt/keycloak/data		# persist the data folder
 screen -d -m -S keycloak -Logfile screenlog-keycloak -L \
   docker run --rm --name keycloak -ti -v /opt/keycloak/data:/opt/keycloak/data \
     -e KEYCLOAK_ADMIN_PASSWORD=$kadmin_pass -e KEYCLOAK_ADMIN=kadmin -p 4488:8080 \
