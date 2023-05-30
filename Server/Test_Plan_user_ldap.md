@@ -79,16 +79,16 @@ Prepare two LDAP backends for testing:
 
 ### ldap:search
 
-- [ ] Run occ command ```ldap:search``` with valid configuration and longer limit
-   - [ ] Show results
+- [ ] Run occ command ```ldap:search '*u'``` with valid configuration and longer limit
+   - [ ] Shows matching results (e.g. "One_User" and "User Two")
 - [ ] Run occ command ```ldap:search``` with offset multiple of limit (both positive)
    - [ ] Show results
-- [ ] Run occ command ```ldap:search```  name (default configuration)
-   - [ ] Show filtered results
+- [ ] Run occ command ```ldap:search ''``` (default configuration)
+   - [ ] Show all ldap users.
 - [ ] Run occ command ```ldap:search``` name (fixed configuration – added “displayName” and/or other attributes in the User Search Attributes field in the wizard)
    - [ ] Show filtered results
-- [ ] Run occ command ```ldap:search --group``` group (fixed configuration – added “displayName” and/or other attributes in the Group Search Attributes field in the wizard)
-   - [ ]  Show filtered results
+- [ ] Run occ command ```ldap:search --group '*u'``` group (fixed configuration – added “displayName” and/or other attributes in the Group Search Attributes field in the wizard)
+   - [ ]  Show filtered results (e.g. "testgroup" and "group1")
 - [ ] Run occ command Group without search `occ ldap:search --group ''`
    - [ ] Show groups (currently 15 or less)
 
