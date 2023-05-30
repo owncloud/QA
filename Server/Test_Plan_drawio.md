@@ -1,9 +1,15 @@
 ## Test Plan drawio
 
+Template: https://github.com/owncloud/QA/edit/master/Server/Test_Plan_drawio.md
+
+### Setup
+* [ ] have one old compressed format file. https://github.com/owncloud/drawio/pull/19, https://stackoverflow.com/questions/59416025/format-of-draw-io-xml-file#59416690
+* [ ] have a new format file.
+
+### Test items
+
 The toplevel checkmark indictes the test was performed.
 The indented checkmarks indicate the results were as expected.
-
-Template: https://github.com/owncloud/QA/edit/master/Server/Test_Plan_drawio.md
 
 This is a quick smoke test only. We don't test drawio itself, only the integration with ownCloud.
 
@@ -15,7 +21,7 @@ This is a quick smoke test only. We don't test drawio itself, only the integrati
    * [ ] A template dialog appears.
    * [ ] An empty file with the suffix .drawio can be created created. 
    * [ ] Multiple other templates are available, choosing one, a prepopulated drawing appears.
-* [ ] Save a drawing.
+* [ ] Save a drawing
    * [ ] The content of the file is updated in the server.
 * [ ] File locking
    * [ ] Multiple users cannot open a drawing for editing simultaneously. -> #5
@@ -28,3 +34,5 @@ This is a quick smoke test only. We don't test drawio itself, only the integrati
    * [ ] A readonly version of the drawing is renderd. No editing menues appear, on save button is chosen.
 * [ ] a drawio file uploaded through web or clients can be edited.
    * [ ] an error is shown, if a corrupt file was uploaded. -> #7
+   * [ ] Compressed file: e.g. from release/oc10/apps/drawio
+   * [ ] Uncompressed file (as saved with modern drawio) 
