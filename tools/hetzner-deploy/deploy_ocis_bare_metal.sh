@@ -122,7 +122,12 @@ PROXY_HTTP_ADDR=0.0.0.0:9200
 PROXY_TLS=false
 OCIS_INSECURE=false
 
-OCIS_LOG_LEVEL=warn
+# OCIS_LOG_LEVEL=warn
+OCIS_LOG_LEVEL=debug
+
+## To go back to 3.0.0-rc3 behavior: https://github.com/owncloud/ocis/issues/6403#issuecomment-1567924356
+PROXY_USER_OIDC_CLAIM=preferred_username
+PROXY_USER_CS3_CLAIM=username
 
 OCIS_CONFIG_DIR=/etc/ocis
 OCIS_BASE_DATA_PATH=$ocis_data
