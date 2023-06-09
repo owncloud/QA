@@ -1,0 +1,35 @@
+
+## Single selection
+
+|| File List | Links (oC10) | Details | Av. Offline | Img preview| Video preview | Audio preview | Txt preview | While Sync |
+|:-:| :-------: | :---: | :---------: | :---: | :--------: | :-----------: | :-----------: | :---------: | :-: |
+| Download (only files) | Available<br>:white_check_mark: | Not available<br>:white_check_mark:| Available<br>:white_check_mark: | Not available<br>:white_check_mark: | Not available<br>:white_check_mark: | Not available<br>:white_check_mark: | Not available<br>:white_check_mark: | Not available<br>:white_check_mark: | Not available<br>:white_check_mark: |
+| Rename |Available<br>:white_check_mark: | Not available<br>:white_check_mark: |Available<br>:white_check_mark: | Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:
+| Move |Available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:
+| Copy |Available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:
+| Remove |Available<br>:white_check_mark:| Not available<br>:white_check_mark:|Available<br>:white_check_mark: | Not available<br>:white_check_mark:|Available<br>:white_check_mark:|Available<br>:white_check_mark:|Available<br>:white_check_mark:|Available<br>:white_check_mark:| Not available<br>:white_check_mark:
+| Open with (only files) |Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Not available<br>:white_check_mark:| 
+| Sync | Available<br>:white_check_mark:| Not available<br>:white_check_mark:| Available (downloaded files)<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:|Not available<br>:white_check_mark:
+| Cancel sync | Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Available (downloaded files)<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark:| Available<br>:white_check_mark:| Not available<br>:white_check_mark:| Not available<br>:white_check_mark: | Available<br>:white_check_mark:
+| Share | Available<br>:white_check_mark:| Available<br>:white_check_mark: | Available<br>:white_check_mark:| Not available<br>:white_check_mark: | Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:| Available<br>:white_check_mark:
+| Details (only files) | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Not available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark:
+| Send (downloaded files) |Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Not Available<br>:white_check_mark: | Available<br>:white_check_mark:| Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Not available<br>:white_check_mark: 
+| Set as av. off. |Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Not available<br>:white_check_mark: | Available<br>:white_check_mark:| Available (no streaming)<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Not available<br>:white_check_mark: 
+| Unset as av. off. |Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark:| Available (no streaming)<br>:white_check_mark: | Available<br>:white_check_mark: | Available<br>:white_check_mark: | Not available<br>:white_check_mark: 
+
+## Multiple selection
+
+|| File List | Links | Details | Av. Offline | Img preview| Video preview | Audio preview | Txt preview | While Sync |
+|:-:| :-------: | :---: | :---------: | :---: | :--------: | :-----------: | :-----------: | :---------: | :-: |
+| Download (not downloaded files)|Available<br>:white_check_mark:| Not available<br>:white_check_mark: | NA | Not available<br>:white_check_mark: | NA | NA | NA | NA | NA 
+| Rename | Not available<br>:white_check_mark: |Not available<br>:white_check_mark: | NA |Not available<br>:white_check_mark: |NA |NA |NA |NA |Not available<br>:white_check_mark:
+| Move |Available<br>:white_check_mark:|Not available<br>:white_check_mark: | NA | Not available<br>:white_check_mark: |NA |NA |NA |NA |Not available<br>:white_check_mark:
+| Copy |Available<br>:white_check_mark:|Not available<br>:white_check_mark: | NA |Not available<br>:white_check_mark: |NA |NA |NA |NA |Not available<br>:white_check_mark:
+| Remove |Available<br>:white_check_mark:|Not available<br>:white_check_mark: |  NA |Not available<br>:white_check_mark: |NA |NA |NA |NA |Not available<br>:white_check_mark:
+| Open with | Not available<br>:white_check_mark: | Not available<br>:white_check_mark: | NA | Not available<br>:white_check_mark:|NA |NA |NA |NA | Not available<br>:white_check_mark:
+| Sync | Available<br>:white_check_mark: | Not available<br>:white_check_mark: | NA | Not available<br>:white_check_mark: | NA|NA |NA |NA| Not available<br>:white_check_mark:
+| Cancel sync | Not available<br>:white_check_mark:| Not available<br>:white_check_mark: | NA | Not available<br>:white_check_mark:|NA |NA |NA |NA | Available<br>:white_check_mark:
+| Share | Not available<br>:white_check_mark: | Available<br>:white_check_mark: | NA | Not available<br>:white_check_mark: | NA |NA |NA |NA| Not available<br>:white_check_mark:
+| Send (downloaded files) | Available<br>:white_check_mark: | Available<br>:white_check_mark:| NA | Not available<br>:white_check_mark:| NA |NA |NA |NA| Not available<br>:white_check_mark:
+| Set as av. off. | Available<br>:white_check_mark: | Available<br>:white_check_mark:| NA | Not available<br>:white_check_mark:| NA |NA |NA| NA| Not available<br>:white_check_mark:
+| Unset as av. off. | Available<br>:white_check_mark: | Available<br>:white_check_mark:| NA | Available<br>:white_check_mark:| NA |NA |NA| NA| Not available<br>:white_check_mark:
