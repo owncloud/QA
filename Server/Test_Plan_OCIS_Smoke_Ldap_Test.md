@@ -1,4 +1,4 @@
-## Smoke test: ocis agains ldap:
+## Smoke test: ocis with ldap:
 
 ### Preparation
 - [ ] switch to the latest stable ocis version using https://github.com/owncloud/ocis/blob/master/deployments/examples/ocis_ldap/docker-compose.yml
