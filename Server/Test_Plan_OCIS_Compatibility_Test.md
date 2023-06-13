@@ -3,7 +3,7 @@ Note: It is necessary to switch to the latest stable version and do all the step
 After switching to the new ocis version you need to check that all resources, shares and settings still exist and remain unchanged
 
 
-### from version 1 to version 2
+### After upgrade from previous release version to new release version
 
 shares:
 - [ ] public share
