@@ -1,4 +1,4 @@
-References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_Files_Antivirus.md)
+References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Plan_files_antivirus.md)
 
 ## Setup
 
@@ -117,8 +117,8 @@ run these steps between every test case in this chapter:
 3. enable antivirus app
 4. set "When infected files were found during a background scan" to "logSetting"
 5. set "File size limit" to "fileSizeLimit"
-6. wait 15 min (or change `$this->setInterval(60 * 15);` in `lib/cron/task.php` to a smaller number)
-7. trigger cron job by running `sudo -u www-data php cron.php`
+6. wait 15 min (or change `$this->setInterval(60 * 15);` in `lib/Cron/Task.php` to a smaller number)
+7. trigger cron job by running `occ system:cron -vvv -p`
 8. check logfile
 9. check files
 
