@@ -6,6 +6,7 @@
 # 2020-05-12, jw, added globbing patterns, for I am lazy.
 # 2020-05-19, jw, added support for hcloud_cli, to ease the terraform dependency
 # 2020-05-20, jw, ported to mac
+# 2023-06-14, jw, fix race condition with dns removal and ssh.
 
 test -z "$HCLOUD_TOKEN" && export HCLOUD_TOKEN=$TF_VAR_hcloud_token
 test -z "$TF_VAR_hcloud_token" && export TF_VAR_hcloud_token=$HCLOUD_TOKEN
@@ -18,8 +19,12 @@ name=$1
 
 if echo $name | grep -q '\.'; then
   echo "$name contains dots - removing cloudflare DNS entries ..."
+  ## Fetch IPADDR first. we cannot safely use the dnsname after we deleted it from cloudflare.
+  ipaddr=$(dig -t A $name | sed -n -e 's/.* IN A //p'
   yes | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
   yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
+
+  test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
 
   echo "Retrieving hostname via ssh ..."
   hostname=$(set -x; timeout 10 ssh root@$name hostname)
