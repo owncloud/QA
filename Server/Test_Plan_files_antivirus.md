@@ -2,7 +2,9 @@ References: [Template](https://github.com/owncloud/QA/edit/master/Server/Test_Pl
 
 ## Setup
 
-  - Download: https://www.eicar.org/?page_id=3950
+  - Download:
+     - https://www.eicar.org/?page_id=3950
+     - https://github.com/fire1ce/eicar-standard-antivirus-test-files
   - `oc10.sh files_antivirus` 
      -> https://oc10110a2-antivirus-110rc2-20220729.jw-qa.owncloud.works
 
