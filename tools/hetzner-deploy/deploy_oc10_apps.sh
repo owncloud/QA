@@ -289,6 +289,11 @@ if [ -n "$OC10_FQDN" ]; then
   OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
 fi
 
+# This unintended-upgrade script can block us for many minutes! Kill it.
+:> /usr/bin/unattended-upgrade
+systemctl disable unattended-upgrades.service
+systemctl stop    unattended-upgrades.service
+
 
 ## aptQ silences most of the usless clutter from apt. This is what apt -q should do, but does not do.
 # We use tr to "insert" a newline at [Y/n], so that prompts are visible
@@ -323,6 +328,7 @@ echo > ~/env.sh "IPADDR=$IPADDR"
 for i in \$env_sh_vars; do eval echo export "\$i=\'\\\$\$i\'"; done >> ~/env.sh
 echo >> ~/env.sh "OC10_VERSION=$vers"
 echo >> ~/env.sh "OC10_TAR_URL=$tar"
+echo >> ~/env.sh "OC10_ADMIN_PASS=$admin_pass"
 echo >> ~/env.sh "ARGV='${ARGV[@]}'"
 
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
@@ -646,6 +652,7 @@ fi
 for uid in Alice bob carol dave einstein; do
   env OC_PASS=secret occ user:add --password-from-env -g \$uid-g \$uid
 done
+occ user:modify admin email "admin@jw-qa.owncloud.works"
 occ user:modify alice displayname "Alice in Wonderland, down the rabbit hole and through the lookin"	# max 64 chars
 occ user:modify carol displayname "Carol
 L€wis"

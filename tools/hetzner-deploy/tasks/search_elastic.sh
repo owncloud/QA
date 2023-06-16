@@ -17,7 +17,7 @@
 # - 4GB of RAM, minimum, it's java!
 # - vm.max_map_count=262144 - see below.
 
-# source ./env.sh			# probably not needed
+source ./env.sh				# we need OC10_ADMIN_PASS
 
 elastic_port="9200"			# always 9200, for both http or https
 elastic_proto="http"			# "http", or "https" untested! (Ignored in 2.1.0 or before)
@@ -27,6 +27,11 @@ occ app:enable search_elastic		# so that we can get it's version number
 
 version_gt() { test "$(echo -e "$1\n$2" | sort -V | head -n 1)" != "$1"; }
 version="$(occ app:list search_elastic --output json | jq '.. | select(.Version?) | .Version' -r)"
+if [ -z "$version" ]; then
+  echo "search_elastic app not installed? Could not get version."
+  sleep 5
+  exit 0
+fi
 
 elastic_pass="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
 
@@ -63,11 +68,31 @@ mkdir -p "$(dirname $pwdfile)"
 echo $elastic_pass > $pwdfile
 chmod 400 $pwdfile		# must have file permissions 400 or 600,
 
+# choose a version seen in https://github.com/elastic/elasticsearch/branches
+# Check for latest image https://hub.docker.com/_/elasticsearch/tags
+# img=docker.elastic.co/elasticsearch/elasticsearch:7.17.9	# latest known es7
+img=docker.elastic.co/elasticsearch/elasticsearch:8.6.2	# try es8 ?
+
 
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
-plugin_dir=/usr/share/elasticsearch/plugins/
+plugin_dir=/usr/share/elasticsearch/plugins/	# with v8, the ingest-attachment is no longer a plugin.
 config_dir=/usr/share/elasticsearch/config/	# needs mode 777, and then still explodes with missing files. Do not use.
-opts="-v $plugin_dir:$plugin_dir -e discovery.type=single-node"
+config_file=$config_dir/elasticsearch.yml
+mkdir -p $config_dir
+cat <<EOC>>$config_file
+cluster.name: docker-cluster
+node.name: es01
+path.data: /usr/share/elasticsearch/data
+network.host: 0.0.0.0
+discovery.type: single-node
+EOC
+# don't do this for es:8, there the module is auto-enabled.
+echo "$img" | grep -q "elasticsearch:7" && echo "ingest.attachment.enabled: true" >> $config_file
+chmod -R 777 $config_dir		# phew...
+
+## We cannot easily persist the entire config_dir, there are many files and subfolders needed in there...
+# opts="-v $plugin_dir:$plugin_dir -v $config_dir:$config_dir -e discovery.type=single-node"
+opts="-v $plugin_dir:$plugin_dir -v $config_file:$config_file -e discovery.type=single-node"
 # -v $pwdfile:$pwdfile -e ELASTIC_PASSWORD_FILE="$pwdfile"
 # opts="$opts -e node.name=es01 -e cluster.initial_master_nodes=es01"
 
@@ -88,12 +113,9 @@ opts="$opts -e xpack.security.authc.api_key.enabled=true"	# enable the API Key s
 
 # opts="$opts -e 'ES_JAVA_OPTS=-Xms512m -Xmx512m'"	# probably not needed. FIXME: docker -e does not handle whitespace.
 
-# choose a version seen in https://github.com/elastic/elasticsearch/branches
-# Check for latest image https://hub.docker.com/_/elasticsearch/tags
-# img=docker.elastic.co/elasticsearch/elasticsearch:7.17.9	# latest known es7
-img=docker.elastic.co/elasticsearch/elasticsearch:8.6.2	# try es8 ?
-
 docker pull $img || { sleep 30; docker pull $img; } || { sleep 60; docker pull $img; }	# their dockerhub is unreliable
+## The next line may output: [ingest-attachment] is no longer a plugin but instead a module packaged with this distribution of Elasticsearch
+## Maybe the line is not needed altogether with modern es??
 docker run --rm --name es01 $opts $img bin/elasticsearch-plugin install -b ingest-attachment || exit 0;
 # docker rm es01 > /dev/null 2>&1 || true
 if [ "$elastic_proto" = "https" ]; then
@@ -219,7 +241,9 @@ if version_gt "$version" 2.1.99; then
   elastic_json="{ \"servers\":\"$elastic_proto://$elastic_host:$elastic_port\", \"authType\":\"userPass\", $elastic_auth }"
 
   requesttoken=$(curl -s -L -c cookie.jar 'http://localhost' | sed -n -e 's@">$@@' -e 's@.*name="requesttoken" value="@@p')
-  curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/login' --data-raw "user=admin&password=admin&timezone-offset=2&timezone=Europe%2FBerlin&requesttoken=$requesttoken" | grep admin
+  curl -L -s -b cookie.jar -c cookie.jar 'http://localhost/index.php/login' --data-raw "user=admin&password=$OC10_ADMIN_PASS&timezone-offset=2&timezone=Europe%2FBerlin&requesttoken=$requesttoken" | grep admin
+  # This grep only finds '				value="admin"			' when the password did not match.
+
   curl -v -L -b cookie.jar -c cookie.jar -X POST -H "Content-Type: application/json" -d "$elastic_json" 'http://localhost/index.php/apps/search_elastic/settings/servers'
 
 elif version_gt "$version" 2.1.0; then
