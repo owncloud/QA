@@ -20,7 +20,7 @@ name=$1
 if echo $name | grep -q '\.'; then
   echo "$name contains dots - removing cloudflare DNS entries ..."
   ## Fetch IPADDR first. we cannot safely use the dnsname after we deleted it from cloudflare.
-  ipaddr=$(dig -t A $name | sed -n -e 's/.* IN A //p'
+  ipaddr=$(dig -t A $name | sed -n -e 's/.* IN A //p')
   yes | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
   yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
 

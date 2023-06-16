@@ -4,6 +4,8 @@
 # - https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html
 # - https://owncloud.github.io/ocis/
 # - https://owncloud.github.io/ocis/deployment/basic-remote-setup/
+# TODO:
+# - Add some services: e.g. https://doc.owncloud.com/ocis/next/deployment/services/s-list/antivirus.html
 #
 # Apache error messages seen:
 # - AH01144: No protocol handler was valid for the URL /
@@ -126,8 +128,8 @@ OCIS_INSECURE=false
 OCIS_LOG_LEVEL=debug
 
 ## To go back to 3.0.0-rc3 behavior: https://github.com/owncloud/ocis/issues/6403#issuecomment-1567924356
-PROXY_USER_OIDC_CLAIM=preferred_username
-PROXY_USER_CS3_CLAIM=username
+# PROXY_USER_OIDC_CLAIM=preferred_username
+# PROXY_USER_CS3_CLAIM=username
 
 OCIS_CONFIG_DIR=/etc/ocis
 OCIS_BASE_DATA_PATH=$ocis_data
@@ -274,11 +276,11 @@ cat <<EOM >> ~/POSTINIT.msg
 ---------------------------------------------
 # Inspect some boltdb contents
 
-  cp data/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
+  cp o/idm/ocis.boltdb /tmp/bolt.db; bbolt buckets /tmp/bolt.db; bbolt keys /tmp/bolt.db dn2id; rm /tmp/bolt.db
 
 # Restart after editing /etc/ocis/ocis.env:  systemctl restart ocis
 # View the ocis server logs:                 journalctl -f -u ocis
-# Examine the ocis data folder:              tree -fF $ocis_data | sed -e 's@ [^ ]*\\(/../\\)$@\\1@'
+# Examine the ocis data folder:              tree -fF $ocis_data | sed -e 's@ [^ ]*\\(/../\\)\$@\\1@'
 
 ---------------------------------------------
 EOM
