@@ -46,8 +46,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | One account | Enter correct credentials of an account | Login correct. One account view displayed with all sections: Display name, access files, edit login, manage storage, log out, settings, add account | P t16
 | More than one account | Enter correct credentials of two accounts | Login correct. List view displayed with all accounts. Swiping: Edit login, manage storage, delete |P t16
 | Edit credentials | 1. Enter correct credentials of one account<br>2. In server, change password<br>3. Select Edit login<br>4. Enter new credentials | Login correct | P t16
-| Edit name basic | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited | F t16 | Name only creating
-| Edit name oauth2 | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited | F t16 | Name only creating
+| Edit name basic | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited | P t16 | Name only creating
+| Edit name oauth2 | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited | P t16 | Name only creating
 | Manage storage | 1. Enter correct credentials of one account<br>2. Download some files by clicking on them<br>3. In login view, select Manage Storage<br>4. Delete all offline files | All downloaded files are removed (download icon is again visible)| P t16 | 
 |**Settings**||||||
 | Passcode 4 digit | 1. Enable passcode<br>2. Select 4 digit<br>3. Set a code<br>4. Close app and open again| 4-digit passcode asked | P t16 |  |
@@ -67,14 +67,11 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Prevent gestures enabled | 1. Enable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions work | P t16 |  |
 | Prevent gestures disabled | 1. Disable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions are not posible | P t16 |  |
 | Streaming enabled | 1. Enable setting "Streaming"<br>2. Open a video file| Video is played and not downloaded. Cloud icon remains in the item in list of files | P t16 |  |
-| Streaming disabled | 1. Disable setting "Streaming"<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files | F t16 | Download with black screen |
+| Streaming disabled | 1. Disable setting "Streaming"<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files | P t16 | FIXED: Download with black screen |
 | Media upload HEIC > JPG | 1. Enable setting "Convert HEIC to JPG"<br>2. Upload an HEIC file| File is saved as JPG | P m16 | Tested with iPhone |
 | Media upload MP4 | 1. Enable setting "Convert videos to MP4"<br>2. Upload video file in MOV format| Video is saved as MP4 | P m16 | Tested with iPhone |
 | Media upload Preserve original name enabled | 1. Enable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format IMG_xxxx | P t16 |  |
 | Media upload Preserve original name disabled | 1. Disable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format Photo-timestamp_xxxx| P t16 |  |
-| Media upload Prefer unedited (IAP) | 1. Enable setting "Prefer unedited"<br>2. With photos app, edit a picure with some filters...<br>3. Upload a picture| Picture is saved with out changes, in original version|  |  |
-| Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG|  |  |
-| Media upload original videos | 1. Enable setting "Prefer original videos"<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable "Prefer original video" and repeat| 3. Uploaded original video<br>4. Uploaded edited video|  |  |
 | Documentation | Open Documentation Section  | Documentation web is opened | P t16 |   |
 | Help | Open Help Section  | Help web is opened | P t16 |  |
 | Send feedback | Open Send feedback section | feedback mail is opened| P t16 |  |
@@ -83,7 +80,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Acknowledgement | Open Acknowledgement section | Acknowledgement is opened| P t16 |  |
 | App version | 1. Click on the App version cell<br>2. Paste in a text editor  | 1. Copied to clipboard<br>2. Information correctly pasted | P t16 |  |
 |**Item Actions**||||||
-| Create folder | In (+) menu of the list of files, select create folder | Correctly created |   | P t16 |
+| Create folder | In (+) menu of the list of files, select create folder | Correctly created   | P t16 |
 | Open In | Open a file in a 3rd party app | Correctly downloaded and sent |  P t16 |  |
 | Copy file | Copy a file to another location | Correctly copied | P t16 |AUTO |
 | Copy folder| Copy a folder to another location | Correctly copied | P t16 | AUTO |
@@ -110,7 +107,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Copy file another account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in other oC account | Correctly copied. Notification indicating the number of copied items | P t16  |
 | Copy file another location | 1. Select to copy a folder<br>2. Copy to Clipboard<br>3. Paste in another location (not oC) | Correctly copied. Notification indicating the number of copied items | P t16  |
 | Copy folder same account | 1. Select to copy a folder<br>2. Copy to Clipboard<br>3. Paste in another location in the same account | Correctly copied. Notification indicating the number of copied items | P t16  |
-| Notification copy folder two accounts | 1. Add two accounts<br>2. Select to copy a folder (no matter which account)<br>3. Copy to Clipboard | Note inside the notification about "folders only copied in the same account" | F t16  | Notification missing
+| Notification copy folder two accounts | 1. Add two accounts<br>2. Select to copy a folder (no matter which account)<br>3. Copy to Clipboard | Note inside the notification about "folders only copied in the same account" | P t16  | FIXED: Notification missing
 | Copy folder another account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in other oC account | Correctly copied. Notification indicating the number of copied items | NA  | Not supported yet
 | Cut item same account | 1. Cut any item<br>2. Paste to another location in the same account | Correctly pasted. Notification indicating the number of cut items |  P t16 |
 | Cut item another account/location| 1. Cut any item<br>2. Paste to another location  | Correctly pasted. Notification indicating the number of cut items | NA  | Not supported yet
@@ -139,7 +136,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | PDF search | Download and open a PDF file and search by a pattern | Correct search |P t16 |  |
 | PDF Go To Page | Download and open a PDF file and go to a page (in the page counter) | Correct jump |P t16 |  |
 | PDF List of Contents | Download and open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed | P t16 |  |
-| PDF Full screen | Download and open a PDF file and tap on the screen| Correct displayed in full screen | F t16 m16 | Not correct |
+| PDF Full screen | Download and open a PDF file and tap on the screen| Correct displayed in full screen | P t16 m16 | FIXED: Not correct |
 | PDF Navigate | Download and open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct | P t16 |  |
 | Doc | Download and open a Doc file | Correctly displayed | P t16|  |
 | Excel | Download and open a excel file | Correctly displayed | P t16|  |
@@ -208,9 +205,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Item info | Open an ownCloud Files app location<br>Open info option | Item info is correct  | P t16 | |
 | Delete one folder | Open an ownCloud Files app location<br>Delete a folder | Folder is deleted in oC app |  P t16|  |
 | Delete one file | Open an ownCloud Files app location<br>Delete a file | File is deleted in oC app | P t16 |  |
-| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | F t16 m16 | Saved 0B |
-| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | F t16 m16 | saved 0B |
-| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded |  F t16 m16 | saved 0B |
+| Upload files app| Open a file with Files app, an MSOffice one f.ex.<br>Modify it<br>Save changes | File is correctly uploaded to ownCloud | P t16 m16 | FIXED: Saved 0B |
+| Upload external| Open an external app to edit files<br>Create a file and upload to oC via Files App | File is correctly uploaded | P t16 m16 | FIXED: saved 0B |
+| Upload non-root| Open an external app to edit files<br>Create a file and upload to oC via Files App to a non-root folder| File is correctly uploaded | P t16 m16 | FIXED: saved 0B |
 | Copy from other location | Open another location in Files app and copy content<br>Paste it into ownCloud location | Content upload to oC | P t16 |  |
 | Copy to other location |Open an ownCloud Files app location<br>Copy content and Paste it into another location | Content correctly pasted | P t16 |  |
 | Move between oC accounts root | Move a file from an oC account to anocther one in root folder | Content correctly moved |  P t16|  |
@@ -219,14 +216,6 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Copy between oC accounts non-root | Copy a file from an oC account to anocther one in non-root folder | Content correctly copied | P t16 |  |
 | Share a file with user | 1.Select a file or folder<br>2. In contextual menu, select Share<br>3. Select sharee | Content correctly shared | P t16 |  |
 | Share a file by link | 1.Select a file or folder<br>2. In contextual menu, select Links<br>3. Create a new link (with defaults) | Link correctly created |  P t16|  |
-|**Remote actions (Files App)**||||||
-| Rename remote| Rename a file or folder in web UI | File is automatically renamed in Files app |  |  |
-| Move remote| Move a file or folder in web UI | File is automatically moved in Files app | |  | |
-| Delete remote| Delete a file or folder in web UI | Delete is automatically moved in Files app |  |  |
-| Upload remote| Upload new content in web UI | New content refreshed in Files app |  |  |
-|**Error handling (Files App)**||||||
-| Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error |  | |
-| Target folder deleted | Select Move/Copy of an item in Files app<br>Before submitting the operation, remove the target folder using another client or device  | Correct error |  | |
 |**Private Share**||||||
 | Share with a user | Open Share<br>Type a correct user name<br>Select user | Sharees list updated with the user | P t16  | AUTO |
 | Share with a group | Open Share<br>Type a correct group name<br>Select group | Group list updated with the user. Check that every user in the group can access the file | P t16 | AUTO |
