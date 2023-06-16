@@ -30,9 +30,8 @@ done
 netstat -a | grep clam
 
 ### and also icap option enabled. User has to choose in the end.
-apt install -y jq p7zip-full postgresql docker.io
-# first: ClamAV c-icap
-apt install -y jq
+apt install -y jq p7zip-full docker.io
+
 screen -d -m -S c-icap -Logfile screenlog-c-icap -L docker run --rm --name c-icap -ti deepdiver/icap-clamav-service
 for i in 10 9 8 7 6 5 4 3 2 1; do
   cicap_addr=$(docker inspect c-icap 2>/dev/null| jq .[0].NetworkSettings.IPAddress -r);
@@ -42,3 +41,15 @@ done
 echo "Testing $cicap_addr 1344 ..."
 echo -e "\r\n\r" | timeout 20 netcat "$cicap_addr" 1344 | grep Server || echo "ERROR: no server reported"
 
+# Document what we did.
+cat <<EOF>> env.sh
+#
+SERVICE_CLAMAV_ADDR=127.0.0.1
+SERVICE_CLAMAV_PORT=3310
+SERVICE_CLAMAV_SOCKET=/var/run/clamav/clamd.ctl
+SERVICE_CLAMAV_ICAP_ADDR=$cicap_addr
+SERVICE_CLAMAV_ICAP_PORT=1344
+EOF
+
+echo "View the syslog of clamd:"
+echo "  journalctl -u clamav-daemon -p0..7 --no-ho -f"

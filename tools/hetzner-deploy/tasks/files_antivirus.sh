@@ -92,7 +92,7 @@ else
   /opt/kaspersky/ScanEngine/etc/init.d/kavicapd restart
 
   echo ""
-  echo "Make the Kaspersky ScanEngine Web GUI locally as https://localhost:11443 via ssh-tunnel:"
+  echo "Make the Kaspersky ScanEngine Web GUI available locally as https://localhost:11443 via ssh-tunnel:"
   echo "  ssh -v -L 11443:127.0.0.1:1443 root@$IPADDR"
   echo ""
   echo "Switch icap from clamav-icap to kaspersky run these commands:"
