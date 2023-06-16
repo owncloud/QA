@@ -118,10 +118,21 @@ run these steps between every test case in this chapter:
 4. set "When infected files were found during a background scan" to "logSetting"
 5. set "File size limit" to "fileSizeLimit"
 6. wait 15 min (or change `$this->setInterval(60 * 15);` in `lib/Cron/Task.php` to a smaller number)
-7. mysql owncloud -e "update oc_jobs set last_run = 0 where class like '%ScanFiles' or class like '%Antivirus%';"
+7. mysql owncloud -e "update oc_jobs set last_run = 0 where class like '%Antivirus%';"
 8. trigger cron job by running `occ system:cron -vvv -p`
 9. check logfile
-10. check files
+```
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"cron","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Running job with id 20 and class OCA\\Files_Antivirus\\Cron\\Task. Last run 0 and interval 900"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"cron","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Started background job of class : OCA\\Files_Antivirus\\Cron\\Task with arguments : "}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"files_antivirus","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"About to scan file of user admin with id 26 and path \/test.txt"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"no app in context","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Lock files\/0ca47d1e59d0cbf07f715297a70f8417\/1 already exists"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"files_antivirus","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Scan started File: 26 Account: admin Path: \/test.txt"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"files_antivirus","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Scan is done File: 26 Account: admin Path: \/test.txt"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"files_antivirus","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Response :: stream: Win.Test.EICAR_HDB-1 FOUND\n"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":3,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"admin","app":"files_antivirus","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Infected file deleted. Win.Test.EICAR_HDB-1 File: 26  Path: \/test.txt"}
+{"reqId":"VBZmy9GE8cIRgWHzhaGy","level":0,"time":"2023-06-15T11:18:02+00:00","remoteAddr":"91.45.213.122","user":"--","app":"cron","method":"GET","url":"\/owncloud10121\/index.php\/cron","message":"Finished background job, the job took : 0 seconds, this job is an instance of class : OCA\\Files_Antivirus\\Cron\\Task with arguments : "}
+```
+11. check files
 
 | Test Case                                | Expected Result                          | Result | Related Comment |
 | ---------------------------------------- | ---------------------------------------- | ------ | --------------- |
