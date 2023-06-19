@@ -1,5 +1,7 @@
 # Encryption Test Plan
 
+Template: https://github.com/owncloud/QA/blob/master/Server/Test_Plan_encryption.md
+
 TODO: qualify test items from https://github.com/owncloud/enterprise/issues/4933#issuecomment-1005287788 to become regression test items here.
 
 ## Setup
@@ -29,11 +31,13 @@ The indented checkmarks indicate the results were as expected.
    * [ ] Files on external SFTP, WND storage are stored encrypted.
       * [ ] Test_Plan_Files_external_CLI.md:Change Mount option for an SFTP mount
          * [ ] option disable encryption is there.
-         * [ ] disable, and check it with list command.
          * [ ] disable, and inspect files with xxd.
    * [ ] files added to the storge + occ file:scan are *not* encrypted.
    * [ ] move file from main storage to unencrypted external storage. The file gets decrypted on disk.
    * [ ] move file from unencrypted external storage to main storage. The file gets encrypted on disk.
+   * [ ] enable encryption on the external storage + occ file:scan
+      * [ ] Existing files remain unencrypted
+      * [ ] New files are encrypted 
    * [ ] move file one encrypted external storage to another encrypted external storage. The file gets encrypted on disk.
 ----
 * [ ] Receiving fedrated share folder from an unencrypted server.
