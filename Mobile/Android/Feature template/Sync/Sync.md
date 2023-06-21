@@ -86,3 +86,9 @@ Context: <br>
 | Forbidden character \"\\" | 1. Select an item from the list by long pressing on it<br>2. In 3-dot-button, select `Rename`<br>3. Enter a name that contains \"\\" | Error: `Rename could not be completed because file name contains at least one forbidden character ` |   |   |
 | Rename existing name | 1. Select an item from the list by long pressing on it<br>2. In 3-dot-button, select `Rename`<br>3. Enter as name an existing name in the same location | Error: `Rename could not be completed because file already exists` |  |  |
 | Rename inexistent item | 1. Select an item from the list by long pressing on it<br>2. In 3-dot-button, select `Rename`<br>2. Enter a correct name<br>3. Before submitting, remove the item in web or other client<br>4. Submit the renaming | Error: `Rename could not be completed because it was not found` |   |  |
+|**Create folder**||||||
+| New folder in root | 1. Open FAB in list of files, root folder<br>2. Select `New folder`<br>3. Enter a correct name | Folder created in root folder. Check in web |  |  |
+| New folder in non-root | 1. Open FAB in list of files, non-root folder<br>2. Select `New folder`<br>3. Enter a correct name | Folder created in non-root folder. Check in web |  |  |
+| New folder - empty | 1. Open FAB in list of files<br>2. Select `New folder`<br>3. Let empty name | `OK` not clickable |  |  |
+| New folder - existing name | 1. Open FAB in list of files<br>2. Select `New folder`<br>3. Enter a name of an existing folder in the current folder | Error: `The resource you tried to create already exists` |  |  |
+| New folder - long name | 1. Open FAB in list of files<br>2. Select `New folder`<br>3. Enter a name longer than 255 characters | Error: `Folder could not be created because folder name could not be that long` |  |  |
