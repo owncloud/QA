@@ -21,15 +21,17 @@ Tasks:
 Setup steps:
 
 1) Log in to hetzner Cloud Console, select QA project, click snapshots
-2) Select the 3 dots from 'winServer2022-sysprep' and 
+2) Select the 3 dots from 'winServer2022-sysprep' and
    -> Create New Server, Nuremberg, CPX31
-	-> deselect [ ] public IPV6
+	-> keep selected both,
+           [X] public IPv4 and
+           [X] public IPv6	(server won't configure correctly if IPv6 is off here, we disable it later.
 	-> add a [x] Private networks
 	   - kerberos.jw 10.42.0.0/16
 	-> Select firewalls:
 	   - in-allow-windows-server-rdp
 	-> labels owner:jw, used_for: kerberos_testing
-        -> Server name: 
+        -> Server name:
 	   jw-w22-server-20230620 	(the suggested name is something with ubuntu, that is misleading wrong)
 3) Should be able to connect wit krdc directly after boot.
 	-> Credentials in buttercup?
@@ -37,7 +39,7 @@ Setup steps:
 Again for the desktop, except only the
 	type cx21 (should be sufficient)
 	firewall in-allow-windows-server-rdp
-and 
+and
 	name jw-w22-desktop-20230620
 
 Heztner console, [x] gui mode, click in window
@@ -45,7 +47,7 @@ Heztner console, [x] gui mode, click in window
 	Germany, German (Germany), German
  -> License -> Accept
  -> Username Administrator
- -> Password 
+ -> Password
   -> Finish
   -> (Login at hconsole not needed, but shoud work)
 
@@ -61,19 +63,47 @@ remmina
    -> Save and Connect, Certificate -> Accept
    -> Left side menu: [^v] Toggle dynamic resolution update
 
-   -> edge 
+   -> edge
     - Start without your data
     - Continue without this data
     - ... bringing your browser data ...??? -> Don't allow
     - ... Microsoft more useful ...??? -> Don't allow
     -> Next -> Finish
-  Run updates -> https://github.com/GeraldLeikam/tutorials/blob/master/windows/server/2022/update_windows_server.md
-   -> Restart (this kills the remmina connection. Wait 60 min before attempting to reconnect, or check the hetzner console)
 
-  IPV6 aus,
-  dns name bei cloudflare - ad01.jw-qa.owncloud.works
-  Server Namen Ändern
-  Rolle hinzufügen
-  Active Direcory promoten...
+Run updates -> https://github.com/GeraldLeikam/tutorials/blob/master/windows/server/2022/update_windows_server.md
+ -> Restart (this kills the remmina connection. Wait 30 min before attempting to reconnect, or check the hetzner console)
+ -> repeat once more
+
+
+IPV6 aus -> https://github.com/GeraldLeikam/tutorials/blob/master/windows/server/2022/disable_ipv6_network.md
+ -> Server Manager -> Local Server -> Interfaces (Click any)
+   -> for both interfaces: -> Properties -> disable [ ] Internet Protocol 6 (TCP/IP 6)
+     -> OK
+ -> (`><,) Refresh local server
+
+DNS NAME via cloudflare
+  - ad01.ker.jw-qa.owncloud.works
+  - desktop.ker.jw-qa.owncloud.works
+
+Server Namen Ändern -> https://github.com/GeraldLeikam/tutorials/blob/master/windows/server/2022/change_server_name.md
+ -> Server Manager -> Local Server -> Computer name (Click on the WIN-7GBXSE)
+  Computer Name -> Computer description: [ad01.ker.jw-qa.owncloud.works]
+  Computer Name -> Change: Computer name: [ad01]
+	# Not yet: Member of (*) Domain: [ker.jw-qa.owncloud.works]
+   -> ok, close, ..
+   -> must restart -> restart now.
+ - same for the [desktop] machine
+
+Rolle hinzufügen
+ -> Server Manager ->
+   Select Server Roles -> Activ directory domain serice
+   next next next next install
+
+Active Direcory promoten...
+ -> zum domain controller promoten ...
+
+Desktop joins domain
+
+OC10 connect: ?semi added to domain?, ?controller knows?
 
 EOF

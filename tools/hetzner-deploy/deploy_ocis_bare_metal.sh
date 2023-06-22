@@ -99,6 +99,7 @@ pip install boltdb
 
 go install go.etcd.io/bbolt/cmd/bbolt@latest   # cli-tool to inspect boltdb files.
 export PATH="$PATH:/root/go/bin"
+echo 'PATH="$PATH:/root/go/bin"' >> ~/.bashrc
 
 wget -O /usr/local/bin/ocis $ocis_url
 chmod +x /usr/local/bin/ocis
