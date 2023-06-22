@@ -6,6 +6,8 @@
 #
 # 2023-06-21 - v0.1 initial draught
 #            - v0.2 refactored as module
+#            - v0.3 default to all keys lowercase, the LDAP specification (RFC 4512) 
+#                   states that attribute names are not case-sensitive in the DIT.
 #
 # Usage:
 #
@@ -14,7 +16,7 @@
 #   print(json.dumps(Dumper())
 #
 
-def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
+def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users', ignorecase=True):
     """
     Loads the ocis.boltdb file as flat binary file and searches for 'uid='
     markers. At these markers user records are decoded.
@@ -27,6 +29,10 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
 
     uidfilter can be used to limit the amount of records included in the dictionary.
     If the filter contains a name, but no prefix with '=', then 'uid=' is assumed.
+
+    When ignorecase is True, keys are returned all lowercase. This is good for
+    the typical ocis.boltdb, as they sometimes store 'ownCloudUUID' and
+    sometimes 'owncloudUUID'. When ignorecase is False, keys are returned as is.
     """
 
     text = open(file, 'rb').read()
@@ -50,6 +56,7 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
         if uid_len == 0:
             break                         # end marker..
         uid = text[s:s+uid_len].decode()  # decode() converts from raw bytes to UTF-8
+        if ignorecase: uid = uid.lower()
 
         # print(uid)
 
@@ -76,6 +83,7 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
                 k_len = text[s]
                 s += 1
                 k = text[s:s+k_len].decode()
+                if ignorecase: k = k.lower()
                 s += k_len
                 n_vals = text[s+1]
                 s += 2
