@@ -2,9 +2,10 @@
 #
 # idm_user_dump.py - a dirty hack, to dump uid records from an ocis boltdb.
 #
-# (c) 2023 - jw@owncloud.com
+# (c) 2023 - jw@owncloud.com, distribute under GPLv2
 #
 # 2023-06-21 - v0.1 initial draught
+#            - v0.2 refactored as module
 #
 # Usage:
 #
@@ -13,19 +14,25 @@
 #   print(json.dumps(Dumper())
 #
 
-import json
-
 def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
     """
-    loads the ocis.boltdb file as flat binary file and searches for
-    'uid=' markers. At these markers decode user records are decoded, if they match the uidfilter
-    A dict with ldap style uid keys is retunrned, values in the dict are the attributes found.
-    Single valued attributes are strings, multi-valued attributes are returnd as a list of strings.
-    The list of values is repeated twice in the boltdb database.
-    If these values differ, a (two element) list of lists is returned.
+    Loads the ocis.boltdb file as flat binary file and searches for 'uid='
+    markers. At these markers user records are decoded.
+
+    A dictionary with ldap style uid keys is returned, values in the dictionary
+    are the attributes found in the database.  Single valued attributes are
+    strings, multi-valued attributes are returnd as a list of strings.  The
+    list of values is repeated twice in the boltdb database.  If these values
+    differ, a (two element) list of lists is returned.
+
+    uidfilter can be used to limit the amount of records included in the dictionary.
+    If the filter contains a name, but no prefix with '=', then 'uid=' is assumed.
     """
 
     text = open(file, 'rb').read()
+
+    if uidfilter is not None and '=' not in uidfilter:
+        uidfilter = 'uid='+uidfilter
 
     starts = [-1]
     while True:
@@ -40,9 +47,13 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
     users = {}
     for s in starts:
         uid_len = text[s-1]               # the one byte before the uid string has the length of the string
+        if uid_len == 0:
+            break                         # end marker..
         uid = text[s:s+uid_len].decode()  # decode() converts from raw bytes to UTF-8
+
         # print(uid)
-        if ',ou=users,' in uid:
+
+        if uidfilter == None or ','+uidfilter+',' in ','+uid+',':
             users[uid] = {}
             # b'uid=admin,ou=users,o=libregraph-idm
             #   \x01\n
@@ -98,4 +109,13 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users'):
 
 
 if __name__ == '__main__':
-    print(json.dumps(Dumper()))
+    import json, sys
+    filter = 'ou=users'
+
+    if len(sys.argv) > 1:
+        filter = sys.argv[1]
+        if filter == '-a' or filter == '--all':
+            filter = None
+
+    print(json.dumps(Dumper(uidfilter=filter)))
+
