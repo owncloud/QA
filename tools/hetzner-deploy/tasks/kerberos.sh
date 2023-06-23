@@ -97,12 +97,71 @@ Server Namen Ändern -> https://github.com/GeraldLeikam/tutorials/blob/master/wi
 Rolle hinzufügen
  -> Server Manager ->
    Select Server Roles -> Activ directory domain serice
-   next next next next install
+   next next next next
+	[x] Restart the destination server automatically...
+	 -> yes -> install
+ wait ...
+  -> Installation succeeded on ad01. -> Close
 
 Active Direcory promoten...
- -> zum domain controller promoten ...
+ -> server manager Flag in gray top bar has a yellow triangle, -> click there
+    small box with blue text -> Promote this server to a domain controller.
+ -> (*) Add a new forest
+   Root domain name: ker.jw-qa.owncloud.works
+   -> next
+	Password: [type an new password]
+	Confirm Password:
+   -> next
+	[ ] DNS delgatin (not enabled)
+   -> next
+	Verify the netbios name:
+	-> click, KER appears
+	-> next
+		location of the db
+	-> next next ... wait ... (many yellw triangle appear. ignore these warnings)
+	 -> install ... wait longer ...
+
+  -> you are about be signed out -> wait 1 min, remmina breaks,
+	check console ..
+		Applying computer settings (ca 5 min)
+  -> Server Manager Dashboard now has two new badges
+	AD DS
+	DNS
+
+
+
 
 Desktop joins domain
+
+local server ethernet, details, find the one with the 10.xx.xx.03 address -> Ethernet instance 0 2
+	properties
+	internet protocol version 4 double click.
+	(*) Use the following DNS server addess
+	10.42.0.2		(click through the interfaces of the server to find this...)
+local server ethernet, details, find the one with the external interfac 10.xx.xx.03 address -> Ethernet instance 0
+	properties
+	internet protocol version 4 double click.
+	(*) Use the following DNS server addess
+	127.0.0.1		(do not use the external IP of the ad01 here. strange, but it only works with localhost.)
+
+Click on computer name, change
+Member of
+  (*) Domain
+	ker.jw-qa.owncloud.works
+
+Welcome to the ker.jw-qa.owncoud.works domain. -> OK
+
+	restart -> ok -> close -> restart now.
+
+Change remmina config for both machines.
+	Domain: ker.jw-qa.owncoud.works
+
+
+
+create more users at the AD. put them all in an rdp group,
+	and allow all users in group rdp to log in via rdp (at server or desktop or both?)
+
+Then create a windows network share for the users...
 
 OC10 connect: ?semi added to domain?, ?controller knows?
 
