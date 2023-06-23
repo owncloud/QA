@@ -8,6 +8,7 @@
 #            - v0.2 refactored as module
 #            - v0.3 default to all keys lowercase, the LDAP specification (RFC 4512) 
 #                   states that attribute names are not case-sensitive in the DIT.
+# 2023-06-22 - v0.4 crude option parser added, --help, redirect via stdin added.
 #
 # Usage:
 #
@@ -15,6 +16,8 @@
 #   from idm_user_dump import Dumper
 #   print(json.dumps(Dumper())
 #
+
+__version__ = '0.4'
 
 def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users', ignorecase=True):
     """
@@ -119,11 +122,32 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users', ignorecas
 if __name__ == '__main__':
     import json, sys
     filter = 'ou=users'
+    file = Dumper.__defaults__[0]
 
     if len(sys.argv) > 1:
+        if sys.argv[1] == '-h' or sys.argv[1] == '--help':
+            print("""
+idm_user_dump.py Version %s
+
+Usage:
+        %s [filter]
+        %s --all
+        %s ... < /tmp/ocis.boltdb
+        bbolt get --parse-format  hex ~/ocis.boltdb id2entry 0900000000000000 | %s | jq
+
+The default filter is '%s'.
+The database file is taken from stdin, when stdin is not connected to a terminal.
+Otherwise the database file defaults to '%s'.
+
+""" % (__version__, sys.argv[0], sys.argv[0], sys.argv[0], sys.argv[0], filter, file))
+            sys.exit(0)
+
         filter = sys.argv[1]
         if filter == '-a' or filter == '--all':
             filter = None
 
-    print(json.dumps(Dumper(uidfilter=filter)))
+    if not sys.stdin.isatty():
+        file = '/dev/stdin'             # allow piping
+
+    print(json.dumps(Dumper(file=file, uidfilter=filter)))
 
