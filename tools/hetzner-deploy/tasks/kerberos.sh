@@ -159,10 +159,54 @@ Change remmina config for both machines.
 
 
 create more users at the AD. put them all in an rdp group,
+	-> Server Manager
+	 -> top right bar, Tools, -> Active Durectry Users and Computers
+ 	click open ker.jwq-qa.owncloud.works
+	 -> There is an orgnisation unit Users. We can use that, but we better create an own unit.
+	   Right clock on ker.jwq-qa.owncloud.works -> New -> Organizationa Unit
+		ownCloud
+		-> there another -> New -> Organizationa Unit
+			Groups
+			-> New Group
+				RDP
+		-> there another -> New -> Organizationa Unit
+			Users
+			 -> New -> User
+	Alice wonderland alice
+	[ ] user must change
+	[X] User cannot change
+	[X] Password never expires
+	-> enter a password with numbers and dashes:	1-pass-2-word-3
+	  -> Finish
+
+	alice, bob, einstein
+	-> select all three users, -> right click, -> Add to Roup
+		-> Enter the object name to select (examples):
+			rdp -> [Check Names] -> RDP gets underlined.
+		-> OK -> successfull.. -> OK
+
 	and allow all users in group rdp to log in via rdp (at server or desktop or both?)
 
+Desktop-> Server Manager -> Local Server -> Prpoerties -> Rempte Desktop -> click [Enabled] -> a new window opens
+	System Properties -> Remote
+	(*) allow remote connections to this computer [Select Users]
+	 rdp -> [check Names] -> (login, if needed) -> RDP gets underlined.
+
+Log in alice via remmina
+
 Then create a windows network share for the users...
+Desktop -> File Explorer -> This PC -> Map Network Drive ...
+	Drive: H:
+	Folder: \\ad01 -> Browse -> click open, -> [Alice] 	-> OK
 
 OC10 connect: ?semi added to domain?, ?controller knows?
+	- create hetzner machine, ...  fqdn: oc.jw-qa.owncloud.works
+		https://confluence.owncloud.com/display/SA/Kerberos+Setup+Guide
+	- add to subnet jw.kerberos
+	- ldap sync
+		- ad01-int.jw-qa.owncloud.works	10.42.0.2
+	- kerberos --
+		- /windows/driver.../etc/hosts/ ad01.jw-qa.owncloud.works	10.42.0.2
+
 
 EOF
