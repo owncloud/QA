@@ -149,5 +149,8 @@ Otherwise the database file defaults to '%s'.
     if not sys.stdin.isatty():
         file = '/dev/stdin'             # allow piping
 
+    env_file = os.environ.get('IDM_BOLTDB_FILE'):
+    if env_file: file = env_file
+
     print(json.dumps(Dumper(file=file, uidfilter=filter)))
 
