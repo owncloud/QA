@@ -23,28 +23,28 @@ Setup steps:
 1) Log in to hetzner Cloud Console, select QA project, click snapshots
 2) Select the 3 dots from 'winServer2022-sysprep' and
    -> Create New Server, Nuremberg, CPX31
-	-> keep selected both,
+        -> keep selected both,
            [X] public IPv4 and
-           [X] public IPv6	(server won't configure correctly if IPv6 is off here, we disable it later.
-	-> add a [x] Private networks
-	   - kerberos.jw 10.42.0.0/16
-	-> Select firewalls:
-	   - in-allow-windows-server-rdp
-	-> labels owner:jw, used_for: kerberos_testing
+           [X] public IPv6         (server won't configure correctly if IPv6 is off here, we disable it later.
+        -> add a [x] Private networks
+           - kerberos.jw 10.42.0.0/16
+        -> Select firewalls:
+           - in-allow-windows-server-rdp
+        -> labels owner:jw, used_for: kerberos_testing
         -> Server name:
-	   jw-w22-server-20230620 	(the suggested name is something with ubuntu, that is misleading wrong)
+           jw-w22-server-20230620          (the suggested name is something with ubuntu, that is misleading wrong)
 3) Should be able to connect wit krdc directly after boot.
-	-> Credentials in buttercup?
+        -> Credentials in buttercup?
 
 Again for the desktop, except only the
-	type cx21 (should be sufficient)
-	firewall in-allow-windows-server-rdp
+        type cx21 (should be sufficient)
+        firewall in-allow-windows-server-rdp
 and
-	name jw-w22-desktop-20230620
+        name jw-w22-desktop-20230620
 
 Heztner console, [x] gui mode, click in window
  -> What is your country, language, keyboard:
-	Germany, German (Germany), German
+        Germany, German (Germany), German
  -> License -> Accept
  -> Username Administrator
  -> Password
@@ -89,7 +89,7 @@ Server Namen Ändern -> https://github.com/GeraldLeikam/tutorials/blob/master/wi
  -> Server Manager -> Local Server -> Computer name (Click on the WIN-7GBXSE)
   Computer Name -> Computer description: [ad01.ker.jw-qa.owncloud.works]
   Computer Name -> Change: Computer name: [ad01]
-	# Not yet: Member of (*) Domain: [ker.jw-qa.owncloud.works]
+        # Not yet: Member of (*) Domain: [ker.jw-qa.owncloud.works]
    -> ok, close, ..
    -> must restart -> restart now.
  - same for the [desktop] machine
@@ -98,8 +98,8 @@ Rolle hinzufügen
  -> Server Manager ->
    Select Server Roles -> Activ directory domain serice
    next next next next
-	[x] Restart the destination server automatically...
-	 -> yes -> install
+        [x] Restart the destination server automatically...
+         -> yes -> install
  wait ...
   -> Installation succeeded on ad01. -> Close
 
@@ -109,24 +109,24 @@ Active Direcory promoten...
  -> (*) Add a new forest
    Root domain name: ker.jw-qa.owncloud.works
    -> next
-	Password: [type an new password]
-	Confirm Password:
+        Password: [type an new password]
+        Confirm Password:
    -> next
-	[ ] DNS delgatin (not enabled)
+        [ ] DNS delgatin (not enabled)
    -> next
-	Verify the netbios name:
-	-> click, KER appears
-	-> next
-		location of the db
-	-> next next ... wait ... (many yellw triangle appear. ignore these warnings)
-	 -> install ... wait longer ...
+        Verify the netbios name:
+        -> click, KER appears
+        -> next
+             location of the db
+        -> next next ... wait ... (many yellw triangle appear. ignore these warnings)
+         -> install ... wait longer ...
 
   -> you are about be signed out -> wait 1 min, remmina breaks,
-	check console ..
-		Applying computer settings (ca 5 min)
+        check console ..
+          Applying computer settings (ca 5 min)
   -> Server Manager Dashboard now has two new badges
-	AD DS
-	DNS
+        AD DS
+        DNS
 
 
 
@@ -134,79 +134,100 @@ Active Direcory promoten...
 Desktop joins domain
 
 local server ethernet, details, find the one with the 10.xx.xx.03 address -> Ethernet instance 0 2
-	properties
-	internet protocol version 4 double click.
-	(*) Use the following DNS server addess
-	10.42.0.2		(click through the interfaces of the server to find this...)
+        properties
+        internet protocol version 4 double click.
+        (*) Use the following DNS server addess
+        10.42.0.2                  (click through the interfaces of the server to find this...)
 local server ethernet, details, find the one with the external interfac 10.xx.xx.03 address -> Ethernet instance 0
-	properties
-	internet protocol version 4 double click.
-	(*) Use the following DNS server addess
-	127.0.0.1		(do not use the external IP of the ad01 here. strange, but it only works with localhost.)
+        properties
+        internet protocol version 4 double click.
+        (*) Use the following DNS server addess
+        127.0.0.1                  (do not use the external IP of the ad01 here. strange, but it only works with localhost.)
 
 Click on computer name, change
 Member of
   (*) Domain
-	ker.jw-qa.owncloud.works
+        ker.jw-qa.owncloud.works
 
 Welcome to the ker.jw-qa.owncoud.works domain. -> OK
 
-	restart -> ok -> close -> restart now.
+        restart -> ok -> close -> restart now.
 
 Change remmina config for both machines.
-	Domain: ker.jw-qa.owncoud.works
+        Domain: ker.jw-qa.owncoud.works
 
 
 
 create more users at the AD. put them all in an rdp group,
-	-> Server Manager
-	 -> top right bar, Tools, -> Active Durectry Users and Computers
- 	click open ker.jwq-qa.owncloud.works
-	 -> There is an orgnisation unit Users. We can use that, but we better create an own unit.
-	   Right clock on ker.jwq-qa.owncloud.works -> New -> Organizationa Unit
-		ownCloud
-		-> there another -> New -> Organizationa Unit
-			Groups
-			-> New Group
-				RDP
-		-> there another -> New -> Organizationa Unit
-			Users
-			 -> New -> User
-	Alice wonderland alice
-	[ ] user must change
-	[X] User cannot change
-	[X] Password never expires
-	-> enter a password with numbers and dashes:	1-pass-2-word-3
-	  -> Finish
+        -> Server Manager
+         -> top right bar, Tools, -> Active Directory Users and Computers
+          click open ker.jwq-qa.owncloud.works
+         -> There is an orgnisation unit Users. We can use that, but we better create an own unit.
+           Right clock on ker.jwq-qa.owncloud.works -> New -> Organizationa Unit
+                 ownCloud
+                 -> there another -> New -> Organizationa Unit
+                          Groups
+                          -> New Group
+                                   RDP
+                 -> there another -> New -> Organizationa Unit
+                          Users
+                           -> New -> User
+        Alice wonderland alice
+        [ ] user must change
+        [X] User cannot change
+        [X] Password never expires
+        -> enter a password with numbers and dashes:         1-pass-2-word-3
+          -> Finish
 
-	alice, bob, einstein
-	-> select all three users, -> right click, -> Add to Roup
-		-> Enter the object name to select (examples):
-			rdp -> [Check Names] -> RDP gets underlined.
-		-> OK -> successfull.. -> OK
+        alice, bob, einstein
+        -> select all three users, -> right click, -> Add to Roup
+                 -> Enter the object name to select (examples):
+                          rdp -> [Check Names] -> RDP gets underlined.
+                 -> OK -> successfull.. -> OK
 
-	and allow all users in group rdp to log in via rdp (at server or desktop or both?)
+        and allow all users in group rdp to log in via rdp (at server or desktop or both?)
 
 Desktop-> Server Manager -> Local Server -> Prpoerties -> Rempte Desktop -> click [Enabled] -> a new window opens
-	System Properties -> Remote
-	(*) allow remote connections to this computer [Select Users]
-	 rdp -> [check Names] -> (login, if needed) -> RDP gets underlined.
+        System Properties -> Remote
+        (*) allow remote connections to this computer [Select Users]
+         rdp -> [check Names] -> (login, if needed) -> RDP gets underlined.
 
 Log in alice via remmina
 
 Then create a windows network share for the users...
 Desktop -> File Explorer -> This PC -> Map Network Drive ...
-	Drive: H:
-	Folder: \\ad01 -> Browse -> click open, -> [Alice] 	-> OK
+        Drive: H:
+        Folder: \\ad01 -> Browse -> click open, -> [Alice]          -> OK
 
 OC10 connect: ?semi added to domain?, ?controller knows?
-	- create hetzner machine, ...  fqdn: oc.jw-qa.owncloud.works
-		https://confluence.owncloud.com/display/SA/Kerberos+Setup+Guide
-	- add to subnet jw.kerberos
-	- ldap sync
-		- ad01-int.jw-qa.owncloud.works	10.42.0.2
-	- kerberos --
-		- /windows/driver.../etc/hosts/ ad01.jw-qa.owncloud.works	10.42.0.2
+        - create hetzner machine, ...  fqdn: oc.jw-qa.owncloud.works
+                 https://confluence.owncloud.com/display/SA/Kerberos+Setup+Guide
+        - add to subnet jw.kerberos
+        - ldap sync
+                 - ad01-int.jw-qa.owncloud.works         10.42.0.2
+                 Cannot autodetect base dn, when using an IP address. we a host name
+                 Benutzer DN: Administrator@ker.jw-qa.owncloud.works
+                 host: ldap://ad01-int.jw-qa.owncloud.works         port: 389
+                 base dn: dc=ker,dc=jw-qa,dc=owncloud,dc=works
+                 ldapsearch -d 0 -H ldap://10.42.0.2 -D administrator@ker.jw-qa.owncloud.works -w "$password" -b dc=ker,dc=jw-qa,dc=owncloud,dc=works
+          Only these object classes: person
+          Only from these groups: []
+          Available groups
+           scroll down to find 'RDP', click '>' -> it appears in 'Selected groups
+            -> Ldap Filter appears: (&(|(objectclass=person))(|(|(memberof=CN=RDP,OU=Groups,OU=ownCloud,DC=ker,DC=jw-qa,DC=owncloud,DC=works)(primaryGroupID=1108))))
+          [verify settings and count users]: 3
+          Login Attributes
+           -> [x] LDAP/AD Username
+           -> [x] LDAP/AD Email-Addresse
+            Other Attributes: userPrincpaName, sAMAccounName, givenName, displayName
+          Advanced: [x] Configuration Aktive
+
+            occ user:sync "OCA\User_LDAP\User_Proxy"
+
+        - kerberos --
+                 - /windows/driver.../etc/hosts/ ad01.jw-qa.owncloud.works         10.42.0.2
+                        - service user
+                - kerberos app config
 
 
 EOF
