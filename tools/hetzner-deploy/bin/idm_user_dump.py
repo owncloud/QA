@@ -120,7 +120,7 @@ def Dumper(file="/var/lib/ocis/idm/ocis.boltdb", uidfilter='ou=users', ignorecas
 
 
 if __name__ == '__main__':
-    import json, sys
+    import json, sys, os
     filter = 'ou=users'
     file = Dumper.__defaults__[0]
 
