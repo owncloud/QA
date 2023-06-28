@@ -10,7 +10,7 @@ top="$1" # parent folder of storages/
 test -z "$top" && top=$HOME/o
 
 cd $top/storage/users/spaces
-for space_nodes_dir in $(find . -type d -name nodes); do
+for space_nodes_dir in $(find * -type d -name nodes); do
 	spaceid=$(echo $space_nodes_dir | sed -e 's@/nodes$@@' -e 's@^\./@@' -e 's@/@@g')
 	root="$space_nodes_dir/$(echo $spaceid | sed -e 's@\(..\)\(..\)\(..\)\(..\)@\1/\2/\3/\4/@')"
 	space_type=$(mpkq user.ocis.space.type -r $root.mpk)
@@ -25,7 +25,8 @@ for space_nodes_dir in $(find . -type d -name nodes); do
 	  echo -e "\tsubtitle = $subtitle"
 	  echo -e "\tquota = $quota bytes"
 	fi
-	echo -e "\tcontents ="
-	(cd $root; find -L * | xargs -n1 ls -Ld --classify | sed -e 's@^@\t\t@')
+	echo -e "\tsymlink_tree ="
+	# (cd $root; find -L * | xargs -n1 ls -Ld --classify | sed -e 's@^@\t\t@')
+	(cd $root; tree -l | grep ' -> ' | sed -e 's@^@\t\t@' -e 's@$@.mpk@')
 done
 
