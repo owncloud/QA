@@ -34,6 +34,12 @@ mkdir -p /home/samba/{demo,user1}; chmod -R 777 /home/samba
 # with docker-compose use: smbclient //samba/shared -U testy testy -c dir
 #
 docker run --rm -v /home/samba:/shared -d --name samba dperson/samba -u "admin;admin" -u "testy;testy" -u "demo;demo" -u "user1;user1" -s "shared;/shared;;no;;all" -s "demo;/shared/demo;;no;;demo,admin" -s "user1;/shared/user1;;no;;user1,testy " -n -p
+echo sleep 2 ...
+sleep 2
+echo   ...
+sleep 2
+echo     ...
+sleep 2
 smb_ip=$(docker inspect samba | jq .[0].NetworkSettings.IPAddress -r)
 wget https://secure.eicar.org/eicar.com
 smbclient //$smb_ip/shared -U testy testy -c 'put eicar.com; dir'
