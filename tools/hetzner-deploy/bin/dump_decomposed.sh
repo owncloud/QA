@@ -3,10 +3,30 @@
 # This is a dirty hack. It finds files in spaces in the filesystem.
 #
 # (C) 2023-06-27, jw@owncloud.com
+# 
+# 2023-06-30, v0.2 	- try xattr, if not mpk found
+#
+# Requires:
+#	mpkq		when using ocis3
+#	xattr		when using ocis2
+
 
 top="$1" # parent folder of storages/
-
 test -z "$top" && top=$HOME/o
+
+mpkq="/mnt/owncloud/data/carlos/files/mpkq"
+
+function ocis_getattr()
+{
+  attr=$1	# e.g. user.ocis.blobid
+  emptyfile=$2	# path without .mpk suffix.
+  if [ -f "$emptyfile.mpk" ]; then
+    # this is ocis 3
+    $mpkq "$attr" -r "$emptyfile.mpk"
+  else
+    xattr -p 2>/dev/null "$attr" "$emptyfile"
+  fi
+}
 
 function fourslashes()
 {
@@ -24,15 +44,15 @@ cd $top/$sprefix
 for space_nodes_dir in $(find * -type d -name nodes); do
   spaceid=$(echo $space_nodes_dir | sed -e 's@/nodes$@@' -e 's@^\./@@' -e 's@/@@g')
   root="$space_nodes_dir/$(fourslashes $spaceid)"
-  space_type=$(mpkq user.ocis.space.type -r $root.mpk)
-  space_alias=$(mpkq user.ocis.space.alias -r $root.mpk)
-  treesize=$(mpkq user.ocis.treesize -r $root.mpk)
+  space_type=$( ocis_getattr user.ocis.space.type  $root)
+  space_alias=$(ocis_getattr user.ocis.space.alias $root)
+  treesize=$(   ocis_getattr user.ocis.treesize    $root)
   echo "[$space_alias]"
   echo -e "\troot = $sprefix/$root"
   echo -e "\ttreesize = $treesize bytes"
   if [ "$space_type" == 'project' ]; then
-    subtitle=$(mpkq user.ocis.space.description -r $root.mpk)
-    quota=$(mpkq user.ocis.quota -r $root.mpk)
+    subtitle=$(ocis_getattr user.ocis.space.description $root)
+    quota=$(   ocis_getattr user.ocis.quota             $root)
     echo -e "\tsubtitle = $subtitle"
     echo -e "\tquota = $quota bytes"
   fi
@@ -43,8 +63,8 @@ for space_nodes_dir in $(find * -type d -name nodes); do
   for link in $(cd $root; find -L .); do
     target=$(cd $root; readlink $link)
     if [ "$target" != "" ]; then
-      blobid=$(mpkq user.ocis.blobid -r $root/$target.mpk)
-      if [ "$blobid" != "null" ]; then
+      blobid=$(ocis_getattr user.ocis.blobid $root/$target)
+      if [ "$blobid" != "null" -a "$blobid" != "" ]; then
 	filecount=$(expr $filecount + 1)
         echo -e "\t$filecount\t$link -> blobid=$blobid"
 	blob="$blobroot/$(fourslashes $blobid)"
