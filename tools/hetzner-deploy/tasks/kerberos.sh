@@ -273,7 +273,7 @@ EOM
 add to config.php:
 
     'wnd.kerberos.servers' => [
-        'ad01' => [
+        'ad01' => [		/* <--- kerberos data id */
             'ockeytab' => '/etc/apache2/oc.ker.jw-qa.owncloud.works.keytab',
             'ocservice' => 'HTTP/oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works', 
             'usermapping' => ['type' => 'Noop'],
