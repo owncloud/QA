@@ -26,7 +26,7 @@ if [ "$(echo hsmdaemon*.zip)" = 'hsmdaemon*.zip' ]; then
   occ app:list encryption
   occ app:enable encryption
   occ encryption:enable
-  occ encryption:select-encryption-type masterkey -y
+  # occ encryption:select-encryption-type masterkey -y
   # occ encryption:encrypt-all -y
 
   occ app:list encryption

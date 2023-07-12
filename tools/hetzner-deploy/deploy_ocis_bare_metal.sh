@@ -19,7 +19,6 @@
 echo "Estimated setup time (when weather is fine): 2 minutes ..."
 
 compose_subdir=deployments/examples/ocis_traefik
-compose_yml=docker-compose.yml
 ocis_bin=/usr/bin/ocis
 ocis_data=/var/lib/ocis
 

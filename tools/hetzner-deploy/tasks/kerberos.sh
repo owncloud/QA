@@ -7,6 +7,7 @@ cat << EOF
 Setup Documentation:
 - https://github.com/GeraldLeikam/tutorials/
 - https://confluence.owncloud.com/display/~gleikam/Tutorials
+- https://github.com/owncloud/kerberos/issues/21#issuecomment-1620367912
 
 Overview:
 - Windows AD server + WND server (can be on the same machine, started from the sysprep win2022 snapshot).
@@ -221,6 +222,8 @@ OC10 connect: ?semi added to domain?, ?controller knows?
            -> [x] LDAP/AD Email-Addresse
             Other Attributes: userPrincpaName, sAMAccounName, givenName, displayName
           Advanced: [x] Configuration Aktive
+	  Expert: Internal User Name: [sAMAccountName]
+		[clear caches]
 
             occ user:sync "OCA\User_LDAP\User_Proxy"
 
