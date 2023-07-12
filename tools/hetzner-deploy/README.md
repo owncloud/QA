@@ -20,7 +20,8 @@ The machines will be
 * Run from your local Ubuntu machine:
 
 ```
-sudo apt install git
+sudo apt install git python3
+pip install hcloud
 git clone https://github.com/owncloud/QA
 cd QA/tools/hetzner-deploy
 

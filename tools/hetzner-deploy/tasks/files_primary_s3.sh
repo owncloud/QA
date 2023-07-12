@@ -153,4 +153,7 @@ app=primary_s3
 cat << EOM | sed -e "s/^/$app: /g" >>  ~/POSTINIT.msg
 To view the scality S3 server log:
 	screen -D -R s3server
+To view the contents of the s3 server:
+	s3cmd du s3://oc-primary
+	s3cmd ls s3://oc-primary
 EOM
