@@ -15,6 +15,7 @@ The machines will be
 
 * Have access to a project at https://console.hetzner.cloud (invitation accepted)
 * Have a hcloud API token for the project project.
+* Have a cloudflare API token. You need an account at cloudflare - My Profile -> Api Token Generate -> DNS -> include owncloud.works
 * Have your public ssh key uploaded into the project. Below use the name of your ssh-key instead of `jw@owncloud.com`
 * Run from your local Ubuntu machine:
 
@@ -25,6 +26,7 @@ cd QA/tools/hetzner-deploy
 
 export HCLOUD_SSHKEY_NAMES=jw@owncloud.com
 export HCLOUD_TOKEN=mZdZX......................................................L8bml
+export CLOUDFLARE_TOKEN=........
 ./deploy_oc10_apps.sh --
 ```
 
