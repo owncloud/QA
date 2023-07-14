@@ -619,7 +619,7 @@ if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
   occ config:system:set trusted_domains 2 --value "\$oc10_fqdn"
   occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
-  if grep -q 'Congratulations!' ~/CF_DNS.msg >/dev/null 2>&1; then
+  if grep -q 'Congratulations! You have successfully enabled' ~/CF_DNS.msg >/dev/null 2>&1; then
     echo >> ~/POSTINIT.msg "DNS: SSL-Cert succeeded via cf_dns - access this system"
     echo >> ~/POSTINIT.msg "DNS:"
     echo >> ~/POSTINIT.msg "DNS: 				https://\$oc10_fqdn$webroute"
