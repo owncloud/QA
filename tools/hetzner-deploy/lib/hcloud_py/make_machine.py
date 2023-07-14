@@ -71,7 +71,8 @@ if args.unique:
 
 used_for = args.used_for
 if not NAME: NAME = args.image
-NAME = NAME.translate( { ord('.'):ord('-'), ord('_'):ord('-') } )       # avoid _ and . in name. Always
+# NAME = NAME.translate( { ord('+'):ord('-'), ord('.'):ord('-'), ord('_'):ord('-') } )       # avoid +, _ and . in name. Always
+NAME = NAME.translate(dict(zip(b'+_.',b'---')))  # avoid +, _ and . in name. Always
 
 client = Client(token=hcloud_api_token)
 

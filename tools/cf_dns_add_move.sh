@@ -110,13 +110,32 @@ if [ "$record_id" != null -a -n "$record_id" ]; then
   fi
 fi
 
+# something like: 65-108-58-64.jw-qa.owncloud.works
+short_fqdn=
+if [ -n "$3" -a $(expr length "$2") -gt 63 ]; then
+  # CN in DNS must be max 63 char. SAN (alternate names) can be longer - we need to fit certbot two names with -d in this case.
+  short_fqdn="$(echo "$1" | sed -e 's/\./-/g').$(echo "$2" | sed -e 's/^[^\.]*\.//')"
+fi
+
 if [ "$1" != '-' -a -n "$1" ]; then
   cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$2"'","content":"'"$1"'","proxied":false}' | jq
+  short_record_id="$(cf_curl GET "$CLOUDFLARE_DNS_API?name=$short_fqdn" | jq '.result[0].id' -r)"
+  if [ -n $short_fqdn ]; then
+    test -n "$short_record_id" && cf_curl DELETE $CLOUDFLARE_DNS_API/$record_id >/dev/null 2>&1
+    cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$short_fqdn"'","content":"'"$1"'","proxied":false}' | jq
+  fi
 fi
 
 if [ -n "$3" ]; then
-  email=$(echo "$3" | cut -d: -f2)
+  email=$(echo "$3" | cut -d: -f2)	# the part after BOT:
   set -x
-  sleep 3; sleep 2; sleep 1
-  ssh root@$1 certbot -m "$email" --no-eff-email --agree-tos --redirect -d "$2"
+  sleep 6; sleep 4; sleep 2	# 3;2;1 often results in: DNS problem: NXDOMAIN looking up A for 95-216-155-231.jw-qa.owncloud.works
+  if [ -n "$short_fqdn" ]; then
+    # when the $2 fqdn is longer than 63 char, we must call certbot with a second, shorter -d parameter.
+    # FIXME: /etc/apache2/sites-available/000-default-le-ssl.conf
+    #        is only created with one ServerName, even when we specify two here. It fails then.
+    ssh root@$1 certbot -m "$email" --no-eff-email --agree-tos --redirect --apache -n -d "$2" -d "$short_fqdn"
+  else
+    ssh root@$1 certbot -m "$email" --no-eff-email --agree-tos --redirect -d "$2"
+  fi
 fi

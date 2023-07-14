@@ -17,7 +17,10 @@ The machines will be
 * Have a hcloud API token for the project project.
 * Have a cloudflare API token. You need an account at cloudflare - My Profile -> Api Token Generate -> DNS -> include owncloud.works
 * Have your public ssh key uploaded into the project. Below use the name of your ssh-key instead of `jw@owncloud.com`
-* Run from your local Ubuntu machine:
+
+By default, machine names are made unique by adding a random suffix of three letters, and a username-prefix derived from the first ssh-key (In my case hostnames start with `jw-`...)
+
+Run from your local Ubuntu machine:
 
 ```
 sudo apt install git python3
