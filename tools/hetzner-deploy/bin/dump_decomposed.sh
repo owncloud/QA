@@ -18,6 +18,7 @@ top="$1" # parent folder of storages/
 test -z "$top" && top=$HOME/o
 
 mpkq="/mnt/owncloud/data/carlos/files/mpkq"
+mpkq="mpkq"
 
 function ocis_getattr()
 {
