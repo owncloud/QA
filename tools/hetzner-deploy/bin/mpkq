@@ -5,20 +5,24 @@
 #   pip install msgpack
 #   apt install jq	#optional
 #
-# 2023-05-23, jw@owncloud.com
+# 2023-05-23, jw@owncloud.com - initia draught
+# 2023-07-20, jw@owncloud.com - added -e
 #
 
 import msgpack
-import sys, json, subprocess, re
+import sys, os, json
+import shutil, subprocess, tempfile, re     # needed with -e
 
-if len(sys.argv) not in (2, 3, 4):
+if len(sys.argv) not in (2, 3, 4) or sys.argv[1] == '-h' or sys.argv[1] == '--help':
   print("""Usage:
 
 	%s [ JQ_FILTER ] [ -r ] FILE.mpk
+	%s -e FILE.mpk   # edit the file inplace - leaving a .orig behind.
 
   Examples:
 	mpkq '.\"user.ocis.name\"' -r FILE.mpk
-	mpkq user.ocis.cs.sha1 -r FILE.mpk | tr -d '\\x'""" % sys.argv[0])
+	mpkq user.ocis.cs.sha1 -r FILE.mpk | tr -d '\\x'""" % (sys.argv[0], sys.argv[0]))
+
   sys.exit(1)
 file = sys.argv[-1]
 
@@ -32,10 +36,103 @@ def bin_dumper(bin):
     return "\\x" + bin.hex(':').replace(':', "\\x")
   return "ERROR: unknown type in bin_dumper(): " + str(type(bin))
 
-with open(file, 'rb') as f:
-  # raw=False converts the keys from bytes to strings
-  mpk_dict = msgpack.unpack(f, raw=False)
-  json_str = json.dumps(mpk_dict, default=bin_dumper, indent=2, sort_keys=True)
+
+def mpk2json(file):
+  with open(file, 'rb') as f:
+    # raw=False converts the keys from bytes to strings
+    mpk_dict = msgpack.unpack(f, raw=False)
+    json_str = json.dumps(mpk_dict, default=bin_dumper, indent=2, sort_keys=True)
+    return json_str
+
+
+def json2mpk(new_json, file, backup=True):
+  for k in new_json.keys():
+    v = bytes(new_json[k], 'UTF-8')
+    if re.match(b'^(\\\\x[0-9a-f]{2})*$', v):
+      # The entire value looks like it was produced with bin_dumper()
+      # Undo that. Well, not 100% safe, but good enough today...
+      new_json[k] = re.sub(b'\\\\x([0-9a-f]{2})', lambda m: bytes([int(m.group(1),16)]), v)
+    else:
+      new_json[k] = v
+
+  if backup:
+    backup_file = file + ".orig"
+    if os.path.exists(file) and not os.path.exists(backup_file):
+      with open(backup_file, "wb") as b:
+        b.write(open(file, "rb").read())
+  msgpack.pack(new_json, open(file, "wb"))
+
+
+def write_tmpfile(text):
+  try:
+    with tempfile.NamedTemporaryFile(mode='w+', delete=False, prefix="mpk_temp", suffix=".json") as t:
+      t.write(text)
+      t.close()
+      return t.name
+  except Exception as e:
+    print(f"write_tmpfile Error: {e}", file=sys.stderr)
+    return None
+
+def find_editor():
+  for e in (os.getenv('EDITOR'), 'vim', 'nano'):
+    if e is not None:
+      p = shutil.which(e)
+      if p is not None:
+        return p
+  print(f"find_editor Error: $EDITOR, vim, nano not found in PATH", file=sys.stderr)
+  return None
+
+
+json_str = mpk2json(file)
+comments = []
+
+if sys.argv[1] == '-e':
+  editor = find_editor()
+  if editor is None: sys.exit(1)  # cannot edit anything.
+
+  # write the string to a temp file, start $EDITOR, parse tempfile as json.
+  # loop, if the file had a parse error. All subsequent calls to the EDITOR have
+  # a top comment, with the error message from the json parser.
+  while True:
+    tmpfile = write_tmpfile(''.join(map(lambda x: f"// {x}\n", comments)) + json_str)
+    if tmpfile is None: break     # could not write?
+    ret = subprocess.call([editor, tmpfile])
+    if ret:
+      print(f"Command '{editor} {tmpfile}' returned code {ret}, aborting", file=sys.stderr)
+      os.remove(tmpfile)
+      break
+    # read back and strip initial comments, if any. (Json does not allow any comments at all, yeah)
+    lines = open(tmpfile).readlines()
+    while len(lines) and lines[0].startswith('//'):
+      lines.pop(0)      # chop off initial comments. JSONC (json with comments is not a standard)
+    json_str = ''.join(lines)
+    os.remove(tmpfile)
+
+    try:
+      decode_error = None
+      new_json = json.loads(json_str)
+    except json.JSONDecodeError as e:
+      decode_error = e
+      comments = [ 'JSONDecodeError:', e, '---- edit JSON below -----' ]
+    if decode_error is None and len(new_json.keys()) == 0:
+      decode_error = "empty JSON?"
+      comments = [ 'OOPS:', decode_error, '---- edit JSON below -----' ]
+    if decode_error is None:
+      json2mpk(new_json, file, backup=True)
+      break
+    else:
+      # we had a decode error... ask the user if he wants to retry, or abort
+      print(f"ERROR: json decode: {decode_error}\n -> (a)bort / (c)ontinue editing / (r)estart? [c]")
+      ret = sys.stdin.readline().strip()
+      if ret.lower() == 'a':
+        os.remove(tmpfile)
+        break
+      if ret.lower() == 'r':
+        # reread content of mpk file to restart.
+        json_str = mpk2json(file)
+
+else:
+
   try:
     jq_cmd = ["jq"]
     if len(sys.argv) >= 3:
