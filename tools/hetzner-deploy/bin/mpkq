@@ -5,7 +5,7 @@
 #   pip install msgpack
 #   apt install jq	#optional
 #
-# 2023-05-23, jw@owncloud.com - initia draught
+# 2023-05-23, jw@owncloud.com - initial draught
 # 2023-07-20, jw@owncloud.com - added -e
 #
 

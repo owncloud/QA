@@ -11,10 +11,12 @@
 
 # source ./env.sh	# probably not needed.
 
+secret="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 32)"
+
 cat << EOF > ~/.s3cfg
 [default]
 access_key = owncloud
-secret_key = owncloud
+secret_key = $secret
 host_base = localhost:8000
 host_bucket = %(bucket).localhost:8000
 signature_v2 = False
@@ -22,9 +24,9 @@ use_https = False
 EOF
 
 ## Caution: Keep in sync with s3cfg and authdata.json above
-cat <<'EOF' > /var/www/owncloud/config/s3primary.config.php
+cat <<EOF > /var/www/owncloud/config/s3primary.config.php
 <?php
-$CONFIG = [
+\$CONFIG = [
     'objectstore' => [
         'class' => 'OCA\Files_Primary_S3\S3Storage',
         'arguments' => [
@@ -41,7 +43,7 @@ $CONFIG = [
                 'credentials' => [
                     // replace key and secret with your credentials
                     'key' => 'owncloud',
-                    'secret' => 'owncloud',
+                    'secret' => '$secret',
                 ],
                 'use_path_style_endpoint' => true,
                 'endpoint' => 'http://localhost:8000/',
@@ -106,7 +108,7 @@ else
         "shortid": "123456789012",
         "keys": [{
             "access": "owncloud",
-            "secret": "owncloud"
+            "secret": "$secret"
         }]
     }]
 }
