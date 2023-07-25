@@ -15,7 +15,28 @@ fi
 test -z "$HCLOUD_TOKEN" && export HCLOUD_TOKEN=$TF_VAR_hcloud_token
 test -z "$OC_DEPLOY" -a -n "$OC_DEPLOY_ADDR" && OC_DEPLOY=simple
 if [ -z "$OC_DEPLOY" -a -n "$HCLOUD_TOKEN" ]; then
-  test -z "$(python3 -c 'import hcloud' 2>&1)" && OC_DEPLOY=hcloud_py || OC_DEPLOY=hcloud_tf
+  if [ -z "$(python3 -c 'import hcloud' 2>&1)" ]; then
+    OC_DEPLOY=hcloud_py
+  else
+    OC_DEPLOY=hcloud_tf
+    cat <<EOM
+Warning hcloud python module not found
+======================================
+
+Please press CTRL-C and retry after running
+
+	pip install hcloud
+
+(or wait 10 seconds to try with deprecated hcloud_tf)
+EOM
+    sleep 5
+    echo .
+    sleep 4
+    echo .
+    sleep 3
+    echo .
+    sleep 2
+  fi
 fi
 test -z "$OC_DEPLOY" -o ! -d $libdir/$OC_DEPLOY && { echo 1>&2 "define HCLOUD_TOKEN or set OC_DEPLOY to one of $(ls -m $libdir)"; exit 1; }
 

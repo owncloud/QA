@@ -61,6 +61,7 @@ while [ "$#" -gt 0 ]; do
     -t|--type) server_type="$2"; shift ;;
     -u|--unique) mk_unique=true; NAME="$2"; shift ;;
     -n|--name) NAME="$2"; shift ;;
+    -L|--location) LOCATION="$2"; shift ;;
     -l|--login) do_login=true ;;
     -f|--used-for) used_for="$2"; shift ;;
     -h|--help) NAME=-h ;;
@@ -93,6 +94,7 @@ if [ "$NAME" = '-h' ]; then
     -p|--packages ...       comma-separated list of linux packages to install
     -u|--unique NAME        make name unique by prepending user and appending a suffix
     -n|--name NAME          specify a name. Default: derive from image
+    -L|--location NAME      ignored. Use -d instead.
     -l|--login              ssh into the machine, when ready
     -f|--used-for           label with purpose of the machine: Default: $used_for
 
