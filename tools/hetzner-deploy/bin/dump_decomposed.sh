@@ -9,6 +9,10 @@
 # 2023-06-30, v0.2 	- Try xattr, if not mpk found.
 # 2023-06-30, v0.3 	- Survive whitespace in filenames.
 #
+# References:
+# 	https://github.com/cs3org/reva/tree/master/pkg/storage/fs/ocis
+# 	https://github.com/cs3org/reva/tree/master/pkg/storage/utils/decomposedfs
+#
 # Requires:
 #	mpkq		when using ocis3
 #	xattr		when using ocis2

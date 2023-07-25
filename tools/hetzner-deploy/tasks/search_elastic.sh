@@ -259,6 +259,11 @@ else
 fi
 # occ config:app:delete search_elastic scanExternalStorages	# only way to enable this option before 2.1.0-rc3: https://github.com/owncloud/search_elastic/issues/260
 occ config:app:set search_elastic nocontent --value false	# false: enable contents search. - true: only file name search
+## connectors management, new in 2.4.0
+occ config:app:set search_elastic connectors_write --value "Legacy,RelevanceV2"
+occ config:app:set search_elastic connectors_search --value "RelevanceV2"
+
+## populate the index. Hope this is not needed: occ search:index:fillSecondary RelevanceV2 $USER
 occ search:index:create --all
 occ search:index:reset -f	# needed so that the web UI acknowledges '0 nodes marked as indexed, 0 documents in index using 226 bytes'
 sleep 3				# TODO: delay does not help here. file scan does not help here. User must force edit a file via web ui.
@@ -301,7 +306,7 @@ cat <<EOSE > /usr/bin/elastic_search_all
 url="$elastic_url/oc-$instanceid/_search"
 json="'{ "query": { "size": 1000, "from": 0, "match_all": {} } }'"
 # curl -H "Content-Type: application/json" -s "\$url" --data "\$json"
-curl -s "$url?pretty=true&q=*:*&size=10000"
+curl -s "\$url?pretty=true&q=*:*&size=10000"
 EOSE
 chmod a+x /usr/bin/elastic_search_all
 
@@ -335,6 +340,10 @@ elastic_search:    elastic_sql "show tables"
 elastic_search:    elastic_sql 'select "file.content_length", name, size, users, left("file.content", 50) from "oc-$instanceid"'
 elastic_search:    elastic_sql 'select "file.content_length", name, size, left("file.content", 50) from "oc-$instanceid"'	# if array is not supported
 elastic_search:    elastic_search_all
+elastic_search:
+elastic_search:  Switch to RelevanceV2 connector https://github.com/owncloud/search_elastic/pull/319
+elastic_search:   - Add the "RelevanceV2" connector to the list of write connectors. The list should have both "Legacy" and "RelevanceV2"
+elastic_search:   occ config:list search_elastic
 elastic_search:
 elastic_search:  To setup an https-reverse-proxy for the elastic server, do
 elastic_search:    env MKCERT_VALID_DAYS=7 /usr/local/bin/mkcert DNS:localhost
