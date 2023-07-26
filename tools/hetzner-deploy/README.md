@@ -32,6 +32,7 @@ export HCLOUD_SSHKEY_NAMES=jw@owncloud.com
 export HCLOUD_TOKEN=mZdZX......................................................L8bml
 export CLOUDFLARE_TOKEN=........
 ./deploy_oc10_apps.sh --
+./deploy_ocis_bare_metal.sh
 ```
 
 ## Simple example with manually created machine
