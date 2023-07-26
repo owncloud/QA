@@ -34,3 +34,10 @@ Run the tests below with freeotp and/or google authenticator. Optionally also so
 | Check the login process is possible using edge |                                          | 🚧             |            |
 | Check the login process is possible using internet explorer 11 |                                          | 🚧             | <br />          |
 | Check the login process is possible using safari |                                          | 🚧             |                 |
+
+
+Since 0.8.0 and core 10.13.0
+* [ ] Admin enforces 2FA in the Settings -> Security -> somewhere????
+   - [ ] user with already configured 2FA can still log in, using his connected authenticator
+   - [ ] user with not yet configured 2FA is presented a QR code and can do the configuration before login.
+     
