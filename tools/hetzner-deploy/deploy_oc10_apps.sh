@@ -225,11 +225,11 @@ test "$firstarg" = "-" && firstarg=
 # try to keep the name short. certbot explodes on long names
 firstarg=$(echo "$firstarg" | sed -e 's/^\-windows_network_drive/-wnd/' -e 's/^\-ransomware_protection/-rwp/' -e 's/^\-user_/-/' -e 's/^\-files_/-/')
 # make dns/docker friendly: lowercase all; remove .; _ to -; shorten -alpha, -beta to a,b in both oc10 and app version.
-test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr -d .=+ | sed -e 's/-\?alpha/a/g' -e 's/-\?beta/b/g' -e 's/-\?rc/rc/g')-DATE"
+test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr -d .=+ | sed -e 's/-\?alpha/a/g' -e 's/-\?beta/b/g' -e 's/-\?rc/rc/g')-date"
 OC10_DNSNAME="$(echo "$OC10_DNSNAME" | tr '[A-Z]_' '[a-z]-' | tr -d =+ | tr ._ -)"
 h_name="$OC10_DNSNAME"
-test -z "$h_name" && h_name=oc-$vers-DATE
-d_name=$(echo $h_name  | sed -e "s/DATE/$(date +%Y%m%d)/")
+test -z "$h_name" && h_name=oc-$vers-date
+d_name=$(echo $h_name  | sed -e "s/date/$(date +%Y%m%d)/i")
 
 if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
   machine_type=cx11
@@ -284,7 +284,7 @@ TASKd=\$HOME/tasks
 ## Prepare FQDN and env.sh as early as possible, so that cf_dns can run in parallel.
 ## FIXME: Can we run cf_dns before we pass control into the new machine?
 
-test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/").jw-qa.owncloud.works"
+test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/date/$(date +%Y%m%d)/i").jw-qa.owncloud.works"
 if [ -n "$OC10_FQDN" ]; then
   oc10_fqdn="$OC10_FQDN"
   OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component

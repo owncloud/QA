@@ -1,6 +1,8 @@
 #! /bin/bash
-# Reference: https://owncloud.dev/clients/web/deployments/oc10-app/
 #
+# References:
+# - https://owncloud.dev/clients/web/deployments/oc10-app/
+# - https://doc.owncloud.com/webui/next/owncloud_web/web_with_oc_server.html#collabora-online-integration
 
 source ./env.sh	# requires oc10_fqdn
 
@@ -27,6 +29,8 @@ occ config:system:set web.rewriteLinks --type boolean --value true
 ## FIXME: only when we are sure it really works...
 occ config:system:set defaultapp --value web
 
+# Bogus entries in external_apps are silently ignored.
+# We can list richdocuments here harmlessly, even if not installed.
 cat <<EOF > $conf
 {
   "server" : "https://$oc10_fqdn",
@@ -40,6 +44,12 @@ cat <<EOF > $conf
     "files",
     "preview",
     "draw-io"
+  ],
+  "external_apps": [
+    {
+      "id": "richdocuments",
+      "path": "https://$oc10_fqdn/apps/richdocuments/js/richdocuments.js"
+    }
   ],
   "applications" : [
     {
