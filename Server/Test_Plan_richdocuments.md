@@ -32,6 +32,10 @@ Secure view | sharing defaults to secure view | :construction:  |
 Secure view | documents have watermark, cannot be downloaded | :construction:  |
 Secure view | still works with invalid or expired license key, until disabled | :construction:  |
 
+* [ ] configure richdocuments with web app. https://doc.owncloud.com/webui/next/owncloud_web/web_with_oc_server.html#collabora-online-integration
+  * [ ] The NEW button has the document types for collabora.
+  * [ ] New documents can be created from the web UI.
+  * [ ] The 9-dots menu can open the 'Büro' / 'Office' page with. an overview with large icons appears.
 
 ----
 
