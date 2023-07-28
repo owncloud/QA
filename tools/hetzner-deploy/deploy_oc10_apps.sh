@@ -126,10 +126,10 @@ ARGV=()
 for arg in "$@"; do
   case "$arg" in
     http://*)
-      echo "App is a URL..."
+      echo "App $arg is a URL..."
       ;;
     https://*)
-      echo "App is a URL ..."
+      echo "App $arg is a URL ..."
       ;;
     bundled:* | builtin:* | b:* )
       arg="$(echo "$arg" | sed -e 's/^\w*:/b:/')"		# makemachine.sh ignores b:... arguments, and just passes them on into PARAM
@@ -154,8 +154,17 @@ for arg in "$@"; do
       $curl -L -H 'Accept: application/octet-stream' "$asseturl" > "$arg"
       ;;
     *)
-      if [ -e $arg ]; then
-        echo "Using local file $arg ..."
+      if [ -e "$arg" -o -n "$(echo "$arg" | sed -ne 's@^\.*/@LOCAL @p' -ne 's@^\w\w*://@URL @p')" ]; then
+
+        if [ -n "$(echo "$arg" | sed -ne 's@^\w\w*://@URL @p')" ]; then
+	  echo "Passing strange URL $arg as is..."
+	elif [ -e "$arg" ]; then
+          echo "Will scp local file $arg ..."
+        else
+          echo "ERROR: local file $arg not found."
+	  exit 1
+	fi
+
       else
 	# Everything that is not a local file, and not a URL should be an app.
         echo "App lookup at github ..."
