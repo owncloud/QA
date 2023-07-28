@@ -20,9 +20,11 @@
 echo "Estimated setup time: 5 minutes ..."
 
 vers=10.12.2
+vers=10.13.0-alpha.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.13.0-alpha.1"                && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230727.tar.bz2
 test "$vers" = "10.12.2"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230606.tar.bz2
 test "$vers" = "10.12.2-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230531.tar.bz2
 test "$vers" = "10.12.1"  -o "$vers" = "10.12"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230415.tar.bz2
@@ -397,7 +399,7 @@ echo "... installing $tar"
 echo "+ curl -L $tar | tar jxf -"
 curl -L $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
-chmod a+x owncloud/tests/acceptance/run.sh	# in case we want to run some acceptance tests here.
+# chmod a+x owncloud/tests/acceptance/run.sh	# in case we want to run some acceptance tests here.
 
 cat <<EOCONF > /etc/apache2/sites-available/owncloud.conf
 Alias $webroute "/var/www/owncloud/"
