@@ -44,6 +44,12 @@ scope="subtree"				# base, one, sub or children
 opts="-LLL -d 0"			# -LLL: do not include comments, -d 0: no debugging
 proto="ldap"				# switch to ldaps, if available.
 
+cat <<EOH>> /etc/hosts
+# Hetzner network: kerberos.jw
+10.42.0.2 ad01.ker-int.jw-qa.owncloud.works
+
+EOH
+
 ## upgrade Gerald's openldap server to allow LDAPS
 # see also: https://openldap.org/doc/admin24/slapdconf2.html
 # sed -i -e 's@^SLAPD_SERVICES=.*@SLAPD_SERVICES="ldap:/// ldaps:/// ldapi:///"@' /etc/default/slapd
