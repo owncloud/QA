@@ -34,12 +34,16 @@ if [ -z "$2" ]; then
   exit 1
 fi
 
-if [ -n "$OC_REL_VESION_IS_BRANCH" ]; then
+# if we don't have a numeric version, with or without leading v, then we can imply OC_REL_VERSION_IS_BRANCH
+test -z "$(echo "$appvers" | sed -n -e 's@^v\?[0-9]@VERSION@p')" && OC_REL_VERSION_IS_BRANCH=1
+
+if [ -n "$OC_REL_VERSION_IS_BRANCH" ]; then
   tagname="$appvers"
 else
   appvers=$(echo "$appvers" | sed -e 's/^v//')	# always without leading v
   tagname="v$appvers"				# always with leading v
 fi
+
 set -x
 cd $appsigning_dir
 bash ./$build_sh $appname $tagname
