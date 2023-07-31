@@ -7,15 +7,19 @@
 
 # source ./env.sh	# probably not needed.
 
+user=admin
 app=calendar
 occ app:enable $app
 
 mkdir ical
 wget -q https://www.feiertage-deutschland.de/content/kalender-download/force-download.php -O ical/feiertage-deutschland-bis-2035.ics
 wget -q https://www.fonflatter.de/dateien/kalender/$(date +%Y).ics -O ical/fonflatter-$(date +%Y).ics
-chown -R www-data. ical
-cp -a ical /var/www/owncloud/data/admin/files/
-occ files:scan -q admin
+
+dest=/var/www/owncloud/data/$user/files/
+mkdir -p $dest
+chown -R www-data. ical $dest/..
+cp -a ical $dest
+occ files:scan -q $user
 
 cat << EOM | sed -e "s/^/$app: /g" >>  ~/POSTINIT.msg
 Populate a calendar:

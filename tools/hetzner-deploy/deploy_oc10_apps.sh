@@ -260,6 +260,7 @@ network=$HCLOUD_NETWORK_NAME
 if [ -z "$HCLOUD_NETWORK_NAME" ]; then
   echo "$*" | grep user_ldap             && network=testlab-network	# ldap may want to use ad01.testlab.owncloud.works
   echo "$*" | grep windows_network_drive && network=testlab-network	# wnd may want to use wnd.testlab.owncloud.works
+  echo "$*" | grep kerberos              && network=kerberos.jw-network # ad01.ker lives there
 fi
 
 function title() { wmctrl -r :ACTIVE: -N "$@"; }
@@ -329,6 +330,9 @@ if [ "$network" = 'testlab-network' ]; then
  # we expect these machines in the network
  ping -c 1 -W 1 10.1.0.3 > /dev/null && echo >> /etc/hosts "10.1.0.3 ad01.testlab.owncloud.works"
  ping -c 1 -W 1 10.1.0.4 > /dev/null && echo >> /etc/hosts "10.1.0.4 wnd.testlab.owncloud.works"
+fi
+if [ "$network" = 'kerberos.jw-network' ]; then
+ ping -c 1 -W 1 ad01.ker-int.jw-qa.owncloud.works > /dev/null && echo "ad01.ker-int.jw-qa.owncloud.works is reachable ..."
 fi
 
 env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute HCLOUD_NETWORK_NAME HCLOUD_MACHINE_TYPE TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
@@ -532,6 +536,21 @@ echo "Hello, world!" >  /home/ftpdata/data/hello.txt
 chown -R ftpdata. /home/ftpdata
 chmod 700 /home/ftpdata/.ssh
 # switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
+
+## prepare an NFS server too...
+aptQ install -y nfs-server
+mkdir -p /pub/data
+echo "Hello, NFS!" > /pub/data/hello-nfs.txt
+chown -R www-data  /pub
+echo >> /etc/exports "/pub            *(rw,insecure,all_squash,no_subtree_check)"
+exportfs -a
+showmount -e localhost
+# should now reflect the contents of /etc/exports
+mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/owncloud/nfs-hard-data	# prone to freezing processes
+mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/owncloud/nfs-soft-data	# prone to data loss
+ls -la /var/www/owncloud/nfs-data
+ # expect to see hello-nfs.txt
+# nfs-server.service ( nfs-idmapd.service nfs-mountd.service )
 
 occ app:list '^files_external$' --output=json
 occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
