@@ -1,9 +1,109 @@
 #! /bin/sh
 #
 # this is not yet a useful script. It is just Juergen's quick run trhough Geralds extensive documentation
+#
+source ./env.sh		# needed for oc10_fqdn and HCLOUD_NETWORK_NAME
+
+app=kerberos
+ker_realm=KER.JW-QA.OWNCLOUD.WORKS
+ker_ad=ad01.ker-int.jw-qa.owncloud.works
+ker_domain="$(echo "$ker_realm" |  tr 'A-Z' 'a-z')"
+keytab_name="oc$(date +%Y%m%d).keytab"
+ker_myipaddr=$(hostname -I | sed -e 's/^.*10\.42/10.42/' -e 's/\s.*//')
+
+if [ -z "$ker_myipaddr" ]; then
+  echo "ERROR: could not find a 10.42.x.x address in hostname -I: $(hostname -I)"
+  echo "Please make sure this machine is attached to an internal kerberos network. E.g. 'kerberos.jw' at hetzner.
+  echo "(The variable HCLOUD_NETWORK_NAME currently is '$HCLOUD_NETWORK_NAME')"
+  exit 1
+fi
+
+export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block with whiptail
+apt install -y libkrb5-dev krb5-user msktutil
+pecl install krb5
+
+cat << EOF > /etc/krb5.conf
+[libdefaults]
+  default_realm = $ker_realm
+  rdns = no
+  dns_lookup_kdc = false
+  dns_lookup_realm = false
+
+  kdc_timesync = 1
+  ccache_type = 4
+  forwardable = true
+  proxiable = true
+
+  fcc-mit-ticketflags = true
+
+[realms]
+  $ker_realm = {
+    kdc = $ker_ad
+    admin_server = $ker_ad
+  }
+
+[domain_realm]
+  .$ker_domain = $ker_realm
+  $ker_domain = $ker_realm
+
+EOF
+
+echo "extension=krb5.so" > /etc/php/7.4/mods-available/krb5.ini
+phpenmod krb5
+
+cat <<EOC >"/var/www/owncloud/config/kerberos.config.php"
+<?php \$CONFIG = [
+
+    /**
+    * path to keytab to use, default is '/etc/krb5.keytab'
+    */
+    'kerberos.keytab' => '/etc/apache2/$keytab_name',
+
+    /**
+    * timeout before re-enableing spnego based auth after logout, default is 60
+    */
+    'kerberos.suppress.timeout' => 0,
+
+    /**
+    * the domain name - remove from principals to match the pure username
+    * e.g. alice@corp.dir will look for the user alice in ldap if 'kerberos.domain' is set to corp.dir
+    */
+    'kerberos.domain' => '',
+
+    /**
+    * Name of login button on login page
+    */
+    'kerberos.login.buttonName' => 'Windows Domain Login (Kerberos)',
+
+    /**
+    * If set to true the login page will immediately try to log in via Kerberos
+    */
+    'kerberos.login.autoRedirect' => false
+
+];
+EOC
+chown www-data. /var/www/owncloud/config/*config.php
+
+cat <<EOC >"/var/www/owncloud/config/wnd_ker.config.php"
+<?php \$CONFIG = [
+    'wnd.kerberos.servers' => [
+        'ad01' => [		/* <--- kerberos data id */
+            'ockeytab' => '/etc/apache2/$keytab_name',
+            'ocservice' => 'HTTP/$oc10_fqdn',
+            'usermapping' => ['type' => 'Noop'],
+            'ccachettl' => 3600,
+        ],
+    ],
+   'wnd.kerberos.mappings' => [
+      'id1' => ['type' => 'noop'],
+      'id5' => ['type' => 'custom', 'param' => ['1234-abcd-9876' => 'user1', '1234-efdc-5555' => 'user2']],
+    ],
+];
+EOC
+chown www-data. /var/www/owncloud/config/*config.php
 
 
-cat << EOF
+cat << 'EOS' > ~/kerberos_ad_wnd_server_setup.txt
 Setup Documentation:
 - https://github.com/GeraldLeikam/tutorials/
 - https://confluence.owncloud.com/display/~gleikam/Tutorials
@@ -16,6 +116,7 @@ Overview:
 
 Tasks:
 - Users from a windows desktop should be able to authenticate at ownCloud using Kerberos protocol
+- a krb5httpoc user is empowered with delegation.
 - ownCloud offers a WND share and uses kerberos autenticaiton, to make this share available to users.
 
 
@@ -80,7 +181,7 @@ IPV6 aus -> https://github.com/GeraldLeikam/tutorials/blob/master/windows/server
  -> Server Manager -> Local Server -> Interfaces (Click any)
    -> for both interfaces: -> Properties -> disable [ ] Internet Protocol 6 (TCP/IP 6)
      -> OK
- -> (`><,) Refresh local server
+ -> (><) Refresh local server
 
 DNS NAME via cloudflare
   - ad01.ker.jw-qa.owncloud.works
@@ -158,7 +259,6 @@ Change remmina config for both machines.
         Domain: ker.jw-qa.owncoud.works
 
 
-
 create more users at the AD. put them all in an rdp group,
         -> Server Manager
          -> top right bar, Tools, -> Active Directory Users and Computers
@@ -188,6 +288,34 @@ create more users at the AD. put them all in an rdp group,
 
         and allow all users in group rdp to log in via rdp (at server or desktop or both?)
 
+# grant 'impersonate' to the krb5httpoc user.
+                   ------fqdn-----@windows-domain
+ktpass /princ HTTP/ocserver.oc.com@OCSERVER.OC.COM /mapuser krb5httpoc +rndPass /out ocserver.oc.com.keytab /crypto all /ptype KRB5_NT_PRINCIPAL /mapop set
+
+                   ----------------fqdn---------------------------------@windows-domain                                             ---filename---
+ktpass /princ HTTP/oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works@KER.JW-QA.OWNCLOUD.WORKS /mapuser krb5httpoc +rndPass /out oc.ker.jw-qa.owncloud.works.keytab /crypto all /ptype KRB5_NT_PRINCIPAL /mapop set
+
+DsCrackNames returned 0x2 in the name entry for krb5httpoc.
+ktpas:failed gettting target domain for specified user
+
+Fix:
+ -> fistname must be krb5httpoc - logon name must be krb5httpoc - all other names empty.
+
+
+Users -> krb5httpoc -> right click propertes -> Delegation
+        Trust this user for delegation to specified services only
+        (*) use kerberis only
+                Add -> Users or Computers
+                   enter object names... ad01
+                        Check Names -> _AD01_
+        service type: cifs
+        ok
+
+
+PowerShell:
+	Set-ADAccountControl -Identity krb5httpoc -TrustedToAuthForDelegation \$True
+
+
 Desktop-> Server Manager -> Local Server -> Prpoerties -> Rempte Desktop -> click [Enabled] -> a new window opens
         System Properties -> Remote
         (*) allow remote connections to this computer [Select Users]
@@ -200,23 +328,40 @@ Desktop -> File Explorer -> This PC -> Map Network Drive ...
         Drive: H:
         Folder: \\ad01 -> Browse -> click open, -> [Alice]          -> OK
 
+Login at windows with domain, check user settings: KER\alice
+ -> login at owncloud from that windows machine: using the 'Windows Domain Login (Kerberos)' button.
+   -> A windows security requester come up. Username Alice,
+	Password .... (is still needed. TODO: Dennis says: no password is needed)
+
+- internal DNS:
+                - ad01:
+                 	- C:\Windows\System32\driver\etc\hosts
+				10.42.0.4	oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works
+			        $ker_myipaddr   $oc10_fqdn
+                        - service user
+		- oc10122-kerberos-...:	
+				10.42.0.2	ad01.ker.jw-qa.owncloud.works
+
+EOS
+
+cat << EOM | sed -e "s/^/$app: /g" >>  ~/POSTINIT.msg
+
 OC10 connect: ?semi added to domain?, ?controller knows?
         - create hetzner machine, ...  fqdn: oc.jw-qa.owncloud.works
                  https://confluence.owncloud.com/display/SA/Kerberos+Setup+Guide
-        - add to subnet jw.kerberos
+        - add to subnet jw.kerberos (unless not done automatially)
         - ldap sync
-                 - ad01-int.jw-qa.owncloud.works         10.42.0.2
-                 Cannot autodetect base dn, when using an IP address. we a host name
-                 Benutzer DN: Administrator@ker.jw-qa.owncloud.works
+                 - ad01.ker-int.jw-qa.owncloud.works         10.42.0.2
                  host: ldap://ad01-int.jw-qa.owncloud.works         port: 389
-                 base dn: dc=ker,dc=jw-qa,dc=owncloud,dc=works
-                 ldapsearch -d 0 -H ldap://10.42.0.2 -D administrator@ker.jw-qa.owncloud.works -w "$password" -b dc=ker,dc=jw-qa,dc=owncloud,dc=works
+                 Benutzer DN: Administrator@ker.jw-qa.owncloud.works
+                 autodetect: base dn: dc=ker,dc=jw-qa,dc=owncloud,dc=works
+                 ldapsearch -d 0 -H ldap://10.42.0.2 -D administrator@ker.jw-qa.owncloud.works -w "\$password" -b dc=ker,dc=jw-qa,dc=owncloud,dc=works
           Only these object classes: person
           Only from these groups: []
           Available groups
            scroll down to find 'RDP', click '>' -> it appears in 'Selected groups
             -> Ldap Filter appears: (&(|(objectclass=person))(|(|(memberof=CN=RDP,OU=Groups,OU=ownCloud,DC=ker,DC=jw-qa,DC=owncloud,DC=works)(primaryGroupID=1108))))
-          [verify settings and count users]: 3
+          [verify settings and count users]: 5
           Login Attributes
            -> [x] LDAP/AD Username
            -> [x] LDAP/AD Email-Addresse
@@ -225,103 +370,41 @@ OC10 connect: ?semi added to domain?, ?controller knows?
 	  Expert: Internal User Name: [sAMAccountName]
 		[clear caches]
 
-            occ user:sync "OCA\User_LDAP\User_Proxy"
+	    occ user:sync -m disable ldap
 
-        - internal DNS:
-		- ad01:	
-                 	- C:\Windows\System32\driver\etc\hosts
-				10.42.0.4	oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works
-                        - service user
-		- oc10122-kerberos-...:	
-				10.42.0.2	ad01.ker.jw-qa.owncloud.works
+Use remmina to connect to $ker_ad
 
-- kerberos app config
+- C:\Windows\System32\driver\etc\hosts
+  $ker_myipaddr	$oc10_fqdn
 
-   mv ~/krb5.conf /etc/krb5.conf
-   echo "extension=krb5.so" > /etc/php/7.4/mods-available/krb5.ini
-   phpenmod krb5
-cat <<EOM >"/var/www/owncloud/config/kerberos.config.php"
-<?php \$CONFIG = [
+In case you don't have a kerberos AD server running, please follow the instrucions in
 
-    /**
-    * path to keytab to use, default is '/etc/krb5.keytab'
-    */
-    'kerberos.keytab' => '/etc/apache2/oc.ker.jw-qa.owncloud.works.keytab',
+  ~/kerberos_ad_wnd_server_setup.txt
 
-    /**
-    * timeout before re-enableing spnego based auth after logout, default is 60
-    */
-    'kerberos.suppress.timeout' => 0,
-
-    /**
-    * the domain name - remove from principals to match the pure username
-    * e.g. alice@corp.dir will look for the user alice in ldap if 'kerberos.domain' is set to corp.dir
-    */
-    'kerberos.domain' => '',
-
-    /**
-    * Name of login button on login page
-    */
-    'kerberos.login.buttonName' => 'Windows Domain Login (Kerberos)',
-
-    /**
-    * If set to true the login page will immediately try to log in via Kerberos
-    */
-    'kerberos.login.autoRedirect' => false
-
-];
-EOM
-
-
-add to config.php:
-
-    'wnd.kerberos.servers' => [
-        'ad01' => [		/* <--- kerberos data id */
-            'ockeytab' => '/etc/apache2/oc.ker.jw-qa.owncloud.works.keytab',
-            'ocservice' => 'HTTP/oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works', 
-            'usermapping' => ['type' => 'Noop'],
-            'ccachettl' => 3600,
-        ],
-    ],
-   'wnd.kerberos.mappings' => [
-      'id1' => ['type' => 'noop'],
-      'id5' => ['type' => 'custom', 'param' => ['1234-abcd-9876' => 'user1', '1234-efdc-5555' => 'user2']],
-    ],
-
-
-
-create a keytabfile at windows:
+Create a keytabfile at windows:
 Cmd:
-	ktpass /princ HTTP/oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works@KER.JW-QA.OWNCLOUD.WORKS /mapuser krb5httpoc +rndPass /out oc.ker.jw-qa.owncloud.works.keytab /crypto all /ptype KRB5_NT_PRINCIPAL /mapop set
-
-PowerShell:
-	Set-ADAccountControl -Identity krb5httpoc -TrustedToAuthForDelegation $True 
+	ktpass /princ HTTP/$oc10_fqdn@$ker_realm /mapuser krb5httpoc +rndPass /out $keytab_name /crypto all /ptype KRB5_NT_PRINCIPAL /mapop set
 
 
+(Use ownCloud to) transport the new keytab file $keytab_name out of the windows machine, into our /etc/apache2 folder.
 mv ~/oc.ker.jw-qa.owncloud.works.keytab /etc/apache2/
 service apache2 restart
-Add ad01 as a dns server:
+Add $ker_ad as a dns server:
 	vi /etc/netplan/50-cloud-init.yaml
 	netplan apply
 	systemd-resolve --flush-caches
 
 
-Login at windows with domain, check user settings: KER\alice
- -> login at owncloud from that windows machine: using the 'Windows Domain Login (Kerberos)' button.
-   -> A windows security requester come up. Username Alice, 
-	Password .... (is still needed. TODO: Dennis says: no password is needed)
-
-
-owncloud admin settings storage: 
+owncloud admin settings storage:
 	[x] Allow users to mount external storage
 	   [x] Windows Network Drive
 
-User Alice: Settings Storage: 
-	Folder name:		Alice-WND 
-	External storage: 	Windows Network Drive 
+User Alice: Settings Storage:
+	Folder name:		Alice-WND
+	External storage: 	Windows Network Drive
 	Authentication: 	Kerberos
-	Host:			ad01.ker.jw-qa.owncloud.works
+	Host:			$ker_ad
 	Share:			alice
 	Domain:			KER
 	Kerberos data id:	
-EOF
+EOM

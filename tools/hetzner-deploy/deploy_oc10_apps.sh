@@ -270,7 +270,7 @@ mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if c
 source $mydir/lib/make_machine.sh -L $location -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin
 
-if [ -z "$network" ]; then
+if [ -n "$network" ]; then
   if [ -z "$(which hcloud)" ]; then
     echo "ERROR: HCLOUD_NETWORK_NAME=$network but no hcloud binary found."
     echo " (press CTRL-C to abort or wait 5 sec to continue anyway)"
@@ -541,16 +541,17 @@ chmod 700 /home/ftpdata/.ssh
 aptQ install -y nfs-server
 mkdir -p /pub/data
 echo "Hello, NFS!" > /pub/data/hello-nfs.txt
-chown -R www-data  /pub
+chown -R www-data.  /pub
 echo >> /etc/exports "/pub            *(rw,insecure,all_squash,no_subtree_check)"
 exportfs -a
 showmount -e localhost
 # should now reflect the contents of /etc/exports
+mkdir -p /var/www/owncloud/nfs-{hard,soft}-data
 mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/owncloud/nfs-hard-data	# prone to freezing processes
 mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/owncloud/nfs-soft-data	# prone to data loss
-ls -la /var/www/owncloud/nfs-data
- # expect to see hello-nfs.txt
-# nfs-server.service ( nfs-idmapd.service nfs-mountd.service )
+ls -la /var/www/owncloud/nfs-*-data
+# expect to see hello-nfs.txt
+# -> nfs-server.service ( nfs-idmapd.service nfs-mountd.service )
 
 occ app:list '^files_external$' --output=json
 occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
