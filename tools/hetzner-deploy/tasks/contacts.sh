@@ -186,46 +186,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Ryan Gosling
-ORG:Movie Star Inc.
-TEL:555-8765
-EMAIL:ryan.gosling@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Mila Kunis
-ORG:Actress Co.
-TEL:555-6543
-EMAIL:mila.kunis@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Matthew McConaughey
-ORG:Movie Star Inc.
-TEL:555-5432
-EMAIL:matthew.mcconaughey@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Charlize Theron
-ORG:Actress Co.
-TEL:555-2345
-EMAIL:charlize.theron@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Channing Tatum
-ORG:Movie Star Inc.
-TEL:555-9876
-EMAIL:channing.tatum@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Emma Stone
 ORG:Actress Co.
 TEL:555-5678
@@ -242,30 +202,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Keira Knightley
-ORG:Actress Co.
-TEL:555-8765
-EMAIL:keira.knightley@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Chris Pratt
-ORG:Movie Star Inc.
-TEL:555-6543
-EMAIL:chris.pratt@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Jennifer Lawrence
-ORG:Actress Co.
-TEL:555-5432
-EMAIL:jennifer.lawrence@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Matt Damon
 ORG:Movie Star Inc.
 TEL:555-2345
@@ -274,66 +210,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Emma Roberts
-ORG:Actress Co.
-TEL:555-9876
-EMAIL:emma.roberts@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Dwayne Johnson
-ORG:Movie Star Inc.
-TEL:555-5678
-EMAIL:dwayne.johnson@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Jessica Alba
 ORG:Actress Co.
 TEL:555-1234
 EMAIL:jessica.alba@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Mark Wahlberg
-ORG:Movie Star Inc.
-TEL:555-8765
-EMAIL:mark.wahlberg@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Amy Adams
-ORG:Actress Co.
-TEL:555-6543
-EMAIL:amy.adams@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Zac Efron
-ORG:Movie Star Inc.
-TEL:555-5432
-EMAIL:zac.efron@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Rachel McAdams
-ORG:Actress Co.
-TEL:555-2345
-EMAIL:rachel.mcadams@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Will Ferrell
-ORG:Movie Star Inc.
-TEL:555-9876
-EMAIL:will.ferrell@example.com
 END:VCARD
 
 BEGIN:VCARD
@@ -354,14 +234,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Charlize Theron
-ORG:Actress Co.
-TEL:555-8765
-EMAIL:charlize.theron@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Ryan Gosling
 ORG:Movie Star Inc.
 TEL:555-6543
@@ -378,14 +250,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Matthew McConaughey
-ORG:Movie Star Inc.
-TEL:555-2345
-EMAIL:matthew.mcconaughey@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Charlize Theron
 ORG:Actress Co.
 TEL:555-9876
@@ -398,22 +262,6 @@ FN:Channing Tatum
 ORG:Movie Star Inc.
 TEL:555-5678
 EMAIL:channing.tatum@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Emma Stone
-ORG:Actress Co.
-TEL:555-1234
-EMAIL:emma.stone@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:George Clooney
-ORG:Movie Star Inc.
-TEL:555-8765
-EMAIL:george.clooney@example.com
 END:VCARD
 
 BEGIN:VCARD
@@ -442,14 +290,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Matt Damon
-ORG:Movie Star Inc.
-TEL:555-9876
-EMAIL:matt.damon@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Emma Roberts
 ORG:Actress Co.
 TEL:555-5678
@@ -462,14 +302,6 @@ FN:Dwayne Johnson
 ORG:Movie Star Inc.
 TEL:555-1234
 EMAIL:dwayne.johnson@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Jessica Alba
-ORG:Actress Co.
-TEL:555-8765
-EMAIL:jessica.alba@example.com
 END:VCARD
 
 BEGIN:VCARD
@@ -510,22 +342,6 @@ FN:Will Ferrell
 ORG:Movie Star Inc.
 TEL:555-5678
 EMAIL:will.ferrell@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Reese Witherspoon
-ORG:Actress Co.
-TEL:555-1234
-EMAIL:reese.witherspoon@example.com
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Chris Pine
-ORG:Movie Star Inc.
-TEL:555-8765
-EMAIL:chris.pine@example.com
 END:VCARD
 
 BEGIN:VCARD
@@ -661,26 +477,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Michael Jackson
-ORG:Solo Artist
-BDAY:1958-08-29
-NOTE:King of Pop.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:David Bowie
 ORG:Solo Artist
 BDAY:1947-01-08
 NOTE:Innovative singer, songwriter, and actor.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Prince
-ORG:Solo Artist
-BDAY:1958-06-07
-NOTE:Versatile musician and performer.
 END:VCARD
 
 BEGIN:VCARD
@@ -773,22 +573,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Taylor Swift
-ORG:Solo Artist
-BDAY:1989-12-13
-NOTE:Multi-award-winning singer-songwriter.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Adele
-ORG:Solo Artist
-BDAY:1988-05-05
-NOTE:Soulful and powerful vocalist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Eminem
 ORG:Solo Artist
 BDAY:1972-10-17
@@ -797,74 +581,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Drake
-ORG:Solo Artist
-BDAY:1986-10-24
-NOTE:Canadian rapper and singer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Kanye West
-ORG:Solo Artist
-BDAY:1977-06-08
-NOTE:Influential rapper, producer, and fashion designer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Lady Gaga
-ORG:Solo Artist
-BDAY:1986-03-28
-NOTE:Iconic singer and actress.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Bruno Mars
-ORG:Solo Artist
-BDAY:1985-10-08
-NOTE:Multi-talented singer, songwriter, and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Ed Sheeran
-ORG:Solo Artist
-BDAY:1991-02-17
-NOTE:Chart-topping singer-songwriter.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Billie Eilish
 ORG:Solo Artist
 BDAY:2001-12-18
 NOTE:Young and acclaimed singer-songwriter.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Ariana Grande
-ORG:Solo Artist
-BDAY:1993-06-26
-NOTE:Pop superstar and actress.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Justin Bieber
-ORG:Solo Artist
-BDAY:1994-03-01
-NOTE:Canadian pop sensation.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Rihanna
-ORG:Solo Artist
-BDAY:1988-02-20
-NOTE:Versatile singer, actress, and entrepreneur.
 END:VCARD
 
 BEGIN:VCARD
@@ -893,34 +613,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Beyoncé
-ORG:Solo Artist
-BDAY:1981-09-04
-NOTE:Iconic singer, actress, and businesswoman.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Madonna
-ORG:Solo Artist
-BDAY:1958-08-16
-NOTE:Queen of Pop.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Adele
 ORG:Solo Artist
 BDAY:1988-05-05
 NOTE:Soulful and powerful vocalist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Eminem
-ORG:Solo Artist
-BDAY:1972-10-17
-NOTE:Renowned rapper and producer.
 END:VCARD
 
 BEGIN:VCARD
@@ -957,14 +653,6 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Billie Eilish
-ORG:Solo Artist
-BDAY:2001-12-18
-NOTE:Young and acclaimed singer-songwriter.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Ariana Grande
 ORG:Solo Artist
 BDAY:1993-06-26
@@ -989,26 +677,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Eminem
+FN:J. Cole
 ORG:Solo Artist
-BDAY:1972-10-17
-NOTE:Renowned rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Dr. Dre
-ORG:N.W.A, Solo Artist
-BDAY:1965-02-18
-NOTE:Hip-hop pioneer and record producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Ice Cube
-ORG:N.W.A, Solo Artist
-BDAY:1969-06-15
-NOTE:Rapper, actor, and member of N.W.A.
+BDAY:1985-01-28
+NOTE:Multi-platinum rapper and producer.
 END:VCARD
 
 BEGIN:VCARD
@@ -1029,34 +701,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Kendrick Lamar
-ORG:Solo Artist
-BDAY:1987-06-17
-NOTE:Acclaimed rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:J. Cole
-ORG:Solo Artist
-BDAY:1985-01-28
-NOTE:Multi-platinum rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Nas
-ORG:Solo Artist
-BDAY:1973-09-14
-NOTE:Legendary rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Eminem
-ORG:Solo Artist
-BDAY:1972-10-17
-NOTE:Renowned rapper and producer.
+FN:Ice Cube
+ORG:N.W.A, Solo Artist
+BDAY:1969-06-15
+NOTE:Rapper, actor, and member of N.W.A.
 END:VCARD
 
 BEGIN:VCARD
@@ -1069,234 +717,10 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:3.0
-FN:Ice Cube
-ORG:N.W.A, Solo Artist
-BDAY:1969-06-15
-NOTE:Rapper, actor, and member of N.W.A.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Snoop Dogg
-ORG:Solo Artist
-BDAY:1971-10-20
-NOTE:Iconic rapper and media personality.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Jay-Z
-ORG:Solo Artist
-BDAY:1969-12-04
-NOTE:Rapper, entrepreneur, and music mogul.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
 FN:Kendrick Lamar
 ORG:Solo Artist
 BDAY:1987-06-17
 NOTE:Acclaimed rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:J. Cole
-ORG:Solo Artist
-BDAY:1985-01-28
-NOTE:Multi-platinum rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Nas
-ORG:Solo Artist
-BDAY:1973-09-14
-NOTE:Legendary rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Eminem
-ORG:Solo Artist
-BDAY:1972-10-17
-NOTE:Renowned rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Dr. Dre
-ORG:N.W.A, Solo Artist
-BDAY:1965-02-18
-NOTE:Hip-hop pioneer and record producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Ice Cube
-ORG:N.W.A, Solo Artist
-BDAY:1969-06-15
-NOTE:Rapper, actor, and member of N.W.A.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Snoop Dogg
-ORG:Solo Artist
-BDAY:1971-10-20
-NOTE:Iconic rapper and media personality.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Jay-Z
-ORG:Solo Artist
-BDAY:1969-12-04
-NOTE:Rapper, entrepreneur, and music mogul.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Kendrick Lamar
-ORG:Solo Artist
-BDAY:1987-06-17
-NOTE:Acclaimed rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:J. Cole
-ORG:Solo Artist
-BDAY:1985-01-28
-NOTE:Multi-platinum rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Nas
-ORG:Solo Artist
-BDAY:1973-09-14
-NOTE:Legendary rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Eminem
-ORG:Solo Artist
-BDAY:1972-10-17
-NOTE:Renowned rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Dr. Dre
-ORG:N.W.A, Solo Artist
-BDAY:1965-02-18
-NOTE:Hip-hop pioneer and record producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Ice Cube
-ORG:N.W.A, Solo Artist
-BDAY:1969-06-15
-NOTE:Rapper, actor, and member of N.W.A.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Snoop Dogg
-ORG:Solo Artist
-BDAY:1971-10-20
-NOTE:Iconic rapper and media personality.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Jay-Z
-ORG:Solo Artist
-BDAY:1969-12-04
-NOTE:Rapper, entrepreneur, and music mogul.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Kendrick Lamar
-ORG:Solo Artist
-BDAY:1987-06-17
-NOTE:Acclaimed rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:J. Cole
-ORG:Solo Artist
-BDAY:1985-01-28
-NOTE:Multi-platinum rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Nas
-ORG:Solo Artist
-BDAY:1973-09-14
-NOTE:Legendary rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Eminem
-ORG:Solo Artist
-BDAY:1972-10-17
-NOTE:Renowned rapper and producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Dr. Dre
-ORG:N.W.A, Solo Artist
-BDAY:1965-02-18
-NOTE:Hip-hop pioneer and record producer.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Ice Cube
-ORG:N.W.A, Solo Artist
-BDAY:1969-06-15
-NOTE:Rapper, actor, and member of N.W.A.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Snoop Dogg
-ORG:Solo Artist
-BDAY:1971-10-20
-NOTE:Iconic rapper and media personality.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Jay-Z
-ORG:Solo Artist
-BDAY:1969-12-04
-NOTE:Rapper, entrepreneur, and music mogul.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:Kendrick Lamar
-ORG:Solo Artist
-BDAY:1987-06-17
-NOTE:Acclaimed rapper and lyricist.
-END:VCARD
-
-BEGIN:VCARD
-VERSION:3.0
-FN:J. Cole
-ORG:Solo Artist
-BDAY:1985-01-28
-NOTE:Multi-platinum rapper and producer.
 END:VCARD
 
 BEGIN:VCARD
