@@ -13,7 +13,7 @@ ker_myipaddr=$(hostname -I | sed -e 's/^.*10\.42/10.42/' -e 's/\s.*//')
 
 if [ -z "$ker_myipaddr" ]; then
   echo "ERROR: could not find a 10.42.x.x address in hostname -I: $(hostname -I)"
-  echo "Please make sure this machine is attached to an internal kerberos network. E.g. 'kerberos.jw' at hetzner.
+  echo "Please make sure this machine is attached to an internal kerberos network. E.g. 'kerberos.jw' at hetzner."
   echo "(The variable HCLOUD_NETWORK_NAME currently is '$HCLOUD_NETWORK_NAME')"
   exit 1
 fi
@@ -103,7 +103,7 @@ EOC
 chown www-data. /var/www/owncloud/config/*config.php
 
 
-cat << 'EOS' > ~/kerberos_ad_wnd_server_setup.txt
+cat << EOS > ~/kerberos_ad_wnd_server_setup.txt
 Setup Documentation:
 - https://github.com/GeraldLeikam/tutorials/
 - https://confluence.owncloud.com/display/~gleikam/Tutorials
@@ -326,16 +326,16 @@ Log in alice via remmina
 Then create a windows network share for the users...
 Desktop -> File Explorer -> This PC -> Map Network Drive ...
         Drive: H:
-        Folder: \\ad01 -> Browse -> click open, -> [Alice]          -> OK
+        Folder: \\\\ad01 -> Browse -> click open, -> [Alice]          -> OK
 
-Login at windows with domain, check user settings: KER\alice
+Login at windows with domain, check user settings: KER\\alice
  -> login at owncloud from that windows machine: using the 'Windows Domain Login (Kerberos)' button.
    -> A windows security requester come up. Username Alice,
 	Password .... (is still needed. TODO: Dennis says: no password is needed)
 
 - internal DNS:
                 - ad01:
-                 	- C:\Windows\System32\driver\etc\hosts
+                 	- C:\\Windows\\System32\\driver\\etc\\hosts
 				10.42.0.4	oc10122-kerberos-100rc2-20230627.jw-qa.owncloud.works
 			        $ker_myipaddr   $oc10_fqdn
                         - service user
@@ -374,7 +374,7 @@ OC10 connect: ?semi added to domain?, ?controller knows?
 
 Use remmina to connect to $ker_ad
 
-- C:\Windows\System32\driver\etc\hosts
+- C:\\Windows\\System32\\driver\\etc\\hosts
   $ker_myipaddr	$oc10_fqdn
 
 In case you don't have a kerberos AD server running, please follow the instrucions in

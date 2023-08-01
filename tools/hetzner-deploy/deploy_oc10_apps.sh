@@ -258,9 +258,9 @@ fi
 
 network=$HCLOUD_NETWORK_NAME
 if [ -z "$HCLOUD_NETWORK_NAME" ]; then
-  echo "$*" | grep user_ldap             && network=testlab-network	# ldap may want to use ad01.testlab.owncloud.works
-  echo "$*" | grep windows_network_drive && network=testlab-network	# wnd may want to use wnd.testlab.owncloud.works
-  echo "$*" | grep kerberos              && network=kerberos.jw-network # ad01.ker lives there
+  echo "$*" | grep user_ldap             && network=testlab	# ldap may want to use ad01.testlab.owncloud.works
+  echo "$*" | grep windows_network_drive && network=testlab	# wnd may want to use wnd.testlab.owncloud.works
+  echo "$*" | grep kerberos              && network=kerberos.jw	# ad01.ker lives there
 fi
 
 function title() { wmctrl -r :ACTIVE: -N "$@"; }
@@ -491,8 +491,8 @@ hog_ip=\$(docker inspect mailhog | jq '.[0].NetworkSettings.IPAddress' -r)
 
 
 sql="UPDATE oc_accounts SET email='admin@oc.example.com' WHERE user_id='admin';"
-test "$OC10_DATABASE" = mysql && mysql owncloud -e "$sql"
-test "$OC10_DATABASE" = pgsql && su - postgres -c "psql -d owncloud -c \\"$sql\\""
+test "$OC10_DATABASE" = mysql && mysql owncloud -e "\$sql"
+test "$OC10_DATABASE" = pgsql && su - postgres -c "psql -d owncloud -c \\"\$sql\\""
 
 occ config:system:set mail_domain       --value oc.example.com
 occ config:system:set mail_from_address --value mail
@@ -646,6 +646,8 @@ for param in \$PARAM; do
     fi
   fi
 done
+
+test "$OC10_DATABASE" = pgsql && echo >> ~/POSTINIT.msg 'POSTGRESQL: su - postgres -c "psql -d owncloud"'
 
 if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
