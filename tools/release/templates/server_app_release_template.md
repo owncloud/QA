@@ -41,6 +41,9 @@ All actions to be done on the release branch (`git pull; git checkout -b release
 
 - [ ] `git tag -s v${version}-rc.1` on release branch (see https://confluence.owncloud.com/display/EN/Product+Owners+List)
 - [ ] Build and sign RC tarball from github tag `v${version}-rc.1` (see handbook for how to build)
+- [ ] Check buildlog for security reports
+- [ ] Check github security tab dependabot reports
+    - [ ] -> if critical or high entries are reported: open a release blocker issue.
 - [ ] Upload as Github release using changelog entries
 - [ ] Test and document in testplan + manual explorative testing:
     - [ ] If this is an enterprise app: Enabling the app must start the grace period
