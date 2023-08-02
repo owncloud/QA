@@ -54,6 +54,7 @@ test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
 test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'sqlite'
+test -z "$OC10_DATADIR" && OC10_DATADIR=data		# must exist. Relative to /var/www/owncloud, if relative.
 
 case $vers in
   10.9.1 | 10.10 | 10.10.* )
@@ -106,6 +107,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
+  echo "   OC10_DATADIR=nfs-soft-data	define the data folder. Default: $OC10_DATADIR"
   echo "   OC10_WEBROUTE=/owncloud	define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
   echo "   OC10_ADMIN_PASS='Passw0rd!'	define password for the owncoud addmin acocunt. Default: $admin_pass"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
@@ -118,6 +120,9 @@ fi
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 test -n "$OC10_WEBROUTE" && webroute="$OC10_WEBROUTE"
 test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
+
+# Prepend owncloud home, unless it starts with a /
+echo "$OC10_DATADIR" | grep -q '^/' || OC10_DATADIR="/var/www/owncloud/$OC10_DATADIR"
 
 tmpdir="/tmp/make_oc10_apps_dl_$$"
 mkdir -p $tmpdir
@@ -402,6 +407,38 @@ aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip r
 aptQ install -y smbclient coreutils ldap-utils postgresql
 aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl
 
+## external FTP, FTPS storage
+aptQ install -y pure-ftpd  # not used. We use the local ssh-server
+aptQ install -y sshfs 	   # for /mnt/sftp mount, which is then unused.
+
+## external SFTP storage
+ftppass=ftp${RANDOM}data
+deluser ftpdata 2>/dev/null && true
+echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""
+mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
+touch /home/ftpdata/.ssh/authorized_keys
+echo "Hello, world!" >  /home/ftpdata/data/hello.txt
+chown -R ftpdata. /home/ftpdata
+chmod 700 /home/ftpdata/.ssh
+# switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
+
+## prepare an NFS server too...
+aptQ install -y nfs-server
+mkdir -p /pub/data
+echo "Hello, NFS!" > /pub/data/hello-nfs.txt
+chown -R www-data.  /pub
+echo >> /etc/exports "/pub            *(rw,insecure,no_root_squash,no_all_squash,no_subtree_check)"
+exportfs -a
+showmount -e localhost
+# should now reflect the contents of /etc/exports
+mkdir -p /var/www/owncloud/nfs-{hard,soft}-data
+mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/owncloud/nfs-hard-data	# prone to freezing processes
+mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/owncloud/nfs-soft-data	# prone to data loss
+ls -la /var/www/owncloud/nfs-*-data
+# expect to see hello-nfs.txt
+# -> nfs-server.service ( nfs-idmapd.service nfs-mountd.service )
+
+
 cd /var/www
 if [ -f owncloud/config/config.php ]; then
  echo "ERROR: /var/www/owncloud/config/config.php already exists."
@@ -463,10 +500,10 @@ OC10_DATABASE_HOST=localhost
 test "$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
 
 set -x
-occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --admin-user "admin" --admin-pass "$admin_pass" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
+occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --data-dir "$OC10_DATADIR" --admin-user "admin" --admin-pass "$admin_pass" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
 occ status    || sleep 15	# in case there was an error, let the user study that for a while...
 set +x
-occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --admin-user "admin" --admin-pass "$admin_pass" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
+occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --data-dir "$OC10_DATADIR" --admin-user "admin" --admin-pass "$admin_pass" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
 
 occ config:system:set trusted_domains 1 --value "$IPADDR"
 occ log:owncloud --enable -vvv
@@ -520,44 +557,12 @@ occ config:app:set core umgmt_set_password --value true		# not a boolean here, b
 # Holger says, this is strongly discouraged, as it mixes owncloud admin with local sysamin scopes:
 occ config:system:set files_external_allow_create_new_local --value false
 
-
-## external FTP, FTPS storage
-aptQ install -y pure-ftpd  # not used. We use the local ssh-server
-aptQ install -y sshfs 	   # for /mnt/sftp mount, which is then unused.
-# install app files_external_ftp
-
-## external SFTP storage
-ftppass=ftp${RANDOM}data
-deluser ftpdata 2>/dev/null && true
-echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""
-mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
-touch /home/ftpdata/.ssh/authorized_keys
-echo "Hello, world!" >  /home/ftpdata/data/hello.txt
-chown -R ftpdata. /home/ftpdata
-chmod 700 /home/ftpdata/.ssh
-# switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
-
-## prepare an NFS server too...
-aptQ install -y nfs-server
-mkdir -p /pub/data
-echo "Hello, NFS!" > /pub/data/hello-nfs.txt
-chown -R www-data.  /pub
-echo >> /etc/exports "/pub            *(rw,insecure,all_squash,no_subtree_check)"
-exportfs -a
-showmount -e localhost
-# should now reflect the contents of /etc/exports
-mkdir -p /var/www/owncloud/nfs-{hard,soft}-data
-mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/owncloud/nfs-hard-data	# prone to freezing processes
-mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/owncloud/nfs-soft-data	# prone to data loss
-ls -la /var/www/owncloud/nfs-*-data
-# expect to see hello-nfs.txt
-# -> nfs-server.service ( nfs-idmapd.service nfs-mountd.service )
-
 occ app:list '^files_external$' --output=json
 occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
 occ market:install files_clipboard
 occ app:enable files_clipboard	# a copy paste function is great for testing ...
 
+# install app files_external_ftp
 occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
 occ config:app:set core enable_external_storage --value yes
 

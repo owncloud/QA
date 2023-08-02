@@ -86,18 +86,23 @@ chown www-data. /var/www/owncloud/config/*config.php
 
 cat <<EOC >"/var/www/owncloud/config/wnd_ker.config.php"
 <?php \$CONFIG = [
-    'wnd.kerberos.servers' => [
-        'ad01' => [		/* <--- kerberos data id */
-            'ockeytab' => '/etc/apache2/$keytab_name',
-            'ocservice' => 'HTTP/$oc10_fqdn',
+   /**
+     * From:
+     *   https://github.com/owncloud/windows_network_drive/pull/423
+     *   https://github.com/owncloud/enterprise/issues/5200
+     */
+   'wnd.kerberos.servers' => [
+        'ad01' => [                                                               /* <--- oc: wnd share config: kerberos data id */
+            'ockeytab' => '/etc/apache2/$keytab_name',                               /* keytab as exported from AD */
+            'ocservice' => 'HTTP/$oc10_fqdn',  /* AD: krb5httpoc -> properties -> account -> User logon name */
             'usermapping' => ['type' => 'Noop'],
             'ccachettl' => 3600,
         ],
-    ],
+   ],
    'wnd.kerberos.mappings' => [
       'id1' => ['type' => 'noop'],
       'id5' => ['type' => 'custom', 'param' => ['1234-abcd-9876' => 'user1', '1234-efdc-5555' => 'user2']],
-    ],
+   ],
 ];
 EOC
 chown www-data. /var/www/owncloud/config/*config.php
@@ -246,6 +251,7 @@ local server ethernet, details, find the one with the external interfac 10.xx.xx
         (*) Use the following DNS server addess
         127.0.0.1                  (do not use the external IP of the ad01 here. strange, but it only works with localhost.)
 
+Start -> Server Manager -> Local Server
 Click on computer name, change
 Member of
   (*) Domain
@@ -352,10 +358,10 @@ OC10 connect: ?semi added to domain?, ?controller knows?
         - add to subnet jw.kerberos (unless not done automatially)
         - ldap sync
                  - ad01.ker-int.jw-qa.owncloud.works         10.42.0.2
-                 host: ldap://ad01-int.jw-qa.owncloud.works         port: 389
+                 host: ldap://ad01.ker-int.jw-qa.owncloud.works         port: 389
                  Benutzer DN: Administrator@ker.jw-qa.owncloud.works
                  autodetect: base dn: dc=ker,dc=jw-qa,dc=owncloud,dc=works
-                 ldapsearch -d 0 -H ldap://10.42.0.2 -D administrator@ker.jw-qa.owncloud.works -w "\$password" -b dc=ker,dc=jw-qa,dc=owncloud,dc=works
+                 ldapsearch -d 0 -H ldap://10.42.0.2 -D administrator@ker.jw-qa.owncloud.works -w "\$OC10_ADMIN_PASS" -b dc=ker,dc=jw-qa,dc=owncloud,dc=works
           Only these object classes: person
           Only from these groups: []
           Available groups
@@ -370,9 +376,13 @@ OC10 connect: ?semi added to domain?, ?controller knows?
 	  Expert: Internal User Name: [sAMAccountName]
 		[clear caches]
 
+	    occ user:list -s alice	# from Database
+	    occ user:delete alice
 	    occ user:sync -m disable ldap
+	    occ user:list -s alice	# from LDAP
 
-Use remmina to connect to $ker_ad
+remmina -c ~/.local/share/remmina/kerberos-jw*ad-server*
+
 
 - C:\\Windows\\System32\\driver\\etc\\hosts
   $ker_myipaddr	$oc10_fqdn
@@ -385,26 +395,63 @@ Create a keytabfile at windows:
 Cmd:
 	ktpass /princ HTTP/$oc10_fqdn@$ker_realm /mapuser krb5httpoc +rndPass /out $keytab_name /crypto all /ptype KRB5_NT_PRINCIPAL /mapop set
 
+check matching logon name in the delegation user (automatic?):
+     krb5httpoc -> properties -> account -> User logon name
+	HTTP/$oc10_fqdn
+
 
 (Use ownCloud to) transport the new keytab file $keytab_name out of the windows machine, into our /etc/apache2 folder.
-mv ~/oc.ker.jw-qa.owncloud.works.keytab /etc/apache2/
+cp ~/o/data/admin/$keytab_name /etc/apache2/
 service apache2 restart
-Add $ker_ad as a dns server:
-	vi /etc/netplan/50-cloud-init.yaml
-	netplan apply
-	systemd-resolve --flush-caches
+occ app:enable kerberos
+
+sed -i '/nameservers:/ { n; n; s/\(^\s*\)-/\1- 10.42.0.2\n\1-/ }' /etc/netplan/50-cloud-init.yaml
+netplan apply
+systemd-resolve --flush-caches
+
+# Kerberos WND does not work with the internal name $ker_ad or an IP-Address.
+# Hack alert: We must re-route the external name to the internal IP-Addr.
+echo "10.42.0.2 ad01.ker.jw-qa.owncloud.works" >> /etc/hosts
+
 
 
 owncloud admin settings storage:
 	[x] Allow users to mount external storage
 	   [x] Windows Network Drive
 
+Folder name:		personal-krb-wnd
+	External storage: 	Windows Network Drive
+	Authentication: 	Kerberos
+	Host:			ad01.ker.jw-qa.owncloud.works
+	Share:			$user
+	Domain:			KER
+	Kerberos data id:	ad01
+
+Folder name:		shared-krb-wnd-ro
+	External storage: 	Windows Network Drive
+	Authentication: 	Kerberos
+	Host:			ad01.ker.jw-qa.owncloud.works
+	Share:			shared_read
+	Domain:			KER
+	Kerberos data id:	ad01
+
+# Both folders are red for the admin, that is okay.
+
+# linux firefox:
+#	- admin can login at the web UI with username & password
+#	- the kerberos button is there, but does nothing, just refreshes the login page.
+
+remmina -c ~/.local/share/remmina/kerberos-jw*ad-desktop-alice*
+# User Alice login webUI at https://$oc10_fqdn
+# The two folders personal-krb-wnd and shared-krb-wnd-ro are there.
+
+# this should also work:
 User Alice: Settings Storage:
 	Folder name:		Alice-WND
 	External storage: 	Windows Network Drive
 	Authentication: 	Kerberos
-	Host:			$ker_ad
+	Host:			ad01.ker.jw-qa.owncloud.works
 	Share:			alice
 	Domain:			KER
-	Kerberos data id:	
+	Kerberos data id:	ad01
 EOM
