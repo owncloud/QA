@@ -30,7 +30,8 @@ occ config:system:set web.rewriteLinks --type boolean --value true
 occ config:system:set defaultapp --value web
 
 # Bogus entries in external_apps are silently ignored.
-# We can list richdocuments here harmlessly, even if not installed.
+# We can list richdocuments here harmlessly, even if not installed (Javascript console shows an error, though)
+# We can even say "hideSearchBar": true -- as long as "apps" contains "search", the search is shown. -> https://github.com/owncloud/web/pull/9541
 cat <<EOF > $conf
 {
   "server" : "https://$oc10_fqdn",
@@ -40,9 +41,13 @@ cat <<EOF > $conf
     "url":     "https://$oc10_fqdn/index.php/apps/oauth2/api/v1/token",
     "authUrl": "https://$oc10_fqdn/index.php/apps/oauth2/authorize"
   },
+  "options": {
+    "hideSearchBar": false
+  },
   "apps" : [
     "files",
     "preview",
+    "search",
     "draw-io"
   ],
   "external_apps": [
