@@ -14,7 +14,8 @@ Context: <br>
 |**Login view UI**||||||
 | Portrait | Open login view in portrait orientation | Visible: <br>- ownCloud icon<br>- Server address text field<br>- Right arrow to validate<br>- "New to owncloud?" section<br>- Settings link |  |  |
 | Landscape | Open login view in landscape orientation | Visible: <br>- ownCloud icon<br>- Server address text field<br>- Right arrow to validate<br>- "New to owncloud?" section<br>- Settings link |  |  |
-| New to ownCloud | Tap on the link "New to ownCloud" | Link works, pointing to [owncloud.com/doc-guides](owncloud.com/doc-guides)|  |  |
+| New to ownCloud | Tap on the link `New to ownCloud` | Link works, pointing to [owncloud.com/doc-guides](owncloud.com/doc-guides)|  |  |
+| Settings | Tap on the link `Settings` | `Settings` view open |  |  |
 |**URL validation**||||||
 | Empty URL | 1. Let empty URL<br>2. Click on right arrow | Error: "Cannot authenticate to this server". |  |  |
 | Prefix http | 1. Enter correct http URL with protocol prefix "http://"<br>2. Click on right arrow | "Connection established" displayed |  |  |
@@ -41,15 +42,18 @@ Context: <br>
 | Password eye | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter a password<br>4. Click on eye button, right to the password | Password is revealed |  |  |
 | Wrong credentials | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter correct username and incorrect password<br>4. Click on "Log in" | Error: "Wrong username or password" |  |  | 
 | Existing account | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter correct username and password<br>4. Repeat all steps to add again same account | Error: "An account for the same user and server already exists in the device" |  |  
+| URL of server older than 10 | Add correct URL of a 9.x server | Server can not be connected |
 |**OAuth2**||||||
 | Correct credentials | 1. Enter correct URL of server with OAuth2<br>2. Set correct credentials in OAuth2 view (browser) | Callback to the app and list of files displayed |  |  | 
 | Cancel OAuth2 Login | 1. Enter correct URL of server with OAuth2<br>2. Cancel authentication process in browser| Moved to Login view |  |  |
 | Cancel OAuth2 Authorizaton | 1. Enter correct URL of server with OAuth2<br>2. Enter correct credentials in browser<br>3. Cancel process in authorization view | Moved to Login view |  |  |
 | Renewal OAuth2 token | 1. Enter correct URL of server with OAuth2 (check how to tweak it to set a shorter expiration time as defaults' 1h)<br>2. Enter correct credentials in browser and authorize<br>3. Wait till token expires<br>4. Perform any operations in the list of files | 2. List of files displayed<br>4. Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called|
 | Revoke OAuth2 token | 1. Enter correct URL of server with OAuth2<br>2. Enter correct credentials in browser and authorize<br>3. In server dashboard, revoke the Android token<br>4. Perform any operation in list of files<br>5. Click on "Sign In" and enter correct credentals | 4. Error in list of files: "The access token has expired or become invalid. Sign again to gain access"<br>5. List of files displayed again. |  |  |
+| Logout  | 1. Complete authentication/authorization process in a OAuth2 server<br>2. Logout in the idP | Session logged out. Needed credentials again to enter the account | NA | Not done yet. |
 | Existing account | 1. Enter correct URL of server with OAuth2<br>2. Click on right arrow<br>3. Enter correct username and password in browser, and authorize<br>4. Repeat all steps to add again same account | Error: "An account for the same user and server already exists in the device" |  |  
 |**OIDC**||||||
 | Correct credentials | 1. Enter correct URL of server with OIDC<br>2. Set correct credentials in OAuth2 view (browser)<br>3. Authorize | Callback to the app and list of files displayed |  |  | 
+| Refresh token | 1. Create a new OAuth2 session<br>2. Wait until token expires<br>3. Perform some actions | Token is refreshed (check in BD or proxy) and user keeps on using the app | | |
 | Cancel OIDC Login | 1. Enter correct URL of server with OIDC<br>2. Cancel authentication process in browser| Moved to Login view |  |  |
 | Cancel OIDC Authorizaton | 1. Enter correct URL of server with OIDC<br>2. Enter correct credentials in browser<br>3. Cancel process in authorization view | Moved to Login view |  |  |
 | Logout  | 1. Complete authentication/authorization process in a OIDC server<br>2. Logout in the idP | Session logged out. Needed credentials again to enter the account | NA | Not done yet. |

@@ -13,7 +13,7 @@ Context: <br>
  
 | Test Case | Steps | Expected | Result | Related Comment / Defect | 
 | :-------- | :---- | :------- | :----: | :----------------------- | 
-| **Public share** |   |  |
+| **Public links** |   |  |
 | Create link file |  1. Select a file from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Save | Check that link is listed in the share view. Check that the file in the file list of the app includes the link icon. Check in web that the link was created |  |  |
 | Create link folder |  1. Select a folder from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Save | Check that link is listed in the share view. Check that the folder in the file list of the app includes the link icon. Check in web that the link was created |  |  |
 | Multiple links | 1. Select an item from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` to create several links on the item<br>4. Save<br> repeat 3. and 4. 10 times to create 10 links over the same item | Check that all created links are listed in the share view. Check in web that the link list was created |  |  |
