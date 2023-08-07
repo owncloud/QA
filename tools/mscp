@@ -55,6 +55,12 @@ show_help() {
   echo ""
 }
 
+http_prefix()
+{
+  # return http:// or https:// or nothing
+  echo "$1" | sed -ne 's@^\(https\?://\).*@\1@pi'
+}
+
 inputs=""
 targets=""
 colon_seen=false	# remaining arguments are targets
@@ -100,6 +106,13 @@ while [ $# -gt 0 ]; do
       show_help
       exit 0
       ;;
+    -* )
+      echo "Unknown option $1"
+      echo ""
+      show_help
+      echo "Unknown option $1"
+      exit 2
+      ;;
     :)
       colon_seen=true
       # found the explicit input / target separator. Undo any guesswork.
@@ -109,14 +122,15 @@ while [ $# -gt 0 ]; do
       fi
       ;;
     *)
-      prefix="$(http_prefix "$1" )"
-      remainder="$(echo "$1" | sed -e "s@^$prefix@@")"
+      # CAUTION: keep in sync with colon_target below
+      prefix="$( http_prefix "$1" )"
+      remainder="$( echo "$1" | sed -e "s@^$prefix@@" )"
       # for targets, we ignore protocol prefixes http:// https:// as a convenience, so that you can copy/paste URLs more quickly.
       echo "$remainder" | grep -q : && colon_seen=true
       # A trailing / on a URL-style target also counts as a colon
-      test -n "$prefix" -a -z "$(echo "$1" | sed -e 's@^.*/@@')" && colon_seen=true
+      test -n "$prefix" -a -z "$( echo "$1" | sed -e 's@^.*/@@' )" && colon_seen=true
       if $colon_seen; then
-	targets="$targets $remainder"
+	targets="$targets $1"	# we don't use $remainder here, that'd be too early. If a ':' parameter appears, things get re-sorted.
       else
 	inputs="$inputs $1"
       fi
@@ -134,41 +148,54 @@ if [ -z "$targets" ]; then
   exit 1
 fi
 
-http_prefix()
-{
-  # return http:// or https:// or nothing
-  echo "$1" | sed -ne 's@^\(https\?://\).*@\1@pi'
-}
-
 colon_target()
 {
-   # add a : into the target name if missing, so that it is easily recognizable as one of our ssh windows.
-   # We don't want to ssh into hosts named 'bash' or similar when using -o after user added more windows to the screen session.
-   if echo "$1" | grep -q :; then 
-     echo "$1"	# unchanged
-   else
-     echo "$1" | sed -e 's@^\([^/]*\)@\1:@'
-   fi
+  # CAUTION: keep in sync with option parser above
+  prefix="$( http_prefix "$1" )"
+  remainder="$( echo "$1" | sed -e "s@^$prefix@@" )"
+  # add a : into the target name if missing, so that it is easily recognizable as one of our ssh windows.
+  # We don't want to ssh into hosts named 'bash' or similar when using -o after user added more windows to the screen session.
+  if echo "$remainder" | grep -q :; then
+    echo "$remainder"	# unchanged
+  else
+    echo "$remainder" | sed -e 's@^\([^/]*\)@\1:@'
+  fi
 }
 
-expand_hostname()
+expand_target()
 {
-  name=$(colon_target "$1")	# assert that we have a colon in the name
+  name="$( colon_target "$1" )"	# assert that we have a colon in the name
   # if there is no username given as a @ prefix, and we have one from -u, then use it.
   if [ -n "$user" ]; then
     if ! echo "$name" | grep -q @; then
       name="$user@$name"
     fi
   fi
-  
+
   # if the hostname before the : contains no dots, we add the dns_suffix before the :
   if [ -z "$dns_suffix" ]; then
     # nothing to expand
     echo "$name"
   else
     echo "$name" | sed -e "s@\(^[^\.:]*\):@\1$dns_suffix:@"
-  fi 
+  fi
 }
+
+old_targets=""
+# CAUTIION: keep in sync with new_targets loop below.
+if $old_hosts; then
+  for win in $( screen -S "$sessionname" -Q windows ); do
+    if echo "$win" | grep -q : ; then
+      seen=false
+      for target in $targets; do
+        test "$win" = "$( colon_target "$target" )" && seen=true
+      done
+      if ! $seen; then
+        oldtargets="$oldtargets $win"
+      fi
+    fi
+  done
+fi
 
 if $debug; then
   echo "User: $user"
@@ -180,16 +207,17 @@ if $debug; then
   echo "split: $split"
   echo "inputs: $inputs"
   echo "targets: $targets"
-  for t in $targets; do
+  echo "oldtargets: $oldtargets"
+  for t in $targets $oldtargets; do
      echo "    target screen window name: $(colon_target $t)"
-     echo "    expanded scp target :      $(expand_hostname $t)"
+     echo "    expanded scp target :      $(expand_target $t)"
   done
 fi
 
 if ! $no_scp; then
   for input in $inputs; do
     prefix="$(http_prefix "$input" )"
-    tempdir="/tmp/mscp-$$/
+    tempdir="/tmp/mscp-$$/"
     if [ -n "$prefix" ]; then
       # make a temp-folder, download, rename the input
       mkdir -p $tempdir
@@ -202,7 +230,9 @@ if ! $no_scp; then
       fi
       input="$tempdir/$downloaded"
     fi
-    for target in $targets; do
+    for target in $targets $oldtargets; do
+      target="$(expand_target "$target" )"
+      echo "+ scp $input $target"
       scp $input $target
     done
     if [ -n "$prefix" ]; then
@@ -212,3 +242,39 @@ if ! $no_scp; then
   done
 fi
 
+if [ -n "$command" ]; then
+  for target in $targets $oldtargets; do
+    target="$(expand_target "$target" )"
+    echo "+ ssh $target '$command'"
+    ssh $target '$command'
+  done
+fi
+
+
+
+if ! $no_login; then
+  # before adding windows to a screen session, find out, if we already
+  # have a screen session, and which windows (ssh style, with :) are already there.
+  newtargets=""
+  # CAUTIION: keep in sync with old_targets loop above.
+  windows=""
+  for win in $( screen -S "$sessionname" -Q windows ); do
+    if echo "$win" | grep -q : ; then
+      windows="$windows $win"
+    fi
+  done
+  for target in $targets; do
+    seen=false
+    for win in $windows; do
+      test "$win" = "$( colon_target "$target" )" && seen=true
+    done
+    if ! $seen; then
+      newtargets="$newtargets $target"
+    fi
+  done
+
+  # we only need to add theses to the screen session:
+  $debug && echo "new_targets: $newtargets"
+
+  echo "screen ssh not impl."
+fi
