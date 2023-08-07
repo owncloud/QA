@@ -109,6 +109,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
   echo "   OC10_DATADIR=nfs-soft-data	define the data folder. Default: $OC10_DATADIR"
   echo "   OC10_WEBROUTE=/owncloud	define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
+  echo "   OC10_WITH_INDEX_PHP=yes	skip index-php-less config."
   echo "   OC10_ADMIN_PASS='Passw0rd!'	define password for the owncoud addmin acocunt. Default: $admin_pass"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
@@ -510,8 +511,11 @@ occ log:owncloud --enable -vvv
 occ log:manage --level=info -vvv				# info=1, okayis - debug=0, way too much token refresh nonsense.
 # occ config:system:set log_query --value true			# seen in 9.1/admin_manual
 occ config:system:set upgrade.disable-web --value false		# default is false. Just here to make it appear in config.php
-occ config:system:set htaccess.RewriteBase --value "$webroute"	# index.php less setup
-occ maintenance:update:htaccess					# index.php less setup
+
+if [ -z "$OC10_WITH_INDEX_PHP" ]; then
+  occ config:system:set htaccess.RewriteBase --value "$webroute"	# index.php less setup
+  occ maintenance:update:htaccess					# index.php less setup
+fi
 
 echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > oc.crontab
 crontab -u www-data oc.crontab		# only the crontab command triggers a reload.

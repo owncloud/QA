@@ -1,0 +1,214 @@
+#!/bin/sh
+#
+# mscp - copy multiple files into multiple servers connect in a screen session.
+#
+# (C) 2023 jw@owncloud.com, distribute under GPLv2 or ask.
+#
+# v0.1	jw	initial draught
+#
+# CAUTIION: whitespace in input-files or scp-targets does not work.
+
+debug=true
+
+# Default values
+user="$MSCP_DEFAULT_USER"; test -z "$user" && user="root"
+sessionname="mscp"
+dns_suffix="$MSCP_DNS_SUFFIX"
+no_scp=false
+no_login=false
+old_hosts=false
+split=false
+command=""
+
+show_help() {
+  echo "Usage: $(basename "$0") [OPTIONS] [input-files ...] [:] scp-targets ..."
+  echo "Options:"
+  echo "  -u, --user USER         Specify the user. Use -u '' to pass no username to ssh. Default: $user"
+  echo "  -U, --same-user         Same as -u '' -- local ssh config may still apply."
+  echo "  -S, --sessionname NAME  Specify the session name. Default: $sessionname"
+  echo "  -D, --domain-suffix DNS Specify the suffix to be added to dns names. Default from \$MSCP_DNS_SUFFIX"
+  echo "                          This suffix used for scp targets and is inserted before the colon (:) character, if any."
+  echo "  -c, --cmd COMMAND       Run COMMAND via ssh on all target hosts (after copying files, before interactive login)."
+  echo "  -n, --no-scp            Skip scp, just open the screen session."
+  echo "  -N, --no-login          Skip using a screen session, just scp."
+  echo "  -s, --split             View the screen session in horizontal split mode, showing all shells simultaenously."
+  echo "  -o, --old-hosts         Also scp into preexisting connections (ignored with -n)."
+  echo "                          Names of screen windows that contain a colon (:) are added as scp targets."
+  echo "  -h, --help              Show this help message."
+  echo ""
+  echo "$(basename "$0") copies multiple files to multiple hosts via ssh (unless --no-scp is specfied)"
+  echo "Additionally (unless --no-login) it opens (or re-attaches) a screen session with ssh connections to the target hosts."
+  echo "Input files can be specified either as local files and paths, or URLs to be download (locally via wget)"
+  echo "Scp-Targets can be specified as"
+  echo "    [username@]hostname:[path]		# Well known scp syntax. For details, see: man scp'"
+  echo "    http[s]://[username@]hostname...	# URL style. The https:// or http:// prefix is ignored, a trailing ':' is assumed."
+  echo "                                        # A URL ending in / or : is assumed to be a target - otherwise an input."
+  echo "    hostame-prefix[:[path]]             # If a short hostname (not containing '.') is given,"
+  echo "                                        # a dns suffix (see -D above) is added (before the optional ':')."
+  echo "A single character : argument can be inserted in the argument list to explicitly separate between input fils and"
+  echo "scp targets. Otherwise some guesswork is used based on the first occurance of a ':' character in the arguments."
+  echo ""
+  echo "Basic screen usage:"
+  echo " - To cycle through all screen windows (see next ssh target) use: CTRL-A SPACE"
+  echo " - To disconnect from all targets and end the screen session use: CTRL-A : quit ENTER"
+  echo " - To leave (detach from) the screen session use:                 CTRL-A d"
+  echo ""
+}
+
+inputs=""
+targets=""
+colon_seen=false	# remaining arguments are targets
+
+# Option parsing loop
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -u | --user )
+      shift
+      user="$1"
+      ;;
+    -U | --same-user )
+      user=""
+      ;;
+    -S | --sessionname )
+      shift
+      sessionname="$1"
+      ;;
+    -D | --domain-suffix )
+      shift
+      dns_suffix="$1"
+      ;;
+    -c | --cmd | --command )
+      shift
+      command="$1"
+      ;;
+    -n | --no-scp )
+      no_scp=true
+      colon_seen=true
+      # with -n, all arguments are targets.
+      if [ -n "$inputs" ]; then
+        targets="$targets $inputs"
+        inputs=""
+      fi
+      ;;
+    -N | --no-login )
+      no_login=true
+      ;;
+    -o | --old-hosts )
+      old_hosts=true	# FIXME: not sure if this is sane...
+      ;;
+    -h | --help )
+      show_help
+      exit 0
+      ;;
+    :)
+      colon_seen=true
+      # found the explicit input / target separator. Undo any guesswork.
+      if [ -n "$targets" ]; then
+        inputs="$inputs $targets"
+        targets=""
+      fi
+      ;;
+    *)
+      prefix="$(http_prefix "$1" )"
+      remainder="$(echo "$1" | sed -e "s@^$prefix@@")"
+      # for targets, we ignore protocol prefixes http:// https:// as a convenience, so that you can copy/paste URLs more quickly.
+      echo "$remainder" | grep -q : && colon_seen=true
+      # A trailing / on a URL-style target also counts as a colon
+      test -n "$prefix" -a -z "$(echo "$1" | sed -e 's@^.*/@@')" && colon_seen=true
+      if $colon_seen; then
+	targets="$targets $remainder"
+      else
+	inputs="$inputs $1"
+      fi
+      ;;
+  esac
+  shift
+done
+
+test -z "$inputs" && no_scp=true	# nothing to scp
+if [ -z "$targets" ]; then
+  echo "ERROR: no scp / ssh targets given."
+  echo ""
+  show_help
+  echo "ERROR: no scp / ssh targets given."
+  exit 1
+fi
+
+http_prefix()
+{
+  # return http:// or https:// or nothing
+  echo "$1" | sed -ne 's@^\(https\?://\).*@\1@pi'
+}
+
+colon_target()
+{
+   # add a : into the target name if missing, so that it is easily recognizable as one of our ssh windows.
+   # We don't want to ssh into hosts named 'bash' or similar when using -o after user added more windows to the screen session.
+   if echo "$1" | grep -q :; then 
+     echo "$1"	# unchanged
+   else
+     echo "$1" | sed -e 's@^\([^/]*\)@\1:@'
+   fi
+}
+
+expand_hostname()
+{
+  name=$(colon_target "$1")	# assert that we have a colon in the name
+  # if there is no username given as a @ prefix, and we have one from -u, then use it.
+  if [ -n "$user" ]; then
+    if ! echo "$name" | grep -q @; then
+      name="$user@$name"
+    fi
+  fi
+  
+  # if the hostname before the : contains no dots, we add the dns_suffix before the :
+  if [ -z "$dns_suffix" ]; then
+    # nothing to expand
+    echo "$name"
+  else
+    echo "$name" | sed -e "s@\(^[^\.:]*\):@\1$dns_suffix:@"
+  fi 
+}
+
+if $debug; then
+  echo "User: $user"
+  echo "Session Name: $sessionname"
+  echo "DNS suffix: $dns_suffix"
+  echo "command: $command"
+  echo "no_scp: $no_scp"
+  echo "no_login: $no_login"
+  echo "split: $split"
+  echo "inputs: $inputs"
+  echo "targets: $targets"
+  for t in $targets; do
+     echo "    target screen window name: $(colon_target $t)"
+     echo "    expanded scp target :      $(expand_hostname $t)"
+  done
+fi
+
+if ! $no_scp; then
+  for input in $inputs; do
+    prefix="$(http_prefix "$input" )"
+    tempdir="/tmp/mscp-$$/
+    if [ -n "$prefix" ]; then
+      # make a temp-folder, download, rename the input
+      mkdir -p $tempdir
+      (cd $tempdir; wget $input)
+      downloaded=$(ls -A $tempdir)
+      if [ -z "$downloaded" ]; then
+        rmdir $tempdir
+        echo "ERROR: Nothing downloaded: wget $input"
+        exit 1
+      fi
+      input="$tempdir/$downloaded"
+    fi
+    for target in $targets; do
+      scp $input $target
+    done
+    if [ -n "$prefix" ]; then
+      # cleanup the temp folder
+      rm -rf "$tempdir"
+    fi
+  done
+fi
+
