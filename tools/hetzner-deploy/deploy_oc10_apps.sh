@@ -54,7 +54,7 @@ test "$vers" = "7.0.15"   -o "$vers" = "7.0"    && tar=https://attic.owncloud.or
 test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.org/community/daily/owncloud-daily-master.tar.bz2
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
-test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'sqlite'
+test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'pgsql15' or 'sqlite'
 test -z "$OC10_DATADIR" && OC10_DATADIR=data		# must exist. Relative to /var/www/owncloud, if relative.
 
 case $vers in
@@ -107,7 +107,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_FQDN=t3.owncloud.works	set the FQDN. Overrides OC10_DNSNAME."
   echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
-  echo "   OC10_DATABASE=pgsql		define the database type. Default: $OC10_DATABASE"
+  echo "   OC10_DATABASE=pgsql:15	define the database type. Default: $OC10_DATABASE"
   echo "   OC10_DATADIR=nfs-soft-data	define the data folder. Default: $OC10_DATADIR"
   echo "   OC10_WEBROUTE=/owncloud	define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
   echo "   OC10_WITH_INDEX_PHP=yes	skip index-php-less config."
@@ -331,6 +331,7 @@ export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testi
 export HCLOUD_MACHINE_TYPE=$machine_type
 export HCLOUD_NETWORK_NAME=$network
 export HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE
+export OC10_DATABASE=$OC10_DATABASE
 export BROWSER=chrome
 
 if [ "$network" = 'testlab-network' ]; then
@@ -342,7 +343,7 @@ if [ "$network" = 'kerberos.jw-network' ]; then
  ping -c 1 -W 1 ad01.ker-int.jw-qa.owncloud.works > /dev/null && echo "ad01.ker-int.jw-qa.owncloud.works is reachable ..."
 fi
 
-env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute HCLOUD_NETWORK_NAME HCLOUD_MACHINE_TYPE TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
+env_sh_vars="HCLOUD_SERVER_IMAGE oc10_fqdn webroute HCLOUD_NETWORK_NAME HCLOUD_MACHINE_TYPE OC10_DATABASE TEST_SERVER_URL TEST_SERVER_FED_URL BROWSER"
 
 # We almost always assign a DNS name.
 
@@ -367,6 +368,16 @@ mv composer.phar /usr/local/bin/composer	# has prioity over /usr/bin/composer
 #docker pull selenium/standalone-firefox
 #docker pull selenium/standalone-firefox-debug
 #docker pull inbucket/inbucket
+
+if [ "\$OC10_DATABASE" = pgsql:15 ]; then
+  # https://github.com/owncloud/enterprise/issues/5936#issuecomment-1676295161
+  export OC10_DATABASE=pgsql
+  curl -fSsL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /usr/share/keyrings/postgresql.gpg
+  subrepo="\$(. /etc/os-release ; echo \$VERSION_CODENAME)-pgdg main"
+  echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ \$subrepo" | tee /etc/apt/sources.list.d/postgresql.list
+  apt purge postgres	# remove any postgresql-12 packages, otherwise both, 12 and 15 will start together.
+  aptQ update
+fi
 
 # FROM
 # * https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
@@ -406,7 +417,6 @@ if [ -n "\$(php --version | grep 'PHP 8')" ]; then
 fi
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
-aptQ install -y smbclient coreutils ldap-utils postgresql
 aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl
 
 ## external FTP, FTPS storage
@@ -499,10 +509,10 @@ mysql -u root -e "DROP DATABASE owncloud;" 2>/dev/null || true
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES ON owncloud.* TO owncloud@localhost IDENTIFIED BY '$dbpass'"
 
 OC10_DATABASE_HOST=localhost
-test "$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
+test "\$OC10_DATABASE" = pgsql && OC10_DATABASE_HOST=/var/run/postgresql
 
 set -x
-occ maintenance:install --database "$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --data-dir "$OC10_DATADIR" --admin-user "admin" --admin-pass "$admin_pass" || echo "ERROR: occ maintenance:install with $OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
+occ maintenance:install --database "\$OC10_DATABASE"  --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --database-host "\$OC10_DATABASE_HOST" --data-dir "$OC10_DATADIR" --admin-user "admin" --admin-pass "$admin_pass" || echo "ERROR: occ maintenance:install with \$OC10_DATABASE failed, trying sqlite ... " | tee -a ~/POSTINIT.msg
 occ status    || sleep 15	# in case there was an error, let the user study that for a while...
 set +x
 occ status -q || occ maintenance:install --database "sqlite" --database-name "owncloud" --database-user "owncloud" --database-pass "$dbpass" --data-dir "$OC10_DATADIR" --admin-user "admin" --admin-pass "$admin_pass" || { echo "ERROR: occ maintenance:install with sqlite also failed"; exit 1; }
