@@ -7,21 +7,23 @@
 #
 # 2023-05-23, jw@owncloud.com - initial draught
 # 2023-07-20, jw@owncloud.com - added -e
-#
+# 2023-08-15, jw@owncloud.com - -e can now create files.
+
+version = "1.0"
 
 import msgpack
 import sys, os, json
 import shutil, subprocess, tempfile, re     # needed with -e
 
 if len(sys.argv) not in (2, 3, 4) or sys.argv[1] == '-h' or sys.argv[1] == '--help':
-  print("""Usage:
+  print("""mpkq (v%s) Usage:
 
 	%s [ JQ_FILTER ] [ -r ] FILE.mpk
 	%s -e FILE.mpk   # edit the file inplace - leaving a .orig behind.
 
   Examples:
 	mpkq '.\"user.ocis.name\"' -r FILE.mpk
-	mpkq user.ocis.cs.sha1 -r FILE.mpk | tr -d '\\x'""" % (sys.argv[0], sys.argv[0]))
+	mpkq user.ocis.cs.sha1 -r FILE.mpk | tr -d '\\x'""" % (version, sys.argv[0], sys.argv[0]))
 
   sys.exit(1)
 file = sys.argv[-1]
@@ -83,10 +85,14 @@ def find_editor():
   return None
 
 
-json_str = mpk2json(file)
 comments = []
 
 if sys.argv[1] == '-e':
+  if os.path.exists(file):
+    json_str = mpk2json(file)
+  else:
+    json_str = "{\n}\n";
+
   editor = find_editor()
   if editor is None: sys.exit(1)  # cannot edit anything.
 
@@ -133,6 +139,7 @@ if sys.argv[1] == '-e':
 
 else:
 
+  json_str = mpk2json(file)
   try:
     jq_cmd = ["jq"]
     if len(sys.argv) >= 3:
