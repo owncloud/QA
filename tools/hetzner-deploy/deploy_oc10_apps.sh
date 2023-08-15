@@ -497,7 +497,10 @@ su - postgres -c "psql -c \"ALTER SYSTEM SET listen_addresses = '';\""	# no TCP 
 # There is probably an early 'local all all peer' rule, that prevents later md5 rules. Disarm that one first.
 sed -i -e 's/^local\s*all\s*all\s*peer.*/local all all md5/' /etc/postgresql/*/main/pg_hba.conf
 # Add an md5 rule for the owncloud user, so that we can authentiate a user that does not exist in linux with password
-echo "local owncloud owncloud md5" >> /etc/postgresql/*/main/pg_hba.conf
+for hba_file in /etc/postgresql/*/main/pg_hba.conf; do
+  # There may be multiple postgres versions installed simultaneously
+  echo "local owncloud owncloud md5" >> \$hba_file
+done
 service postgresql restart
 su - postgres -c "psql -c 'DROP DATABASE owncloud'" 2>&1 | grep -v 'does not exist'
 su - postgres -c "psql -c 'DROP ROLE     owncloud'" 2>&1 | grep -v 'does not exist'
@@ -667,7 +670,7 @@ for param in \$PARAM; do
   fi
 done
 
-test "$OC10_DATABASE" = pgsql && echo >> ~/POSTINIT.msg 'POSTGRESQL: su - postgres -c "psql -d owncloud"'
+test "\$OC10_DATABASE" = pgsql && echo >> ~/POSTINIT.msg 'POSTGRESQL: su - postgres -c "psql -d owncloud"'
 
 if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
