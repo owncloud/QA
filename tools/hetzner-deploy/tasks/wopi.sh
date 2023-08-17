@@ -39,8 +39,9 @@ occ config:system:set wopi.office-online.server --value 'https://mso.owncloud.wo
 
 # Check for expired certs
 for server in mso.owncloud.works collabora.owncloud-demo.com office.owncloud.works; do
-  echo | openssl s_client -servername $server -connect $server:443 2>/dev/null | openssl x509 -noout -enddate | sed -e "s/notAfter=/Certificate end date: /" -e "s/\$/    $server/"
-  echo | openssl s_client -servername $server -connect $server:443 2>&1 | grep -A1 'verify error' && echo "WOPI: ERROR checking certficate: https://$server" | tee -a
+  echo | timeout 10 openssl s_client -servername $server -connect $server:443 2>/dev/null | openssl x509 -noout -enddate | sed -e "s/notAfter=/Certificate end date: /" -e "s/\$/    $server/"
+  # office.owncloud.works hangs forever today -- need timeout.
+  echo | timeout 10 openssl s_client -servername $server -connect $server:443 2>&1 | grep -A1 'verify error' && echo "WOPI: ERROR checking certficate: https://$server" | tee -a
 done
 
 echo >> ~/POSTINIT.msg "WOPI:  - To check the office-server, run:  occ c:s:get wopi.office-online.server"
