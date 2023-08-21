@@ -64,8 +64,9 @@ case $vers in
     # We switch the default to the new 'problematic' image, but we want to be able to manually override this.
     test -z "$HCLOUD_SERVER_IMAGE" && export HCLOUD_SERVER_IMAGE=ubuntu-22.04
     ;;
-  10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.* )
-    export HCLOUD_SERVER_IMAGE=ubuntu-18.04
+  10.4 | 10.4* | 10.3 | 10.3.* | 10.2 | 10.2.* | 10.1 | 10.1.* )
+    test -z "$HCLOUD_SERVER_IMAGE" && export HCLOUD_SERVER_IMAGE=ubuntu-18.04	# this no longer exists.
+    test -z "$HCLOUD_SERVER_IMAGE" && export HCLOUD_SERVER_IMAGE=debian-10
     ;;
   9* | 8* )
     # Server 8.1 is incompatible with PHP 7.1, debian-9 has PHP-7.0

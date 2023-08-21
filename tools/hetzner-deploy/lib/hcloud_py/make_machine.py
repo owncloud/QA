@@ -171,6 +171,8 @@ def find_image(client, name):
     if i.description == name:
       print("Using image '%s' by descrption, type=%s" % (name, i.type), file=sys.stderr)
       return i
+  print("ERROR: find_image('%s') not found by name or description" % (name), file=sys.stderr)
+
 
 img = find_image(client, args.image)
 
