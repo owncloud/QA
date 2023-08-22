@@ -88,8 +88,13 @@ done
 
 if [ -z "$app_version" ]; then
   echo 1>&2 "ERROR: No release ticket with a version number in QA milestone"
-  echo 1>&2 "Retry with: env RELEASE_ISSUE=nnnn ..."
-  exit 1
+  if [ -z "$2" ]; then
+    echo 1>&2 "Retry with: env RELEASE_ISSUE=nnnn ..."
+    echo 1>&2 "        or: version number as additional parameter"
+    exit 1
+  else
+    app_version="$2"
+  fi
 fi
 
 if $releaseticket_batchmode; then
