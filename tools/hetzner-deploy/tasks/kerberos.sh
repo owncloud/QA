@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# this is not yet a useful script. It is just Juergen's quick run trhough Geralds extensive documentation
+# This is not yet an automated script. It is just Juergen's quick run trhough Geralds extensive documentation
 #
 source ./env.sh		# needed for oc10_fqdn and HCLOUD_NETWORK_NAME
 
