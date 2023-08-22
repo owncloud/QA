@@ -14,8 +14,8 @@ source ./env.sh	# needed for $webroute
 # CAUTION: the client id and secret must be set from within the keycloak admin interface!
 keycloak_realm=owncloud.works
 keycloak_base_url=https://keycloak-20221129.jw-qa.owncloud.works:19443
-keycloak_client_id=openidconnect-220rc6-20221216
-keycloak_client_secret=g6XbJF3raJis7YFB8rXQtrgnWu1qT5X6
+keycloak_client_id=$oc10_fqdn
+keycloak_client_secret=g6XbJF3r____dummy_value____qT5X6
 
 keycloak_url="$keycloak_base_url/realms/$keycloak_realm"
 keycloak_admin_url="$keycloak_base_url/admin/master/console/#/$keycloak_realm"
@@ -51,10 +51,10 @@ service apache2 restart
 cat <<EOF>/var/www/owncloud/config/oidc-keycloak.config.php
 <?php
 // Here, provider-url must have the realm/... path, (unlike kopano)
-// otherwise owncloud explodes in apps/opeindconnect/redirect with 
+// otherwise owncloud explodes in apps/opeindconnect/redirect with
 // "The provider authorization_endpoint could not be fetched. Make sure your provider has a well known configuration available."
 //
-// Without autoprovisioning, keycloak users end up in owncloud with 
+// Without autoprovisioning, keycloak users end up in owncloud with
 // "User with kalice@example.com is not known."
 //
 \$CONFIG = [
@@ -90,7 +90,7 @@ EOF
 
 cat <<EO_AZ_CONF>/var/www/owncloud/config/oidc-azure.config.php.disabled
 // see also: HOWTO/azure-ad.txt
-// 
+//
 <?php
 \$CONFIG = array (
   'http.cookie.samesite' => 'None',
@@ -137,9 +137,38 @@ cat << EOM | sed -e "s/^/openidconnect: /g" >>  ~/POSTINIT.msg
 CAUTION: Written keycloak config with dummy values.
 Please enter this owncloud instance as a client in keycloak.
 The admin interface may be found at $keycloak_admin_url/clients
-Then paste the new client id and secret into o/config/oidc-keycloak.config.php
+ 1) Manage -> Clients -> Create client
+ - Client type:         OpenID Connect
+ - Client ID:           $oc10_fqdn
+ -> Next - Client Authentication: [x] On -> Save
 
-To switch from keycloak to azure, 
+ 2) Client details $oc10_fqdn -> Settings tab - Access Settings
+   - Root URL:                  https://$oc10_fqdn
+   - Home URL:                  https://$oc10_fqdn
+   - Valid redirect URIs:       [*]
+   - Valid post logout redirect URIs:   [+]
+   - Web origins                        [+] [*] -> Save
+
+ 3) Client details $oc10_fqdn -> Roles tab
+  - Create Role - Role name:  [admin] -> Save
+
+ 4) Client details $oc10_fqdn -> Client scopes tab
+  -> Click on [ ] oc10110-20221130.jw-qa.owncloud.works-dedicated
+    Mappers tab -> [Add predefined mapper] -> search: client roles -> [x] client roles -> Add
+    -> Click on [client roles]
+        (Client ID:             $oc10_fqdn
+        Token Claim Name:       [roles] -> Save
+
+ 5) Client details $oc10_fqdn -> Credentials tab
+  -> Client secret -> copy/paste into o/config/oidc-keycloak.config.php
+
+ 6) Client scopes tab -> Click on [ ] $oc10_fqdn -> Scope tab
+      Full Scope Allowed:       [ ] Off
+        [Assign role] -> [x] default-roles-owncloud.works -> Assign
+
+Then paste the new client id (!) and secret into o/config/oidc-keycloak.config.php
+
+To switch from keycloak to azure,
  - fill in variables in o/config/oidc-azure.config.php.disabled
  - mv o/config/oidc-azure.config.php{.disabled,}
  - mv o/config/oidc-keycloak.config.php{,.disabled}
