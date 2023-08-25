@@ -117,12 +117,14 @@ if [ -n "$3" -a $(expr length "$2") -gt 63 ]; then
   short_fqdn="$(echo "$1" | sed -e 's/\./-/g').$(echo "$2" | sed -e 's/^[^\.]*\.//')"
 fi
 
+test -z "$CLOUDFLARE_USER" && CLOUDFLARE_USER=$LOGNAME
+
 if [ "$1" != '-' -a -n "$1" ]; then
-  cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$2"'","content":"'"$1"'","proxied":false}' | jq
+  cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$2"'","content":"'"$1"'","proxied":false,"comment":"owner: '$CLOUDFLARE_USER'"}' | jq
   short_record_id="$(cf_curl GET "$CLOUDFLARE_DNS_API?name=$short_fqdn" | jq '.result[0].id' -r)"
-  if [ -n $short_fqdn ]; then
+  if [ -n "$short_fqdn" ]; then
     test -n "$short_record_id" && cf_curl DELETE $CLOUDFLARE_DNS_API/$record_id >/dev/null 2>&1
-    cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$short_fqdn"'","content":"'"$1"'","proxied":false}' | jq
+    cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$short_fqdn"'","content":"'"$1"'","proxied":false,"comment":"owner: '$CLOUDFLARE_USER'"}' | jq
   fi
 fi
 
