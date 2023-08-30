@@ -6,12 +6,16 @@ Execution date: <br>
 Tester:  <br>
 Context: <br>
 
+---
+
+Tests: 9<br>
+Automated: 1 (11%)
 
 | Title | Steps     | Expected Result | Result | Comments |
 | :---- | :-------- | :-------------- | :----: | :------- |
 |**Download**||||
 | Single not-previewable file | Click on a single file that is not previewable (f. ex, MSOffice file, PDF file...) | Details view is displayed with the download progress bar<br>File downloaded showing the green badge next to the thumbnail<br>`Open with` shown when download finishes<br>`Download success` notification shown when download finishes |  | |
-| Single previewable file | Click on a single file that is previewable (f. ex, image, txt file...) | Progress bar shown and file previewed<br>`Download success` notification shown when download finishes<br>File downloaded showing the green badge next to the thumbnail |  | |
+| Single previewable file | Click on a single file that is previewable (f. ex, image, txt file...) | Progress bar shown and file previewed<br>`Download success` notification shown when download finishes<br>File downloaded showing the green badge next to the thumbnail | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/download.feature) | |
 | Download a big file | Click on a single file which size is greater than 500MB | File is downloaded after showing the progress<br>`Download success` notification shown when download finishes<br>File downloaded showing the green badge next to the thumbnail |  | |
 | Multiple file | 1. Click on a file to enable multiselection mode<br>2. Select several non-downloaded files<br>3. Select download icon on the top (down arrow icon) | Files are downloaded (green badge next to the thumbnail)<br>One notification of success for every downloaded file |  | |
 | Folder with subfolders | 1. Select a folder that contains files and subfolders by long pressing on it<br>2. Click on sync button (circle arrow)  | All files inside (including ones inside subfolders) downloaded showing the green badge next to the thumbnail<br>One notification of success for every downloaded file | | |
