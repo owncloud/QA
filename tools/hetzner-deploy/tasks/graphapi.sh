@@ -11,9 +11,10 @@ cat << EOM | sed -e "s/^/$app: /g" >>  ~/POSTINIT.msg
 Try:
   # exercise the web ui
   base=https://\$oc10_fqdn/index.php
-  curl -s -u admin:admin \$base/apps/graphapi/v1.0/groups               | jq	# list groups
-  curl -s -u admin:admin \$base/apps/graphapi/v1.0/groups/admin/members | jq	# list members of group admin
-  curl -s -u admin:admin \$base/apps/graphapi/v1.0/groups/admin         | jq	# group details
-  curl -s -u admin:admin \$base/apps/graphapi/v1.0/users                | jq	# list users
-  curl -s -u admin:admin \$base/apps/graphapi/v1.0/users/admin          | jq	# user details 
+  cred=admin:\$OC10_ADMIN_PASS
+  curl -s -u \$cred \$base/apps/graphapi/v1.0/groups               | jq	# list groups
+  curl -s -u \$cred \$base/apps/graphapi/v1.0/groups/admin/members | jq	# list members of group admin
+  curl -s -u \$cred \$base/apps/graphapi/v1.0/groups/admin         | jq	# group details
+  curl -s -u \$cred \$base/apps/graphapi/v1.0/users                | jq	# list users
+  curl -s -u \$cred \$base/apps/graphapi/v1.0/users/admin          | jq	# user details
 EOM
