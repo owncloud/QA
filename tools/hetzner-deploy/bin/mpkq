@@ -8,8 +8,9 @@
 # 2023-05-23, jw@owncloud.com - initial draught
 # 2023-07-20, jw@owncloud.com - added -e
 # 2023-08-15, jw@owncloud.com - -e can now create files.
+# 2023-08-31, jw@owncloud.com - diagnostics about keys mixing str and bytes.
 
-version = "1.0"
+version = "1.1"
 
 import msgpack
 import sys, os, json
@@ -41,8 +42,22 @@ def bin_dumper(bin):
 
 def mpk2json(file):
   with open(file, 'rb') as f:
-    # raw=False converts the keys from bytes to strings
-    mpk_dict = msgpack.unpack(f, raw=False)
+    # Bug alert: raw=False should convert the keys from bytes to strings. It does nothing.
+    # Bug alert: raw=True converts all keys to bytes.
+    mpk_dict_raw = msgpack.unpack(f, raw=False)
+    str_count = 0
+    bytes_count = 0
+    mpk_dict = {}
+    for k in mpk_dict_raw:
+        if type(k) == type(b''):
+            bytes_count += 1
+            kk = k.decode()
+        else:
+            str_count += 1
+            kk = k
+        mpk_dict[kk] = mpk_dict_raw[k]
+    if bytes_count > 0 and str_count > 0:
+        print(f"WARNING: mixed keys: {bytes_count} type bytes, {str_count} type str: {mpk_dict_raw.keys()}", file=sys.stderr)
     json_str = json.dumps(mpk_dict, default=bin_dumper, indent=2, sort_keys=True)
     return json_str
 
