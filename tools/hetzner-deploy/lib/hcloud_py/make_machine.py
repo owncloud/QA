@@ -23,7 +23,7 @@
 import os, sys, string, random, base64, hashlib, argparse, subprocess
 
 from hcloud import Client
-from hcloud.hcloud import VERSION as hcloud_version
+from hcloud._client import VERSION as hcloud_version    # was from hcloud.hcloud before. from hcloud.__version__ import VERSION also would work. Sigh.
 from hcloud.images.domain import Image
 from hcloud.ssh_keys.domain import SSHKey
 from hcloud.server_types.domain import ServerType
