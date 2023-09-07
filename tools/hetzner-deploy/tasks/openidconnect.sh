@@ -137,6 +137,8 @@ cat << EOM | sed -e "s/^/openidconnect: /g" >>  ~/POSTINIT.msg
 CAUTION: Written keycloak config with dummy values.
 Please enter this owncloud instance as a client in keycloak.
 The admin interface may be found at $keycloak_admin_url/clients
+ 0) Select Realm: [owncloud.works]
+
  1) Manage -> Clients -> Create client
  - Client type:         OpenID Connect
  - Client ID:           $oc10_fqdn
@@ -162,8 +164,8 @@ The admin interface may be found at $keycloak_admin_url/clients
  5) Client details $oc10_fqdn -> Credentials tab
   -> Client secret -> copy/paste into o/config/oidc-keycloak.config.php
 
- 6) Client scopes tab -> Click on [ ] $oc10_fqdn -> Scope tab
-      Full Scope Allowed:       [ ] Off
+ 6) Client scopes tab -> Click on [ ] $oc10_fqdn-dedicated
+      -> Scope tab -> Full Scope Allowed:       [ ] Off
         [Assign role] -> [x] default-roles-owncloud.works -> Assign
 
 Then paste the new client id (!) and secret into o/config/oidc-keycloak.config.php
