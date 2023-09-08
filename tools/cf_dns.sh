@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# Add or move a DNS record ar cloudflare
+# Add or remove a DNS record at cloudflare
 # References: https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
 #
 # (C) 2021 - jw@owncloud.com
