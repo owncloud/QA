@@ -28,7 +28,7 @@
 
 . ./env.sh	# requires oc10_fqdn
 
-wopi_key="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 10)"
+wopi_key="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 32)"	# min. 32 bytes since 1.8.0
 test -z "$oc10_fqdn" && oc10_fqdn="wopi-$(date +%Y%m%d).jw-qa.owncloud.works"
 occ app:enable wopi	# CAUTION: triggers license grace period!
 occ config:system:set wopi.token.key            --value "$wopi_key"

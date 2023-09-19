@@ -103,19 +103,19 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "To start with no extra apps and no extra files, use: $0 --"
   echo ""
   echo "Environment:"
-  echo "   OC10_DNSNAME=oc1080rc1-DATE	set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
-  echo "   OC10_FQDN=t3.owncloud.works	set the FQDN. Overrides OC10_DNSNAME."
-  echo "   OC10_VERSION=10.8.0-rc1	set the version label. Should match the download url. Default: $vers"
-  echo "   OC10_TAR_URL=...	        define the download url. Default: $tar"
-  echo "   OC10_DATABASE=pgsql:15	define the database type. Default: $OC10_DATABASE"
-  echo "   OC10_DATADIR=nfs-soft-data	define the data folder. Default: $OC10_DATADIR"
-  echo "   OC10_WEBROUTE=/owncloud	define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
-  echo "   OC10_WITH_INDEX_PHP=yes	skip index-php-less config."
-  echo "   OC10_ADMIN_PASS='Passw0rd!'	define password for the owncoud addmin acocunt. Default: $admin_pass"
+  echo "   OC10_DNSNAME=oc1080rc1-DATE		set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
+  echo "   OC10_FQDN=t3.owncloud.works		set the FQDN. Overrides OC10_DNSNAME."
+  echo "   OC10_VERSION=10.8.0-rc1		set the version label. Should match the download url. Default: $vers"
+  echo "   OC10_TAR_URL=...	        	define the download url. Default: $tar"
+  echo "   OC10_DATABASE=pgsql:15		define the database type. Default: $OC10_DATABASE"
+  echo "   OC10_DATADIR=/var/www/nfs-soft-data	define the data folder. Default: $OC10_DATADIR"
+  echo "   OC10_WEBROUTE=/owncloud		define a subdirectory for owncloud. May not work with wopi. Default: $webroute"
+  echo "   OC10_WITH_INDEX_PHP=yes		skip index-php-less config."
+  echo "   OC10_ADMIN_PASS='Passw0rd!'		define password for the owncoud addmin acocunt. Default: $admin_pass"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
   echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
-  echo "   HCLOUD_LOCATION=nbg1		define the compute center location. hel1, fsn1, nbg1. Default: $location"
+  echo "   HCLOUD_LOCATION=nbg1			define the compute center location. hel1, fsn1, nbg1. Default: $location"
   exit 1
 fi
 
@@ -444,9 +444,9 @@ exportfs -a
 showmount -e localhost
 # should now reflect the contents of /etc/exports
 mkdir -p /var/www/owncloud/nfs-{hard,soft}-data
-mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/owncloud/nfs-hard-data	# prone to freezing processes
-mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/owncloud/nfs-soft-data	# prone to data loss
-ls -la /var/www/owncloud/nfs-*-data
+mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/nfs-hard-data	# prone to freezing processes
+mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/nfs-soft-data	# prone to data loss
+ls -la /var/www/nfs-*-data
 # expect to see hello-nfs.txt
 # -> nfs-server.service ( nfs-idmapd.service nfs-mountd.service )
 
