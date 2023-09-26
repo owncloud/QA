@@ -2,6 +2,8 @@
 #
 # 2021-01-26, jw@owncloud.com
 #
+# TODO: add an nginx reverse proxy here. Maybe jsut run bin/nginx_ssl_proxy
+#       or study ./deploy_keycloak.sh
 
 echo "Estimated setup time: 2 minutes ..."
 

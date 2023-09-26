@@ -11,7 +11,7 @@
 #
 #
 # Configure one of our well-known wopi servers.
-# Should work with 
+# Should work with
 # - mso.owncloud.works			- maintained by Dmitry
 # - collabora.owncloud-demo.com(?)	- FIXME: this hangs with "message":"Undefined offset: 0 at \/var\/www\/owncloud\/apps\/wopi\/lib\/Service\/DiscoveryService.php#93"
 # - deepdiver's proxy setup
@@ -44,9 +44,40 @@ for server in mso.owncloud.works collabora.owncloud-demo.com office.owncloud.wor
   echo | timeout 10 openssl s_client -servername $server -connect $server:443 2>&1 | grep -A1 'verify error' && echo "WOPI: ERROR checking certficate: https://$server" | tee -a
 done
 
+
+## No, onlyoffice does not work with our wopi app at all, says Holger.
+# onlyoffice_server=http://$oc10_fqdn:7780
+# ## start a local onlyoffice server, and wait for it.
+# docker run -ti --name=onlyoffice --restart=always -p 7780:80 -e WOPI_ENABLED=true -e JWT_SECRET=$wopi_key -d onlyoffice/documentserver
+# # onlyoffice_server=$(docker inspect onlyoffice | jq .[0].NetworkSettings.IPAddress -r)
+#
+# for i in 1 2 3 4 5 6 7 8 9 0; do
+#   ok=$(docker logs onlyoffice  | grep 'Starting nginx' | grep '\[ OK \]')
+#   if [ -n "$ok" ]; then
+#     for i in 1 2 3 4 5 6 7 8 9 0; do
+#       disco=$(curl "$onlyoffice_server/hosting/discovery")
+#       if [ -n "$disco" ]; then
+#         echo "onlyoffice wopi found at $onlyoffice_server/hosting/discovers"
+#         echo 'oo - discovery!'
+#         break
+#       fi
+#       sleep 2
+#       echo 'oo - discovery?'
+#     done
+#     break
+#   fi
+#   sleep 4
+#   echo 'waiting for onlyofffice server to accept connections ...'
+# done
+# docker logs onlyoffice | tail -20 | sed -e 's/^/ONLYOFFICE: /'
+
 echo >> ~/POSTINIT.msg "WOPI:  - To check the office-server, run:  occ c:s:get wopi.office-online.server"
 echo >> ~/POSTINIT.msg "WOPI:  - For collabora, try: occ c:s:del wopi.proxy.url; occ c:s:set wopi.office-online.server --value 'https://collabora.owncloud-demo.com'"
 echo >> ~/POSTINIT.msg "WOPI:  - For office365, try: cp ~/wopi-office365.config.php o/config/"
+if [ -n "$disco" ]; then
+  echo >> ~/POSTINIT.msg "WOPI:  - For onlyoffice, try: occ c:s:del wopi.proxy.url; occ c:s:set wopi.office-online.server --value '$onlyoffice_server'"
+fi
+
 
 cat << EOF >> ~/wopi-office365.config.php
 <?php
