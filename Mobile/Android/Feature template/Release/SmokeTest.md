@@ -9,8 +9,8 @@
 Test Case | Steps | Expected Result | Result | Related Comment
 | :------ | :---- | :-------------- | :----- | :---------
 | Login Basic (oC10) | Login in an oC10 server, typing correct credentials | Access to account |  | AUTO |
-| Login OAuth2 (oC10)| Login in an OAuth2 server, typing correct OAuth2 credentials | Access to account |  | AUTO |
-| Login OIDC | Login in an oCIS server, typing correct OIDC credentials | Access to account |  | AUTO |
+| Login OAuth2 (oC10)| Login in an OAuth2 server, typing correct OAuth2 credentials | Access to account |  | |
+| Login OIDC | Login in an oCIS server, typing correct OIDC credentials | Access to account |  | |
 | New folder | Open FAB and select to create a new folder with correct name|The folder is created with the correct name|   | [AUTO](https://github.com/owncloud/android-scenario-testing/tree/master/src/test/resources/io/cucumber/createfolder.feature) |
 | Rename | 1. Long press on a folder<br>Select Rename and type new name  |  Folder is renamed with the new name |  | [AUTO](https://github.com/owncloud/android-scenario-testing/tree/master/src/test/resources/io/cucumber/rename.feature) |
 | Move | 1. Long press on a folder<br>2. Select Move, and a new location | Folder is moved to the specified location |  | [AUTO](https://github.com/owncloud/android-scenario-testing/tree/master/src/test/resources/io/cucumber/move.feature) |
