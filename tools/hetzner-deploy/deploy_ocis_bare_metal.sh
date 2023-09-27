@@ -140,7 +140,7 @@ ln -s /etc/ocis/ocis.env env.sh
 ln -s $ocis_data o
 
 rm -f /etc/ocis/ocis.yaml # BUG: --force-overwrite does not work.
-# --insecure is needed to allow th einternal communication between proxy and ocis without certificates.
+# --insecure is needed to allow the internal communication between proxy and ocis without certificates.
 sudo -u ocis ocis init --insecure --force-overwrite --config-path /etc/ocis
 admin_pass="\$(yq -r .idm.service_user_passwords.admin_password /etc/ocis/ocis.yaml)"
 ##
