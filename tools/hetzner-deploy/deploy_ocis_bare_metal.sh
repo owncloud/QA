@@ -21,6 +21,7 @@ echo "Estimated setup time (when weather is fine): 2 minutes ..."
 compose_subdir=deployments/examples/ocis_traefik
 ocis_bin=/usr/bin/ocis
 ocis_data=/var/lib/ocis
+ocis_import=https://raw.githubusercontent.com/esgarov/Daten-Import-in-Ocis/main/ocis-import.py
 
 if [ -z "$OCIS_VERSION" ]; then
 #  export OCIS_VERSION=v1.0.0-rc7
@@ -95,13 +96,14 @@ pip install yq       		# yaml frontend for jq.
 pip install msgpack  		# for mpkq
 pip install boltdb
 
-
 go install go.etcd.io/bbolt/cmd/bbolt@latest   # cli-tool to inspect boltdb files.
 export PATH="$PATH:/root/go/bin"
 echo 'PATH="$PATH:/root/go/bin"' >> ~/.bashrc
 
 wget -O /usr/local/bin/ocis $ocis_url
-chmod +x /usr/local/bin/ocis
+wget -O /usr/local/bin/ocis-import.py $ocis_import
+chmod +x /usr/local/bin/ocis*
+
 
 # Create a service user
 useradd --system --no-create-home --shell=/sbin/nologin ocis
