@@ -7,8 +7,8 @@
 
 ---
  
-| Test Case | Description | Expected | Result | Comments |
-| :-------- | :---------- | :------- | :----: | :------- |
+| Test Case | Steps | Expected Result | Result | Related Comment |
+| :-------- | :---- | :-------------- | :----: | :-------------- |
 |**No Availabiliy**||
 | oC10 server | Authenticate in a oC10 server | No files or folders with the `Open in Web` option available |  |  |  |
 | oCIS server | Authenticate in a oCIS server with `app_providers` capability set to `false` | No files or folders with the `Open in Web` option available |  |  |  |
