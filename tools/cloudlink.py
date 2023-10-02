@@ -3,6 +3,8 @@
 # cloudlink.py - produce a private cloud link from a local file name
 #
 # (C) 2023 jw@owncloud.com - distribute under GPLv2 or ask
+# 
+# v1.1 2023-10-01 -  also handle github checkouts by hackily parsing .git/config
 
 
 import sys, os, re, glob
@@ -77,7 +79,29 @@ def find_syncconfig(path):
     dir = os.path.dirname(dir) 
   return ( dir, [] )     # nothing found.
 
+
+def find_gitrepo(path):
+  fullpath = os.path.realpath(path)
+  dir = os.path.dirname(fullpath)
+  while dir != "/":
+    if os.path.isdir(dir + '/.git'):
+      giturl = f"ERROR: No url = ... in {dir}/.git/config, orphan "
+      for line in open(dir + '/.git/config', 'r').readlines():
+        m = re.match('^\s*url\s*=\s*(.*)\.git\s*$', line);
+        if m:
+          giturl = m.group(1)
+      giturl = re.sub("git@(.*):", "https://\\1/", giturl)
+      return ( dir, [ { "url": giturl } ] )
+    dir = os.path.dirname(dir) 
+  return ( dir, [] )     # nothing found.
+
+
 syncroot, cfgs = find_syncconfig(fullpath)
+if not cfgs:
+  # not in an owncloud sync root. Maybe in a git repo?
+  syncroot, cfgs = find_gitrepo(fullpath)
+
+
 if not cfgs:
   print(f"ERROR: {sys.argv[0]}: could not find a sync root connection for {fullpath}")
   sys.exit(1)
@@ -87,17 +111,20 @@ if not cfgs:
 for cfg in cfgs:
   rest = fullpath[len(syncroot):]
   url = cfg['url']
-  m = re.match("^(\w+)://(.*)", url)
-  if m:
-    url = m.group(1) + "://" + cfg['user'] + "@" + m.group(2)
+  if 'user' not in cfg: # probably from github
+    print(f"\t{url}/blob/master{rest}")
   else:
-    url = "https://" + cfg['user'] + "@" + m.group(2)
-  
-  url = re.sub('/+$', '', url)      # strip trialing slashes
-  dir = os.path.dirname(rest)
-  file = os.path.basename(rest)
-  payload = urlencode({'dir': dir, 'scrollto': file}, quote_via=quote_plus)
-  print(f"\t{url}/index.php/apps/files?{payload}")
+    m = re.match("^(\w+)://(.*)", url)
+    if m:
+      url = m.group(1) + "://" + cfg['user'] + "@" + m.group(2)
+    else:
+      url = "https://" + cfg['user'] + "@" + m.group(2)
+    
+    url = re.sub('/+$', '', url)      # strip trialing slashes
+    dir = os.path.dirname(rest)
+    file = os.path.basename(rest)
+    payload = urlencode({'dir': dir, 'scrollto': file}, quote_via=quote_plus)
+    print(f"\t{url}/index.php/apps/files?{payload}")
 
 print("")
   

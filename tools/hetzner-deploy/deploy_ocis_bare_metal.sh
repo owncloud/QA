@@ -228,6 +228,7 @@ for i in \$(seq 1 10); do
     echo "########################### CF_DNS.msg ###########################"
     cat ~/CF_DNS.msg
     echo "########################### ---------- ###########################"
+    sleep 5	# give DNS some time to get in syn...
     break
   fi
   sleep 10
