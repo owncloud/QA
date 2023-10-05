@@ -21,11 +21,12 @@ echo "Estimated setup time: 5 minutes ..."
 
 vers=10.12.2
 vers=10.13.1
+vers=10.13.2-beta.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.13.2-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231004.tar.bz2
 test "$vers" = "10.13.1"  -o "$vers" = "10.13"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230906.tar.bz2
-test "$vers" = "10.13.1-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20230901.tar.bz2
 test "$vers" = "10.13.0"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230822.tar.bz2
 test "$vers" = "10.12.2"  -o "$vers" = "10.12"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230606.tar.bz2
 test "$vers" = "10.12.1"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230415.tar.bz2
@@ -114,6 +115,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_ADMIN_PASS='Passw0rd!'		define password for the owncoud addmin acocunt. Default: $admin_pass"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
+  echo "   HCLOUD_SERVER_IMAGE=debian-12	try with a php-8.1 system."
   echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
   echo "   HCLOUD_LOCATION=nbg1			define the compute center location. hel1, fsn1, nbg1. Default: $location"
   exit 1
@@ -410,10 +412,11 @@ esac
 php --version
 if [ -n "\$(php --version | grep 'PHP 8')" ]; then
   echo ""
-  echo "ERROR: ownCloud does not run on PHP 8"
+  echo "Warning: ownCloud does not run on PHP 8"
   echo "Check if '\$(lsb_release -d -s)' is covered in $0"
   echo ""
-  exit 1
+  echo "Press Enter to remove the version checks from lib/base.php and try anyway..."
+  read a
 fi
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
@@ -462,6 +465,14 @@ echo "+ curl -L $tar | tar jxf -"
 curl -L $tar | tar jxf - || exit 1
 chown -R www-data. owncloud
 # chmod a+x owncloud/tests/acceptance/run.sh	# in case we want to run some acceptance tests here.
+
+if [ -n "\$(php --version | grep 'PHP 8')" ]; then
+  echo "Removing the php 8 version checks from lib/base.php -- good luck! ..."
+  echo "(integrity checker will complain about this modification)"
+  sleep 5
+  (set -x; sed -ie 's@exit@// exit@' /var/www/owncloud/lib/base.php)
+  sleep 5
+fi
 
 cat <<EOCONF > /etc/apache2/sites-available/owncloud.conf
 Alias $webroute "/var/www/owncloud/"
