@@ -329,6 +329,7 @@ export DEBIAN_FRONTEND=noninteractive	# try prevent ssh install to block wit whi
 export LC_ALL=C LANGUAGE=C
 aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
+
 export EMAIL_HOST=localhost
 export TEST_SERVER_URL=https://\$oc10_fqdn
 export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=$admin_pass ... works, but not mentioned in the docs.
@@ -422,7 +423,8 @@ if [ -n "\$(php --version | grep 'PHP 8')" ]; then
 fi
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
-aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl
+aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl python3-pil
+
 
 ## external FTP, FTPS storage
 aptQ install -y pure-ftpd  # not used. We use the local ssh-server
