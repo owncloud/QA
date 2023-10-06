@@ -1,4 +1,4 @@
-### Share with oC
+#### Deep Links
 
 
 **Server(s)**: <br>
@@ -68,5 +68,5 @@
 | Non existing item | 1. Get deep link of any file or folder<br>2. Delete or move the item from its original location<br>3. Open the link in a device | File or folder does not exist anymore, correct error message about unknown item |   |   |
 | Space not available | 1. In an oCIS server, disable an space<br>2. Get deep link of a file or folder inside the space | Item not opened, correct error message about unknown item |  |  |
 | Account not attached | Get deep link of a file or folder in an account that is not attached to the device | Item not opened, correct error message about unknown item |  |  |
-| App not installed | Get deep link of a non-cached file or folder in an account | Opened in browser |  |  |
+
 
