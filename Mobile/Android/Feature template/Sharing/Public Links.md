@@ -11,7 +11,7 @@ Context: <br>
 ---
 
 Tests: 31
-Automated: 10
+Automated: 11
  
 | Test Case | Steps | Expected | Result | Related Comment / Defect | 
 | :-------- | :---- | :------- | :----: | :----------------------- | 
@@ -19,7 +19,7 @@ Automated: 10
 | Create link file |  1. Select a file from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Save | Check that link is listed in the share view. Check that the file in the file list of the app includes the link icon. Check in web that the link was created | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature) |  |
 | Create link folder |  1. Select a folder from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Save | Check that link is listed in the share view. Check that the folder in the file list of the app includes the link icon. Check in web that the link was created | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature) |  |
 | Multiple links | 1. Select an item from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` to create several links on the item<br>4. Save<br> repeat 3. and 4. 10 times to create 10 links over the same item | Check that all created links are listed in the share view. Check in web that the link list was created |  |  |
-| Link name | 1. Select an item from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Add a name to the link, different of the default one, including special characters<br>5. Save | Check in web that the link was created with correct name |  |  |
+| Link name | 1. Select an item from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Add a name to the link, different of the default one, including special characters<br>5. Save | Check in web that the link was created with correct name | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature) |  |
 | Password | 1. Select an item from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Enable `Password` and add new password<br>5. Save<br>6. Click on the chain icon to copy the link to the clipboard and paste it in a browser| 5. Check in web that the link was created with password enabled<br>6. Link is opened in the browser and password is asked | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature) |  |
 | Expiration | 1. Select an item from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Enable `Expiration` and add date<br>5. Save | Check in web that the link was created with expiration date enabled with the correct date| [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature)
 | **From web** |   |  |
