@@ -21,10 +21,11 @@ echo "Estimated setup time: 5 minutes ..."
 
 vers=10.12.2
 vers=10.13.1
-vers=10.13.2-beta.1
+vers=10.13.2-rc.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.13.2-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231005.tar.bz2
 test "$vers" = "10.13.2-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231004.tar.bz2
 test "$vers" = "10.13.1"  -o "$vers" = "10.13"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230906.tar.bz2
 test "$vers" = "10.13.0"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230822.tar.bz2
@@ -115,8 +116,8 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   OC10_ADMIN_PASS='Passw0rd!'		define password for the owncoud addmin acocunt. Default: $admin_pass"
   echo "   HCLOUD_SERVER_IMAGE=ubuntu-18.04	to use an old php-7.2 base system."
   echo "   HCLOUD_SERVER_IMAGE=debian-10	to use an old php-7.3 base system."
-  echo "   HCLOUD_SERVER_IMAGE=debian-12	try with a php-8.1 system."
-  echo "   HCLOUD_MACHINE_TYPE=ccx11		to use a machine with dedicated CPUs."
+  echo "   HCLOUD_SERVER_IMAGE=debian-12	try with a php-8.2 system."
+  echo "   HCLOUD_MACHINE_TYPE=ccx33		to use a machine with 8 dedicated CPUs."
   echo "   HCLOUD_LOCATION=nbg1			define the compute center location. hel1, fsn1, nbg1. Default: $location"
   exit 1
 fi
@@ -251,6 +252,7 @@ h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-date
 d_name=$(echo $h_name  | sed -e "s/date/$(date +%Y%m%d)/i")
 
+machine_type=$HCLOUD_MACHINE_TYPE
 if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
   machine_type=cx11
   # cx11: 20 GB

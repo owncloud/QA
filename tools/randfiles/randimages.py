@@ -18,11 +18,11 @@ if len(sys.argv) < 2 or sys.argv[1] == '-h' or sys.argv[1] == '--help':
     print(f"""
 randimages V{VERSION} Usage:
 
-	{sys.argv[0]} SOURCE.png [N] [PREFIX]
+        {sys.argv[0]} SOURCE.png [N] [PREFIX]
 
 Parameters:
-	SOURCE.png - an existing to uses as source material.
-	N	   - an optional image count. Default: {imgcount}
+        SOURCE.png - an existing to uses as source material.
+        N	   - an optional image count. Default: {imgcount}
         PREFIX     - output image name prefix, may be specified as a full path. Default: "{prefix}"
 
 Creates a number of small random snippets from the named SOURCE.png image and ((by default) places them in the current folder.
