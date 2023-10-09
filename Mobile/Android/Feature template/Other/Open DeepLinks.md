@@ -23,4 +23,6 @@
 | Subdomain host | 1. Create a link over a host with subdomain (like `cloud.owncloud.com`) <br>3. Open the link from outside the app | App is opened |  |  |
 | Subfolder host | 1. Create a link over a host with subfolder (like `mydomain.com/owncloud`) <br>3. Open the link from outside the app | App is opened |  |  |
 |**Other**|||
+| App without accounts | 1. Create a link over an existing host<br>2. Remove all accounts from the app<br>3. Open the link from outside the app | Redirected to login view with error message:  |  |  |
+| Incorrect format | 1. Create a link with an incorrect format like `oc://android.oc.com/12345/6789`<br>2. Open the link from outside the app | Correct error message: |  |  |
 | App not installed | 1. Create a link over an existing host<br>2. Uninstall the app | Opened in browser |  |  |
