@@ -1,6 +1,8 @@
 #! /bin/sh
 #
 # This is not yet an automated script. It is just Juergen's quick run trhough Geralds extensive documentation
+# TODO: run all the tests mentioned in:
+# - https://doc.staging.owncloud.com/server/next/admin_manual/enterprise/authentication/kerberos.html
 #
 source ./env.sh		# needed for oc10_fqdn and HCLOUD_NETWORK_NAME
 
