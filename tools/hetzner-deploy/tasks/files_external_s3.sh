@@ -6,19 +6,27 @@
 #  - https://github.com/scality/cloudserver#readme
 #  - https://s3-server.readthedocs.io/en/latest/
 #
+# TODO: deprecate setup_16.x, use deb package: https://github.com/nodesource/distributions
+#
 # CAUTION: keep in sync with files_primary_s3 and objectstore
 
 # source ./env.sh	# probably not needed.
 
-cat << EOF > ~/.s3cfg
+secret="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 32)"
+if [ -f ~/.s3cfg ]; then
+  # may be already there...
+  secret=$(sed -ne 's@secret_key\s*=\s*@@p' ~/.s3cfg)
+else
+  cat << EOF > ~/.s3cfg
 [default]
 access_key = owncloud
-secret_key = owncloud
+secret_key = $secret
 host_base = localhost:8000
 host_bucket = %(bucket).localhost:8000
 signature_v2 = False
 use_https = False
 EOF
+fi
 
 if [ ! -x ~/nodesource_setup.sh ]; then
   ## update 2022-03-18: Node.js 10.x is no longer actively supported!
@@ -74,7 +82,7 @@ else
         "shortid": "123456789012",
         "keys": [{
             "access": "owncloud",
-            "secret": "owncloud"
+            "secret": "$secret"
         }]
     }]
 }
@@ -102,7 +110,7 @@ success=$?
 
 occ app:enable files_external_s3
 
-occ files_external:create /s3-bucket files_external_s3 amazons3::accesskey -c bucket=oc-external -c hostname=localhost -c port=8000 -c use_ssl=0 -c use_path_style=0 -c key=owncloud -c secret=owncloud
+occ files_external:create /s3-bucket files_external_s3 amazons3::accesskey -c bucket=oc-external -c hostname=localhost -c port=8000 -c use_ssl=0 -c use_path_style=0 -c key=owncloud -c secret=$secret
 
 s3cmd put /var/www/owncloud/data/owncloud.log s3://oc-external/logs/oc.log
 s3cmd put ~/env.sh s3://oc-external/env.sh.txt

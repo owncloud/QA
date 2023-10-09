@@ -7,13 +7,18 @@
 #  - https://s3-server.readthedocs.io/en/latest/
 #  - Hints for using a dockerized ceph instead: https://github.com/owncloud/core/pull/40389#issue-1388808146
 #
+# TODO: deprecate setup_16.x, use deb package: https://github.com/nodesource/distributions
+#
 # CAUTION: keep in sync with files_external_s3 and objectstore
 
 # source ./env.sh	# probably not needed.
 
 secret="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 32)"
-
-cat << EOF > ~/.s3cfg
+if [ -f ~/.s3cfg ]; then
+  # may be already there...
+  secret=$(sed -ne 's@secret_key\s*=\s*@@p' ~/.s3cfg)
+else
+  cat << EOF > ~/.s3cfg
 [default]
 access_key = owncloud
 secret_key = $secret
@@ -22,6 +27,7 @@ host_bucket = %(bucket).localhost:8000
 signature_v2 = False
 use_https = False
 EOF
+fi
 
 ## Caution: Keep in sync with s3cfg and authdata.json above
 cat <<EOF > /var/www/owncloud/config/s3primary.config.php
