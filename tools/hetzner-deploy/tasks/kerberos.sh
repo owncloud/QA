@@ -397,6 +397,10 @@ Create a keytabfile at windows:
 Cmd:
 	ktpass /princ HTTP/$oc10_fqdn@$ker_realm /mapuser krb5httpoc +rndPass /out $keytab_name /crypto all /ptype KRB5_NT_PRINCIPAL /mapop set
 
+CAUTION: 
+ - Documentation uses a different crypto setting: ... -crypto AES256-SHA1 ...
+ - Documentation says: Note that the parameter crypto is according the Microsoft documentation recommended to be set.
+
 check matching logon name in the delegation user (automatic?):
      krb5httpoc -> properties -> account -> User logon name
 	HTTP/$oc10_fqdn
