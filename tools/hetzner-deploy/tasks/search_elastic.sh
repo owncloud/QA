@@ -70,8 +70,8 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 
 # choose a version seen in https://github.com/elastic/elasticsearch/branches
 # Check for latest image https://hub.docker.com/_/elasticsearch/tags
-# img=docker.elastic.co/elasticsearch/elasticsearch:7.17.9	# latest known es7
-img=docker.elastic.co/elasticsearch/elasticsearch:8.6.2	# try es8 ?
+img=docker.elastic.co/elasticsearch/elasticsearch:7.17.9	# latest known es7
+# img=docker.elastic.co/elasticsearch/elasticsearch:8.6.2	# try es8 ? -> fails with "Cannot connect"
 
 
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
@@ -87,7 +87,7 @@ network.host: 0.0.0.0
 discovery.type: single-node
 EOC
 # don't do this for es:8, there the module is auto-enabled.
-echo "$img" | grep -q "elasticsearch:7" && echo "ingest.attachment.enabled: true" >> $config_file
+#echo "$img" | grep -q "elasticsearch:7" && echo "ingest.attachment.enabled: true" >> $config_file
 chmod -R 777 $config_dir		# phew...
 
 ## We cannot easily persist the entire config_dir, there are many files and subfolders needed in there...
@@ -99,6 +99,8 @@ opts="-v $plugin_dir:$plugin_dir -v $config_file:$config_file -e discovery.type=
 if $use_authentication; then
   opts="$opts -e xpack.security.enabled=true -e ELASTIC_PASSWORD=$elastic_pass"
 fi
+
+opts="$opts -e ingest.attachment.enabled=true"	# elastic7 also explodes when this is in the config_file
 
 if [ "$elastic_proto" = "https" ]; then
   # we don't have an ssh.key yet, this will cause an error, but only after the config_dir inside docker is initialized.

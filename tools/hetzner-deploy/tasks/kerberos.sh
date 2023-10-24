@@ -115,6 +115,7 @@ Setup Documentation:
 - https://github.com/GeraldLeikam/tutorials/
 - https://confluence.owncloud.com/display/~gleikam/Tutorials
 - https://github.com/owncloud/kerberos/issues/21#issuecomment-1620367912
+- https://github.com/owncloud/windows_network_drive/issues/446
 
 Overview:
 - Windows AD server + WND server (can be on the same machine, started from the sysprep win2022 snapshot).
