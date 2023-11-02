@@ -13,7 +13,6 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 ### QA
 
 - [ ] Create **QA** Milestone and set the description to $version
-- [ ] Move tickets from milestone `development` to `qa` (testplan and tickets mentioned in release ticket)
 - [ ] Create release branch with the format "release-$version"
 - [ ] Create "$version Testplan" ([QA templates](https://github.com/owncloud/QA/tree/master/Server) or [Enterprise](https://github.com/owncloud/qa-enterprise/tree/master/Core))
 - [ ] copy new/reopened issues from the previous release ticket as 'Issues to review' below.
@@ -25,7 +24,6 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Marketing
 
-- [ ] Ping @owncloud/marketing
 - [ ] Update https://confluence.owncloud.com/display/PROD/Upcoming+Releases
 - [ ] Request a screenshot if the app is new or changed fundamentally
 
@@ -64,9 +62,9 @@ All actions to be done on the release branch (`git pull; git checkout -b release
 ### Publishing
 
 - [ ] Upload tarball to marketplace (see handbook in confluence for details)
-- [ ] Publish tarball for customers  - [old 10](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Enterprise%2FownCloud-10), [old 10.0](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Server%2FownCloud-10.0) and [new portal](https://portal.owncloud.com/apps/files/?dir=/Portal%20Data/All%20Account%20Data/ownCloud%20Enterprise%20Resources%20Data/Server&fileid=5661) (see [handbook](https://confluence.owncloud.com/display/OG/Releasing+Apps) for details)
-- [ ] Send mail to release-coordination with link to this ticket and to the changelog
-- [ ] Copy email to rocket chat `#updates` channel
+- [ ] Publish tarball for customers `github/owncloud/QA/tools/portal_upload_app.sh` - [old 10](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Enterprise%2FownCloud-10), [old 10.0](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Server%2FownCloud-10.0) and [new portal](https://portal.owncloud.com/apps/files/?dir=/Portal%20Data/All%20Account%20Data/ownCloud%20Enterprise%20Resources%20Data/Server&fileid=5661) (see [handbook](https://confluence.owncloud.com/display/OG/Releasing+Apps) for details)
+- [ ] Send mail to release-coordination with link to this ticket and to the changelog `github/owncloud/QA/tools/release/oc_release.sh app:status`
+- [ ] Copy email to rocket chat `#updates` channel (`remove all `https://` to avoid auto-expansions.)
 
 ### Post-release
 
