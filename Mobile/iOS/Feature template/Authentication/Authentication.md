@@ -54,14 +54,21 @@ Context:
 |**Redirections**||||||
 | 301 | 1. Enter an URL that points to 301 redirection<br>2. `Approve`<br>3. Complete the authentication process | 1. `Review connection` dialog displayed, showing the target URL<br>2. Redirection followed to the new location. New Location displayed in login view<br>3. Account added and listed using the target URL |  |  |  
 
-#### Account options
+
+#### Authentication parameters
 
 [Reference](https://github.com/owncloud/ios-app/blob/11074347386021d2bd222aee4efa14810cf93f70/doc/CONFIGURATION.json#L771-L784)
 
-| Option | Value | Expected | Result | Related Comment / Defect  | 
-| :----- | :---- | :------- | :----: | :------------------------ | 
-| branding.can-add-account | false | `+` button hidden in downside of sidebar menu | | 
-| branding.can-edit-account | false | `Edit` option hidden when long pressing over account header in side bar menu | | 
+| Parameter | Value  | Result | Related Comment / Defect  | 
+| :---- | :----- | :----- | :-----------------------  |
+| branding.organization-name | Any string |  | Name of the app in the welcome string and sidebar menu top |
+| branding.app-name | Any string |  | Name of the app in the welcome string and sidebar menu top, overriding `branding.organization-name` |
+| branding.profile-bookmark-name | Any string|  | Default name for bookmarks in authentication process|
+| branding.profile-url | Any oC URL |  | URL to attach, should be valid |
+| branding.can-edit-account | boolean | | `Edit` option hidden/displayed when long pressing over account header in sidebar menu | | 
+| branding.profile-allow-url-configuration | boolean |  | In edit account menu, it determines whether URL is editable or not |
+| branding.can-add-account | boolean | | `+` button hidden/displayed in downside of sidebar menu | | 
+
 
 #### Branding assets
 
@@ -83,9 +90,54 @@ Clean build folder after every execution
 
 #### Branding theme colors
 
-| Asset | Value  | Result | Related Comment / Defect  | 
+| Parameter | Value  | Result | Related Comment / Defect  | 
 | :---- | :----- | :----- | :-----------------------  |
 | tint-color | Color hex value |  | Topbar items, 3-dot button, button background...
 | branding-background.png | Color hex value |  | Background of welcome view and background of icon in sidebar. Works when no background image is set|
+| setup-status-bar-style | white |  | upper status bar (hour, battery...)
+| setup-status-bar-style | black |  | upper status bar (hour, battery...)
+| folder-icon-color | Color hex value |  | tinting of folder icon in list
 
 
+
+Example of basic branding file:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>branding.organization-name</key>
+		<string>Hello Cloud</string>
+		<key>branding.profile-allow-url-configuration</key>
+		<string>false</string>
+		<key>branding.profile-bookmark-name</key>
+		<string>cloud</string>
+		<key>branding.profile-url</key>
+		<string>demo.owncloud.com</string>
+		<key>branding.theme-colors</key>
+			<dict>
+				<key>tint-color</key>
+				<string>#ff0000</string>
+				<key>branding-background-color</key>
+				<string>#0ff0f0</string>
+				<key>setup-status-bar-style</key>
+				<string>black</string>
+				<key>folder-icon-color</key>
+				<string>#ff0000</string>
+				<key>file-icon-color</key>
+				<string>#AA83E1</string>
+			</dict>
+		<key>branding.theme-definitions$[0].darkBrandColor</key>
+		<string>#5BB75B</string>
+		<key>branding.theme-definitions$[0].lightBrandColor</key>
+		<string>#ff00ff</string>
+		<key>branding.theme-definitions$[0].cssRecords</key>
+		<array>
+			<string>brand.background.fill: #ff0000</string>
+			<string>modal.accountSetup.statusBarStyle: darkContent</string>
+		</array>
+
+	</dict>
+</plist>
+```
