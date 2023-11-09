@@ -1,6 +1,6 @@
 # `files_primary_s3` Test Plan
 
-<a href="https://github.com/owncloud/QA/edit/master/Server/Test_plan_files_primary_s3.md">Template</a>
+<a href="https://github.com/owncloud/QA/edit/master/Server/Test_Plan_files_primary_s3.md">Template</a>
 
 ## Setup
 <details><summary>Setup details (click to view)</summary>
@@ -35,7 +35,6 @@ Have a primary storage configured for all files in the system (Scality or Ceph p
 | Check that activity is correctly recorded. | No errors found.                         | :construction: |                 |
 | Set logging level to INFO. Check that user file actions are logged by admin audit. | Actions are logged correctly.            | :construction:  |                 |
 | Using the URL provided by user1: 1. enter the link.(without being logged in, use a different browser or have the cache cleaned) 2. Upload an existing file. | You can choose between cancel the upload and renaming the file. |  :construction:  |                 |
-| **Known issues from the past**           |                                          |                |                 |
 | As admin user create a user "user1" and share a folder "SHARED" with "user1". As "user1" upload some files to root folder. Favorite them, add comments and tags. Move those files into "SHARED" folder received from admin user. | FileID should be kept after moving to a shared folder as recipient. All metadata must still be there, favorites, comments and tags. | :construction: |                 |
 | As admin user upload a file bigger than 5GB using web ui. | File can be uploaded, finishing correctly joining the chunks without problems. | :construction: |                 |
 | As admin user connect desktop client and sync a file bigger than 5GB. | File can be uploaded, finishing correctly joining the chunks without problems. | :construction:  |                 |
