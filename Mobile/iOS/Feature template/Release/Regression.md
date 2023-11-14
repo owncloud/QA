@@ -26,26 +26,26 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
  
 | Test Case | Steps | Expected Result | Result | Related Comment
 | :-------- | :---- | :-------------- | :----: | :------------- |
-|**Basic Auth**||||||
-| Basic auth http | 1. Type an correct URL to the app with http and basic auth | 2. Host certificate is there. Credentials are asked  |   |  |
-| Basic auth https | 1. Type an correct URL to the app with https and basic auth | 2. Host certificate is there, asked from approval. Credentials are asked  |   |  |
-| Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>Type correct credentials | File list accesible |   |  |
-| Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>Type wrong credentials | Error |   |  |
-| Redirection 301 | 1. Type an correct URL to a sever with 301 redirection<br>Type correct credentials | File list accesible |   |  |
-| Redirection 302 | 1. Type an correct URL to a sever with 302 redirection<br>Type correct credentials | File list accesible |   |  |
-| LDAP | 1. Type an correct URL to the app agains LDAP server<br>Type correct credentials | File list accesible |   |  |
+|**Basic Auth**||||
+| Basic auth http | Type an correct URL to the app with http and basic auth | Host certificate is there. Credentials are asked  |   |  |
+| Basic auth non secure https | Type an correct URL to the app with https and basic auth | Host certificate is there, asked from approval. Credentials are asked  |   |  |
+| Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>2. Type correct credentials<br>3. Add name to the bookmark | Account list displayeed including the new account with bookmark name |   |  |
+| Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>2. Type wrong credentials | Error: `Authorization failed` |   |  |
+| Red 301 | 1. Enter an URL that points to 301 redirection<br>2. `Approve`<br>3. Complete the authentication process | 1. `Review connection` dialog displayed, showing the target URL<br>2. Redirection followed to the new location. New Location displayed in login view<br>3. Account added and listed using the target URL |  |  |  
 | **OAuth2** |   |  |
-| Log in correct | Log in OAuth2 server with correct credentials | Login correct. Files view displayed |
-| Log in incorrect | Log in OAuth2 server with incorrect credentials | Correct error message, Login not succeded |
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed (check in BD) and user keep on using the app |
-| Remove token | 1. After being logged, remove token in server side | App detects inline the lack of authenthication and prompts the user to continue online or sign in again  |
+| Correct credentials | 1. Enter correct credentials in OAuth2 view (browser)<br>2. Add name to the account (optional)| Account added and listed |  |  | 
+| Cancel OAuth2 Login | 1. Enter correct credentials in OAuth2 view (browser)<br>2. Cancel authentication process in browser| Moved to login view |  |  |
+| Renewal OAuth2 token | 1. Enter correct credentials in browser and authorize<br>2. Wait till token expires (default 1h)<br>3. Perform any operations in the list of files | Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called |
+| Revoke OAuth2 token (oC10) |1. Enter correct credentials in browser and authorize<br>2. Revoke the iOS token<br>3. Perform any operation in list of files<br>4. Click on `Sign In` and enter correct credentals | 3. Error in list of files: `Access denied`<br>4. List of files displayed again. |  |  |
+| Logout  | 1. Complete authentication/authorization process in a OAuth
 | **OIDC** |   |  |
-| Log in correct | Log in OIDC server with correct credentials | Login correct. Files view displayed |
-| Log in incorrect | Log in OIDC server with incorrect credentials | Correct error message, Login not succeded |
-| Refresh token | Wait until token expires and perform some actions | Token is refreshed and user keep on using the app |
-| Logout | Logout in a open and active OIDC session | Moved to login view| | |
-| **Login view** |   |  |
-| One account | Enter correct credentials of an account | Login correct. One account view displayed with all sections: Display name, access files, edit login, manage storage, log out, settings, add account |
+| Correct credentials | 1. Enter correct credentials in OIDC view (browser)<br>2. Add name to the account (optional)| Account added and listed |  |  | 
+| Cancel OIDC Login | 1. Enter correct credentials in OIDC view (browser)<br>2. Cancel authentication process in browser| Moved to login view |  |  |
+| Cancel OIDC Authorizaton | 1. Enter correct credentials in browser<br>3. Cancel process in authorization view | Moved to login view |  |  |
+| Renewal OIDC token | 1. Enter correct credentials in browser and authorize<br>2. Wait till token expires (default 1h)<br>3. Perform any operations in the list of files | Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called |
+| Revoke OAuth2 token |1. Enter correct credentials in browser and authorize<br>2. Revoke the iOS token<br>3. Perform any operation in list of files<br>4. Click on `Sign In` and enter correct credentals | 3. Error in list of files: `Access denied`<br>4. List of files displayed again. | NA | No way|
+| **Accounts view (sidebar)** |   |  |
+| One account | 1. Enter correct credentials of an account<br>2. Long press over the account pill | One account view displayed with all sections: Display name, access files, edit login, manage storage, log out, settings, add account |
 | More than one account | Enter correct credentials of two accounts | Login correct. List view displayed with all accounts. Swiping: Edit login, manage storage, delete |
 | Edit credentials | 1. Enter correct credentials of one account<br>2. In server, change password<br>3. Select Edit login<br>4. Enter new credentials | Login correct |
 | Edit name basic | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited |
@@ -62,7 +62,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked and differences are displayed (they can be hidden)  |  |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked. In Settings > Certificate, it appears as auto approved  |   |  |
-| Theme | 1. Select Dark<br>2. Select Classic<br>3. Select Light<br>4. Select System | All themes are correcly saved and displayed in file list |  |  |
+| Theme | 1. Select Dark<br>2. Select Light<br>3. Select System Light<br>4. Select System Dark<br>5. Select System | All themes are correcly saved and displayed in file list |  |  |
 | Delete unused | 1. Set Delete unused copies to 1 minute<br>2. Download two files | After 1 minute, local copies are removed (download icon appears again the row on the file list) | |  |
 | Show hidden | 1. Enable setting "show hidden files"<br>2. In web, create a file of folder that stars with .<br>3. Disable the setting| 2. Item displayed in app<br>3. Item not displayed|  |  |
 | Show folders at the top | 1. Enable setting "show folders at the top"<br>2. Disable setting "show folders at the top"| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files|  |  |
@@ -106,6 +106,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Sort Type | Sort the file list by type  | Grouped by type |  |  |
 | Sort Size | Sort the file list by size  | Biggest on the top |  |  |
 | Sort Date | Sort the file list by date  | Newest on the top |  |  |
+| Sort last used | Sort the file list by last used  | Recently used on the top |  |  |
 | Sort Shared | Sort the file list by shared  | Shared on the top |  |  |
 |**Clipboard**||||||
 | Copy file same account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in the same account | Correctly copied. Notification indicating the number of copied items |   |
@@ -201,7 +202,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Add to av. offline | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder inside the av. offline folder | Content copied/moved is now av. offline | | |
 | Displace av. offline file | 1. Set a file as av. offline<br>2. Move the file to another location that is not av. offline| File is av. offline in the new location | | |
 | Displace from av. offline folder | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder from the av. offline folder to another location that is not av. offline| Content copied/moved is not av. offline anymore | | |
-|**Files App**| **2 auth methods** |||||
+|**Files App**|  |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |  |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
 | Browse Basic | Open an ownCloud Files app location | Content is correctly displayed | |  |
@@ -244,9 +245,9 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error |  | |
 | Target folder deleted | Select Move/Copy of an item in Files app<br>Before submitting the operation, remove the target folder using another client or device  | Correct error |  | |
 |**Private Share**||||||
-| Share with a user | Open Share<br>Type a correct user name<br>Select user | Sharees list updated with the user |   |  |
-| Share with a group | Open Share<br>Type a correct group name<br>Select group | Group list updated with the user. Check that every user in the group can access the file |  |  |
-| Permissions | 1. Open Share<br>2. Type a correct user name<br>3. Select user<br>4. Revoke "Can Edit and Change" permission | Share is created with the correct permissons (check in web UI) |  |  |
+| Share with a user | 1. Open Sharing<br>2. Invite<br>3. Type a correct user name<br>4. Select user<br>5. Select Viewer permission and Invite | Sharees list updated with the user |   |  |
+| Share with a group | 1. Open Sharing<br>2. Invite<br>3. Type a correct group name<br>4. Select group<br>5. Select Viewer permission and Invite| List updated with the group. Check that every user in the group can access the file |  |  |
+| Permissions | 1. Open Sharing<br>2. Invite<br>3. Type a correct user name<br>4. Select user<br>5. Select Editor permission and Invite| Share is created with the correct permissons (check in web UI) |  |  |
 | Edit | 1. Using a created share, modify permissions (grant new permissions and revoke existing permissions)| Share is updated with the correct permissons (check in web UI) |  |  |
 | Delete | Delete an existing share by swiping left in the list of shares| Share is removed (check in web UI) |  |  |
 |**Public Link**||||||
