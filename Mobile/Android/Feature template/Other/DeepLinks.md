@@ -39,6 +39,7 @@
 | Non Root-No Preview-Non Downloaded oCIS (custom) | 1. Get deep link of any file without preview that is not downloaded in non-root folder of oCIS' custom space with upload permissions<br>2. Click the link in the device | App is opened, file downloaded and file content is displayed |  |  |
 |**Folders - Single Account**|||||||
 | Root oC10 | 1. Get deep link of a folder in root<br>2. Click the link in the device | App is opened and folder content displayed |  |  |
+| Space Root oCIS | 1. Get deep link of a space (oCIS)<br>2. Click the link in the device | App is opened and root folder of the space displayed |  |  |
 | Root oCIS personal | 1. Get deep link of a folder in root of Personal (oCIS)<br>2. Click the link in the device | App is opened and folder content displayed |  |  |
 | Root oCIS custom | 1. Get deep link of a folder in root of custom space (oCIS)<br>2. Click the link in the device | App is opened and folder content displayed |  |  |
 | Non-root - Not Discovered oC10 | 1. Get deep link of a folder in non-root (not discovered)<br>2. Click the link in the device | App is opened and folder content displayed |  |   |
