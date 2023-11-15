@@ -14,7 +14,20 @@
 #   Library Error: error:0A00010B:SSL routines::wrong version number
 #     fix: use http://localhost:9200 (instead of https://)
 #
+#
+# Alternative to bare-metal:
+#  - full blown docker compose including ollabora and onlyoffice:
+#    - cd ~/src/github/owncloud/ocis/deployments/examples/ocis_wopi/; git pull
+#    - edit .env there, and add a random string to WOPI_JWT_SECRET=.... - everything can remain at default values.
+#    - entrypoint is the https://ocis.owncloud.test domain, but certificates fail unless
+#      manually accepted for https://onlyoffic.owncloud.test and https://collabora.owncloud.test - then wopi works.
+#    - if not both icons for only onlyoffice and collabora show up in the context menu of a file, then
+#      docker-compose restart ocis-appprovider-collabora
+#      docker-compose restart ocis-appprovider-onlyoffice
+#
 # 2023-05-23, jw@owncloud.com
+# 2023-11-15, jw@owncloud.com
+#
 
 echo "Estimated setup time (when weather is fine): 2 minutes ..."
 
