@@ -85,11 +85,14 @@ INIT_SCRIPT <<EOF
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#install-and-configure-the-infinite-scale-binary
 
+
 export DEBIAN_FRONTEND=noninteractive    # try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
 apt -y install apache2
 apt -y install certbot python3-certbot-apache	# ubuntu 22.04 has certbot 1.21.0 - DEPRECATED. use pip install certbot
 
+# Needed on debian 12 to avoid "error: externally-managed-environment"
+export PIP_BREAK_SYSTEM_PACKAGES=1
 # apt -y install augeas-tools	# dependency of pip install certbot
 # pip install certbot		# version 2.6.0 seen 2023-05-23
 pip install yq       		# yaml frontend for jq.
@@ -100,6 +103,8 @@ go install go.etcd.io/bbolt/cmd/bbolt@latest   # cli-tool to inspect boltdb file
 export PATH="$PATH:/root/go/bin"
 echo 'PATH="$PATH:/root/go/bin"' >> ~/.bashrc
 
+# Check if this is an arm64 device. E.g. raspberry
+test "$(uname -m)" = aarch64 && ocis_url=$(echo "$ocis_url" | sed -e 's/-amd64/-arm64/')
 wget -O /usr/local/bin/ocis $ocis_url
 wget -O /usr/local/bin/ocis-import.py $ocis_import
 chmod +x /usr/local/bin/ocis*
@@ -121,7 +126,7 @@ chown -R ocis:ocis /etc/ocis
 cat <<EOT>> /etc/ocis/ocis.env
 OCIS_URL=https://$BASE_DOMAIN
 ocis_fqdn=$BASE_DOMAIN
-OCIS_VERSION_STRING=\$(ocis version | grep -i version)
+OCIS_VERSION_STRING=\$(ocis version | grep -i version | sed -e 's/^version:\s*//i')
 PROXY_HTTP_ADDR=0.0.0.0:9200
 PROXY_TLS=false
 OCIS_INSECURE=false
@@ -139,9 +144,11 @@ OCIS_CONFIG_DIR=/etc/ocis
 OCIS_BASE_DATA_PATH=$ocis_data
 EOT
 ln -s /etc/ocis/ocis.env env.sh
-ln -s $ocis_data o
+ln -s $ocis_data ~/o
 
-rm -f /etc/ocis/ocis.yaml # BUG: --force-overwrite does not work.
+# service ocis stop
+rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.
+rm -rf $ocis_data/*		# needed for init to also re-init ldap credentials
 # --insecure is needed to allow the internal communication between proxy and ocis without certificates.
 sudo -u ocis ocis init --insecure --force-overwrite --config-path /etc/ocis
 admin_pass="\$(yq -r .idm.service_user_passwords.admin_password /etc/ocis/ocis.yaml)"
@@ -287,6 +294,14 @@ cat <<EOM >> ~/POSTINIT.msg
 # Restart after editing /etc/ocis/ocis.env:  systemctl restart ocis
 # View the ocis server logs:                 journalctl -f -u ocis
 # Examine the ocis data folder:              tree -fF $ocis_data | sed -e 's@ [^ ]*\\(/../\\)\$@\\1@'
+
+# example to reset admin password:
+  sudo -u ocis bash
+  source ~/env.sh
+  export OCIS_BASE_DATA_PATH OCIS_CONFIG_DIR
+  ocis idm resetpassword
+    Resetting password for user 'uid=admin,ou=users,o=libregraph-idm'.
+    Enter new password:
 
 ---------------------------------------------
 EOM
