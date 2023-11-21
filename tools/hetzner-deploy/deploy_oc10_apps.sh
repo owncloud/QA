@@ -19,13 +19,14 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
-vers=10.12.2
-vers=10.13.2-rc.1
-vers=10.13.2
+vers=10.13.3-rc.2
+vers=10.13.3
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
-test "$vers" = "10.13.2"  -o "$vers" = "10.13"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231009.tar.bz2
+test "$vers" = "10.13.3"  -o "$vers" = "10.13"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231121.tar.bz2
+test "$vers" = "10.13.3-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231117.tar.bz2
+test "$vers" = "10.13.2"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231009.tar.bz2
 test "$vers" = "10.13.2-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231005.tar.bz2
 test "$vers" = "10.13.2-beta.1"                 && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231004.tar.bz2
 test "$vers" = "10.13.1"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20230906.tar.bz2
@@ -435,6 +436,7 @@ aptQ install -y sshfs 	   # for /mnt/sftp mount, which is then unused.
 ftppass=ftp${RANDOM}data
 deluser ftpdata 2>/dev/null && true
 echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""
+echo "ftpdata password: $ftppass"
 mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
 touch /home/ftpdata/.ssh/authorized_keys
 echo "Hello, world!" >  /home/ftpdata/data/hello.txt
