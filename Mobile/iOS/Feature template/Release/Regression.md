@@ -44,7 +44,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Cancel OIDC Authorizaton | 1. Enter correct credentials in browser<br>3. Cancel process in authorization view | Moved to login view |  |  |
 | Renewal OIDC token | 1. Enter correct credentials in browser and authorize<br>2. Wait till token expires (default 1h)<br>3. Perform any operations in the list of files | Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called |
 | Revoke OAuth2 token |1. Enter correct credentials in browser and authorize<br>2. Revoke the iOS token<br>3. Perform any operation in list of files<br>4. Click on `Sign In` and enter correct credentals | 3. Error in list of files: `Access denied`<br>4. List of files displayed again. | NA | No way|
-| **Accounts view (sidebar)** |   |  |
+| **Accounts view (sidebar)** |  Review |  |
 | One account | 1. Enter correct credentials of an account<br>2. Long press over the account pill | One account view displayed with all sections: Display name, access files, edit login, manage storage, log out, settings, add account |
 | More than one account | Enter correct credentials of two accounts | Login correct. List view displayed with all accounts. Swiping: Edit login, manage storage, delete |
 | Edit credentials | 1. Enter correct credentials of one account<br>2. In server, change password<br>3. Select Edit login<br>4. Enter new credentials | Login correct |
@@ -52,53 +52,54 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Edit name oauth2 | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited |
 | Manage storage | 1. Enter correct credentials of one account<br>2. Download some files by clicking on them<br>3. In login view, select Manage Storage<br>4. Delete all offline files | All downloaded files are removed (download icon is again visible)|
 |**Settings**||||||
-| Passcode 4 digit | 1. Enable passcode<br>2. Select 4 digit<br>3. Set a code<br>4. Close app and open again| 4-digit passcode asked |  |  |
-| Passcode 6 digit | 1. Enable passcode<br>2. Select 6 digit<br>3. Set a code<br>4. Close app and open again| 6-digit passcode asked |  |  |
-| Passcode Files App| 1. Enable passcode and set a code<br>2. Close app and open Files App| Passcode asked (check with 4 and 6 digits) |  |  |
-| Passcode removed | 1. Disable passcode<br>2. Close app and open again| Passcode not asked |  |  |
-| Face ID | 1. Enable Face ID (it must be enrolled in device)<br>2. Close app and open again| Face ID asked |  |  |
-| Face ID removed | 1. Disable Face ID<br>2. Close app and open again| Face ID not asked. Passcode asked |  |  |
-| Face ID failing | 1. Enable Face ID<br>2. Close app and open again, making Face ID fail<br>3. Unlock using passcode<br>4. Open app again | Face ID not asked. Passcode asked |  |  |
-| Lock | 1. Enable passcode lock<br>2. Set lock after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
+| Passcode 4 digit | 1. Enable `Passcode Lock`<br>2. Select `4 digit code`<br>3. Set a code by entering twice<br>4. Don't use Face ID<br>5. Close app and open again| 4-digit passcode asked |  |  |
+| Passcode 6 digit | 1. Enable `Passcode Lock`<br>2. Select `6 digit code`<br>3. Set a code by entering twice<br>4. Don't use Face ID<br>5. Close app and open again| 6-digit passcode asked |  |  |
+| Passcode Files App| 1. Enable `Passcode Lock` and set a code<br>2. Close app and open Files App. selecting an ownCloud account | Passcode asked (check with 4 and 6 digits) |  |  |
+| Passcode removed | 1. Disable `Passcode lock`<br>2. Close app and open again| Passcode not asked anymore |  |  |
+| Face ID | 1. Enable `Face ID` (it must be enrolled in device and passcode enabled in advance)<br>2. Close app and open again| Face ID asked |  |  |
+| Face ID removed | 1. Disable `Face ID`<br>2. Close app and open again| Face ID not asked.<br> Passcode asked |  |  |
+| Face ID failing | 1. Enable `Face ID`<br>2. Close app and open again, making Face ID fail<br>3. Unlock using passcode<br>4. Open app again | Face ID not asked.<br> Passcode asked |  |  |
+| Lock | 1. Enable `Passcode lock<`br>2. Set lock application after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked and differences are displayed (they can be hidden)  |  |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked. In Settings > Certificate, it appears as auto approved  |   |  |
 | Theme | 1. Select Dark<br>2. Select Light<br>3. Select System Light<br>4. Select System Dark<br>5. Select System | All themes are correcly saved and displayed in file list |  |  |
-| Delete unused | 1. Set Delete unused copies to 1 minute<br>2. Download two files | After 1 minute, local copies are removed (download icon appears again the row on the file list) | |  |
-| Show hidden | 1. Enable setting "show hidden files"<br>2. In web, create a file of folder that stars with .<br>3. Disable the setting| 2. Item displayed in app<br>3. Item not displayed|  |  |
-| Show folders at the top | 1. Enable setting "show folders at the top"<br>2. Disable setting "show folders at the top"| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files|  |  |
-| Prevent gestures enabled | 1. Enable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions work |  |  |
-| Prevent gestures disabled | 1. Disable setting "Prevent gestures"<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions are not posible |  |  |
-| Streaming enabled | 1. Enable setting "Streaming"<br>2. Open a video file| Video is played and not downloaded. Cloud icon remains in the item in list of files |  |  |
-| Streaming disabled | 1. Disable setting "Streaming"<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files |  |  |
-| Media upload HEIC > JPG | 1. Enable setting "Convert HEIC to JPG"<br>2. Upload an HEIC file| File is saved as JPG |  |  |
-| Media upload MP4 | 1. Enable setting "Convert videos to MP4"<br>2. Upload video file in MOV format| Video is saved as MP4 |  |  |
-| Media upload Preserve original name enabled | 1. Enable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format IMG_xxxx |  |  |
-| Media upload Preserve original name disabled | 1. Disable setting "Preserve original media file names"<br>2. Upload a picture| Picture is saved with format Photo-timestamp_xxxx|  |  |
-| Media upload Prefer unedited (IAP) | 1. Enable setting "Prefer unedited"<br>2. With photos app, edit a picure with some filters...<br>3. Upload a picture| Picture is saved with out changes, in original version|  |  |
-| Media upload Prefer RAW (IAP) | 1. Enable setting "Prefer RAW"<br>2. With a photo app like Halide, take a RAW picture<br>3. Upload the picture<br>4. Disable "Prefer RAW" and repeat| 3. Upload in DNG format<br>4. Upload in JPG|  |  |
-| Media upload original videos | 1. Enable setting "Prefer original videos"<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable "Prefer original video" and repeat| 3. Uploaded original video<br>4. Uploaded edited video|  |  |
-| Documentation | Open Documentation Section  | Documentation web is opened |  |   |
-| Help | Open Help Section  | Help web is opened |  |  |
-| Send feedback | Open Send feedback section | feedback mail is opened|  |  |
-| Recommend | Open Recommend section | recommend mail is opened|  |  |
-| Privacy policy | Open Privacy policy section | privacy policy is opened|  |  |
-| Acknowledgement | Open Acknowledgement section | Acknowledgement is opened|  |  |
+| Delete unused | 1. Set `Delete unused copies` to 1 minute<br>2. Download two files | After 1 minute, local copies are removed (download icon appears again in the row on the file list) | |  |
+| Show hidden | 1. Enable setting `Show hidden files`<br>2. In web, create a file of folder that stars with `.`<br>3. Disable the setting| 2. Item displayed in file list<br>3. Item not displayed in file list|  |  |
+| Show folders at the top | 1. Enable setting `Show folders at the top`<br>2. Disable setting `Show folders at the top`| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files|  |  |
+| Prevent gestures disabled | 1. Disable setting `Prevent gestures`<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions are not posible to do |  |  |
+| Streaming enabled | 1. Enable setting `Streaming`<br>2. Open a video file| Video is played and not downloaded. Cloud icon remains in the item in list of files |  |  |
+| Streaming disabled | 1. Disable setting  `Streaming`<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files |  |  |
+| Media upload HEIC > JPG | 1. Enable setting  `Convert HEIC to JPG`<br>2. Upload an HEIC file| File is saved as JPG |  |  |
+| Media upload MP4 | 1. Enable setting `Convert videos to MP4`<br>2. Upload video file in MOV format| Video is saved as MP4 |  |  |
+| Media upload Preserve original name enabled | 1. Enable setting `Preserve original media file names`<br>2. Upload a picture| Picture is saved with format `IMG_xxxx` |  |  |
+| Media upload Preserve original name disabled | 1. Disable setting `Preserve original media file names`<br>2. Upload a picture| Picture is saved with format `Photo-timestamp_xxxx`|  |  |
+| Media upload Prefer unedited (IAP) | 1. Enable setting `Prefer unedited`<br>2. With Photos app, edit a picure with some filters<br>3. Upload a picture| Picture is saved without changes, in original version|  |  |
+| Media upload Prefer RAW (IAP) | 1. Enable setting `Prefer RAW`<br>2. With a Photo app like `Halide`, take a RAW picture<br>3. Upload the picture<br>4. Disable `Prefer RAW` and repeat| 3. Uploaded in DNG format<br>4. Uploaded in JPG format |  |  |
+| Media upload original videos | 1. Enable setting `Prefer original videos`<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable `Prefer original video` and repeat| 3. Uploaded original video<br>4. Uploaded edited video|  |  |
+| Documentation | Click on `Documentation`  | Documentation web is opened |  |   |
+| Help | Click on `Help`  | Help web is opened |  |  |
+| Send feedback | Click on `Send feedback` | feedback mail is opened|  |  |
+| Recommend | Click on `Recommend` | Recommend mail is opened|  |  |
+| Privacy policy | Click on `Privacy policy` | Privacy policy is opened|  |  |
+| Acknowledgement | Click on `Acknowledgement` | Acknowledgement is opened|  |  |
 | App version | 1. Click on the App version cell<br>2. Paste in a text editor  | 1. Copied to clipboard<br>2. Information correctly pasted |  |  |
 |**Item Actions**||||||
-| Create folder | In (+) menu of the list of files, select create folder | Correctly created |   |  |
-| Open In | Open a file in a 3rd party app | Correctly downloaded and sent |   |  |
-| Copy file | Copy a file to another location | Correctly copied |  | |
-| Copy folder| Copy a folder to another location | Correctly copied |  |  |
-| Move file | Move a file to another location | Correctly moved |  |  |
-| Move folder| Move a folder to another location | Correctly moved |  |  |
-| Duplicate file | Duplicate a file to another location | Correctly duplicated |  |  |
-| Duplicate folder| Duplicate a folder to another location | Correctly duplicated |  |  |
-| Rename file | Rename a file | Correctly renamed |  |  |
-| Rename folder| Rename a folder  | Correctly renamed |  |  |
-| Delete file | Delete a file | Correctly deleted |  |  |
-| Delete folder| Delete a folder  | Correctly deleted |  |  |
-| Favorite file | Open the card of a file and click the favorite star | File is favorited (check in server) |  |  |
-| Unfavorite file | Open the card of a favorited file and click the favorite star | File is unfavorited (check in server) |  |  |
+| Create folder | 1. In (+) menu of the list of files, select `Create folder`<br>2. Add a correct name | Folder correctly created |   |  |
+| Open In | 1. Open 3-dot-button menu of a file in the list and select `Open In`<br>2. Open the file in a 3rd party app | File downloaded and sent to the app |   |  |
+| Copy file - destination | 1. Open 3-dot-button menu of a file in the list and select `Copy`<br>2. `Choose destination directory...`<br>3. Select a correct location | File copied to the chosen location|  | |
+| Copy folder - destination | 1. Open 3-dot-button menu of a folder with subfolders in the list and select `Copy`<br>2. `Choose destination directory...`<br>3. Select a correct location | Folder and subfolders copied to the chosen location|  | |
+| Copy file - clipboard | 1. Open 3-dot-button menu of a file in the list and select `Copy`<br>2. `Copy to Clipboard`<br>3. Browse to another location<br>4. In the 3-dot-button of top right corner, select `Paste` | File pasted to the chosen location|  | |
+| Copy folder - clipboard | 1. Open 3-dot-button menu of a folder with subfolders in the list and select `Copy`<br>2. `Copy to Clipboard`<br>3. Browse to another location<br>4. In the 3-dot-button of top right corner, select `Paste` | Folder and subfolders pasted to the chosen location|  | |
+| Move file | 1. Open 3-dot-button menu of a file in the list and select `Move`<br> 2. Select a correct location | File moved to the chosen location |  |  |
+| Move folder | 1. Open 3-dot-button menu of a folder with subfolders in the list and select `Move`<br>2. Select a correct location | Folder and subfolders moved to the chosen location |  |  |
+| Duplicate file | Open 3-dot-button menu of a file in the list and select `Duplicate` | File duplicated in same location adding `(1)` to the name|  |  |
+| Duplicate folder | Open 3-dot-button menu of a folder with subfolders in the list and select `Duplicate` | Folder duplicated in same location adding `(1)` to the name|  |  |
+| Rename file | 1. Open 3-dot-button menu of a file in the list and select `Rename`<br> 2. Enter a new name | File renamed |  |  |
+| Rename folder | 1. Open 3-dot-button menu of a folder in the list and select `Rename`<br> 2. Enter a new name | Folder renamed |  |  |
+| Delete file | 1. Open 3-dot-button menu of a file in the list and select `Delete`<br> 2. Confirm deletion | File deleted from list |  |  |
+| Delete folder | 1. Open 3-dot-button menu of a folder with subfolders in the list and select `Delete`<br> 2. Confirm deletion | Folder and subfolders deleted from list |  |  |
+| Favorite item (oC10) |1. Open the card of any item and click the favorite star | File is favorited (check in server) |  |  |
+| Unfavorite item (oC10)  | 1. Open the card of a favorited item and click the favorite star | File is unfavorited (check in server) |  |  |
 | Sort Date | Sort the file list by date  | Newest on the top |  |  |
 | Sort A-Z | Sort the file list by A-Z  | A on the top |  |  |
 | Sort Z-A | Sort the file list by Z-A  | Z on the top |  |  |
@@ -108,7 +109,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Sort Date | Sort the file list by date  | Newest on the top |  |  |
 | Sort last used | Sort the file list by last used  | Recently used on the top |  |  |
 | Sort Shared | Sort the file list by shared  | Shared on the top |  |  |
-|**Clipboard**||||||
+|**Clipboard**| Review |||||
 | Copy file same account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in the same account | Correctly copied. Notification indicating the number of copied items |   |
 | Copy file another account | 1. Select to copy a file<br>2. Copy to Clipboard<br>3. Paste in another location in other oC account | Correctly copied. Notification indicating the number of copied items |   |
 | Copy file another location | 1. Select to copy a folder<br>2. Copy to Clipboard<br>3. Paste in another location (not oC) | Correctly copied. Notification indicating the number of copied items |   |
@@ -118,16 +119,16 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Cut item same account | 1. Cut any item<br>2. Paste to another location in the same account | Correctly pasted. Notification indicating the number of cut items |   |
 | Cut item another account/location| 1. Cut any item<br>2. Paste to another location  | Correctly pasted. Notification indicating the number of cut items | NA  | Not supported yet
 |**Multiselection**||||||
-| Open In files | Open several files in a 3rd party app | Correctly downloaded and sent |  |  |
-| Open In folder | Open several folders in a 3rd party app | Not posible |   |  |
-| Copy file | Copy several files to another location | Correctly copied |   |  |
-| Copy folder| Copy several folders to another location | Correctly copied |   |  |
-| Move file | Move several files to another location | Correctly moved |   |  |
-| Move folder| Move several folders to another location | Correctly moved |   |  |
-| Duplicate file | Duplicate several files to another location | Correctly duplicated |   |  |
-| Duplicate folder| Duplicate several folders to another location | Correctly duplicated |   |  |
-| Delete file | Delete several files | Correctly deleted |   |  |
-| Delete folder| Delete several folders  | Correctly deleted |   |  |
+| Open In files | 1. Click on multiselection indicator<br>2. Select several files (not folders<br>3. Select `Open In` on the bottom side<br>4. Select app to send, like `Mail`| 3. All files downloaded<br>4. Files attached to mail |  |  |
+| Open In folder | 1. Click on multiselection indicator<br>2. Select several folders | `Open In` not available in the bottom bar action list |   |  |
+| Copy file | 1. Click on multiselection indicator<br>2. Select some files<br>3. Select `Copy` on the bottom side<br>3. Select `Choose destination...`<br>4. Select a correct location | All files copied to the chosen location |   |  |
+| Copy folder | 1. Click on multiselection indicator<br>2. Select some folders<br>3. Select `Copy` on the bottom side<br>3. Select `Choose destination...`<br>4. Select a correct location | All folders copied to the chosen location |   |  |
+| Move file | 1. Click on multiselection indicator<br>2. Select some files<br>3. Select `Move` on the bottom side<br>3. Select a correct location | All files moved to the chosen location |   |  |
+| Move folder | 1. Click on multiselection indicator<br>2. Select some folders<br>3. Select `Move` on the bottom side<br>3. Select a correct location | All folders moved to the chosen location |   |  |
+| Duplicate file | 1. Click on multiselection indicator<br>2. Duplicate several files to another location | Correctly duplicated |   |  |
+| Duplicate folder| 1. Click on multiselection indicator Duplicate several folders to another location | Correctly duplicated |   |  |
+| Delete file | 1. Click on multiselection indicator Delete several files | Correctly deleted |   |  |
+| Delete folder| 1. Click on multiselection indicator Delete several folders  | Correctly deleted |   |  |
 |**Upload & Download**||||||
 | Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
 | Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
