@@ -47,13 +47,11 @@ openssl rsa -noout < "$SSL_KEY_FILE" -passin pass:none -check || exit 1
 # 140358091203904:error:06065064:digital envelope routines:EVP_DecryptFinal_ex:bad decrypt:../crypto/evp/evp_enc.c:610:
 # 140358091203904:error:0906A065:PEM routines:PEM_do_header:bad decrypt:../crypto/pem/pem_lib.c:461:
 
-openssl x509 -noout < local_cert.crt -enddate -checkhost localhost -checkip 127.0.0.1
+openssl x509 -noout < $SSL_CERT_FILE -enddate -subject
 ## expected output:
 # notAfter=Apr 24 10:18:36 2022 GMT
-echo "|Expected output (don't worry):"
-echo "| Hostname localhost does match certificate"
-echo "| IP 127.0.0.1 does match certificate"
-openssl x509 -noout < local_cert.crt -checkend 86400 >/dev/null || echo " ===== WARNING: Certificate epxires within 24h ===="
+# subject=CN = collabora-20231123.jw-qa.owncloud.works
+openssl x509 -noout < $SSL_CERT_FILE -checkend 86400 >/dev/null || echo " ===== WARNING: Certificate epxires within 24h ===="
 
 
 test -f dhparam.pem || curl -s https://ssl-config.mozilla.org/ffdhe2048.txt > dhparam.pem
