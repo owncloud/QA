@@ -27,8 +27,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Test Case | Steps | Expected Result | Result | Related Comment
 | :-------- | :---- | :-------------- | :----: | :------------- |
 |**Basic Auth**||||
-| Basic auth http | Type an correct URL to the app with http and basic auth | Host certificate is there. Credentials are asked  |   |  |
-| Basic auth non secure https | Type an correct URL to the app with https and basic auth | Host certificate is there, asked from approval. Credentials are asked  |   |  |
+| Basic auth http | 1. Type an correct URL to the app with http and basic auth | Host certificate is there. Credentials are asked  |   |  |
+| Basic auth non secure https | 1. Type an correct URL to the app with https and basic auth | Host certificate is there, asked from approval. Credentials are asked  |   |  |
 | Basic auth right credentials | 1. Type an correct URL to the app with basic auth<br>2. Type correct credentials<br>3. Add name to the bookmark | Account list displayeed including the new account with bookmark name |   |  |
 | Basic auth wrong credentials | 1. Type an correct URL to the app with basic auth<br>2. Type wrong credentials | Error: `Authorization failed` |   |  |
 | Red 301 | 1. Enter an URL that points to 301 redirection<br>2. `Approve`<br>3. Complete the authentication process | 1. `Review connection` dialog displayed, showing the target URL<br>2. Redirection followed to the new location. New Location displayed in login view<br>3. Account added and listed using the target URL |  |  |  
@@ -46,7 +46,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Revoke OAuth2 token |1. Enter correct credentials in browser and authorize<br>2. Revoke the iOS token<br>3. Perform any operation in list of files<br>4. Click on `Sign In` and enter correct credentals | 3. Error in list of files: `Access denied`<br>4. List of files displayed again. | NA | No way|
 | **Accounts view (sidebar)** |  Review |  |
 | One account | 1. Enter correct credentials of an account<br>2. Long press over the account pill | One account view displayed with all sections: Display name, access files, edit login, manage storage, log out, settings, add account |
-| More than one account | Enter correct credentials of two accounts | Login correct. List view displayed with all accounts. Swiping: Edit login, manage storage, delete |
+| More than one account | 1. Enter correct credentials of two accounts | Login correct. List view displayed with all accounts. Swiping: Edit login, manage storage, delete |
 | Edit credentials | 1. Enter correct credentials of one account<br>2. In server, change password<br>3. Select Edit login<br>4. Enter new credentials | Login correct |
 | Edit name basic | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited |
 | Edit name oauth2 | 1. Enter correct credentials of one account and set a name<br>2. Select Edit login<br>3. Enter new name<br>4. Save | Account name edited |
@@ -130,60 +130,57 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Delete file | 1. Click on multiselection indicator Delete several files | Correctly deleted |   |  |
 | Delete folder| 1. Click on multiselection indicator Delete several folders  | Correctly deleted |   |  |
 |**Upload & Download**||||||
-| Upload photo in root | Select "Upload from photo library"<br>Select one pic| File is uploaded in root folder |  |  |
-| Upload photo in non-root | Select "Upload from photo library" in a non-root folder<br>Select one pic| File is uploaded in non-root folder|  |  |
-| Upload video in root | Select "Upload from photo library"<br>Select one video| File is uploaded in root folder |  | |
-| Upload video in non-root | Select "Upload from photo library" in a non-root folder<br>Select one video| File is uploaded in non-root folder|  | |
-| Upload a bunch of files | Select "Upload from  Files in a non-root folder<br>Select a huge amount of files (~300)| All files are uplaoded |  | |
-| Restrict uploads to None |In Device Settings > ownCloud > Photos, Select "None"<br>Try to upload a picture from albums| Not allowed, error displayed | | |
-| Restrict upload to Selected I |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were not selected in previous step| Not allowed, error displayed | | |
-| Restrict upload to Selected II |In Device Settings > ownCloud > Photos, Select "Selected Photos"<br>Try to upload a picture from albums that were selected in previous step| Pics uplaoded | | |
-| Download file in non-root | Tap on a single file | File is downloaded in non-root folder. Download icon disappears|  | |
-| Download big file in root | Tap on a single file | File is downloaded in root folder. Download icon disappears| | |
-| Download several files | Tap on several files | all are enqueued and fully downloaded |  | |
-| Download a bunch of files | Tap on a huge number of files| all are enqueued and fully downloaded. Last one is displayed | | |
+| Upload photo in root | 1. In root folder, click on `+`<br>2. Select `Upload from photo library`<br>3. Select one pic| Pic is uploaded in root folder |  |  |
+| Upload photo in non-root | 1. In non-root folder, click on `+`<br>2. Select `Upload from photo library`<br>3. Select one pic| Pic is uploaded in chosen folder folder |  |  |
+| Upload video in root | 1. In root folder, click on `+`<br>2. Select `Upload from photo library`<br>3. Select one video | Video is uploaded in root folder |  |  |
+| Upload video in non-root | 1. In non-root folder, click on `+`<br>2. Select `Upload from photo library`<br>3. Select one video | Video is uploaded in chosen folder |  |  |
+| Upload to custom space (oCIS) | 1. In non-root folder in a custom space, click on `+`<br>2. Select `Upload from photo library`<br>3. Select video and picture | Items are uploaded in chosen folder |  |  |
+| Upload a bunch of files | 1. Click on `+`<br>2.Select to upload from `Files` or from `Photo library`<br>3. Select a huge amount of files (~500)| All files are uploaded to the correct location |  | |
+| Restrict uploads to None | 1. In Device Settings > ownCloud > Photos, Select `None`<br>2. Try to upload a picture from albums| Not allowed, error displayed | | |
+| Restrict upload to Selected (I) | 1. In Device Settings > ownCloud > Photos, Select `Selected Photos`<br>2. Try to upload a picture from albums that were not selected in previous step| Not allowed, error displayed | | |
+| Restrict upload to Selected (II) |1. In Device Settings > ownCloud > Photos, Select `Selected Photos`<br>2. Try to upload a picture from albums that were selected in previous step| Pics uploaded to the correct location | | |
+| Download file in non-root | 1. Click on a single file located in non-root folder<br>2. Remove device connection | File is downloaded in non-root folder. Download icon disappears. File is openable without connection|  | |
+| Download big file in root | 1. Click on a single file (size ~2GB) located in non-root folder<br>2. Remove device connection  | File is downloaded in root folder. Download icon disappears. File is openable without connection| | |
+| Download a bunch of files | 1. Click on a huge number of files| All are fully downloaded  | | |
 |**Auto uploads**||||||
-| Auto uploads Photos | In Settings, Media Upload, enable Auto uploads for photos with a correct target folder<br>Take some photos and videos| Pics are uploaded after opening the app. Videos are not uploaded |  |   |
-| Auto uploads videos | In Settings, Media Upload, enable Auto uploads for videos with a correct target folder<br>Take some photos and videos| Videos are uploaded after opening the app. Photos are not uploaded |  |   |
+| Auto uploads Photos | 1. In `Settings` >  `Media Upload`, enable Auto uploads for photos with a correct target folder and let videos disabled<br>2. Take some photos and videos| Pics are uploaded after opening the app. Videos are not uploaded |  |   |
+| Auto uploads videos | 1. In `Settings`, `Media Upload`, enable Auto uploads for videos with a correct target folder and let pics disabled<br>2. Take some photos and videos| Videos are uploaded after opening the app. Photos are not uploaded |  |   |
 |**Cellular transfers**||||||
 | Allow cellular enabled | 1. Upload a file under wifi<br>2. Upload a file under cellular| Both uploaded|  | |
 | Allow cellular disabled | 1. Upload a file under wifi<br>2. Upload a file under cellular| Under wifi, file is uploaded. Under cellular data file is not uploaded|  | |
 |**Multiaccount**||||||
-| Switch account | Create several accounts and browse through them | Correct browsing |  | |
-| Upload in several | Upload several items to different accounts at the time | All items corectly uploaded |  | |
-| Download in several | Download several items in different accounts at the time | All items corectly uploaded |  |  |
+| Switch account | 1. Add several accounts and browse through them | Correct browsing, showing the correct files in every account|  | |
+| Upload in several | 1. Upload several files to different accounts at the time | All items corectly uploaded to the correct account and location |  | |
+| Download in several | 1. Download several items in different accounts at the time | All items corectly downloaded  |  |  |
 |**Files preview**||||||
-| PDF | Download and open a PDF file | Correctly displayed |  |  |
-| PDF search | Download and open a PDF file and search by a pattern | Correct search | |  |
-| PDF Go To Page | Download and open a PDF file and go to a page (in the page counter) | Correct jump | |  |
-| PDF List of Contents | Download and open a PDF file and open the list of contents. Switch thumbnails/list| Correct displayed |  |  |
-| PDF Full screen | Download and open a PDF file and tap on the screen| Correct displayed in full screen |  |  |
-| PDF Navigate | Download and open a PDF file<br>Open search, and search for a common pattern to have a bunch of results<br>Navigate through the results in the file| Results are shown on the file<br>Navigation correct |  |  |
-| Doc | Download and open a Doc file | Correctly displayed | |  |
-| Excel | Download and open a excel file | Correctly displayed | |  |
-| Ppt | Download and open a ppt file | Correctly displayed | |  |
-| Txt | Download and open a txt file | Correctly displayed | |  |
-| Image | Download and open a png, jpg files | Correctly displayed | |  |
-| GIF | Download and open a GIF file | Correctly displayed | |  |
-| Video | Download and open a video file. Go back and the video stops | Correctly played |  |  |
-| Slow-mo Video | Download and open a slow-mo video file. taken with the camera| Correctly played in slow mo |   |  |
-| Audio | Download and open a audio file. Go back and the music stops | Correctly played |  |  |
-| Media background | Download an open a audio file. Switch the screen off | Audio plays in background |  |  |
-| Non openable | Download and open a non openable file | Placeholder displayed with date and size| |  |
-| Damaged | Download and open a damaged file | Placeholder displayed | |  |
-| Presentation mode | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"| After 30 seconds, screen keeps alive | |  |
-| Presentation mode cancel | 1. On device, set screen auto-lock for 30 seconds<br>2. Open any file<br>3. Set in card "Presentation mode"<br>4. Cancel it in the dialog| After 30 seconds, screen locks | |  |
-|**Offline**||||||
-| Create folder no conn | Create folder without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Move item  no conn| Move item without connection<br> Recover connection | Action is done after recovering connection |  | |
-| Copy item  no conn| Copy item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Duplicate item  no conn| Duplicate item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Remove item  no conn| Remove item without connection<br> Recover connection | Action is done after recovering connection |  |  |
-| Download item  no conn| Download item without connection<br> Recover connection | First, an error is received.|  |  |
-| Upload item  no conn| Upload item without connection<br> Recover connection | Action is done after recovering connection|  |  |
-| Upload many items  no conn| Upload many items without connection<br> Recover connection | Action is done after recovering connection| |  |
-| All actions  no conn| Perform all actions above without connection<br> Recover connection | Every action is done after recovering connection. All process finishes OK|  |   |
-| Maintenance mode | Actions under maintenance mode: create folder, delete, remove, move, duplicate, upload | Actions are done after recovering connection| |  |
+| PDF | 1. Click on a PDF file | PDF file is downloaded and correctly displayed |  |  |
+| PDF search | 1. Click on a PDF file<br>2. Click on the lens icon and enter a string  | 1. PDF file downloaded and opened<br>2. Correct search showing strings that matches the entered| |  |
+| PDF Go To Page | 1. Click on a PDF file<br>2. Click on the the page counter<br>3. Enter a valid number of page | Jumps to that page | |  |
+| PDF List of Contents | 1. Click on a PDF file<br>2. Click on the list of contents<br>3. Click on any random entry | 2. List of contents displayed<br>3. Jump to that entry in the document |  |  |
+| PDF Full screen | 1. Click on a PDF file<br>2. Double click on the screen | Correct displayed in full screen |  |  |
+| PDF Navigate | 1. Click on a PDF file<br>2. Click on lens icon to search<br>3. Enter a string which matches several times<br>4. Navigate through the results in the file using the right and left arrows| 3. Matching strings are listed<br>4. Navigation through results is correct |  |  |
+| Docx | 1. Click on a .docx file | .docx file downloaded and displayed | |  |
+| Xlsx | 1. Click on a .xlsx file | .xlsx file downloaded and displayed | |  |
+| Pptx | 1. Click on a .pptx file | .pptx file downloaded and displayed | |  |
+| Txt | 1. Click on a .txt file | .txt file downloaded and displayed | |  |
+| Image | 1. Click on a .png and .jpg files | .png and .jpg files downloaded and displayed | |  |
+| GIF | 1. Click on a .gif file | .gif file downloaded and displayed | |  |
+| Video | 1. Click on a .mov file | .mov file downloaded and displayed | |  |
+| Audio | 1. Click on a .mp3 file<br>2. Go back and the music stops | Correctly played |  |  |
+| Media background | 1. Click on a .mp3 file<br>2. Switch the screen off | Audio plays in background |  |  |
+| Non openable | 1. Click on a non openable file | Placeholder displayed with date and size| |  |
+| Damaged | 1. Click on a damaged file | Placeholder displayed | |  |
+| Presentation mode | 1. On device settings, set screen auto-lock for 30 seconds<br>2. Open any file with preview<br>3. Click on 3-dot-button and select `Presentation mode`| After 30 seconds, screen keeps alive and file displayed | |  |
+|**Offline**| **Device with no connection**|||||
+| Create folder | 1. Create a new folder<br>2. Recover connection | Action is done after recovering connection |  |  |
+| Move  | 1. Move any item<br>2. Recover connection | Action is done after recovering connection |  | |
+| Copy item | 1. Copy any item to another location<br>2. Recover connection | Action is done after recovering connection |  |  |
+| Duplicate item | 1. Duplication any item<br>2. Recover connection | Action is done after recovering connection |  |  |
+| Remove item | 1. Remove any item<br>2. Recover connection | Action is done after recovering connection |  |  |
+| Download item  | 1. Download a file<br>2. Recover connection | Error: `Network unavailable`|  |  |
+| Upload item | 1. Upload a file<br>2. Recover connection | Action is done after recovering connection|  |  |
+| Upload many items | 1. Upload many items<br> 2. Recover connection | Action is done after recovering connection| |  |
+| All actions| 1. Perform all actions above  together without connection<br>2. Recover connection | Every action is done after recovering connection. All process finishes OK|  |   |
 |**Error handling**||||||
 | Create folder | Create folder with existing name | Correct error |  |  |
 | Rename | Rename item with existing name in target | Correct error |  |  |
@@ -193,16 +190,16 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |   |
 | Several| Cause together some of the errors above| Messages are grouped by kind, and can be fixed individually or grouped  |  |   |
 |**Conflict handling**||||||
-| Conflict detected | 1. Edit a file with device 1<br>2. Edit the same file with device 2<br>3. Submit changes with device 1<br>4. Submit changes with device 2 just a couple of seconds later | Device 1 uploads its new version correctly<br>Device 2 shows the conflict with three options: Cancel, Replace, Keep Both |  |
-| Cancel | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Cancel` |  Device 1 uploads its new version correctly<br> Local copy in Device 2 is deleted |  |
-| Replace | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Replace` |  Device 1 uploads its new version correctly<br> Device 2 replaces its version with the server version uploaded by Device 1<br>Device 1 updates its version to the Device 2 one |  |  |
-| Keep Both | 1. Cause a conflict following steps in Conflict detection case<br>2. In Device 2, Select `Keep Both` |  Device 1 uploads its new version correctly<br> Device 2 keeps its version locally and creates a new file with the version uploaded by Device 1 |  |
+| Conflict detected | 1. Edit a file with device 1<br>2. Edit the same file with device 2<br>3. Submit changes with device 1<br>4. Submit changes with device 2 just a couple of seconds later | Device 1 uploads its new version correctly<br>Device 2 shows the conflict with three options: `Cancel`, `Replace`, `Keep Both` |  |
+| Cancel | 1. Cause a conflict following steps in previous case<br>2. In Device 2, Select `Cancel` |  Device 1 uploads its new version correctly<br>Local copy in Device 2 is deleted |  |
+| Replace | 1. Cause a conflict following steps in previous case<br>2. In Device 2, Select `Replace` |  Device 1 uploads its new version correctly<br> Device 2 replaces its version with the server version uploaded by Device 1<br>Device 1 updates its version to the Device 2 one |  |  |
+| Keep Both | 1. Cause a conflict following steps in previous case<br>2. In Device 2, Select `Keep Both` |  Device 1 uploads its new version correctly<br> Device 2 keeps its version locally and creates a new file with the version uploaded by Device 1 |  |
 |**Available Offline**||||||
-| File | 1. Set a file as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the file | File is accessible | | |
-| Folder | 1. Set a folder with subfolders as av. offline<br>2. In the list of accounts: swipe left the account, and select Manage<br>3. Select "Delete local copies"<br>4. Remove device connection<br>5. Open the folder | All the content in the folders and subfolders is accesible and openable | | |
+| File | 1. Set a previewable file as av. offline (3-dot-button menu)<br>2. Open the sidebar and long press over the account name<br>3. Select `Manage`<br>4. Select `Delete all offline files`<br>5. Remove device connection<br>6. Open the file | File content is displayed| | |
+| Folder | 1. Set a folder as av. offline (3-dot-button menu)<br>2. Open the sidebar and long press over the account name<br>3. Select `Manage`<br>4. Select `Delete all offline files`<br>5. Remove device connection<br>6. Open any file inside the folder | File content is displayed| | |
 | Add to av. offline | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder inside the av. offline folder | Content copied/moved is now av. offline | | |
-| Displace av. offline file | 1. Set a file as av. offline<br>2. Move the file to another location that is not av. offline| File is av. offline in the new location | | |
-| Displace from av. offline folder | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder from the av. offline folder to another location that is not av. offline| Content copied/moved is not av. offline anymore | | |
+| Move av. offline file | 1. Set a file as av. offline<br>2. Move the file to another location that is not av. offline| File is av. offline in the new location | | |
+| Move from av. offline folder | 1. Set a folder as av. offline<br>2. Copy or move a file and a folder from the av. offline folder to another location that is not av. offline| Content moved is not av. offline anymore | | |
 |**Files App**|  |||||
 | Location one account| Attach one account to the app<br>Open available locations in files app | Account is there |  |  |
 | Location several account| Attach serveral accounts to the app<br>Open available locations in files app | All Accounts are there, one location per account attached |  |  |
@@ -246,22 +243,20 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Colliding name | Move, copy or rename a folder, so the target collides with an existing item | Correct error |  | |
 | Target folder deleted | Select Move/Copy of an item in Files app<br>Before submitting the operation, remove the target folder using another client or device  | Correct error |  | |
 |**Private Share**||||||
-| Share with a user | 1. Open Sharing<br>2. Invite<br>3. Type a correct user name<br>4. Select user<br>5. Select Viewer permission and Invite | Sharees list updated with the user |   |  |
-| Share with a group | 1. Open Sharing<br>2. Invite<br>3. Type a correct group name<br>4. Select group<br>5. Select Viewer permission and Invite| List updated with the group. Check that every user in the group can access the file |  |  |
-| Permissions | 1. Open Sharing<br>2. Invite<br>3. Type a correct user name<br>4. Select user<br>5. Select Editor permission and Invite| Share is created with the correct permissons (check in web UI) |  |  |
-| Edit | 1. Using a created share, modify permissions (grant new permissions and revoke existing permissions)| Share is updated with the correct permissons (check in web UI) |  |  |
-| Delete | Delete an existing share by swiping left in the list of shares| Share is removed (check in web UI) |  |  |
+| Share with a user | 1. Click on 3-dot-button > `Sharing`<br>2. `Invite`<br>3. Type a correct user name<br>4. Select user<br>5. Select Viewer permission and `Invite` | Sharees list updated with the user |   |  |
+| Share with a group | 1. Click on 3-dot-button > `Sharing`<br>2. `Invite`<br>3. Type a correct group name<br>4. Select group<br>5. Select Viewer permission and `Invite`| List updated with the group. Check that every user in the group can access the file |  |  |
+| Permissions | 1. Click on 3-dot-button > `Sharing`<br>2. `Invite`<br>3. Type a correct user name<br>4. Select user<br>5. Select Editor permission and `Invite`| Share is created with the correct permissons (check in web UI) |  |  |
+| Edit | 1. Accessing a created share, modify permissions (grant new permissions and revoke existing permissions)| Share is updated with the correct permissons (check in web UI) |  |  |
+| Delete | 1. Delete an existing share by swiping left in the list of shares| Share is removed (check in web UI) |  |  |
 |**Public Link**||||||
-| Create with name | Select to create a public link with an specific name | Correct creation with name (check in web UI)|   |  | | 
-| Create with Download/View/Upload | Select to create a public link with Download/View/Upload permission | Correct creation with permissions (check in web UI)| | | | 
-| Create with Upload Only | Select to create a public link with "Upload Only" permission | Correct creation with permissions (check in web UI)| | | | 
-| Create with Password | Select to create a public link with password | Correct creation with password (check in web UI). Open the link in browser and check password is asked| | | | 
-| Create with Expiration | Select to create a public link with expiration date | Correct creation with expiration date (check in web UI) | | | | 
-| Edit | 1. In the list of shares, open an existing public share<br>2. Change the name, the permission, password and expiration date | Correct edition (check in web UI). Get the link and open in browser to check password is correct. | | | | 
-| Delete | 1. In the list of shares, delete an existing public link | Public link is deleted (check in web ui)  | | | | 
+| Create with name | 1. Click on 3-dot-button > `Sharing`<br>2. `Create link` giving an specific name<br>3. `Create Link` | Link is listed with proper name (check in web UI)|   |  | | 
+| Create with Editor | 1. Click on 3-dot-button > `Sharing`<br>2. `Create link` giving `Editor` permission<br>3. `Create Link` | Link is listed with `Editor` permissions (check in web UI)| | | 
+| Create with Password | 1. Click on 3-dot-button > `Sharing`<br>2. `Create link` adding password | Link is listed with password (check in web UI) | | |
+| Create with Expiration | 1. Click on 3-dot-button > `Sharing`<br>2. `Create link` adding espiration date | Link is listed with correct expiration date (check in web UI)  | | | | 
+| Edit link | 1. In the list of links, open an existing public link<br>2. Modify the name, the permission, password and expiration date | Correct edition (check in web UI). Get the link and open in browser to check password is correct | | | | 
+| Delete link | 1. In the list of links, delete an existing public link | Public link is deleted (check in web ui)  | | | | 
 |**Private link**||||||
-| Get link View | Open Share view | Option correctly displayed |   |    | | 
-| Copy link | Get copy link and paste in the browser | File correctly linked |    | | | 
+| Copy Private link | 1. Click on 3-dot-button > `Sharing`<br>2. Click on `Copy Private Link`<br>3. Paste somewhere the clipboard content | Link correct (compare with web UI) | | | 
 |**Universal link**||||||
 | File in root supported not downloaded | 1. Get private link of a supported format downloaded file in root<br>2. Open the link in the device (use suffix owncloud://)| App is opened and the file is downloaded and opened |  |  |
 | Folder in root  | 1. Get private link of a folder in root<br>2. Open the link in the device (use suffix owncloud://) | App is opened and folder content displayed | |  |
