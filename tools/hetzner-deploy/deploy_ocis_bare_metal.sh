@@ -54,7 +54,7 @@ vers=$(echo "$OCIS_VERSION" | sed -e 's/^v//')
 if [ -n "$OCIS_DNSNAME" ]; then
   dns_name=$(echo "$OCIS_DNSNAME" | sed -e "s/DATE/$(date +%Y%m%d)/")
 else
-  dns_name=ocis-$(echo $vers  | tr '[A-Z]' '[a-z]' | tr . -)-$(date +%Y%m%d)
+  dns_name=ocis-$(echo $vers  | tr '[A-Z]' '[a-z]' | tr -d .=+ | sed -e 's/-\?alpha/a/g' -e 's/-\?beta/b/g' -e 's/-\?rc/rc/g')-$(date +%Y%m%d)
   echo "No OCIS_DNSNAME specified, using $dns_name"
   sleep 2
 fi
