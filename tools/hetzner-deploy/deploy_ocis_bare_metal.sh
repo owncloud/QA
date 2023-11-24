@@ -36,6 +36,11 @@ ocis_bin=/usr/bin/ocis
 ocis_data=/var/lib/ocis
 ocis_import=https://raw.githubusercontent.com/esgarov/Daten-Import-in-Ocis/main/ocis-import.py
 
+if [ "$OCIS_STORAGE" == sshfs ]; then
+  ocis_data=/home/ocis/data
+fi
+
+
 if [ -z "$OCIS_VERSION" ]; then
 #  export OCIS_VERSION=v1.0.0-rc7
 #  export OCIS_VERSION=v2.0.0
@@ -81,7 +86,7 @@ export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"   # find related scripts, even if called through a symlink.
 # use a cx31 -- we need more than 40GB disk space.
-source $mydir/lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
+source $mydir/lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin    # mpkq et al..
 
 if [ -z "$IPADDR" ]; then
@@ -122,13 +127,31 @@ wget -O /usr/local/bin/ocis $ocis_url
 wget -O /usr/local/bin/ocis-import.py $ocis_import
 chmod +x /usr/local/bin/ocis*
 
-
 # Create a service user
-useradd --system --no-create-home --shell=/sbin/nologin ocis
+useradd --system --create-home --shell=/sbin/nologin ocis
+test -f /home/ocis/.ssh/id_rsa.pub || sudo -u ocis ssh-keygen -t rsa -f /home/ocis/.ssh/id_rsa -P ''
 
 # Infinite Scale Data Directory
 mkdir -p $ocis_data
 chown ocis:ocis $ocis_data
+
+## prepare an sshfs mount as an alternative to native local file system.
+ftppass=ftp${RANDOM}data
+deluser ftpdata 2>&1 >/dev/null	# just in case
+echo -e "\$ftppass\\n\$ftppass" | adduser ftpdata --gecos ""
+mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
+### allow user ocis to ssh into localhost as user ftpdata
+cp /home/ocis/.ssh/id_rsa.pub /home/ftpdata/.ssh/authorized_keys
+chown -R ftpdata. /home/ftpdata
+chmod 700 /home/ftpdata/.ssh
+
+echo user_allow_other >>  /etc/fuse.conf	# so that we can use sshfs -o allow_other (a strange dependency, but that is what it is)
+mkdir -p /var/lib/ocis-sshfs
+chown ftpdata /var/lib/ocis-sshfs
+sudo -u ocis sshfs -o StrictHostKeyChecking=no -o transform_symlinks -o idmap=user -o allow_other ftpdata@localhost:/var/lib/ocis-sshfs  /home/ocis/data
+sudo -u ocis touch /home/ocis/data/foobar
+# this should show first as owner ftpdata and second as user ocis:
+(set -x; ls -la /var/lib/ocis-sshfs /home/ocis/data)
 
 # Infinite Scale Configuration File
 mkdir -p /etc/ocis

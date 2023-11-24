@@ -442,6 +442,7 @@ touch /home/ftpdata/.ssh/authorized_keys
 echo "Hello, world!" >  /home/ftpdata/data/hello.txt
 chown -R ftpdata. /home/ftpdata
 chmod 700 /home/ftpdata/.ssh
+# ssh-keygen
 # switch to RSA public key: copy the key generated in the admin interface, paste it into /home/ftpdata/.ssh/authorized_keys
 
 ## prepare an NFS server too...
@@ -605,6 +606,11 @@ occ config:app:set core enable_external_storage --value yes
 ## mount the SFTP also as a linux filesystem, so that we can play with files_external
 mkdir /mnt/sftp
 # May ask for authenticity of host unless we provide -o StrictHostKeyChecking=no
+# By default, only the mounting user will be able to access the filesystem.
+#  Access for other users can be enabled by passing -o allow_other.
+#  In this case you most likely also want to use -o default_permissions.
+#   (By default, file permissions are ignored by SSHFS. Any user that can access
+#   the filesystem will be able to perform any operation that the remote server permits)
 echo "\$ftppass" | sshfs -o password_stdin -o StrictHostKeyChecking=no -o allow_other ftpdata@localhost:/home/ftpdata/data /mnt/sftp
 # occ files_external:create /local-mnt-sftp local null::null -c datadir=/mnt/sftp
 
