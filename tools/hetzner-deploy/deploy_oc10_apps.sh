@@ -315,6 +315,15 @@ if [ -n "$OC10_FQDN" ]; then
   OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
 fi
 
+### this does not work at all. Quoting?
+if [ "$(echo $oc10_fqdn | wc -c)" -gt 63  ]; then
+  # FIXME: that is a bit late here. We already started into the new machine, before noticing this ....
+  echo "ERROR: oc10_fqdn is longer than 63 chars: $oc10_fqdn"
+  echo ""
+  echo "Please use a shorther one with  	env OC10_FQDN=... $0 ..."
+  exit 1
+fi
+
 # This unintended-upgrade script can block us for many minutes! Kill it.
 :> /usr/bin/unattended-upgrade
 systemctl disable unattended-upgrades.service
