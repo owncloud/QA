@@ -37,6 +37,12 @@ EOF
   exit 0
 fi
 
+if [ "$(echo "$2" | wc -c)" -gt 64 ]; then
+  echo "ERROR: '$2' is longer than 63 characters."
+  echo "ERROR: This may work with cloudflare dns, but would certainly fail with letsencrypt."
+  exit 1
+fi
+
 if [ -z "$CLOUDFLARE_DNS_ZONE" ]; then
   export CLOUDFLARE_DNS_ZONE=$cf_zone_default
 fi
