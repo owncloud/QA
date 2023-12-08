@@ -28,7 +28,7 @@ if echo $name | grep -q '\.'; then
   test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
 
   echo "Retrieving hostname via ssh ..."
-  hostname=$(set -x; timeout 10 ssh root@$name hostname)
+  hostname=$(set -x; timeout -s 9 10 ssh root@$name hostname)
   if [ -z "$hostname" ]; then
     echo "Oops, failed to get hostname. Retry $0 with the ip address?"
     exit 1

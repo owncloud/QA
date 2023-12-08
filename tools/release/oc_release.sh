@@ -79,6 +79,13 @@ if [ "$1" = '.' ]; then
   appname=$(git remote -v | grep '(fetch)' | sed -e 's@.*/@@' -e 's/\s.*//' -e 's/\.git$//')
   if [ -z "$2" ]; then
     tagname=$(git tag -l --sort -taggerdate | head -n 1)
+    tagname2=$(git tag -l | tail -n 1)
+    if [ "$tagname2" != "$tagname" ]; then
+      echo "Newest tagname from 'git tag -l --sort -taggerdate': $tagname"
+      echo "Last tagname from 'git tag -l': $tagname2"
+      # tagname=$( (echo "$tagname"; echo "$tagname2") | sort |tail -n 1)
+      echo "CAUTION: These tagnames disagree. Choosing: $tagname"
+    fi
   else
     tagname="$2"
   fi

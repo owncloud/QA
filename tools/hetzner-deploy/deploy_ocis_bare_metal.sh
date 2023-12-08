@@ -46,6 +46,7 @@ if [ -z "$OCIS_VERSION" ]; then
 #  export OCIS_VERSION=v2.0.0
   export OCIS_VERSION=v3.0.0-alpha.2
   export OCIS_VERSION=daily
+  export OCIS_VERSION=v5.0.0-alpha.4
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -181,6 +182,9 @@ OCIS_BASE_DATA_PATH=$ocis_data
 EOT
 ln -s /etc/ocis/ocis.env env.sh
 ln -s $ocis_data ~/o
+
+echo >> ~/.bashrc "export OCIS_CONFIG_DIR=$ocis_data"
+echo >> ~/.bashrc 'export OCIS_BASE_DATA_PATH=/etc/ocis'
 
 # service ocis stop
 rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.

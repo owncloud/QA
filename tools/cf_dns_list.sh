@@ -121,7 +121,7 @@ for entry in $(echo "$json"  | jq '.result[] | .modified_on+"@"+.content+"@"+.na
         orphan="$orphan $fqdn"
       fi
     elif [ "$check" = ssl ]; then
-      if ! timeout 10 ssh "root@$fqdn" /bin/true; then
+      if ! timeout -s 9 10 ssh -v "root@$fqdn" /bin/true; then
         echo "-- please retry: ssh 'root@$fqdn' /bin/true && echo okay"
         orphan="$orphan $fqdn"
       fi

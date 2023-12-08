@@ -19,6 +19,8 @@
 
 echo "Estimated setup time: 5 minutes ..."
 
+data_exporter_vers=0.3.0
+
 vers=10.13.3-rc.2
 vers=10.13.3
 
@@ -607,6 +609,10 @@ occ app:list '^files_external$' --output=json
 occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
 occ market:install files_clipboard
 occ app:enable files_clipboard	# a copy paste function is great for testing ...
+
+(cd /tmp/; wget https://github.com/owncloud/data_exporter/releases/download/v$data_exporter_vers/data_exporter-$data_exporter_vers.tar.gz)
+occ market:install -l /tmp/data_exporter-$data_exporter_vers.tar.gz
+occ app:enable data_exporter
 
 # install app files_external_ftp
 occ files_external:create /SFTP sftp password::password -c host=localhost -c root="/home/ftpdata/data" -c user=ftpdata -c password=\$ftppass
