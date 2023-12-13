@@ -21,11 +21,12 @@ echo "Estimated setup time: 5 minutes ..."
 
 data_exporter_vers=0.3.0
 
-vers=10.13.3-rc.2
 vers=10.13.3
+vers=10.13.4-rc.1
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.13.4-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231213.tar.bz2
 test "$vers" = "10.13.3"  -o "$vers" = "10.13"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231121.tar.bz2
 test "$vers" = "10.13.3-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231117.tar.bz2
 test "$vers" = "10.13.2"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231009.tar.bz2

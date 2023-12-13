@@ -92,12 +92,15 @@ cat <<EOC >"/var/www/owncloud/config/wnd_ker.config.php"
      * From:
      *   https://github.com/owncloud/windows_network_drive/pull/423
      *   https://github.com/owncloud/enterprise/issues/5200
+     *   https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_apps_sample_php_parameters.html#code-sample-35
      */
    'wnd.kerberos.servers' => [
         'ad01' => [                                                               /* <--- oc: wnd share config: kerberos data id */
             'ockeytab' => '/etc/apache2/$keytab_name',                               /* keytab as exported from AD */
             'ocservice' => 'HTTP/$oc10_fqdn',  /* AD: krb5httpoc -> properties -> account -> User logon name */
             'usermapping' => ['type' => 'Noop'],
+            'usermapping_dis' => ['type' => 'EALdapATTR', 'params' => ['attr' => 'homeDirectory'] ],
+            'usermapping_dis2' => ['type' => 'EALdapAttr', 'params' => ['attr' => 'userPrincipalName'] ],
             'ccachettl' => 3600,
         ],
    ],

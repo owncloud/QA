@@ -397,25 +397,57 @@ Connect owncloud via user_ldap:
    User DN: $admin_dn
    Password: $admin_pass
    One Base DN per line: dc=owncloud,dc=com
-   Test Base DN: 11 entries available
+   Test Base DN: More than 1,000 directory entries available
    [x] Manually enter LDAP filters
    -> Continue -> Continue -> Continue
  - Groups
    Click "Edit LDAP Query", (if needed: Mode switch -> YES)
    -> The dropdown become active:
    Only these object classes: ownCloud, posixGroup
-   Only from these groups: hackers, physics-lovers, sailors, users
-   Verify settings and count groups: 4 groups found
+   Only from these groups: hackers, lemming-group, physics-lovers, rabbit-group, sailors, users
+   Verify settings and count groups: 6 groups found
    -> Back -> Back
  - User
    Click "Edit LDAP Query", (if needed: Mode switch -> YES)
    -> Some dropdown become active.
-   Verify settings and count users: 4 users found
+   Verify settings and count users: > 1000 users found
  - Expert
-   Attribute for internal username: sAMAccountName	( to avoid UUIDs in the oc user listing)
+   Internal Username Attribute: sAMAccountName	( to avoid UUIDs in the oc user listing)
+
+ - Login Attributes
+   Test Loginname [Lemming0123]
+   -> Verify settings -> "User found and settings verified."
 
 Finally from the login shell:
-  time occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
+ time occ user:sync "OCA\User_LDAP\User_Proxy" --showCount --re-enable --missing-account-action=disable
+
+   2008/2008 --- 100%
+   real 017.123s
+
+ ldapsearch -x -H ldap://$ldapserver -b dc=owncloud,dc=com -D "$admin_dn" -w "$admin_pass" '(uid=lemming0123)'
+
+   uidNumber: 20123
+   gidNumber: 30000
+   homeDirectory: /home/lemming0123
+   ownCloudUUID: 8ce67d3a-3079-4755-a7df-6ef77ac2b8c8
+
+ occ ldap:search 'N0123 '
+   N0123 Lemming (N0123Lemming)
+   N0123 Rabbit (N0123Rabbit)
+
+ echo "select * from oc_accounts where user_id like '%0123%';" | mysql owncloud
+  id	email	user_id	lower_user_id	display_name	quota	last_login	backend	home	state	creation_time
+  137	NULL	N0123Lemming	n0123lemming	N0123 Lemming	NULL	0	OCA\\User_LDAP\\User_Proxy	/var/www/owncloud/data/N0123Lemming	11702319618
+  1137	NULL	N0123Rabbit	n0123rabbit	N0123 Rabbit	NULL	0	OCA\\User_LDAP\\User_Proxy	/var/www/owncloud/data/N0123Rabbit	11702319626
+
+ echo "select * from oc_ldap_user_mapping where ldap_dn like '%0123%';" | mysql owncloud
+  +---------------+---------------------------------------------+--------------------------------------+
+  | owncloud_name | ldap_dn                                     | directory_uuid                       |
+  +---------------+---------------------------------------------+--------------------------------------+
+  | N0123Lemming  | uid=lemming0123,ou=users,dc=owncloud,dc=com | 3c79172e-2a2e-103e-905b-713e205df531 |
+  | N0123Rabbit   | uid=rabbit0123,ou=users,dc=owncloud,dc=com  | 3dda518c-2a2e-103e-9444-713e205df531 |
+  +---------------+---------------------------------------------+--------------------------------------+
+
 
 Extend the LDAP Schema
  - Edit ~/ldif/40_jwextra_schema.ldif
