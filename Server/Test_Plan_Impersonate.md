@@ -19,3 +19,8 @@
 | Check that all the UI elements are usable when browsing with firefox. |                                          | :construction: |                 |
 | Check that all the UI elements are usable when browsing with edge. |                                          | :construction: |                 |
 | Check that all the UI elements are usable when browsing with IE11. |                                          | :construction: |                 |
+
+* [ ] Transitive ("cascading") impersonate is disallowed.
+   * [ ] Given Alice can impersonate as Bob, and Bob can impersonate as Carol
+      * [ ] Alice (after impersonating as Bob) sees the impersonate icon for user Carol
+      * [ ] But impersonate fails with an error message.
