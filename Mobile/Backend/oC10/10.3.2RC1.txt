@@ -1,0 +1,50 @@
+
+https://github.com/owncloud/core/issues/36241
+
+Added to config.php: 
+
+'share_folder' => '/ReceivedShares'
+
+Checked the PROPFIND response to check oc:permissions of '/ReceivedShares': 
+
+<oc:permissions>NVCK</oc:permissions>
+
+This is: rename, move, create file, create folder). Sharing (R) is not allowed. Should rename permission revoked as well?
+
+Client tests:
+
+- iOS: item is not allowed to share. Sharing option hidden. Correct.
+- Android: item is not allowed to share, under error handling. Behaviour to set a better UX (sharing option disabled for such folder). Will open a new issue in Android repository.
+
+_______
+
+https://github.com/owncloud/core/pull/36225
+
+Checking (as regression) the autocomplete feature (userID, emial, None)
+
+-iOS: OK
+-Android: OK
+
+_______
+
+https://github.com/owncloud/core/pull/36242
+
+It should not concern the clients. We lack of an environment to test this. Mobile clients display the list that the PROPFIND returns, so it is not dependent from the attached storage backend to oC core.
+
+_______
+
+https://github.com/owncloud/core/issues/35488
+
+Group and user with the same name were created. 
+
+iOS: The app is preventing to share with two items with same name (if you already shared with user called "Peter", groups with name "Peter" are not displayed as matching). Bug in the iOS app, to create a new issue. 
+
+Android: Users can share with both group and user. OK.
+
+_______
+
+https://github.com/owncloud/core/pull/36384
+
+Fixed problem does not affect the mobile clients, since that is a problem in the creation of the guest user. Mobile clients do not have such feature.
+
+
