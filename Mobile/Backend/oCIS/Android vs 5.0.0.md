@@ -4,7 +4,8 @@
 
 
 **Device/s**: Pixel 2 Android 11 <br>
-**Server**: oCIS 5.0.0-beta.1
+**Server**: oCIS 5.0.0-beta.1<br>
+**Android Studio version**: Giraffe 2022.3.1 Patch 2<br>
 
 How to read Results:
 
@@ -71,7 +72,7 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Upload from external app | 1. Enable any security method (passcode/pattern/biometrical)<br>2. Open an external app, like `Photos` or `Gallery`<br>3. Select some files and share them with ownCloud | Security method asked | NA
 | Lock delay 1 minute | 1. Enable passcode lock<br>2. Click on `Lock application`<br>3. Set `After 1 minute`<br>4. Kill the app<br>5. Open the app immediately<br>6. Close the app and open after 1 minute | 5. Passcode lock not asked<br>6. Passcode lock asked  | NA |  |
 | Lock access doc provider | 1. Enable passcode lock<br>2. Enable `Lock access from document provider`<br>3. Open app that supports Document Provider<br>4. Open sidemenu in that app<br>5. Click on the ownCloud account to browse through  | 4. ownCloud as `Locked`<br>5. Not posible because locking | NA |  |
-| Change certificate | 1. Login in https server with a self-signed cert<br>2. After login, change the certificate in server<br>3. Refresh in the login view | Dialog is raised to warn the user of the certificate change and asking to accept |
+| Change certificate | 1. Login in https server with a self-signed cert<br>2. After login, change the certificate in server<br>3. Refresh in the login view | Dialog is raised to warn the user of the certificate change and asking to accept | NA | Test available for oC10
 | **Transfers** |   |  |
 | Upload a very big file | 1. Open FAB and select `Files`<br>2. Select one file from any provider which size is bigger than 500MB | File is uploaded.<br>Uploads view shows the file uploaded to the correct place with correct size in the `Uploaded` section | P m11 | |
 | Upload 1000 Files | 1. Open FAB and select `Files`<br>2. Select 1000 files from any provider. | Files are uploaded to the correct location.<br>Uploads view shows the list of 1000 files uploaded to the correct place with correct sizes in the `Uploaded` section| P m11 | |
@@ -151,13 +152,6 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Create new file special chars| From a 3rd party app, create new file and save in oC, selecting a non-root folder which contains special characters | new file is correctly saved in the folder  |NA |   |
 | Conflict | From a 3rd party app, create new file and save in oC, setting an existing name | added a numeral to the file name | NA|  |  |
 | Multiaccount | Add several accounts<br>From a 3rd party app, create new file and save in local and in oC in different accounts and target folders | File is correctly saved in all accounts  | NA |  |
-|**Other operations**||||||
-| Create folder | Create a new folder inside the document provider | Folder is created inside the oC account |  |  |  |
-| Delete file | Delete a file in root folder and non-root folder | Files deleted correctly | |  |  |
-| Delete folder | Delete a folder in root folder and non-root folder | Folders deleted correctly |  |  |  |
-| Rename file | Rename a file in root folder and non-root folder | Files renamed correctly | |  |  |
-| Rename folder | Rename a folder in root folder and non-root folder | Folders renamed correctly |  |  |  |
-| Edit file | Open a file stored in oC<br>Modify the file | File is saved in oC with the update | |   |  |
 | **Public links** |   |  |
 | Create link file |  1. Select a file from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Save | Check that link is listed in the share view. Check that the file in the file list of the app includes the link icon. Check in web that the link was created | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature) |  |
 | Create link folder |  1. Select a folder from the list by clicking on the 3-dot-button<br>2. Select `Share`<br>3. Click on `+` of `Public Links` section<br>4. Save | Check that link is listed in the share view. Check that the folder in the file list of the app includes the link icon. Check in web that the link was created | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/links.feature) |  |
@@ -181,47 +175,4 @@ P m8 F t8 -> Passed with a phone with Android 8 and failed with tablet with Andr
 | Latest version | 1. Install the previous version adding three accounts of different types (basic, OAuth and OIDC), enabling all Settings, downloading some items and setting some items as av. offline in both accounts<br>2. Upgrade to the current version | `Release notes` shown and also linked in `Settings` as `What's new`.<br> App correctly upgraded: both accounts are there, settings correct, download and av. offline are correct | NA
 
 
-Remove section share from outside
-Add tests open with web - create new
-svg to previews
-Add more literals
-
-AUTO Tests:  https://reports.cucumber.io/reports/3ea6e8b5-b71b-4586-80b5-f04f7afadc58
-
-Reporte
-
-- Icon for docxf (Android,iOS)
-- Response in Android to the links privacy policy
-
-
-# Changelog
-
-#### [Depth infinity](https://github.com/cs3org/reva/pull/4278)
-
-Created an oCIS5-beta.1 server with a deep folder structure with many items inside. 
-
-**iOS**: iOS does the depth infinity check correctly, discovering the whole structure. <br>
-**Android**: No depth infinity in Android yet
-
-
-#### [Do not allow moves between shares](https://github.com/cs3org/reva/pull/4318) 
-
-**iOS**: iOS app does not allow, showing the following error:
-
-<screenshot>
-
-Room for improvement: operation could be prevented to items in the share list (create issue)<br>
-
-**Android**: Move operation is not allowed in oCIS' shares for Android yet
-
-#### [Fix spaceID in meta endpoint response](https://github.com/cs3org/reva/pull/4341)
-
-**iOS**: Fixed, available 12.1+<br>
-**Android**: Fixed, available 4.2+
-
-#### [Add url extension to mime type list](https://github.com/cs3org/reva/pull/4344)
-
-
-**iOS**: .url files not detected as straigth-openable. Needs `Open In`<br>
-**Android**: .url files not detected as straigth-openable. Needs `Open In`
 
