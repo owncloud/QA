@@ -3,8 +3,9 @@
 #### PR: [https://github.com/owncloud/android/issues/]([https://github.com/owncloud/android/issues/])<br>
 
 
-Device/s: <br>
-Server: 
+**Device/s**: <br>
+**Server**: <br>
+**Android Studio Version**:
 
 How to read Results:
 
@@ -27,36 +28,34 @@ Add all automated that are not here
 | **Welcome Wizard**|
 | Welcome  wizard | Install the app from scratch | Welcome wizard shown and all slides correctly displayed |
 | **Basic Auth** |   |  |
-| Correct credentials | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter correct username and password<br>4. Click on "Log in" | List of files displayed  |   [AUTO](https://github.com/owncloud/android-scenario-testing/tree/master/src/test/resources/io/cucumber) | all tests using it |
-| Wrong credentials | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter correct username and incorrect password<br>4. Click on "Log in" | Error: "Wrong username or password" |  |  | 
+| Correct credentials | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter correct username and password<br>4. Click on `Log in` | List of files displayed  |   [AUTO](https://github.com/owncloud/android-scenario-testing/tree/master/src/test/resources/io/cucumber) | all tests using it |
+| Wrong credentials | 1. Enter correct URL of server with basic auth<br>2. Click on right arrow<br>3. Enter correct username and incorrect password<br>4. Click on `Log in` | Error: `Wrong username or password` |  |  | 
 | **OAuth2** |   |  |
-| Correct credentials | 1. Enter correct URL of server with OAuth2<br>2. Set correct credentials in OAuth2 view (browser) | Callback to the app and list of files displayed |  |  | 
-| Refresh token | 1. Create a new OAuth2 session<br>2. Wait until token expires<br>3. Perform some actions | Token is refreshed (check in BD or proxy) and user keeps on using the app | | |
-| Renewal OAuth2 token | 1. Enter correct URL of server with OAuth2 (check how to tweak it to set a shorter expiration time as defaults' 1h)<br>2. Enter correct credentials in browser and authorize<br>3. Wait till token expires<br>4. Perform any operations in the list of files | 2. List of files displayed<br>4. Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called|
-| Revoke OAuth2 token | 1. Enter correct URL of server with OAuth2<br>2. Enter correct credentials in browser and authorize<br>3. In server dashboard, revoke the Android token<br>4. Perform any operation in list of files<br>5. Click on "Sign In" and enter correct credentals | 4. Error in list of files: "The access token has expired or become invalid. Sign again to gain access"<br>5. List of files displayed again. |  |  |
-| Logout  | 1. Complete authentication/authorization process in a OAuth2 server<br>2. Logout in the idP | Session logged out. Needed credentials again to enter the account | NA | Not done yet. |
+| Correct credentials | 1. Enter correct URL of server with OAuth2<br>2. Set correct credentials in OAuth2 view (browser)<br>3. Authorize | List of files displayed |  |  | 
+| Refresh token | 1. Create a new OAuth2 session<br>2. Wait until token expires<br>3. Perform some actions | Token is refreshed (check in BD or proxy) in trasparent way, no failures in operations| | |
+| Renewal OAuth2 token | 1. Enter correct URL of server with OAuth2<br>2. Enter correct credentials in browser and authorize<br>3. Wait till token expires<br>4. Perform any operations in the list of files | 2. List of files displayed<br>4. Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called|
+| Revoke OAuth2 token | 1. Enter correct URL of server with OAuth2<br>2. Enter correct credentials in browser and authorize<br>3. In server dashboard, revoke the Android token<br>4. Perform any operation in list of files<br>5. Click on `Sign In` and enter correct credentals | 4. Error: `The access token has expired or become invalid.<br>` `Sign again to gain access`<br>5. List of files displayed again. |  |  |
+| Logout  | 1. Complete authentication/authorization process in a OAuth2 server<br>2. Logout in the idP | Session logged out.<br> Needed credentials again to enter the account | NA | Not done yet. |
 | **OIDC** |   |  |
 | Correct credentials | 1. Enter correct URL of server with OIDC<br>2. Set correct credentials in OAuth2 view (browser)<br>3. Authorize | Callback to the app and list of files displayed |  |  | 
-| Refresh token | 1. Create a new OAuth2 session<br>2. Wait until token expires<br>3. Perform some actions | Token is refreshed (check in BD or proxy) and user keeps on using the app | | |
+| Refresh token | 1. Create a new OAuth2 session<br>2. Wait until token expires<br>3. Perform some actions | Token is refreshed (check in BD or proxy) in trasparent way, no failures in operations| | |
 | Logout  | 1. Complete authentication/authorization process in a OIDC server<br>2. Logout in the idP | Session logged out. Needed credentials again to enter the account | NA | Not done yet. |
 | **Accounts manager** |   |  |
-| List of files | 1. Log in in a account<br>2. On the top right corner, click on the account avatar | Account Manager opened |  |  |
+| List of files | 1. Log in in a account<br>2. On the top right corner of list of files, click on the account avatar | Account Manager opened |  |  |
 | Drawer | 1. Log in a account<br>2. Open drawer by clicking the hamburger button<br>3. Click on the arrow inside the drawer to show the submenu<br>4. Click on `Manage accounts`| Account Manager opened |  |  |
-| Add new account | 1. Click on `Add account` option | Login View displayed with editable Server address field |  |  |
-| Edit Password (basic auth) | 1. Click on key button of an attached basic auth account<br>2. In server, modify the password of the account<br>3. Enter the old password in Login View<br>4. Enter the new password in Login View | 3. Error: Wrong username or password"<br>4. Connected and Login View displayed |  |  |
-| Edit OAuth2/OIDC | 1. Click on key button of an attached OAuth2/OIDC account<br>2. In server, modify the password of the account<br>3. Enter the old password in Login View<br>4. Enter the new password in Login View  | 1. Moved forward to the browser<br>3. Error in browser<br>4. Connected and Login View displayed |  |  |
-| Sync account content | 1. Add new account to the app<br>2. Without browsing, open Account Manager<br>3. Click on sync (rounded arrow button)<br>4. After some seconds, remove device connection<br>5. Click on account in the list to open it<br>6. Browse through all available folders | All folders are discovered and all content is listed  |  |  |
-| Delete one account from app | 1. Add several accounts to the app<br>2.Open Account Manager<br>3. Click on trashbin icon to delete one of them<br>4. Confirm deletion | Deleted account is not listed in Account Manager<br>Account not listed in device's Settings > Accounts   |  |  |
-| Delete one account from device | 1. Add several accounts to the app<br>2.Open device's Settings > Accounts<br>3. Remove account from there<br>4. Open Account manager in the app | Deleted account is not listed in Account Manager<br>Account not listed in device's Settings > Accounts   |  |  |
+| Add new account | 1. Log in a account<br>2. Open drawer by clicking the hamburger button<br>3. Click on `Add account` option | Login view displayed with editable server address field |  |  |
+| Edit Password (basic auth) | 1. Click on key button of an attached basic auth account<br>2. In server, modify the password of the account<br>3. Enter the old password in Login View<br>4. Enter the new password in Login View | 3. Error: `Wrong username or password`<br>4. File list displayed |  |  |
+| Edit OAuth2/OIDC | 1. Click on key button of an attached OAuth2/OIDC account<br>2. In server, modify the password of the account<br>3. Enter the old password in Login View<br>4. Enter the new password in Login View  | 1. Moved forward to the browser<br>3. Error in browser<br>4. File list displayed |  |  |
+| Sync account content | 1. Add new account to the app<br>2. Without browsing, open Account Manager<br>3. Click on sync (rounded arrow button)<br>4. After some seconds, remove device connection<br>5. Click on account in the accounts list to open it<br>6. Browse through all available folders | All folders are discovered and all content is listed  |  |  |
+| Delete one account from app | 1. Add several accounts to the app<br>2. Open Account Manager<br>3. Click on trashbin icon to delete one of them<br>4. Confirm deletion | Deleted account is not listed in Account Manager<br>Account not listed in device's Settings > Accounts   |  |  |
+| Delete one account from device | 1. Add several accounts to the app<br>2. Open device's Settings > Accounts<br>3. Remove account from there<br>4. Open Account manager in the app | Deleted account is not listed in Account Manager<br>Account not listed in device's Settings > Accounts   |  |  |
 | **Spaces** |   |  |
-| List spaces (oCIS) | 1. Log in an oCIS account with some spaces available<br>2. Click on spaces button on the bottom bar | Spaces listed with name, subtitle and image | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/spaces.feature) | |
-| Update spaces (oCIS) | 1. Log in an oCIS account with some spaces available<br>2. Click on spaces button on the bottom bar<br>3. Using web client, add a new space and refresh view in the app<br>4. Using web client, remove an existing space and refresh view in the app<br> | 2. Spaces listed with name, subtitle and image<br>3. New space listed<br>4. Removed space not listed anymore | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/spaces.feature) | |
-| **User quota** | TO DO  |  |
-| Default/Unlimited | Set aun user with default/unlimited quota | No limite is displayed |
-| 5GB | Set quota to 5GB | Quota is correctly dispplayed in drawer with correct progress bar |
-| Other | Set quota to Other value, for example , 1500 MB | Quota is correctly displayed in drawer with correct progress bar |
-| 0 mB | Set Qouta to Other, and set 0 MB | "No storage information available" |
-| **Security** |   |  |
+| List spaces (oCIS) | 1. Log in an oCIS account with some spaces available<br>2. Click on spaces button on the list of files' bottom bar | Spaces listed with name, subtitle and image | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/spaces.feature) | |
+| Update spaces (oCIS) | 1. Log in an oCIS account with some spaces available<br>2. Click on spaces button on the bottom bar<br>3. Using web client, add a new space and refresh view in the app<br>4. Using web client, disable an existing space and refresh view in the app<br> | 2. Spaces listed with name, subtitle and image<br>3. New space listed<br>4. Disabled space not listed anymore | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/spaces.feature) | |
+| **User quota** | |  |
+| No restriction (unlimited) | 1. In web dashadmin, set a No restricted/unlimited quota<br>2. Open sidebar in the app | In the bottom of the sidebar it's displayed the account size with no limit |
+| 5GB | 1. In web dashadmin, set a 5GB quota | In the bottom of the sidebar it's displayed the account size out of 5GB, including % |
+| **Security** | `Settings` section  |  |
 | Passcode enabled | 1. Click on `Passcode lock` to enable<br>2. Enter same code twice correctly<br>3. Don't activate biometric security<br>4. Kill the app and open it again | 2. Correctly stored, no feedback message<br>4. Passcode asked | 
 | Disable passcode | 1. With passcode enabled, click on `Passcode lock` to disable<br>2. Enter current passcode<br>3. Close the app<br>4. Open the app<br> | Passcode is not asked |
 | Brute force protection | 1. Enable passcode and enter correct passcode to lock the app<br>2. Kill the app and open it again<br>3. Enter wrong passcode 3 times<br>4. Enter another wrong passcode<br>5. Keep entering wrong passcodes several times | 3. Wait 3 seconds to enter new attempts<br>4. Wait 5 seconds to enter new attempts<br>5. Every wrong attempt, time to wait for a new one increases | 
@@ -68,7 +67,7 @@ Add all automated that are not here
 | Upload from external app | 1. Enable any security method (passcode/pattern/biometrical)<br>2. Open an external app, like `Photos` or `Gallery`<br>3. Select some files and share them with ownCloud | Security method asked | 
 | Lock delay 1 minute | 1. Enable passcode lock<br>2. Click on `Lock application`<br>3. Set `After 1 minute`<br>4. Kill the app<br>5. Open the app immediately<br>6. Close the app and open after 1 minute | 5. Passcode lock not asked<br>6. Passcode lock asked  |  |  |
 | Lock access doc provider | 1. Enable passcode lock<br>2. Enable `Lock access from document provider`<br>3. Open app that supports Document Provider<br>4. Open sidemenu in that app<br>5. Click on the ownCloud account to browse through  | 4. ownCloud as `Locked`<br>5. Not posible because locking |  |  |
-| Change certificate | 1. Login in https server with a self-signed cert<br>2. After login, change the certificate in server<br>3. Refresh in the login view | Dialog is raised to warn the user of the certificate change and asking to accept |
+| Change certificate | 1. Login in https server with a self-signed cert<br>2. After login, change the certificate in server<br>3. Refresh in the login view | Dialog is shown to warn the user of the certificate change and asking to accept |
 | **Transfers** |   |  |
 | Upload a very big file | 1. Open FAB and select `Files`<br>2. Select one file from any provider which size is bigger than 500MB | File is uploaded.<br>Uploads view shows the file uploaded to the correct place with correct size in the `Uploaded` section | | |
 | Upload 1000 Files | 1. Open FAB and select `Files`<br>2. Select 1000 files from any provider. | Files are uploaded to the correct location.<br>Uploads view shows the list of 1000 files uploaded to the correct place with correct sizes in the `Uploaded` section|  | |
@@ -89,25 +88,24 @@ Add all automated that are not here
 | Account | 1. With two (al least) accounts in device, click on `Account to upload videos `<br>2. Select a different account to upload videos<br>3. Close the app<br>4. Take some videos with the camera | With the app closed, check in web or another client that the taken videos were uploaded in 15 minutes to the correct account|  |  |
 | Path | 1. Click on `Video upload path`<br>2. Select a different folder to upload videos in the selected account<br>3. Close the app<br>4. Take some videos with the camera | With the app closed, check in web or another client that the taken videos were uploaded in 15 minutes to the correct folder |  |  |
 | Camera folder | 1. Install another camera app in the device<br>2. Click on `Video upload path`<br>3. Click on `Camera folder`and select the folder from the newest installed camera app<br>4. Take videos with the installed camera app and with the built-in camera app<br>5. Wait 15 minutes| Only videos taken with the newest installed camera app are enqueued and then, uploaded |  |  |
-| **Upload from external** |   |  |
-| Upload a file from an external app | 1. Add two accounts<br>2. Open an external app that contain files(Photos, Google drive, dropbox...)<br>3. Select some files<br>4. Share them with oC<br>5. Select one of the accounts | Files are uploaded to the correct account and folder, and correctly managed in uploads view |  | 
-| Send text | 1. Add two accounts<br>2. Open an external app with text (a web browser f. ex)<br>3. Select text<br>4. Share the text with oC<br>5. Select one of the accounts | A txt file is created with the copied text after typing a correct name |
-| **Conflict handling** | TO DO  |  |
-| Update file | 1. Create a txt file, and download it to the app<br>2. Update the file in the server or in another client<br>3. Tap on the file| The content is updated |
-| Update file - Conflict Server | 1. Create a txt file in non-root folder, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Server" | 5. Conflict is detected and marked in file and parent folder<br>6. Server version is downloaded to the device |
-| Update file - Conflict Device | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Device" | 5. Conflict is detected and notification shows it<br>6. Device version is uploaded to the server |
-| Update file - Conflict Both | 1. Create a txt file, and download it to the app<br>2. Switch the device connection off<br>3. Update the file in the server and in the device<br>4. Switch the device connection on<br>5. Tap on the file<br>6. Solve the conflict with "Both" | 5. Conflict is detected and notification shows it<br>6. Device version is uploaded to the server and server version is downloaded |
-| **Download and preview** |   |  |
+| **Conflict handling** |   |  |
+| Update file | 1. Add a txt file to the account<br>2. Download it to the app by clicking on it<br>2. Update the file in the web or in another client<br>3. Open again the file by clicking on it | File content is updated with the changes | |  |
+| Update file - Conflict Server | 1. Add a txt file in non-root folder<br> 2. Download it to the app by clicking on it<br>3. Switch the device connection off<br>4. Modify the file in both web and  device<br>5. Switch the device connection on<br>6. Click on the file to open it<br>7. Solve the conflict with `Server` | 6. Conflict is detected and marked in file and parent folder<br>7. Server version is downloaded to the device |
+| Update file - Conflict Device |  1. Add a txt file in non-root folder<br> 2. Download it to the app by clicking on it<br>3. Switch the device connection off>4. Modify the file in both web and  device<br>5. Switch the device connection on<br>6. Click on the file to open it<br>7. Solve the conflict with `Device` | 6. Conflict is detected and marked in file and parent folder<br>6. Device version is uploaded to the server (check in web) |
+| Update file - Conflict Both |  1. Add a txt file in non-root folder<br> 2. Download it to the app by clicking on it<br>3. Switch the device connection off>4. Modify the file in both web and device<br>5. Switch the device connection on<br>6. Click on the file to open it<br>7. Solve the conflict with `Both` | 6. Conflict is detected and notification shows it<br>7. Device version is uploaded to the server and server version is downloaded |
+| **Previews** |   |  |
 | .txt | Download a txt file | The content is correctly displayed| [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/download.feature) | |
 | .png | Download a png file | Image is correctly displayed| | |
 | .jpg | Download a jpg file | Image is correctly displayed| | |
+| .svg | Open a SVG image | Image is correctly displayed |
 | .gif | Open a GIF file | GIF correctly reproduced in both orientations |
 | Audio without coverart | Open a MP3 file that does not include cover| Music played and placeholder note displayed |
 | Audio with coverart | Open a MP3 file that includes cover| Music played and cover displayed |
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward and change orientation | Video is streamed correctly |
 | Unsupported | Download a unsupported file (pdf, office...) | Menu to open in a different app is raised up| | |
-| Open with | 1. Download a file<br>2. Select the option `Open with`<br>3. Select an app from the list<br>4. Edit the file and save | 3. Correctly opened<br>4. Correctly edited and synced with server| | |
-| Open in web (oCIS) | 1. Click on 3-dot-button, and select `Open in <provider>` for any kind of file available to open in the server | File opened in browser| | |
+| **Open in web** | (Server with app providers)  |  |
+| Open in web | 1. Click on 3-dot-button of a file which type is open by an available app provider in the server (usually Office files)<br>2. Select `Open in <provider> web` | File opened in browser| | |
+| New document | 1. Click on FAB button<br>2. Select `New document`<br>3. Pick one item and give a name to the file<br>4. Open te file in web (as previous test) | 3. File created in the list with 0B<br>4. Empty file opened | |
 | **Details view** |   |  |
 | View | Open details view of a file | All info correctly displayed in both orientations | | |
 | Downloaded file | 1. Click on 3-dot-button on a downlaoded file, and select `Details`<br>2. Click on thumbnail | File is displayed | | |
@@ -124,6 +122,7 @@ Add all automated that are not here
 | Shortcut | 1. Set as av. offline two files and two folders<br>2. Click on av. offline shortcut in the bottom bar<br>3. Click on a file<br>4. Click on a folder | 2. All av. offline items are listed<br>3. File opened or previewed<br>4. Folder browsed | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/avoffline.feature) |  |
 | **Basic sync operations**||||||
 | Create folder | 1. Open FAB in list of files, root folder<br>2. Select `New folder`<br>3. Enter a correct name<br>4. Click `OK`| Folder created in root folder. Check in web | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/createfolder.feature) |  |
+| Open with | 1. Download a file<br>2. Select the option `Open with`<br>3. Select an app from the list<br>4. Edit the file and save | 3. Correctly opened<br>4. Correctly edited and synced with server| | |
 | Rename | 1. Select a file from the list by clicking on the 3-dot-button and click on `Rename`<br>2. Enter a correct name<br>3. Click `OK` | File renamed in list. Check in web | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/rename.feature) |  |
 | Copy file | 1. Select a file from the list by clicking on the 3-dot-button and click on `Copy`<br>2. Select a correct target location (including space in case of oCIS account) | File in the new location and not removed from original location.<br>Check in web that items were correctly copied to the correct location. | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/copy.feature)  |  |
 | Copy folder | 1. Select a folder that contains subfolders with files from the list by clicking on the 3-dot-button and click on `Copy`<br>2. Select a correct location (including space in case of oCIS account) | Folder in the new location and not removed from original location.<br>Check in web that items were correctly copied to the correct location.| [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/copy.feature) |  |
