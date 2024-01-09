@@ -2,6 +2,7 @@
 
 ### Regression test against oCIS 5.0.0-beta 
 
+Regreession test executed the week of the 18/12/2023 against oCIS 5.0.0-beta.1. The main target was validating the oCIS version, but the fact of releasig almost together oCIS and iOS made me decide to execute one regression test for both. That means, validating oCIS 5 and iOS 12 in one test plan
 
 
 **Device/s**: iPhoneXR v17.2 <br>
