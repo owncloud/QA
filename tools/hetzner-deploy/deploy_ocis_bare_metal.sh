@@ -45,8 +45,8 @@ if [ -z "$OCIS_VERSION" ]; then
 #  export OCIS_VERSION=v1.0.0-rc7
 #  export OCIS_VERSION=v2.0.0
   export OCIS_VERSION=v3.0.0-alpha.2
-  export OCIS_VERSION=daily
   export OCIS_VERSION=v5.0.0-alpha.4
+  export OCIS_VERSION=daily
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -122,6 +122,8 @@ go install go.etcd.io/bbolt/cmd/bbolt@latest   # cli-tool to inspect boltdb file
 export PATH="$PATH:/root/go/bin"
 echo 'PATH="$PATH:/root/go/bin"' >> ~/.bashrc
 
+chmod a+rx /root	# we want to access our test files, when we are user ocis.
+
 # Check if this is an arm64 device. E.g. raspberry
 test "$(uname -m)" = aarch64 && ocis_url=$(echo "$ocis_url" | sed -e 's/-amd64/-arm64/')
 wget -O /usr/local/bin/ocis $ocis_url
@@ -185,6 +187,7 @@ ln -s $ocis_data ~/o
 
 echo >> ~/.bashrc "export OCIS_CONFIG_DIR=$ocis_data"
 echo >> ~/.bashrc 'export OCIS_BASE_DATA_PATH=/etc/ocis'
+echo >> ~/.bashrc 'export OCIS_TOPDIR=/var/lib/ocis'	# for ocis-import.py
 
 # service ocis stop
 rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.
@@ -279,7 +282,7 @@ for i in \$(seq 1 10); do
     break
   fi
   sleep 10
-  echo "CF_DNS.msg not found. Retrying \$i ..."
+  echo "CF_DNS.msg not yet there. Retrying \$i ..."
   test "\$i" == 10 && echo " gving up."
 done
 

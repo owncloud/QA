@@ -309,6 +309,8 @@ INIT_SCRIPT << EOF
 TASKd=\$HOME/tasks
 # ls -la \$TASKd
 
+chmod a+rx /root	# we want to access our testfiles, when we are user www-data
+
 ## Prepare FQDN and env.sh as early as possible, so that cf_dns can run in parallel.
 ## FIXME: Can we run cf_dns before we pass control into the new machine?
 
