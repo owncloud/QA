@@ -26,7 +26,7 @@ Create a guest user via email using a password that doesn't fit password policy 
 **Users Menu** |  |   |
 |  |   |
 Delete a guest user in user's menu | The user is deleted and no longer available in oC. Check that user disappears from sharetabviews | :construction:  |
-Try to create a guest user in users menu adding it to the guest_group| The user should not be created. A warning should be shown | :construction:  |
+Try to create a guest user in users menu adding it to the guest_app group| The user is created. but cannot be added to the group | :construction:  |
 Change the guest user's password in users menu | The new password is set for the guest user | :construction:  |
 **Guest User account**|  |   |
 |  |   |
