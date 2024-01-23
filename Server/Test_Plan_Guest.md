@@ -20,7 +20,7 @@ Create a guest user via email |  | :construction:  |
 Try to create a guest user via email sharing from another guest user | Only Federation is offered, not guest | :construction:  |
 Try to create a guest user via email when a server email is not set or it is invalid|  An error message should be shown | :construction:  |
 Try to create a guest user via email with an invalid email format | An error message should be shown | :construction:  |
-Try to create a guest user via email with an email used by a normal user | An warning about a username with that email already exists should be shown | :construction:  |
+Try to create a guest user via email with an email used by a normal user | Converted into sharing with this normal user | :construction:  |
 Create a guest user via email using a password that fits password policy | Check that the user receives the email and can register into oC | :construction:  | 
 Create a guest user via email using a password that doesn't fit password policy | Check that the user receives the email and cannot register into oC. A warning related to password policy should be shown | :construction:  |
 **Users Menu** |  |   |
