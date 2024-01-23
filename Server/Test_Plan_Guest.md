@@ -17,16 +17,16 @@ Disable Guest app via Web Frontend (Classic Design) using App Section in Setting
 **Add Guest User in sharetabview** |  |   |
 |  |   |
 Create a guest user via email |  | :construction:  |
-Create a guest user via email sharing from another guest user |  | :construction:  |
+Try to create a guest user via email sharing from another guest user | Only Federation is offered, not guest | :construction:  |
 Try to create a guest user via email when a server email is not set or it is invalid|  An error message should be shown | :construction:  |
 Try to create a guest user via email with an invalid email format | An error message should be shown | :construction:  |
-Try to create a guest user via email with an email used by a normal user | An warning about a username with that email already exists should be shown | :construction:  |
+Try to create a guest user via email with an email used by a normal user | Converted into sharing with this normal user | :construction:  |
 Create a guest user via email using a password that fits password policy | Check that the user receives the email and can register into oC | :construction:  | 
 Create a guest user via email using a password that doesn't fit password policy | Check that the user receives the email and cannot register into oC. A warning related to password policy should be shown | :construction:  |
 **Users Menu** |  |   |
 |  |   |
 Delete a guest user in user's menu | The user is deleted and no longer available in oC. Check that user disappears from sharetabviews | :construction:  |
-Try to create a guest user in users menu adding it to the guest_group| The user should not be created. A warning should be shown | :construction:  |
+Try to create a guest user in users menu adding it to the guest_app group| The user is created. but cannot be added to the group | :construction:  |
 Change the guest user's password in users menu | The new password is set for the guest user | :construction:  |
 **Guest User account**|  |   |
 |  |   |
