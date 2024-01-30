@@ -22,6 +22,20 @@ phpver=$(ls /etc/php/ | head -n 1)
 # There is no php7.4-pear, not even in ondrej's ppa.
 apt install -y php-pear php$phpver-dev libsmbclient libsmbclient-dev make smbclient || exit -1
 
+## This is what Gerald did:
+# smbclient_packages="libsmbclient-dev php-dev php-pear"
+# apt install -y $smbclient_packages
+# pecl channel-update pecl.php.net
+# mkdir -p /tmp/pear/cache
+# pecl install smbclient-stable
+# echo "extension=smbclient.so" > /etc/php/7.4/mods-available/smbclient.ini
+# phpenmod smbclient
+# systemctl restart apache2
+# result=$(php -m | grep smbclient)
+# if [[ $result =~  'libsmbclient' ]] && [[ $result =~ 'smbclient' ]]; then
+#        echo "extension was successfull installed"
+# else ...
+
 pecl install smbclient-stable || exit 1
 echo 'extension="smbclient.so"' > /etc/php/$phpver/mods-available/smbclient.ini
 phpenmod -v ALL smbclient

@@ -4,6 +4,8 @@
 # TODO: run all the tests mentioned in:
 # - https://doc.staging.owncloud.com/server/next/admin_manual/enterprise/authentication/kerberos.html
 #
+# TODO: compare ../gerald_kerberos_setup.sh
+#
 source ./env.sh		# needed for oc10_fqdn and HCLOUD_NETWORK_NAME
 
 app=kerberos

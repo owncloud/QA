@@ -541,6 +541,15 @@ su - postgres -c "psql -c 'DROP ROLE     owncloud'" 2>&1 | grep -v 'does not exi
 (echo "$dbpass"; echo "$dbpass"; ) | su - postgres -c "createuser -e -P owncloud" 2>&1 | grep -v '^Enter '
 su - postgres -c "createdb -e -O owncloud owncloud"
 
+## this is what Gerald did:
+# # enable virtual host ->
+# a2dissite 000-default
+# a2ensite owncloud.conf
+# # configure database ->
+# sed -i "/\[mysqld\]/atransaction-isolation = READ-COMMITTED\nperformance_schema = on" /etc/mysql/mariadb.conf.d/50-server.cnf
+# systemctl start mariadb
+
+
 # ... and myql/mariadb
 mysql -u root -e "DROP DATABASE owncloud;" 2>/dev/null || true
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS owncloud; GRANT ALL PRIVILEGES ON owncloud.* TO owncloud@localhost IDENTIFIED BY '$dbpass'"
@@ -565,13 +574,26 @@ if [ -z "$OC10_WITH_INDEX_PHP" ]; then
   occ maintenance:update:htaccess					# index.php less setup
 fi
 
-echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron" > oc.crontab
+
+echo "*/5  *  *  *  * /var/www/owncloud/occ system:cron"         > oc.crontab
+echo "0    2  *  *  * /var/www/owncloud/occ dav:cleanup-chunks" >> oc.crontab
 crontab -u www-data oc.crontab		# only the crontab command triggers a reload.
 occ background:cron
 
 occ config:system:set memcache.local --value '\OC\Memcache\APCu'
 occ config:system:set memcache.locking --value '\OC\Memcache\Redis'
 occ config:system:set redis --type json --value '{"host": "127.0.0.1", "port": "6379"}'
+
+cat <<EOM >/etc/logrotate.d/owncloud
+/var/www/owncloud/data/owncloud.log {
+  size 10M
+  rotate 12
+  copytruncate
+  missingok
+  compress
+  compresscmd /bin/gzip
+}
+EOM
 
 ## initialize mailhog
 docker rm mailhog --force 2>/dev/null && true
