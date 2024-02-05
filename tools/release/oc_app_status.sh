@@ -301,6 +301,7 @@ cheers, Jürgen
 For #updates channel, replace "https://"  with "https: //"
 
 Post also as a new item to https://kiteworks.monday.com/boards -> "Marketing Requests"
+ -> forward email to internal board inbox, or
  -> Please check if suitable for e.g. newsletter: ...
 
 
