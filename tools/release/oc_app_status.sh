@@ -117,7 +117,7 @@ if [ -n "$gh_rel_message" -a "$gh_rel_message" != 'null' ]; then
   echo "       $gh_rel_message"
   if [ "$gh_rel_message" = "Not Found" ]; then
     if [ "$gh_tag" = "v$app_version" ]; then
-      gh_tag="v${app_version}-rc1"
+      gh_tag="v${app_version}-rc.1"
       $curl > $gh_rel_file -s "$api_url/releases/tags/$gh_tag"
       gh_rel_message=$(cat "$gh_rel_file" | jq -r '.message')
       if [ -n "$gh_rel_message" -a "$gh_rel_message" != 'null' ]; then
@@ -282,7 +282,7 @@ cat <<EOF # | sed -e 's@https://@https: //@g'
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 To: release-coordination@owncloud.com
-Subject: New app release: $market_title $market_relvers
+Subject: New oc10 app release: $market_title $market_relvers
 
 Hi all!
 Today we released the long awaited version $app_version of the $appname app.
@@ -299,5 +299,9 @@ cheers, Jürgen
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 For #updates channel, replace "https://"  with "https: //"
+
+Post also as a new item to https://kiteworks.monday.com/boards -> "Marketing Requests"
+ -> Please check if suitable for e.g. newsletter: ...
+
 
 EOF
