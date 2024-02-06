@@ -2,8 +2,9 @@
 #
 # 2024-02-05, jw@owncloud.com
 #
-# 
-# 
+# TODO: 
+#  - add volumes.
+#
 
 echo "Estimated setup time: 5 minutes ..."
 
@@ -28,14 +29,16 @@ INIT_SCRIPT << EOF
   echo >> ~/env.sh "ADMIN_PASS=$admin_pass"
 
   # https://tracker.ceph.com/issues/59103: need the pacific release here. The newer quincy does not work on ubuntu 22.04
-  # (cd /usr/local/bin; curl --silent --remote-name --location https://github.com/ceph/ceph/raw/$ceph_rel/src/cephadm/cephadm ) 
-  # chmod a+x /usr/local/bin/cephadm 
-  cephadm version
+  # (cd /usr/local/bin; curl --silent --remote-name --location https://github.com/ceph/ceph/raw/$ceph_rel/src/cephadm/cephadm )
+  # chmod a+x /usr/local/bin/cephadm
   cephadm add-repo --release $ceph_rel
   cephadm install
   cephadm version
+  cephadm install ceph-common
+  ceph -v
 
   cephadm bootstrap --mon-ip $IPADDR --initial-dashboard-password $admin_pass
+  ceph status
 
   cat <<EOM
 ---------------------------------------------
@@ -46,14 +49,7 @@ Attach:
   - network "ceph.jw" 10.100.0.0/16
   - volume "volume-ceph-hel1-1" as /dev/sdb (but umount)
 
-cephadm --create-daemon mon.a -i a
-
-cephadm --create-daemon mgr.x -i x
-
-cephadm --create-daemon osd.0 -i 0
-
-
-
+And now?
 
 ---------------------------------------------
 EOM
