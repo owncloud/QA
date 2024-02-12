@@ -469,7 +469,7 @@ echo >> /etc/exports "/pub            *(rw,insecure,no_root_squash,no_all_squash
 exportfs -a
 showmount -e localhost
 # should now reflect the contents of /etc/exports
-mkdir -p /var/www/owncloud/nfs-{hard,soft}-data
+mkdir -p /var/www/nfs-{hard,soft}-data
 mount -t nfs -o proto=tcp,hard 			  localhost:/pub/data /var/www/nfs-hard-data	# prone to freezing processes
 mount -t nfs -o proto=tcp,soft,timeo=50,retrans=2 localhost:/pub/data /var/www/nfs-soft-data	# prone to data loss
 ls -la /var/www/nfs-*-data
