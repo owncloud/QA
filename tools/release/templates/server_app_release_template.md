@@ -8,7 +8,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 ### Product approval 
 
 - [ ] Verify transifex commits (enterprise should update weekly, others daily): If folder `l10n` exists, then `git log` should show '[tx] updated from transifex` ...
-- [ ] Ping ProductManagement to check `info.xml` description and screenshot
+- [ ] Check `info.xml` description and screenshot
 
 ### QA
 
@@ -49,7 +49,6 @@ All actions to be done on the release branch (`git pull; git checkout -b release
     - [ ] Do changelog tests
     - [ ] Do regression tests
     - [ ] Watch out for untranslated strings when locale is de oder de_DE.
-    - [ ] PHP 7.3 compatibility (`HCLOUD_SERVER_IMAGE=debian-10 OC10_VERSION=10.11 oc10.sh ...`)
     - [ ] => Final "Go" from QA (set 'QA-ready' label) => else do another RC after fixing issues in the "release-$version" branch
 
 #### Final
@@ -65,6 +64,7 @@ All actions to be done on the release branch (`git pull; git checkout -b release
 - [ ] Publish tarball for customers `github/owncloud/QA/tools/portal_upload_app.sh` - [old 10](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Enterprise%2FownCloud-10), [old 10.0](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Server%2FownCloud-10.0) and [new portal](https://portal.owncloud.com/apps/files/?dir=/Portal%20Data/All%20Account%20Data/ownCloud%20Enterprise%20Resources%20Data/Server&fileid=5661) (see [handbook](https://confluence.owncloud.com/display/OG/Releasing+Apps) for details)
 - [ ] Send mail to release-coordination with link to this ticket and to the changelog `github/owncloud/QA/tools/release/oc_release.sh app:status`
 - [ ] Copy email to rocket chat `#updates` channel (`remove all `https://` to avoid auto-expansions.)
+- [ ] Submit mail-text as a Markting Request via https://kiteworks.monday.com/boards/5983659465/views/130504071
 
 ### Post-release
 
