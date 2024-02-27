@@ -21,11 +21,14 @@ echo "Estimated setup time: 5 minutes ..."
 
 data_exporter_vers=0.3.0
 
-vers=10.13.3
-vers=10.13.4
+vers=10.14.0-rc.2
+vers=10.14.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "10.14.0"  -o "$vers" = "10.14"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20240226.tar.bz2
+test "$vers" = "10.14.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240221.tar.bz2
+test "$vers" = "10.14.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240219.tar.bz2
 test "$vers" = "10.13.4"  -o "$vers" = "10.13"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231213.tar.bz2
 test "$vers" = "10.13.4-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20231213.tar.bz2
 test "$vers" = "10.13.3"                        && tar=https://download.owncloud.com/server/stable/owncloud-complete-20231121.tar.bz2
@@ -88,7 +91,7 @@ esac
 # webroute=/owncloud	# what we document
 webroute=/		# what users expect
 admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
-location=hel1		# hel1, fsn1, nbg1
+location=fsn1	#hel1		# hel1, fsn1, nbg1
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "Usage examples:"
