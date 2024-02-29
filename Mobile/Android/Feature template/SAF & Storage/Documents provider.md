@@ -48,7 +48,7 @@ Recommended app to test: [Files](https://play.google.com/store/apps/details?id=c
 | Rename folder non-root | Rename a folder in non-root folder in SAF | Correctly renamed, check in the app or web UI |  |
 | Select several to rename | Select several items in SAF| Rename is disabled |  |
 | Rename to empty name | Set blank the item name while renaming in SAF | Error: `You need to rename this` |   |
-| Cancel rename | Open rename option<br>Cancel without renaming in SAF | File is not renamed | P t13 |
+| Cancel rename | Open rename option<br>Cancel without renaming in SAF | File is not renamed |  |
 | Rename item with an existing name | Rename any item to another existing name in SAF | Error: `A file with this name already exist`|  |
 | Rename item with special characters | Rename any item using special characters like &%ä^ in SAF | Correctly renamed, check in the app or web UI |  |
 | Rename item with forbidden characters |Rename any item using forbidden characters like \ or / in SAF| Error: `Failed to rename document` |  |
@@ -58,47 +58,39 @@ Recommended app to test: [Files](https://play.google.com/store/apps/details?id=c
 | Rename item with no server connection | Rename any item with no server connection in SAF|Error: `Failed to rename document` |   |
 | Rename item with server in maintenance mode | Rename any item with server in maintenance mode in SAF| Error: `Failed to rename document` |  |
 |**Copy**|||
-| Copy file same oC10 account |  1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy a file to another location in the same oC10 account| File copied. Check in web |  |  |
-| Copy file to same space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file to another location in the same space | File copied. Check in web |  |  |
-| Copy folder to same space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders to another location in the same space | File copied. Check in web |  | Fails with many subfolders|
-| Copy many items to same space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders to another location in the same space | All items copied. Check in web |  |  |
-| Copy file to another space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file to another space in same provider | File copied. Check in web | |  |
-| Copy folder to another space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders to another space in same provider | Folder copied. Check in web |  | Fails with many subfolders |
-| Copy many items to another space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders to another space in same provider  | All items copied. Check in web | | Not able to copy more than 500. Unestable.  |
-| Copy file other oC10 account | 1. Add oC10 account<br>2. Open any app with access to Document Provider<br>3. Copy any file to other oC10 and oCIS accounts | File copied. Check in web |  | 
-| Copy file to another oCIS account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file to another account (two different spaces) and oC10 account | File copied. Check in web |  | Sometimes fails, unestable. The higher the size to move, the more likely it fails   |
+| Copy file same oC10 account |  1. Add oC10 account<br>2. Open any app with access to Document Provider<br>3. Copy a file to another location in the same oC10 account| File copied. Check in web |  |  |
+| Copy many files same oC10 account |  1. Add oC10 account<br>2. Open any app with access to Document Provider<br>3. Copy 500 files to another location in the same oC10 account| Files copied. Check in web |  |  |
+| Copy file to same space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file to another location in the same space | File copied. Check in web | |  |
+| Copy folder to same space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders to another location in the same space | File copied. Check in web |  | Fails with many files and subfolders |
+| Copy many items to same space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders to another location in the same space | All items copied. Check in web |  | Fails with many files and subfolders |
+| Copy file to another space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file to another space in same provider | File copied. Check in web |  |  |
+| Copy folder to another space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders to another space in same provider | Folder copied. Check in web |  |  |
+| Copy many items to another space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders to another space in same provider  | All items copied. Check in web |  | Fails with many items  |
+| Copy file other oC10 account | 1. Add oC10 account<br>2. Open any app with access to Document Provider<br>3. Copy any file to other oC10 and oCIS accounts | File copied. Check in web |   | 
+| Copy file to another oCIS account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file to another account (two different spaces) and oC10 account | File copied. Check in web |  | Sometimes fails, unestable. The higher the size to move, the more likely it fails. In oC10 fails when copying to non-root folder   |
 | Copy folder to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders to another account (two different spaces) and oC10 account | Folder copied. Check in web |  | Sometimes fails, unestable. The higher the size to move, the more likely it fails |
 | Copy many items to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders to another account (two different spaces) and oC10 account | All items copied. Check in web |  | Sometimes fails, unestable. The higher the size to move, the more likely it fails|
-| Copy file to another provider | 1. Add oCIS and oC10 accounts<br>2. Open any app with access to Document Provider<br>3. Copy file from oC accounts to another provider in device | File copied there |  |  |
-| Copy folder to another provider | 1. Add oCIS and oC10 accounts<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders to another provider in device | Folder copied | |  |
-| Copy many items to another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders to another provider in device | All items copied |  |  |
-| Copy file from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file from another provider to oC10 and oCIS account (any space) | File created in accounts (check in web) | |  |
-| Copy folder from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders from another provider to oC10 and oCIS account (any space) | Folders created in accounts (check in web) |  |  |
+| Copy file from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy file from another provider to oC10 and oCIS account (any space) | File created in accounts (check in web) |  |  |
+| Copy folder from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders from another provider to oC10 and oCIS account (any space) | Folders created in accounts (check in web) | |  |
 | Copy many items from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders from another provider to oC10 and oCIS account (any space) | All items created in accounts (check in web) |  |  |
-| No connection | Copy an item with no connection | Correct error, item not copied | |  |
-| Source removed | Copy an item and before submitting, remove the source item from web UI | Correct error, item not copied |  |  |
-| Target removed | Copy an item and before submitting, remove the target folder from web UI | Correct error, item not copied | |  |
 |**Move**|||
-| Move file to same oC10 account | Move a file to another location in the same oC10 account| File moved. Check in web |  |  |
-| Move file to same oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another location in the same space | File moved. Check in web |  |  |
-| Move folder to same oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another location in the same space | File moved. Check in web |  |  |
-| Move many items to same oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another location in the same space | All items  moved. Check in web |  |  |
-| Move file to another oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another space in same provider | File moved. Check in web |  |  |
-| Move folder to another oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another space in same provider | Folder moved. Check in web |  |  |
-| Move many items to another oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another space in same provider  | All items moved. Check in web |   |  |
-| Move file to another oC10 account | 1. Add oC10 account<br>2. Open any app with access to Document Provider<br>3. Move file to another oC10 account and oCIS (two different spaces) a | File moved. Check in web |  |  |
-| Move file to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another account (two different spaces) and oC10 | File moved. Check in web |  |  |
-| Move folder to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another account (two different spaces) and oC10 | Folder moved. Check in web |  | Unestable |
-| Move many items to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another account (two different spaces) and oC10 | All items moved. Check in web | | |
+| Move file to same oC10 account | Move a file to another location in the same oC10 account| File moved. Check in web |   |  |
+| Move file to same oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another location in the same space | File moved. Check in web |    |
+| Move folder to same oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another location in the same space | File moved. Check in web |   |  |
+| Move many items to same oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another location in the same space | All items  moved. Check in web |   |  |
+| Move file to another oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another space in same provider | File moved. Check in web |    |  |
+| Move folder to another oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another space in same provider | Folder moved. Check in web |   |  |
+| Move many items to another oCIS space | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another space in same provider  | All items moved. Check in web |    |  |
+| Move file to another oC10 account | 1. Add oC10 account<br>2. Open any app with access to Document Provider<br>3. Move file to another oC10 account and oCIS (two different spaces) account | File moved. Check in web |   | "Couldn't copy 3 items" in oC10 but works in oCIS |
+| Move file to another oCIS account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another account (two different spaces)  | File moved. Check in web |   |  |
+| Move folder to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another account (two different spaces) and oC10 | Folder moved. Check in web |   | Unestable, not always work fine |
+| Move many items to another oC account | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another account (two different spaces) and oC10 | All items moved. Check in web |  | Unestable, not always work fine |
 | Move file to another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file to another provider in device | File moved |   |  |
-| Move folder to another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another provider in device | Folder moved | |  |
-| Move many items to another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another provider in device | All items moved |  | Moving forever till timeout |
-| Move file from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file from another provider to oC10 and oCIS account (any space) | File created in accounts (check in web) |  |  |
-| Move folder from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders from another provider to oC10 and oCIS account (any space) | Folders created in accounts (check in web) |  | Unestable |
-| Move many items from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders from another provider to oC10 and oCIS account (any space) | All items created in accounts (check in web) | |  |
-| No connection | Move an item with no connection |Correct error, item not moved |  |  |
-| Source removed | Move an item and before submitting, remove the source item from web UI | Correct error, item not moved |  |  |
-| Target removed | Move an item and before submitting, remove the target folder from web UI | Correct error, item not moved |  |  |
+| Move folder to another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move folder with subfolders to another provider in device | Folder moved |  |  |
+| Move many items to another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move more than 500 files and folders to another provider in device | All items moved |   |  |
+| Move file from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Move file from another provider to oC10 and oCIS account (any space) | File created in accounts (check in web) |   |  |
+| Move folder from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy folder with subfolders from another provider to oC10 and oCIS account (any space) | Folders created in accounts (check in web) |    | Unestable, not always work fine |
+| Move many items from another provider | 1. Add oCIS account<br>2. Open any app with access to Document Provider<br>3. Copy more than 500 files and folders from another provider to oC10 and oCIS account (any space) | All items created in accounts (check in web) |   |Unestable, not always work fine|
 |**Delete**|||
 | Delete file root | Delete a file in root folder | Correctly deleted, check in the app or web UI |   |
 | Delete file non-root | Delete a file in non-root folder | Correctly deleted, check in the app or web UI |   |
