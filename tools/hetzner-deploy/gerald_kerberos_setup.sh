@@ -17,8 +17,8 @@ OWNCLOUD_DATA_DIR="/var/www/owncloud/data"
 DATABASE_TYPE="mysql"
 DATABASE_HOST="localhost"
 DATABASE_NAME="owncloud"
-DATABASE_USER="owncloud"
-DATABASE_PASSWORD="owncloud"
+DATABASE_USER="---dummy-username---"
+DATABASE_PASSWORD="---dummy-password---"
 
 USE_REDIS_LOCAL=true
 REDIS_HOST="127.0.0.1"
@@ -29,8 +29,8 @@ USE_SMBCLIENT=true
 USE_LDAP=true
 LDAP_HOST_IP="10.11.0.2"
 LDAP_HOST_DOMAIN="ad01.kerberos.test.owncloud.works"
-LDAP_ADMIN_USER="admin"
-LDAP_PASSWORD="!owncloud123"
+LDAP_ADMIN_USER="---dummy-admin-name---"
+LDAP_PASSWORD="---dummy-pasword---"
 LDAP_DOMAIN="kerberos.test.owncloud.works"
 LDAP_LOGIN="${LDAP_ADMIN_USER}@${LDAP_DOMAIN}"
 LDAP_BASE_DN="dc=kerberos,dc=test,dc=owncloud,dc=works"
