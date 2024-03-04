@@ -12,7 +12,10 @@
 
 echo "Estimated setup time: 2 minutes ..."
 
+vers=10.13.4
 vers=10.14.0
+export HCLOUD_SERVER_IMAGE=ubuntu-20.04	# works!
+export HCLOUD_SERVER_IMAGE=ubuntu-22.04 # works!
 d_vers=$(echo $vers  | tr '[A-Z]' '[a-z]' | tr -d .=+-)-$(date +%Y%m%d)
 
 domain=jw-qa.owncloud.works
