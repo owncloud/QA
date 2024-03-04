@@ -26,6 +26,7 @@ vers=10.14.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
+test "$vers" = "php8"                           && tar=/home/testy/src/github/owncloud/QA/tools/hetzner-deploy/core-10.13.4-pre-php8.tar.bz2
 test "$vers" = "10.14.0"  -o "$vers" = "10.14"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20240226.tar.bz2
 test "$vers" = "10.14.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240221.tar.bz2
 test "$vers" = "10.14.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240219.tar.bz2
@@ -68,6 +69,10 @@ test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'pgsql1
 test -z "$OC10_DATADIR" && OC10_DATADIR=data		# must exist. Relative to /var/www/owncloud, if relative.
 
 case $vers in
+  *php8* )
+    # use PHP 8.2 or 8.3
+    test -z "$HCLOUD_SERVER_IMAGE" && export HCLOUD_SERVER_IMAGE=debian-12
+    ;;
   10.9.1 | 10.10 | 10.10.* )
     # Server 10.10 is incompatible with PHP 8.1, but we install php-7-4 from ondrej's ppa.
     # We switch the default to the new 'problematic' image, but we want to be able to manually override this.
@@ -290,6 +295,13 @@ mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if c
 source $mydir/lib/make_machine.sh -L $location -t $machine_type -u $d_name -p git,screen,wget,apache2,ssl-cert,docker.io,jq "${ARGV[@]}"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin
 
+case "$tar" in
+  /*)
+  # OC10_TAR_URL can be a local file. In this case we push it now via scp, as we cannot pull it later via curl.
+  scp $tar root@$IPADDR:
+  ;;
+esac
+
 if [ -n "$network" ]; then
   if [ -z "$(which hcloud)" ]; then
     echo "ERROR: HCLOUD_NETWORK_NAME=$network but no hcloud binary found."
@@ -426,6 +438,7 @@ case "\$(lsb_release -d -s)" in
     aptQ install -y php-phpseclib || echo "php-phpseclib seen in https://github.com/owncloud/docs-server/pull/369/files failed to install, check https://phpseclib.com/docs/install"
     ;;
   *)
+    # ubuntu 20.04 or older with php 7.4, but also debian-12 with intentionally php 8.2
     aptQ install -y libapache2-mod-php php-imagick php-common php-curl php-gd php-imap php-intl
     aptQ install -y php-ldap php-pgsql php-json php-mbstring php-mysql php-sqlite3 php-ssh2
     aptQ install -y php-xml php-zip php-apcu php-redis php-gmp
@@ -433,14 +446,27 @@ case "\$(lsb_release -d -s)" in
 esac
 
 php --version
-if [ -n "\$(php --version | grep 'PHP 8')" ]; then
-  echo ""
-  echo "Warning: ownCloud does not run on PHP 8"
-  echo "Check if '\$(lsb_release -d -s)' is covered in $0"
-  echo ""
-  echo "Press Enter to remove the version checks from lib/base.php and try anyway..."
-  read a
-fi
+case $vers in
+  *php8* )
+    if [ -n "\$(php --version | grep 'PHP 7')" ]; then
+      echo ""
+      echo "Warning: this ownCloud version is for PHP 8"
+      echo ""
+      echo "Press Enter to try anyway..."
+      read a
+    fi
+    ;;
+  *)
+    if [ -n "\$(php --version | grep 'PHP 8')" ]; then
+      echo ""
+      echo "Warning: ownCloud does not run on PHP 8"
+      echo "Check if '\$(lsb_release -d -s)' is covered in $0"
+      echo ""
+      echo "Press Enter to remove the version checks from lib/base.php and try anyway..."
+      read a
+    fi
+    ;;
+esac
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
 aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl python3-pil
@@ -487,8 +513,17 @@ if [ -f owncloud/config/config.php ]; then
 fi
 # set -x
 echo "... installing $tar"
-echo "+ curl -L $tar | tar jxf -"
-curl -L $tar | tar jxf - || exit 1
+case "$tar" in
+  /*)
+    echo "+ tar jxf /root/\$(basename $tar)"
+    tar jxf /root/\$(basename $tar) || exit 1
+    ;;
+  *)
+    echo "+ curl -L $tar | tar jxf -"
+    curl -L $tar | tar jxf - || exit 1
+    ;;
+esac
+
 chown -R www-data. owncloud
 # chmod a+x owncloud/tests/acceptance/run.sh	# in case we want to run some acceptance tests here.
 
