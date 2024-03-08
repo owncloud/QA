@@ -144,6 +144,7 @@ test -z "$IPADDR" && exit 1
 
 ssh-keygen -f ~/.ssh/known_hosts -R $IPADDR	# needed to make life easier later.
 # StrictHostKeyChecking=no automatically adds new host keys and accepts changed host keys.
+# maybe 'ssh -o UserKnownHostsFile=/dev/null' helps?
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 last; do
   to=5

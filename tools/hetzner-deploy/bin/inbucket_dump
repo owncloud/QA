@@ -1,0 +1,8 @@
+#! /bin/sh
+#
+
+# find a running inbucket container...
+inb=$(docker ps | grep inbucket | cut -f1 -d' ')
+
+# hack. 
+docker exec $inb /bin/sh -c 'for m in /storage/mail/*/*/*/*.raw; do echo =======================================================================; cat $m; done'

@@ -18,13 +18,16 @@ export HCLOUD_SERVER_IMAGE=ubuntu-20.04	# works!
 export HCLOUD_SERVER_IMAGE=ubuntu-22.04 # works!
 d_vers=$(echo $vers  | tr '[A-Z]' '[a-z]' | tr -d .=+-)-$(date +%Y%m%d)
 
+machine_type=cx21
+machine_type=cx31	# when using an s3 server and or clamav, e.g. ldbv
+
 domain=jw-qa.owncloud.works
 test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$d_vers" | sed -e 's/-\?alpha/a/g' -e 's/-\?beta/b/g' -e 's/-\?rc/rc/g')"
 OC10_FQDN="$(echo "$OC10_DNSNAME" | tr '[A-Z]_' '[a-z]-' | tr -d =+ | tr ._ -).$domain"
 
 d_name=oc-$d_vers
 mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
-source $mydir/lib/make_machine.sh -u $d_name -p git,screen,docker.io,wget "$@"
+source $mydir/lib/make_machine.sh -t $machine_type -u $d_name -p git,screen,docker.io,wget "$@"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin
 
 HOST_HTTP_PORT=8080
@@ -35,6 +38,7 @@ export LC_ALL=C
 
 # Let certbot come by as early as possible.
 apt install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare apache2
+apt install -y docker-compose || true	# obsolete?
 apachectl configtest
 
 for mod in ssl headers env dir mime unique_id rewrite setenvif proxy_http; do
@@ -128,6 +132,10 @@ For direct docker (wthout ssl), try:
 
 Normally, just do:
  firefox https://$OC10_FQDN
+
+To access inbucket mails, a) locally, b) from remote:
+  socat -dd TCP-LISTEN:9680,fork,reuseaddr TCP:localhost:9000
+  firefox http://$IPADDR:9680
 
 You can find config, apps, and data folders under /root/ocmount
 --------------------------------------------------------------------

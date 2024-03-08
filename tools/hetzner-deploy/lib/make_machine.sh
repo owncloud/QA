@@ -4,6 +4,9 @@
 # 2021-03-01 jw, 	support for POSTINIT_MSG, POSTINIT_BASHRC added.
 # 2021-07-16 jw, 	print better instructions also when running standalone
 # 2022-09-12, jw	if cf_dns_add_move.sh is found, automate cloudflare DNS and certbot.
+#
+# TODO:
+#  - ssh -o UserKnownHostsFile=/dev/null  could simplify things...
 
 if [ -z "$BASH_SOURCE" ]; then
   libdir=$(dirname $0)/lib	# a source command does not update $0, we have to add the lib ourselves. grrr.
