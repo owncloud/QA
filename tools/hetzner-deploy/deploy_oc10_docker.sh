@@ -108,7 +108,7 @@ systemctl restart apache2
 
 
 mkdir -p /root/ocmount
-docker run --name $d_name -d --rm -v /root/ocmount:/mnt/data -e OWNCLOUD_TRUSTED_DOMAINS=$OC10_FQDN,$IPADDR -p $HOST_HTTP_PORT:$DOCKER_HTTP_PORT owncloud/server:$vers
+docker run --name $d_name -d --rm -v /root/ocmount:/mnt/data -e OWNCLOUD_OVERWRITE_PROTOCOL=https -e OWNCLOUD_TRUSTED_DOMAINS=$OC10_FQDN,$IPADDR -p $HOST_HTTP_PORT:$DOCKER_HTTP_PORT owncloud/server:$vers
 sleep 3 	# wait for owncloud to initialize
 chmod a+rx .	# so that www-data can enter here.
 install_app() { curl -L -s \$1 | su www-data -s /bin/sh -c 'tar zxvf - -C /root/ocmount/apps'; }
@@ -136,6 +136,9 @@ Normally, just do:
 To access inbucket mails, a) locally, b) from remote:
   socat -dd TCP-LISTEN:9680,fork,reuseaddr TCP:localhost:9000
   firefox http://$IPADDR:9680
+
+ATTENTION: this is an ssl-offloading proxy.
+	Run docker with OWNCLOUD_OVERWRITE_PROTOCOL=https
 
 You can find config, apps, and data folders under /root/ocmount
 --------------------------------------------------------------------
