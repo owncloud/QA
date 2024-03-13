@@ -60,6 +60,9 @@ Context: <br>
 | Existing account | 1. Enter correct URL of server with OIDC<br>2. Click on right arrow<br>3. Enter correct username and password in browser, and authorize<br>4. Repeat all steps to add again same account | Error: "An account for the same user and server already exists in the device" |  |
 |**Redirections**||||||
 | 301 | 1. Enter an URL with a 301 redirection<br>2. Connect | Redirection followed to the new location. New Location displayed in Login view  |  |  |  |
+|**Edit account**||||||
+| Password (basic auth) | 1. In server admin dashboard, change the password of any attached account that uses basic auth<br>2. Reopen the app | An snackbar indicates `Authentication failed` with the option to sign in again to enter the correct password in login view |  |  |
+| OAuth2/OIDC | 1. In server, remove active token of the account<br>2. Try to execute any action  | An snackbar indicates `Token expired` with the option to sign in again to get a new one in login view |  |  |
 |**Brandable options**||||||
 | Default URL | 1. Set a URL in `server_url` field of [setup.xml branding file](https://github.com/owncloud/android/blob/master/owncloudApp/src/main/res/values/setup.xml)<br>2. Build app using Android Studio/gradle scripts | URL set in Login View |  |  |  |
 | Hide URL | 1. Set `show_server_url_input` to false in [setup.xml branding file](https://github.com/owncloud/android/blob/master/owncloudApp/src/main/res/values/setup.xml)<br>2. Build app using Android Studio/gradle script | URL hidden in Login View |  |  |  |
