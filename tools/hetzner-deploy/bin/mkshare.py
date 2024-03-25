@@ -144,7 +144,7 @@ def mkshare(share_with, with_group, path):
 
     is_folder = os.path.isdir(datapath)
 
-    file_target = path[5:]     # chop away 'files'
+    file_target = os.path.basename(path)     # chop away 'files' and any directories...
 
     # FIXME: must check first, if that same share is already there.
     # FIXME: must check, if share_with equals from_user
