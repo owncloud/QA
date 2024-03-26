@@ -2,9 +2,9 @@
 #
 # mkshare.py - a tool to create mass sharings in ownCloud 10.
 #
-# type=0 file with user
+# type=0 file or folder with user
 # type=1 folder with group, or file with group
-# type=2 folder with user
+# (type=2 folder with user???)
 # 
 # item_type=file        # or folder
 #
@@ -119,7 +119,7 @@ def mkshare(share_with, with_group, path):
         if is_groupshare:
             share_type = 1
         else:
-            share_type = 2
+            share_type = 0      # sometimes 2 ???
     else:
         permissions = 19
         item_type = 'file'
