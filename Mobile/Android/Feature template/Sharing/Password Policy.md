@@ -30,5 +30,14 @@ Preconditions:
 | Not all criteria matched | 1. Type a password that does not match any criteria<br>1. Type a password that match some criteria and not match other criteria  | 1. `SAVE` button locked <br>2. `SAVE` button locked | |  |
 | All criteria matched | 1. Type a password that matchs all criteria | `SAVE` button unlocked  | |  |
 | Changes | 1. Type a password that matchs all criteria<br>2. Remove some characters from password that make some criteria not to match | 1. All criteria in green and `SAVE` unlocked<br>2. Criteria turns to red again and `SAVE` locked<br> | |  |
+|**Password generator**| Uses the server policies|||||
+| `min characters` | 1. Set 12 as a minimum number of characters in server<br>2. Click on `generate password`| Generated password contains at least 12 characters | |  |
+| `max characters` | 1. Set 100 as a max number of characters in server<br>2. Click on `generate password`| Generated password contains minus than 100 characters | |  |
+| `uppercase` | 1. Set 3 as a minimum number of uppercase characters in server<br>2. Click on `generate password`| Generated password contains at least 3 uppercase characters | |  |
+| `lowercase` | 1. Set 3 as a minimum number of lowercase characters in server<br>2. Click on `generate password`| Generated password contains at least 3 lowercase characters| |  |
+| `special` | 1. Set 3 as a minimum number of special characters in server<br>2. Click on `generate password`| Generated password contains at least 3 special characters| |  |
+| `numbers` | 1. Set 3 as a minimum number of numbers in server<br>2. Click on `generate password`| Generated password contains at least 3 numbers| |  |
+| All together | 1. Set 3 as a minimum number of lowercase, uppercase, special chars and numbers in server, with 12 minimum and 100 maximum<br>2. Click on `generate password`| Generated password contains at least 3 lowercase, 3 uppercase, 3 special characters and 3 numbers, is longer that 12 chars and shorter than 100| |  |
+| Copy | 1. Click on `generate password`<br>2. Click on `Copy`| Generated password is copies to the clipboard and can be pasted | |  |
 |**Edition**||||||
 | Password edition | 1. Create a link with correct password<br>2. Open the link in the app to edit the password<br>3. Add another valid password different to the added in step 1.<br>4. Click on `SEND`<br>5. Copy the link and open it in a browser<br>6. Type password from step 3. | Item is displayed in browser |  |  |
