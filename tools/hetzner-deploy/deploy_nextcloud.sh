@@ -13,6 +13,8 @@ d_name=$(echo $h_name  | sed -e "s/date/$(date +%Y%m%d)/i")
 
 image=nextcloud
 webroute=/		# what users expect
+admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
+test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
 
 machine_type=$HCLOUD_MACHINE_TYPE
 if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
@@ -29,17 +31,27 @@ INIT_SCRIPT << EOF
 uptime
 test -n "$NC_DNSNAME" && nc_fqdn="$(echo "$NC_DNSNAME" | sed -e "s/date/$(date +%Y%m%d)/i").jw-qa.owncloud.works"
 
+# preload values for /opt/hcloud/nextcloud_setup.sh
+export domain=\$nc_fqdn
+export username=admin
+export email=jw@owncloud.com
+password=$admin_pass
+password2=$admin_pass
+
+# replace all the read -p or read -s -p lines with simple echo, to make it non-interactive...
+sed -i 's/\bread\s[-ps\s]*/echo /' /opt/hcloud/nextcloud_setup.sh
+
 cat << EOM
 
 Please run locally:
-	cf_dns 78.46.246.94 $nc_fqdn
+	cf_dns 78.46.246.94 \$nc_fqdn
 
 Then paste the name below at the prompt 'Your Domain:' $nc_fqdn
 and follow the remaining instructions.
 You will be placed in a root shell at the server when all is set up.
 
 From remote
-	firefox https://$nc_fqdn$webroute
+	firefox https://\$nc_fqdn$webroute
 	firefox https://$IPADDR$webroute
 		admin / ...
 EOM
