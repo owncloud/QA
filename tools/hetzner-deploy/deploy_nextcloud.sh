@@ -33,21 +33,36 @@ test -n "$NC_DNSNAME" && nc_fqdn="$(echo "$NC_DNSNAME" | sed -e "s/date/$(date +
 
 # prepare env.sh so cf_dns can generate us a DNS entry.
 echo >  ~/env.sh "IPADDR=$IPADDR"
-echo >> ~/env.sh "oc0_fqdn=\$nc_fqdn"
+echo >> ~/env.sh "nc_fqdn=\$nc_fqdn"
+echo >> ~/env.sh "CERTBOT=none"		# DNS only, no cert service for this one, the nextcloud_setup.sh does it locally.
 
 # wait until CF_DNS.sh
-echo "TODO: poll CF_DNS.sh ... instead of stupid poll."
-sleep 20;
+for i in \$(seq 1 10); do
+  if [ -f ~/CF_DNS.msg ]; then
+    echo "########################### CF_DNS.msg ###########################"
+    cat ~/CF_DNS.msg
+    echo "########################### ---------- ###########################"
+    sleep 5	# give DNS some time to get in syn...
+    break
+  fi
+  sleep 10
+  echo "CF_DNS.msg not yet there. Retrying \$i ..."
+  test "\$i" == 10 && echo " gving up."
+done
 
 # preload values for /opt/hcloud/nextcloud_setup.sh
 export domain=\$nc_fqdn
 export username=admin
 export email=jw@owncloud.com
-password=$admin_pass
-password2=$admin_pass
+export password=$admin_pass
+export password2=$admin_pass
 
-# replace all the read -p or read -s -p lines with simple echo, to make it non-interactive...
-sed -i.orig 's/\bread\b/echo \\# read/' /opt/hcloud/nextcloud_setup.sh
+# HACK: replace all the read -p or read -s -p lines with simple echo, to make it non-interactive...
+sed -i.orig 's/\bread\b/echo \\\\# read/' /opt/hcloud/nextcloud_setup.sh
+
+(set -x; ls -la /var/www/*/config)
+
+echo "NOTE: If there is an error message below about removing /var/www/html/config/CAN_INSTALL, then everything is well..."
 
 cat << EOM
 
@@ -61,6 +76,6 @@ You will be placed in a root shell at the server when all is set up.
 From remote
 	firefox https://\$nc_fqdn$webroute
 	firefox https://$IPADDR$webroute
-		admin / ...
+		admin / $admin_pass
 EOM
 EOF

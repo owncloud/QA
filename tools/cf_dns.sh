@@ -6,6 +6,7 @@
 # (C) 2021 - jw@owncloud.com
 
 cf_zone_default=owncloud.works
+env_sh_bot="bot:qa@owncloud.com"
 
 if [ "$1" = "-l" ]; then
   cf_dns_list "$2"
@@ -93,13 +94,16 @@ if [ "$2" = '--poll' ]; then
     # extract the string that follows after fqdn= and strip quotes.
     fqdn=$(timeout 10 ssh root@$1 grep fqdn= env.sh | sed -e 's/^.*fqdn=//' -e "s/[\"']//g")
     if [ -n "$fqdn" ]; then
+      certbot=$(timeout 10 ssh root@$1 grep CERTBOT= env.sh | sed -e 's/^CERTBOT=//' -e "s/[\"']//g")
       break
     fi
     echo "$0: retry $try ssh root@$1 ..."
     sleep 10
   done
-  echo "$0: Poll result: FQDN = '$fqdn'"
-  set $1 $fqdn bot:qa@owncloud.com
+  test "$certbot" = 'none' && env_sh_bot=
+  echo "$0: Poll result: FQDN = '$fqdn' CERTBOT = '$env_sh_bot'"
+
+  set $1 "$fqdn" "$env_sh_bot"
   ## Fallthrough...
 fi
 
@@ -135,7 +139,7 @@ if [ "$1" != '-' -a -n "$1" ]; then
 fi
 
 if [ -n "$3" ]; then
-  email=$(echo "$3" | cut -d: -f2)	# the part after BOT:
+  email=$(echo "$3" | cut -d: -f2)	# the part after BOT: or bot:
   set -x
   sleep 6; sleep 4; sleep 2	# 3;2;1 often results in: DNS problem: NXDOMAIN looking up A for 95-216-155-231.jw-qa.owncloud.works
   if [ -n "$short_fqdn" ]; then
