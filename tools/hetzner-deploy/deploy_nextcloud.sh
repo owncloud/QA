@@ -3,6 +3,11 @@
 # References:
 # - https://docs.hetzner.com/de/cloud/apps/list/nextcloud/
 #
+# (C) 2024 jw@owncloud.com
+#
+# 2024-03-26	Initial draft. 
+# 2024-03-26	Image nextcloud appears to contain Nextcloud Hub 7 (28.0.1)
+
 
 location=fsn1	#hel1		# hel1, fsn1, nbg1
 
@@ -64,18 +69,14 @@ sed -i.orig 's/\bread\b/echo \\\\# read/' /opt/hcloud/nextcloud_setup.sh
 
 echo "NOTE: If there is an error message below about removing /var/www/html/config/CAN_INSTALL, then everything is well..."
 
-cat << EOM
+cat << EOM | tee -a ~/POSTINIT.msg
+========================================================
+Access this server from remote:
 
-Please run locally:
-	cf_dns 78.46.246.94 \$nc_fqdn
+	ssh root@$IPADDR
 
-Then paste the name below at the prompt 'Your Domain:' $nc_fqdn
-and follow the remaining instructions.
-You will be placed in a root shell at the server when all is set up.
-
-From remote
 	firefox https://\$nc_fqdn$webroute
-	firefox https://$IPADDR$webroute
 		admin / $admin_pass
+========================================================
 EOM
 EOF
