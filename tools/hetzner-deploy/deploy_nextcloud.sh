@@ -31,6 +31,14 @@ INIT_SCRIPT << EOF
 uptime
 test -n "$NC_DNSNAME" && nc_fqdn="$(echo "$NC_DNSNAME" | sed -e "s/date/$(date +%Y%m%d)/i").jw-qa.owncloud.works"
 
+# prepare env.sh so cf_dns can generate us a DNS entry.
+echo >  ~/env.sh "IPADDR=$IPADDR"
+echo >> ~/env.sh "oc0_fqdn=\$nc_fqdn"
+
+# wait until CF_DNS.sh
+echo "TODO: poll CF_DNS.sh ... instead of stupid poll."
+sleep 20;
+
 # preload values for /opt/hcloud/nextcloud_setup.sh
 export domain=\$nc_fqdn
 export username=admin
@@ -39,7 +47,7 @@ password=$admin_pass
 password2=$admin_pass
 
 # replace all the read -p or read -s -p lines with simple echo, to make it non-interactive...
-sed -i 's/\bread\s[-ps\s]*/echo /' /opt/hcloud/nextcloud_setup.sh
+sed -i.orig 's/\bread\b/echo \\# read/' /opt/hcloud/nextcloud_setup.sh
 
 cat << EOM
 
