@@ -1,5 +1,7 @@
 ## Customgroups Test Plan
 
+References:
+- https://github.com/owncloud/docs-server/blob/master/modules/admin_manual/pages/configuration/server/occ_commands/app_commands/_custom_groups.adoc
 
 
 | Test Case                                | Expected Result                          | Result         | Related Comment |
