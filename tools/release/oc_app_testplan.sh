@@ -32,7 +32,9 @@ if [ -z "$(which gh)" ]; then
 fi
 
 tp_url="https://raw.githubusercontent.com/owncloud/QA/master/Server/Test_Plan_"
+tp_url2="https://raw.githubusercontent.com/owncloud/QA/master/Server/Test_plan_"
 tp_url_ee="https://raw.githubusercontent.com/owncloud/qa-enterprise/master/Core/Test_Plan_"
+tp_url_ee2="https://raw.githubusercontent.com/owncloud/qa-enterprise/master/Core/Test_plan_"
 
 tp=$(echo $appname | sed -e 's/./\U&/' -e 's/_./\U&/g')	# files_antivirus -> Files_Antivirus
 ## it is an n:m mapping
@@ -51,7 +53,8 @@ test $appname = files_primary_s3	&& tp="files_primary_s3"
 plan=
 ## tp may hold multiple names. Try them all and concatenate into plan.
 ## We try both repos: QA and qa-enterprise
-## And as a fallback the appname, (in case our tp logic above is all wrong)
+## and each one with two diffeent urls, saying Test_Plan_... and Test_plan_...
+## and as a fallback also with the appname (for each of the URLs. (that is a total of 8 cases now..)
 for name in $tp; do
   using=${tp_url}$name.md
   t=$(curl -L -l -s $using)
@@ -60,11 +63,27 @@ for name in $tp; do
     t=$(curl -L -l -s $using)
   fi
   if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
+    using=${tp_url2}$name.md
+    t=$(curl -L -l -s $using)
+  fi
+  if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
+    using=${tp_url2}$appname.md
+    t=$(curl -L -l -s $using)
+  fi
+  if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
     using=${tp_url_ee}$name.md
     t=$(curl -u "$GITHUB_USER:$GITHUB_TOKEN" -L -l -s $using)
   fi
   if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
     using=${tp_url_ee}$appname.md
+    t=$(curl -u "$GITHUB_USER:$GITHUB_TOKEN" -L -l -s $using)
+  fi
+  if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
+    using=${tp_url_ee2}$name.md
+    t=$(curl -u "$GITHUB_USER:$GITHUB_TOKEN" -L -l -s $using)
+  fi
+  if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
+    using=${tp_url_ee2}$appname.md
     t=$(curl -u "$GITHUB_USER:$GITHUB_TOKEN" -L -l -s $using)
   fi
   if [ "$(echo "$t" | wc -l)" -lt 3 ]; then
@@ -100,7 +119,7 @@ if [ -z "$appvers" ]; then
   appvers=$(echo $vers_url | cut -d' ' -f1)
   rel_url=$(echo $vers_url | cut -d' ' -f2)
   if [ -z "$appvers" ]; then
-    echo "app:status $appname failed. Please specify the app version"
+    echo "app:testplan $appname failed. Please specify the app version"
     exit 0
   fi
 fi
