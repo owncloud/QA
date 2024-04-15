@@ -1,5 +1,11 @@
 ## Customgroups Test Plan
 
+References:
+- https://owncloud.com/features/custom-groups/
+- https://doc.owncloud.com/webui/next/classic_ui/personal_settings/custom_groups.html
+- https://www.youtube.com/watch?v=jthRk6gw_hE
+- https://doc.owncloud.com/server/next/admin_manual/configuration/user/custom_groups_app.html
+- https://github.com/owncloud/docs-server/blob/master/modules/admin_manual/pages/configuration/server/occ_commands/app_commands/_custom_groups.adoc
 
 
 | Test Case                                | Expected Result                          | Result         | Related Comment |
