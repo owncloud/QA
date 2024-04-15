@@ -25,6 +25,7 @@ For instructions around app releases, see https://kiteworks.atlassian.net/wiki/s
 ### Marketing
 
 - [ ] ~Update https://kiteworks.atlassian.net/wiki/spaces/PROD/pages/403801090/Upcoming+Releases~
+- [ ] Check for any left over TODO's at https://kiteworks.monday.com/my_work (hide [x] done, empty)
 
 ### Build
 
@@ -78,3 +79,4 @@ All actions to be done on the release branch (`git pull; git checkout -b release
 - [ ] Ensure [release template](https://github.com/owncloud/QA/edit/master/tools/release/templates/server_app_release_template.md) is up to date
 - [ ] Ensure the testplan template ([community](https://github.com/owncloud/QA/tree/master/Server) or [enterprise](https://github.com/owncloud/qa-enterprise/tree/master/Core)) is up to date
 - [ ] Close the testplan issue
+- [ ] Check for any left over TODO's at https://kiteworks.monday.com/my_work (hide [x] done, empty)
