@@ -1,5 +1,5 @@
 This is the server app release template, please copy the part below in a new ticket.
-For instructions around app releases, see https://confluence.owncloud.com/display/OG/Releasing+Apps
+For instructions around app releases, see https://kiteworks.atlassian.net/wiki/spaces/OG/pages/404326697/Releasing+Apps
 
 ### Reason
 
@@ -16,7 +16,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 - [ ] Create release branch with the format "release-$version"
 - [ ] Create "$version Testplan" ([QA templates](https://github.com/owncloud/QA/tree/master/Server) or [Enterprise](https://github.com/owncloud/qa-enterprise/tree/master/Core))
 - [ ] copy new/reopened issues from the previous release ticket as 'Issues to review' below.
-- [ ] check if [Non-normal Release Process](https://confluence.owncloud.com/display/OG/Apps+with+special+release+process) applies, and adapt this checklist.
+- [ ] check if [Non-normal Release Process](https://kiteworks.atlassian.net/wiki/spaces/OG/pages/404327434/Apps+with+special+release+process) applies, and adapt this checklist.
 
 ### Documentation
 
@@ -24,8 +24,7 @@ For instructions around app releases, see https://confluence.owncloud.com/displa
 
 ### Marketing
 
-- [ ] Update https://confluence.owncloud.com/display/PROD/Upcoming+Releases
-- [ ] Request a screenshot if the app is new or changed fundamentally
+- [ ] ~Update https://kiteworks.atlassian.net/wiki/spaces/PROD/pages/403801090/Upcoming+Releases~
 
 ### Build
 
@@ -37,7 +36,7 @@ All actions to be done on the release branch (`git pull; git checkout -b release
 
 #### Beta/RC
 
-- [ ] `git tag -s v${version}-rc.1` on release branch (see https://confluence.owncloud.com/display/EN/Product+Owners+List)
+- [ ] `git tag -s v${version}-rc.1` on release branch
 - [ ] Build and sign RC tarball from github tag `v${version}-rc.1` (see handbook for how to build)
 - [ ] Check buildlog for security reports
 - [ ] Check github security tab dependabot reports
@@ -60,11 +59,15 @@ All actions to be done on the release branch (`git pull; git checkout -b release
 
 ### Publishing
 
-- [ ] Upload tarball to marketplace (see handbook in confluence for details)
-- [ ] Publish tarball for customers `github/owncloud/QA/tools/portal_upload_app.sh` - [old 10](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Enterprise%2FownCloud-10), [old 10.0](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Server%2FownCloud-10.0) and [new portal](https://portal.owncloud.com/apps/files/?dir=/Portal%20Data/All%20Account%20Data/ownCloud%20Enterprise%20Resources%20Data/Server&fileid=5661) (see [handbook](https://confluence.owncloud.com/display/OG/Releasing+Apps) for details)
+- [ ] Upload tarball to marketplace (details https://kiteworks.atlassian.net/wiki/spaces/OG/pages/404326697/Releasing+Apps)
+- [ ] Publish tarball for customers `github/owncloud/QA/tools/portal_upload_app.sh` - [old 10](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Enterprise%2FownCloud-10), [old 10.0](https://customer.owncloud.com/owncloud/index.php/apps/files/?dir=%2FownCloud-Server%2FownCloud-10.0) and [new portal](https://portal.owncloud.com/apps/files/?dir=/Portal%20Data/All%20Account%20Data/ownCloud%20Enterprise%20Resources%20Data/Server&fileid=5661) (details https://kiteworks.atlassian.net/wiki/spaces/OG/pages/404326697/Releasing+Apps)
 - [ ] Send mail to release-coordination with link to this ticket and to the changelog `github/owncloud/QA/tools/release/oc_release.sh app:status`
 - [ ] Copy email to rocket chat `#updates` channel (`remove all `https://` to avoid auto-expansions.)
 - [ ] Submit mail-text as a Markting Request via https://kiteworks.monday.com/boards/5983659465/views/130504071
+	- DONE: Send Email to Alias: release-coordination@owncloud.com
+	- DONE: Send Rocket Chat (internal)
+	- DONE: Post to GitHub
+	- DONE: Post to ownCloud Marketplace
 
 ### Post-release
 
