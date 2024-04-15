@@ -15,62 +15,65 @@ if [ -z "$HCLOUD_TOKEN" ]; then
   exit 1
 fi
 test -z "$TF_USER" && TF_USER=$USER
-name=$1
 
-if echo $name | grep -q '\.'; then
-  echo "$name contains dots - removing cloudflare DNS entries ..."
-  ## Fetch IPADDR first. we cannot safely use the dnsname after we deleted it from cloudflare.
-  # ipaddr=$(dig -t A $name | sed -n -e 's/.* IN A //p')
-  ipaddr=$(host $name | sed -ne 's/.* has address //p')
-  yes | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
-  yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
+for name in "$@"; do
 
-  test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
+  if echo $name | grep -q '\.'; then
+    echo "$name contains dots - removing cloudflare DNS entries ..."
+    ## Fetch IPADDR first. we cannot safely use the dnsname after we deleted it from cloudflare.
+    # ipaddr=$(dig -t A $name | sed -n -e 's/.* IN A //p')
+    ipaddr=$(host $name | sed -ne 's/.* has address //p')
+    yes | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
+    yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
 
-  echo "Retrieving hostname via ssh ..."
-  hostname=$(set -x; timeout -s 9 10 ssh root@$name hostname)
-  if [ -z "$hostname" ]; then
-    echo "Oops, failed to get hostname. Retry $0 with the ip address?"
+    test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
+
+    echo "Retrieving hostname via ssh ..."
+    hostname=$(set -x; timeout -s 9 10 ssh root@$name hostname)
+    if [ -z "$hostname" ]; then
+      echo "Oops, failed to get hostname. Retry $0 with the ip address?"
+      exit 1
+    fi
+    echo "+ $0 $hostname"
+    name=$hostname
+  fi
+
+
+  if [ -f "$(dirname $0)/lib/hcloud_cli/bin/hcloud" ]; then
+    "$(dirname $0)/lib/hcloud_cli/bin/hcloud" server delete "$name"
+    next
+  fi
+
+  cd $(dirname $0)/lib/hcloud_tf/terraform
+
+  if [ -z "$name" ]; then
+    echo "Usage: $0 MACHINE_NAME_GLOB ..."
+    echo ""
+    echo "Example: $0 $TF_USER-*"
+    echo ""
+    echo "Known names are:"
+    ls *.tfstate 2>/dev/null | grep -v 'terraform\.tfstate' | sed -e 's/\.tfstate//' -e 's/^/  /'
     exit 1
   fi
-  echo "+ $0 $hostname"
-  name=$hostname
-fi
 
-
-if [ -f "$(dirname $0)/lib/hcloud_cli/bin/hcloud" ]; then
-  "$(dirname $0)/lib/hcloud_cli/bin/hcloud" server delete "$name"
-  exit 0
-fi
-
-cd $(dirname $0)/lib/hcloud_tf/terraform
-
-if [ -z "$name" ]; then
-  echo "Usage: $0 MACHINE_NAME_GLOB ..."
-  echo ""
-  echo "Example: $0 $TF_USER-*"
-  echo ""
-  echo "Known names are:"
-  ls *.tfstate 2>/dev/null | grep -v 'terraform\.tfstate' | sed -e 's/\.tfstate//' -e 's/^/  /'
-  exit 1
-fi
-
-while [ -n "$name" ]; do
-  for tfstate in $name.tfstate; do
-    autoapprove=
-    bin/terraform refresh -state=$tfstate >/dev/null
-    test -z "$(bin/terraform state list -state=$tfstate)" && autoapprove=-auto-approve
-    bin/terraform destroy $autoapprove -state=$tfstate
+  while [ -n "$name" ]; do
+    for tfstate in $name.tfstate; do
+      autoapprove=
+      bin/terraform refresh -state=$tfstate >/dev/null
+      test -z "$(bin/terraform state list -state=$tfstate)" && autoapprove=-auto-approve
+      bin/terraform destroy $autoapprove -state=$tfstate
+    done
+    shift
+    name=$1
   done
-  shift
-  name=$1
-done
 
-for st in *.tfstate; do
-  bin/terraform refresh -state=$st >/dev/null
-  address=$(bin/terraform state list -state=$st)
-  if [ -z "$address" ]; then
-    rm -f $st $st.backup
-    echo "state-file $st removed."
-  fi
+  for st in *.tfstate; do
+    bin/terraform refresh -state=$st >/dev/null
+    address=$(bin/terraform state list -state=$st)
+    if [ -z "$address" ]; then
+      rm -f $st $st.backup
+      echo "state-file $st removed."
+    fi
+  done
+
 done
