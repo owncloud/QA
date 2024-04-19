@@ -40,6 +40,7 @@ if [ "$OCIS_STORAGE" == sshfs ]; then
   ocis_data=/home/ocis/data
 fi
 
+export REVA_CLI_VERSION=2.19.3
 
 if [ -z "$OCIS_VERSION" ]; then
 #  export OCIS_VERSION=v1.0.0-rc7
@@ -47,6 +48,7 @@ if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=v3.0.0-alpha.2
   export OCIS_VERSION=daily
   export OCIS_VERSION=v5.0.0-rc.6
+  export OCIS_VERSION=v5.0.1
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -103,7 +105,6 @@ user_speech_url=https://www.einstein-website.de/z_biography/einstein1930.mp3
 INIT_SCRIPT <<EOF
 
 # https://doc.owncloud.com/ocis/next/depl-examples/bare-metal.html#install-and-configure-the-infinite-scale-binary
-
 
 export DEBIAN_FRONTEND=noninteractive    # try prevent ssh install to block wit whiptail
 export LC_ALL=C LANGUAGE=C
@@ -313,8 +314,18 @@ done
 #   #   curl -k -u einstein:relativity -T ~/INIT.bashrc.md https://$BASE_DOMAIN/remote.php/webdav/init/INIT.bashrc.md
 # fi
 
+wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O go/bin/reva
+chmod a+x go/bin/reva
+api_gw=$(ocis version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
+(echo admin; echo "$admin_pass") | script -c "reva -insecure -host $api_gw login basic"
+# we now should have .reva.config and .reva-token
+# we still must call it as 'reva -insecure'
+
+
 uptime
 sleep 3
+ocis version
+
 cat <<EOM >> ~/POSTINIT.msg
 
 ---------------------------------------------
