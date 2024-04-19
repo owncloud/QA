@@ -314,13 +314,17 @@ done
 #   #   curl -k -u einstein:relativity -T ~/INIT.bashrc.md https://$BASE_DOMAIN/remote.php/webdav/init/INIT.bashrc.md
 # fi
 
+sleep 2
+
+# install and configure reva cli
 wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O go/bin/reva
 chmod a+x go/bin/reva
-api_gw=$(ocis version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
-(echo admin; echo "$admin_pass") | script -c "reva -insecure -host $api_gw login basic"
+api_gw=\$(ocis version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
+(echo admin; echo "\$admin_pass") | script -c "reva -insecure -host \$api_gw login basic"
 # we now should have .reva.config and .reva-token
 # we still must call it as 'reva -insecure'
-
+echo 'alias reva="reva -insecure"' >> ~/.bash_aliases
+reva -insecure whoami
 
 uptime
 sleep 3
