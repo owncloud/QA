@@ -11,7 +11,7 @@
 #
 # CAUTION: keep in sync with files_external_s3 and objectstore
 
-# source ./env.sh	# probably not needed.
+# source ./env.sh	# needed for IPADDR in the bind example.
 
 secret="$(tr -dc 'a-z0-9' < /dev/urandom | head -c 32)"
 if [ -f ~/.s3cfg ]; then
@@ -164,4 +164,9 @@ To view the scality S3 server log:
 To view the contents of the s3 server:
 	s3cmd du s3://oc-primary
 	s3cmd ls s3://oc-primary
+
+Make local services available at public IP addresses:
+	socat -d TCP-LISTEN:13306,bind=$IPADDR,fork,reuseaddr TCP:localhost:3306	# for mysql
+	socat -d TCP-LISTEN:18000,bind=$IPADDR,fork,reuseaddr TCP:localhost:8000	# for s3
+	-> this requires open ports at the Hetzner firewall config.
 EOM
