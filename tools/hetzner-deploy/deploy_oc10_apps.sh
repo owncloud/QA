@@ -406,15 +406,23 @@ mv composer.phar /usr/local/bin/composer	# has prioity over /usr/bin/composer
 #docker pull selenium/standalone-firefox-debug
 #docker pull inbucket/inbucket
 
-if [ "\$OC10_DATABASE" = pgsql:15 ]; then
-  # https://github.com/owncloud/enterprise/issues/5936#issuecomment-1676295161
-  export OC10_DATABASE=pgsql
-  curl -fSsL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /usr/share/keyrings/postgresql.gpg
-  subrepo="\$(. /etc/os-release ; echo \$VERSION_CODENAME)-pgdg main"
-  echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ \$subrepo" | tee /etc/apt/sources.list.d/postgresql.list
-  apt purge postgres	# remove any postgresql-12 packages, otherwise both, 12 and 15 will start together.
-  aptQ update
-fi
+case "\$OC10_DATABASE" in
+  "pgsql:"* )
+    pg_vers=\$(echo "\$OC10_DATABASE" | sed -e 's/.*://')
+    # https://github.com/owncloud/enterprise/issues/5936#issuecomment-1676295161
+    export OC10_DATABASE=pgsql
+    curl -fSsL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /usr/share/keyrings/postgresql.gpg
+    subrepo="\$(. /etc/os-release ; echo \$VERSION_CODENAME)-pgdg main"
+    echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt/ \$subrepo" | tee /etc/apt/sources.list.d/postgresql.list
+    apt purge -y 'postgres*'	# remove any postgresql-12 packages, otherwise both, 12 and 15 will start together.
+    aptQ update
+    aptQ install -y postgresql-\$pg_vers
+  ;;
+  pgsql)
+    aptQ install -y postgresql	# default install
+  ;;
+esac
+
 
 # FROM
 # * https://doc.owncloud.com/server/admin_manual/installation/ubuntu_18_04.html
@@ -469,7 +477,7 @@ case $vers in
 esac
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
-aptQ install -y smbclient coreutils ldap-utils postgresql libhttp-dav-perl python3-pil
+aptQ install -y smbclient coreutils ldap-utils libhttp-dav-perl python3-pil
 
 
 ## external FTP, FTPS storage
