@@ -41,7 +41,7 @@ for name in "$@"; do
 
   if [ -f "$(dirname $0)/lib/hcloud_cli/bin/hcloud" ]; then
     "$(dirname $0)/lib/hcloud_cli/bin/hcloud" server delete "$name"
-    next
+    continue
   fi
 
   cd $(dirname $0)/lib/hcloud_tf/terraform

@@ -19,14 +19,12 @@
 # First parameter: username or groupname to share with.
 # second (or more) optional parameters: path names to share, relative to current working directory.
 #  (no path name implies .)
+#
+# v0.1    - 20240322, jw, initial draft
+# v0.2    - 20240513, jw, ported to postgres, autodetect mysql/postgres
 
 
 import os, sys, re
-try:
-    import MySQLdb
-except:
-    print("python module MySQLdb not found. Try 'apt install python3-mysqldb' or 'pip install mysqlclient'\n")
-    sys.exit(1)
 
 if len(sys.argv) < 2:
   print("\nUsage: {sys.argv[0]} SHARE_RECEIVER [files ...]", file=sys.stderr);
@@ -75,17 +73,32 @@ m = re.search("'dbname'\s=>\s'([^']*)'", cfg)
 dbname = m.group(1)
 m = re.search("'dbtableprefix'\s=>\s'([^']*)'", cfg)
 oc_ = m.group(1)       # 'oc_'
+m = re.search("'dbtype'\s=>\s'([^']*)'", cfg)
+dbtype = m.group(1)    # pgsql
+
+if dbtype == 'pgsql':
+    try:
+        import psycopg2
+    except:
+        print("python module psycopg2 not found. Try 'apt install python3-psycopg2' or 'pip install psycopg2'\n")
+        sys.exit(1)
+else:
+    try:
+        import MySQLdb
+    except:
+        print("python module MySQLdb not found. Try 'apt install python3-mysqldb' or 'pip install mysqlclient'\n")
+        sys.exit(1)
 
 # print(dbuser, dbpass, dbhost, dbname, oc_)
-
-conn = MySQLdb.connect( host=dbhost, user=dbuser, passwd=dbpass, db=dbname );
+# passwd, db is for mysql, password, dbname for pgsql
+conn = psycopg2.connect( host=dbhost, user=dbuser, password=dbpass, dbname=dbname );
 cur = conn.cursor()
 
-cur.execute(f"select user_id from {oc_}accounts where user_id = %s or lower_user_id = %s or display_name = %s or email = %s", ( sys.argv[1], sys.argv[1], sys.argv[1], sys.argv[1]))
+cur.execute(f"SELECT user_id FROM {oc_}accounts WHERE user_id = %s OR lower_user_id = %s OR display_name = %s OR email = %s", ( sys.argv[1], sys.argv[1], sys.argv[1], sys.argv[1]))
 rows = cur.fetchall()
 
 if len(rows) < 1:
-  cur.execute(f"select * from {oc_}groups where gid = %s or lower(gid) = %s", ( sys.argv[1], sys.argv[1]))
+  cur.execute(f"SELECT * FROM {oc_}groups WHERE gid = %s OR LOWER(gid) = %s", ( sys.argv[1], sys.argv[1]))
   rows = cur.fetchall()
   if len(rows) < 1:
     print(f"ERROR: {sys.argv[1]} is neither user, email, fullname nor group")
@@ -128,13 +141,13 @@ def mkshare(share_with, with_group, path):
         else:
             share_type = 0
 
-    cur.execute(f"select numeric_id from {oc_}storages where id = %s", ("home::"+from_user, ))
+    cur.execute(f"SELECT numeric_id FROM {oc_}storages WHERE id = %s", ("home::"+from_user, ))
     rows = cur.fetchall()
     if len(rows) < 1:
         print(f"ERROR: 'home::{from_user}' not found in {oc_}storages.")
         sys.exit(1)
     storage = rows[0][0]
-    cur.execute(f"select fileid from {oc_}filecache where storage=%s and path = %s", (storage, path))
+    cur.execute(f"SELECT fileid FROM {oc_}filecache WHERE storage=%s AND path = %s", (storage, path))
     rows = cur.fetchall()
     if len(rows) < 1:
         print(f"ERROR: path '{path}' storage {storage} not found in {oc_}filecache.")
@@ -149,7 +162,11 @@ def mkshare(share_with, with_group, path):
     # FIXME: must check first, if that same share is already there.
     # FIXME: must check, if share_with equals from_user
     # FIXME: must check, share_with already has file_target
-    sql = f"insert into {oc_}share set share_type=%s, share_with=%s, uid_owner=%s, uid_initiator=%s, item_type=%s, item_source=%s, file_source=%s, file_target=%s, permissions=%s, stime=UNIX_TIMESTAMP();"
+    # mysql uses INSERT INTO ... SET ... but pgsql needs INSERT INTO ... (field, field) VALUES (val, val, val)
+    if dbtype == 'pgsql':
+        sql = f"INSERT INTO {oc_}share (share_type, share_with, uid_owner, uid_initiator, item_type, item_source, file_source, file_target, permissions, stime) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, EXTRACT(EPOCH FROM now()))"
+    else:
+        sql = f"INSERT INTO {oc_}share SET share_type=%s, share_with=%s, uid_owner=%s, uid_initiator=%s, item_type=%s, item_source=%s, file_source=%s, file_target=%s, permissions=%s, stime=UNIX_TIMESTAMP();"
     data = ( share_type, share_with, from_user, from_user, item_type, fileid, fileid, file_target, permissions )
     cur.execute(sql, data)
     conn.commit()
