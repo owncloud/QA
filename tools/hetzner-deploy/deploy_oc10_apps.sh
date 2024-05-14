@@ -781,7 +781,7 @@ for param in \$PARAM; do
   fi
 done
 
-test "\$OC10_DATABASE" = pgsql && echo >> ~/POSTINIT.msg 'POSTGRESQL: su - postgres -c "psql -d owncloud"'
+test "\$OC10_DATABASE" = pgsql && echo >> ~/POSTINIT.msg 'POSTGRESQL: su - postgres -c "PAGER='' psql -d owncloud"'
 
 if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
