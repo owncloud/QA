@@ -10,22 +10,37 @@ Usage:
 
 	$0 https://\$USER:\$PASS@\$OC10_FQDN[/prefix] /path/to/file [/path/to/]newfile
 
+Or locally:
+
+	$0 \$USER:\$PASS /path/to/file [/path/to/]newfile
+
 EOU
 exit 0
 fi
+
+url="$1"
 sourcename="$2"
 targetname="$3"
 
-set $(echo "$1" | sed -e 's#\(://\|:\|@\|/remote.php\)# #g')
+set $(echo "$url" | sed -e 's#\(://\|:\|@\|/remote.php\)# #g')
 proto="$1"
 user="$2"
 pass="$3"
 host="$4"
 
 if [ -z "$host" ]; then
-  echo "ERROR: first parameter must be of form PROTO://USER:PASS@HOST...."
-  echo "       seen: $host"
-  exit 1
+  set $(echo "$url" | sed -e 's#:# #')
+  user="$1"
+  pass="$2"
+  if [ -n "$pass" -a -z "$(echo "$url" | grep /)" ]; then
+    proto="http"
+    host="localhost"
+  else
+    echo "ERROR: first parameter must be of form PROTO://USER:PASS@HOST...."
+    echo "    or first parameter must be of form USER:PASS"
+    echo "       seen: $url"
+    exit 1
+  fi
 fi
 
 sourcename="$(readlink --canonicalize-missing "$sourcename")"	# resolve redundant path components
