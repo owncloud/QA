@@ -19,7 +19,7 @@ Preconditions:
 | Parameter to zero | 1. Create a oCIS server adding any variable that sets password policy to `0`, for example: `OCIS_PASSWORD_POLICY_MIN`<br>`_UPPERCASE_CHARACTERS: "0"`<br>2. Open public link view and type characters<br>3. Repeat with other [variables](https://github.com/owncloud/ocis/tree/master/services/frontend#the-password-policy) | 2. Min uppercase is not listed as criteria<br>3. Criteria with `0` not listed | P m11 t13 |  |
 |**Password generator**| Uses the server policies|||||
 | `min characters` | 1. Set 12 as a minimum number of characters in server<br>2. Click on `generate`| Generated password contains at least 12 characters | P m11 t13|  |
-| `max characters` | 1. Set 100 as a max number of characters in server<br>2. Click on `generate`| Generated password contains minus than 100 characters | NA t13|  |
+| `max characters` | 1. Set 100 as a max number of characters in server<br>2. Click on `generate`| Generated password contains minus than 100 characters | NA |  |
 | `uppercase` | 1. Set 3 as a minimum number of uppercase characters in server<br>2. Click on `generate`| Generated password contains at least 3 uppercase characters | P m11 t13|  |
 | `lowercase` | 1. Set 3 as a minimum number of lowercase characters in server<br>2. Click on `generate`| Generated password contains at least 3 lowercase characters| P m11 t13|  |
 | `special` | 1. Set 3 as a minimum number of special characters in server<br>2. Click on `generate`| Generated password contains at least 3 special characters|P m11 t13 |  |
