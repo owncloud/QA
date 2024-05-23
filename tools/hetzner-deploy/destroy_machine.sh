@@ -7,6 +7,7 @@
 # 2020-05-19, jw, added support for hcloud_cli, to ease the terraform dependency
 # 2020-05-20, jw, ported to mac
 # 2023-06-14, jw, fix race condition with dns removal and ssh.
+# 2024-05-23, jw, timeout from 10 to 15 sec, it triggered needlessly.
 
 test -z "$HCLOUD_TOKEN" && export HCLOUD_TOKEN=$TF_VAR_hcloud_token
 test -z "$TF_VAR_hcloud_token" && export TF_VAR_hcloud_token=$HCLOUD_TOKEN
@@ -29,7 +30,7 @@ for name in "$@"; do
     test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
 
     echo "Retrieving hostname via ssh ..."
-    hostname=$(set -x; timeout -s 9 10 ssh root@$name hostname)
+    hostname=$(set -x; timeout -s 9 15 ssh root@$name hostname)
     if [ -z "$hostname" ]; then
       echo "Oops, failed to get hostname. Retry $0 with the ip address?"
       exit 1

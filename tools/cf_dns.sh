@@ -4,6 +4,7 @@
 # References: https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
 #
 # (C) 2021 - jw@owncloud.com
+# 2024-05-23, jw - Minimal Support for CLOUDFLARE_DNS_WILDCARD=true added
 
 cf_zone_default=owncloud.works
 env_sh_bot="bot:qa@owncloud.com"
@@ -27,13 +28,17 @@ To list all entries for an IPADDR, do not pass an FQDN.
 To delete all entries for an IPADDR, you can pass '-' instead of a valid FQDN.
 
 The form cf_dns IPADDR --poll tries to log into the machine as root and read ~/env.sh for *fqdn=... setting.
+If found, a line CERTBOT=none will suppress running the certbot in the target system.
+If found, a line DNS_WILDCARD=true mail will create a '*.' wildcard entry too.
 
 The form cf_dns -l is an alias for cf_dns_list.
 
 The zone used is controlled by the environment variable CLOUDFLARE_DNS_ZONE, which defaults to $cf_zone_default.
 (With CLOUDFLARE_DNS_API the URL for a zone API can be directly given. This overrides CLOUDFLARE_DNS_ZONE.)
 
-TODO: If the optional third paramter is given, try to log into the machine and run certbot with the given email address.
+The environment variable CLOUDFLARE_DNS_WILDCARD can be set to true to also create a '*.' wildcard entry.
+(certbot currently ignores this variable)
+
 EOF
   exit 0
 fi
@@ -95,6 +100,7 @@ if [ "$2" = '--poll' ]; then
     fqdn=$(timeout 10 ssh root@$1 grep fqdn= env.sh | sed -e 's/^.*fqdn=//' -e "s/[\"']//g")
     if [ -n "$fqdn" ]; then
       certbot=$(timeout 10 ssh root@$1 grep CERTBOT= env.sh | sed -e 's/^CERTBOT=//' -e "s/[\"']//g")
+      wildcard=$(timeout 10 ssh root@$1 grep DNS_WILDCARD= env.sh | sed -e 's/^DNS_WILDCARD=//' -e "s/[\"']//g")
       break
     fi
     echo "$0: retry $try ssh root@$1 ..."
@@ -103,6 +109,7 @@ if [ "$2" = '--poll' ]; then
   test "$certbot" = 'none' && env_sh_bot=
   echo "$0: Poll result: FQDN = '$fqdn' CERTBOT = '$env_sh_bot'"
 
+  test "$wildcard" = 'true' && export CLOUDFLARE_DNS_WILDCARD=true
   set $1 "$fqdn" "$env_sh_bot"
   ## Fallthrough...
 fi
@@ -136,9 +143,12 @@ if [ "$1" != '-' -a -n "$1" ]; then
     test -n "$short_record_id" && cf_curl DELETE $CLOUDFLARE_DNS_API/$record_id >/dev/null 2>&1
     cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"$short_fqdn"'","content":"'"$1"'","proxied":false,"comment":"owner: '$CLOUDFLARE_USER'"}' | jq
   fi
+  if [ "$CLOUDFLARE_DNS_WILDCARD" = 'true' ]; then
+    cf_curl POST $CLOUDFLARE_DNS_API --data '{"type":"A","name":"'"*.$2"'","content":"'"$1"'","proxied":false,"comment":"owner: '$CLOUDFLARE_USER'"}' | jq
+  fi
 fi
 
-if [ -n "$3" ]; then
+if [ -n "$3" ]; then			# we shall run certbot there.
   email=$(echo "$3" | cut -d: -f2)	# the part after BOT: or bot:
   set -x
   sleep 6; sleep 4; sleep 2	# 3;2;1 often results in: DNS problem: NXDOMAIN looking up A for 95-216-155-231.jw-qa.owncloud.works
@@ -149,5 +159,12 @@ if [ -n "$3" ]; then
     ssh root@$1 certbot -m "$email" --no-eff-email --agree-tos --redirect --apache -n -d "$2" -d "$short_fqdn"
   else
     ssh root@$1 certbot -m "$email" --no-eff-email --agree-tos --redirect -d "$2"
+  fi
+  if [ "$CLOUDFLARE_DNS_WILDCARD" = 'true' ]; then
+     # letsencrypt recommends to either add TXT DNS record manually when prompted, 
+     # or have a certbot plugin with full cloudflare api token. None appears sane to me.
+     echo "WARNING: cannot generate a wildcard certificate for *.$2"
+     echo "         via certbot without human assistance."
+     echo "Please check letsencrypt documentation on how to add that manually."
   fi
 fi

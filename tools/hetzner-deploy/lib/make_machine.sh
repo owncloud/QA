@@ -98,9 +98,8 @@ echo "$PARAM_BASENAME"
 
 # try find cf_dns
 cf_dns=$(type -P cf_dns)
-test -z "$cf_dns" && cf_dns=$(type -P cf_dns_add_move)
-test -z "$cf_dns" && cf_dns=$(type -P cf_dns_add_move.sh)
-test -z "$cf_dns" && cf_dns=$libdir/../../cf_dns_add_move.sh
+test -z "$cf_dns" && cf_dns=$(type -P cf_dns.sh)
+test -z "$cf_dns" && cf_dns=$libdir/../../cf_dns.sh
 
 if [ -n "$cf_dns" ]; then
   # Automate DNS name and certbot.
