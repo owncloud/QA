@@ -82,8 +82,12 @@ for param in $PARAM; do
       # nothing to do, but only a comment is invalid syntax in an if clause.
       echo "bundled app: $param"
     else
-      echo "+ ssh root@$IPADDR wget '$param' "
-      ssh root@$IPADDR wget --progress=bar:force:noscroll "$param"
+      if echo "$param" | grep -q '://'; then
+        echo "+ ssh root@$IPADDR wget '$param' "
+        ssh root@$IPADDR wget --progress=bar:force:noscroll "$param"
+      else
+        echo "$0: non-magic param: $param"
+      fi
     fi
   fi
   sleep 2
@@ -131,7 +135,7 @@ function LOAD_SCRIPT {
      # inline style usage with <<EOF or such ...
      echo  > $scriptfile "export PARAM='$PARAM'"
      echo >> $scriptfile "export PARAM_BASENAME='$PARAM_BASENAME'"
-     echo >> $scriptfile "ls -l \$PARAM_BASENAME"
+     echo >> $scriptfile "# ls -l \$PARAM_BASENAME"
      cat  >> $scriptfile
   else
      # TODO: add INIT.bashrc prolog like above

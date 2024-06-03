@@ -10,6 +10,8 @@
 # 2024-05-23, jw@owncloud.com
 #	based on deploy_ocis_docker_compose.sh, but stripped down and restarted acording to the dev docs.
 # 2024-06-03, jw	- local.yaml, web.yaml and .env in my own compose_dir, not messing with the original example code any more.
+#                       - refacored ocm init into tasks/ocis/ocm.sh
+#
 
 echo "Estimated setup time (when weather is fine): 6 minutes ..."
 
@@ -20,6 +22,15 @@ compose_dir=/root/run/ocis_traefik
 compose_yml=local.yml
 
 ocis_bin=/usr/bin/ocis
+
+if [ "$1" = "-h" -o "$1" = "--help" ]; then
+  echo "Usage:"
+  echo "	$0 [ocm] ..."
+  echo "	env BASE_DOMAIN=ocis2-DATE $0 [ocm] ..."
+  echo ""
+  echo "Check tasks/ocis/*.sh for possible command line parameters"
+  exit 1
+fi
 
 if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=master
@@ -35,7 +46,12 @@ if [ -z "$OCIS_DOCKER_TAG" ]; then
 fi
 
 d_tag=$(echo $OCIS_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr . -)-$(date +%m%d)
-BASE_DOMAIN=ocis-$d_tag.jw-qa.owncloud.works
+if [ -z "$BASE_DOMAIN" ]; then
+  BASE_DOMAIN=ocis-$d_tag
+else
+  BASE_DOMAIN=$(echo $BASE_DOMAIN | sed -e "s/\bDATE\b/$(date +%Y%m%d)/")
+fi
+echo "$BASE_DOMAIN" | grep -qF '.' - || BASE_DOMAIN=$BASE_DOMAIN.jw-qa.owncloud.works
 OCIS_DOMAIN=web.$BASE_DOMAIN
 
 admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
@@ -45,13 +61,14 @@ test -n "$OCIS_ADMIN_PASS" && admin_pass="$OCIS_ADMIN_PASS"
 # It does not work with the ubuntu-20.04-preload server image.
 export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
+
 # use a cx31 -- we need more than 40GB disk space.
 source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,apache2-utils,docker.io,docker-compose,binutils,ldap-utils,golang-go,python3-pip "$@"
 set -x
 
 if [ -z "$IPADDR" ]; then
   echo "Error: make_machine.sh failed."
-  exit 1;
+  exit 1
 fi
 
 version_file=this-is-ocis-$OCIS_VERSION.txt
@@ -60,6 +77,10 @@ user_portrait_url=https://upload.wikimedia.org/wikipedia/commons/3/32/Max_Lieber
 user_speech_url=https://www.einstein-website.de/z_biography/einstein1930.mp3
 
 INIT_SCRIPT <<EOF
+
+export LC_ALL=C
+TASKd=\$HOME/tasks/ocis
+test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
 echo -e "#! /bin/sh\ncd $compose_dir\ndocker-compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
 echo -e "#! /bin/sh\ncd $compose_dir\ndocker-compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
@@ -122,17 +143,11 @@ OCIS_LOG_LEVEL=debug
 # PROXY_ENABLE_BASIC_AUTH=true
 EOT
 
+echo "# ocis_env.sh is where "apps" can add environment variable to the ocis service" > ocis_env.sh
 
 ## we also add our own local.yml to override some bad defaults, and allow adding apps to the web service.
 cat <<EOT>>local.yml
 ---
-services:
-  ocis:
-    environment:
-      XXWEB_UI_CONFIG_FILE: /etc/ocis/web.config-extra.json
-    volumes:
-      - $compose_dir/web.yaml:/etc/ocis/web.yaml
-
 volumes:
   ocis-config:
     driver: local
@@ -146,6 +161,13 @@ volumes:
       o: bind
       type: none
       device: $compose_dir/data
+
+services:
+  ocis:
+    env_file: $compose_dir/ocis_env.sh
+    environment:
+      XXWEB_UI_CONFIG_FILE: /etc/ocis/web.config-extra.json
+    volumes:
 EOT
 
 # Unused:
@@ -174,14 +196,35 @@ web:
       - preview
       - search
       - text-editor
-      - ocm
 EOT
+## CAUTION: tasks/ocis/*.sh can assume that web.yaml ends in web.config.apps: at indentation level 6.
+
+
+for app_name in \$PARAM; do
+  if [ -f \$TASKd/\$app_name.sh ]; then
+    echo "\$app requested. Running \$TASKd/\$app_name.sh ..."
+    source \$TASKd/\$app_name.sh
+    ret=\$?
+    if [ "\$ret" = 0 ]; then
+      echo >> ~/POSTINIT.msg "SUCCESS: \$TASKd/\$app_name.sh"
+    else
+      echo >> ~/POSTINIT.msg "WARNING: \$TASKd/\$app_name.sh return code \$ret, check log."
+    fi
+  else
+    echo "ERROR: \$TASKd/\$app_name.sh not found." | tee -a ~/POSTINIT.msg
+  fi
+done
+
+# TODO: check, if we should add our extra file volumes to more services, than just 'ocis'
+for svc in ocis; do
+  for app_yaml in *.yaml; do
+    echo "      - $compose_dir/\$app_yaml:/etc/ocis/\$app_yaml" >> local.yml
+  done
+done
 
 docker-compose up -d
 
 cat <<EOM > ~/POSTINIT.msg
-
-
 
 ---------------------------------------------
 # This shell is now connected to root@$IPADDR
@@ -191,12 +234,10 @@ cat <<EOM > ~/POSTINIT.msg
 
 ---------------------------------------------
 You may first need to
- - study https://owncloud.dev/ocis/deployment/ocis_traefik/#install-ocis-and-traefik
- - inspect the .env file
- - You may need to wait some minutes until all services are fully ready, ...
- - ocis.sh webdav health
+ - wait some minutes until all services are fully ready, ...
+ - maybe run: ocis.sh webdav health
 
-TODO: docs say to tun ocis init before starting the server. Clarify: the docker-compose.yml takes care.
+TODO: docs say to run ocis init before starting the server. Clarify: the docker-compose.yml takes care.
 TODO: evaluate the health check and build a wait loop.
 
 
