@@ -8,6 +8,7 @@
 # 2020-05-20, jw, ported to mac
 # 2023-06-14, jw, fix race condition with dns removal and ssh.
 # 2024-05-23, jw, timeout from 10 to 15 sec, it triggered needlessly.
+# 2024-06-03, jw, also removing *.$name, ... - take care to not remove DNS entries from machines we don't own.
 
 test -z "$HCLOUD_TOKEN" && export HCLOUD_TOKEN=$TF_VAR_hcloud_token
 test -z "$TF_VAR_hcloud_token" && export TF_VAR_hcloud_token=$HCLOUD_TOKEN
@@ -21,11 +22,11 @@ for name in "$@"; do
 
   if echo $name | grep -q '\.'; then
     echo "$name contains dots - removing cloudflare DNS entries ..."
+
+    set -x
     ## Fetch IPADDR first. we cannot safely use the dnsname after we deleted it from cloudflare.
     # ipaddr=$(dig -t A $name | sed -n -e 's/.* IN A //p')
-    ipaddr=$(host $name | sed -ne 's/.* has address //p')
-    yes | cf_dns - $name		# removes cloudflare entry if $name is a dnsname, harmless otherwise
-    yes | cf_dns $name -		# removes cloudflare entry if $name is an ipaddr, harmless otherwise
+    ipaddr=$(host "$name" | sed -ne 's/.* has address //p')
 
     test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
 
@@ -35,6 +36,13 @@ for name in "$@"; do
       echo "Oops, failed to get hostname. Retry $0 with the ip address?"
       exit 1
     fi
+    # now that we verified, that we could log into the machine with ssh, it should be safe to remove DNS entries.
+    # If $name was a DNS-name, that could be resolved into an ipaddr, then we assigned that ipaddr back to $name
+    #  -> in this case, $name now holds the IP address.
+    # Otherwise, we know that $name worked to log in via ssh, so if it is not a DNS name, then it is most likely an IP address.
+    yes | cf_dns "$name" -		# this deletes all dns names pointing to the ip address.
+
+    set +x
     echo "+ $0 $hostname"
     name=$hostname
   fi

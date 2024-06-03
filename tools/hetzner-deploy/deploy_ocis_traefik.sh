@@ -9,6 +9,7 @@
 # 2020-12-15, jw@owncloud.com
 # 2024-05-23, jw@owncloud.com
 #	based on deploy_ocis_docker_compose.sh, but stripped down and restarted acording to the dev docs.
+# 2024-06-03, jw	- local.yaml, web.yaml and .env in my own compose_dir, not messing with the original example code any more.
 
 echo "Estimated setup time (when weather is fine): 6 minutes ..."
 
@@ -69,7 +70,7 @@ chmod a+x /usr/local/bin/*
 ## docker compose is the supported go implementation of v2. It is missing in 22.04 jammy. We have to add the upstream docker repo
 # FROM: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list
+echo "deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \$(. /etc/os-release && echo "\$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list
 apt update
 apt install -y docker-compose-plugin
 
@@ -78,7 +79,7 @@ cd ~
 ln -s /var/lib/docker/volumes/ocis_traefik_ocis-data/_data data
 ln -s /var/lib/docker/volumes/ocis_traefik_ocis-config/_data config
 go install go.etcd.io/bbolt/cmd/bbolt@latest	# cli-tool to inspect boltdb files.
-export PATH="$PATH:/root/go/bin"
+export PATH="\$PATH:/root/go/bin"
 
 # used by make_machine.sh / cf_dns --poll
 echo >  ~/env.sh "base_fqdn=$BASE_DOMAIN"
@@ -93,16 +94,16 @@ docker volume prune --force
 git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION
 ln -s $compose_dir_orig o
 
-mkdir -p run/ocis_traefik{config,data}
+mkdir -p $compose_dir/{config,data}
 cd $compose_dir
 
 ## .env hacking is always needed. Otherwise we only have localhost endpoints in
 ## curl -k https://$IPADDR/.well-known/openid-configuration | grep https:
 ## and the webpage remains blank. No login possible.
 #
-cat <<EOF>>.env
+cat <<EOT>>.env
 "# $0 ---- below"
-COMPOSE_FILE=../../ocis/deployments/examples/ocis_traefik/docker-compose.yml:local.yml
+COMPOSE_FILE=$compose_dir_orig/$compose_yml_orig:local.yml
 IPADDR=$IPADDR
 OCIS_VERSION=$OCIS_VERSION
 INSECURE=false
@@ -119,44 +120,46 @@ OCIS_LOG_LEVEL=debug
 ## Seen in $compose_yml
 ## basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
 # PROXY_ENABLE_BASIC_AUTH=true
-EOF
+EOT
 
 
 ## we also add our own local.yml to override some bad defaults, and allow adding apps to the web service.
-cat <<EOF>>local.yml
+cat <<EOT>>local.yml
 ---
 services:
   ocis:
     environment:
       XXWEB_UI_CONFIG_FILE: /etc/ocis/web.config-extra.json
     volumes:
-      - /root/run/ocis_traefik/web.yaml:/etc/ocis/web.yaml
+      - $compose_dir/web.yaml:/etc/ocis/web.yaml
 
 volumes:
   ocis-config:
-       driver: local
+    driver: local
     driver_opts:
       o: bind
       type: none
-      device: /root/run/config
+      device: $compose_dir/config
   ocis-data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /root/run/data
-EOF
+      device: $compose_dir/data
+EOT
 
-cat <<EOF>>web.config-extra.json
+# Unused:
+cat <<EOT>>web.config-extra.json
 {
 	"apps": [ "admin-settings", "draw-io", "epub-reader", "external", "files", "ocm", "pdf-viewer", "preview", "search", "text-editor" ]
 }
-EOF
+EOT
 
-# adding a web.config-extra.json leads to startup errors.
-# adding a web.yaml without setting the WEB_UI_CONFIG_FILE variable works niceley. The name must be web.yaml (my-web-extra.yaml or web.yml do not work!)
-# However, we also must repeat the list of standard apps, we cannot just add one app.
-cat <<EOF>>web.yaml
+# Adding a web.config-extra.json leads to startup errors.
+# Adding a web.yaml without setting the WEB_UI_CONFIG_FILE variable works niceley. The name must be web.yaml (my-web-extra.yaml or web.yml do not work!)
+# However, in any case, we also must repeat the list of standard apps, we cannot just add one app.
+# TODO: find a way to a) inspect the defaults, b) add a delta
+cat <<EOT>>web.yaml
 common_apps: @common_apps [ "admin-settings", "epub-reader", "external", "files", "pdf-viewer", "preview", "search", "text-editor" ]
 
 web:
@@ -172,7 +175,7 @@ web:
       - search
       - text-editor
       - ocm
-EOF
+EOT
 
 docker-compose up -d
 
