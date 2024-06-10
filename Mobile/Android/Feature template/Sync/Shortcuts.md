@@ -16,11 +16,11 @@ Automated:
 | :-------- | :---- | :------- | :----: | :------------------------- | 
 |**View**||||||
 | New shortcut | Open FAB | Option `New shortcut` displayed. Correct in both orientations |  |  |
-| Shortcut dialog | 1. Open FAB<br>2. Click on `New shortcut` | Dialog to create shortcut is displayed with inputs for name and url |  |  |
+| Shortcut dialog | 1. Open FAB<br>2. Click on `New shortcut` | Dialog to create shortcut is displayed with inputs for name and url. Correct in both orientations |  |  |
 |**Creation**||||||
 | Empty name | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Let empty name  | `Create` button is disabled |  |  |
 | Empty URL | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Let empty URL  | `Create` button is disabled |  |  |
-| Long name | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Set a name longer than 256 chars (max file length) | `Create` button is disabled showing error |  |  |
+| Long name | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Set a name longer than 256 chars (max file name length) | `Create` button is disabled showing error |  |  |
 | Incorrect characters | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Set a name that includes forbidden characters ( `\`, `/`) | `Create` button is disabled showing error|  |  |
 | Correct Shortcut in root | 1. Open FAB in root folder<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the root folder. Check in uploads view. |  |  |
 | Correct Shortcut in non-root | 1. Open FAB in non-root folder<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the non-root folder. Check in uploads view.  |  |  |
