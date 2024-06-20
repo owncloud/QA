@@ -22,6 +22,7 @@ Automated:
 | Empty URL | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Let empty URL  | `Create` button is disabled |  |  |
 | Long name | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Set a name longer than 256 chars (max file name length) | `Create` button is disabled showing error |  |  |
 | Incorrect characters | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Set a name that includes forbidden characters ( `\`, `/`) | `Create` button is disabled showing error|  |  |
+| Spaces | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Set a URL that contain spaces | `Create` button is disabled showing error:<br>`URL cannot contain blanks`|  |  |
 | Correct Shortcut in root | 1. Open FAB in root folder<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the root folder. Check in uploads view. |  |  |
 | Correct Shortcut in non-root | 1. Open FAB in non-root folder<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the non-root folder. Check in uploads view.  |  |  |
 | Correct Shortcut in space | 1. Open FAB in custom space<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the space folder. Check in uploads view.  |  |  |
