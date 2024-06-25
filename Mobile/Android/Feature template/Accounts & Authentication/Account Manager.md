@@ -13,11 +13,10 @@ Context: <br>
 | :-------- | :---- | :------- | :----: | :------------------------ | 
 |**Access**||||||
 | List of files | 1. Log in in a account<br>2. On the top right corner, click on the account avatar | Account Manager opened |  |  |
-| Drawer | 1. Log in a account<br>2. Open drawer by clicking the hamburger button<br>3. Click on the arrow inside the drawer to show the submenu<br>4. Click on `Manage accounts`| Account Manager opened |  |  |
 |**View**||||||
-| View | Open the Account Manager view (check howto with "Access" tests) | Displayed: <br>- Correct header (`Manage accounts`)<br>- `X` to close<br>- At least, one account including avatar, display name, username@URL, broom button and trashbin button<br>- `Add account` option<br> Same in landscape orientation |  |  |
+| View | 1. Log in in a account<br>2. On the top right corner, click on the account avatar  | Displayed: <br>- Correct header (`Manage accounts`)<br>- `X` to close<br>- At least, one account including avatar, display name, username@URL, broom button and trashbin button<br>- `Add account` option<br> Same in landscape orientation |  |  |
 |**Add account**||||||
-| Add new account | 1. Click on `Add account` option | Login View displayed with editable Server address field |  |  |
+| Add new account | 1. Click on `Add account` option | Login View displayed |  |  |
 |**Enter account**||||||
 | Enter | 1. Add account to the device<br>2. Open Account Manager<br>3. Click on the account | List of files of the account displayed |  |  |
 |**Clean up account**||||||

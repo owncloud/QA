@@ -27,6 +27,7 @@ Automated:
 | Correct Shortcut in non-root | 1. Open FAB in non-root folder<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the non-root folder. Check in uploads view.  |  |  |
 | Correct Shortcut in space | 1. Open FAB in custom space<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter correct name like `shortcut.url`<br>5. Click on `Create`  | `shortcut.url` created in the space folder. Check in uploads view.  |  |  |
 | Existing name | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Enter correct URL<br>4. Enter name as an existing file name in the folder<br>5. Click on `Create` | `shortcut (1).url` created in the space folder. Check in uploads view.  |  |  |
+| Icon | 1. Open FAB<br>2. Click on `New shortcut`<br>3. Enter correct URL and name<br>4. Click on `Create` | Correct shortcut icon in list of files, uploads view and details view  |  |  |
 | External | 1. Open FAB <br>2. Click on `New shortcut`<br>3. Enter correct URL and name<br>4. Using another client (web, iOS), open the shortcut there | Shortcut is correctly opened |  |  |  |
 |**Open shortcut**||||||
 | Link dialog | Click over an existing and correct `.url` file | Dialog is displayed asking user for confirmation, showing the URL to open. Check in both orientations |  |  |
