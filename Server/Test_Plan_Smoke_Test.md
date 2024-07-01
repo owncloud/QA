@@ -12,8 +12,8 @@ Apps included:
 
 ### Test deployments
 
+ - oc10.sh b:windows_network_drive b:encryption b:user_ldap b:guests b:impersonate twofactor_totp b:openidconnect
  - localhost: `docker run --rm -ti -p 8080:8080 owncloud/server:10.9.0-beta1`
-
  - https://oc1090beta1-primary-s3-113-rc3-20211119.jw-qa.owncloud.works
    via `env OC10_VERSION=10.9.0beta1 OC10_TAR_URL=https://download.owncloud.org/community/testing/owncloud-complete-20211118.tar.bz2 hetzner_deploy/deploy_oc10_apps.sh web files_primary_s3 guests user_ldap impersonate oauth2 twofactor_totp windows_network_drive richdocuments`
  - `env OC10_DNSNAME=update-from-1080-DATE OC10_VERSION=10.8 hetzner_deploy/deploy_oc10_apps.sh user_ldap`
