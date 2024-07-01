@@ -54,6 +54,13 @@ cat <<EOF > $conf
     {
       "id": "richdocuments",
       "path": "https://$oc10_fqdn/apps/richdocuments/js/richdocuments.js"
+    },
+    {
+      "id": "text-editor",
+      "path": "web-app-text-editor",
+      "config": {
+        "primaryExtensions": ["txt", "yaml", "md"]
+      }
     }
   ],
   "applications" : [

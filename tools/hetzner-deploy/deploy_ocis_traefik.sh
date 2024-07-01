@@ -5,6 +5,7 @@
 # - https://github.com/owncloud/ocis/blob/master/deployments/examples/ocis_traefik/docker-compose.yml
 # - https://owncloud.github.io/ocis/deployment/basic-remote-setup/
 # - ~/ownCloud/release/ocis/test-*.txt,issues.txt
+# - https://doc.staging.owncloud.com/ocis/next
 #
 # 2020-12-15, jw@owncloud.com
 # 2024-05-23, jw@owncloud.com

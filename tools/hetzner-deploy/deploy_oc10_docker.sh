@@ -14,12 +14,15 @@ echo "Estimated setup time: 2 minutes ..."
 
 vers=10.13.4
 vers=10.14.0
+vers=10.15.0-rc.1
 export HCLOUD_SERVER_IMAGE=ubuntu-20.04	# works!
 export HCLOUD_SERVER_IMAGE=ubuntu-22.04 # works!
 d_vers=$(echo $vers  | tr '[A-Z]' '[a-z]' | tr -d .=+-)-$(date +%Y%m%d)
 
 machine_type=cx21
 machine_type=cx31	# when using an s3 server and or clamav, e.g. ldbv
+admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
+test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
 
 domain=jw-qa.owncloud.works
 test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$d_vers" | sed -e 's/-\?alpha/a/g' -e 's/-\?beta/b/g' -e 's/-\?rc/rc/g')"
@@ -114,6 +117,8 @@ chmod a+rx .	# so that www-data can enter here.
 install_app() { curl -L -s \$1 | su www-data -s /bin/sh -c 'tar zxvf - -C /root/ocmount/apps'; }
 # install_app file:///root/icap-0.1.0RC1.tar.gz
 
+docker exec -ti $d_name /bin/bash -c "env OC_PASS=$admin_pass occ user:resetpassword --password-from-env admin"
+
 cat <<EOM >> ~/POSTINIT.msg
 --------------------------------------------------------------------
 # This shell is now connected to root@$IPADDR
@@ -121,7 +126,7 @@ cat <<EOM >> ~/POSTINIT.msg
 
    URL:      https://$OC10_FQDN
    Login:    admin
-   Password: $docker_admin_pass
+   Password: $admin_pass
 
 To inspect docker, try:
  docker logs -f $d_name

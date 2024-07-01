@@ -21,12 +21,14 @@ echo "Estimated setup time: 5 minutes ..."
 
 data_exporter_vers=0.3.0
 
-vers=10.14.0-rc.2
 vers=10.14.0
+vers=10.15.0-rc.2
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
 test "$vers" = "php8"                           && tar=/home/testy/src/github/owncloud/QA/tools/hetzner-deploy/core-10.13.4-pre-php8.tar.bz2
+test "$vers" = "10.15.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240620.tar.bz2
+test "$vers" = "10.15.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240618.tar.bz2
 test "$vers" = "10.14.0"  -o "$vers" = "10.14"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20240226.tar.bz2
 test "$vers" = "10.14.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240221.tar.bz2
 test "$vers" = "10.14.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240219.tar.bz2
@@ -62,7 +64,7 @@ test "$vers" = "8.2.11"   -o "$vers" = "8.2"    && tar=https://attic.owncloud.or
 test "$vers" = "8.1.12"   -o "$vers" = "8.1"    && tar=https://attic.owncloud.org/community/owncloud-8.1.12.tar.bz2
 test "$vers" = "8.0.16"   -o "$vers" = "8.0"    && tar=https://attic.owncloud.org/community/owncloud-8.0.16.tar.bz2
 test "$vers" = "7.0.15"   -o "$vers" = "7.0"    && tar=https://attic.owncloud.org/community/owncloud-7.0.15.tar.bz2
-test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.org/community/daily/owncloud-daily-master.tar.bz2
+test "$vers" = "daily"	  -o "$vers" = "master" && tar=https://download.owncloud.com/server/daily/owncloud-daily-master.tar.bz2
 test -n "$OC10_TAR_URL" &&  tar="$OC10_TAR_URL"
 
 test -z "$OC10_DATABASE" && OC10_DATABASE=mysql		# 'mysql' or 'pgsql' or 'pgsql15' or 'sqlite'
@@ -264,7 +266,7 @@ test -z "$OC10_DNSNAME" && OC10_DNSNAME="$(echo "oc$vers$firstarg" | tr -d .=+ |
 OC10_DNSNAME="$(echo "$OC10_DNSNAME" | tr '[A-Z]_' '[a-z]-' | tr -d =+ | tr ._ -)"
 h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-date
-d_name=$(echo $h_name  | sed -e "s/date/$(date +%Y%m%d)/i")
+d_name=$(echo $h_name  | sed -e "s/\bdate\b/$(date +%Y%m%d)/i")
 
 machine_type=$HCLOUD_MACHINE_TYPE
 if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
@@ -330,7 +332,7 @@ chmod a+rx /root	# we want to access our testfiles, when we are user www-data
 ## Prepare FQDN and env.sh as early as possible, so that cf_dns can run in parallel.
 ## FIXME: Can we run cf_dns before we pass control into the new machine?
 
-test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/date/$(date +%Y%m%d)/i").jw-qa.owncloud.works"
+test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/\bdate\b/$(date +%Y%m%d)/i").jw-qa.owncloud.works"
 if [ -n "$OC10_FQDN" ]; then
   oc10_fqdn="$OC10_FQDN"
   OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
@@ -477,7 +479,7 @@ case $vers in
 esac
 
 aptQ install -y ssh apache2 mariadb-server openssl redis-server wget bzip2 zip rsync curl jq inetutils-ping
-aptQ install -y smbclient coreutils ldap-utils libhttp-dav-perl python3-pil
+aptQ install -y smbclient coreutils ldap-utils libhttp-dav-perl python3-pil unrar p7zip p7zip-full
 
 
 ## external FTP, FTPS storage
@@ -492,6 +494,7 @@ echo "ftpdata password: $ftppass"
 mkdir -p /home/ftpdata/.ssh /home/ftpdata/data
 touch /home/ftpdata/.ssh/authorized_keys
 echo "Hello, world!" >  /home/ftpdata/data/hello.txt
+zip /home/ftpdata/data/tasks.zip tasks/*
 chown -R ftpdata. /home/ftpdata
 chmod 700 /home/ftpdata/.ssh
 # ssh-keygen
@@ -681,6 +684,8 @@ occ app:list '^files_external$' --output=json
 occ app:enable files_external	# OOPS: not auto-enabled in 10.10.0RC1 ??
 occ market:install files_clipboard
 occ app:enable files_clipboard	# a copy paste function is great for testing ...
+occ market:install extract
+occ app:enable extract # rar, zip, tar, tag.gz will have an extra menu entry 'extract here'
 
 (cd /tmp/; wget https://github.com/owncloud/data_exporter/releases/download/v$data_exporter_vers/data_exporter-$data_exporter_vers.tar.gz)
 occ market:install -l /tmp/data_exporter-$data_exporter_vers.tar.gz
@@ -783,21 +788,26 @@ done
 
 test "\$OC10_DATABASE" = pgsql && echo >> ~/POSTINIT.msg 'POSTGRESQL: su - postgres -c "PAGER='' psql -d owncloud"'
 
+if [ "$webroute" != "/" ]; then
+  # append a / on what we print out. Not sure, why it currently does not wok without a /.
+  webroute=$webroute/
+fi
+
 if [ -n "\$oc10_fqdn" ]; then
   # We use certbot with --redirect, that adds a HTTP to HTTPS defult redirect to the servers.
   occ config:system:set trusted_domains 2 --value "\$oc10_fqdn"
-  occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn$webroute"	# Avoid http://localhost in notifcations emails.
+  occ config:system:set overwrite.cli.url --value "https://\$oc10_fqdn\$webroute"	# Avoid http://localhost in notifcations emails.
   if grep -q 'Congratulations! You have successfully enabled' ~/CF_DNS.msg >/dev/null 2>&1; then
     echo >> ~/POSTINIT.msg "DNS: SSL-Cert succeeded via cf_dns - access this system"
     echo >> ~/POSTINIT.msg "DNS:"
-    echo >> ~/POSTINIT.msg "DNS: 				https://\$oc10_fqdn$webroute"
+    echo >> ~/POSTINIT.msg "DNS: 				https://\$oc10_fqdn\$webroute"
     echo >> ~/POSTINIT.msg ""
   else
     echo >> ~/POSTINIT.msg "DNS: The following manual steps are needed to setup your dns name:"
     echo >> ~/POSTINIT.msg "DNS:  - Register at cloudflare and get a letsencrypt certificate:"
     echo >> ~/POSTINIT.msg "DNS:         cf_dns $IPADDR \$oc10_fqdn bot:qa@owncloud.com"
     # echo >> ~/POSTINIT.msg "DNS:  - To get a certificate, run:        certbot -m qa@owncloud.com --no-eff-email --agree-tos --redirect -d \$oc10_fqdn"
-    echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn$webroute"
+    echo >> ~/POSTINIT.msg "DNS:  - Then try:                         firefox https://\$oc10_fqdn\$webroute"
     echo >> ~/POSTINIT.msg ""
   fi
 fi
@@ -833,7 +843,7 @@ cat << EOM
 Server $vers is ready.
 
 From remote
-	firefox https://$IPADDR$webroute
+	firefox https://$IPADDR\$webroute
 		admin / $admin_pass
 EOM
 EOF
