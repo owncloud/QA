@@ -16,7 +16,7 @@
 
 echo "Estimated setup time (when weather is fine): 6 minutes ..."
 
-compose_dir_orig=/root/ocis/deployments/examples/ocis_traefik
+compose_dir_orig=/root/ocis/deployments/examples/ocis_traefik	# only available until tag v6.0.0, no longer in master.
 compose_yml_orig=docker-compose.yml
 # we call the above via a wapper:
 compose_dir=/root/run/ocis_traefik
@@ -28,6 +28,7 @@ if [ "$1" = "-h" -o "$1" = "--help" ]; then
   echo "Usage:"
   echo "	$0 [ocm] ..."
   echo "	env BASE_DOMAIN=ocis2-DATE $0 [ocm] ..."
+  echo "	env OCIS_VERSION=master BASE_DOMAIN=ocis2-latest-DATE $0 ocm"
   echo ""
   echo "Check tasks/ocis/*.sh for possible command line parameters"
   exit 1
@@ -44,6 +45,15 @@ if [ -z "$OCIS_DOCKER_TAG" ]; then
   test "$OCIS_DOCKER_TAG" = "master" && OCIS_DOCKER_TAG=latest
   echo "No OCIS_DOCKER_TAG specified, using $OCIS_DOCKER_TAG"
   sleep 3
+fi
+
+OCIS_TRAEFIK_GIT_TAG=$OCIS_VERSION
+if [ "$OCIS_TRAEFIK_GIT_TAG" == "master" ]; then
+  # the example/ocis_traefik is gone in master.
+  OCIS_TRAEFIK_GIT_TAG=v6.0.0
+  echo "WARNING: using OCIS_TRAEFIK_GIT_TAG=$OCIS_TRAEFIK_GIT_TAG instead of $OCIS_VERSION"
+  echo "WARNING: $0 is based on $compose_dir_orig, which may be deprecated..."
+  sleep 5
 fi
 
 d_tag=$(echo $OCIS_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr . -)-$(date +%m%d)
@@ -113,7 +123,7 @@ docker images -q | xargs -r docker rmi --force
 docker system prune --all --force
 docker volume prune --force
 
-git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION
+git clone https://github.com/owncloud/ocis.git -b $OCIS_TRAEFIK_GIT_TAG
 ln -s $compose_dir_orig o
 
 mkdir -p $compose_dir/{config,data}
