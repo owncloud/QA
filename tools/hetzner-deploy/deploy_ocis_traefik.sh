@@ -243,6 +243,9 @@ cat <<EOM > ~/POSTINIT.msg
 
    https://$OCIS_DOMAIN
 
+   user: admin
+   pass: $admin_pass
+
 ---------------------------------------------
 You may first need to
  - wait some minutes until all services are fully ready, ...
