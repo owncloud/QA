@@ -52,6 +52,10 @@ if [ -z "$CLOUDFLARE_DNS_ZONE" ]; then
   export CLOUDFLARE_DNS_ZONE=$cf_zone_default
 fi
 
+if [ "$CLOUDFLARE_DNS_ZONE" = "owncloud.company" ]; then
+  CLOUDFLARE_TOKEN=$CLOUDFLARE_TOKEN_COMPANY
+fi
+
 if [ -n "$CLOUDFLARE_TOKEN" ]; then
   cf_curl () { curl -s -H "Authorization: Bearer $CLOUDFLARE_TOKEN" -H "Content-Type: application/json" -X "$@"; }
 elif [ -n "$CLOUDFLARE_API_KEY" -a -n "$CLOUDFLARE_USER" ]; then
