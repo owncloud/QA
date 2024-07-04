@@ -10,7 +10,7 @@
 # 2020-12-15, jw@owncloud.com
 # 2024-05-23, jw@owncloud.com
 #	based on deploy_ocis_docker_compose.sh, but stripped down and restarted acording to the dev docs.
-# 2024-06-03, jw	- local.yaml, web.yaml and .env in my own compose_dir, not messing with the original example code any more.
+# 2024-06-03, jw	- local.yml, web.yaml and .env in my own compose_dir, not messing with the original example code any more.
 #                       - refacored ocm init into tasks/ocis/ocm.sh
 #
 
@@ -156,7 +156,13 @@ EOT
 
 echo "# ocis_env.sh is where "apps" can add environment variable to the ocis service" > ocis_env.sh
 
-## we also add our own local.yml to override some bad defaults, and allow adding apps to the web service.
+## we also add our own local.yml to override some bad defaults in ocis.yml
+##  - we change the volumes ocis-config and ocis-data from docer-builtin, to host filesystem, 
+##    so that we can prepopulate an web.yaml there. 
+##    (alternative would be to sed-edit '- ocis-config:' and '- ocis-data:' in ocis.yml )
+##, - we allow adding apps to the web service. as we know the format of that web.yaml file exactly, and can append
+## TODO: changing the driver type is an ugly hack.
+##    - create a new ocis-web.yml, that adds one ocis volume for my config/web.yaml file.
 cat <<EOT>>local.yml
 ---
 volumes:

@@ -121,7 +121,7 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "To start with no extra apps and no extra files, use: $0 --"
   echo ""
   echo "Environment:"
-  echo "   OC10_DNSNAME=oc1080rc1-DATE		set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.owncloud.works (Default: as needed by apps)"
+  echo "   OC10_DNSNAME=oc1080rc1-DATE		set the FQDN to oc1070rc1-$(date +%Y%m%d).jw-qa.$OC_BASE_DOMAIN (Default: as needed by apps)"
   echo "   OC10_FQDN=t3.owncloud.works		set the FQDN. Overrides OC10_DNSNAME."
   echo "   OC10_VERSION=10.8.0-rc1		set the version label. Should match the download url. Default: $vers"
   echo "   OC10_TAR_URL=...	        	define the download url. Default: $tar"
@@ -140,7 +140,8 @@ fi
 
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 test -n "$OC10_WEBROUTE" && webroute="$OC10_WEBROUTE"
-test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
+dest -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
+dest -z "$OC_BASE_DOMAIN" && OC_BASE_DOMAIN=owncloud.works
 
 # Prepend owncloud home, unless it starts with a /
 echo "$OC10_DATADIR" | grep -q '^/' || OC10_DATADIR="/var/www/owncloud/$OC10_DATADIR"
@@ -332,7 +333,7 @@ chmod a+rx /root	# we want to access our testfiles, when we are user www-data
 ## Prepare FQDN and env.sh as early as possible, so that cf_dns can run in parallel.
 ## FIXME: Can we run cf_dns before we pass control into the new machine?
 
-test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/\bdate\b/$(date +%Y%m%d)/i").jw-qa.owncloud.works"
+test -n "$OC10_DNSNAME" &&  oc10_fqdn="$(echo "$OC10_DNSNAME" | sed -e "s/\bdate\b/$(date +%Y%m%d)/i").jw-qa.$OC_BASE_DOMAIN"
 if [ -n "$OC10_FQDN" ]; then
   oc10_fqdn="$OC10_FQDN"
   OC10_DNSNAME="$(echo "$OC10_FQDN" | cut -d. -f1)"	# take first name component
@@ -366,7 +367,7 @@ aptQ install -y certbot python3-certbot-apache python3-certbot-dns-cloudflare
 
 export EMAIL_HOST=localhost
 export TEST_SERVER_URL=https://\$oc10_fqdn
-export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.owncloud.works    # username=admin, password=$admin_pass ... works, but not mentioned in the docs.
+export TEST_SERVER_FED_URL=https://TODO-find-another-server-for-federation-testing.$OC_BASE_DOMAIN    # username=admin, password=$admin_pass ... works, but not mentioned in the docs.
 export HCLOUD_MACHINE_TYPE=$machine_type
 export HCLOUD_NETWORK_NAME=$network
 export HCLOUD_SERVER_IMAGE=$HCLOUD_SERVER_IMAGE
@@ -830,7 +831,7 @@ fi
 for uid in Alice bob carol dave einstein; do
   env OC_PASS=secret occ user:add --password-from-env -g \$uid-g \$uid
 done
-occ user:modify admin email "admin@jw-qa.owncloud.works"
+occ user:modify admin email "admin@jw-qa.$OC_BASE_DOMAIN"
 occ user:modify alice displayname "Alice in Wonderland, down the rabbit hole and through the lookin"	# max 64 chars
 occ user:modify carol displayname "Carol
 L€wis"

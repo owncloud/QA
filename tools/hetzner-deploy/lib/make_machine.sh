@@ -73,8 +73,8 @@ reset	# clear screen when all was well.
 ## mitigate CVE-2024-6387, 2024-07-02. jw
 ssh_opts="-o ConnectTimeout=10 -o CheckHostIP=no -o StrictHostKeyChecking=no -o PasswordAuthentication=no"
 echo "LoginGraceTime 0" | timeout 20 ssh $ssh_opts root@$IPADDR tee -a /etc/ssh/sshd_config.d/nograce.conf
-timeout 20 ssh $ssh_opts-root@$IPADDR service sshd restart
-timeout 20 ssh $ssh_opts-root@$IPADDR sshd -T | grep -i grace
+timeout 20 ssh $ssh_opts root@$IPADDR service sshd restart
+timeout 20 ssh $ssh_opts root@$IPADDR sshd -T | grep -i grace
 echo "expected output above: logingracetime 0"
 
 echo NAME=$NAME

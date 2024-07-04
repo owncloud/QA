@@ -43,14 +43,15 @@ if [ -z "$OCIS_DOCKER_TAG" ]; then
   sleep 3
 fi
 
-d_tag=$(echo $OCIS_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr . -)-$(date +%m%d)
+d_tag=$(echo ocis-$OCIS_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr . - | sed -e 's/-latest//')-$(date +%m%d)
 if [ -z "$BASE_DOMAIN" ]; then
-  BASE_DOMAIN=ocis-$d_tag
+  BASE_DOMAIN=$d_tag
 else
   BASE_DOMAIN=$(echo $BASE_DOMAIN | sed -e "s/\bDATE\b/$(date +%Y%m%d)/")
 fi
 echo "$BASE_DOMAIN" | grep -qF '.' - || BASE_DOMAIN=$BASE_DOMAIN.jw-qa.owncloud.works
-OCIS_DOMAIN=web.$BASE_DOMAIN
+export OCIS_DOMAIN=web.$BASE_DOMAIN
+
 
 admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
 test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
@@ -101,7 +102,7 @@ for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
   echo "$i: waiting for CF_DNS.msg"
   sleep 4
 done
-if grep -q 'Congratulations! You have successfully enabled' ~/CF_DNS.msg >/dev/null 2>&1; then
+if grep -q '"success": true,' ~/CF_DNS.msg >/dev/null 2>&1; then
   echo >> ~/POSTINIT.msg "DNS: Domain name registered *.$BASE_DOMAIN"
 else
   echo >> ~/POSTINIT.msg "DNS: FAILED to register domain name registered *.$BASE_DOMAIN"
@@ -109,7 +110,41 @@ fi
 
 # now we have a DNS Name.
 
-# docker compose up -d
+# nano .env //enter your domain
+last_line=$(grep COMPOSE_FILE= .env)
+
+cat >> .env <<EOF
+# --- edits by $0 ---
+IPADDR=$IPADDR
+# ----
+OCIS_DOCKER_TAG=$OCIS_DOCKER_TAG
+ADMIN_PASSWORD=$admin_pass
+DEMO_USERS=true
+LOG_LEVEL=debug
+INSECURE=false
+OCIS_WEB_YML=:ocis-web.yml
+FRONTEND_OCS_INCLUDE_OCM_SHAREES=true
+FRONTEND_OCS_ENABLE_DENIALS=true
+# ---
+TRAEFIK_DOMAIN=traefik.$BASE_DOMAIN
+TRAEFIK_ACME_MAIL=qa@owncloud.com
+TRAEFIK_DASHBOARD=true
+## FIXME: 5.0 docs and the .env says plaintext admin:admin,  4.0 docs says htpaswd encoded.
+TRAEFIK_BASIC_AUTH_USERS_4=\$(htpasswd -nb admin $admin_pass)
+TRAEFIK_BASIC_AUTH_USERS=admin:$admin_pass
+# ---
+INBUCKET_DOMAIN=mail.$BASE_DOMAIN
+EOF
+
+
+echo "$last_line:\${OCIS_WEB_YML:-}" >> .env
+
+# https://docs.docker.com/compose/compose-file/13-merge/
+## TODO create a ocis-web.yml that adds one volume 
+## We can also use !reset and !override pragmas
+
+:(
+docker compose up -d
 
 cat <<EOM >> ~/POSTINIT.msg
 
@@ -124,7 +159,6 @@ cat <<EOM >> ~/POSTINIT.msg
 
 ---------------------------------------------
 You may first need to
- - wait some minutes until all services are fully ready, ...
  - maybe run: ocis.sh webdav health
 
 After changing configs:
