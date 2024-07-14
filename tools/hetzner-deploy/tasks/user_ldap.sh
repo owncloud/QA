@@ -55,7 +55,8 @@ EOH
 # sed -i -e 's@^SLAPD_SERVICES=.*@SLAPD_SERVICES="ldap:/// ldaps:/// ldapi:///"@' /etc/default/slapd
 # service slapd restart
 ## SSL Does not work. The test command fails with "no peer certificate available:
-openssl s_client -connect $ldap_server:636 < /dev/null && proto=ldaps
+## or with: 140267127543104:error:0200206E:system library:connect:Connection timed out:../crypto/bio/b_sock2.c:110:
+timeout 10 openssl s_client -connect $ldap_server:636 < /dev/null && proto=ldaps
 
 opts="$opts -H $proto://$ldap_server -D $ldap_login -w $ldap_pass -b $base -s $scope"
 

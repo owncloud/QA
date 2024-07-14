@@ -22,11 +22,13 @@ echo "Estimated setup time: 5 minutes ..."
 data_exporter_vers=0.3.0
 
 vers=10.14.0
-vers=10.15.0-rc.2
+vers=10.15.0-rc.4
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
 test "$vers" = "php8"                           && tar=/home/testy/src/github/owncloud/QA/tools/hetzner-deploy/core-10.13.4-pre-php8.tar.bz2
+test "$vers" = "10.15.0-rc.4"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240711.tar.bz2
+test "$vers" = "10.15.0-rc.3"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240709.tar.bz2
 test "$vers" = "10.15.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240620.tar.bz2
 test "$vers" = "10.15.0-rc.1"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240618.tar.bz2
 test "$vers" = "10.14.0"  -o "$vers" = "10.14"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20240226.tar.bz2
@@ -135,13 +137,14 @@ if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "   HCLOUD_SERVER_IMAGE=debian-12	try with a php-8.2 system."
   echo "   HCLOUD_MACHINE_TYPE=ccx33		to use a machine with 8 dedicated CPUs."
   echo "   HCLOUD_LOCATION=nbg1			define the compute center location. hel1, fsn1, nbg1. Default: $location"
+  echo "   OC_BASE_DOMAIN=owncloud.company	switch to another toplevel domain. Default: owncloud.works"
   exit 1
 fi
 
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 test -n "$OC10_WEBROUTE" && webroute="$OC10_WEBROUTE"
-dest -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
-dest -z "$OC_BASE_DOMAIN" && OC_BASE_DOMAIN=owncloud.works
+test -n "$OC10_ADMIN_PASS" && admin_pass="$OC10_ADMIN_PASS"
+test -z "$OC_BASE_DOMAIN" && OC_BASE_DOMAIN=owncloud.works
 
 # Prepend owncloud home, unless it starts with a /
 echo "$OC10_DATADIR" | grep -q '^/' || OC10_DATADIR="/var/www/owncloud/$OC10_DATADIR"
@@ -353,6 +356,7 @@ fi
 systemctl disable unattended-upgrades.service
 systemctl stop    unattended-upgrades.service
 
+HISTTIMEFORMAT="%F %T "
 
 ## aptQ silences most of the usless clutter from apt. This is what apt -q should do, but does not do.
 # We use tr to "insert" a newline at [Y/n], so that prompts are visible

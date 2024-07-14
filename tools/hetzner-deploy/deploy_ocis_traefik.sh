@@ -89,6 +89,7 @@ user_speech_url=https://www.einstein-website.de/z_biography/einstein1930.mp3
 
 INIT_SCRIPT <<EOF
 
+HISTTIMEFORMAT="%F %T "
 export LC_ALL=C
 TASKd=\$HOME/tasks/ocis
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
