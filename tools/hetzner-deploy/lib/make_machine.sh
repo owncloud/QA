@@ -4,6 +4,7 @@
 # 2021-03-01 jw, 	support for POSTINIT_MSG, POSTINIT_BASHRC added.
 # 2021-07-16 jw, 	print better instructions also when running standalone
 # 2022-09-12, jw	if cf_dns_add_move.sh is found, automate cloudflare DNS and certbot.
+# 2024-07-15, jw	use env MAKE_MACHINE_CF_DNS= ... to skip generating DNS names and certs while debugging.
 #
 # TODO:
 #  - ssh -o UserKnownHostsFile=/dev/null  could simplify things...
@@ -113,6 +114,7 @@ echo "$PARAM_BASENAME"
 cf_dns=$(type -P cf_dns)
 test -z "$cf_dns" && cf_dns=$(type -P cf_dns.sh)
 test -z "$cf_dns" && cf_dns=$libdir/../../cf_dns.sh
+test -z "$MAKE_MACHINE_CF_DNS" && cf_dns=$MAKE_MACHINE_CF_DNS
 
 if [ -n "$cf_dns" ]; then
   # Automate DNS name and certbot.
@@ -134,6 +136,9 @@ if [ -n "$cf_dns" ]; then
   cf_dns_tmp=/tmp/cf_dns_$$.log
   ($cf_dns $IPADDR --poll < /dev/null > $cf_dns_tmp 2>&1; scp -q $cf_dns_tmp root@$IPADDR:CF_DNS.msg; rm -f $cf_dns_tmp) &
   echo "+ $cf_dns $IPADDR --poll &"
+else
+  echo "No cf_dns found. Try manually: cf_dns $IPADDR --poll"
+  sleep 10
 fi
 
 tmpscriptfile=./tmpscript$$.sh

@@ -13,11 +13,11 @@
 
 echo "Estimated setup time (when weather is fine): 6 minutes ..."
 
-compose_dir_orig=/root/ocis/deployments/examples/ocis_full	# only available until tag v6.0.0, no longer in master.
-compose_yml_orig=docker-compose.yml
+compose_dir=/root/ocis/deployments/examples/ocis_full	# only available since tag v6.0.0
+compose_yml=docker-compose.yml
 # we call the above via a wapper:
-compose_dir=/root/run/ocis_full
-compose_yml=local.yml
+w_compose_dir=/root/run/ocis_full
+w_compose_yml=local.yml
 
 ocis_bin=/usr/bin/ocis
 
@@ -95,7 +95,7 @@ echo >> ~/env.sh "CERTBOT=none"
 echo >> ~/env.sh "DNS_WILDCARD=true"
 
 git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION
-ln -s $compose_dir_orig o
+ln -s $compose_dir o
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
   test -f ~/CF_DNS.msg && break;
@@ -111,7 +111,7 @@ fi
 # now we have a DNS Name.
 
 # nano .env //enter your domain
-last_line=$(grep COMPOSE_FILE= .env)
+dot_env_last_line=$(grep COMPOSE_FILE= .env)
 
 cat >> .env <<EOF
 # --- edits by $0 ---
@@ -123,6 +123,7 @@ DEMO_USERS=true
 LOG_LEVEL=debug
 INSECURE=false
 OCIS_WEB_YML=:ocis-web.yml
+# FIXME: next two should not be hardcoded here. They should come from tasks/ocis/ocm.sh
 FRONTEND_OCS_INCLUDE_OCM_SHAREES=true
 FRONTEND_OCS_ENABLE_DENIALS=true
 # ---
@@ -137,14 +138,50 @@ INBUCKET_DOMAIN=mail.$BASE_DOMAIN
 EOF
 
 
-echo "$last_line:\${OCIS_WEB_YML:-}" >> .env
-
 # https://docs.docker.com/compose/compose-file/13-merge/
-## TODO create a ocis-web.yml that adds one volume 
-## We can also use !reset and !override pragmas
+## create a ocis-web.yml that adds one volume containing our web.yaml, so that we
+## can configure the web service.
+## (We can also use !reset and !override pragmas, nice!)
+cat <<EOF > ocis-web.yml
+services:
+    volumes:
+      - ./config/ocis/web.yaml:/etc/ocis/web.yaml
+      - ./volume/config:/etc/ocis
+      - ./volume/data:/var/lib/ocis
+EOF
+# TODO: having the volume/config here in the filesystem is probably useless? 
+# It appears empty, as eveything in there are mounted files. 
+mkdir -pf volume/{config,data}
+cat <<EOF > config/ocis/web.yaml
+common_apps: @common_apps [ "admin-settings", "epub-reader", "external", "files", "pdf-viewer", "preview", "search", "text-editor" ]
 
-:(
-docker compose up -d
+web:
+  config:
+    apps:
+      - admin-settings
+      - draw-io
+      - epub-reader
+      - external
+      - files
+      - pdf-viewer
+      - preview
+      - search
+      - text-editor
+      - ocm
+EOF
+## CAUTION: tasks/ocis/*.sh can assume that web.yaml ends in web.config.apps: at indentation level 6.
+
+for app_name in \$PARAM; do
+  if [ -f \$TASKd/\$app_name.sh ]; then
+    echo "ERROR: \$app requested. NOT IMPL. Running \$TASKd/\$app_name.sh ..." | tee -a ~/POSTINIT.msg
+  else
+    echo "ERROR: \$TASKd/\$app_name.sh not found." | tee -a ~/POSTINIT.msg
+  fi
+done
+
+echo "$dot_env_last_line:\${OCIS_WEB_YML:-}" >> .env
+
+echo now do: docker compose up -d
 
 cat <<EOM >> ~/POSTINIT.msg
 
