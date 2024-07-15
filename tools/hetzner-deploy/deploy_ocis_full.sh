@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 # References:
+# - https://doc.staging.owncloud.com/ocis/next/depl-examples/ubuntu-compose/ubuntu-compose-hetzner.html	(this is for 5.0.6 !)
+# - https://owncloud.dev/ocis/deployment/ocis_full/
 # - https://streaming.media.ccc.de/osc24/relive/4662 33:01
 # - https://owncloud.dev/ocis/deployment/ocis_traefik/
 # - https://github.com/owncloud/ocis/blob/master/deployments/examples/ocis_traefik/docker-compose.yml
@@ -26,6 +28,7 @@ if [ "$1" = "-h" -o "$1" = "--help" ]; then
   echo "	$0 [ocm] ..."
   echo "	env BASE_DOMAIN=ocis2-DATE $0 [ocm] ..."
   echo "	env OCIS_VERSION=master BASE_DOMAIN=ocis2-latest-DATE $0 ocm"
+  echo "	env OCIS_DOCKER_IMAGE=owncloud/ocis-rolling BASE_DOMAIN=fedi-rolling-DATE $0 ocm"
   echo ""
   echo "Check tasks/ocis/*.sh for possible command line parameters"
   exit 1
@@ -41,6 +44,9 @@ if [ -z "$OCIS_DOCKER_TAG" ]; then
   test "$OCIS_DOCKER_TAG" = "master" && OCIS_DOCKER_TAG=latest
   echo "No OCIS_DOCKER_TAG specified, using $OCIS_DOCKER_TAG"
   sleep 3
+fi
+if [ -z "$OCIS_DOCKER_IMAGE" ]; then
+  export OCIS_DOCKER_IMAGE=owncloud/ocis
 fi
 
 d_tag=$(echo ocis-$OCIS_DOCKER_TAG  | tr '[A-Z]' '[a-z]' | tr . - | sed -e 's/-latest//')-$(date +%m%d)
@@ -62,7 +68,8 @@ export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
 
 # use a cx31 -- we need more than 40GB disk space.
-source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,apache2-utils,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
+mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
+source $mydir/lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,apache2-utils,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
 set -x
 
 if [ -z "$IPADDR" ]; then
@@ -72,12 +79,15 @@ fi
 
 INIT_SCRIPT <<EOF
 
+export EDITOR=vim
+echo >> .bashrc "export EDITOR=vim"
 export LC_ALL=C
+
 TASKd=\$HOME/tasks/ocis
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
-echo -e "#! /bin/sh\ncd $compose_dir\ndocker-compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
-echo -e "#! /bin/sh\ncd $compose_dir\ndocker-compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
+echo -e "#! /bin/sh\ncd $compose_dir\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
+echo -e "#! /bin/sh\ncd $compose_dir\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
 chmod a+x /usr/local/bin/*
 
 # docker-compose v1 or v2?
@@ -89,12 +99,15 @@ echo "deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker
 apt update
 apt install -y docker-compose-plugin
 
+# jq was an apt package, but yq is a pip package.
+pip install yq
+
 # used by make_machine.sh / cf_dns --poll
 echo >  ~/env.sh "base_fqdn=$BASE_DOMAIN"
 echo >> ~/env.sh "CERTBOT=none"
 echo >> ~/env.sh "DNS_WILDCARD=true"
 
-git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION
+git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION --depth 1
 ln -s $compose_dir o
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
@@ -110,19 +123,22 @@ fi
 
 # now we have a DNS Name.
 
+cd $compose_dir
 # nano .env //enter your domain
-dot_env_last_line=$(grep COMPOSE_FILE= .env)
+dot_env_last_line=\$(grep COMPOSE_FILE= .env)
 
-cat >> .env <<EOF
+cat >> .env <<EOT
 # --- edits by $0 ---
 IPADDR=$IPADDR
 # ----
 OCIS_DOCKER_TAG=$OCIS_DOCKER_TAG
+OCIS_DOCKER_IMAGE=$OCIS_DOCKER_IMAGE
 ADMIN_PASSWORD=$admin_pass
 DEMO_USERS=true
 LOG_LEVEL=debug
 INSECURE=false
 OCIS_WEB_YML=:ocis-web.yml
+OCIS_DOMAIN=$OCIS_DOMAIN
 # FIXME: next two should not be hardcoded here. They should come from tasks/ocis/ocm.sh
 FRONTEND_OCS_INCLUDE_OCM_SHAREES=true
 FRONTEND_OCS_ENABLE_DENIALS=true
@@ -130,32 +146,54 @@ FRONTEND_OCS_ENABLE_DENIALS=true
 TRAEFIK_DOMAIN=traefik.$BASE_DOMAIN
 TRAEFIK_ACME_MAIL=qa@owncloud.com
 TRAEFIK_DASHBOARD=true
-## FIXME: 5.0 docs and the .env says plaintext admin:admin,  4.0 docs says htpaswd encoded.
-TRAEFIK_BASIC_AUTH_USERS_4=\$(htpasswd -nb admin $admin_pass)
-TRAEFIK_BASIC_AUTH_USERS=admin:$admin_pass
+## FIXME: 5.0 docs and the .env says plaintext admin:admin,  4.0 docs says htpaswd encoded. 6.0 example has it htpasswd encoded again.
+##   According to YAML specification we need to escape the $ symbol by doubling it ($$). Or put the entire string into doublequotes.
+##   (The latter is IMHO a bad choice, as it contradicts the distinction betwwen double and single quotes seen in other languages.)
+TRAEFIK_BASIC_AUTH_USERS=\$(htpasswd -nb admin $admin_pass | sed -e 's@\\\$@\$\$@g')
 # ---
+# FIXME: this .env should use an OCIS_BASE_DOMAIN variable and default this to owncloud.test,
+# instead of defaulting eigth times the same thing.
 INBUCKET_DOMAIN=mail.$BASE_DOMAIN
-EOF
+MINIO_DOMAIN=minio.$BASE_DOMAIN
+COLLABORA_DOMAIN=collabora.$BASE_DOMAIN
+WOPISERVER_DOMAIN=wopi.$BASE_DOMAIN
+COMPANION_DOMAIN=companion.$BASE_DOMAIN
+ONLYOFFICE_DOMAIN=onlyoffice.$BASE_DOMAIN
+WOPISERVER_ONLYOFFICE_DOMAIN=wopi-oo.$BASE_DOMAIN
+EOT
 
 
 # https://docs.docker.com/compose/compose-file/13-merge/
+# -> A YAML mapping gets merged by adding missing entries and merging the conflicting ones.
+#    (later yaml files overwrite values from earlier yaml files, no conflict is escalated)
+# -> A YAML sequence is merged by appending values from the overriding Compose file to the previous one.
+#    (duplicates are not merged)
 ## create a ocis-web.yml that adds one volume containing our web.yaml, so that we
 ## can configure the web service.
 ## (We can also use !reset and !override pragmas, nice!)
-cat <<EOF > ocis-web.yml
+cat <<EOT > ocis-web.yml
 services:
+  ocis:
     volumes:
       - ./config/ocis/web.yaml:/etc/ocis/web.yaml
-      - ./volume/config:/etc/ocis
-      - ./volume/data:/var/lib/ocis
-EOF
-# TODO: having the volume/config here in the filesystem is probably useless? 
-# It appears empty, as eveything in there are mounted files. 
-mkdir -pf volume/{config,data}
-cat <<EOF > config/ocis/web.yaml
-common_apps: @common_apps [ "admin-settings", "epub-reader", "external", "files", "pdf-viewer", "preview", "search", "text-editor" ]
-
-web:
+      - ./patch_ocis_yaml.sh:/etc/ocis/patch_ocis_yaml.sh
+    # FIXME: hack into the generated /etc/ocis/ocis.yaml
+    command: [ "-c", "ocis init || true; /etc/ocis/patch_ocis_yaml.sh || true; ocis server" ]
+EOT
+mkdir -p ~/volume/
+ln -s /var/lib/docker/volumes/o_ocis-data/_data ~/volume/ocis-data
+ln -s /var/lib/docker/volumes/o_ocis-config/_data ~/volume/ocis-config
+ln -s /var/lib/docker/volumes/o_certs/_data ~/volume/traefik-certs
+# HACK: make wopi.secret appear as needed by the collaboration service.
+cat <<EOT > patch_ocis_yaml.sh
+set -x
+grep -q 'xxxwopi:' /etc/ocis/ocis.yaml && exit 0	# everything okay, we already have a wopi: key.
+# else: ocis 5.1.x docker has a wopiapp: key, we need to copy the secret from there.
+sed -i -e 's@\\bsecret:\\s\\(\\S*\\)@secret: \\1\\n  wopi:\\n    secret: \\1@' /etc/ocis/ocis.yaml
+EOT
+chmod a+x patch_ocis_yaml.sh
+cat <<EOT >> config/ocis/web.yaml
+extra:
   config:
     apps:
       - admin-settings
@@ -168,7 +206,11 @@ web:
       - search
       - text-editor
       - ocm
-EOF
+EOT
+# yaml keys must be uniq, we can only merge by appending somethin with a diffeent name, and then run a jq merge operator.
+# funny but nice: the += array merge does not explode when .web.config.apps is absent.
+# this also merges correctly, when web.yaml was completely absent, and also when it has external-apps in config.
+yq '.web.config.apps += .extra.config.apps | del(.extra)' config/ocis/web.yaml -y > temp.yaml; mv temp.yaml config/ocis/web.yaml
 ## CAUTION: tasks/ocis/*.sh can assume that web.yaml ends in web.config.apps: at indentation level 6.
 
 for app_name in \$PARAM; do
@@ -179,7 +221,9 @@ for app_name in \$PARAM; do
   fi
 done
 
-echo "$dot_env_last_line:\${OCIS_WEB_YML:-}" >> .env
+# Three \\\ preserve one $ sign here.
+# HACK: the colon separator is part of OCIS_WEB_YML as with all the other entries in this line.
+echo "\$dot_env_last_line\\\${OCIS_WEB_YML:-}" >> .env
 
 echo now do: docker compose up -d
 
@@ -197,6 +241,10 @@ cat <<EOM >> ~/POSTINIT.msg
 ---------------------------------------------
 You may first need to
  - maybe run: ocis.sh webdav health
+Check if something is restarting:
+ - docker compos ls
+ - docker ps
+ - docker logs
 
 After changing configs:
   cd o

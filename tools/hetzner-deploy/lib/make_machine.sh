@@ -114,7 +114,7 @@ echo "$PARAM_BASENAME"
 cf_dns=$(type -P cf_dns)
 test -z "$cf_dns" && cf_dns=$(type -P cf_dns.sh)
 test -z "$cf_dns" && cf_dns=$libdir/../../cf_dns.sh
-test -z "$MAKE_MACHINE_CF_DNS" && cf_dns=$MAKE_MACHINE_CF_DNS
+test -n "$MAKE_MACHINE_CF_DNS" && cf_dns=$MAKE_MACHINE_CF_DNS
 
 if [ -n "$cf_dns" ]; then
   # Automate DNS name and certbot.
@@ -137,7 +137,10 @@ if [ -n "$cf_dns" ]; then
   ($cf_dns $IPADDR --poll < /dev/null > $cf_dns_tmp 2>&1; scp -q $cf_dns_tmp root@$IPADDR:CF_DNS.msg; rm -f $cf_dns_tmp) &
   echo "+ $cf_dns $IPADDR --poll &"
 else
-  echo "No cf_dns found. Try manually: cf_dns $IPADDR --poll"
+  cf_dns_tmp=/tmp/cf_dns_$$.log
+  echo "No cf_dns found. Try manually: cf_dns $IPADDR --poll" | tee -a $cf_dns_tmp
+  scp -q $cf_dns_tmp root@$IPADDR:CF_DNS.msg
+  rm -f $cf_dns_tmp
   sleep 10
 fi
 

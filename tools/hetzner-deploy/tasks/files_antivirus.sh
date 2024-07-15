@@ -5,6 +5,8 @@
 # - files_antivirus with a local clamav
 # - files_antivirus with dockerized clamav-c-icap
 # - files_antivirus with (if tar and key are present) Kaspersky Scan Engine
+#
+# Das CST VMware Lab gibt es nicht mehr. Das wurde irgendwann im April abgeschaltet.
 
 # FIXME: this is needed to avoid an upgrade scenario during start: rm -rf /var/www/owncloud/apps/files_antivirus
 
