@@ -76,6 +76,7 @@ if [ -z "$IPADDR" ]; then
   echo "Error: make_machine.sh failed."
   exit 1
 fi
+scp $mydir/bin/ocis/* root@$IPADDR:/usr/local/bin
 
 INIT_SCRIPT <<EOF
 
@@ -88,8 +89,10 @@ useradd -u 1000 ocis	# so that we can refer to the ocis user in ocmproviders-add
 TASKd=\$HOME/tasks/ocis
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
-echo -e "#! /bin/sh\ncd $compose_dir\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
-echo -e "#! /bin/sh\ncd $compose_dir\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
+## FIXME: when docker compose was started using the /root/o symlink, we must always use the symlink, otherwise it complains 'service "ocis" is not running'
+## FIXME: When there are multiple paths leading to the same environment, we must quere docker compose ls, it contains the path that was used. e.g. /root/o
+echo -e "#! /bin/sh\ncd /root/o\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
+echo -e "#! /bin/sh\ncd /root/o\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
 chmod a+x /usr/local/bin/*
 
 # docker-compose v1 or v2?
