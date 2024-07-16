@@ -83,6 +83,8 @@ export EDITOR=vim
 echo >> .bashrc "export EDITOR=vim"
 export LC_ALL=C
 
+useradd -u 1000 ocis	# so that we can refer to the ocis user in ocmproviders-add.sh
+
 TASKd=\$HOME/tasks/ocis
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
@@ -181,17 +183,20 @@ services:
     command: [ "-c", "ocis init || true; /etc/ocis/patch_ocis_yaml.sh || true; ocis server" ]
 EOT
 mkdir -p ~/volume/
-ln -s /var/lib/docker/volumes/o_ocis-data/_data ~/volume/ocis-data
-ln -s /var/lib/docker/volumes/o_ocis-config/_data ~/volume/ocis-config
 ln -s /var/lib/docker/volumes/o_certs/_data ~/volume/traefik-certs
+ln -s /var/lib/docker/volumes/o_ocis-config/_data ~/volume/ocis-config
+ln -s /var/lib/docker/volumes/o_ocis-data/_data ~/volume/ocis-data
+ln -s ~/volume/ocis-data ~/data
 # HACK: make wopi.secret appear as needed by the collaboration service.
 cat <<EOT > patch_ocis_yaml.sh
 set -x
-grep -q 'xxxwopi:' /etc/ocis/ocis.yaml && exit 0	# everything okay, we already have a wopi: key.
+grep -q 'wopi:' /etc/ocis/ocis.yaml && exit 0	# everything okay, we already have a wopi: key.
 # else: ocis 5.1.x docker has a wopiapp: key, we need to copy the secret from there.
 sed -i -e 's@\\bsecret:\\s\\(\\S*\\)@secret: \\1\\n  wopi:\\n    secret: \\1@' /etc/ocis/ocis.yaml
 EOT
 chmod a+x patch_ocis_yaml.sh
+
+# FIXME: how do I find a list of available apps? How do I find the list of default apps?
 cat <<EOT >> config/ocis/web.yaml
 extra:
   config:
@@ -211,7 +216,6 @@ EOT
 # funny but nice: the += array merge does not explode when .web.config.apps is absent.
 # this also merges correctly, when web.yaml was completely absent, and also when it has external-apps in config.
 yq '.web.config.apps += .extra.config.apps | del(.extra)' config/ocis/web.yaml -y > temp.yaml; mv temp.yaml config/ocis/web.yaml
-## CAUTION: tasks/ocis/*.sh can assume that web.yaml ends in web.config.apps: at indentation level 6.
 
 for app_name in \$PARAM; do
   if [ -f \$TASKd/\$app_name.sh ]; then
@@ -225,7 +229,7 @@ done
 # HACK: the colon separator is part of OCIS_WEB_YML as with all the other entries in this line.
 echo "\$dot_env_last_line\\\${OCIS_WEB_YML:-}" >> .env
 
-echo now do: docker compose up -d
+docker compose up -d
 
 cat <<EOM >> ~/POSTINIT.msg
 
@@ -242,13 +246,12 @@ cat <<EOM >> ~/POSTINIT.msg
 You may first need to
  - maybe run: ocis.sh webdav health
 Check if something is restarting:
- - docker compos ls
- - docker ps
- - docker logs
+ - cd ~/o; docker compose ls
+ - docker ps -a
+ - docker logs o-collaboration-1
 
 After changing configs:
-  cd o
-  docker compose restart
+  cd ~/o; docker compose restart
 
 ---------------------------------------------
 EOM
