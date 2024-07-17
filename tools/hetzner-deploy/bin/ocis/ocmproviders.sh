@@ -21,29 +21,35 @@ if [ "$cmd" = '-h' -o "$cmd" = '--help' -o "$cmd" = 'help' ]; then
 	cat << EOT
 Usage:
 	$0 [list]
-	$0 add https://otherhost.example.com
+	$0 [add] https://otherhost.example.com
 	$0 del https://otherhost.example.com
 
 Environment:
-	OCIS_TOPDIR	// contains the 'storage/ocm' subdirectories
+	OCIS_DATADIR	// contains the 'storage/ocm' subdirectories
 
 EOT
 	exit 0
 fi
 
-if [ -z "$OCIS_TOPDIR" ]; then
-	test -d $HOME/data/storage && OCIS_TOPDIR=$HOME/data
-	test -d $HOME/.ocis/storage && OCIS_TOPDIR=$HOME/.ocis
-	test -d /var/lib/ocis/storage && OCIS_TOPDIR=/var/lib/ocis
+if [ -z "$OCIS_DATADIR" ]; then
+	for dir in /var/lib/docker/volumes/*ocis-data/_data \
+			$HOME/data \
+			$HOME/.ocis \
+			/var/lib/ocis; do
+		test -d $dir/storage && OCIS_DATADIR=$dir
+	done
+	# test -d $HOME/data/storage && OCIS_DATADIR=$HOME/data
+	# test -d $HOME/.ocis/storage && OCIS_DATADIR=$HOME/.ocis
+	# test -d /var/lib/ocis/storage && OCIS_DATADIR=/var/lib/ocis
 
-	test -n "$OCIS_TOPDIR" && echo "Choosing OCIS_TOPDIR=$OCIS_TOPDIR" 1>&2
+	test -n "$OCIS_DATADIR" && echo "Choosing OCIS_DATADIR=$OCIS_DATADIR" 1>&2
 fi
-if [ -z "$OCIS_TOPDIR" ]; then
-	echo "ERROR: environment variable OCIS_TOPDIR is undefdined and the ocis storage was not found in a well known location."
+if [ -z "$OCIS_DATADIR" ]; then
+	echo "ERROR: environment variable OCIS_DATADIR is undefdined and the ocis storage was not found in a well known location."
 	exit 1
 fi
-if [ ! -d "$OCIS_TOPDIR/storage/ocm" ]; then
-	echo "ERROR: sudbdirectory storage/ocm does not exist in OCIS_TOPDIR=$OCIS_TOPDIR, try somthing else."
+if [ ! -d "$OCIS_DATADIR/storage/ocm" ]; then
+	echo "ERROR: sudbdirectory storage/ocm does not exist in OCIS_DATADIR=$OCIS_DATADIR, try somthing else."
 	exit 1
 fi
 
@@ -73,11 +79,11 @@ lookup () {
 
 add () {
 	fqdn=$(domain $2)
-	host=$(echo $domain | sed -e 's@\..*@@')
+	name=$(echo $fqdn | sed -e 's@^web\.@web-@' -e 's@\..*@@')	# web alone is not a good name.
 	cat <<EOT | jq --slurpfile newprov /dev/stdin '. += $newprov' $1
 {
-    "name": "$host",
-    "full_name": "$host provider",
+    "name": "$name",
+    "full_name": "$name provider",
     "organization": "Owncloud",
     "domain": "$fqdn",
     "homepage": "$url",
@@ -88,7 +94,7 @@ add () {
 		    "name": "OCM",
 		    "description": "$fqdn Open Cloud Mesh API"
 		},
-		"name": "$host - OCM API",
+		"name": "$name - OCM API",
 		"path": "$url/ocm/",
 		"is_monitored": true
 	    },
@@ -101,7 +107,7 @@ EOT
 }
 
 try_chown_ocis() {
-	chown ocis.ocis $1 2>&1 > /dev/null || chown 1000.1000 $1 || true
+	chown ocis:ocis $1 >/dev/null 2>&1 || chown 1000:1000 $1 || true
 	chmod 644 $1 || true
 }
 
@@ -122,7 +128,7 @@ restart_hint() {
 	echo "TODO: service ocis restart / docker compose restart ocis" 1>&2
 }
 
-ocmproviders_file=$OCIS_TOPDIR/storage/ocm/ocmproviders.json
+ocmproviders_file=$OCIS_DATADIR/storage/ocm/ocmproviders.json
 if [ ! -f $ocmproviders_file ]; then
 	echo "[]" > $ocmproviders_file
 	# use the ocis user, if we have one, otherwise assume its 1000.
@@ -150,9 +156,16 @@ if [ "$cmd" = "del" -o "$cmd" = "-d"  -o "$cmd" = "delete" -o "$cmd" = "rm" ]; t
 	exit 0
 fi
 
+if [ -n "$(echo "$cmd" | grep '://' )" -a -z "$url" ] ; then
+	# This command looks like URL, and we don't have a URL
+	# let's assume 'add'
+	url="$cmd"
+	cmd=add
+fi
+
 # now url needs to be really an url. Do some sanity checking ...
-echo $url | grep -q :// || { echo "URL needs a protocol, e.g. start with https://"; exit 1; }
-echo $url | grep -q '\.' || { echo "URL needs a fully qualified domain name, e.g. try append domain"; exit 1; }
+echo "$url" | grep -q '://' || { echo "URL needs a protocol, e.g. start with https://"; exit 1; }
+echo "$url" | grep -q '\.'  || { echo "URL needs a fully qualified domain name, e.g. try append domain"; exit 1; }
 
 if [ "$cmd" = "try" -o "$cmd" = "test"  ]; then
 	try_connect $url
@@ -161,8 +174,9 @@ fi
 
 if [ "$cmd" = "add" -o "$cmd" = "-a"  ]; then
 
-	entry=$(lookup $fqdn$ocmproviders_file)
+	entry=$(lookup $ocmproviders_file $url)
 	if [ "$entry" != 'null' ]; then
+		fqdn=$(echo "$entry" | jq '.domain' -r)
 		echo "A provider with domain $fqdn already exists. Nothing added:" 2>&1
 		echo $entry 2>&1
 		exit 2
@@ -173,7 +187,7 @@ if [ "$cmd" = "add" -o "$cmd" = "-a"  ]; then
 	try_chown_ocis $ocmproviders_file
 
 	echo "$ocmproviders_file updated with:" 2>&1
-	lookup $ocmproviders_file $fqdn
+	lookup $ocmproviders_file $url
 	echo "" 2>&1
 	echo "The registered domains are now:" 2>&1
 	list $ocmproviders_file
