@@ -79,7 +79,7 @@ lookup () {
 
 add () {
 	fqdn=$(domain $2)
-	name=$(echo $fqdn | sed -e 's@^web\.@web-@' -e 's@\..*@@')	# web alone is not a good name.
+	name=$(echo $fqdn | sed -e 's@^web\.@@' -e 's@^ocis.@ocis-@' -e 's@\..*@@')	# web / ocis alone are not good names.
 	cat <<EOT | jq --slurpfile newprov /dev/stdin '. += $newprov' $1
 {
     "name": "$name",
