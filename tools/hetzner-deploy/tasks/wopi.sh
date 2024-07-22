@@ -87,5 +87,6 @@ cat << EOF >> ~/wopi-office365.config.php
 	'wopi.office-online.server' => 'https://ffc-onenote.officeapps.live.com/hosting/discovery',
 	'wopi.proxy.url' => 'https://office.owncloud.works/wopi/files/',
 	'http.cookie.samesite' => 'Lax',	# needed for the proxy
+	#'wopi_group' => 'wopi-users', 		# limit wopi to be only available for a certain user group.
 ];
 EOF
