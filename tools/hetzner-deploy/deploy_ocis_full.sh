@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # References:
+# - https://doc.owncloud.com/ocis/next/deployment/services/s-list/web.html
 # - https://doc.staging.owncloud.com/ocis/next/depl-examples/ubuntu-compose/ubuntu-compose-hetzner.html	(this is for 5.0.6 !)
 # - https://owncloud.dev/ocis/deployment/ocis_full/
 # - https://streaming.media.ccc.de/osc24/relive/4662 33:01
@@ -16,12 +17,8 @@
 echo "Estimated setup time (when weather is fine): 6 minutes ..."
 
 compose_dir=/root/ocis/deployments/examples/ocis_full	# only available since tag v6.0.0
-compose_yml=docker-compose.yml
-# we call the above via a wapper:
-w_compose_dir=/root/run/ocis_full
-w_compose_yml=local.yml
-
 ocis_bin=/usr/bin/ocis
+export REVA_CLI_VERSION=2.19.3
 
 if [ "$1" = "-h" -o "$1" = "--help" ]; then
   echo "Usage:"
@@ -82,6 +79,8 @@ INIT_SCRIPT <<EOF
 
 export EDITOR=vim
 echo >> .bashrc "export EDITOR=vim"
+echo >> .bashrc "export ADMIN_PASS=$admin_pass"
+echo >> .bashrc "export OCIS_API_PASS=$admin_pass"
 export LC_ALL=C
 
 useradd -u 1000 ocis	# so that we can refer to the ocis user in ocmproviders-add.sh
@@ -105,7 +104,8 @@ apt update
 apt install -y docker-compose-plugin
 
 # jq was an apt package, but yq is a pip package.
-pip install yq
+# msgpack is needed by mpkq
+pip install yq msgpack
 
 # used by make_machine.sh / cf_dns --poll
 echo >  ~/env.sh "base_fqdn=$BASE_DOMAIN"
@@ -114,6 +114,7 @@ echo >> ~/env.sh "DNS_WILDCARD=true"
 
 git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION --depth 1
 ln -s $compose_dir o
+ln -s /root/volume/ocis-data/storage o/storage	# make dump_decomposedsh and list_decomposed.sh happy.
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
   test -f ~/CF_DNS.msg && break;
@@ -147,6 +148,10 @@ OCIS_DOMAIN=$OCIS_DOMAIN
 # FIXME: next two should not be hardcoded here. They should come from tasks/ocis/ocm.sh
 FRONTEND_OCS_INCLUDE_OCM_SHAREES=true
 FRONTEND_OCS_ENABLE_DENIALS=true
+FRONTEND_OCS_LIST_OCM_SHARES=true
+#
+PROXY_ENABLE_BASIC_AUTH=true
+OCIS_SHOW_USER_EMAIL_IN_RESULTS=true
 # ---
 TRAEFIK_DOMAIN=traefik.$BASE_DOMAIN
 TRAEFIK_ACME_MAIL=qa@owncloud.com
@@ -233,6 +238,17 @@ done
 echo "\$dot_env_last_line\\\${OCIS_WEB_YML:-}" >> .env
 
 docker compose up -d
+sleep 10
+
+# install and configure reva cli
+wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O go/bin/reva
+chmod a+x go/bin/reva
+api_gw=\$(ocis version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
+(echo admin; echo "\$admin_pass") | script -c "reva -insecure -host \$api_gw login basic"
+# we now should have .reva.config and .reva-token
+# we still must call it as 'reva -insecure'
+echo 'alias reva="reva -insecure"' >> ~/.bash_aliases
+reva -insecure whoami
 
 cat <<EOM >> ~/POSTINIT.msg
 

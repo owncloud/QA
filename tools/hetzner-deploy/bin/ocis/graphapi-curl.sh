@@ -69,6 +69,6 @@ echo "$query" | grep '^/*graph//*v1\.0' || query="/graph/v1.0/$query"
 # graph api responds with 404, when it sees dupicate slashes. Remove them.
 query=$(echo "/$query" | sed -e 's@//*@/@g')
 
-echo "+ curl -s -u$api_user:...  http://$ocis_addr:9200$query" 1>&2
+echo "+ curl -s -u$api_user:\$OCIS_API_PASS  http://$ocis_addr:9200$query" 1>&2
 curl -s -u"$api_user:$api_pass" "http://$ocis_addr:9200$query"
 
