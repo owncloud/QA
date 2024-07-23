@@ -1,5 +1,5 @@
 #! /bin/bash
-# 
+#
 # References:
 #  - https://owncloud.dev/libre-graph-api/#/users/ListUsers
 #
@@ -8,6 +8,7 @@
 # or an internal port 9200 directly on the container. For the latter, we need to find the correct IPaddress
 #
 # v0.2, 20240723 - jw@owncloud.com - support both /graph/v1.0 and /v1.0 as an optional prefix for the query.
+# v0.3, 20240724 - jw@owncloud.com - added: share invite using /graph/v1beta1
 
 api_user=admin
 api_pass=admin
@@ -24,6 +25,9 @@ Well known queries are:
 	/v1.0/groups					# list all groups
 	/v1.0/groups/GROUPNAME			# show only matching group
 	/v1.0/users | jq '.value[].displayName' -r	# show all displayNames of all users.
+
+	share <spaceId>:<objectId> user:<userId> [Viewer|Editor|Uploader|Manager|...]
+	share 835e4533-8cc3-4c22-a7d0-e6bbb1618193:50d4b91b-d91e-4715-9645-3c81b2d72578 user:084de045-3148-4a8b-bff2-11a4575e751b Viewer
 
 See also: https://owncloud.dev/libre-graph-api
 
@@ -50,7 +54,7 @@ if echo "$auths" | grep -q -i ' 401 '; then
   if echo "$auths" | grep -q -i "basic"; then
     cat <<EOF
 
-Authentication with user $api_user failed. 
+Authentication with user $api_user failed.
 Try setting the env variables OCIS_API_USER and OCIS_API_PASS.
 EOF
   else
@@ -61,6 +65,38 @@ Please enable PROXY_ENABLE_BASIC_AUTH=true in .env followed by docker compose do
 EOF
   fi
   exit 1
+fi
+
+if [ "$query" = "share" ]; then
+	object="$2"
+	sharee="$3"
+	role="$4"
+
+	spaceId="$(  echo "$object" | sed -e 's/:.*//')"
+	itemId="$(   echo "$object" | sed -e 's/.*://')"
+	sharetype="$(echo "$sharee" | sed -e 's/:.*//')"
+	shareeId="$( echo "$sharee" | sed -e 's/.*://')"
+
+	case $role in
+		"Viewer") 	roleId="b1e2218d-eef8-4d4c-b82d-0f1a1b48f3b5" ;;
+                "Space Viewer") roleId="a8d5fe5e-96e3-418d-825b-534dbdf22b99" ;;
+                "Editor")	roleId="fb6c3e19-e378-47e5-b277-9732f9de6e21" ;;
+                "Space Editor")	roleId="58c63c02-1d89-4572-916a-870abc5a1b7d" ;;
+                "File Editor")	roleId="2d00ce52-1fc2-4dbc-8b95-a73b73395f5a" ;;
+                "Co Owner")	roleId="3a4ba8e9-6a0d-4235-9140-0e7a34007abe" ;;
+                "Uploader")	roleId="1c996275-f1c9-4e71-abdf-a42f6495e960" ;;
+                "Manager")	roleId="312c0871-5ef7-4b3a-85b6-0e4074c64049" ;;
+                "Secure viewer")roleId="aa97fe03-7980-45ac-9e50-b325749fd7e6" ;;
+		"")		echo "Usage: $0 share <spaceId>:<objectId> user:<userId> [Viewer|Editor|Uploader|Manager|...]"; exit 0 ;;
+                *)		echo "ERROR: onknown sharing type: $role"; exit 1 ;;
+	esac
+
+	url="http://$ocis_addr:9200/graph/v1beta1/drives/$spaceId/items/$itemId/invite"
+	body='{"recipients":[{"@libre.graph.recipient.type":"'"$sharetype"'","objectId":"'"$shareeId"'"}],"roles":["'"$roleId"'"]}'
+
+	echo "+ curl -s -u\"$api_user:\$OCIS_API_PASS\" -d '$body' '$url'"
+	curl -s -u"$api_user:$api_pass" -d "$body" "$url"
+	exit 0
 fi
 
 # add prefix /graph/v1.0 if missing in full or partly.

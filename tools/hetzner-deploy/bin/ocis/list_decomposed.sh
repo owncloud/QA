@@ -95,7 +95,9 @@ function nodeid_by_path()
 
 cd "$top/$sprefix" || { echo "ERROR: storage not found: $top/$sprefix"; exit 1; }
 
-namefilter="-name $name"
+namefilter=
+test -n "$name" && namefilter="-name $name"
+
 # asuming: all objects, files and directories have a symlink
 find . -type l $namefilter -print0 | xargs -0 -n 1 echo | while read link ; do
 	test -z "$link" && { echo "ERROR: $name not found in $top/$sprefix"; exit 1; }
