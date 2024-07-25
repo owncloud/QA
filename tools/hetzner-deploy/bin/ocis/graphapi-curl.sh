@@ -2,6 +2,8 @@
 #
 # References:
 #  - https://owncloud.dev/libre-graph-api/#/users/ListUsers
+#  - https://owncloud.dev/libre-graph-api/#/drives.permissions/Invite
+#  - https://owncloud.dev/libre-graph-api/#/driveItem/GetDriveItem		# has examples of driveId and itemID !
 #
 # We can either use the external port 443 through traffic, e.g. via
 #  wget -d -O - --user=$api_user --password=$api_pass "https://web.$base_fqdn/graph/v1.0/"
@@ -9,6 +11,7 @@
 #
 # v0.2, 20240723 - jw@owncloud.com - support both /graph/v1.0 and /v1.0 as an optional prefix for the query.
 # v0.3, 20240724 - jw@owncloud.com - added: share invite using /graph/v1beta1
+# v0.4, 20240725 - jw@owncloud.com - share works for local users, list-my-space added.
 
 api_user=admin
 api_pass=admin
@@ -25,6 +28,8 @@ Well known queries are:
 	/v1.0/groups					# list all groups
 	/v1.0/groups/GROUPNAME			# show only matching group
 	/v1.0/users | jq '.value[].displayName' -r	# show all displayNames of all users.
+
+        list-my-space				# readdir of the personal space
 
 	share <spaceId>:<objectId> user:<userId> [Viewer|Editor|Uploader|Manager|...]
 	share 835e4533-8cc3-4c22-a7d0-e6bbb1618193:50d4b91b-d91e-4715-9645-3c81b2d72578 user:084de045-3148-4a8b-bff2-11a4575e751b Viewer
@@ -67,6 +72,15 @@ EOF
   exit 1
 fi
 
+if [ "$query" = "list-my-space" ]; then
+	url="http://$ocis_addr:9200/graph/v1.0/me/drive/root/children"
+
+	echo "+ curl -s -u\"$api_user:\$OCIS_API_PASS\" '$url' | jq '.value | .[] | {name: .name, id: .id }'"
+	curl -s -u"$api_user:$api_pass" "$url" | jq '.value | .[] | {name: .name, id: .id }'
+	exit 0
+fi
+
+# See https://owncloud.dev/libre-graph-api/#/drives.permissions/Invite
 if [ "$query" = "share" ]; then
 	object="$2"
 	sharee="$3"
@@ -91,7 +105,8 @@ if [ "$query" = "share" ]; then
                 *)		echo "ERROR: onknown sharing type: $role"; exit 1 ;;
 	esac
 
-	url="http://$ocis_addr:9200/graph/v1beta1/drives/$spaceId/items/$itemId/invite"
+	url="http://$ocis_addr:9200/graph/v1beta1/drives/$spaceId/items/$spaceId!$itemId/invite"
+	# url="http://$ocis_addr:9200/graph/v1.0/drives/$spaceId/items/$spaceId!$itemId/invite"
 	body='{"recipients":[{"@libre.graph.recipient.type":"'"$sharetype"'","objectId":"'"$shareeId"'"}],"roles":["'"$roleId"'"]}'
 
 	echo "+ curl -s -u\"$api_user:\$OCIS_API_PASS\" -d '$body' '$url'"
