@@ -19,6 +19,7 @@ echo "Estimated setup time (when weather is fine): 6 minutes ..."
 compose_dir=/root/ocis/deployments/examples/ocis_full	# only available since tag v6.0.0
 ocis_bin=/usr/bin/ocis
 export REVA_CLI_VERSION=2.19.3
+projname=$(basename $compose_dir)
 
 if [ "$1" = "-h" -o "$1" = "--help" ]; then
   echo "Usage:"
@@ -89,9 +90,8 @@ TASKd=\$HOME/tasks/ocis
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
 ## FIXME: when docker compose was started using the /root/o symlink, we must always use the symlink, otherwise it complains 'service "ocis" is not running'
-## FIXME: When there are multiple paths leading to the same environment, we must quere docker compose ls, it contains the path that was used. e.g. /root/o
-echo -e "#! /bin/sh\ncd /root/o\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
-echo -e "#! /bin/sh\ncd /root/o\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
+echo -e "#! /bin/sh\ncd /root/$compose_dir\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
+echo -e "#! /bin/sh\ncd /root/$compose_dir\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
 chmod a+x /usr/local/bin/*
 
 # docker-compose v1 or v2?
@@ -128,6 +128,11 @@ else
 fi
 
 # now we have a DNS Name.
+
+# FIXME:
+# docker compose exec depends on the $PWD variable for "finding" the current directory. How silly is this?
+set -o physical         # tcsh: set symlinks=chase
+echo "set -o physical" >> /etc/bash.bashrc
 
 cd $compose_dir
 # nano .env //enter your domain
@@ -189,11 +194,21 @@ services:
       - ./patch_ocis_yaml.sh:/etc/ocis/patch_ocis_yaml.sh
     # FIXME: hack into the generated /etc/ocis/ocis.yaml
     command: [ "-c", "ocis init || true; /etc/ocis/patch_ocis_yaml.sh || true; ocis server" ]
+    environment:
+      # seen in github.com/owncloud/ocis/tests/config/drone/.env-federation
+      FRONTEND_OCS_INCLUDE_OCM_SHAREES: "${FRONTEND_OCS_INCLUDE_OCM_SHAREES:-true}"
+      FRONTEND_OCS_LIST_OCM_SHARES: "${FRONTEND_OCS_LIST_OCM_SHARES:-true}"
+      FRONTEND_ENABLE_FEDERATED_SHARING_INCOMING: "${FRONTEND_ENABLE_FEDERATED_SHARING_INCOMING:-true}"
+      FRONTEND_ENABLE_FEDERATED_SHARING_OUTGOING: "${FRONTEND_ENABLE_FEDERATED_SHARING_OUTGOING:-true}"
+      OCIS_ADD_RUN_SERVICES: "${OCIS_ADD_RUN_SERVICES:-ocm}"
+      GRAPH_INCLUDE_OCM_SHAREES: "${GRAPH_INCLUDE_OCM_SHAREES:-true}"
+      OCIS_DECOMPOSEDFS_PROPAGATOR: "${OCIS_DECOMPOSEDFS_PROPAGATOR:-async}"
+
 EOT
 mkdir -p ~/volume/
-ln -s /var/lib/docker/volumes/o_certs/_data ~/volume/traefik-certs
-ln -s /var/lib/docker/volumes/o_ocis-config/_data ~/volume/ocis-config
-ln -s /var/lib/docker/volumes/o_ocis-data/_data ~/volume/ocis-data
+ln -s /var/lib/docker/volumes/${projname}_certs/_data ~/volume/traefik-certs
+ln -s /var/lib/docker/volumes/${projname}_ocis-config/_data ~/volume/ocis-config
+ln -s /var/lib/docker/volumes/${projname}_ocis-data/_data ~/volume/ocis-data
 ln -s ~/volume/ocis-data ~/data
 # HACK: make wopi.secret appear as needed by the collaboration service.
 cat <<EOT > patch_ocis_yaml.sh
@@ -237,13 +252,15 @@ done
 # HACK: the colon separator is part of OCIS_WEB_YML as with all the other entries in this line.
 echo "\$dot_env_last_line\\\${OCIS_WEB_YML:-}" >> .env
 
+echo "+ docker compose up -d"
 docker compose up -d
 sleep 10
 
 # install and configure reva cli
-wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O go/bin/reva
-chmod a+x go/bin/reva
-api_gw=\$(ocis version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
+mkdir -p ~/go/bin
+wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O ~/go/bin/reva
+chmod a+x ~/go/bin/reva
+api_gw=\$(ocis.sh version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
 (echo admin; echo "\$admin_pass") | script -c "reva -insecure -host \$api_gw login basic"
 # we now should have .reva.config and .reva-token
 # we still must call it as 'reva -insecure'
