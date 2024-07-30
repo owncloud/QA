@@ -261,11 +261,14 @@ mkdir -p ~/go/bin
 wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O ~/go/bin/reva
 chmod a+x ~/go/bin/reva
 api_gw=\$(ocis.sh version | grep com.owncloud.api.gateway | tr -d ' ' | cut -d '|' -f 3)
-(echo admin; echo "\$admin_pass") | script -c "reva -insecure -host \$api_gw login basic"
+(echo admin; echo "\$admin_pass") | script -c "/root/go/bin/reva -insecure -host \$api_gw login basic"
 # we now should have .reva.config and .reva-token
 # we still must call it as 'reva -insecure'
-echo 'alias reva="reva -insecure"' >> ~/.bash_aliases
-reva -insecure whoami
+# FIXME: we should have a reva.sh to update api_gw after compose down/up
+echo 'alias reva="/root/go/bin/reva -insecure"' >> ~/.bash_aliases
+echo 'alias ll="ls -la"' >> ~/.bash_aliases		# not needed. :-)
+source ~/.bash_aliases
+reva whoami
 
 cat <<EOM >> ~/POSTINIT.msg
 
