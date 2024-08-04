@@ -5,6 +5,7 @@
 # (C) 2023 jw@owncloud.com - distribute under GPLv2 or ask
 # 
 # v1.1 2023-10-01 -  also handle github checkouts by hackily parsing .git/config
+# v1.2 2024-08-02 -  handle ddirectories directly, without ugly scrollto
 
 
 import sys, os, re, glob
@@ -121,9 +122,13 @@ for cfg in cfgs:
       url = "https://" + cfg['user'] + "@" + m.group(2)
     
     url = re.sub('/+$', '', url)      # strip trialing slashes
-    dir = os.path.dirname(rest)
-    file = os.path.basename(rest)
-    payload = urlencode({'dir': dir, 'scrollto': file}, quote_via=quote_plus)
+
+    if os.path.isdir(fullpath):
+      payload = urlencode({'dir': rest}, quote_via=quote_plus)
+    else:
+      dir = os.path.dirname(rest)
+      file = os.path.basename(rest)
+      payload = urlencode({'dir': dir, 'scrollto': file}, quote_via=quote_plus)
     print(f"\t{url}/index.php/apps/files?{payload}")
 
 print("")
