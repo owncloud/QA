@@ -22,11 +22,12 @@ echo "Estimated setup time: 5 minutes ..."
 data_exporter_vers=0.3.0
 
 vers=10.14.0
-vers=10.15.0-rc.4
+vers=10.15.0
 
 test -n "$OC_VERSION" && vers="$OC_VERSION"
 test -n "$OC10_VERSION" && vers="$OC10_VERSION"
 test "$vers" = "php8"                           && tar=/home/testy/src/github/owncloud/QA/tools/hetzner-deploy/core-10.13.4-pre-php8.tar.bz2
+test "$vers" = "10.15.0"  -o "$vers" = "10.15"  && tar=https://download.owncloud.com/server/stable/owncloud-complete-20240724.tar.bz2
 test "$vers" = "10.15.0-rc.4"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240711.tar.bz2
 test "$vers" = "10.15.0-rc.3"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240709.tar.bz2
 test "$vers" = "10.15.0-rc.2"                   && tar=https://download.owncloud.com/server/testing/owncloud-complete-20240620.tar.bz2

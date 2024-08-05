@@ -90,8 +90,8 @@ TASKd=\$HOME/tasks/ocis
 test -e \$TASKd/env.sh || ln -s ~/env.sh \$TASKd/env.sh
 
 ## FIXME: when docker compose was started using the /root/o symlink, we must always use the symlink, otherwise it complains 'service "ocis" is not running'
-echo -e "#! /bin/sh\ncd /root/$compose_dir\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
-echo -e "#! /bin/sh\ncd /root/$compose_dir\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
+echo -e "#! /bin/sh\ncd $compose_dir\ndocker compose logs -f --tail=10 --no-color ocis" > /usr/local/bin/show_logs
+echo -e "#! /bin/sh\ncd $compose_dir\ndocker compose exec ocis $ocis_bin \"\\\$@\"" > /usr/local/bin/ocis.sh
 chmod a+x /usr/local/bin/*
 
 # docker-compose v1 or v2?
