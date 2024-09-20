@@ -47,7 +47,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | **Accounts view (sidebar)** |  Logged user |  |
 | One account | 1. Open sidebar menu with the up-left button<br>2. Open the account pill | 1. Only one account listed<br>2. Sections: `Personal`, `Shares`, `Spaces` (only oCIS), `Quick access`, `Status` |  |
 | More than one account | 1. Enter correct credentials of more accounts<br>2. Open sidebar menu with the up-left button<br>3. Open the account pill for every account  | 2. All accounts listed<br>3. Sections: `Personal`, `Shares`, `Spaces` (only oCIS), `Quick access`, `Status`  |  |
-| Account options | 1. Open sidebar menu with the up-left button<br>2. Long press over the account pill | 1. Only one account listed<br>2. Sections: `Edit`, `Manage`, `Delete` |  |
+| Account options | 1. Open sidebar menu with the up-left button<br>2. Long press over the account pill | 1. Only one account listed<br>2. Sections: `Edit`, `Manage`, `Delete`, `Disconnect`, `Open in new window` (only iPad) |  |
 | Edit credentials | 1. Long press over the account pill<br>2. Select `Edit`<br>3. In server, change credentials<br>4. Enter new credentials in app | Login correct, file list displayed |  |
 | Edit name | 1. Long press over the account pill<br>2. Select `Edit`<br>3. Enter new name<br>4. Save | Account name edited and displayed in the account pill after reopening the app | 
 | Manage storage | 1. Download some files by clicking on them in the file of list, and set some fles as av. offline<br>2. Long press over the account pill in sidebar<br>3. Select `Manage`<br>4. Click on `Delete all Offline files` | All downloaded files are removed (download icon is again visible) but the av. offline|  | |
@@ -64,7 +64,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Lock | 1. Enable `Passcode lock<`br>2. Set lock application after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked and differences are displayed (they can be hidden)  |  |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked. In Settings > Certificate, it appears as auto approved  |   |  |
-| Theme | 1. Select Dark<br>2. Select Light<br>3. Select System Light<br>4. Select System Dark<br>5. Select System | All themes are correcly saved and displayed in file list |  |  |
+| Theme | 1. Select Dark<br>2. Select Light<br>3. Select System | All themes are correcly saved and displayed in file list |  |  |
 | Delete unused | 1. Set `Delete unused copies` to 1 minute<br>2. Download two files | After 1 minute, local copies are removed (download icon appears again in the row on the file list) | |  |
 | Show hidden | 1. Enable setting `Show hidden files`<br>2. In web, create a file of folder that stars with `.`<br>3. Disable the setting| 2. Item displayed in file list<br>3. Item not displayed in file list|   |
 | Show folders at the top | 1. Enable setting `Show folders at the top`<br>2. Disable setting `Show folders at the top`| 1. Folders placed at the top in list of files<br>2. Folders mixed with files depending of the sort method in list of files|  |  |
@@ -78,9 +78,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Media upload Prefer unedited (IAP) | 1. Enable setting `Prefer unedited`<br>2. With Photos app, edit a picure with some filters<br>3. Upload a picture| Picture is saved without changes, in original version|  |  |
 | Media upload Prefer RAW (IAP) | 1. Enable setting `Prefer RAW`<br>2. With a Photo app like `Halide`, take a RAW picture<br>3. Upload the picture<br>4. Disable `Prefer RAW` and repeat| 3. Uploaded in DNG format<br>4. Uploaded in JPG format |  |  |
 | Media upload original videos | 1. Enable setting `Prefer original videos`<br>2. Edit a video, changing orientation or any other change<br>3. Upload the video<br>4. Disable `Prefer original video` and repeat| 3. Uploaded original video<br>4. Uploaded edited video|  |  |
-| Documentation | Click on `Documentation`  | Documentation web is opened |  |   |
-| Help | Click on `Help`  | Help web is opened |  |  |
-| Send feedback | Click on `Send feedback` | feedback mail is opened|  |  |
+| Help & Contact | Click on `Help & Contact`  | `Documentation`, `Help` and `Feedback` sections available. Buttons and links work fine |  |  |
 | Recommend | Click on `Recommend` | Recommend mail is opened|  |  |
 | Privacy policy | Click on `Privacy policy` | Privacy policy is opened|  |  |
 | Acknowledgement | Click on `Acknowledgement` | Acknowledgement is opened|  |  |
@@ -188,6 +186,8 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Non existing | Delete/Rename/Duplicate/Copy/Move an item just removed in other client or server | Correct error |  |  |
 | Quota exceeded | Upload some content so that the user quota is exceeded | Correct error |  |   |
 | Several| Cause together some of the errors above| Messages are grouped by kind, and can be fixed individually or grouped  |  |   |
+|**Open with**||||||
+| Open with external | In a server with app providers, open some files into available providers displayed in the file card | Correctly opened. File can be edited |  P t17 m18  |   |
 |**Conflict handling**||||||
 | Conflict detected | 1. Edit a file with device 1<br>2. Edit the same file with device 2<br>3. Submit changes with device 1<br>4. Submit changes with device 2 just a couple of seconds later | Device 1 uploads its new version correctly<br>Device 2 shows the conflict with three options: `Cancel`, `Replace`, `Keep Both` |  |
 | Cancel | 1. Cause a conflict following steps in previous case<br>2. In Device 2, Select `Cancel` |  Device 1 uploads its new version correctly<br>Local copy in Device 2 is deleted |   |
@@ -305,7 +305,6 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Contextual menu | Long press over an item of the list | Contextual menu displayed|  | |
 | Save from mail | Open mail and save an attachment in ownCloud account  with the option "Sharing"| Correctly saved |  | |
 | Take photo and video | In file list,in the (+) menu, select "Take photo or video"<br>Take a photo and then, a video | Both are uploaded to the current folder|  | |
-| Quick access | Open quick access section and check images, pdfs and documents |  Check that the info showed matches with the account|  | |
 | Restoration | 1. Open a file<br>2. Go to background (homescreen) without killing<br>3. Open another app and then kill oC app<br>4. Open app  | Displayed the file opened in 1.  |  | |
 |**Accesibility**||||||
 | Voice Over | Enable Voice Over and perform some basic exploratory tests, putting more effort in the newest features| Commands and names are correctly spelt |  | |
