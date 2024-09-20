@@ -277,15 +277,15 @@ machine_type=$HCLOUD_MACHINE_TYPE
 if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
   machine_type=cx11
   # cx11: 20 GB
-  # cx21: 40 GB
+  # cx21: 40 GB, deprecated
   # cpx21: 80 GB
   # ccx11: 80 GB, 2 CPUs dedicated.
   # cpx31: 160 GB
-  echo "$*" | grep files_antivirus   && machine_type=cx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
-  echo "$*" | grep search_elastic    && machine_type=cx21	# elasticsearch server docker consumes 1.8GB
+  echo "$*" | grep files_antivirus   && machine_type=cpx21	# c-icap docker consumes 1.4GB -> https://github.com/owncloud/files_antivirus/issues/437
+  echo "$*" | grep search_elastic    && machine_type=cpx21	# elasticsearch server docker consumes 1.8GB
   echo "$*" | grep files_primary_s3  && machine_type=cpx31 # yarn tsc fails very often on a cx11.
-  echo "$*" | grep files_external_s3 && machine_type=cx21	# yarn tsc fails very often on a cx11.
-  echo "$*" | grep objectstore       && machine_type=cx21	# yarn tsc fails very often on a cx11.
+  echo "$*" | grep files_external_s3 && machine_type=cpx21	# yarn tsc fails very often on a cx11.
+  echo "$*" | grep objectstore       && machine_type=cpx21	# yarn tsc fails very often on a cx11.
 fi
 
 network=$HCLOUD_NETWORK_NAME
