@@ -12,21 +12,11 @@
 # 	apt install jq
 #	optionally curl for 'try' command.
 #
-# 20240922 update according to https://doc.owncloud.com/ocis/next/deployment/services/s-list/ocm.html#trust-between-instances
-# 1) it is no longer in $OCIS_DATADIR/storage/ocm/ocmproviders.json
-#    it now lives in $OCIS_CONFIGDIR/ocmproviders.json
 
 
 cmd=$1
 url=$2
 test -z "$cmd" && cmd=list	# default
-
-if [ -n "$(ocis version | grep 'Version: 5')" ]; then
-	# backwards compatibility...
-	exec $(dirname $0)/ocmproviders_v5.sh "$@"
-	exit 0
-fi
-
 
 if [ "$cmd" = '-h' -o "$cmd" = '--help' -o "$cmd" = 'help' ]; then
 	cat << EOT
@@ -36,24 +26,31 @@ Usage:
 	$0 del https://otherhost.example.com
 
 Environment:
-	OCS_CONFIG_DIR		// contains the providers.json file"
+  	OCIS_DATADIR    // contains the 'storage/ocm' subdirectories
 
 EOT
 	exit 0
 fi
 
-if [ -z "$OCIS_CONFIG_DIR" ]; then
-	for dir in /var/lib/docker/volumes/*ocis-config/_data \
-			/etc/ocis; do
-		test -f $dir/ocis.yaml && OCIS_CONFIG_DIR=$dir
-	test -n "$OCIS_CONFIGDIR" && echo "Choosing OCIS_CONFIG_DIR=$OCIS_CONFIG_DIR" 1>&2
+if [ -z "$OCIS_DATADIR" ]; then
+	for dir in /var/lib/docker/volumes/*ocis-data/_data \
+			$HOME/data \
+			$HOME/.ocis \
+			/var/lib/ocis; do
+		test -d $dir/storage && OCIS_DATADIR=$dir
+	done
+	# test -d $HOME/data/storage && OCIS_DATADIR=$HOME/data
+	# test -d $HOME/.ocis/storage && OCIS_DATADIR=$HOME/.ocis
+	# test -d /var/lib/ocis/storage && OCIS_DATADIR=/var/lib/ocis
+
+	test -n "$OCIS_DATADIR" && echo "Choosing OCIS_DATADIR=$OCIS_DATADIR" 1>&2
 fi
-if [ -z "$OCIS_CONFIG_DIR" ]; then
-	echo "ERROR: environment variable OCIS_CONFIG_DIR is undefdined and the ocis config was not found in a well known location."
+if [ -z "$OCIS_DATADIR" ]; then
+	echo "ERROR: environment variable OCIS_DATADIR is undefdined and the ocis storage was not found in a well known location."
 	exit 1
 fi
-if [ ! -d "$OCIS_CONFIG_DIR/ocis.yaml" ]; then
-	echo "ERROR: ocis.yaml does not exist in OCIS_CONFIG_DIR=$OCIS_CONFIG_DIR, try somthing else."
+if [ ! -d "$OCIS_DATADIR/storage/ocm" ]; then
+	echo "ERROR: sudbdirectory storage/ocm does not exist in OCIS_DATADIR=$OCIS_DATADIR, try somthing else."
 	exit 1
 fi
 
@@ -132,7 +129,7 @@ restart_hint() {
 	echo "TODO: service ocis restart / docker compose restart ocis" 1>&2
 }
 
-ocmproviders_file=$OCIS_CONFIG_DIR/ocmproviders.json
+ocmproviders_file=$OCIS_DATADIR/storage/ocm/ocmproviders.json
 if [ ! -f $ocmproviders_file ]; then
 	echo "[]" > $ocmproviders_file
 	# use the ocis user, if we have one, otherwise assume its 1000.

@@ -49,6 +49,7 @@ if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=v5.0.3
   export OCIS_VERSION=v5.0.5
   export OCIS_VERSION=daily
+  export OCIS_VERSION=v6.4.0
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -103,8 +104,8 @@ location=nbg1
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"   # find related scripts, even if called through a symlink.
-# use a cx31 -- we need more than 40GB disk space.
-source $mydir/lib/make_machine.sh -t cx31 -L $location -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
+# use a cpx31 -- we need more than 40GB disk space.
+source $mydir/lib/make_machine.sh -t cpx31 -L $location -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin    # mpkq et al..
 
 if [ -z "$IPADDR" ]; then
