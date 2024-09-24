@@ -28,7 +28,16 @@
 #
 # 2023-05-23, jw@owncloud.com
 # 2023-11-15, jw@owncloud.com
+# 2024-09-23, jw@owncloud.com
 #
+if [ "$1" = "-h" -o "$1" = "--help" ]; then
+  echo "Usage:"
+  echo "	$0 [ocm] ..."
+  echo "	env OCIS_VERSION=v6.4.0 OCIS_DNSNAME=bare1-640-DATE $0 [ocm]"
+  echo ""
+  echo "Check tasks/ocis/*.sh for possible command line parameters"
+  exit 1
+fi
 
 echo "Estimated setup time (when weather is fine): 2 minutes ..."
 
@@ -63,6 +72,7 @@ else
   sleep 2
 fi
 export BASE_DOMAIN=$dns_name.jw-qa.owncloud.works
+export WEB_UI_CONFIG_FILE=/etc/ocis/web/config.json
 
 if [ "$vers" == "testing" -o "$vers" == "daily" ]; then
   # CAUTION: yes, everything in ocis/ocis/daily has *-testing-* in its name. Not *-daily-*
@@ -177,9 +187,10 @@ sudo -u ocis touch /home/ocis/data/foobar
 (set -x; ls -la /var/lib/ocis-sshfs /home/ocis/data)
 
 # Infinite Scale Configuration File
-mkdir -p /etc/ocis
+mkdir -p /etc/ocis/web
 touch /etc/ocis/ocis.env
 chown -R ocis:ocis /etc/ocis
+chown -R ocis:ocis /etc/ocis/web
 
 # ocis_fqdn is used by cf_dns ...
 cat <<EOT>> /etc/ocis/ocis.env
@@ -197,10 +208,11 @@ IDM_ADMIN_PASSWORD=$admin_pass
 # OCIS_LOG_LEVEL=warn
 OCIS_LOG_LEVEL=debug
 
-# FIXME: next two should not be hardcoded here. They should come from tasks/ocis/ocm.sh
-FRONTEND_OCS_INCLUDE_OCM_SHAREES=true
-FRONTEND_OCS_ENABLE_DENIALS=true
-FRONTEND_OCS_LIST_OCM_SHARES=true
+# FIXME: next four should not be hardcoded here. They should come from tasks/ocis/ocm.sh
+OCIS_ENABLE_OCM=true
+#FRONTEND_OCS_INCLUDE_OCM_SHAREES=true
+#FRONTEND_OCS_ENABLE_DENIALS=true
+#FRONTEND_OCS_LIST_OCM_SHARES=true
 #
 PROXY_ENABLE_BASIC_AUTH=true
 OCIS_SHOW_USER_EMAIL_IN_RESULTS=true
@@ -211,7 +223,54 @@ OCIS_SHOW_USER_EMAIL_IN_RESULTS=true
 
 OCIS_CONFIG_DIR=/etc/ocis
 OCIS_BASE_DATA_PATH=$ocis_data
+
+WEB_UI_CONFIG_FILE=$WEB_UI_CONFIG_FILE
 EOT
+
+cat <<EOT >$WEB_UI_CONFIG_FILE
+{
+  "server": "https://$BASE_DOMAIN",
+  "theme": "https://$BASE_DOMAIN/themes/owncloud/theme.json",
+  "openIdConnect": {
+    "metadata_url": "https://$BASE_DOMAIN/.well-known/openid-configuration",
+    "authority": "https://$BASE_DOMAIN",
+    "client_id": "web",
+    "response_type": "code",
+    "scope": "openid profile email"
+  },
+  "options": {
+    "contextHelpersReadMore": true
+  },
+  "apps": [
+    "files",
+    "text-editor",
+    "pdf-viewer",
+    "search",
+    "external",
+    "admin-settings",
+    "ocm",
+    "webfinger",
+    "epub-reader"
+  ],
+  "external_apps": [
+    {
+      "id": "preview",
+      "path": "web-app-preview",
+      "config": {
+        "mimeTypes": ["image/tiff", "image/bmp", "image/x-ms-bmp"]
+      }
+    },
+    {
+      "id": "importer",
+      "path": "web-app-importer",
+      "config": {
+        "companionUrl": "https://localhost:9200/companion"
+      }
+    }
+  ]
+}
+EOT
+
 ln -s /etc/ocis/ocis.env env.sh
 ln -s $ocis_data ~/o
 
@@ -221,6 +280,7 @@ echo >> ~/.bashrc "export OCIS_CONFIG_DIR=/etc/ocis"
 echo >> ~/.bashrc "export OCIS_BASE_DATA_PATH=$ocis_data"
 echo >> ~/.bashrc 'export OCIS_TOPDIR=/var/lib/ocis'	# for ocis-import.py
 
+# DEPRECATED: use $WEB_UI_CONFIG_FILE instead of web.yaml
 cat <<EOT>> /etc/ocis/web.yaml
 extra:
   config:
@@ -367,6 +427,7 @@ done
 # fi
 
 git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION --depth 1
+git clone https://github.com/owncloud/web.git -b master --depth 1
 sleep 2
 
 # install and configure reva cli

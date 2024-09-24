@@ -21,7 +21,7 @@ cmd=$1
 url=$2
 test -z "$cmd" && cmd=list	# default
 
-if [ -n "$(ocis version | grep 'Version: 5')" ]; then
+if [ -n "$(ocis version 2>/dev/null | grep 'Version: 5')" ]; then
 	# backwards compatibility...
 	exec $(dirname $0)/ocmproviders_v5.sh "$@"
 	exit 0
@@ -36,7 +36,7 @@ Usage:
 	$0 del https://otherhost.example.com
 
 Environment:
-	OCS_CONFIG_DIR		// contains the providers.json file"
+	OCS_CONFIG_DIR		// contains the providers.json file
 
 EOT
 	exit 0
@@ -46,13 +46,14 @@ if [ -z "$OCIS_CONFIG_DIR" ]; then
 	for dir in /var/lib/docker/volumes/*ocis-config/_data \
 			/etc/ocis; do
 		test -f $dir/ocis.yaml && OCIS_CONFIG_DIR=$dir
+	done
 	test -n "$OCIS_CONFIGDIR" && echo "Choosing OCIS_CONFIG_DIR=$OCIS_CONFIG_DIR" 1>&2
 fi
 if [ -z "$OCIS_CONFIG_DIR" ]; then
 	echo "ERROR: environment variable OCIS_CONFIG_DIR is undefdined and the ocis config was not found in a well known location."
 	exit 1
 fi
-if [ ! -d "$OCIS_CONFIG_DIR/ocis.yaml" ]; then
+if [ ! -f "$OCIS_CONFIG_DIR/ocis.yaml" ]; then
 	echo "ERROR: ocis.yaml does not exist in OCIS_CONFIG_DIR=$OCIS_CONFIG_DIR, try somthing else."
 	exit 1
 fi
@@ -88,7 +89,7 @@ add () {
 {
     "name": "$name",
     "full_name": "$name provider",
-    "organization": "Owncloud",
+    "organization": "oCIS",
     "domain": "$fqdn",
     "homepage": "$url",
     "services": [
@@ -103,7 +104,20 @@ add () {
 		"is_monitored": true
 	    },
 	    "api_version": "0.0.1",
-	    "host": "$fqdn"
+	    "host": "http://$fqdn"
+	},
+	{
+	    "endpoint": {
+		"type": {
+		    "name": "Webdav",
+		    "description": "$fqdn Webdav API"
+		},
+		"name": "$name - Webdav API",
+		"path": "$url/dav/",
+		"is_monitored": true
+	    },
+	    "api_version": "0.0.1",
+	    "host": "https://$fqdn"
 	}
     ]
 }
