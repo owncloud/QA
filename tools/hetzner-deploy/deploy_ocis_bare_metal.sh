@@ -224,6 +224,9 @@ OCIS_SHOW_USER_EMAIL_IN_RESULTS=true
 OCIS_CONFIG_DIR=/etc/ocis
 OCIS_BASE_DATA_PATH=$ocis_data
 
+# used by ocis init
+IDM_CREATE_DEMO_USERS=true
+
 WEB_UI_CONFIG_FILE=$WEB_UI_CONFIG_FILE
 EOT
 
@@ -297,13 +300,15 @@ extra:
       - ocm
 EOT
 
-# put env.sh in the current environment.
+# put env.sh in the current environment, so that started processes see that.
 # (ignore comments, trailing whitespace and empty lines)
+# (we already have it in the current shell as simple shell variables due to the source /etc/ocis.ocis.env above.)
 sed -e 's@#.*$@@' -e 's@\s*$@@' < env.sh  | while read line; do if [ "$line" != "" ]; then export $line; fi; done
 
 # service ocis stop
 rm -f /etc/ocis/ocis.yaml	# BUG: --force-overwrite does not work.
 rm -rf $ocis_data/*		# needed for init to also re-init ldap credentials
+# we don't seem to need sudo -E, the contents of env.sh is available to the ocis binaryis
 # --insecure is needed to allow the internal communication between proxy and ocis without certificates.
 sudo -u ocis ocis init --insecure --force-overwrite --config-path /etc/ocis
 admin_pass="$admin_pass"

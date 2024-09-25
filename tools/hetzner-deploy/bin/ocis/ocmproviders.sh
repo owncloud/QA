@@ -15,6 +15,7 @@
 # 20240922 update according to https://doc.owncloud.com/ocis/next/deployment/services/s-list/ocm.html#trust-between-instances
 # 1) it is no longer in $OCIS_DATADIR/storage/ocm/ocmproviders.json
 #    it now lives in $OCIS_CONFIGDIR/ocmproviders.json
+# 20240924 - fixed test command and allowed test -a
 
 
 cmd=$1
@@ -31,9 +32,10 @@ fi
 if [ "$cmd" = '-h' -o "$cmd" = '--help' -o "$cmd" = 'help' ]; then
 	cat << EOT
 Usage:
-	$0 [list]
-	$0 [add] https://otherhost.example.com
+	$0 [ list ]
+	$0 [ add ] https://otherhost.example.com
 	$0 del https://otherhost.example.com
+	$0 test [ -a | https://otherhost.example.com ]
 
 Environment:
 	OCS_CONFIG_DIR		// contains the providers.json file
@@ -130,15 +132,29 @@ try_chown_ocis() {
 }
 
 try_connect() {
-	endpoint=$1/ocm/invite-accepted
-	allowed=$(timeout 5 curl -v $endpoint 2>&1 | grep allow:)
-	if [ -z "$allowed" ]; then
-		echo "INFO: the endpoint $endpoint did not respond within 5 sec."
-	elif [ -z "$(echo $allowed | grep POST)" ]; then
-		echo "INFO: The allowed: response from $endpoint did not say POST: '$allowed'"
+	if [ -z "$1" -o "$1" = 'all' -o "$1" = '--all' -o "$1" = '-a' ]; then
+		todo=$(list $ocmproviders_file)
+		if [ -z "$todo" ]; then
+			echo "ERROR: no URL specified - and nothing in $ocmproviders_file"
+			exit 4
+		fi
 	else
-		echo "OK: $allowed"
+		todo="$1"
 	fi
+	echo "Testing endpoint /ocm/invite-accepted ..."
+	for url in $todo; do
+		echo -n "$url	"
+		endpoint=$url/ocm/invite-accepted
+		# -L to allow 302 http->https forward.
+		allowed=$(timeout 5 curl -L -v $endpoint 2>&1 | grep -i allow:)
+		if [ -z "$allowed" ]; then
+			echo "INFO: the endpoint $endpoint did not respond within 5 sec."
+		elif [ -z "$(echo $allowed | grep POST)" ]; then
+			echo "INFO: The Allow: response from $endpoint did not say POST: '$allowed'"
+		else
+			echo "OK: $allowed"
+		fi
+	done
 }
 
 restart_hint() {
@@ -181,14 +197,14 @@ if [ -n "$(echo "$cmd" | grep '://' )" -a -z "$url" ] ; then
 	cmd=add
 fi
 
-# now url needs to be really an url. Do some sanity checking ...
-echo "$url" | grep -q '://' || { echo "URL needs a protocol, e.g. start with https://"; exit 1; }
-echo "$url" | grep -q '\.'  || { echo "URL needs a fully qualified domain name, e.g. try append domain"; exit 1; }
-
 if [ "$cmd" = "try" -o "$cmd" = "test"  ]; then
 	try_connect $url
 	exit 0
 fi
+
+# now url needs to be really an url. Do some sanity checking ...
+echo "$url" | grep -q '://' || { echo "URL needs a protocol, e.g. start with https://"; exit 1; }
+echo "$url" | grep -q '\.'  || { echo "URL needs a fully qualified domain name, e.g. try append domain"; exit 1; }
 
 if [ "$cmd" = "add" -o "$cmd" = "-a"  ]; then
 
