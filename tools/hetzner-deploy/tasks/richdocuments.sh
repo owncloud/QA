@@ -46,7 +46,9 @@ richdocuments:  Please create a share with a user (or group) and check '[x] Secu
 richdocuments:
 richdocuments:  ATTENTION: the local docker server $collabora_docker is HTTP only. To not get blocked in browser
 richdocuments:		   redirects, you have to connect to owncloud with HTTP too:
+richdocuments:
 richdocuments:		http://$IPADDR:80/index.php/apps/files/
+richdocuments:		admin / $admin_pass
 richdocuments:
 richdocuments:  Try the old collabora.owncloud-demo.com server:
 richdocuments:  	occ config:app:set richdocuments wopi_url --value https://collabora.owncloud-demo.com:443
