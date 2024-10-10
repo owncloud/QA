@@ -6,16 +6,18 @@ After switching to the new ocis version you need to check that all resources, sh
 ### After upgrade from previous release version to new release version
 
 shares:
-- [ ] public share
-- [ ] share with user as role editor
+- [ ] public share (with an expiration date)
+- [ ] share with user as role editor (with an expiration date)
 - [ ] share with user as role viewer
 - [ ] share with group "Users"
+- [ ] check activities
 
 project space:
 - [ ] uploaded folder & files
 - [ ] trashed files
 - [ ] share space with user
 - [ ] public share space
+- [ ] check space activities
 
 files:
 - [ ] uploaded folder & files
@@ -32,3 +34,5 @@ users
 settings
 - [ ] language settings
 - [ ] update logo
+- [ ] new password
+- [ ] GDPR export
