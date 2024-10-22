@@ -2,11 +2,12 @@
 #
 # References:
 # - https://github.com/owncloud/ocis/blob/master/services/ocm/README.md#trust-between-instances
-# - https://owncloud.dev/services/ocm/#example-yaml-config	# FIXME: Confusion. How is this yaml relevant?
+# - https://owncloud.dev/services/ocm/#trust-between-instances
 #
 # ocmproviders.sh -- a simple shell script to list / add / remove ocm providers
 #
 # 20240716 jw@owncloud.com - initial draught.
+# 20241021 jw@owncloud.com - updated json to include description.
 #
 # dependencies:
 # 	apt install jq
@@ -85,6 +86,7 @@ lookup () {
 }
 
 add () {
+	# CAUTION: keep in sync with https://owncloud.dev/services/ocm/#trust-between-instances
 	fqdn=$(domain $2)
 	name=$(echo $fqdn | sed -e 's@^web\.@@' -e 's@^ocis.@ocis-@' -e 's@\..*@@')	# web / ocis alone are not good names.
 	cat <<EOT | jq --slurpfile newprov /dev/stdin '. += $newprov' $1
@@ -94,6 +96,7 @@ add () {
     "organization": "oCIS",
     "domain": "$fqdn",
     "homepage": "$url",
+    "description": "oCIS $fqdn cloud storage",
     "services": [
 	{
 	    "endpoint": {

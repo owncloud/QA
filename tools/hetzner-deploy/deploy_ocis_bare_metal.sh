@@ -53,8 +53,8 @@ fi
 export REVA_CLI_VERSION=2.19.3
 
 if [ -z "$OCIS_VERSION" ]; then
-  export OCIS_VERSION=v6.5.0
   export OCIS_VERSION=daily
+  export OCIS_VERSION=v6.6.0
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -107,11 +107,12 @@ test -n "$OCIS_ADMIN_PASS" && admin_pass="$OCIS_ADMIN_PASS"
 export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
 location=nbg1
+location=fsn1	# fsn1, nbg1, hel1, to be used with -L
 test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"   # find related scripts, even if called through a symlink.
 # use a cpx31 -- we need more than 40GB disk space.
-source $mydir/lib/make_machine.sh -t cpx31 -L $location -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
+source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin    # mpkq et al..
 
 if [ -z "$IPADDR" ]; then

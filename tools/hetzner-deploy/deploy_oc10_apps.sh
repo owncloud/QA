@@ -101,7 +101,7 @@ esac
 # webroute=/owncloud	# what we document
 webroute=/		# what users expect
 admin_pass="admin$(date +%Y%m%d)"	# an unsecure default. To be overridden by env OC10_ADMIN_PASS
-location=fsn1	#hel1		# hel1, fsn1, nbg1
+location=hel1	#hel1		# hel1, fsn1, nbg1
 
 if [ -z "$1" -o "$1" = "-" -o "$1" = "-h" ]; then
   echo "Usage examples:"
