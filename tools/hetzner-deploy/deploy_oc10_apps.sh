@@ -273,10 +273,15 @@ h_name="$OC10_DNSNAME"
 test -z "$h_name" && h_name=oc-$vers-date
 d_name=$(echo $h_name  | sed -e "s/\bdate\b/$(date +%Y%m%d)/i")
 
+# FIXME: cax11 does not work, even ubuntu-20.04 is rejected as incompatible image architecture.
+# The old server plans with shared Intel vCPUs (CX11, CX21, CX31, CX41, CX51) are no longer available for order.
 machine_type=$HCLOUD_MACHINE_TYPE
 if [ -z "$HCLOUD_MACHINE_TYPE" ]; then
-  machine_type=cx11
-  # cx11: 20 GB
+  machine_type=cx22
+  # cax11: 40 GB arm
+  # cx22:  40 GB, 2vcpus, 4g, 40g,
+  # cpx11: 40 GB, 2vcpus, 2g, 40g,
+  # cx11: 20 GB, deprecated
   # cx21: 40 GB, deprecated
   # cpx21: 80 GB
   # ccx11: 80 GB, 2 CPUs dedicated.
