@@ -67,7 +67,7 @@ export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
 # use a cpx31 -- we need more than 40GB disk space.
 mydir="$(dirname -- "$(readlink -f -- "$0")")"	# find related scripts, even if called through a symlink.
-source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,apache2-utils,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
+source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,gdb,jq,apache2-utils,docker.io,binutils,ldap-utils,golang-go,python3-pip "$@"
 set -x
 
 if [ -z "$IPADDR" ]; then

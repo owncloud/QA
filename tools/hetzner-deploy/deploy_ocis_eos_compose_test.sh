@@ -33,7 +33,7 @@ if [ -z "$EOS_OCIS_TAG" ]; then
 fi
 
 # use a cx31 -- we need more than 40GB disk space.
-source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION}-eos -p git,vim,screen,docker.io,docker-compose,binutils,ldap-utils "$@"
+source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION}-eos -p git,vim,screen,gdb,docker.io,docker-compose,binutils,ldap-utils "$@"
 set -x
 
 if [ -z "$IPADDR" ]; then

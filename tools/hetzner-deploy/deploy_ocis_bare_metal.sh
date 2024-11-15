@@ -7,6 +7,7 @@
 # - https://owncloud.github.io/ocis/deployment/basic-remote-setup/
 # TODO:
 # - Add some services: e.g. https://doc.owncloud.com/ocis/next/deployment/services/s-list/antivirus.html
+# - the collaboration service is not autostarted. Find out, how to start it.
 #
 # Apache error messages seen:
 # - AH01144: No protocol handler was valid for the URL /
@@ -112,7 +113,7 @@ test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"   # find related scripts, even if called through a symlink.
 # use a cpx31 -- we need more than 40GB disk space.
-source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
+source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,gdb,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin    # mpkq et al..
 
 if [ -z "$IPADDR" ]; then

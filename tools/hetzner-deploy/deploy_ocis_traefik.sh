@@ -74,7 +74,7 @@ export HCLOUD_SERVER_IMAGE=ubuntu-22.04
 
 
 # use a cx31 -- we need more than 40GB disk space.
-source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,jq,apache2-utils,docker.io,docker-compose,binutils,ldap-utils,golang-go,python3-pip "$@"
+source lib/make_machine.sh -t cx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,xattr,file,gdb,jq,apache2-utils,docker.io,docker-compose,binutils,ldap-utils,golang-go,python3-pip "$@"
 set -x
 
 if [ -z "$IPADDR" ]; then
