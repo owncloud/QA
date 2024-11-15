@@ -71,7 +71,7 @@ chmod 400 $pwdfile		# must have file permissions 400 or 600,
 # choose a version seen in https://github.com/elastic/elasticsearch/branches
 # Check for latest image https://hub.docker.com/_/elasticsearch/tags
 img=docker.elastic.co/elasticsearch/elasticsearch:7.17.9	# latest known es7
-# img=docker.elastic.co/elasticsearch/elasticsearch:8.6.2	# try es8 ? -> fails with "Cannot connect"
+img=docker.elastic.co/elasticsearch/elasticsearch:8.16.0	# try es8 ? -> fails with "Cannot connect"
 
 
 # we place plugins in a persistant directory, so that we can restart the docker. That is needed after installing a plugin.
@@ -100,7 +100,7 @@ if $use_authentication; then
   opts="$opts -e xpack.security.enabled=true -e ELASTIC_PASSWORD=$elastic_pass"
 fi
 
-opts="$opts -e ingest.attachment.enabled=true"	# elastic7 also explodes when this is in the config_file
+#echo "$img" | grep -q "elasticsearch:7" && opts="$opts -e ingest.attachment.enabled=true"	# elastic7 also explodes when this is in the config_file
 
 if [ "$elastic_proto" = "https" ]; then
   # we don't have an ssh.key yet, this will cause an error, but only after the config_dir inside docker is initialized.
@@ -334,6 +334,7 @@ instanceid=$instanceid
 EOE
 
 cat << EOM >>  ~/POSTINIT.msg
+elastic_search:  admin: check the search config, it should not use localhost:9200 unauthenticated, it should use the components of the url below:
 elastic_search:  url: $elastic_url
 elastic_search:
 elastic_search:  Edit some text files, then try
