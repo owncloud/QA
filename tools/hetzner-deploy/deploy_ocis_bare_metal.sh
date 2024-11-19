@@ -55,7 +55,7 @@ export REVA_CLI_VERSION=2.19.3
 
 if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=daily
-  export OCIS_VERSION=v6.6.0
+  export OCIS_VERSION=v7.0.0-rc.2
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
