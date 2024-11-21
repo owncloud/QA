@@ -4,6 +4,8 @@
 #  - https://owncloud.dev/libre-graph-api/#/users/ListUsers
 #  - https://owncloud.dev/libre-graph-api/#/drives.permissions/Invite
 #  - https://owncloud.dev/libre-graph-api/#/driveItem/GetDriveItem		# has examples of driveId and itemID !
+# Requirements:
+#  - env var PROXY_ENABLE_BASIC_AUTH=true
 #
 # We can either use the external port 443 through traffic, e.g. via
 #  wget -d -O - --user=$api_user --password=$api_pass "https://web.$base_fqdn/graph/v1.0/"
@@ -12,6 +14,19 @@
 # v0.2, 20240723 - jw@owncloud.com - support both /graph/v1.0 and /v1.0 as an optional prefix for the query.
 # v0.3, 20240724 - jw@owncloud.com - added: share invite using /graph/v1beta1
 # v0.4, 20240725 - jw@owncloud.com - share works for local users, list-my-space added.
+#
+# TODO:
+# curl -s -k -u "$api_user:$api_pass" 'https://$HOST/graph/v1.0/drives' | jq '.value[] | {driveAlias,id}'
+# {
+#   "driveAlias": "personal/alice",
+#   "id": "c4dae5a1-7e34-47b2-947c-d9a3283f863f$50054bd8-8ef7-41f7-af07-a3eb897bc6a8"
+# }
+# ...
+
+#
+# Response header
+# curl 'https://cat-7rc2-20241119.jw-qa.owncloud.works/api/v0/settings/roles-list' -X POST -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:132.0) Gecko/20100101 Firefox/132.0' -H 'Accept: application/json, text/plain, */*' -H 'Accept-Language: de' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Referer: https://cat-7rc2-20241119.jw-qa.owncloud.works/files/spaces/personal/alice?fileId=c4dae5a1-7e34-47b2-947c-d9a3283f863f%2450054bd8-8ef7-41f7-af07-a3eb897bc6a8%2150054bd8-8ef7-41f7-af07-a3eb897bc6a8&items-per-page=100&files-spaces-generic-view-mode=resource-table&tiles-size=2' -H 'Content-Type: application/json' -H 'Initiator-ID: d63d34f8-7b19-4190-88e2-8a7d127c4f72' -H 'X-Requested-With: XMLHttpRequest' -H 'X-Request-ID: e4fe7cf9-ef2e-43af-9459-3450a7bfdfe6' -H 'Authorization: Bearer eyJhbGciOiJQUzI1NiIsImtpZCI6InByaXZhdGUta2V5IiwidHlwIjoiSldUIn0.eyJhdWQiOiJ3ZWIiLCJleHAiOjE3MzIxMTI4MjIsImlhdCI6MTczMjExMjUyMiwiaXNzIjoiaHR0cHM6Ly9jYXQtN3JjMi0yMDI0MTExOS5qdy1xYS5vd25jbG91ZC53b3JrcyIsImp0aSI6IkRESWkweVpuMVkyeW9fb096aXFCUE1Eb2Fma2FXc1BGIiwibGcuaSI6eyJkbiI6IkFsaWNlIGluIFdvbmRlcmxhbmQiLCJpZCI6Im93bkNsb3VkVVVJRD01MDA1NGJkOC04ZWY3LTQxZjctYWYwNy1hM2ViODk3YmM2YTgiLCJ1biI6ImFsaWNlIn0sImxnLnAiOiJpZGVudGlmaWVyLWxkYXAiLCJsZy50IjoiMSIsInNjcCI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwic3ViIjoidVBsR2lJUktrV0toUFR3QkBvaUpuN0hPZ29MaVZPQ2VpWlE4TzBIaDE5aHp4WUpXLUgzdnVVOVp1MWJBbVJ3UjFIcGhSYzlEWnRZM2dINUw2dnoxTl9RIn0.nP6J59jdri-nm4IQKOS9NW1DtA-tpELFpRyhx3bIEr0PH9wju-_e1YXPmh4kyw5U5NyVtVD-Lb92rHUgFbXIDIxOBUluSr0psEYwKarXLhMoc1v47lhA2eseugbariZ0VgcEe6-zo1WWEvczGpnFZcfkI0PfyGRYz-ODYgFVvUzlSrH7q8rqKEhcRFsfE5oRNewsZTkriZwrf6iEGjB7GTnUehjycW-nNBMP2yZYo9QR1insJIq9MiZTtDhJCNhm0tKqyJFW-DAFZ29W8LinZ_FCsLDtRvr0tttN2JvXlRSno99WaD_6jpP-nKKTCXcnGWVtlGCQrjh1cg4gNnU7hT_jECNjSq-SwrJJws3qIbQJ5kwi6HJf6vMilspiZNssbEijZt-DR9dOoEp6yEnurSn7HpSs28dqTPYqTmYOL0Qbsxps5_5osmACACq7pgT132mko1odEIHKlcKFQYv0psrsjWplmH_UP-BpilOSPq2EAZcT7tc2F0E6i2UzXkKQiU79N1nHQW8ZqvXqOseFFLD3AvKRPivUzDBSaSSRDbDa-_Q7CyqWZ9-AEjp3W2h9oWfMy0JgzcCutc3GHoWQ8P1r-DP8QCPHv4xo__YWsQMr6Ecl_n4hANAEB_XR_MSCkIGcqyOwNHE8u1PtvnjLzbj-hBQCGY0hFVgEBjtgaLw' -H 'Origin: https://cat-7rc2-20241119.jw-qa.owncloud.works' -H 'Connection: keep-alive' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' -H 'DNT: 1' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' --data-raw '{}'
+
 
 api_user=admin
 api_pass=admin

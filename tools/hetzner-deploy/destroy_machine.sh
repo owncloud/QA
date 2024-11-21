@@ -30,11 +30,18 @@ for name in "$@"; do
 
     test -n "$ipaddr" && name=$ipaddr	# prefer the IP Address for ssh, now that we officially removed the DNS name
 
-    echo "Retrieving hostname via ssh ..."
+    echo "Retrieving hostname via ssh ..."	# ssh may fail of first attempt due to spam filtering ...
     hostname=$(set -x; timeout -s 9 15 ssh root@$name hostname)
     if [ -z "$hostname" ]; then
-      echo "Oops, failed to get hostname. Retry $0 with the ip address?"
-      exit 1
+      echo "... retrying to connect ..."
+      hostname=$(set -x; timeout -s 9 15 ssh root@$name hostname)
+      if [ -z "$hostname" ]; then
+        hostname=$(set -x; timeout -s 9 15 ssh root@$name hostname)
+        if [ -z "$hostname" ]; then
+          echo "Oops, failed to get hostname. Retry $0 with the ip address?"
+          continue
+        fi
+      fi
     fi
     # now that we verified, that we could log into the machine with ssh, it should be safe to remove DNS entries.
     # If $name was a DNS-name, that could be resolved into an ipaddr, then we assigned that ipaddr back to $name
