@@ -244,14 +244,16 @@ cat <<EOT >$WEB_UI_CONFIG_FILE
   },
   "apps": [
     "files",
+    "search",
     "text-editor",
     "pdf-viewer",
-    "search",
     "external",
     "admin-settings",
-    "ocm",
-    "webfinger",
     "epub-reader"
+    "preview",
+    "app-store",
+    "webfinger",
+    "ocm",
   ],
   "external_apps": [
     {
@@ -286,15 +288,16 @@ cat <<EOT>> /etc/ocis/web.yaml
 extra:
   config:
     apps:
-      - admin-settings
-      - draw-io
-      - epub-reader
-      - external
       - files
-      - pdf-viewer
-      - preview
       - search
       - text-editor
+      - pdf-viewer
+      - external
+      - admin-settings
+      - epub-reader
+      - preview
+      - app-store
+      - draw-io
       - ocm
 EOT
 
