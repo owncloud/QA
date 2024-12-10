@@ -43,7 +43,7 @@ fi
 echo "Estimated setup time (when weather is fine): 2 minutes ..."
 
 compose_subdir=deployments/examples/ocis_traefik
-ocis_bin=/usr/bin/ocis
+# ocis_bin=/usr/bin/ocis
 ocis_data=/var/lib/ocis
 ocis_import=https://raw.githubusercontent.com/esgarov/Daten-Import-in-Ocis/main/ocis-import.py
 
@@ -55,7 +55,7 @@ export REVA_CLI_VERSION=2.19.3
 
 if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=daily
-  export OCIS_VERSION=v7.0.0-rc.3
+  export OCIS_VERSION=v7.0.0-rc.4
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -249,11 +249,11 @@ cat <<EOT >$WEB_UI_CONFIG_FILE
     "pdf-viewer",
     "external",
     "admin-settings",
-    "epub-reader"
+    "epub-reader",
     "preview",
     "app-store",
     "webfinger",
-    "ocm",
+    "ocm"
   ],
   "external_apps": [
     {
@@ -330,6 +330,9 @@ User=ocis
 Group=ocis
 EnvironmentFile=/etc/ocis/ocis.env
 ExecStart=/usr/local/bin/ocis server
+## Is this 9200 http or https? The endless confusion...
+## and it fails anyway: Can't start JetStream: storage directory is not a directory
+# ExecStart=/usr/local/bin/ociswrapper serve --admin-username=admin --admin-password=$admin_pass --url=https://localhost:9200 --bin=/usr/local/bin/ocis
 Restart=always
 
 [Install]
@@ -435,6 +438,8 @@ done
 git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION --depth 1
 git clone https://github.com/owncloud/web.git -b master --depth 1
 sleep 2
+
+(cd ocis/tests/ociswrapper; make build; cp bin/ociswrapper /usr/local/bin)
 
 # install and configure reva cli
 wget https://github.com/cs3org/reva/releases/download/v${REVA_CLI_VERSION}/reva_v${REVA_CLI_VERSION}_linux_amd64 -O go/bin/reva

@@ -57,11 +57,11 @@ if [ -z "$OCIS_DATADIR" ]; then
 	test -n "$OCIS_DATADIR" && echo "Choosing OCIS_DATADIR=$OCIS_DATADIR" 1>&2
 fi
 if [ -z "$OCIS_DATADIR" ]; then
-	echo "ERROR: environment variable OCIS_DATADIR is undefined and the ocis storage was not found in a well known location."
+	echo 1>&2 "ERROR: environment variable OCIS_DATADIR is undefined and the ocis storage was not found in a well known location."
 	exit 1
 fi
 if [ ! -d "$OCIS_DATADIR/$sprefix" ]; then
-	echo "ERROR: sudbdirectory $sprefix does not exist in OCIS_DATADIR=$OCIS_DATADIR, try somthing else."
+	echo 1>&2 "ERROR: sudbdirectory $sprefix does not exist in OCIS_DATADIR=$OCIS_DATADIR, try somthing else."
 	exit 1
 fi
 top="$OCIS_DATADIR"
@@ -76,7 +76,7 @@ function ocis_getattr()
     # this is ocis 3
     $mpkq "$attr" -r "$emptyfile.mpk"
   else
-    echo "ERROR: $emptyfile.mpk not found. Do we need old xattr here?"
+    echo 1>&2 "ERROR: ocis_getattr $attr: $emptyfile.mpk not found. Do we need old xattr here?"
     exit 1
   fi
 }
@@ -93,14 +93,14 @@ function nodeid_by_path()
   echo "$1" | sed -e 's@.*/\(..\)/\(..\)/\(..\)/\(..\)/@\1\2\3\4@' -e 's/\.mpk$//'
 }
 
-cd "$top/$sprefix" || { echo "ERROR: storage not found: $top/$sprefix"; exit 1; }
+cd "$top/$sprefix" || { echo 1>&2 "ERROR: storage not found: $top/$sprefix"; exit 1; }
 
 namefilter=
 test -n "$name" && namefilter="-name $name"
 
 # asuming: all objects, files and directories have a symlink
 find . -type l $namefilter -print0 | xargs -0 -n 1 echo | while read link ; do
-	test -z "$link" && { echo "ERROR: $name not found in $top/$sprefix"; exit 1; }
+	test -z "$link" && { echo 1>&2 "ERROR: $name not found in $top/$sprefix"; exit 1; }
 	target="$(readlink "$link")"
 	filename="$(basename "$link")"
 	nodespath="$(echo "$link" | sed -e 's@nodes/.*$@nodes@')"
