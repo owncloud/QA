@@ -113,7 +113,7 @@ test -n "$HCLOUD_LOCATION" && location="$HCLOUD_LOCATION"
 
 mydir="$(dirname -- "$(readlink -f -- "$0")")"   # find related scripts, even if called through a symlink.
 # use a cpx31 -- we need more than 40GB disk space.
-source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,gdb,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs "$@"
+source $mydir/lib/make_machine.sh -t cpx31 -u ocis-${OCIS_VERSION} -p git,vim,screen,tree,telnet,gdb,xattr,file,jq,docker.io,binutils,ldap-utils,golang-go,python3-pip,sshfs,rclone "$@"
 scp $mydir/bin/* root@$IPADDR:/usr/local/bin    # mpkq et al..
 
 if [ -z "$IPADDR" ]; then
@@ -454,6 +454,19 @@ reva -insecure whoami
 uptime
 sleep 3
 ocis version
+
+## Reference: https://owncloud.dev/apis/http/graph/users/#creating--updating-users
+
+# create user bob
+curl -u admin:\$admin_pass -k --header "Content-Type: application/json" --data '{ "displayName":"Bob Builder", "mail":"bob@example.org", "onPremisesSamAccountName": "bob", "passwordProfile": { "password":"secret" } }' "https://$BASE_DOMAIN/graph/v1.0/users"
+
+## Reference: https://owncloud.dev/ocis/guides/migrate-data-rclone/
+
+# prepare an rclone.conf
+echo -e "[ocis]\ntype = webdav\nurl = https://$BASE_DOMAIN/webdav\nvendor = owncloud\npass = \$(rclone obscure secret)" > /root/.config/rclone/rclone.conf
+
+# upload a file into bob's home
+rclone copy -vv /etc/ocis/ocis.env --webdav-user bob ocis:/ocis-config/
 
 cat <<EOM >> ~/POSTINIT.msg
 
