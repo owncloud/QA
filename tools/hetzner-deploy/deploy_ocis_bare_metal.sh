@@ -55,7 +55,7 @@ export REVA_CLI_VERSION=2.19.3
 
 if [ -z "$OCIS_VERSION" ]; then
   export OCIS_VERSION=daily
-  export OCIS_VERSION=v7.0.0-rc.4
+  export OCIS_VERSION=v7.0.0-rc.5
   echo "No OCIS_VERSION specified, using $OCIS_VERSION"
   sleep 2
 fi
@@ -458,7 +458,23 @@ ocis version
 ## Reference: https://owncloud.dev/apis/http/graph/users/#creating--updating-users
 
 # create user bob
-curl -u admin:\$admin_pass -k --header "Content-Type: application/json" --data '{ "displayName":"Bob Builder", "mail":"bob@example.org", "onPremisesSamAccountName": "bob", "passwordProfile": { "password":"secret" } }' "https://$BASE_DOMAIN/graph/v1.0/users"
+function create_user()
+{
+  name=\$1
+  pass=\$2
+  dname=\$3
+  email=\$4
+  test -z "\$pass" && pass="secret"
+  test -z "\$dname" && dname="\$(echo "\$name User" | sed 's/.*/\\u&/')"
+  test -z "\$email" && email="\$name@example.com"
+
+  curl -u admin:\$admin_pass -k --header "Content-Type: application/json" --data '{ "displayName":"'"\$dname"'", "mail":"'"\$email"'", "onPremisesSamAccountName": "'"\$name"'", "passwordProfile": { "password":"'"\$pass"'" } }' "https://$BASE_DOMAIN/graph/v1.0/users"
+}
+
+create_user alice secret "Alice Wonderland" alice@wonderland.org
+create_user bob   secret "Bob Builder"      bob@builder.org
+create_user carol secret "Carol Lewis"      carol@lewis.org
+create_user dave  secret "Dave Bowman"      dave@hal9000.org
 
 ## Reference: https://owncloud.dev/ocis/guides/migrate-data-rclone/
 
@@ -466,7 +482,16 @@ curl -u admin:\$admin_pass -k --header "Content-Type: application/json" --data '
 echo -e "[ocis]\ntype = webdav\nurl = https://$BASE_DOMAIN/webdav\nvendor = owncloud\npass = \$(rclone obscure secret)" > /root/.config/rclone/rclone.conf
 
 # upload a file into bob's home
-rclone copy -vv /etc/ocis/ocis.env --webdav-user bob ocis:/ocis-config/
+mkdir download
+wget -nv -O download/Alice.png           "https://upload.wikimedia.org/wikipedia/commons/6/63/Alice_par_John_Tenniel_04.png"
+wget -nv -O download/Bob_the_builder.jpg "https://upload.wikimedia.org/wikipedia/en/c/c5/Bob_the_builder.jpg"
+wget -nv -O download/Carol.png           "https://upload.wikimedia.org/wikipedia/commons/1/1e/Cheshire_Cat_Tenniel.png"
+wget -nv -O download/Dave.svg            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/HAL9000.svg/800px-HAL9000.svg.png"
+rclone copy -v /etc/ocis/ocis.env           --webdav-user admin --webdav-pass "\$(rclone obscure "\$admin_pass")" ocis:/ocis-config/
+rclone copy -v download/Alice.png           --webdav-user alice ocis:/alice-pictures/
+rclone copy -v download/Bob_the_builder.jpg --webdav-user bob   ocis:/bob-pictures/
+rclone copy -v download/Carol.png           --webdav-user carol ocis:/carol-pictures/
+rclone copy -v download/Dave.svg            --webdav-user dave  ocis:/dave-pictures/
 
 cat <<EOM >> ~/POSTINIT.msg
 
