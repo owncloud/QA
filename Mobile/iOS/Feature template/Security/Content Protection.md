@@ -38,6 +38,7 @@
 | List of files | 1. Open the list of files<br>2. Set `Dark` theme in `Settings`> `Themes` and take another screenshot | 1. Watermark visible<br>2. Watermark visible | |  |
 | Image file | Open an image file | Watermark visible | |  |
 | Video file | Open a video file | Watermark visible | |  |
+| Video file audio | Open a video file | No audio reproducible, just subtitles | |  |
 | Audio file with coverart | Open an audio file with coverart |Watermark visible | |  |
 | Audio file without coverart | Open an audio file without coverart  | Watermark visible | |  |
 | PDF file | Open a PDF file and  | Watermark visible | |  |
@@ -51,3 +52,6 @@
 | List of operations | 1. Click on 3-dot-button of any file on the list<br>2. Click on 3-dot-button on the top-right corner | Watermark visible in the header | |  |
 | File provider | Open the Files app | Not posible to access, just posible with the app | |  |
 | Share sheet from 3rd party| 1. Open a 3rd party app and share content with ownCloud | Watermark visible in the folder picker| |  |
+|**Files Provider**| 
+| `allow-overwrite-confidential-mdm-settings` true | 1. Set `allow-overwrite-confidential-mdm-settings` to `true` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is granted | |  |
+| `allow-overwrite-confidential-mdm-settings` false | 1. Set `allow-overwrite-confidential-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed | |  |
