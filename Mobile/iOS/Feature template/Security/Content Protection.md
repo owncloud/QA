@@ -1,19 +1,19 @@
 ### Content Protection
 
 
-**Server(s)**: <br>
-**Device(s)**: <br>
-**Execution date**: <br>
-**Tester**: <br>
+**Server(s)**: oCIS 7.0<br>
+**Device(s)**: iPhone XR iOS18 <br>
+**Execution date**: 21/01/2025<br>
+**Tester**: jrecio<br>
 **Context**: <br>
 
 
 
 | Test Case | Steps | Expected | Result | Related Comment / Defect | 
 | :-------- | :---- | :------- | :----: | :----------------------- | 
-|**Screenshot protected**| `confidential.allow-screenshots` false|||||
+|**Screenshot protected**| `confidential.allow-`<br>`screenshots` false|||||
 | Login | 1. Open the Login view and take an screenshot<br>2. Set `Dark` theme in `Settings`> `Themes` and take another screenshot | 1. Screenshot white<br>2. Screenshot dark | |  |
-| List of files | 1. Open the list of files and take an screenshot<br>2. Set `Dark` theme in `Settings`> `Themes` and take another screenshot | 1. Screenshot white<br>2. Screenshot dark | |  |
+| List of files | 1. Open the list of files and take an screenshot<br>2. Set `Dark` theme in `Settings`> `Themes` and take another screenshot | 1. Screenshot empty<br>2. Screenshot empty | |  |
 | Settings | 1. Open the Settings and take an screenshot<br>2. Set `Dark` theme in `Settings`> `Themes` and take another screenshot | 1. Screenshot white<br>2. Screenshot dark | |  |
 | Image file | Open an image file and take an screenshot | Screenshot empty| |  |
 | Video file | Open a video file and take an screenshot | Screenshot empty| |  |
@@ -26,15 +26,15 @@
 | Recents view | Open the recents view and take a screenshot | Screenshot empty| |  |
 | Av. offline view | Open the av. offline view and take a screenshot | Screenshot empty| |  |
 | Status view | Open the status view and take a screenshot | Screenshot empty| |  |
-| List of operations | Click on 3-dot-button of any file on the list and take an screenshot | Screenshot empty| |  |
+| List of operations | Click on 3-dot-button of any file on the list and take an screenshot | Screenshot does not show file info| |  |
 | File provider | Open the Files app | Not posible to access, just posible with the app | |  |
 | Share sheet from 3rd party| 1. Open a 3rd party app and share content with ownCloud<br>2. Take a screenshot from the folder picker  | Screenshot empty| |  |
 | Screen recording | Record a video with the screenshot | Video empty| |  |
 | Shortcuts | Try to create a shortcut with `Shortcuts` app | Shortcuts disabled for ownCloud | |  |
 |**Screenshot not protected**||||||
-| `confidential.allow-screenshots` true | 1. Set `confidential.allow-screenshots` to `true` in  `Branding.plist` file<br>2. Open the app and take an screenshot |  Screenshot taken and saved in album | |  |
-| No `confidential.allow-screenshots` | 1. Remove `confidential.allow-screenshots` from  `Branding.plist` file<br>2. Open the app and take an screenshot| Screenshot taken and saved in album| |  |
-|**Confidential protected**| `confidential.mark-confidential-views` true|||||
+| `confidential.allow-`<br>`screenshots` true | 1. Set `confidential.allow`<br>`-screenshots` to `true` in  `Branding.plist` file<br>2. Open the app and take an screenshot |  Screenshot taken and saved in album | |  |
+| No `confidential.allow-`<br>`screenshots` | 1. Remove `confidential.allow-`<br>`screenshots` from  `Branding.plist` file<br>2. Open the app and take an screenshot| Screenshot taken and saved in album| |  |
+|**Confidential protected**| `confidential.mark-`<br>`confidential-views` true|||||
 | List of files | 1. Open the list of files<br>2. Set `Dark` theme in `Settings`> `Themes` and take another screenshot | 1. Watermark visible<br>2. Watermark visible | |  |
 | Image file | Open an image file | Watermark visible | |  |
 | Video file | Open a video file | Watermark visible | |  |
@@ -53,5 +53,5 @@
 | File provider | Open the Files app | Not posible to access, just posible with the app | |  |
 | Share sheet from 3rd party| 1. Open a 3rd party app and share content with ownCloud | Watermark visible in the folder picker| |  |
 |**Files Provider**| 
-| `allow-overwrite-confidential-mdm-settings` true | 1. Set `allow-overwrite-confidential-mdm-settings` to `true` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is granted | |  |
-| `allow-overwrite-confidential-mdm-settings` false | 1. Set `allow-overwrite-confidential-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed | |  |
+| `allow-overwrite-confidential`<br>`-mdm-settings` true | 1. Set `allow-overwrite-confidential`<br>`-mdm-settings` to `true` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is granted | |  |
+| `allow-overwrite-confidential`<br>`-mdm-settings` false | 1. Set `allow-overwrite-confidential`<br>`-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed | |  |
