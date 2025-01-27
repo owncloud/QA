@@ -11,17 +11,16 @@ Marie:
 - [ ] accept "folder_to_share"
 - [ ] upload new file "file.txt" to "folder_to_share" (admin sees file.txt)
 - [ ] open sample.pdf
-- [ ] rename sample.pdf to file.pdf (use rigth click) (admin now sees file.pdf)
+- [ ] rename sample.pdf to file.pdf (use right click) (admin now sees file.pdf)
 
 Admin:
 - [ ] add new file.jpeg to "folder_to_share"
 - [ ] move file.pdf to root (ctrl x -> ctrl v) "personal" (marie can not see file.pdf)
 - [ ] add new "file.txt" (select replace option) create new version. (use drag and drop)
-- [ ] open "file.tx" in markdown-editor. Change and save. (admin sees "file.txt" updated)
+- [ ] open "file.txt" in markdown-editor. Change and save. (admin sees "file.txt" updated)
 
 Marie:
-- [ ] can download both versions
-- [ ] can restore old version
+- [ ] cannot see version history
 
 Admin:
 - [ ] change share "folder_to_share" from role "editor" to "viewer" (marie cannot rename/move/delete files in folder and cannot create new document in the folder)
@@ -93,10 +92,11 @@ Katherine:
 - [ ] delete file
 - [ ] add member Marie with editor role
 - [ ] add member Einstein with viewer role
+- [ ] add member Moss with manager role
 
 Marie:
 - [ ] can see space without accepting
-- [ ] change image and description
+- [ ] cannot change image but can change description
 - [ ] can upload file/folder and create file and folder
 - [ ] can create resource but cannot share space or space resource
 - [ ] can see deleted files and can restore files from trash
@@ -109,6 +109,14 @@ Einstein:
 - [ ] cannot create resource and share space
 - [ ] can see deleted files and cannot restore files from trash
 - [ ] cannot disable space
+
+Moss:
+- [ ] can see space without accepting
+- [ ] can change image and description
+- [ ] can upload file/folder and create file and folder
+- [ ] can create resource and can share space or space resource
+- [ ] can see deleted files and can restore files from trash
+- [ ] can disable space
 
 ## Case 6: create new user via accounts:
 Admin:
