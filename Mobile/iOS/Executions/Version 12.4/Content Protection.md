@@ -35,10 +35,10 @@
 | Share with me | 1. Other user shares content with me<br>2. Open the sidebar menu > `Shares` and select `Shared with me`<br>3. Take screenshot  | Screenshot empty | P m18 t17 | |
 | Share by me | 1. Share content with other user<br>2. Open the sidebar menu > `Shares` and select `Shared by me`<br>3. Take screenshot  | Screenshot empty | P m18 t17 | |
 | Share by link | 1. Create a link over any item<br>2. Open the sidebar menu > `Shares` and select `Shared by link`<br>3. Take screenshot  | Screenshot empty | P m18 t17 | |
-| `confidential.allow`<br>`-overwrite-confidential`<br>`-mdm-settings` true | 1. Set `confidential.`<br>`allow-overwrite-`<br>`confidential`<br>`-mdm-settings` to `true` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is granted | F m18 t17 | "Content unavailable" as a FP's crash |
-| `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` false | 1. Set `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed | P m18 t17|  |
+| `confidential.allow`<br>`-overwrite-confidential`<br>`-mdm-settings` true | 1. Set `confidential.`<br>`allow-overwrite-`<br>`confidential`<br>`-mdm-settings` to `true` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is granted, `Copy`, `Open In` and `Markup`available in operations card| P m18 t17 | "Content unavailable" as a FP's crash |
+| `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` false | 1. Set `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed, `Copy`, `Open In` and `Markup` are not available in operations card| P m18 t17|  |
 | Shortcuts | 1. Enable shorcuts IAP feature<br>2. Try to create a shortcut with `Shortcuts` app | Shortcuts disabled for ownCloud | P m18 t17 |  |
-| Markup | 1. Open `Markup` over a pdf or image file<br>2. Take screenshot | Screenshot empty | F m18 t17 | In iPhone, not displayed, in iPad displayed but not banned. [Check](https://github.com/owncloud/ios-app/pull/1430#issuecomment-2607819318) |
+| Markup | 1. Open `Markup` over a pdf or image file<br>2. Take screenshot | Screenshot empty | NA | In iPhone, not displayed, in iPad displayed but not banned. [Check](https://github.com/owncloud/ios-app/pull/1430#issuecomment-2607819318). Disabled |
 | Image metadata | 1. Open `Image metadata` over a image file<br>2. Take screenshot | Screenshot with header empty | P m18 t17 |  |
 | Open in new Window (iPad)| 1. Over any file, select `Open in new window`<br>2. Take screenshot | Screenshot empty | P t17 |  |
 |**Screenshot not protected**||||||
@@ -65,11 +65,11 @@
 | Share with me | 1. Other user shares content with me<br>2. Open the sidebar menu > `Shares` and select `Shared with me`  | Watermark over the shared content | P m18 t17 | |
 | Share by me | 1. Share content with other user<br>2. Open the sidebar menu > `Shares` and select `Shared by me` | Watermark over the shared content | P m18 t17 | |
 | Share by link | 1. Create a link over any item<br>2. Open the sidebar menu > `Shares` and select `Shared by link` | Watermark over the shared content  | P m18 t17 | |
-| File names redacted | 1. Open spaces view<br>2. Try to delete a file or folder<br>3. Share a file or folder<br>4. Create a link over a file or folder<br>5. Open the invite view to share with a new member | 1. Space name is redacted in all places<br>2. The delete dialog shows the name redacted<br>3. The sharing dialog shows the name redacted<br>4. The create link dialog shows the name redacted<br>5. The invite view shows the file or folder name redacted | F m18 t17|  Not redacted in all cases|
+| File names redacted | 1. Open spaces view<br>2. Try to delete a file or folder<br>3. Share a file or folder<br>4. Create a link over a file or folder<br>5. Open the invite view to share with a new member | 1. Space name is redacted in all places<br>2. The delete dialog shows the name redacted<br>3. The sharing dialog shows the name redacted<br>4. The create link dialog shows the name redacted<br>5. The invite view shows the file or folder name redacted | P m18 t17|  FIXED: Not redacted in all cases|
 | Breadcrumbs | 1. Browse in a A/B/C/D structure<br>2. Open breadcrumbs by clicking on the upper chevron | Names of folders are redacted<br>Names of folders are redacted in the bottom side's breadcrumbs | P m18 t17 | |
 | `confidential.allow`<br>`-overwrite-confidential`<br>`-mdm-settings` true | 1. Set `confidential.allow`<br>`-overwrite-confidential`<br>`-mdm-settings` to `true` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is granted | P m18 t17 |  |
-| `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` false | 1. Set `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed | F m18 t17 | "Content unavailable" as a FP's crash |
-| Markup | 1. Open `Markup` over a pdf or image file | Watermark visible. Name of file redacted | F m18 t17 | Name not redacted on the top [Check](https://github.com/owncloud/ios-app/pull/1430#issuecomment-2607819318) |
+| `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` false | 1. Set `confidential.allow-`<br>`overwrite-confidential`<br>`-mdm-settings` to `false` in  `Branding.plist` file<br>2. Open `Files` app | Access to files provider is not allowed | P m18 t17 | "Content unavailable" as a FP's crash |
+| Markup | 1. Open `Markup` over a pdf or image file | Watermark visible. Name of file redacted | NA | Name not redacted on the top [Check](https://github.com/owncloud/ios-app/pull/1430#issuecomment-2607819318) - Disabled |
 | Image metadata | 1. Open `Image metadata` over a image file|  Watermark visible. Name redacted. | P m18 t17 |  |
 | Open in new Window (iPad)| 1. Over any file, select `Open in new window` |Watermark visible | P t17 |  |
 _______
@@ -86,7 +86,9 @@ _______
 | System sharing actions | Not allowed   | Allowed  |  Not allowed  | Not allowed  |
 | Copy | Not allowed   |  Allowed  | Not allowed  | Not allowed  |
 | Test recognition | Not allowed   | Allowed  | Not allowed  | Not allowed  |
+| Markup | Not allowed   | Allowed  | Not allowed  | Not allowed  |
 
 - 3rd column is the one where both features are enabled  ✅ 
 - 2nd column is the one where both features are disabled ✅ 
 - 1st and 4th column, one feature enabled and the other disabled, that means, features to be disabled ✅ 
+
