@@ -45,11 +45,11 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Renewal OIDC token | 1. Enter correct credentials in browser and authorize<br>2. Wait till token expires (default 1h)<br>3. Perform any operations in the list of files | Operation is completed with no authentication/authorization errors. Check with mitmproxy or any other tool that the token endpoint was called | 
 | Revoke OAuth2 token |1. Enter correct credentials in browser and authorize<br>2. Revoke the iOS token<br>3. Perform any operation in list of files<br>4. Click on `Sign In` and enter correct credentals | 3. Error in list of files: `Access denied`<br>4. List of files displayed again. | NA | No way|
 | **Accounts view (sidebar)** |  Logged user |  |
-| One account | 1. Open sidebar menu with the up-left button<br>2. Open the account pill | 1. Only one account listed<br>2. Sections: `Personal`, `Shares`, `Spaces` (only oCIS), `Quick access`, `Status` |  |
+| One account | 1. Open sidebar menu with the up-left button<br>2. Open the account pill | 1. Only one account listed<br>2. Sections: `Personal`, `Shares`, `Spaces` (only oCIS), `Search`, `Quick access`, `Status` |  |
 | More than one account | 1. Enter correct credentials of more accounts<br>2. Open sidebar menu with the up-left button<br>3. Open the account pill for every account  | 2. All accounts listed<br>3. Sections: `Personal`, `Shares`, `Spaces` (only oCIS), `Quick access`, `Status`  |  |
 | Account options | 1. Open sidebar menu with the up-left button<br>2. Long press over the account pill | 1. Only one account listed<br>2. Sections: `Edit`, `Manage`, `Delete`, `Disconnect`, `Open in new window` (only iPad) |  |
 | Edit credentials | 1. Long press over the account pill<br>2. Select `Edit`<br>3. In server, change credentials<br>4. Enter new credentials in app | Login correct, file list displayed |  |
-| Edit name | 1. Long press over the account pill<br>2. Select `Edit`<br>3. Enter new name<br>4. Save | Account name edited and displayed in the account pill after reopening the app | 
+| Edit name | 1. Long press over the account pill<br>2. Select `Edit`<br>3. Enter new name<br>4. Save<br>5. Reopen the app | Account name edited and displayed in the account pill after reopening the app | 
 | Manage storage | 1. Download some files by clicking on them in the file of list, and set some fles as av. offline<br>2. Long press over the account pill in sidebar<br>3. Select `Manage`<br>4. Click on `Delete all Offline files` | All downloaded files are removed (download icon is again visible) but the av. offline|  | |
 | Manage storage av. offline | 1. Download some files by clicking on them in the file of list<br>2. Long press over the account pill in sidebar<br>3. Select `Manage`<br>4. Click on `Delete all Offline files` and select `Include available offline` | All downloaded files are removed (download icon is again visible) including the available offline |  | |
 | Delete |  1. Long press over the account pill<br>2. Select `Delete`| Account removed from the sidebar and device |  || 
@@ -61,7 +61,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Face ID | 1. Enable `Face ID` (it must be enrolled in device and passcode enabled in advance)<br>2. Close app and open again| Face ID asked |  |  |
 | Face ID removed | 1. Disable `Face ID`<br>2. Close app and open again| Face ID not asked.<br> Passcode asked |  |  |
 | Face ID failing | 1. Enable `Face ID`<br>2. Close app and open again, making Face ID fail<br>3. Unlock using passcode<br>4. Open app again | Face ID not asked.<br> Passcode asked |  |  |
-| Lock | 1. Enable `Passcode lock<`br>2. Set lock application after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
+| Lock | 1. Enable `Passcode lock`<br>2. Set lock application after 1 minute<br>3. Minimize the app and reopen before 1 minute<br>4. Minimize again and reopen after 1 minute| 3. Passcode not asked<br>4. Passcode asked |  |  |
 | Certificate different key | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. In Settings, open "Certificates"<br>3. Revoke the certificate<br>4. Add an account in the same server | 2. Host certificate is there.<br>4. Certificate Approval is asked and differences are displayed (they can be hidden)  |  |  |
 | Same key cert | 1. Attach one account to the app with non-secure https, accepting the certificate<br>2. Add another account with different certificate but signed wuith the same key | Certificate Approval is not asked. In Settings > Certificate, it appears as auto approved  |   |  |
 | Theme | 1. Select Dark<br>2. Select Light<br>3. Select System | All themes are correcly saved and displayed in file list |  |  |
@@ -71,7 +71,7 @@ P m13 F t12 -> Passed with an iPhone with iOS13 and failed with an iPad with iOS
 | Prevent gestures disabled | 1. Disable setting `Prevent gestures`<br>2. Try to drag an drop<br>3. Try to do a multiselection with two fingers| Actions are not posible to do |  |  |
 | Streaming enabled | 1. Enable setting `Streaming`<br>2. Open a video file| Video is played and not downloaded. Cloud icon remains in the item in list of files |  |  |
 | Streaming disabled | 1. Disable setting  `Streaming`<br>2. Open a video file| Video is downloaded and then played. Cloud icon removed from the item in list of files |  |  |
-| Media upload HEIC > JPG | 1. Enable setting  `Convert HEIC to JPG`<br>2. Upload an HEIC file| File is saved as JPG |  |  |
+| Media upload HEIC > JPG | 1. Enable setting  `Convert HEIC to JPG`<br>2. Upload an HEIC file (using the `Take Photo` option in  `+` menu)| File is saved as JPG |  |  |
 | Media upload MP4 | 1. Enable setting `Convert videos to MP4`<br>2. Upload video file in MOV format| Video is saved as MP4 |  |  |
 | Media upload Preserve original name enabled | 1. Enable setting `Preserve original media file names`<br>2. Upload a picture| Picture is saved with format `IMG_xxxx` |  | |
 | Media upload Preserve original name disabled | 1. Disable setting `Preserve original media file names`<br>2. Upload a picture| Picture is saved with format `Photo-timestamp_xxxx`|  |  |
