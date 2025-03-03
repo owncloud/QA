@@ -335,6 +335,15 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 
 ### 13. Crash reporter
 
+#### Preconditions:
+
+1. Open desktop client
+2. Go to Settings tab
+3. In the middle there are Advanced settings including 'Show crash reporter' checkbox
+
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
-1 | Verify that the crash reporter works | 1. Download the App image <br> 2. In the terminal, go to the location where App image is installed: <br> `./ownCloud-X.X.X.AppImage --debug` <br> 3. Right click on ownCloud taskbar <br> 4. Debug actions -> Crash now-qFatal | Crash reporter sends messages to Sentry | :construction: Win :construction: Linux ||
+1 | Check crash report window | Start the client running the below commands (all of them): <br> - macOS: /Applications/owncloud.app/Contents/MacOS/owncloud --debug <br> - macOS: /Applications/owncloud.app/Contents/MacOS/owncloud --debug <br> - Ubuntu: owncloud --debug <br><br> Trigger the crash from the tray context menu: <br> - Right click on ownCloud taskbar <br> - Click Debug actions -> Crash now-qFatal| Crash window has been opened |||
+2 | Check button | Click 'Don't send' button to close the window | Window has been closed, no report sent ||||
+3 | Verify crash report has been sent | 1. Trigger the crash again <br> 2. Add a comment (so it is obvious that this is a test crash report) <br> 3. Send the report | - Message has been shown: Sent! Many thanks. Please refer to crash bp-612d8ff3-e41d-4070-9d65-7282e2190619 in bug reports. <br> - Report has been sent to crash report server and it's shown there |
+4 | Verify the report includes correct data | | Comment and version are correct |
