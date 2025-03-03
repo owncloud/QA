@@ -343,7 +343,7 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
-1 | Check crash report window | Start the client running the below commands (all of them): <br> - macOS: /Applications/owncloud.app/Contents/MacOS/owncloud --debug <br> - macOS: /Applications/owncloud.app/Contents/MacOS/owncloud --debug <br> - Ubuntu: owncloud --debug <br><br> Trigger the crash from the tray context menu: <br> - Right click on ownCloud taskbar <br> - Click Debug actions -> Crash now-qFatal| Crash window has been opened |||
+1 | Check crash report window | Start the client running the below commands (all of them): <br> - macOS: /Applications/owncloud.app/Contents/MacOS/owncloud --debug <br> - Windows: cd "C:\Program files (x86)\owncloud" && owncloud --debug <br> - Ubuntu: owncloud --debug <br><br> Trigger the crash from the tray context menu: <br> - Right click on ownCloud taskbar <br> - Click Debug actions -> Crash now-qFatal| Crash window has been opened |||
 2 | Check button | Click 'Don't send' button to close the window | Window has been closed, no report sent ||||
 3 | Verify crash report has been sent | 1. Trigger the crash again <br> 2. Add a comment (so it is obvious that this is a test crash report) <br> 3. Send the report | - Message has been shown: Sent! Many thanks. Please refer to crash bp-612d8ff3-e41d-4070-9d65-7282e2190619 in bug reports. <br> - Report has been sent to crash report server and it's shown there |
 4 | Verify the report includes correct data | | Comment and version are correct |
