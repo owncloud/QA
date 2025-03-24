@@ -108,7 +108,7 @@ Add all automated that are not here
 | Audio with coverart | Open a MP3 file that includes cover| Music played and cover displayed |
 | Stream a video with https (trusted server) | 1. With a https server stream a video. Use the controls to move forward and backward and change orientation | Video is streamed correctly | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/download.feature)
 | Unsupported | Download a unsupported file (pdf, office...) | Menu to open in a different app is raised up| | |
-| Damaged | Download a damaged file (pdf, office...) | `Unable to display file` |  | |
+| Damaged | Download a damaged file (pdf, office...) | `Unable to display file` | [AUTO](https://github.com/owncloud/android-scenario-testing/blob/master/src/test/resources/io/cucumber/download.feature) | |
 | **Offline** |   |  |
 | Sync | Remove device connection and perform the following operations: <br>1. Create a folder<br>2. Copy & Move file<br>3. Upload a file<br>4. Delete a file<br>5. Rename an item | 1. `Device is not connected to a network`<br>2. `Device is not connected to a network`<br>3. `Sync failed`<br>4. `Device is not connected to a network`<br>5. `Device is not connected to a network`| | |
 | **Open in web** | (Server with app providers)  |  |
