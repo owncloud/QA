@@ -1,45 +1,93 @@
 ###  Sharing 
 
+**Server(s)**: <br>
+**Device(s)**: <br>
+**Execution date**: <br>
+**Tester**: <br>
+**Context**: <br>
 
 ---
 
  
-| Test Case | Description | Expected | Android | iOS | Comment |
-| :-------- | :---------- | :------- | :-----: | :-: | :------
-| **Share with users** |   |  |
-| Shared with one user| Select to share a file whose name contains special characters with a user whose name includes special characters| 1. Check that user2 has access to the file<br>2. Check that the file includes the share icon |  |  |
-| Shared with one group| 1. Select to share a file with a group whose name includes special characters| Check that everyone in the group has access to the file<br>2. Check that the file includes the share icon |  |  | 
-| Shared with several | Select to share a file with several users and groups | 1. Check that everyone has access to the file<br>2. Check that the file includes the share icon |  |  |
-| Shared with an already shared user | Select to share an item already shared, with the same user | An error is shown |   |  |
-| Share an item with edit | Share an item granting edit permission | Sharee can edit |   |  |
-| Share an item with re-share | Share an item granting share permission | Sharee can reshare |    |  |
-| Share an item with both | Share an item granting edit and share permissions | Sharee can edit and share |    |  |
-| Share an item without permissions | Share an item revoking edit and share permissions | Sharee can neither edit not share |    |  |
-| Reshare reflected | 1. Share content with user1<br>2. User1 shares with user2 | source user sees user1 and user2 as sharees |   |  |
-| Share with users + Share with link | 1. Select shared with user<br>2. Select to share by link | Check that the link works<br>Check, at least one user have still access to the file |   |  |
-| Privileges inheritance | 1. Share a folder with user1 with share and create privileges, and without change and delete<br>2. Login with user1 and try to re-share the folder with create privilege<br>3. Re-share with change and/or delete privileges (check in server side)| 2. user1 can reshare the file<br>3. user1 can not reshare the file |   |  |
-| Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file |   |  |
-|**Edit share**||||||
-| Edit an item adding edit | Edit an item by adding edit permission | Sharee can edit |  |  |
-| Edit an item adding re-share | Edit an item by adding share permission | Sharee can reshare |   |  |
-| Edit an item revoking edit | Edit an item by removing edit permission | Sharee can not edit |   |  |
-| Edit an item revoking re-share | Edit an item by removing share permission | Sharee can not reshare |   |  |
-| Edit an item with both | Share an item granting edit and share permissions | Sharee can edit and share |   |  |
-|**Delete share**||||||
-| Delete | 1. Previosly shared user, select shared with user<br>2. Unshare with 1 of the users<br>| The share with user icon is not included<br>User does not have access to the folder any more |  |  |
-| Delete all | 1. Delete all sharees form an item| The share with user icon is not included |  |  |
-| **Public share** |   |  |
-| Share by link | 1. Share a folder with a long name by link, by long press<br>2. Access using a web browser to the link | 1. Link is generated and options to share are shown<br>2. Link works |  |  |
-| Unshare by link | Select to unshare the previous file | Link icon is not shown. Link doesn't work |  |  |
-| Share by link from the web | 1. From the web select to share by link a file and a folder at different levels<br>2. Access to the device | Files are shown as shared by link |  |  |
-| Share by link with password | 1. in the server, enforce the password<br>2. select to share by link a file/folders<br>3. fill in a password | File is shared |  |  |
-| Share by link with expiration | 1. in the server, enforce the date<br>2. select to share by link a file/folders<br>3. fill in the date | File is shared |  |  |
-| Multiple links | Create several public links on the same file or folder | Check that all of them are correctly generated in server |  |  |
-| Download / View | 1. Share link of a folder<br>2. Select "Download / View"  | Folder is shared and content is visible, but no action is allowed |  |  |
-| Download / View / Upload | 1. Share link of a folder<br>2. Select "Download / View / Upload"  | Folder is shared and content is "updatable" |  |  |
-| Upload only | 1. Share link of a folder<br>2. Select "Upload Only"  | Folder is shared and content is not visible, but it is posible to upload content |  |  |
-| Remove links | After creating a huge amount of links in the same file, remove some of them | Check in server that removed do not appear |  |  |
-| **Server options** |   |  |
+| Test Case | Description | Expected | Result | Comment |
+| :-------- | :---------- | :------- | :----: | :------ |
+| **Share with users (local)**|   |  |
+| Shared with one user| 1. Select `Sharing` over any item in the list<br>2. Invite another user<br>3. Grant any permission level| Check that sharee has access to the file. Check that the item includes the share icon. Check in web |  |  |
+| Shared with one group| 1. Select `Sharing` over any item in the list<br>2. Invite an existing group<br>3. Grant any permission level| Check that every member of the group has access to the item. Check that the file includes the share icon. Check in web |  |  |
+| Shared with several | 1. Select `Sharing` over any item in the list<br>2. Invite some users and groups granting them any permission level | Check that every user has access to the item <br>2. Check that the file includes the share icon. Check in web |  |  |
+| Shared with an already shared user | 1. Select `Sharing` over any item in the list<br>2. Invite a user<br>3. Grant any permission level<br>4. Invite again the same user| `Already shared with the user` |  | |
+| Share with yourself | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the item | |  |
+| Share with no permission | 1. Select `Sharing` over any item in the list<br>2. Invite another user<br>3. Don't choose any permission level| `Invite` button disabled |   |  |
+| Share with `Can View` | 1. Select `Sharing` over any item in the list<br>2. Invite another user<br>3. Grant `Can View` | Check that sharee has access to the item. Check in web the permission level is `Can View` |   |  |
+| Share folder with `Can Upload` | 1. Select `Sharing` over a folder in the list<br>2. Invite another user<br>3. Grant `Can Upload` | Check that sharee has access to the folder. Check in web the permission level is `Can Upload` |   |  |
+| Share file with `Can Upload` | 1. Select `Sharing` over a file in the list<br>2. Invite another user<br>|  `Can Upload` not available as permission|   |  |
+| Share with `Can Edit`<br>`without versions` | 1. Select `Sharing` over any item in the list<br>2. Invite another user<br>3. Grant `Can Edit without versions` | Check that sharee has access to the file. Check in web the permission level is `Can Edit without versions` |   |  |
+| Share with expiration default | 1. Select `Sharing` over any item in the list<br>2. Invite another user<br>3. Grant any permission<br>4. `Add` expiration date by default | Check that sharee has access to the file. Check in web the expiration date is one week later than today (default in iOS)  |   |  |
+| Share with expiration custom | 1. Select `Sharing` over any item in the list<br>2. Invite another user<br>3. Grant any permission<br>4. `Add` expiration date<br>5. Click on the default date and choose a different one | Check that sharee has access to the file. Check in web the expiration date is the chosen one in step 5.  |   |  |s<br>Check, at least one user have still access to the file |   |  |
+| Federated Share | 1. Share a folder with user1 in other server<br>2. Login with user1| user1 can view the file |   | only oC10  |
+| **Share with users (remote)**|   |  |
+| Share with `Can View` | In web, share any item with `Can View` permission | Check in the app that the permission level is `Can View` |    |  |
+| Share folder with `Can Upload` | In web, share a folder with `Can Upload` permission | Check in the app that the permission level is `Can Upload` |    |  |
+| Share with `Can Edit`<br>`without permissions` | In web, share any item with `Can Edit`<br>`without permissions` permission | Check in the app that the permission level is `Can Edit`<br>`without permissions` |    |  |
+| Share with expiration default | In web, share any item with any permission level and a expiration date | Check in the app that the expiration date is the chosen one |  |  |
+|**Edit share (local)**||||||
+| Change permissons | 1. Open an existing share with `Can View` permission<br>2. Change permission to `Can edit`<br>`without versions` | Check in web the permission level is `Can Edit`<br>`without versions`<br>  |  |  |
+| Change permissons folder | 1. Open an existing shared folder with `Can View` permission<br>2. Change permission to `Can upload` | Check in web the permission level is `Can upload`<br>  |  |  |
+| Add expiration date | 1. Open an existing share without expiration date<br>2. Add an expiration date to the share |  Check in web the expiration date is the new chosen one  |  |  |
+| Change expiration date | 1. Open an existing share with expiration date<br>2. Change expiration date to a different one |  Check in web the expiration date is the new chosen one  |  |  |
+| Remove expiration date | 1. Open an existing share with expiration date<br>2. Remove expiration date |  Check in web the item does not have expiration date |  |  |
+|**Edit share (remote)**||||||
+| Change permissons | 1. In web, open an existing share with `Can View` permission<br>2. Change permission to `Can edit`<br>`without versions` | Check in app the permission level is `Can Edit`<br>`without versions`<br>  |  |  |
+| Change permissons folder | 1. In web, open an existing shared folder with `Can View` permission<br>2. Change permission to `Can upload` | Check in app the permission level is `Can upload`<br>  |  |  |
+| Add expiration date | 1. In web, open an existing share without expiration date<br>2. Add an expiration date to the share |  Check in app the expiration date is the new chosen one  |  |  |
+| Change expiration date | 1. In web, open an existing share with expiration date<br>2. Change expiration date to a different one |  Check in app the expiration date is the new chosen one  |  |  |
+| Remove expiration date | 1. In web, open an existing share with expiration date<br>2. Remove expiration date |  Check in app the item does not have expiration date |  |  |
+|**Delete share(local)**||||||
+| Delete with unshare | 1. Open an existing share<br>2. Remove the share with the `Unshare` option | Sharee is not in the list anymore. Check in web  |  |  |
+| Delete with swipe | 1. Open the list of sharees of any share<br>2. Remove any sharee by swiping over its name| Sharee is not in the list anymore. Check in web  |  |  |
+|**Delete share(remote)**||||||
+| Delete | 1. In web, open an existing share<br>2. Remove the share| In app, sharee is not in the list anymore.|  |  |
+| **Public link(local)** |   |  |
+| Share by link with name | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add a name to the link<br>3. Select any permission level<br>4. `Create`  | Link is created with the given name. Check on web | |  |
+| Share by link `Can View` | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add `Can View` as permission level<br>3. `Create` | Link is created with `Can View`permission. Check on web | |  |
+| Share by link `Can Edit` | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add `Can Edit` as permission level<br>3. `Create` | Link is created with `Can Edit` permission. Check on web | |  |
+| Share folder by link `Secret File Drop` | 1. Select `Sharing` over a folder in the list and `Create Link`<br>2. Add `Secret File Dropt` as permission level<br>3. `Create` | Link is created with `Secret File Drop` permission. Check on web |  |  |
+| Share by link without permission | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Select no permission level | `Create` option is disabled | |  |
+| Share by link with password auto | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add an automatic password by clicking `Generate`<br>3. `Create` | Link is created with the given password. Check on web |  |  |
+| Share by link with password custom | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add a password by clicking `Set`<br>3. Add a password that fulfill requirements<br>4. `Create` | Link is created with the given password. Check on web |  |  |
+| Share by link with expiration date default | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add default expiration date by clicking `Add`<br>3. `Create` | Link is created with the given expiration date. Check on web |  |  |
+| Share by link with expiration date custom | 1. Select `Sharing` over any item in the list and `Create Link`<br>2. Add default expiration date by clicking `Add`<br>3. Click on the default expiration date and choose another one<br>4. `Create` | Link is created with the given expiration date. Check on web |  |  |
+| **Public link(remote)** |   |  |
+| Share by link with name | In web, create a link with name  | In app, link is listed with the given name |  |  |
+| Share by link `Can View` | In web, create a link with `Can View` as permission level | In app, link is created with `Can View` permission |  |  |
+| Share by link `Can Edit` | In web, create a link with `Can Edit` as permission level | In app, link is created with `Can Edit` permission |  |  |
+| Share by link `Secret File Drop` | In web, create a link over a folder with `Secret File Drop` as permission level | In app, link is created with `Secret File Drop` permission |  |  |
+| Share by link with password | In web, create a link with password | In app, link is created with the given password |  |  |
+| Share by link with expiration date | In web, create a link with expiration date | Link is created with the given expiration date |  |  |
+| **Edit Public link(local)** |   |  |
+| Edit name | 1. Open an existing link<br>2. Change name | Check in web the new name  |  |  |
+| Remove name | 1. Open an existing link<br>2. Remove name | Check in web the name was removed |  |  |
+| Change permission | 1. Open an existing link with `Can view`<br>2. Change pemission `Can edit` | Check in web the permission is `Can edit` |  |  |
+| Change permission folder | 1. Open an existing link over a folder with `Can view`<br>2. Change pemission `Secret file drop` | Check in web the permission is `Secret file drop` |  |  |
+| Change password | 1. Open an existing link with password<br>2. Change password | Check in web the password is set|  |  |
+| Remove password | 1. Open an existing link with password<br>2. Remove password | Check in web the password is not set anymore |  |  |
+| Add expiration date | 1. Open an existing link without expiration date<br>2. Change the expiration date | Check in web the expiration is the new one |  |  |
+| Change expiration date | 1. Open an existing link with expiration date<br>2. Change the expiration date | Check in web the expiration is the new one |  |  |
+| Remove expiration date | 1. Open an existing link with expiration date<br>2. Remove the expiration date | Check in web there is no expiration date|  |  |
+| **Edit Public link(remote)** |   |  |
+| Change permission | 1. In web, open an existing link with `Can view`<br>2. Change pemission `Can edit` | Check in app the permission is `Can edit` |  |  |
+| Change permission folder | 1. In web, open an existing link over a folder with `Can view`<br>2. Change pemission `Secret file drop` | Check in app the permission is `Secret file drop` |  |  |
+| Change password | 1. In web, open an existing link with password<br>2. Change password | Check in app the password is set|  |  |
+| Remove password (files) | 1. In web, open an existing link with password<br>2. Remove password | Check in app the password is not set anymore |  |  Only for files not for folders|
+| Add expiration date | 1. In web, open an existing link without expiration date<br>2. Change the expiration date | Check in app the expiration is the new one |  |  |
+| Change expiration date | 1. In web, open an existing link with expiration date<br>2. Change the expiration date | Check in app the expiration is the new one |  |  |
+| Remove expiration date | 1. In web, open an existing link with expiration date<br>2. Remove the expiration date | Check in app there is no expiration date|  |  |
+| **Remove link(local)** |   |  |
+| Remove link by unshare | 1. Open an existing link<br>2. `Unshare` | Link is removed from the list. Check on web |  |  |
+| Remove link by swipe | 1. Open the list of links over an item<br>2. Swipe over a link and `Remove`| Link is removed from the list. Check on web|  |  |
+| **Remove link(remote)** |   |  |
+| Remove link | 1. In web, open an existing link<br>2. Remove link | in app, link is removed from the list |  |  |
+| **Server options** | only oC10  |  |
 | Server doesn't support share api preview | 1. Select to disable the share API<br>2. From the app, try to share by link a file/folder | Sharing option does not appear, only private link. |  |  |
 | Server doesn't support public links | 1. Select to disable the public link API<br>2. From the app, try to share by link a file/folder  | Only private link and private share |  |  |
 | Allow public links | 1. disable "Allow public uploads"<br>2. From the app, try to share by link a folder | Public links on folders do not have permission options |  |  |
@@ -56,7 +104,7 @@
 | Extra field = User ID | Set extra field = User ID<br>Create private share | User ID is shown in results |  |  |
 | Extra field = Email | Set extra field = Email<br>Create private share | Email is shown in results |  |  |
 | Federated revoked | Revoke federated shares (sent and received) | No way to create (not in the results) |  |  |
-| **Password policy** |  |  |
+| **Password policy** |  only oC10|  |
 | Password minimum characters | Enable the feature, set a number, and create a password that does not fit the value | Correct error, link not created |  |  |
 | Password lowercase | Enable the feature, set a lowercase letters number, and create a password that does not fit the value | Correct error, link not created |  |  |
 | Password uppercase | Enable the feature, set a uppercase letters number, and create a password that does not fit the value | Correct error, link not created |  |  |
@@ -66,7 +114,7 @@
 | All policies OK | Enable all policies, and create a password that fits all of them | Created |  |  |
 | All policies NOK | Enable all policies, and create a password that fits all but one | Correct error |  |  |
 | All policies disabled | Disable all policies, and create a password that do not fin any policy | Link created |  |  |
-| **Expiration policy** |  |  |
+| **Expiration policy** | only oC10 |  |
 | Password set | Enable the feature, set a value of days and create a link with password (no expiration days in "Sharing") | Correct number of expiration days |  |  |
 | Password not set | Enable the feature, set a value of days if password not set and create a link (no expiration days in "Sharing") | Correct number of expiration days |  |  |
 | Expiration enforced with higher value in policy (password set) | Enable the feature, set a value of days higher than the expiration in "Sharing" and create a link with password | Correct number of expiration days: the ones in the expiration as maximum |  |  |
