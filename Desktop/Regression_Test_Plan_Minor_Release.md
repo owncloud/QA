@@ -77,7 +77,7 @@ but testing should be also done with a 'real' server, for that the BTR team can 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-Test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
 1 | Update Installation | 1. You need to have installed a previous version<br>2. Update to the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
-2 | Install the new version | 1. Delete the previous version<br>2. Install the new version || :construction: Win<br>:construction: macOS<br>:construction: Linux ||
+2 | Install the new version | Delete the previous version<br><br> **Windows:** <br> - Install ownCloud desktop client using .msi installer. <br> - During installation, check the MSI details page for: <br> &nbsp;&nbsp; - Verified publisher <br> &nbsp;&nbsp; - Certificate expiry <br><br> **Mac:** <br> - Install ownCloud desktop client using .pkg installer <br><br> **Ubuntu or Debian with GNOME desktop:** <br> - Install ownCloud client. <br><br> **Fedora with GNOME desktop:** <br> - Install ownCloud client. <br> - Install Nautilus extension: <br> &nbsp;```sudo yum install owncloud-client-nautilus``` <br><br> **Testpilot on Windows:** <br> - Install testpilot client <br><br> **All platforms:** <br> - Check the version from the Settings tab -> About | **Windows:** <br>Verified publisher: ownCloud GmbH <br> Show information about the publisher's certificate: <br> - Issued to: ownCloud GmbH <br> - Issued by: `<Issuer>` Code Signing CA <br> - Valid from `<start-date>` to `<end-date>` <br> [Enterprise Issue #4334](https://github.com/owncloud/enterprise/issues/4334#issuecomment-749115521) <br><br> **All platforms:** <br> ownCloud installed version is correct <br><br> On **Testpilot** verify that it doesn't show ownCloud name and logo but rather shows Testpilotcloud name and logo | :construction: Win<br>:construction: macOS<br>:construction: Linux ||
 3 | Verify that you can enter a server address (self signed cert) | 1. Launch desktop client<br>2. Enter a server address<br>3. Click on Next<br>4. If it is the first time you should accept the certificate || :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS|
 4 | Valid Login | 1. Log in with the correct username and password | Login successful | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
 5 | Invalid Login | 1. Try to log in with wrong username or password | Error message `Login failed: username and/or password incorrect` is shown | :heavy_check_mark: | tst_addAccount | :robot: oC10<br>:robot: oCIS
@@ -324,10 +324,26 @@ ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment
 
 ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
 -- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
-1 | If the system is offline, there are no overlay icons present | 1. Disconnect the Internet<br>2. Launch the Desktop client<br>3. Check the overlay icons in the local sync folder | The overlay icons are not shown| :construction: ||
-2 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop client<br>2. Check the overlay icons<br>3. Pause the sync<br>4. Check the overlay icons | The overlay icons disappear | :construction: ||
-3 | Green check (All files within a folder all the way down the tree are synced with the server) | 1. Open the local sync folder<br>2. Add a folder having multiple nested files and folders<br>3. Check the overlay icons | The green check is shown in all the folders/files | :construction: ||
-4 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively in sync) | 1. Open the local sync folder<br>2. Add some files and folders<br>3. Check the overlay icons | The files/folder that are waiting to sync have the blue icons | :construction: ||
-5 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters, a bad character in a name or a file firewall problem) | 1. Open the local sync folder<br>3. Add a problematic file<br>3. Check the overlay icons | The files that are not synced due to a problem have the yellow warning triangle icons | :construction: ||
-6 | Red error Icon (There is a fatal problem in the sync process that can't be resolved) | 1. Open the local sync folder<br>3. Create a sync error<br>3. Check the overlay icons | The files/folders that are not synced due to a fatal problem have the red error icons | :construction: ||
+1 | Check the overlay icons (VFS enabled) | 1. Launch the Desktop client <br> 2. Check if VFS is already enabled <br> 3. Open the file explorer | Check owncloud overlay icons are present. | :construction: Win ||
+2 | If the system is offline, there are no overlay icons present | 1. Disconnect the Internet<br>2. Launch the Desktop client<br>3. Check the overlay icons in the local sync folder | The overlay icons are not shown| :construction: Win ||
+3 | When you pause the sync, the overlay icons are still shown | 1. Launch the Desktop client<br>2. Check the overlay icons<br>3. Pause the sync<br>4. Check the overlay icons | The overlay icons disappear | :construction: Win ||
+4 | Green check (All files within a folder all the way down the tree are synced with the server) | 1. Open the local sync folder<br>2. Add a folder having multiple nested files and folders<br>3. Check the overlay icons | The green check is shown in all the folders/files | :construction: Win ||
+5 | Blue spinning icon (Some or all files/folders in the directory are waiting to sync or are actively in sync) | 1. Open the local sync folder<br>2. Add some files and folders<br>3. Check the overlay icons | The files/folder that are waiting to sync have the blue icons | :construction: Win ||
+6 | Yellow warning triangle (There is an error in sync somewhere in the directory such as a path longer than 255 characters, a bad character in a name or a file firewall problem) | 1. Open the local sync folder<br>3. Add a problematic file<br>3. Check the overlay icons | The files that are not synced due to a problem have the yellow warning triangle icons | :construction: Win ||
+7 | Red error Icon (There is a fatal problem in the sync process that can't be resolved) | 1. Open the local sync folder<br>3. Create a sync error<br>3. Check the overlay icons | The files/folders that are not synced due to a fatal problem have the red error icons | :construction: Win ||
+8 | Disable VFS | 1. Launch the Desktop client <br> 2. Disable VFS | - VFS has been disabled. <br> - Overlay icon is changed to green check overlay icon <br> - Check that all cloud files are downloaded and NOT deleted (in client and server). <br> Github issue: [#11331](https://github.com/owncloud/client/issues/11331) |:construction: Win ||
 
+### 13. Crash reporter
+
+#### Preconditions:
+
+1. Open desktop client
+2. Go to Settings tab
+3. In the middle there are Advanced settings including 'Show crash reporter' checkbox
+
+ID | Test Case | Steps to reproduce | Expected Result | Result | Related Comment (Squish-test) | Server
+-- | --------- | ------------------ | --------------- | ------ | ----------------------------- | ------
+1 | Check crash report window | Start the client running the below commands (all of them): <br> - macOS: /Applications/owncloud.app/Contents/MacOS/owncloud --debug <br> - Windows: cd "C:\Program files (x86)\owncloud" && owncloud --debug <br> - Ubuntu: owncloud --debug <br><br> Trigger the crash from the tray context menu: <br> - Right click on ownCloud taskbar <br> - Click Debug actions -> Crash now-qFatal| Crash window has been opened |||
+2 | Check button | Click 'Don't send' button to close the window | Window has been closed, no report sent ||||
+3 | Verify crash report has been sent | 1. Trigger the crash again <br> 2. Add a comment (so it is obvious that this is a test crash report) <br> 3. Send the report | - Message has been shown: Sent! Many thanks. Please refer to crash bp-612d8ff3-e41d-4070-9d65-7282e2190619 in bug reports. <br> - Report has been sent to crash report server and it's shown there |
+4 | Verify the report includes correct data | | Comment and version are correct |
