@@ -8,7 +8,6 @@ Admin:
 - [ ] share folder "folder_to_share" to marie with editor role
 
 Marie:
-- [ ] accept "folder_to_share"
 - [ ] upload new file "file.txt" to "folder_to_share" (admin sees file.txt)
 - [ ] open sample.pdf
 - [ ] rename sample.pdf to file.pdf (use right click) (admin now sees file.pdf)
@@ -20,14 +19,11 @@ Admin:
 - [ ] open "file.txt" in markdown-editor. Change and save. (admin sees "file.txt" updated)
 
 Marie:
-- [ ] cannot see version history
+- [ ] can see version history
 
 Admin:
+- [ ] change share "folder_to_share" from role "editor" to "editor without versions" (marie can not see version history)
 - [ ] change share "folder_to_share" from role "editor" to "viewer" (marie cannot rename/move/delete files in folder and cannot create new document in the folder)
-
-Marie:
-- [ ] can decline "folder_to_share" 
-- [ ] can accept again
 
 Admin:
 - [ ] delete folder "folder_to_share" (removed from shared with me, removed from Marie)
@@ -39,7 +35,6 @@ Admin:
 - [ ] share file.jpeg to marie with role viewer (use main menu. find marie by email marie@example.org)
 
 Marie:
-- [ ] accept file
 - [ ] can open/download file
 - [ ] can share/copy quicklink
 - [ ] cannot delete/move/rename file
@@ -95,7 +90,6 @@ Katherine:
 - [ ] add member Moss with manager role
 
 Marie:
-- [ ] can see space without accepting
 - [ ] cannot change image but can change description
 - [ ] can upload file/folder and create file and folder
 - [ ] can create resource but cannot share space or space resource
@@ -103,7 +97,6 @@ Marie:
 - [ ] cannot disable space
 
 Einstein:
-- [ ] can see space without accepting
 - [ ] cannot change image and description
 - [ ] cannot upload file/folder and create file and folder
 - [ ] cannot create resource and share space
@@ -111,7 +104,6 @@ Einstein:
 - [ ] cannot disable space
 
 Moss:
-- [ ] can see space without accepting
 - [ ] can change image and description
 - [ ] can upload file/folder and create file and folder
 - [ ] can create resource and can share space or space resource
