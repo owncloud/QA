@@ -55,3 +55,62 @@ NOTE: Tests on `Auto Uploads` in `Settings` section
 | Lack of permissions | 1. User1 shares a folder with user2, grating any edit permission<br>2. User2 tries to upload a file into the shared folder | Not posible, FAB is hidden | | |
 | Account disabled | 1. In the admin dashboard, go to `Users` and disable current account<br>2. Upload a file to the disabled account | Uploads view error in `FAILED`: `Credentials error`<br>Notification error: `Upload failed, you need to login again`  | |
 | Account deleted | 1. In the admin dashboard, go to `Users` and remove current account<br>2. Upload a file | Uploads view error in `FAILED`: `Unknown error`<br>Notification error: `Malformed server configuration` |  | 
+
+
+## Intermediate stuff (tmp and local source)
+
+**Manual retry**
+
+Server down, credentials revoked
+
+| Scenario   | Outcome                    | Local source | /tmp  | oC10 | oCIS | Comment |
+|:----------:|:---------------------------|:------------:|:-----:|:----:|:----:| :------ |
+| Manual     | 1st att :white_check_mark: | Keep file    | clean |      |     |          |
+| Manual     | 1st att :x:                | Keep file    | file  |      |     |          |
+| Manual     | 2nd att :white_check_mark: | Keep file    | clean |      |     |          |
+| Photo      | 1st att :white_check_mark: | Remove file  | clean |      |     |          |
+| Photo      | 1st att :x:                | Keep file    | file  |      |     | sdcard > Android > data > com.owncloud.android > cache   |
+| Photo      | 2nd att :white_check_mark: | Remove file  | clean |      |     | sdcard > Android > data > com.owncloud.android > cache  |
+| Shortcut   | 1st att :white_check_mark: | Remove file  | clean |      |     |          |
+| Shortcut   | 1st att :x:                | Keep file    | file  |      |     | sdcard > Android > data > com.owncloud.android > cache   |
+| Shortcut   | 2nd att :white_check_mark: | Remove file  | clean |      |     | sdcard > Android > data > com.owncloud.android > cache |
+| Auto Keep  | 1st att :white_check_mark: | Keep file    | clean |      |     |          |
+| Auto Keep  | 1st att :x:                | Keep file    | file  |      |     |          |
+| Auto Keep  | 2nd att :white_check_mark: | Keep file    | clean |      |     |          |
+| Auto Rem.  | 1st att :white_check_mark: | Remove file  | clean |      |     |          |
+| Auto Rem.  | 1st att :x:                | Keep file    | file  |      |     |          |
+| Auto Rem.  | 2nd att :white_check_mark: | Remove file  | clean |      |     |          |
+| External   | 1st att :white_check_mark: | Keep file    | clean |      |     |          |
+| External   | 1st att :x:                | Keep file    | file  |      |     |          |
+| External   | 2nd att :white_check_mark: | Keep file    | clean |      |     |          |
+
+
+___
+
+**Automatic retry**
+
+Connectivity loss
+
+| Scenario   | Outcome                    | Local source | /tmp  | oC10 | oCIS | Comment |
+|:----------:|:---------------------------|:------------:|:-----:|:----:|:----:| :------ |
+| Manual     | 1st att :x:                | Keep file    | file  |      |      | No pic in /tmp because ENQUEUED status      |
+| Manual     | 2nd att :white_check_mark: | Keep file    | clean |      |      |         |
+| Photo      | 1st att :x:                | Keep file    | file  |      |      |  sdcard > Android > data > com.owncloud.android > cache |
+| Photo      | 2nd att :white_check_mark: | Remove file  | clean |      |      |  sdcard > Android > data > com.owncloud.android > cache |
+| Shortcut   | 1st att :x:                | Keep file    | file  |      |      |  sdcard > Android > data > com.owncloud.android > cache |
+| Shortcut   | 2nd att :white_check_mark: | Remove file  | clean |      |      |  sdcard > Android > data > com.owncloud.android > cache |
+| Auto Keep  | 1st att :x:                | Keep file    | file  |      |      |  No pic in /tmp because ENQUEUED status         |
+| Auto Keep  | 2nd att :white_check_mark: | Keep file    | clean |      |      |         |
+| Auto Rem.  | 1st att :x:                | Keep file    | file  |      |      |  No pic in /tmp because ENQUEUED status        |
+| Auto Rem.  | 2nd att :white_check_mark: | Remove file  | clean |      |      |         |
+| External   | 1st att :x:                | Keep file    | file  |      |      |         |
+| External   | 2nd att :white_check_mark: | Keep file    | clean |      |      |         |
+
+Corner cases:
+
+- Manual upload + manual retry + automatic retry + success
+- Manual upload + automatic retry + manual retry + success
+- Auto upload + manual retry + automatic retry + success
+- Auto upload + automatic retry + manual retry + success
+- Photo upload + manual retry + automatic retry + success
+- Photo upload + automatic retry + manual retry + success
