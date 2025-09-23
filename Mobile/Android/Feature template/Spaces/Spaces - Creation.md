@@ -30,3 +30,6 @@
 | Remove permission  | 1. Open `Spaces` of admin user<br>2. In admin account, revoke admin permissions to the<br>3. Reopen the app and Open `Spaces`| 1. FAB displayed <br>3. No FAB displayed | |  |  |
 |**Errors**|  |
 | No connection  | 1. Remove connection from device<br>2. Click on `Spaces` on the bottom bar| FAB hidden, not posible to check whether the user still has permissions  | |  |  |
+|**Accesibility**|  |
+| Talkback | 1. Enable Talkback in device<br>2. Navigate through the `Create Space` dialog | Every field in the dialog is correctly spelt  | |  |  |
+| Keyboard | 1. Attach physical keyboard to device via BT<br>2. Navigate through the `Create Space` dialog | Every field in the dialog is selected and no dead paths in navigation  |  |  |  |
