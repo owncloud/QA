@@ -1,24 +1,24 @@
-# Owncloudcmd
+# owncloudcmd
 
-## Version check - macOS
+## 1. Version check - macOS
 
 | ID | Test Case                       | Steps to reproduce                                                                                                                                                                                                    | Expected Result                                                                                                                                                                                            | Result | Related Comment |
 |----|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
 | 1  | Check versions | Check all the versions of SSL, Qt, OwnCloud <br/> `/Applications/owncloud.app/Contents/MacOS/owncloudcmd --version` | All the versions are correct <br/>Qt 5.15.8 <br/>OpenSSL 1.1.1t <br/>e.g.<br/>`ownCloud version 2.6.0rc1 (build 12411)` <br/>`Git revision 13bf76fc0ab993a5e5668bd864749cb44a4009bc` <br/>`Using **Qt 5.15.8**, built against Qt 5.12.5` <br/>`Using '**OpenSSL 1.1.1t**&nbsp; 28 May 2019'` |
 
-## Version check - Linux
+## 2. Version check - Linux
 
 | ID | Test Case                       | Steps to reproduce                                                                                                                                                                                                    | Expected Result                                                                                                                                                                                            | Result | Related Comment |
 |----|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
 | 1  | Check versions | Check all the versions - SSL, Qt, OwnCloud <br/> `owncloudcmd --version` | All the versions are correct <br/> ownCloud &lt;version&gt;.&lt;build&gt;<br/>Qt 5/6 (depends on the client version) <br/>OpenSSL at least 1.1.1 (depends on the operating system) |
 
-## Version check - Windows
+## 3. Version check - Windows
 
 | ID | Test Case                       | Steps to reproduce                                                                                                                                                                                                    | Expected Result                                                                                                                                                                                            | Result | Related Comment |
 |----|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
 | 1  | Check versions | Check all the versions - SSL, Qt, OwnCloud <br/>`""C:\\Program Files (x86)\ownCloud\owncloudcmd.exe"" --version` |  All the versions are correct <br/>Qt 5.15.8 <br/>OpenSSL 1.1.1t <br/>e.g. <br/>`ownCloud version 2.6.0rc2 (build 12524)` <br/>  `Git revision aeaf6de3b148a58efce564946a36f6f6d9eff350` <br/>`Using Qt 5.12.5, built against Qt 5.12.5 <br/>Using 'OpenSSL 1.1.1d &nbsp;10 Sep 2019'` |
 
-## Crash reporter
+## 4. Crash reporter
 
 | ID | Test Case                       | Steps to reproduce                                                                                                                                                                                                    | Expected Result                                                                                                                                                                                            | Result | Related Comment |
 |----|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
