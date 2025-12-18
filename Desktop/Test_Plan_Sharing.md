@@ -1,0 +1,18 @@
+# Sharing
+
+## 1. Reshare
+
+| ID | Test Case                                   | Steps to reproduce                                                                                                                                                                                                              | Expected Result                                                                                                                                | Result | Related Comment |
+|----|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
+| 1  | Verify permissions cannot be increased when resharing subfolders | 1. user1 creates /testfolder/subfolder <br/> 2. user1 shares **testfolder** with user2 with read only and can share permissions(17) <br/> 3. user2 reshares the **subfolder** with user3. This will create the share with read and share permission (17) <br/> 4.  user2 increases permissions of user3 | Not possible to increase the permissions by resharing <br/>GitHub issue: [#3364](https://github.com/owncloud/enterprise/issues/3364) | | |
+| 2  | Verify reshare cannot increase granted permissions | 1.  user1 shares a folder with user2 with permissions 23 (no deletion granted) <br/> 2.  user2 reshares with user3, granting deletion | Not possible to increase permissions <br/> GitHub issue: [#35528](https://github.com/owncloud/core/issues/35528) | | | 
+| 3  | Verify actions restricted for public link shares | 1. Share with a public link <br/> 2. Add to your owncloud <br/> 3. Reshare | Not possible | | |
+| 4  | Verify visibility of reshare chain permissions | 1.  Admin creates TMP folder <br/> 2.  Admin shares to User1 <br/> 3.  User1 has shared it to User2 <br/> 4.  User2 to User3 | Admin sees every single user in the chain <br/> User1 can see only User2 | | |
+| 5 | Verify collaborators are isolated for independent shares | 1.  Admin creates TMP folder <br/> 2. Admin shares to User1 <br/> 3.  Admin shares the TMP folder with User4 | User4 and User1 don't see each other in the list of colaborators | | |
+| 6 | Verify folder deletion removes access for all users | 1. Admin deletes the folder | Folder has been removed from all accounts | | |
+
+## 2. Sharing a resource which name already exists
+
+| ID | Test Case                                   | Steps to reproduce                                                                                                                                                                                                              | Expected Result                                                                                                                                | Result | Related Comment |
+|----|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
+| 1  | Verify duplicate folder is created when sharing with a user who already has it | Share Documents folder to the User that already has Documents folder | Documents (2) or Documents copy folder has been created | | | 
