@@ -27,6 +27,7 @@ Context: <br>
 | Mixed match  | 1. Click on `+`<br>2. Type at least 3 characters that match an existing group name, username or display name | Every match listed as result with username, displayname and mark of user, or group name and mark of group. Check both orientations |  |  |
 | Match existing users  | 1. Click on `+`<br>2. Type characters in search field that match at least a user that is already a member of the space | User not listed as result. Check both orientations |  |  |
 | Match existing groups  | 1. Click on `+`<br>2. Type characters in search field that match at least a group that is already a member of the space | Group not listed as result. Check both orientations |  |  |
+| Special chars | 1. Click on `+`<br>2. Type special characters in search field like `?` or `$`| No results. Check both orientations |  |  |
 | No results  | 1. Click on `+`<br>2. Type characters that don't match with any existing group or user | `No results` displayed. Check both orientations  |  |  |
 | Long result  | 1. Click on `+`<br>2. Type characters that match with a existing group or user whose name is very long (more that 50 chars) | Name ellipsized. Check both orientations  |  |  |
 | Long list | 1. Click on `+`<br>2. Type characters that match a long list of results (at least 30) | Long list displayed and scrolled smoothly. Check both orientations  |  |  |
@@ -41,10 +42,12 @@ Context: <br>
 | Can Manage  | 1. Select `Can Manage`<br>2. Click on `Add` | Member added and listed with `Can manage`. Check in web |  |
 | Add expiration date  | 1. Select any permission level<br>2. Open expiration date picker and choose a valid date<br>3.  Click on `Add` | Member added and listed with the chosen permission and the correct expiration date. Check in web |  |
 |**Errors**|  |
-| No permissions | 1. Space manager opens `Members`<br>2. Click on `+` and search for members<br>3. Select a member and give new permission<br>4. Before submitting, manager is downgraded to editor/viewer<br>5. Click on `Invite` | Permissions error|
+| No permissions | 1. Space manager opens `Members`<br>2. Click on `+` and search for members<br>3. Select a member and give new permission<br>4. Before submitting, manager is downgraded to editor/viewer<br>5. Click on `Invite` | Permissions error| | |
 | No connection - Members search | 1. Open `Members`<br>2. Click on `+`<br>3. Remove connection from device<br>4. Type 3 chars in the search field | Error `connecting to the server`<br>No results |
-| No connection - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Search and choose a member<br>4. In invite view, remove connection from device<br>4. Select a permission and click on `Invite` | Error `connecting to the server` |
-| Existing member | 1. In app, search for a new member and select a permission without submitting<br>2. In web, add the same user as a member <br>3. Submit invitation in app | Error `add grant: error: already exists` (by server)|
+| No connection - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Search and choose a member<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` | | |
+| Server down - Members search | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. Type 3 chars in the search field | Error `connecting to the server`<br>No results | | |
+| Server down - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` | | |
+| Existing member | 1. In app, search for a new member and select a permission without submitting<br>2. In web, add the same user as a member <br>3. Submit invitation in app | Error `add grant: error: already exists` (by server)| | |
 |**Accessibility**| One device |
 | Talkback | 1. Enable Talkback in device<br>2. Navigate through the `Members` and `Add Member` views | Every field in the dialog is correctly spelt  |  |  |  |
 | Keyboard | 1. Attach physical keyboard to device via BT<br>2. Navigate through the `Members` and `Add Member` views | Every field in the view is selected and no dead paths in navigation  |  |  |  |
