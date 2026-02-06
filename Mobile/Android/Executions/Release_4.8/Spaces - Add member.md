@@ -2,7 +2,7 @@
 
 **Server(s):** oCIS 7.3.0 <br>
 **Device(s):** Xiaomi Redmi Note 13 Android 15, Samsung Galaxy A8 Android 15 <br>
-**Execution date:** 21/01/2026<br>
+**Execution date:** 21/01/2026 (1st it), 06/02/2026 (2nd it)<br>
 **Tester:** jrecio <br>
 **Context:** <br>
 
@@ -33,21 +33,21 @@
 | Long list | 1. Click on `+`<br>2. Type characters that match a long list of results (at least 30) | Long list displayed and scrolled smoothly. Check both orientations  | P m15 t15|  |
 | Typing | 1. Click on `+`<br>2. Type and remove characters quickly | Result list updates after every character with the matches in a smooth way with correct transitions | P m15 t15 | FIXED: [IMPVMT](https://github.com/owncloud/android/pull/4754#issuecomment-3783157085) FIXED: [[BUG]](https://github.com/owncloud/android/pull/4754#issuecomment-3789875850)
 |**Select member**| Space manager |||
-| Member selection | Click over user or group in results view | Member setup view displayed | | |
+| Member selection | Click over user or group in results view | Member setup view displayed | P m15 t15| |
 |**Set up member**| Member already selected |||
-| Header  | | View with header: member, item name and space quota . Check both orientations |  |  |
-| No permission  | Try to submit the member with no permission selected | Not posible, button disabled |  |
-| Can View  | 1. Select `Can View`<br>2. Click on `Add` | Member added and listed with `Can View`. Check in web |  |
-| Can Edit  | 1. Select `Can Edit`<br>2. Click on `Add` | Member added and listed with `Can Edit`. Check in web |  |
-| Can Manage  | 1. Select `Can Manage`<br>2. Click on `Add` | Member added and listed with `Can manage`. Check in web |  |
-| Add expiration date  | 1. Select any permission level<br>2. Open expiration date picker and choose a valid date<br>3.  Click on `Add` | Member added and listed with the chosen permission and the correct expiration date. Check in web |  |
+| Header  | | View with header: member, item name and space quota . Check both orientations | P m15 t15 |  |
+| No permission  | Try to submit the member with no permission selected | Not posible, button disabled | P m15 t15  |
+| Can View  | 1. Select `Can View`<br>2. Click on `Invite` | Member added and listed with `Can View`. Check in web | P m15 t15 |
+| Can Edit  | 1. Select `Can Edit`<br>2. Click on `Invite ` | Member added and listed with `Can Edit`. Check in web | P m15 t15 |
+| Can Manage  | 1. Select `Can Manage`<br>2. Click on `Invite ` | Member added and listed with `Can manage`. Check in web |  P m15 t15|
+| Add expiration date  | 1. Select any permission level<br>2. Open expiration date picker and choose a valid date<br>3.  Click on `Add` | Member added and listed with the chosen permission and the correct expiration date. Check in web | P m15 t15 |
 |**Errors**|  |
-| No permissions | 1. Space manager opens `Members`<br>2. Click on `+` and search for members<br>3. Select a member and give new permission<br>4. Before submitting, manager is downgraded to editor/viewer<br>5. Click on `Invite` | Permissions error|
+| No permissions | 1. Space manager opens `Members`<br>2. Click on `+` and search for members<br>3. Select a member and give new permission<br>4. Before submitting, manager is downgraded to editor/viewer<br>5. Click on `Invite` | Error `Member could not be invited`<br>` because permission error`| P m15 t15 | FIXED: [BUG](https://github.com/owncloud/android/pull/4764#issuecomment-3858933888) |
 | No connection - Members search | 1. Open `Members`<br>2. Click on `+`<br>3. Remove connection from device<br>4. Type 3 chars in the search field | Error `connecting to the server`<br>No results | P m15 t15
-| No connection - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Search and choose a member<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` |
+| No connection - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Search and choose a member<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error`device is not connected to a network` | P m15 t15
 | Server down - Members search | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. Type 3 chars in the search field | Error `connecting to the server`<br>No results | P m15 t15
-| Server down - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` |
-| Existing member | 1. In app, search for a new member and select a permission without submitting<br>2. In web, add the same user as a member <br>3. Submit invitation in app | Error `add grant: error: already exists` (by server)|
-|**Accessibility**| One device |
-| Talkback | 1. Enable Talkback in device<br>2. Navigate through the `Members` and `Add Member` views | Every field in the dialog is correctly spelt  |  |  |  |
-| Keyboard | 1. Attach physical keyboard to device via BT<br>2. Navigate through the `Members` and `Add Member` views | Every field in the view is selected and no dead paths in navigation  | F m15  | NOT FIXED: [BUG](https://github.com/owncloud/android/pull/4754#issuecomment-3783304368). Dependency from customization layer |  |
+| Server down - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` | P m15 t15
+| Existing member | 1. In app, search for a new member and select a permission without submitting<br>2. In web, add the same user as a member <br>3. Submit invitation in app | Error `is already a space member` | P m15 t15
+|**Accessibility**|  |
+| Talkback | 1. Enable Talkback in device<br>2. Navigate through the `Members` and `Add Member` views | Every field in the dialog is correctly spelt  | P m15 t15 | [IMP](https://github.com/owncloud/android/pull/4764#issuecomment-3859461941): native, wont fix|  |
+| Keyboard | 1. Attach physical keyboard to device via BT<br>2. Navigate through the `Members` and `Add Member` views | Every field in the view is selected and no dead paths in navigation  | P m15 t15 | NOT FIXED: [BUG](https://github.com/owncloud/android/pull/4754#issuecomment-3783304368). Dependency from customization layer |  |

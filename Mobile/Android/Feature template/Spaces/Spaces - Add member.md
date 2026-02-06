@@ -37,17 +37,17 @@ Context: <br>
 |**Set up member**| Member already selected |||
 | Header  | | View with header: member, item name and space quota . Check both orientations |  |  |
 | No permission  | Try to submit the member with no permission selected | Not posible, button disabled |  |
-| Can View  | 1. Select `Can View`<br>2. Click on `Add` | Member added and listed with `Can View`. Check in web |  |
-| Can Edit  | 1. Select `Can Edit`<br>2. Click on `Add` | Member added and listed with `Can Edit`. Check in web |  |
-| Can Manage  | 1. Select `Can Manage`<br>2. Click on `Add` | Member added and listed with `Can manage`. Check in web |  |
+| Can View  | 1. Select `Can View`<br>2. Click on `Invite ` | Member added and listed with `Can View`. Check in web |  |
+| Can Edit  | 1. Select `Can Edit`<br>2. Click on `Invite ` | Member added and listed with `Can Edit`. Check in web |  |
+| Can Manage  | 1. Select `Can Manage`<br>2. Click on `Invite ` | Member added and listed with `Can manage`. Check in web |  |
 | Add expiration date  | 1. Select any permission level<br>2. Open expiration date picker and choose a valid date<br>3.  Click on `Add` | Member added and listed with the chosen permission and the correct expiration date. Check in web |  |
 |**Errors**|  |
-| No permissions | 1. Space manager opens `Members`<br>2. Click on `+` and search for members<br>3. Select a member and give new permission<br>4. Before submitting, manager is downgraded to editor/viewer<br>5. Click on `Invite` | Permissions error| | |
+| No permissions | 1. Space manager opens `Members`<br>2. Click on `+` and search for members<br>3. Select a member and give new permission<br>4. Before submitting, manager is downgraded to editor/viewer<br>5. Click on `Invite` | Error `Member could not be invited`<br>` because permission error`| | |
 | No connection - Members search | 1. Open `Members`<br>2. Click on `+`<br>3. Remove connection from device<br>4. Type 3 chars in the search field | Error `connecting to the server`<br>No results |
-| No connection - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Search and choose a member<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` | | |
+| No connection - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Search and choose a member<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `device is not connected to a network`  | | |
 | Server down - Members search | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. Type 3 chars in the search field | Error `connecting to the server`<br>No results | | |
 | Server down - Members invitation | 1. Open `Members`<br>2. Click on `+`<br>3. Switch server off<br>4. In invite view, remove connection from device<br>5. Select a permission and click on `Invite` | Error `connecting to the server` | | |
-| Existing member | 1. In app, search for a new member and select a permission without submitting<br>2. In web, add the same user as a member <br>3. Submit invitation in app | Error `add grant: error: already exists` (by server)| | |
+| Existing member | 1. In app, search for a new member and select a permission without submitting<br>2. In web, add the same user as a member <br>3. Submit invitation in app | Error `is already a space member` | | |
 |**Accessibility**| One device |
 | Talkback | 1. Enable Talkback in device<br>2. Navigate through the `Members` and `Add Member` views | Every field in the dialog is correctly spelt  |  |  |  |
 | Keyboard | 1. Attach physical keyboard to device via BT<br>2. Navigate through the `Members` and `Add Member` views | Every field in the view is selected and no dead paths in navigation  |  |  |  |
