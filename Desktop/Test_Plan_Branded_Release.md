@@ -6,18 +6,18 @@
 
 Build three clients:
 * **Cactus** theme: cactus_test
-** VFS is unchecked
-** Fixed server url
-** Don't use your own icons (tray icons/mac menu icons)
-** Optional: Sidebar icon for macOS (in Finder links)
+    - VFS is unchecked
+    - Fixed server url
+    - Don't use your own icons (tray icons/mac menu icons)
+    - Optional: Sidebar icon for macOS (in Finder links)
 * **btr-testing** theme: btrtesting
-** VFS checked, enforced unchecked
-** Use your own icons
-** No optional: Sidebar icon for macOS
+    - VFS checked, enforced unchecked
+    - Use your own icons
+    - No optional: Sidebar icon for macOS
 * **QA Testing Client** theme: hg
-** VFS checked, enforced checked
-** Don't Use your own icons
-** No optional: Sidebar icon for macOS
+    - VFS checked, enforced checked
+    - Don't Use your own icons
+    - No optional: Sidebar icon for macOS
 
 Install Linux packages and appimages according to our owncloud documentation: 
 https://doc.owncloud.com/desktop/next/installing.html#installation-on-linux
