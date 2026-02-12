@@ -21,8 +21,8 @@ Context: <br>
 | Space editor |  As a editor, open `Members` of a space with several members | No trashbin icon. Check both orientations | | |
 | Space viewer |  As a viewer, open `Members` of a space with several members | No trashbin icon. Check both orientations| | |
 |**Delete member**| Space manager|||
-| Delete user | 1. As a space manager, open `Members` on a space with at least, one user as a member<br>2. Click on the trashbin icon of any user<br>3.  Confirm the deletion | 2. Dialog to confirm the deletion is displayed<br>3. List of members updated without the removed user. Check in web. | | |
-| Delete group | 1. As a space manager, open `Members` on a space with at least, one group as a member<br>2. Click on the trashbin icon of the group<br>3. Confirm the deletion | 2. Dialog to confirm the deletion is displayed<br>3. List of members updated without the removed group. Check in web. | | |
+| Delete user | 1. As a space manager, open `Members` on a space with at least, one user as a member<br>2. Click on the trashbin icon of any user<br>3. Confirm the deletion | 2. Dialog to confirm the deletion is displayed<br>3. List of members updated without the removed user. Snackbar to notify success.  Check in web. | | |
+| Delete group | 1. As a space manager, open `Members` on a space with at least, one group as a member<br>2. Click on the trashbin icon of the group<br>3. Confirm the deletion | 2. Dialog to confirm the deletion is displayed<br>3. List of members updated without the removed group. Snackbar to notify success. Check in web. | | |
 | Delete yourself | 1. As a space manager, open `Members` on a space with at least, two managers<br>2. Click on the trashbin icon of yourself<br>3. Confirm the deletion | 2. Dialog to confirm the deletion is displayed<br>3. Moved to the space list, since user is not member of the space anymore | | |
 | Cancelled deletion | 1. As a space manager, open `Members`<br>2. Click on the trashbin icon of any member<br>3. Cancel the deletion | 2. Dialog to confirm the deletion is displayed<br>3. List of members with same members as before 2. Check in web. | | |
 |**Errors**|  |
