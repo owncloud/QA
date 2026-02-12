@@ -1,4 +1,4 @@
-# File/Folder operations
+# File/Folder Operations
 
 ## 1. Rename
 

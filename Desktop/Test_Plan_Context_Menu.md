@@ -1,4 +1,4 @@
-# Context menu
+# Context Menu
 
 ## 1. Open in browser
 

@@ -1,7 +1,5 @@
 # Notifications
 
-## 1. Notifications
-
 | ID | Test Case                                   | Steps to reproduce                                                                                                                                                                                                              | Expected Result                                                                                                                                | Result | Related Comment |
 |----|---------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
 | 1  | Verify macOS desktop notification appears for a synced file | Upload a new file to the server | Dektop client (macOS) shows the notification: Sync Activity - $file_name has been added | | | 
