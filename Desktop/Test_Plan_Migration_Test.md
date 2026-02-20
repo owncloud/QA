@@ -1,0 +1,8 @@
+# Migration Test
+
+| ID | Test Case                        | Steps to reproduce                                                                                                                                            | Expected Result                                                                                                                                                                                    | Result | Related Comment |
+|----|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------|
+| 1  | Verify migration on Windows | Install previous version and update manually to the new version on **windows** | Accounts configured, VFS On/Off state preserved, client syncs. | | |
+| 2  | Verify migration on macOS | Install previous version and update manually to the new version on **mac** | Accounts configured, VFS On/Off state preserved, client syncs. | | |
+| 3  | Verify migration on Linux package | Install previous version and update manually to the new version on **linux package** | Accounts configured, VFS On/Off state preserved, client syncs. | | |
+| 4  | Verify migration on Linux appimage | Install previous version and update manually to the new version on **linux appimage** | Accounts configured, VFS On/Off state preserved, client syncs. | | |
