@@ -11,7 +11,7 @@
 | Test Case | Description | Expected | Result | Comments |
 | :-------- | :---------- | :------- | :----: | :------- |
 |**Link list**| **No role dependency** |
-| Links option |  1. Click on `Spaces` on the bottom bar<br>2. Click on the 3-dot-button on the space | `Links` option is listed |  |  |  |
+| Links option |  1. Click on `Spaces` on the bottom bar<br>2. Click on the 3-dot-button on the space | `Members` option is listed |  |  |  |
 | No links | 1. Use a space with no links<br> 2. Click on `Spaces` on the bottom bar<br>3. Click on the 3-dot-button on the space and select `Members` | Link section empty with the warning `Anyone with the link has access` and the message `No public links created`. Check in both orientations |  |  |  |
 | Space with members and links | 1. Use a space with both members and links created in the web<br> 2. Click on `Spaces` on the bottom bar<br>3. Click on the 3-dot-button on the space and select `Members` | Lists of members and links are correct with proper roles and expiration dates (check in web and both orientations)  |  |  |  |
 | Long link name | 1. Use a space with one link which name is very long<br> 2. Click on `Spaces` on the bottom bar<br>3. Click on the 3-dot-button on the space and select `Members` | Long link name is displayed and ellipsized (check in web and both orientations) |  |  |  |
