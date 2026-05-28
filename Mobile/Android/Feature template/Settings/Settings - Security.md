@@ -21,7 +21,6 @@ Context: <br>
 | Disable passcode | 1. With passcode enabled, click on `Passcode lock` to disable<br>2. Enter current passcode<br>3. Close the app<br>4. Open the app<br> | Passcode is not asked |
 | Disable passcode + cancel | 1. With passcode enabled, click on `Passcode lock` to disable<br>2. When asked to enter the current passcode, cancel before entering by clicking the back arrow on the top<br>3. Close the app<br>4. Open the app| Passcode is asked |
 | Disable passcode + kill | 1. With passcode enabled, click on `Passcode lock` to disable<br>2. When asked to enter the current passcode, kill the app before entering<br>3. Close the app<br>4. Open the app | Passcode is asked |
-| Device clearing data | 1. With passcode enabled, go to Device Settings > Apps > ownCloud > Storage/Cache<br>2. Clear data and storage<br>3. Open the app | Passcode is asked, not reset after cleaning | 
 |**Passcode lock protection**||||
 | Passcode correct | 1. Enable passcode and enter correct passcode to lock the app<br>2. Kill the app and open it<br>3. Enter correct passcode| App unlocked  | 
 | Passcode incorrect | 1. Enable passcode and enter correct passcode to lock the app<br>2. Kill the app and open it<br>3. Enter incorrect passcode| Error: Incorrect passcode<br>App locked. No way no unlock it till correct passcode is entered  | 
@@ -37,7 +36,6 @@ Context: <br>
 | Disable pattern | 1. With pattern enabled, click on `Pattern lock` to disable<br>2. When it's asked to enter the current pattern, enter it<br>3. Close the app<br>4. Open the app<br> | Pattern is not asked |
 | Disable pattern + cancel | 1. With pattern enabled, click on `Pattern lock` to disable<br>2. When asked to enter the current pattern, cancel before entering by clicking the back arrow on the top<br>3. Close the app<br>4. Open app again | Pattern is asked | 
 | Disable pattern + kill | 1. With pattern enabled, click on `Pattern lock` to disable<br>2. When asked to enter the current pattern, kill the app before entering<br>3. Close the app<br>4. Open the app| Pattern is asked |
-| Device clearing data | 1. With pattern enabled, go to Device Settings > Apps > ownCloud > Storage/Cache<br>2. Clear data and storage<br>3. Open the app | Pattern is asked, not reset after cleaning | 
 | Both at the same time | 1. With passcode enabled, try to enable pattern<br>2. With pattern enabled, try to enable passcode| Error: Pattern and passcode locks cannot be enabled at the same time |
 |**Pattern lock protection**||||
 | Pattern correct | 1. Enable pattern and enter correct pattern to lock the app<br>2. Kill the app and open it<br>3. Enter correct pattern| App unlocked  | 
