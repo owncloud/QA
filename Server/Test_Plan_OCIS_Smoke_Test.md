@@ -5,7 +5,7 @@ Admin:
 - [ ] upload folder with 803 small images.
 - [ ] Check pagination, count items per page.
 - [ ] upload folder(drag folder) "folder_to_share" with sample.pdf
-- [ ] share folder "folder_to_share" to marie with editor role
+- [ ] share folder "folder_to_share" to marie with "Can edit with trashbin, versions and show invitees" role
 
 Marie:
 - [ ] upload new file "file.txt" to "folder_to_share" (admin sees file.txt)
@@ -22,8 +22,8 @@ Marie:
 - [ ] can see version history
 
 Admin:
-- [ ] change share "folder_to_share" from role "editor" to "editor without versions" (marie can not see version history)
-- [ ] change share "folder_to_share" from role "editor" to "viewer" (marie cannot rename/move/delete files in folder and cannot create new document in the folder)
+- [ ] change share "folder_to_share" from role "Can edit with trashbin, versions and show invitees" to "Can edit" (marie can not see version history)
+- [ ] change share "folder_to_share" from role "Can edit" to "Can view" (marie cannot rename/move/delete files in folder and cannot create new document in the folder)
 
 Admin:
 - [ ] delete folder "folder_to_share" (removed from shared with me, removed from Marie)
@@ -52,10 +52,10 @@ Admin:
 
 Admin:
 - [ ] create folder "for upload"
-- [ ] add link with name "to_upload" with role "Uploader" with password and expiration date
+- [ ] add link with name "to_upload" with role "Secret File Drop" with password and expiration date
 - [ ] open link and enter password (can only upload)
 - [ ] upload file (admin can see new file)
-- [ ] change share "for upload" from "Uploader" to "editor"
+- [ ] change share "for upload" from "Secret File Drop" to "Can edit"
 - [ ] admin add new file to folder "for upload"
 - [ ] refresh link (file exist)
 - [ ] admin changes password (refresh link has to type new password)
@@ -85,9 +85,9 @@ Katherine:
 - [ ] try to upload file (more 1 Gb)
 - [ ] increase quota to 5Gb and try again
 - [ ] delete file
-- [ ] add member Marie with editor role
-- [ ] add member Einstein with viewer role
-- [ ] add member Moss with manager role
+- [ ] add member Marie with "Can edit with versions and trashbin" role
+- [ ] add member Einstein with "Can view" role
+- [ ] add member Moss with "Can manage" role
 
 Marie:
 - [ ] cannot change image but can change description
