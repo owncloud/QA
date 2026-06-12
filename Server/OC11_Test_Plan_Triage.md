@@ -471,24 +471,42 @@
 
 
 ## Cross-cutting findings
-<!-- TASK 5 fills this section -->
 
-<!-- KEYWORD MATRIX (working notes, remove or summarize in Task 5)
-IE11 (explicit): Files_Mediaviewer, market, External, Simplified_Smoke_Test, Firstrunwizard, Guest, Impersonate, Settings, Diagnostics, Activity, customgroups, Templateeditor
-internet explorer (generic): Filtering_System_Tags, files_pdfviewer, Files_Mediaviewer, twofactor_totp, web, Smoke_Test
-Edge (legacy, ~23 plans): nearly all browser-matrix plans
-Safari (version-brittle, ~20 plans): nearly all browser-matrix plans
-Travis: Simplified_Smoke_Test, Smoke_Test
-Smashbox: Smoke_Test
-pyocclient: Smoke_Test
-ci.owncloud.org / drone.owncloud: Smoke_Test
-hetzner_deploy: Files_Mediaviewer, Smoke_Test, user_ldap, search_elastic
-oc10.sh: files_antivirus, msteamsbridge, configreport, Smoke_Test, notes, search_elastic
-.jw-qa.owncloud.works (dead hosts): market, files_antivirus, msteamsbridge, richdocuments, configreport, Smoke_Test
-download.owncloud.org + tar.bz2 (tarball install): Smoke_Test
-version pins: Smoke_Test (openidconnect 2.1.0, windows_network_drive 2.1.0, ldap 0.16.0, web 4.9.0)
-suspect apps: drawio (drawio), msteamsbridge (msteams), market (marketplace), Firstrunwizard, windows_network_drive
-owncloud/enterprise links (private/archived): search_elastic, calendar, web, Smoke_Test, encryption
-one-line stubs: calendar (1 line), windows_network_drive (2 lines)
--->
+These patterns span many plans and are best fixed in a single batch pass rather than plan-by-plan.
+
+### Legacy browsers (IE11 / EdgeHTML)
+Internet Explorer 11 appears as an explicit test target in **18 plans**: Activity, customgroups, Smoke_Test_Plan_customgroups, Diagnostics, External, Files_Mediaviewer, files_pdfviewer, Filtering_System_Tags, Firstrunwizard, Guest, Impersonate, market, Settings, Simplified_Smoke_Test, Smoke_Test, Templateeditor, twofactor_totp, web. **Recommendation:** drop IE11 entirely for OC11 (it has been unsupported across the ownCloud stack for years). Likewise, every "Edge" row predates Chromium Edge — either delete the dedicated Edge row or treat Edge as "a Chromium browser". Several plans also assume specific Safari versions; keep Safari but stop pinning versions.
+
+### Dead deployment scripts and hosts (the docker-only conflict)
+The bulk of staleness is host-based deployment that directly contradicts docker-only OC11:
+- **`oc10.sh` / `make_oc10_apps.sh` / `deploy_oc10_apps.sh` / `oc_app.sh` / `oc_release.sh`** — host provisioning scripts referenced by: Smoke_Test, files_antivirus, configreport, msteamsbridge, notes, search_elastic, user_ldap, encryption, Files_Mediaviewer, files_pdfviewer, files_primary_s3, richdocuments, twofactor_totp, web, admin_audit.
+- **`*.jw-qa.owncloud.works` ephemeral hosts** — dead URLs in: market, files_antivirus, msteamsbridge, richdocuments, configreport, Smoke_Test.
+- **Tarball install** (`download.owncloud.org`, `owncloud-complete-*.tar.bz2`, `OC10_TAR_URL`) — Smoke_Test.
+- **Obsolete host OSes** ("Ubuntu 16.04", "CentOS 6.6") — Pluggable_Auth, Sharees, WebDav_Interface_WebUI.
+**Recommendation:** replace all of the above with a single canonical docker setup snippet (`docker run` / compose with the OC11 image and `occ` via `docker exec`), referenced by the plans instead of per-plan deploy lines.
+
+### Dead CI / tooling references
+**Travis** (Smoke_Test, Simplified_Smoke_Test), **Smashbox**, **pyocclient**, **ci.owncloud.org**, **drone.owncloud.com** (all in Smoke_Test) are dead or frozen. Numerous plans link to **`github.com/owncloud/enterprise/issues/*`**, which is a private/archived repo (calendar, encryption, search_elastic, web, Smoke_Test). **Recommendation:** strip dead CI badges/links and re-point or remove enterprise-issue references.
+
+### Host-level DB and file manipulation
+Several plans drive tests via bare `mysql owncloud -e '...'` or by editing app source files on disk (Activity, files_antivirus, notes, System_Tagging, Filtering_System_Tags curl examples, Updater `delete from oc_appconfig`). These assume shell access to the host filesystem/DB and won't work cleanly against a container. **Recommendation:** convert to `occ` commands where possible and document the `docker exec` form for the rest.
+
+### Smoke-plan consolidation
+Three overlapping smoke plans exist: **Test_Plan_Smoke_Test.md**, **Test_Plan_Simplified_Smoke_Test.md**, and **Smoke_Test_Plan_customgroups.md**. **Recommendation:** keep `Test_Plan_Smoke_Test.md` as the canonical smoke plan (with a "simplified" section), fold the other two in, and delete the duplicates.
+
+### Apps whose OC11 availability must be confirmed (best-effort — not verified)
+Because this triage made no live lookups, the following app-existence calls need product confirmation before acting:
+- **Likely removed (Delete candidates):** `market` (marketplace; conflicts with bundled docker apps), `drawio`, `msteamsbridge`, `notes`, `gallery` (referenced by Files_Mediaviewer, market, web — deprecated), the in-place **updater** mechanism (Updater, Settings channel UI).
+- **Uncertain, used across multiple plans:** `windows_network_drive` (Smoke_Test, External, External_Auth, admin_audit, configreport, user_ldap, files_pdfviewer), **Shibboleth** auth (Activity, Addressbook, Files_Transfer_Ownership, Pluggable_Auth, Sharees), and the **Dropbox / Google Drive / OpenStack** external-storage backends (Files_External, Files_external_CLI).
+- **Enterprise apps to confirm are in the OC11 set:** customgroups, configreport, diagnostics, guests, impersonate, admin_audit, search_elastic, richdocuments, templateeditor, files_primary_s3.
+
+### Stub plans with no recoverable content
+`Test_Plan_calendar.md` (1 line) and `Test_Plan_windows_network_drive.md` (2 lines) contain only pointers to external/private sources — Delete.
+
+## Action summary
+
+- **47 plans triaged** (OCIS excluded): **6 Delete, 2 Merge, 39 Update, 0 Keep.**
+- **Confidence:** 29 High, 15 Medium, 3 Low.
+- **18 verdicts are Medium/Low confidence and need human confirmation before acting** — driven almost entirely by app-availability questions (the Delete candidates and the WND/Shibboleth/external-backend clusters above), since this triage made no live repo/marketplace lookups.
+- **No plan was rated Keep:** every in-scope plan needs at least a deploy/browser refresh for OC11, even where the test logic is sound. The highest-value, lowest-risk batch fix is removing IE11 and replacing the host-deploy snippets with a docker setup.
 
