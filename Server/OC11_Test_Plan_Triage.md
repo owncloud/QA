@@ -20,3 +20,23 @@
 
 ## Cross-cutting findings
 <!-- TASK 5 fills this section -->
+
+<!-- KEYWORD MATRIX (working notes, remove or summarize in Task 5)
+IE11 (explicit): Files_Mediaviewer, market, External, Simplified_Smoke_Test, Firstrunwizard, Guest, Impersonate, Settings, Diagnostics, Activity, customgroups, Templateeditor
+internet explorer (generic): Filtering_System_Tags, files_pdfviewer, Files_Mediaviewer, twofactor_totp, web, Smoke_Test
+Edge (legacy, ~23 plans): nearly all browser-matrix plans
+Safari (version-brittle, ~20 plans): nearly all browser-matrix plans
+Travis: Simplified_Smoke_Test, Smoke_Test
+Smashbox: Smoke_Test
+pyocclient: Smoke_Test
+ci.owncloud.org / drone.owncloud: Smoke_Test
+hetzner_deploy: Files_Mediaviewer, Smoke_Test, user_ldap, search_elastic
+oc10.sh: files_antivirus, msteamsbridge, configreport, Smoke_Test, notes, search_elastic
+.jw-qa.owncloud.works (dead hosts): market, files_antivirus, msteamsbridge, richdocuments, configreport, Smoke_Test
+download.owncloud.org + tar.bz2 (tarball install): Smoke_Test
+version pins: Smoke_Test (openidconnect 2.1.0, windows_network_drive 2.1.0, ldap 0.16.0, web 4.9.0)
+suspect apps: drawio (drawio), msteamsbridge (msteams), market (marketplace), Firstrunwizard, windows_network_drive
+owncloud/enterprise links (private/archived): search_elastic, calendar, web, Smoke_Test, encryption
+one-line stubs: calendar (1 line), windows_network_drive (2 lines)
+-->
+
