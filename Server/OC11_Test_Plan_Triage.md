@@ -13,7 +13,56 @@
 - **Confidence** — High / Medium / Low.
 
 ## Summary
-<!-- TASK 4 fills this table -->
+
+| Plan | Verdict | Confidence | Reason |
+| ---- | ------- | ---------- | ------ |
+| Test_Plan_calendar.md | Delete | Medium | One-line stub to a private enterprise issue; calendar is not an OC11 server app |
+| Test_Plan_drawio.md | Delete | Low | drawio integration app; confirm it is dropped from OC11 |
+| Test_Plan_market.md | Delete | Medium | Marketplace app conflicts with docker-only bundled-app delivery |
+| Test_Plan_msteamsbridge.md | Delete | Low | Niche MS Teams bridge app; confirm it is dropped from OC11 |
+| Test_Plan_notes.md | Delete | Low | Community notes app + migration scratchpad; confirm availability |
+| Test_Plan_windows_network_drive.md | Delete | Medium | Two-line "See qa-enterprise" stub, no recoverable content |
+| Smoke_Test_Plan_customgroups.md | Merge | Medium | Smoke subset of Test_Plan_customgroups.md; fold in |
+| Test_Plan_Simplified_Smoke_Test.md | Merge | High | Overlaps Test_Plan_Smoke_Test.md; consolidate |
+| Test_Plan_Activity.md | Update | High | IE11/Edge matrix + bare `mysql` triggers; Shibboleth unconfirmed |
+| Test_Plan_Addressbook.md | Update | Medium | DAV addressbook valid; contacts-app migration step obsolete |
+| Test_Plan_admin_audit.md | Update | Medium | Valid app but stub-quality (TBD/TODO) + dead deploy line |
+| Test_Plan_configreport.md | Update | Medium | Valid app; dead oc10.sh/jw-qa host; verify telemetry flags |
+| Test_Plan_customgroups.md | Update | High | Valid; remove IE11/Edge browser rows |
+| Test_Plan_Diagnostics.md | Update | Medium | Valid; trim IE11; confirm Oracle DB support |
+| Test_Plan_encryption.md | Update | High | Core; dead HSM host/deploy + pinned versions |
+| Test_Plan_External.md | Update | High | Valid; remove IE11 browser row |
+| Test_Plan_External_Auth.md | Update | Medium | files_external auth matrix valid; WND dependency uncertain |
+| Test_Plan_Federated_Sharing.md | Update | High | Core matrix valid; refresh "different oC versions" rows |
+| Test_Plan_files_antivirus.md | Update | High | High-value; dead setup + host-file/`mysql` edits + v1 dav |
+| Test_Plan_Files_external_CLI.md | Update | Medium | Valid CLI; drop removed Dropbox/Google Drive backends |
+| Test_Plan_Files_External.md | Update | Medium | Largest plan; prune removed backends; consider splitting |
+| Test_Plan_Files_Mediaviewer.md | Update | High | Valid; dead scripts + gallery refs + IE11 |
+| Test_Plan_files_pdfviewer.md | Update | High | Valid; dead make_oc10_apps script + IE11 |
+| Test_Plan_files_primary_s3.md | Update | High | Highly relevant for docker; dead host script + confluence link |
+| Test_Plan_Files_Texteditor.md | Update | High | Valid; bump "Server: v10" label |
+| Test_Plan_Files_Transfer_Ownership.md | Update | High | Core occ command valid; confirm Shibboleth rows |
+| Test_Plan_Filtering_System_Tags.md | Update | High | Core; remove IE11; fix curl base URL |
+| Test_Plan_Firstrunwizard.md | Update | Medium | Likely bundled; remove IE11; confirm app |
+| Test_Plan_Guest.md | Update | High | Valid; remove IE11/Edge rows |
+| Test_Plan_Impersonate.md | Update | High | Valid; remove IE11 row |
+| Test_Plan_notifications.md | Update | Medium | Core flow valid; re-express multi-homed/cron for docker |
+| Test_Plan_OAuth2.md | Update | High | Valid and current; verify `occ oauth:add-client` |
+| Test_Plan_openidconnect.md | Update | High | Key auth path; dead deploy + market install + version rows |
+| Test_Plan_Pluggable_Auth.md | Update | Medium | Flows valid; Ubuntu 16.04 env obsolete; Shibboleth unconfirmed |
+| Test_Plan_richdocuments.md | Update | High | Valid; dead make_oc10_apps + demo host |
+| Test_Plan_search_elastic.md | Update | High | Valid; dead oc10.sh + enterprise links; confirm ES version |
+| Test_Plan_Settings.md | Update | High | Valid; drop IE11 column; updater/channel UI N/A for docker |
+| Test_Plan_Sharees.md | Update | High | Matrix valid; Ubuntu 16.04 env obsolete; Shibboleth unconfirmed |
+| Test_Plan_Smoke_Test.md | Update | High | Merge target but most outdated: dead scripts/hosts/CI + IE |
+| Test_Plan_System_Tagging.md | Update | High | Valid; modernize Edge; fix curl host/credentials |
+| Test_Plan_Templateeditor.md | Update | High | Valid; remove IE11 row |
+| Test_Plan_template_federation_autocomplete.md | Update | High | Valid; restate ancient "older than 9.0" floor |
+| Test_Plan_twofactor_totp.md | Update | High | Valid; dead make_oc10_apps + IE11 + version pins |
+| Test_Plan_Updater.md | Update | Medium | In-place web updater N/A for docker; rewrite as image upgrade (may become Delete) |
+| Test_Plan_user_ldap.md | Update | High | Essential; dead host/scripts + version pins + CI FIXMEs |
+| Test_Plan_WebDav_Interface_WebUI.md | Update | High | Core matrix valuable; Ubuntu/CentOS environments obsolete |
+| Test_Plan_web.md | Update | High | Valid + docker-oriented; refresh version/apps/browsers |
 
 ## Per-plan details
 
