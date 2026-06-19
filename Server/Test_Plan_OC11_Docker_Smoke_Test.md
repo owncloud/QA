@@ -171,9 +171,9 @@ Admin:
 - [ ] upload a large file (~1 GB) — show details, observe the upload completes
 - [ ] upload a folder "smoke_folder" containing `sample.pdf` and `sample.jpg` (drag-drop)
 - [ ] create a new folder "docs" inside "smoke_folder"
-- [ ] rename `sample.pdf` to `renamed.pdf` (right-click → Rename)
-- [ ] move `renamed.pdf` into "docs" (cut/paste)
-- [ ] upload a new version of `sample.jpg` (choose Replace) — a new version is created
+- [ ] rename `sample.pdf` to `renamed.pdf` (triple dots context menu → Rename)
+- [ ] move `renamed.pdf` into "docs" (drag-drop)
+- [ ] upload a new version of `sample.jpg` (choose `New Files`) — a new version is created
   - [ ] open the file's Versions, the previous version is listed and restorable
 - [ ] delete "docs" — it disappears from the file list
   - [ ] open Deleted files, "docs" is present, restore it — it returns to the list
@@ -192,6 +192,10 @@ Admin:
   (Note: the docker default has no `/owncloud` subpath.)
   - [ ] the file appears in the Web UI Files list
 - [ ] download it back via DAV — the size matches the upload
+  ```
+  curl -u admin:admin -o downloaded.bin \
+    http://localhost:8080/remote.php/dav/files/admin/webdav_upload.bin
+  ```
 
 ## Case 3: User share — folder with a user
 
@@ -208,7 +212,7 @@ Marie:
 - [ ] rename `sample.txt` to `renamed.txt` (Admin sees the rename)
 
 Admin:
-- [ ] change Marie's role to "Can view"
+- [ ] change Marie's role to "Can view(unselect all - can share, can edit, create, change, delete)"
 
 Marie:
 - [ ] can open/download but cannot rename, move, delete, or upload in the folder
@@ -278,6 +282,8 @@ Local, SFTP, SMB/CIFS, WebDAV, ownCloud, and Google Drive (confirm with
 
 Admin:
 - [ ] list backends: `occ files_external:backends storage`
+- [ ] ensure the local mount path exists inside the container before creating the mount:
+  `docker exec oc11 mkdir -p /tmp/smoke_ext`
 - [ ] create one mount that needs no extra infrastructure — use **Local** (point it at a
   path inside the container) or **SFTP** (against any reachable host):
   ```
