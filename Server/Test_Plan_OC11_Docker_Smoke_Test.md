@@ -284,6 +284,11 @@ Admin:
 - [ ] list backends: `occ files_external:backends storage`
 - [ ] ensure the local mount path exists inside the container before creating the mount:
   `docker exec oc11 mkdir -p /tmp/smoke_ext`
+- Enable local backend (system config): `occ config:system:set files_external_allow_create_new_local --value=true --type=boolean`
+
+  This is needed because local storage backend visibility is stripped for admin mounts when this flag is false (the default)
+
+- Enable External storage app in UI (if not already): Go to Settings → Admin → Storage and enable External storage (or confirm it's already enabled).
 - [ ] create one mount that needs no extra infrastructure — use **Local** (point it at a
   path inside the container) or **SFTP** (against any reachable host):
   ```
@@ -292,6 +297,7 @@ Admin:
   (adjust backend/auth identifier/config for the chosen backend)
 - [ ] `occ files_external:list` shows the mount
 - [ ] `occ files_external:verify <mount-id>` returns status OK
+- [ ] assign mount to admin user: `occ files_external:applicable --add-user admin <mount-id>`
 - [ ] open the mount in Files, upload a file into it, download it back, delete it
 
 ## Case 8: Encryption (master key)
