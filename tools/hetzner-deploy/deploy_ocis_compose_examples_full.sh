@@ -116,7 +116,7 @@ git clone https://github.com/owncloud/ocis.git -b $OCIS_VERSION --depth 1
 ln -s $compose_dir o
 ln -s /root/volume/ocis-data/storage o/storage	# make dump_decomposedsh and list_decomposed.sh happy.
 
-for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+for i in {1..20}; do
   test -f ~/CF_DNS.msg && break;
   echo "$i: waiting for CF_DNS.msg"
   sleep 4
