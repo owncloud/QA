@@ -1,7 +1,7 @@
 # OC11 Docker Smoke Test
 
 Canonical smoke test for ownCloud classic server **OC11** (`owncloud/core` master,
-version `11.0.0-prealpha`), deployed **docker-only**. This plan replaces the three
+version `11.0.0-rc2`), deployed **docker-only**. This plan replaces the three
 legacy smoke plans: `Test_Plan_Smoke_Test.md`, `Test_Plan_Simplified_Smoke_Test.md`
 and `Smoke_Test_Plan_customgroups.md` (see **Replaces** at the bottom).
 
@@ -15,9 +15,8 @@ files_classifier, files_lifecycle, …) and opt-in apps (encryption, guests, imp
 customgroups, user_ldap, oauth2, openidconnect, web, …). Those are **out of scope** here
 and get their own plans — see **Out of scope**.
 
-> Verified against `owncloud/server:11.0.0-prealpha` on 2026-06-12 (Community edition,
-> PHP 8.3.6, sqlite default). Because the tag is a daily rebuild, always re-confirm the
-> live app set with the Setup step below before running.
+> Verified against `owncloud/server:11.0.0-rc2` on 2026-07-24 (Community edition,
+> PHP 8.3.6, sqlite default).
 
 ---
 
@@ -25,8 +24,8 @@ and get their own plans — see **Out of scope**.
 
 ### Image under test
 
-- Image: **`owncloud/server:11.0.0-prealpha`** (Docker Hub).
-- This tag is **rebuilt daily** from `owncloud-daily-master.tar.bz2`, so the exact app
+- Image: **`owncloud/server:11.0.0-rc2`** (Docker Hub).
+- This tag may be **rebuilt daily** from `owncloud-daily-master.tar.bz2`, so the exact app
   set and versions can drift day to day. The "Confirm the bundled app set" step below is
   therefore mandatory, not optional.
 - Runtime requires **PHP ≥ 8.3 and < 8.6**.
@@ -41,13 +40,13 @@ testing. (For a production-like run, set `OWNCLOUD_DB_TYPE=mysql` and add a Mari
 container via compose.)
 
 ```
-docker pull owncloud/server:11.0.0-prealpha
+docker pull owncloud/server:11.0.0-rc2
 docker run -d --name oc11 \
   -p 8080:8080 \
   -e OWNCLOUD_DOMAIN=localhost:8080 \
   -e OWNCLOUD_ADMIN_USERNAME=admin \
   -e OWNCLOUD_ADMIN_PASSWORD=admin \
-  owncloud/server:11.0.0-prealpha
+  owncloud/server:11.0.0-rc2
 ```
 
 - The admin env vars are `OWNCLOUD_ADMIN_USERNAME` / `OWNCLOUD_ADMIN_PASSWORD` (both
@@ -70,7 +69,7 @@ This replaces every host-based `oc10.sh` / `make_oc10_apps.sh` invocation and ev
 `mysql owncloud -e '…'` call from the legacy plans.
 
 - [ ] `docker exec -u www-data oc11 occ status` reports version `11.0.0.x` /
-  `11.0.0-prealpha`.
+  `11.0.0-rc2`.
 
 ### Confirm the live app set
 
@@ -82,12 +81,12 @@ docker exec -u www-data oc11 occ app:list
   (20 apps, this is the smoke scope) is expected to be: `activity`, `comments`,
   `configreport`, `dav`, `diagnostics`, `federatedfilesharing`, `federation`, `files`,
   `files_external`, `files_mediaviewer`, `files_pdfviewer`, `files_sharing`,
-  `files_texteditor`, `files_trashbin`, `files_versions`, `firstrunwizard`,
+  `files_texteditor`, `files_trashbin`, `files_versions`, `firstrunwizard`, `market`,
   `notifications`, `provisioning_api`, `systemtags`, `updatenotification`.
-- [ ] If the enabled list diverges from the 20 above, note the drift (daily-build change)
+- [ ] If the enabled list diverges from the 21 above, note the drift
   and adjust which Cases apply.
 - Always-enabled (cannot be disabled): `files`, `dav`, `federatedfilesharing`.
-- The image also ships ~35 **disabled** apps (enterprise/licensed and opt-in). This plan
+- The image also ships ~34 **disabled** apps (enterprise/licensed and opt-in). This plan
   enables only the few it needs (`encryption`, `external`) in the relevant Cases.
 
 ### Enable the extra apps this plan needs
@@ -111,17 +110,17 @@ docker network create oc11net
 docker run -d --name oc11-a --network oc11net -p 8080:8080 \
   -e OWNCLOUD_DOMAIN=oc11-a:8080 \
   -e OWNCLOUD_ADMIN_USERNAME=admin -e OWNCLOUD_ADMIN_PASSWORD=admin \
-  owncloud/server:11.0.0-prealpha
+  owncloud/server:11.0.0-rc2
 
 docker run -d --name oc11-b --network oc11net -p 8081:8080 \
   -e OWNCLOUD_DOMAIN=oc11-b:8080 \
   -e OWNCLOUD_ADMIN_USERNAME=admin -e OWNCLOUD_ADMIN_PASSWORD=admin \
-  owncloud/server:11.0.0-prealpha
+  owncloud/server:11.0.0-rc2
 ```
 
 - Instance A UI: `http://localhost:8080`; instance B UI: `http://localhost:8081`.
 - [ ] Confirm the two instances can reach each other (docker network hostnames `oc11-a` /
-  `oc11-b`). Federation between two prealpha instances may require HTTPS and/or each
+  `oc11-b`). Federation between two instances may require HTTPS and/or each
   domain being added to the other's `trusted_domains` — record what was needed.
 - (Alternatively, define a `docker-compose.yml` with two services `oc11-a` and `oc11-b`
   on one network — equivalent to the above.)
@@ -218,7 +217,7 @@ Marie:
 - [ ] can open/download but cannot rename, move, delete, or upload in the folder
 
 Admin:
-- [ ] unshare "shared_with_marie" — it disappears from Marie's "Shared with me"
+- [ ] unshare "shared_with_marie" — it disappears from Marie's "Shared with you"
 
 ## Case 4: Group share
 
@@ -252,7 +251,7 @@ Admin:
 - [ ] change the link role to "Can edit", refresh the link — existing files are now visible
 - [ ] create a public link to a single file with role "Can view"
   - [ ] open it incognito — the file opens/downloads
-- [ ] delete the link, refresh — "resource not found"
+- [ ] delete the link, refresh — "File not found"
 
 ## Case 6: Federated sharing
 
@@ -270,7 +269,7 @@ Richard (instance B):
 Admin (instance A):
 - [ ] sees Richard's changes
 - [ ] unshare "federated_folder" — it disappears on instance B
-- [ ] record any HTTPS / `trusted_domains` configuration that prealpha federation required
+- [ ] record any HTTPS / `trusted_domains` configuration that federation required
 
 ## Case 7: External storage
 
@@ -328,12 +327,13 @@ Admin:
 Apps: `files_mediaviewer`
 
 Admin:
-- [ ] upload an image (jpg/png) and, if available, a small video (mp4)
+- [ ] upload multiple images (jpg/png) (or use the skeleton images provided in the Photos folder)
+  and, if available, a small video (mp4)
 - [ ] click the image — it opens in the media viewer overlay
   - [ ] navigate next/previous through multiple images
 - [ ] click the video — it plays in the viewer
 
-## Case 10: Comments and system tags
+## Case 10: Comments, favorites and system tags
 
 Apps: `comments`, `systemtags`
 
@@ -343,12 +343,15 @@ Admin:
 - [ ] add a system tag "smoke" to two files (details panel → Tags)
 - [ ] use the tag filter / search to list files tagged "smoke" — both files appear
 - [ ] remove the tag from one file — the filter now shows only the other
+- [ ] mark two files and a folder as favorites
+- [ ] select Favorites (left-hand menu bar) - the favorite files and folder are listed
 
 ## Case 11: Notifications
 
 Apps: `notifications`
 
 Admin:
+- [ ] go to Settings, Admin, Sharing and unselect "Automatically accept new incoming local user shares"
 - [ ] run cron at least once: `occ system:cron`
 - [ ] share a file with Marie
 
@@ -364,6 +367,7 @@ Admin:
 
 Newbie:
 - [ ] log in for the first time — the first-run wizard / welcome dialog is shown
+- [ ] click each of the documentation links - relevant documentation pages are displayed in new tabs
 - [ ] dismiss it, log out, and log back in — the wizard does not reappear
 
 ## Case 13: External sites
@@ -371,8 +375,8 @@ Newbie:
 Apps: `external` (ships disabled — enabled in Setup)
 
 Admin:
-- [ ] Admin → Additional settings → External sites: add a site (name + URL, e.g.
-  `https://owncloud.com`)
+- [ ] Settings → Admin → Additional settings → External sites: add a site (name + URL, e.g.
+  "Docs" `https://doc.owncloud.com`)
 - [ ] a new entry appears in the top app menu and opens the configured site
 
 ## Case 14: Document viewers (PDF + text editor)
@@ -384,7 +388,7 @@ Admin:
   with the entered text (files_texteditor)
 - [ ] reopen the text file, edit it, close — changes are saved
 - [ ] upload a PDF and open it — it renders in the PDF viewer with working controls
-  (download, page navigation) (files_pdfviewer)
+  (download, page navigation, search, resizing) (files_pdfviewer)
 
 ## Case 15: Activity stream
 
@@ -396,9 +400,10 @@ Admin:
 
 ## Case 16: App management
 
-Apps: `app:enable/disable` smoke (no marketplace — `market` is not in the Community image)
+Apps: `app:enable/disable` smoke
 
 Admin:
+- [ ] `occ app:disable market` disable the market app
 - [ ] `occ app:list` returns the enabled/disabled lists without error
 - [ ] disable then re-enable a default-enabled app:
   `occ app:disable comments` then `occ app:enable comments` — no errors, comments work again
@@ -413,7 +418,7 @@ Apps: `provisioning_api`, `files:transfer-ownership`
 Admin:
 - [ ] create a user via the UI (Admin → Users), set a storage quota
 - [ ] create a group via the UI, add the user to it
-- [ ] change a user's display language
+- [ ] login as the user, change the display language (Settings, General) - the UI is rendered in the selected language
 - [ ] transfer ownership of Marie's files to Einstein:
   `occ files:transfer-ownership marie einstein` — files move owner without error
 - [ ] delete the test user
@@ -423,22 +428,21 @@ Admin:
 ## Out of scope
 
 This plan covers only the apps **enabled by default** in the
-`owncloud/server:11.0.0-prealpha` Community image. The following are intentionally **not**
+`owncloud/server:11.0.0-rc2` Community image. The following are intentionally **not**
 covered here and get their own plans:
 
 - **Opt-in apps shipped disabled** (present in the image, but need explicit enable and/or
   external infrastructure): `user_ldap`, `user_shibboleth`, `oauth2`, `openidconnect`,
-  `guests`, `impersonate`, `customgroups`, `files_primary_s3`, `windows_network_drive`,
-  `admin_audit`, `files_antivirus`, `wopi`, `web` (ownCloud Web), `password_policy`,
+  `guests`, `customgroups`, `files_primary_s3`, `windows_network_drive`,
+  `admin_audit`, `files_antivirus`, `wopi`, `password_policy`,
   `graphapi`, `announcementcenter`, `drawio`, `systemtags_management`, `user_external`,
-  `files_external_dropbox`, `files_external_ftp`. The `templateeditor` app is present but
-  **archived/discontinued** (use theming) — not planned.
+  `files_external_dropbox`, `files_external_ftp`.
 - **Enterprise/licensed apps shipped disabled** (need an enterprise license — Community
-  edition cannot exercise them): `firewall`, `enterprise_key`, `ransomware_protection`,
-  `sharepoint`, `kerberos`, `workflow`, `theme-enterprise`, `files_classifier`,
+  edition cannot exercise them): `firewall`, `ransomware_protection`,
+  `kerberos`, `workflow`, `theme-enterprise`, `files_classifier`,
   `files_lifecycle`, `files_ldap_home`.
-- **`market`** — the marketplace app is **not present** in this Community image (apps are
-  baked into the image instead). Marketplace install flows are out of scope.
+- **`market`** — the marketplace app is present in this Community image (but most apps are
+  already baked into the image). Marketplace install flows are out of scope.
 - **Desktop and mobile sync clients** — the legacy smoke plan's Desktop/Mobile matrices
   are tracked separately, not part of this server-image smoke test.
 - **In-place updater / release channels** — not applicable to docker; covered by a future
