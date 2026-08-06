@@ -37,6 +37,8 @@
 | Remove share | 1. Open the share view of an item shared with several users/groups<br>2. In web, remove an existing share<br>3. Pull to refresh in the app<br>4. In web, remove all existing shares<br>5. Pull to refresh in the app | 3. Share removed from the app<br>5. All shares removed and `No data shares with users yet` displayed |  |  |  |
 |**Errors**|  |
 | No connection | 1. Remove connection from device<br>2. Open `Share` of any item | `Device not connected to a network` |  |  |  |
+| Item or space null | Simulate that item or space are null by changing values in `GraphShareViewModel` | `some data could not be retrieved`<br>Lists are empty |  |  |  |
+| Shares not retrieved | Simulate a break in the request by changing in the code the endpoint name | `It was not found`<br>Lists are empty |  |  |  |
 |**Accessibility**| One device |
 | Talkback | 1. Enable Talkback in device<br>2. Navigate through the `Share` dialog | Every field in the dialog is correctly spelt  | |  |  |
 | Keyboard | 1. Attach physical keyboard to device via BT<br>2. Navigate through the `Share` dialog | Every field in the dialog is selected and no dead paths in navigation  |  |  |  |
