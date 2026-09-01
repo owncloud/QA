@@ -28,7 +28,7 @@ users
 - [ ] non demo user with role admin
 - [ ] non demo user with role user
 - [ ] created new user
-- [ ] disabled user
+- [ ] deleted user
 - [ ] created new group
 
 settings
