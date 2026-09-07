@@ -22,13 +22,15 @@ Context: <br>
 | Match users | 1. Click on `+`<br>2. Type at least 3 characters that match an existing username or displayname | User listed as result with displayname, username and mark of user. Check both orientations |  |  |
 | Match groups  | 1. Click on `+`<br>2. Type at least 3 characters that match an existing group name | Group listed as result with group name and mark of group. Check both orientations |  |  |
 | Mixed match  | 1. Click on `+`<br>2. Type at least 3 characters that match an existing group name, username or display name | Every match listed as result with username, displayname and mark of user, or group name and mark of group. Check both orientations |  |  |
+| Match user itself  | 1. Click on `+`<br>2. Type characters in search field that match the current user | User not listed as result. Check both orientations |  |  |
 | Match existing users  | 1. Click on `+`<br>2. Type characters in search field that match at least a user, the item is already shared with | User not listed as result. Check both orientations |  |  |
 | Match existing groups  | 1. Click on `+`<br>2. Type characters in search field that match at least a group, the item is already shared with | Group not listed as result. Check both orientations |  |  |
 | Special chars | 1. Click on `+`<br>2. Type special characters in search field like `?` or `$`| No results. Check both orientations |  |  |
 | No results  | 1. Click on `+`<br>2. Type characters that don't match with any existing group or user | `No results` displayed. Check both orientations  |  |  |
 | Long result  | 1. Click on `+`<br>2. Type characters that match with a existing group or user whose name is very long (more that 50 chars) | Name ellipsized. Check both orientations  |  |  |
 | Long list | 1. Click on `+`<br>2. Type characters that match a long list of results (at least 30) | Long list displayed and scrolled smoothly. Check both orientations  |  |  |
-| Typing | 1. Click on `+`<br>2. Type and remove characters quickly | Result list updates after every character with the matches in a smooth way with correct transitions |
+| Typing | 1. Click on `+`<br>2. Type and remove characters | Result list updates after every character with the matches in a smooth way with correct transitions | 
+| Typing fast | 1. Click on `+`<br>2. Type characters very fast | Request over users and groups are only sent when stopping typing | 
 | search\_min\_length | Set up an oCIS server with a different value of `search_min_length`, for example, n<br>2. Type n-1 characters<br>3. Type another character | 2. No search is triggered<br>3. Search is triggered  |
 |**Select member**||||
 | Member selection | Click over user or group in results view | Share setup view displayed | | |
