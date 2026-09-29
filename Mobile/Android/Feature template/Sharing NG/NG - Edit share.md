@@ -15,9 +15,9 @@ Context: <br>
 | Sharing permission - Custom | Select `Share` of any item of a space manager with Share `R` permission | pencil option available in `Share with people`. Check both orientations | | |
 | No Sharing permission - Custom | Select `Share` of any item in a editor/viewer space with Share `R` permission| pencil option not available in `Share with people`. Check both orientations | | |
 |**Edit member - Personal Space**||||
-| Header | Click on Edit (pencil)| View with header: item name, and size and date for files (not folders). Check both orientations |  |  |
+| Header | Click on Edit (pencil)| View with header: item name, and size  for files (not folders). Check both orientations |  |  |
 | Can view | 1. On a file or folder with `Can edit`, click on Edit (pencil)<br>2. Change permission to `Can view`<br>3. Click on `Edit` | Share has now `Can view` in the shares list. Snackbar with correct edition displayed. Check in web |  |  |
-| Can view | 1. On a file or folder with `Can view`, click on Edit (pencil)<br>2. Change permission to `Can view`<br>3. Click on `Edit` | Share has now `Can edit` in the shares list. Snackbar with correct edition displayed. Check in web |  |  |
+| Can edit | 1. On a file or folder with `Can view`, click on Edit (pencil)<br>2. Change permission to `Can view`<br>3. Click on `Edit` | Share has now `Can edit` in the shares list. Snackbar with correct edition displayed. Check in web |  |  |
 | Can edit with trashbin | 1. On a folder with `Can edit`, click on Edit (pencil)<br>2. Change permission to `Can edit with trashbin`<br>3. Click on `Edit` | Share has now `Can edit with trashbin` in the shares list. Snackbar with correct edition displayed. Check in web |  |  |
 | No permission | Try to edit a share by removing permission | Not possible |  |
 | Add expiration date  | 1. Click on Edit (pencil) on any file or folder without expiration date<br>2. Set an expiration date for the share<br>3. Click on `Edit` | Share has now an expiration date in the shares list. Snackbar with correct edition displayed. Check in web|  |
