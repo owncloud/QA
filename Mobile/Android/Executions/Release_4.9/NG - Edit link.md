@@ -1,0 +1,70 @@
+### Sharing NG: Edit link
+
+**Server(s):** oCIS 8.2.1<br>
+**Device(s):** Xiaomi Redmi 13, Android 15. Samsung Galaxy Tab A8, Android 14<br>
+**Execution date:** 10/11/2026<br>
+**Tester:** jrecio<br>
+**Context:** <br>
+
+
+| Test name | Steps to execute | Expected result | Result | Comments |
+|-----------|------------------|-----------------|--------|----------|
+| **Affordance visible** | | | | |
+| Pencil visible — file | As a user with `libre.graph/driveItem/`<br>+`permissions/update`, open the sharing panel for a file that has a public link. Check both orientations | A pencil icon appears on each public link entry | P m15 t14| |
+| Pencil visible — folder | As a user with `libre.graph/driveItem/`<br>`permissions/update`, open the sharing panel for a folder that has a public link | A pencil icon appears on each public link entry | P m15 t14 | |
+| Pencil hidden — no permission | As a user without `libre.graph/driveItem/`<br>`permissions/update`, open the sharing panel for an item with a public link | No pencil icon on any public link entry |P m15 t14 | |
+| Pencil hidden after live downgrade | 1. As a space manager, open Share (pencil visible)<br>2. Another admin removes your update permission<br>3. Pull to refresh | The pencil is hidden after the refresh, without leaving the panel | P m15 t14 | |
+| **Open edit view pre-filled** | | | | |
+| Pre-filled fields | Tap the pencil on a link with a name, permission, password, and expiration date | Edit view opens with the name, permission radio, and expiration date set to the link's current values; password and expiration fields visible immediately; submit button reads `Save` | P m15 t14 | |
+| Password not shown in clear | Tap the pencil on a link that has a password | The password is not displayed in clear text; the field reflects `*****` | P m15 t14 | |
+| Permission options — file | Tap the pencil on a file link and open the permission selector | Only `Can view` and `Can edit` offered (no `Secret file drop`) | P m15 t14 | |
+| Permission options — folder | Tap the pencil on a folder link and open the permission selector | `Can view`, `Can edit`, and `Secret file drop` offered | P m15 t14 | |
+| Reopen is clean | 1. Edit link A, change permission, back out without saving<br>2. Tap the pencil on link B | Link B's edit view shows link B's values; no state leaked from A | P m15 t14| |
+| **Edit submission Personal space** | | | | |
+| Change name only | 1. Tap pencil<br>2. Change only the name<br>3. `Save` | PATCH sends the link's attributes; list shows the new name. Check in web | P m15 t14 | |
+| Change permission only | 1. Tap pencil<br>2. Change only the permission<br>3. `Save` | PATCH sends the link's attributes; list shows the new permission. Check in web | P m15 t14| |
+| Set expiration date | 1. Tap pencil on a link with no expiration<br>2. Set a future date<br>3. `Save` | PATCH sends `expirationDateTime` as ISO 8601; list shows the expiration. Check in web | P m15 t14| |
+| Change expiration date | 1. Tap pencil on a link with an expiration<br>2. Pick a different date<br>3. `Save` | PATCH sends the new `expirationDateTime`; list shows the updated date. Check in web | P m15 t14| |
+| Remove expiration date | 1. Tap pencil on a link with an expiration<br>2. Switch off the expiration<br>3. `Save` | Expiration cleared server-side (`expirationDateTime` sent as null); list shows no expiration. Check in web | P m15 t14| |
+| No-op save | 1. Tap pencil<br>2. Change nothing<br>3. `Save` | PATCH sends the link's unchanged attributes; list unchanged | P m15 t14 | |
+| Change all attributes | 1. Tap pencil<br>2. Change name, permission, and expiration<br>3. `Save` | All attributes sent; list reflects all updates. Check in web |P m15 t14 | |
+| Long name | Attempt to enter a name exceeding 255 characters | Input is restricted to 255 characters maximum |P m15 t14 | |
+| **Edit submission other space** | | | | |
+| Change name only | 1. Tap pencil<br>2. Change only the name<br>3. `Save` | PATCH sends the link's attributes; list shows the new name. Check in web | P m15 t14 | |
+| Change permission only | 1. Tap pencil<br>2. Change only the permission<br>3. `Save` | PATCH sends the link's attributes; list shows the new permission. Check in web |P m15 t14 | |
+| Set expiration date | 1. Tap pencil on a link with no expiration<br>2. Set a future date<br>3. `Save` | PATCH sends `expirationDateTime` as ISO 8601; list shows the expiration. Check in web |P m15 t14 | |
+| Change expiration date | 1. Tap pencil on a link with an expiration<br>2. Pick a different date<br>3. `Save` | PATCH sends the new `expirationDateTime`; list shows the updated date. Check in web | P m15 t14| |
+| Remove expiration date | 1. Tap pencil on a link with an expiration<br>2. Switch off the expiration<br>3. `Save` | Expiration cleared server-side (`expirationDateTime` sent as null); list shows no expiration. Check in web | P m15 t14| |
+| No-op save | 1. Tap pencil<br>2. Change nothing<br>3. `Save` | PATCH sends the link's unchanged attributes; list unchanged | P m15 t14 | |
+| Change all attributes | 1. Tap pencil<br>2. Change name, permission, and expiration<br>3. `Save` | All attributes sent; list reflects all updates. Check in web | P m15 t14 | |
+| Long name | Attempt to enter a name exceeding 255 characters | Input is restricted to 255 characters maximum | P m15 t14| |
+| **Password** | | | | |
+| Change password | 1. Tap pencil<br>2. Set a new policy-compliant password<br>3. `Save` | A separate `setPassword` request is sent; link requires the new password. Check in web | P m15 t14 | |
+| Keep password unchanged | 1. Tap pencil on a link with a password<br>2. Change only the name, leave password untouched<br>3. `Save` | No `setPassword` request is sent; the existing password still works. Check in web | P m15 t14 | |
+| Edit mandatory password | 1. In a [server with mandatory password](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), click on Edit (pencil) on any link<br>2. Click on `Remove` password<br>3. Click on `Set`, `Generate` and `Copy` to generate a new password for the link<br>4. Click on `Set`<br> 5. Click on `Save`<br>6. Click on the chain icon and paste the password in the browser | 1. Password field is set with `...`<br>2. `Save` disabled<br>4. `Save` enabled<br>5. Snackbar with correct edition displayed<br>6. Link is opened with the new password | P m15 t14 |
+| Add not mandatory password | 1. In a [server with not mandatory password](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), click on Edit (pencil) on any link with no password<br>2. Switch password on, `Generate` and `Copy` to generate a new password for the link<br>3. Click on `Set`<br>4. Click on `Save`<br>5. Click on the chain icon and paste the password in the browser | 1. `Save` enabled<br>3. `Save` enabled<br>4. Snackbar with correct edition displayed<br>5. Link is opened with the new password | P m15 t14 | FIXED: [BUG](https://github.com/owncloud/android/pull/5044#issuecomment-6772209989)
+| Edit not mandatory password | 1. In a [server with not mandatory password](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), click on Edit (pencil) on any link with password<br>2. Switch password off<br>3. Switch password on, `Generate` and `Copy` to generate a new password for the link<br>4. Click on `Set`<br> 5. Click on `Save`<br>6. Click on the chain icon and paste the password in the browser | 2. `Save` enabled<br>4. `Save` enabled<br>5. Snackbar with correct edition displayed<br>6. Link is opened with the new password | P m15 t14 | FIXED: [BUG](https://github.com/owncloud/android/pull/5044#issuecomment-6772209989)
+| Remove not mandatory password | 1. In a [server with not mandatory password](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), click on Edit (pencil) on any link with password<br>2. Switch password off<br>3. Click on `Save`<br>4. Click on the chain icon | Link is opened without asking a password  | P m15 t14 | FIXED: [BUG](https://github.com/owncloud/android/pull/5044#issuecomment-6772209989)| Password not always mandatory | 1. In a [server with mandatory password for writeable links](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), open a link with `Can view` permission<br>2. Change permission to `Can edit`<br>3. Change permission to `Secret File Drop` | 1. Password is not mandatory, `Save` is enabled<br>2. Password is mandatory, `Save` is disabled<br>3. Password is mandatory, `Save` is disabled  |  |  |
+| From not mandatory with password to mandatory | 1. In a [server with mandatory password for writeable links](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), open a link with `Can view` permission and password set<br>2. Change permission to `Can edit`<br>3. Click on `Remove`<br>4. Click on `Set`, `Generate` and `Copy`<br>5. Click on `Set`<br>6. Click on `Save`<br>7. Click on the chain icon| 1. `Save` enabled, switch visible and on<br>2. `Save` enabled, switch hidden and `Remove` and `...` shown<br>3. `Save` disabled, `Set` shown and `...` not shown <br>5. Password field is set with `...`<br>7. Link is opened with the new password  | P m15 t14 |  |
+| From not mandatory without password to mandatory | 1. In a [server with mandatory password for writeable links](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), open a link with `Can view` permission and password not set<br>2. Change permission to `Can edit`<br>3. Click on `Set`, `Generate` and `Copy`<br>4. Click on `Set`<br>5. Click on `Save`<br>6. Click on the chain icon| 1. `Save` enabled, switch visible and off<br>2. `Save` disabled, switch hidden and `Set` shown<br>4. Password field is set with `...`<br>6. Link is opened with the new password  | P m15 t14 |  |
+| From mandatory to not mandatory changing password| 1. In a [server with mandatory password for writeable links](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), open a link with `Can edit` permission<br>2. Change permission to `Can view`<br>3. Click on Password row, `Generate` and `Copy`<br>4. Click on `Set`<br>5. Click on `Save`<br>6. Click on the chain icon| 1. `Save` enabled<br>2. `Save` enabled, password field is set with `...` and switch is visible and on<br>4. Password field is set with `...`<br>6. Link is opened with the new password  | P m15 t14 |  |
+| From mandatory to not mandatory removing password| 1. In a [server with mandatory password for writeable links](https://doc.owncloud.com/ocis/next/deployment/services/s-list/frontend.html#password-enforcement-for-all-public-links), open a link with `Can edit` permission<br>2. Change permission to `Can view`<br>3. Switch password off<br>4. Click on `Save`<br>5. Add password and `Save` again<br>6. Click on the chain icon| 1. `Save` enabled<br>2. `Save` enabled, password field is set with `...` and switch is visible and on<br>3. Password field is empty and switch is off<br>4. Error `password mandatory`<br>6. Link is opened with the password  | P m15 t14 |  |
+| Password not compliant with policy | 1. In a server with a password policy, tap pencil and select a permission<br>2. Enter a non-compliant password | `Save` disabled | P m15 t14 | |
+| **After edit** | | | | |
+| List refresh | Edit a link successfully | The `PUBLIC LINKS` list refreshes and shows the link's updated values; a success message is shown | P m15 t14 | |
+| Chain icon still works | After editing, tap the chain icon on the edited link | Android share sheet opens with the link's `webUrl` | P m15 t14 | |
+| **Errors** | 1 device | | | |
+| Edit without password fails (PATCH) | Tweak the code to force an error in the edit, without changing password | `Edit could not be crated` | P m15| |
+| Password edit fails (POST) | Tweak the code to force an error in the password edit  |`Edit could not be crated` | P m15| If the password fails, the whole fails|
+| Other fields fail but password (PATCH) | Tweak the code to force an error in the edit, after a success in the password  | `Password updated but the rest`<br>` of the changes could not be saved` | P m15 | Password can success and the other fail, this is the case |
+| No network | 1. Open the edit view<br>2. Disable network<br>3. `Save` | Error message shown; edit view stays open | P m15 | |
+| Server down | 1. Open the edit view<br>2. Turn the server off<br>3. `Save` | Error message shown; edit view stays open | P m15 | |
+| Permission revoked during edit | 1. Open the edit view<br>2. Have update permission removed server-side<br>3. `Save` | Error message shown; edit view stays open for retry | P m15 | |
+| **Regression** | | | | |
+| Space link edit unchanged | Edit a public link from space management as before | Space link still edited via `root/permissions/{linkId}`; behavior unchanged. Check in web | P m15 t14 | |
+| Create flow unchanged | Create a public link for a file/folder | Creation still works via `items/{itemId}/createLink`; new link appears | P m15 t14| |
+| Existing links readable | Open a sharing panel with existing links | Links listed correctly; chain icons share the correct URL | P m15 t14 | |
+| Existing links oC10 | Open a sharing panel with existing links in oC10 | Links edited correctly; chain icons share the correct URL | P m15 t14 | |
+| **Accessibility** | One device | | | |
+| Talkback | Enable Talkback and navigate the edit and password views | Every field is correctly labelled and navigable | P m15 | |
+| Keyboard navigation | Connect a BT keyboard and navigate the edit and password views | Every field selectable; no dead paths | P m15 | |
